@@ -1,3 +1,0 @@
-The FOX Controller test script is licensed under MIT. This means that anyone, particually those involved with Optim Controls, may use or modify this project as they see fit as long as the copyright notices (license.txt, disclaimer.txt) are intact and relevant credit is given for respective contributions.
-
--Tyrone Johnston
