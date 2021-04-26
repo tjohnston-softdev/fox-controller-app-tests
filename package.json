@@ -1,0 +1,29 @@
+{
+  "name": "fox-controller-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/optimcontrols/fox-controller-app-tests.git"
+  },
+  "author": "Tyrone Johnston",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/optimcontrols/fox-controller-app-tests#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-things": "^0.2.0",
+    "mocha": "^5.2.0",
+    "npm": "^6.4.1",
+    "prompt-sync": "^4.1.6",
+    "request": "^2.88.0",
+    "sinon": "^6.3.5",
+    "validator": "^10.8.0"
+  }
+}

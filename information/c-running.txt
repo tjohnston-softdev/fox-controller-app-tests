@@ -1,0 +1,53 @@
+Now that you have installed the FOX Controller test project successfully, this text file is going to explain how to actually run the script.
+
+
+1. First, navigate to where the 'fox-controller-app' and 'fox-controller-app-tests' folders are located. These two projects should be sitting in the same 'root' folder. Remembering where this root folder is located is helpful because it corresponds to where the Controller project is along with any dependencies or derived items
+
+
+
+2. At the moment, the test script currently assumes you are using a blank installation. Because of this, it is a good idea to delete the folders created by the Controller before doing any major testing.
+
+These folders will be sitting alongside 'fox-controller-app' and 'fox-controller-app-tests' in your project root folder. The folders you should delete are: 'fox-dbs', 'fox-flows', 'logs' and 'user-storage'
+
+This step may or may not be optional depending on what testing you want to perform but if you run the test script without cleaning the project first, it is possible that errors will be flagged where they shouldn't be.
+
+
+3. Now that the Controller is cleaned, you should now decide whether to run it. This depends on what parts you want to test (See 'parts' text file for details)
+
+* For parts A-D, this does not matter
+* For parts E-G, the Controller must be offline
+* For parts H-J, the Controller must be online
+
+If you need to run the Controller, do so before continuing
+
+
+
+4. Open a Node JS command prompt relevant to your environment. This may be either a separate executable or integrated into your Operating System's prompt. It does not matter which one you end up using.
+
+
+
+5. Ensure that the Node JS command prompt begins in the 'fox-controller-app-tests' folder where you installed the project previously. This can be done through a particular command (eg. 'cd' for Windows), or depending on your environment, you may be able to open the prompt directly in that folder.
+
+
+
+6. To run the test script, run the command "npm test". What this particular command does is that it executes the script file located in the 'test' folder in a way that calls upon the 'Mocha' testing framework for Node JS.
+
+
+
+7. At this point, we are assuming the required third-party modules have been installed. A basic way to check this is if the 'node_modules' folder exists inside the project root. If you did not install them, an error will most likely be flagged when running "npm test". If this happens, don't worry because mistakes happen. All you have to do is run "npm install".
+
+Reiterating from the install guide, the "npm install" command will take several minutes to run so that all third-party modules can be downloaded and extracted. Often the command prompt will display 'loading bars' for each module but not all of them provide this and it may not always be obvious whether and how a module is being installed. The best thing to do is just wait a few minutes. Once the process is complete, a result message will be displayed to the effect of "Installed x modules in y seconds"
+
+
+
+8. Once running "npm test", you will be prompted to enter a testing mode. This could be one of several defined keywords, with each keyword executing different parts of the project. For example, the keyword "common" runs tests for dependency scripts required by the whole project. For more details, see the 'modes' text file.
+
+Keywords are case-insensitive. If an invalid keyword is entered, a suitable message will be displayed and nothing serious will happen. Just run "npm test" again and try something different.
+
+
+
+9. After entering a valid keyword, the different tests will be performed accordingly. This may take up to several seconds depending on what mode you entered. Once the testing is complete and everything has been executed, you will be indicated to enter a new command.
+
+When running test modes that interact with the controller files, the command prompt may 'freeze' and you will not be allowed to enter a new command. This is because a side-effect of interacting with these files is that they will run as if everything is normal. This is okay for the most part but it becomes a problem in Remote IO when the relevant files have been designed to run indefinitely in the background and not in a particularly linear manner.
+
+If the program keeps running after testing has been complete and you cannot enter a new command, just press CRTL+C or equivalentIf a confirmation message is displayed, choose (y)es

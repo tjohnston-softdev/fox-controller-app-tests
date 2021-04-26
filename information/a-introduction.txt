@@ -1,0 +1,1 @@
+This folder includes a series of (ordered) text files which provide information about the controller test script. This includes things like how the project is structured, what each folder is for, how to maintain or expand the script, and other things.

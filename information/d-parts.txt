@@ -1,0 +1,28 @@
+This text file will explain the different parts of the test script. The reason this was implemented is because the test project can be quite complex when you look at it as a whole. First, it has to test common dependency files, 3rd party modules, local functions, and whether the application is on/offline. This is all without even going into the Controller files or device APIs themselves.
+
+So far, the test project is divided into ten different parts. This division was necessary because the test script started out as one huge file. Of course, it was a lot more simple back then but at the same time, it became very tedious to maintain. After dividing it up into different parts and files, it became much easier to sort things and figure out where they are. The project now operates using many smaller files rather than one large file. Another benefit is that with one file, it can only be as large as you can remember but as the project is divided, the test script can expand or contract as much as it needs to, as long as everybody understands more or less where everything is.
+
+These different parts are initially located in the 'test-parts' subfolder. Each part folder is named using the format 'part-x-example_name'. Each part has a main file (example_main.js), a sub-folder containing individual scripts for that file, and optionally another sub-folder containing common files for that part. The main file requires and calls the script files inside the subfolder. This main file in turn is required and called in 'test/fox-test-main.js'. For more detail as to how this is arranged, look at one of these parts yourself.
+
+The parts are:
+
+A - Common Data: This part is used to test common dependency files which are required by the project as a whole. This includes test functions, shortcuts for the chai library, error strings, and example objects. The files being tested here are located in the 'app' folder
+
+B - External Modules: This part is used to test 3rd party modules installed with NPM. An example is 'request', used to make HTTP requests. While these modules can be used globally, they are based in the 'node_modules' folder
+
+C - Internal Scripts: This part is used to test local scripts which were written to help with Controller API testing. These files are 'define-api' and 'request-api' in the 'app' folder
+
+D - Online Checks: This part is only used to test whether the Controller is on/offline when it should be. This is a separate part because in order for device APIs to be tested, the Controller must be running. On the other hand, the Controller must be offline in order to test its files.
+
+E - Controller Settings: This part is only used to test the 'Remote IO Settings' file inside the Controller. This gets a separate test because other Controller files in later parts depend on it.
+
+F - Controller Models: This part is used to test the model definition files inside the Controller. This is a separate part not only because of dependency, but because this involves multiple files and not just one definition
+
+G - Controller Files: This is where most Controller testing takes place after dependency is validated. This part covers the Controller in general but mainly relates to Remote IO and Database testing
+
+H - Device API Requests: This part is used to test the Controller APIs while the Controller is running. This does not involve any particular files but rather relies on URLs used by the Controller.
+
+I - Frontend: This part is used to test the Device and Node Controller APIs in regards to how one might access and use them from the front-end
+
+J - Restart Controller: This part is used to test specific Admin APIs that are responsible for restarting or rebooting the Controller. The reason that this is a separate part is because it involves taking the Controller offline or potentially turning it off entirely. Therefore, it is safest to have these APIs run separately not only in their own mode, but also separate from each other.
+
