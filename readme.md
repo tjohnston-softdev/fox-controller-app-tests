@@ -15,9 +15,7 @@ I do not know the exact date I started working on this project but it was during
 ---
 
 ## Getting Started
-After downloading the project, open a terminal inside the root folder and run `npm install`. Afterwards, run `npm test` to perform the tests. You will then be asked to enter a [test mode](./information/e-modes.txt), such as "request" for online endpoint testing.
-
-For more detail on how to use this program, refer to the [information](https://github.com/tjohnston-softdev/fox-controller-app-tests/tree/master/information) folder.
+Refer to the [Information](./information/readme.md) folder for instructions on how to use this program.
 
 ---
 
