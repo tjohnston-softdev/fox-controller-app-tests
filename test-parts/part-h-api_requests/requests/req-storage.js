@@ -15,7 +15,6 @@ const apiCommonFile = require("../sub-requests/common-api");
 const storageCommonFile = require("../sub-requests/common-storage");
 const storageFolder = apiPaths.storageApi;
 
-var stoFile = require("../../../backup/other-api-objects/storage-objects");
 var userStorageTestPaths = null;
 var currentPlatform = osModule.platform();
 

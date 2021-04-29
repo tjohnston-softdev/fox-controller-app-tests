@@ -1,26 +1,12 @@
 # Changelog
 
 **Test Status**
-* Checked unit tests since package update.
-	* Offline Controller file testing is successful.
-	* API testing has an error due to a missing backup file. (My fault...)
-	* Front-end testing is unchanged.
-	* Factory reset is successful.
+* Missing backup file error has been fixed.
+* Online API testing is successful.
 
 ---
 
-**./package.json**
-* Uninstalled 'npm' package. (I don't even know how that got there)
-* Updated these packages to the latest version:
-	* request
-	* sinon
-	* validator
-	* chai
-	* mocha
-
----
-
-**./package-lock.json**
-* Patched 'minimist' security vulnerability.
-	* Updating 'mocha' and 'sinon' appeared to do the trick.
-	* This removed all dependency on 'minimist'
+**./test-parts/part-h-api_requests/requests/req-storage.js**
+* Removed 'stoFile' global.
+	* This was obviously a holdover from when I was preparing the tests.
+	* Uses a backup file I have since deleted for public release.
