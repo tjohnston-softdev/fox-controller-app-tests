@@ -1,14 +1,16 @@
-const adminApiString = "admin";
-const alarmApiString = "alarm-history";
-const nodesApiString = "nodes";
-const storageApiString = "storage";
-const devicesApiString = "devices";
+function defineApiPaths()
+{
+	var defineRes = {};
+	
+	defineRes["adminApi"] = "admin";
+	defineRes["alarmApi"] = "alarm-history";
+	defineRes["nodesApi"] = "nodes";
+	defineRes["storageApi"] = "storage";
+	defineRes["devicesApi"] = "devices";
+	defineRes["rioApiSub"] = "remote-io";
+	
+	return defineRes;
+}
 
-const rioApiSubstring = "remote-io";
 
-exports.adminApi = adminApiString;
-exports.alarmApi = alarmApiString;
-exports.nodesApi = nodesApiString;
-exports.storageApi = storageApiString;
-exports.devicesApi = devicesApiString;
-exports.rioApiSub = rioApiSubstring;
+module.exports = defineApiPaths();

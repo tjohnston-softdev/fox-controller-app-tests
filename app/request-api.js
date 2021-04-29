@@ -4,22 +4,21 @@ const apiRoot = '/api/';
 const hStart = "<h1>";
 const hEnd = "</h1>";
 
-function writeApiUrl(apiFolder, apiPage)
+function writeApiUrl(vFolder, vPage)
 {	
-	var folderValid = checkWriteArgument(apiFolder);
-	var pageValid = checkWriteArgument(apiPage);
-	
-	var rootPart = null;
-	var pagePart = null;
-	var combinedUrl = null;
-	var apiUrlResult = null;
+	var folderValid = checkWriteArgument(vFolder);
+	var pageValid = checkWriteArgument(vPage);
+	var apiUrlResult = "";
 	
 	if (folderValid === true && pageValid === true)
-	{
-		rootPart = foxHost + apiRoot;
-		pagePart = apiFolder + '/' + apiPage;
-		combinedUrl = rootPart + pagePart;
-		apiUrlResult = combinedUrl.toLowerCase();
+	{	
+		apiUrlResult += foxHost;
+		apiUrlResult += apiRoot;
+		apiUrlResult += vFolder;
+		apiUrlResult += "/";
+		apiUrlResult += vPage;
+		
+		apiUrlResult = apiUrlResult.toLowerCase();
 	}
 	
 	
@@ -48,18 +47,16 @@ function readApiResponseArray(responseObject)
 
 function readApiResponseObject(responseObject)
 {
-	var rText = null;
-	var rType = null;
+	var bodyType = null;
 	var objectResult = null;
 	
 	try
 	{
-		rText = responseObject.body;
-		rType = typeof rText;
+		bodyType = typeof responseObject.body;
 		
-		if (rType === 'object')
+		if (responseObject.body !== undefined && responseObject.body !== null && bodyType === "object")
 		{
-			objectResult = rText;
+			objectResult = responseObject.body;
 		}
 		else
 		{
@@ -77,20 +74,28 @@ function readApiResponseObject(responseObject)
 
 function readApiResponseString(rObject)
 {
-	var rObjType = typeof rObject;
-	var rBdyType = typeof rObject.body;
+	var inputType = typeof rObject;
+	var correctInput = false;
+	var bodyType = "";
 	var rText = null;
 	
-	if (rObject !== null && rObjType !== 'undefined' && rObjType === 'object' && rObject.body !== null && rBdyType === 'string' && rObject.body.length > 0)
+	if (rObject !== undefined && rObject !== null && inputType === "object")
+	{
+		correctInput = true;
+		bodyType = typeof rObject.body;
+	}
+	
+	
+	if (correctInput === true && bodyType === "string" && rObject.body.length > 0)
 	{
 		rText = rObject.body;
 	}
-	else if (rObject !== null && rObjType !== 'undefined' && rObjType === 'object')
+	else if (correctInput === true)
 	{
 		rText = null;
 		throw new Error("HTTP Reply is empty");
 	}
-	else if (rObject !== null && rObjType !== 'undefined')
+	else if (rObject !== undefined && rObject !== null)
 	{
 		rText = null;
 		throw new Error("Invalid Reply object type");
@@ -118,9 +123,6 @@ function readApiResponseError(eObject)
 	
 	return rText;
 }
-
-
-
 
 
 
@@ -162,14 +164,13 @@ function getRequestOptionsObject(oLink, oMethod, oBody)
 	var oRes = null;
 	
 	if (linkValid === true && methodValid === true)
-	{
-		oRes =
-		{
-			"url": oLink,
-			"method": methodUpper,
-			"body": oBody,
-			"json": true
-		};
+	{	
+		oRes = {};
+		
+		oRes["url"] = oLink;
+		oRes["method"] = methodUpper;
+		oRes["body"] = oBody;
+		oRes["json"] = true;
 	}
 	
 	return oRes;
@@ -182,7 +183,9 @@ function getDeleteOptionsObject(dLink, dPerm)
 	
 	if (permType === 'boolean')
 	{
-		dRes["headers"] = {'Content-Type': 'text/plain', "delete-permanently": dPerm};
+		dRes["headers"] = {};
+		dRes.headers["Content-Type"] = "text/plain";
+		dRes.headers["delete-permanently"] = dPerm;
 	}
 	else
 	{
@@ -190,12 +193,8 @@ function getDeleteOptionsObject(dLink, dPerm)
 		throw new Error("Invalid permanant flag. Must be True or False");
 	}
 	
-	
-	
 	return dRes;
 }
-
-
 
 
 function extractErrorText(eBodyText)
@@ -280,8 +279,7 @@ function validateExtractedErrorText(vObject)
 
 function getRandomIpNumber()
 {
-	var randomBase = Math.random();
-	var randomMultiply = randomBase * 255;
+	var randomBase = Math.random() * 255;
 	var randomResult = Math.round(randomMultiply);
 	
 	if (randomResult < 1)
@@ -293,21 +291,21 @@ function getRandomIpNumber()
 }
 
 
-function checkWriteArgument(wArg)
+function checkWriteArgument(argValue)
 {
-	var argType = typeof wArg;
+	var argType = typeof argValue;
 	var argValid = false;
 	
-	if (wArg !== null && argType !== 'undefined' && argType === 'string' && wArg.length > 0)
+	if (argValue !== undefined && argValue !== null && argType === "string" && argValue.length > 0)
 	{
 		argValid = true;
 	}
-	else if (wArg !== null && argType !== 'undefined' && argType === 'string')
+	else if (argValue !== undefined && argValue !== null && argType === "string")
 	{
 		argValid = false;
 		throw new Error("URL Write argument strings cannot be empty");
 	}
-	else if (wArg !== null && argType !== 'undefined')
+	else if (argValue !== undefined && argValue !== null)
 	{
 		argValid = false;
 		throw new Error("URL Write arguments must be strings");
