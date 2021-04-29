@@ -90,13 +90,13 @@ function verifyIpFunction()
 		it("Call - Invalid Type", function()
 		{
 			var iRes = ipInvalidCall(-1);
-			commonFunctionsFile.testInvalidFunctionResult(iRes, "Expected string but received a number.");
+			commonFunctionsFile.testInvalidFunctionResult(iRes, "Expected a string but received a number");
 		});
 		
 		it("Call - Null", function()
 		{
 			var nRes = ipInvalidCall(null);
-			commonFunctionsFile.testInvalidFunctionResult(nRes, "Expected string but received null.");
+			commonFunctionsFile.testInvalidFunctionResult(nRes, "Expected a string but received a null");
 		});
 		
 		it("Complete", function()
