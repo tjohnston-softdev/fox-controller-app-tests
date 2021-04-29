@@ -60,7 +60,7 @@ function readApiResponseObject(responseObject)
 		}
 		else
 		{
-			objectResult = JSON.parse(rText);
+			objectResult = JSON.parse(responseObject.body);
 		}
 	}
 	catch(e)
@@ -75,27 +75,20 @@ function readApiResponseObject(responseObject)
 function readApiResponseString(rObject)
 {
 	var inputType = typeof rObject;
-	var correctInput = false;
-	var bodyType = "";
+	var bodyType = typeof rObject.body;
+	var correctInput = (rObject !== undefined && rObject !== null);
 	var rText = null;
 	
-	if (rObject !== undefined && rObject !== null && inputType === "object")
-	{
-		correctInput = true;
-		bodyType = typeof rObject.body;
-	}
-	
-	
-	if (correctInput === true && bodyType === "string" && rObject.body.length > 0)
+	if (correctInput === true && inputType === "object" && bodyType === "string" && rObject.body.length > 0)
 	{
 		rText = rObject.body;
 	}
-	else if (correctInput === true)
+	else if (correctInput === true && inputType === "object")
 	{
 		rText = null;
 		throw new Error("HTTP Reply is empty");
 	}
-	else if (rObject !== undefined && rObject !== null)
+	else if (correctInput === true)
 	{
 		rText = null;
 		throw new Error("Invalid Reply object type");
@@ -280,7 +273,7 @@ function validateExtractedErrorText(vObject)
 function getRandomIpNumber()
 {
 	var randomBase = Math.random() * 255;
-	var randomResult = Math.round(randomMultiply);
+	var randomResult = Math.round(randomBase);
 	
 	if (randomResult < 1)
 	{
@@ -322,20 +315,20 @@ function checkWriteArgument(argValue)
 
 function checkOptionUrlArgument(oUrlArg)
 {
-	var urlValidationIndex = getUrlValidationIndex(oUrlArg);
+	var validIndex = getUrlValidationIndex(oUrlArg);
 	var urlType = typeof oUrlArg;
 	var urlValid = false;
 	
-	if (oUrlArg !== null && urlType !== 'undefined' && urlType === 'string' && oUrlArg.length > 0 && urlValidationIndex === 0)
+	if (oUrlArg !== undefined && oUrlArg !== null && urlType === "string" && oUrlArg.length > 0 && validIndex === 0)
 	{
 		urlValid = true;
 	}
-	else if (oUrlArg !== null && urlType !== 'undefined' && urlType === 'string' && oUrlArg.length > 0)
+	else if (oUrlArg !== undefined && oUrlArg !== null && urlType === "string" && oUrlArg.length > 0)
 	{
 		urlValid = false;
 		throw new Error("Invalid URL format. Must refer to localhost:3000");
 	}
-	else if (oUrlArg !== null && urlType !== 'undefined')
+	else if (oUrlArg !== undefined && oUrlArg !== null)
 	{
 		urlValid = false;
 		throw new Error("URL must be a non-empty string");
@@ -369,7 +362,7 @@ function checkOptionMethodArgument(oMethodArg)
 
 function readOptionMethodArgument(oMethodArg)
 {
-	var readResult = oMethodArg;
+	var readResult = null;
 	
 	try
 	{
@@ -387,11 +380,12 @@ function readOptionMethodArgument(oMethodArg)
 
 function getUrlValidationIndex(ouArg)
 {
-	var urlTemplate = foxHost + apiRoot;
+	var urlTemplate = "";
 	var vIndex = -1;
 	
 	try
 	{
+		urlTemplate = foxHost + apiRoot;
 		vIndex = ouArg.indexOf(urlTemplate);
 	}
 	catch(e)
@@ -404,14 +398,17 @@ function getUrlValidationIndex(ouArg)
 
 
 
-exports.hostUrl = foxHost;
-exports.callWriteApiUrl = writeApiUrl;
-exports.callReadApiResponseArray = readApiResponseArray;
-exports.callReadApiResponseObject = readApiResponseObject;
-exports.callReadApiResponseString = readApiResponseString;
-exports.callReadApiResponseError = readApiResponseError;
-exports.getApplicationOnlineResult = requestApplicationOnlineResult;
-exports.showApiRequestRefusedError = apiRequestRefusedError;
-exports.generateIpAddress = generateRandomIpAddress;
-exports.getRequestOptions = getRequestOptionsObject;
-exports.getDeleteOptions = getDeleteOptionsObject;
+module.exports =
+{
+	hostUrl: foxHost,
+	callWriteApiUrl: writeApiUrl,
+	callReadApiResponseArray: readApiResponseArray,
+	callReadApiResponseObject: readApiResponseObject,
+	callReadApiResponseString: readApiResponseString,
+	callReadApiResponseError: readApiResponseError,
+	getApplicationOnlineResult: requestApplicationOnlineResult,
+	showApiRequestRefusedError: apiRequestRefusedError,
+	generateIpAddress: generateRandomIpAddress,
+	getRequestOptions: getRequestOptionsObject,
+	getDeleteOptions: getDeleteOptionsObject
+};
