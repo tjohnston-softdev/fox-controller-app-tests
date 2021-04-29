@@ -7,14 +7,6 @@ const filenameSyntax =  /^([^\\\/]+)$/;
 const rioPrefixSyntax = /^(A|D|R)(I|O)-([0-9]+)$/i;
 const requirementPathSyntax = /^(([.][\\\/])|(([.]{2}[\\\/])+))([^\\\/]+[\\\/])*([^\\\/]+)$/i;
 
-function writeRequirementPathRegEx()
-{	
-	var resultObject = null;
-	return resultObject;
-}
-
-
-
 
 function validateExample(testString, testSyntax, allowEmpty)
 {
@@ -90,9 +82,6 @@ function validateRequirementPathString(reqPathString, allowEmpty)
 
 
 
-
-
-
 function validateRioTextString(txtString, allowEmpty)
 {
 	var txtLower = txtString.toLowerCase();
@@ -100,7 +89,7 @@ function validateRioTextString(txtString, allowEmpty)
 	var validCheck = checkRioSplitArray(wordArray);
 	var res = false;
 	
-	if (validCheck.first === true && validCheck.second === true && validCheck.third === true)
+	if (validCheck === true)
 	{
 		res = true;
 	}
@@ -119,32 +108,39 @@ function validateRioTextString(txtString, allowEmpty)
 
 
 
-function checkRioSplitArray(s)
+function checkRioSplitArray(splitArr)
 {
-	var indexValue = Math.pow(s[2], 1);
+	var nameElement = "";
+	var modeElement = "";
+	var indexElement = "";
+	var indexNumber = -1;
+	var indexParsed = false;
 	
 	var firstValid = false;
 	var secondValid = false;
 	var thirdValid = false;
 	
-	if (s[0] === "analogue" || s[0] === "digital" || s[0] === "relay")
+	var checkRes = false;
+	
+	if (splitArr.length >= 3)
 	{
-		firstValid = true;
+		nameElement = splitArr[0];
+		modeElement = splitArr[1];
+		indexElement = splitArr[2];
+		indexNumber = parseInt(indexElement);
+		indexParsed = Number.isInteger(indexNumber);
+		
+		firstValid = (nameElement === "analogue" || nameElement === "digital" || nameElement === "relay");
+		secondValid = (modeElement === "input" || modeElement === "output");
+		thirdValid = (indexParsed === true && indexNumber >= 0);
 	}
 	
-	if (s[1] === "input" || s[1] === "output")
+	if (firstValid === true && secondValid === true && thirdValid === true)
 	{
-		secondValid = true;
+		checkRes = true;
 	}
 	
-	if (indexValue >= 0)
-	{
-		thirdValid = true;
-	}
-	
-	var checkResult = {"first": firstValid, "second": secondValid, "third": thirdValid};
-	return checkResult;
-	
+	return checkRes;
 }
 
 
@@ -171,13 +167,17 @@ function checkRegEx(subjectString, subjectSyntax, allowEmptyString)
 	return validationMet;
 }
 
-exports.validateExampleTest = validateExample;
-exports.validateMac = validateMacAddress;
-exports.validateTimezoneOffset = validateTimezoneOffsetString;
-exports.validateDriveLetter = validateDriveLetterString;
-exports.validateDrivePath = validateDrivePathString;
-exports.validateIpAddressSix = validateIpAddressSixString;
-exports.validateFilename = validateFilenameString;
-exports.validateRioPrefix = validateRioPrefixString;
-exports.validateRequirementPath = validateRequirementPathString;
-exports.validateRioText = validateRioTextString;
+
+module.exports =
+{
+	validateExampleTest: validateExample,
+	validateMac: validateMacAddress,
+	validateTimezoneOffset: validateTimezoneOffsetString,
+	validateDriveLetter: validateDriveLetterString,
+	validateDrivePath: validateDrivePathString,
+	validateIpAddressSix: validateIpAddressSixString,
+	validateFilename: validateFilenameString,
+	validateRioPrefix: validateRioPrefixString,
+	validateRequirementPath: validateRequirementPathString,
+	validateRioText: validateRioTextString
+};
