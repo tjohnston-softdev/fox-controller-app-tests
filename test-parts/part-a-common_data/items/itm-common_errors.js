@@ -114,7 +114,7 @@ function getCommonErrorsFile()
 	
 	try
 	{
-		errFile = require(commonPaths.commonErrorsFile);
+		errFile = require(commonPaths.commonErrors);
 	}
 	catch(e)
 	{

@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrorsFile);
+const commonErrorStringsFile = require(commonPaths.commonErrors);
 
 const requestPathFile = getRequestPathFile();
 

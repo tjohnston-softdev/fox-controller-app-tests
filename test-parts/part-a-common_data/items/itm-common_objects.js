@@ -277,7 +277,7 @@ function getCommonObjectFile()
 	
 	try
 	{
-		res = require(commonPaths.commonObjectFile);
+		res = require(commonPaths.commonObjects);
 	}
 	catch(e)
 	{

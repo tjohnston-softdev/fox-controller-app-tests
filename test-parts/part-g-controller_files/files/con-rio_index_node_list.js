@@ -4,10 +4,10 @@ const chaiThings = require('chai-things');
 const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelativeFile);
-const subCommonPath = require(commonPaths.subCommonFile);
+const foxPath = require(commonPaths.foxRelative);
+const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjectFile);
+const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const indexFile = getIndexFileRequirement(foxPath.rioIndexFile);
 const rioSubCommonFile = getIndexFileRequirement(subCommonPath.rioCommonFile);

@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelativeFile);
+const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 
 const subRequire = require("../sub-settings/get-rio-set");

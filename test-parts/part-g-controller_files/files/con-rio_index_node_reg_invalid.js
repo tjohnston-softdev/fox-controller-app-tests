@@ -4,11 +4,11 @@ const chaiThings = require('chai-things');
 const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelativeFile);
-const subCommonPath = require(commonPaths.subCommonFile);
+const foxPath = require(commonPaths.foxRelative);
+const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrorsFile);
-const commonJsonObjectsFile = require(commonPaths.commonObjectFile);
+const commonErrorStringsFile = require(commonPaths.commonErrors);
+const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const rioFile = getRequiredRegisterFile(foxPath.rioIndexFile);
 const commonFile = getRequiredRegisterFile(subCommonPath.rioCommonFile);

@@ -4,10 +4,10 @@ const chaiThings = require('chai-things');
 const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelativeFile);
+const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrorsFile);
-const commonJsonObjectsFile = require(commonPaths.commonObjectFile);
+const commonErrorStringsFile = require(commonPaths.commonErrors);
+const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 
 function checkFactoryReturnValid(factReturnObject)

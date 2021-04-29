@@ -5,10 +5,10 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const foxPath = require(commonPaths.foxRelativeFile);
+const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrorsFile);
-const commonJsonObjectsFile = require(commonPaths.commonObjectFile);
+const commonErrorStringsFile = require(commonPaths.commonErrors);
+const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestFile = require(commonPaths.requestApi);
 
 

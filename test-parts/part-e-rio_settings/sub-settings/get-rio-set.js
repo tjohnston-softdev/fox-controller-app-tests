@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelativeFile);
+const foxPath = require(commonPaths.foxRelative);
 
 
 function getRioSetFile()

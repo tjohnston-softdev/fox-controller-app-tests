@@ -131,7 +131,7 @@ function getSupportedFile()
 	
 	try
 	{
-		fileRes = require(commonPaths.supportedDatabasesPath);
+		fileRes = require(commonPaths.supportedDatabases);
 	}
 	catch(e)
 	{
