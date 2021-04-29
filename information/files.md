@@ -44,7 +44,7 @@ This file contains links to things used  and referenced in this project.
 
 ---
 
-**Previous:** [Files](./files.md)  
-**Next:**
+**Previous:** [Folders](./folders.md)  
+**Next:** [References](./references.md)
 
 [Contents](./readme.md)

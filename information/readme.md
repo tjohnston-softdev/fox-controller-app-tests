@@ -12,6 +12,7 @@ This folder includes a series of documentation files which provide information a
 4. [Test Modes](./modes.md)
 5. [Folders](./folders.md)
 6. [Files](./files.md)
+7. [References](./references.md)
 
 ---
 
