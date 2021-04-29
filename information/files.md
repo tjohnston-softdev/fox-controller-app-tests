@@ -39,9 +39,6 @@ The main part of the test script. This is run with the command `npm test`
 **[changelog.md](../changelog.md)**  
 This file contains a list of changes made for this current version of the project.
 
-**[reference-links.txt](../reference-links.txt)**  
-This file contains links to things used  and referenced in this project.
-
 ---
 
 **Previous:** [Folders](./folders.md)  
