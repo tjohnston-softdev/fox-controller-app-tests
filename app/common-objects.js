@@ -68,29 +68,31 @@ const nodeDeviceObject =
 };
 
 
-function getRegisterNodeObject(registerDeviceID, registerNodeID, registerPrefixIndex)
+function getRegisterNodeObject(regDeviceID, regNodeID, regPrefixInd)
 {
-	var rNodeObj =
-	{
-		id: registerNodeID,
-		type: 'Advantech Out',
-		z: 'b177490a.885f28', 
-		name: '',
-		deviceId: registerDeviceID,
-		ioSetId: registerPrefixIndex,
-		x: 200, y: 300, 
-		wires: []
-	};
+	var rNodeObj = {};
+	
+	rNodeObj["id"] = regNodeID;
+	rNodeObj["type"] = "Advantech Out";
+	rNodeObj["z"] = "b177490a.885f28";
+	rNodeObj["name"] = "";
+	rNodeObj["deviceId"] = regDeviceID;
+	rNodeObj["ioSetId"] = regPrefixInd;
+	rNodeObj["x"] = 200;
+	rNodeObj["y"] = 300;
+	rNodeObj["wires"] = [];
 	
 	return rNodeObj;
 }
 
 
-
-exports.unknownID = unknownIDString;
-exports.exampleObj = exampleObject;
-exports.testDevice = testDeviceObject;
-exports.crudDevice = crudDeviceObject;
-exports.modifiedDevice = modifiedDeviceObject;
-exports.nodeDevice = nodeDeviceObject;
-exports.getRegisterNode = getRegisterNodeObject;
+module.exports =
+{
+	unknownID: unknownIDString,
+	example: exampleObject,
+	testDevice: testDeviceObject,
+	crudDevice: crudDeviceObject,
+	modifiedDevice: modifiedDeviceObject,
+	nodeDevice: nodeDeviceObject,
+	getRegisterNode: getRegisterNodeObject
+};

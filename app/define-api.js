@@ -1,3 +1,6 @@
 const apiDefinitions = ["Advantech", "Moxa", "Sonoff"];
 
-exports.definitions = apiDefinitions;
+module.exports =
+{
+	definitions: apiDefinitions
+};
