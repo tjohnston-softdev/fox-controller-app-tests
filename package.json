@@ -17,13 +17,12 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/optimcontrols/fox-controller-app-tests#readme",
   "dependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "chai-things": "^0.2.0",
-    "mocha": "^5.2.0",
-    "npm": "^6.4.1",
+    "mocha": "^8.3.2",
     "prompt-sync": "^4.1.6",
-    "request": "^2.88.0",
-    "sinon": "^6.3.5",
-    "validator": "^10.8.0"
+    "request": "^2.88.2",
+    "sinon": "^10.0.0",
+    "validator": "^13.6.0"
   }
 }
