@@ -83,7 +83,7 @@ function handleRetrieve()
 		
 		it("Referental Integrity", function(done)
 		{
-			modelIntegrityFile.checkRefIntegrity(resultList, modelReferenceArray);
+			modelIntegrityFile.checkIntegrity(resultList, modelReferenceArray);
 			done();
 		});
 		

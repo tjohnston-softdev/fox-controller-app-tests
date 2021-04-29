@@ -214,7 +214,7 @@ function handleBeforeListTest()
 		
 		it("Referental Integrity", function(done)
 		{
-			modelIntegrityFile.checkRefIntegrity(rioList, modelObjectArray);
+			modelIntegrityFile.checkIntegrity(rioList, modelObjectArray);
 			done();
 		});
 		

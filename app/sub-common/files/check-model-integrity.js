@@ -1,34 +1,25 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
-
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-
 
 
 function verifyDeviceListRefIntegrity(dList, sList)
 {
 	var deviceIndex = 0;
 	var currentDevice = null;
-	var currentErrorDesc = "";
+	var currentDesc = "";
 	var currentMatch = false;
 	var canContinue = true;
 	
 	while (deviceIndex >= 0 && deviceIndex < dList.length && canContinue === true)
 	{
 		currentDevice = dList[deviceIndex];
-		currentErrorDesc = writeCurrentDeviceDescription(currentDevice);
+		currentDesc = writeCurrentDeviceDescription(currentDevice);
 		currentMatch = matchCurrentDevice(currentDevice, sList);
 		
 		if (currentMatch !== true)
 		{
 			canContinue = false;
-			throw new Error(currentErrorDesc);
+			throw new Error(currentDesc);
 		}
 		
 		deviceIndex = deviceIndex + 1;
@@ -41,43 +32,49 @@ function verifyDeviceListRefIntegrity(dList, sList)
 
 function matchCurrentDevice(cDevice, sModels)
 {
-	var cManufacturerLower = cDevice.maker.toLowerCase();
-	var cModelLower = cDevice.model.toLowerCase();
+	var deviceManufacturer = cDevice.maker.toLowerCase();
+	var deviceModel = cDevice.model.toLowerCase();
 	
 	var supportIndex = 0;
 	var currentSupportEntry = null;
-	var sManufacturerLower = "";
-	var sModelLower = "";
-	var matched = false;
+	var currentManufacturer = "";
+	var currentModel = "";
+	var matchFound = false;
 	
-	while (supportIndex >= 0 && supportIndex < sModels.length && matched !== true)
+	while (supportIndex >= 0 && supportIndex < sModels.length && matchFound !== true)
 	{
 		currentSupportEntry = sModels[supportIndex];
-		sManufacturerLower = currentSupportEntry.maker.toLowerCase();
-		sModelLower = currentSupportEntry.modelType.toLowerCase();
+		currentManufacturer = currentSupportEntry.maker.toLowerCase();
+		currentModel = currentSupportEntry.modelType.toLowerCase();
 		
-		if (cManufacturerLower === sManufacturerLower && cModelLower === sModelLower)
+		if (deviceManufacturer === currentManufacturer && deviceModel === currentModel)
 		{
-			matched = true;
+			matchFound = true;
 		}
 		
 		supportIndex = supportIndex + 1;
 	}
 	
-	return matched;
+	return matchFound;
 }
 
-function writeCurrentDeviceDescription(dv)
+function writeCurrentDeviceDescription(vDevice)
 {
-	var p1 = "'" + dv.maker + "'";
-	var p2 = " - ";
-	var p3 = "'" + dv.model + "'";
-	var p4 = ", ";
-	var p5 = "is not a supported device";
+	var writeRes = "";
 	
-	var dRes = p1 + p2 + p3 + p4 + p5;
-	return dRes;
+	writeRes += "'";
+	writeRes += vDevice.maker;
+	writeRes += "' - ";
+	
+	writeRes += "'";
+	writeRes += vDevice.model;
+	writeRes += "', is not a supported device";
+	
+	return writeRes;
 }
 
 
-exports.checkRefIntegrity = verifyDeviceListRefIntegrity;
+module.exports =
+{
+	checkIntegrity: verifyDeviceListRefIntegrity
+};
