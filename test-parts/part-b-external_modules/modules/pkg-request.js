@@ -91,7 +91,7 @@ function verifyRequestFunction()
 
 function checkRequestSpy(reqArg)
 {
-	commonFunctionsFile.testTrue(rSpy.called);
+	expect(rSpy.called).to.be.true;
 	commonFunctionsFile.testPresent(rSpy.lastCall);
 	
 	commonFunctionsFile.testPresent(rSpy.lastCall.args);

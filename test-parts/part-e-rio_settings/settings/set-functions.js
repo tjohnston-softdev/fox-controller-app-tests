@@ -83,7 +83,7 @@ function checkGetSignalTypeFunction()
 		{
 			settingsFile.getSignalType(aValid);
 			
-			commonFunctionsFile.testTrue(gSpy.calledOnce);
+			expect(gSpy.calledOnce).to.be.true;
 			expect(gSpy.firstCall.args).to.deep.equal([aValid]);
 			commonFunctionsFile.testPresent(gSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(gSpy.firstCall.returnValue, 'number');
@@ -136,7 +136,7 @@ function checkParsePrefixFunction()
 		{
 			settingsFile.parseIoPrefix(prefixIndexObject.valid);
 		
-			commonFunctionsFile.testTrue(prefixSpy.calledOnce);
+			expect(prefixSpy.calledOnce).to.be.true;
 			expect(prefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.valid]);
 			commonFunctionsFile.testPresent(prefixSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(prefixSpy.firstCall.returnValue, 'string');
@@ -175,7 +175,7 @@ function checkParseIndexFunction()
 		{
 			settingsFile.parseIoIndex(prefixIndexObject.valid);
 			
-			commonFunctionsFile.testTrue(indexSpy.calledOnce);
+			expect(indexSpy.calledOnce).to.be.true;
 			expect(indexSpy.firstCall.args).to.deep.equal([prefixIndexObject.valid]);
 			commonFunctionsFile.testPresent(indexSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(indexSpy.firstCall.returnValue, 'number');

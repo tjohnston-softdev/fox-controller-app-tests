@@ -51,7 +51,7 @@ function verifyNetIpFunction()
 		{
 			netModule.isIPv4(ipStringFile.testString);
 			
-			commonFunctionsFile.testTrue(ipSpy.calledOnce);
+			expect(ipSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(ipSpy.firstCall);
 			
 			expect(ipSpy.firstCall.args).to.deep.equal([ipStringFile.testString]);
@@ -59,7 +59,7 @@ function verifyNetIpFunction()
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.firstCall.returnValue, 'boolean');
-			commonFunctionsFile.testTrue(ipSpy.firstCall.returnValue);
+			expect(ipSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
@@ -90,11 +90,11 @@ function verifyNetIpFunction()
 function callInvalidIP(a)
 {
 	netModule.isIPv4(a);
-	commonFunctionsFile.testTrue(ipSpy.called);
+	expect(ipSpy.called).to.be.true;
 	expect(ipSpy.lastCall.args).to.deep.equal([a]);
 	commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
 	commonFunctionsFile.testType(ipSpy.lastCall.returnValue, 'boolean');
-	commonFunctionsFile.testFalse(ipSpy.lastCall.returnValue);
+	expect(ipSpy.lastCall.returnValue).to.be.false;
 }
 
 exports.callTestNetDependency = testNetDependency;

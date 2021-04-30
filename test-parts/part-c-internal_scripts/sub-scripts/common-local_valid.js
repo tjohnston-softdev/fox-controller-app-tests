@@ -9,7 +9,7 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 
 function validateSpyObject(sCalledFlag, sCallObject, aString, aEmpty)
 {
-	commonFunctionsFile.testTrue(sCalledFlag);
+	expect(sCalledFlag).to.be.true;
 	commonFunctionsFile.testPresent(sCallObject);
 	
 	commonFunctionsFile.testPresent(sCallObject.args);
@@ -24,7 +24,7 @@ function validateSpyObject(sCalledFlag, sCallObject, aString, aEmpty)
 
 function validateFullPathSpyObject(sCalledFlag, sCallObject, aString, aAbsolute, aFile, aEmpty)
 {
-	commonFunctionsFile.testTrue(sCalledFlag);
+	expect(sCalledFlag).to.be.true;
 	commonFunctionsFile.testPresent(sCallObject);
 	
 	commonFunctionsFile.testPresent(sCallObject.args);
@@ -40,7 +40,7 @@ function validateFullPathSpyObject(sCalledFlag, sCallObject, aString, aAbsolute,
 
 function validateExampleSpy(sCallFlag, sCallObject, aString, aSynt, aEmpty)
 {
-	commonFunctionsFile.testTrue(sCallFlag);
+	expect(sCallFlag).to.be.true;
 	commonFunctionsFile.testPresent(sCallObject);
 	
 	commonFunctionsFile.testPresent(sCallObject.args);
@@ -55,11 +55,11 @@ function validateExampleResult(eRes, eTarget)
 	
 	if (eTarget === true)
 	{
-		commonFunctionsFile.testTrue(eRes);
+		expect(eRes).to.be.true;
 	}
 	else
 	{
-		commonFunctionsFile.testFalse(eRes);
+		expect(eRes).to.be.false;
 	}
 }
 

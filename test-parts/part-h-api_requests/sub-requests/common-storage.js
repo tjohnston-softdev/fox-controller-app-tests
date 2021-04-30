@@ -36,7 +36,7 @@ function testDriveLetterObject(dObject, dPlatform)
 		dLetterValid = localValidFile.validateDrivePath(dValue);
 	}
 	
-	commonFunctionsFile.testTrue(dLetterValid);
+	expect(dLetterValid).to.be.true;
 }
 
 function testMountObject(dObject, dPlatform)
@@ -180,7 +180,7 @@ function testFileFlags(fList)
 	for (fileIndex = 0; fileIndex < fList.length; fileIndex = fileIndex + 1)
 	{
 		currentFile = fList[fileIndex];
-		commonFunctionsFile.testFalse(currentFile.isDirectory);
+		expect(currentFile.isDirectory).to.be.false;
 	}
 }
 
@@ -242,7 +242,7 @@ function testFolderCreationResult(eObject)
 		successful = true;
 	}
 	
-	commonFunctionsFile.testTrue(successful);
+	expect(successful).to.be.true;
 }
 
 

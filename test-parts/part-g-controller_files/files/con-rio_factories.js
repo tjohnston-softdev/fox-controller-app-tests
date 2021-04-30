@@ -69,7 +69,7 @@ function handleRemoteIoModuleFunction()
 		{
 			factoryFile.RemoteIoModule(remoteIoTestDevice);
 			
-			commonFunctionsFile.testTrue(moduleSpy.calledOnce);
+			expect(moduleSpy.calledOnce).to.be.true;
 			expect(moduleSpy.firstCall.args).to.deep.equal([remoteIoTestDevice]);
 			commonFunctionsFile.testPresent(moduleSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(moduleSpy.firstCall.returnValue, 'object');

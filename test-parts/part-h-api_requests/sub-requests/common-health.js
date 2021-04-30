@@ -37,7 +37,7 @@ function testHealthDeviceObject(hObject, hPlatform)
 function testHealthTimezoneCodeValue(tzCode)
 {
 	var tzValid = localValidFile.validateTimezoneOffset(tzCode, false);
-	commonFunctionsFile.testTrue(tzValid);
+	expect(tzValid).to.be.true;
 }
 
 function testHealthNumberMaximum(srcObject, propName, maxVal)
@@ -69,7 +69,7 @@ function testHealthEnvironmentDummy(eObject, ePlatform)
 	{
 		commonFunctionsFile.testObjectPropertyDefinition(eObject, 'isDummy');
 		commonFunctionsFile.testObjectPropertyContent(eObject, 'isDummy', 'boolean');
-		commonFunctionsFile.testTrue(eObject.isDummy);
+		expect(eObject.isDummy).to.be.true;
 	}
 	else
 	{

@@ -339,7 +339,7 @@ function handleUpdateAddTest()
 		it("Test Device Listed", function(done)
 		{
 			var listFlag = rioCommon.callTestIdListed(addUpdateRead, testID);
-			commonFunctionsFile.testTrue(listFlag);
+			expect(listFlag).to.be.true;
 			done();
 		});
 		
@@ -682,7 +682,7 @@ function handleDeleteFlagTest()
 		
 		it("Delete Flag Successful", function(done)
 		{
-			commonFunctionsFile.testTrue(flagRead.success);
+			expect(flagRead.success).to.be.true;
 			done();
 		});
 		
@@ -745,7 +745,7 @@ function handleDeleteObjectTest()
 		
 		it("Delete Object Successful", function(done)
 		{
-			commonFunctionsFile.testTrue(deleteRead.success);
+			expect(deleteRead.success).to.be.true;
 			done();
 		});
 		
@@ -801,7 +801,7 @@ function handleUpdateDeleteTest()
 		it("Test Device Absent", function(done)
 		{
 			var listFlag = rioCommon.callTestIdListed(deleteUpdateRead, testID);
-			commonFunctionsFile.testFalse(listFlag);
+			expect(listFlag).to.be.false;
 			done();
 		});
 		

@@ -231,7 +231,7 @@ function testDatabaseNames(dbArray)
 			dbNameValid = true;
 		}
 		
-		commonFunctionsFile.testTrue(dbNameValid);
+		expect(dbNameValid).to.be.true;
 	}
 }
 
@@ -266,7 +266,7 @@ function testDatabaseFolderFlags(dbArray)
 			showUnknownDatabaseError(dbName);
 		}
 		
-		commonFunctionsFile.testTrue(dbValid);
+		expect(dbValid).to.be.true;
 	}
 	
 }
@@ -306,7 +306,7 @@ function testDatabaseSizesEmpty(dbArray, dbPlatform)
 			showUnknownDatabaseError(dbName);
 		}
 		
-		commonFunctionsFile.testTrue(dbValid);
+		expect(dbValid).to.be.true;
 	}
 }
 
@@ -345,8 +345,7 @@ function testDatabaseSizesPopulated(dbArray, dbPlatform)
 			showUnknownDatabaseError(dbName);
 		}
 		
-		
-		commonFunctionsFile.testTrue(dbValid);
+		expect(dbValid).to.be.true;
 	}
 	
 }

@@ -156,7 +156,7 @@ function handleUserStorageCreate()
 		
 		it("Storage Folder Successful", function(done)
 		{
-			commonFunctionsFile.testTrue(folderComplete);
+			expect(folderComplete).to.be.true;
 			storageCommonFile.callTestFolderCreationResult(folderError);
 			done();
 		});
@@ -173,7 +173,7 @@ function handleUserStorageCreate()
 		
 		it("Test File Write Successful", function(done)
 		{
-			commonFunctionsFile.testTrue(fileWriteComplete);
+			expect(fileWriteComplete).to.be.true;
 			expect(fileWriteError).to.be.null;
 			done();
 		});
@@ -257,7 +257,7 @@ function handleUserStorageDelete()
 		
 		it("File Remove Successful", function(done)
 		{
-			commonFunctionsFile.testTrue(fileRemoveComplete);
+			expect(fileRemoveComplete).to.be.true;
 			expect(fileRemoveError).to.be.null;
 			done();
 		});
@@ -274,7 +274,7 @@ function handleUserStorageDelete()
 		
 		it("Folder Remove Successful", function(done)
 		{
-			commonFunctionsFile.testTrue(folderRemoveComplete);
+			expect(folderRemoveComplete).to.be.true;
 			expect(folderRemoveError).to.be.null;
 			done();
 		});

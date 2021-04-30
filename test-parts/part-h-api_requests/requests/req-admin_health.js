@@ -467,7 +467,7 @@ function handleLog()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject.logSize[0], 'isDirectory');
 			commonFunctionsFile.testObjectPropertyContent(healthObject.logSize[0], 'isDirectory', 'boolean');
-			commonFunctionsFile.testFalse(healthObject.logSize[0].isDirectory);
+			expect(healthObject.logSize[0].isDirectory).to.be.false;
 		});
 	
 		it("Modified (logSize.modified)", function()

@@ -11,7 +11,7 @@ const validModule = require("validator");
 
 function validateWriteUrl(writeCalled, writeObject, writeFolder, writeFile, writtenReturn)
 {
-	commonFunctionsFile.testTrue(writeCalled);
+	expect(writeCalled).to.be.true;
 	commonFunctionsFile.testPresent(writeObject);
 	
 	expect(writeObject.args).to.deep.equal([writeFolder, writeFile]);
@@ -24,7 +24,7 @@ function validateWriteUrl(writeCalled, writeObject, writeFolder, writeFile, writ
 
 function validateResponseArray(arrayCalled, callObject, callArg)
 {
-	commonFunctionsFile.testTrue(arrayCalled);
+	expect(arrayCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	expect(callObject.args).to.deep.equal([callArg]);
@@ -45,7 +45,7 @@ function validateResponseArray(arrayCalled, callObject, callArg)
 
 function validateResponseObject(objectCalled, callObject, callArg)
 {
-	commonFunctionsFile.testTrue(objectCalled);
+	expect(objectCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 			
 	expect(callObject.args).to.deep.equal([callArg]);
@@ -62,7 +62,7 @@ function validateResponseObject(objectCalled, callObject, callArg)
 
 function validateResponseString(stringCalled, callObject, callArg, expectedResult)
 {
-	commonFunctionsFile.testTrue(stringCalled);
+	expect(stringCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	expect(callObject.args).to.deep.equal([callArg]);
@@ -85,21 +85,21 @@ function writeReplyErrorExample(rMessage)
 
 function validateOnlineResult(oCalledFlag, oCallObject, oArg)
 {
-	commonFunctionsFile.testTrue(oCalledFlag);
+	expect(oCalledFlag).to.be.true;
 	commonFunctionsFile.testPresent(oCallObject);
 	
 	expect(oCallObject.args).to.deep.equal([oArg]);
 	expect(oCallObject.exception).to.be.undefined;
 	
 	commonFunctionsFile.testPresent(oCallObject.returnValue);
-	commonFunctionsFile.testTrue(oCallObject.returnValue);
+	expect(oCallObject.returnValue).to.be.true;
 }
 
 function validateRandomIp(ipCalled, ipCallObject)
 {
 	var returnValid = null;
 	
-	commonFunctionsFile.testTrue(ipCalled);
+	expect(ipCalled).to.be.true;
 	commonFunctionsFile.testPresent(ipCallObject);
 	expect(ipCallObject.exception).to.be.undefined;
 	
@@ -107,13 +107,13 @@ function validateRandomIp(ipCalled, ipCallObject)
 	commonFunctionsFile.testString(ipCallObject.returnValue);
 	
 	returnValid = validModule.isIP(ipCallObject.returnValue);
-	commonFunctionsFile.testTrue(returnValid);
+	expect(returnValid).to.be.true;
 }
 
 
 function validateOptionsBase(optCalledFlag, optCallObject)
 {
-	commonFunctionsFile.testTrue(optCalledFlag);
+	expect(optCalledFlag).to.be.true;
 	commonFunctionsFile.testPresent(optCallObject);
 	
 	commonFunctionsFile.testPresent(optCallObject.args);
@@ -147,7 +147,7 @@ function validateOptionsReturn(optCallObject, desiredUrl, desiredMethod, desired
 	expect(optCallObject.returnValue.body).to.equal(desiredBody);
 	
 	commonFunctionsFile.testObjectPropertyContent(optCallObject.returnValue, 'json', 'boolean');
-	commonFunctionsFile.testTrue(optCallObject.returnValue.json);
+	expect(optCallObject.returnValue.json).to.be.true;
 }
 
 function validateDeleteOptionsReturn(optCallObject, desiredPermFlag)

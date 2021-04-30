@@ -1,3 +1,5 @@
+const chai = require("chai");
+const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 
@@ -25,7 +27,7 @@ function verifyDeviceListRefIntegrity(dList, sList)
 		deviceIndex = deviceIndex + 1;
 	}
 	
-	commonFunctionsFile.testTrue(canContinue);
+	expect(canContinue).to.be.true;
 }
 
 

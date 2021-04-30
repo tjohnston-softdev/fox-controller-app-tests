@@ -83,7 +83,7 @@ function handleCheckDevicesLoop()
 			it(cacheDeviceDescription, function(done)
 			{
 				var cacheDeviceListed = rioCommon.callTestIdListed(dbDeviceList, cacheDeviceElement.key);
-				commonFunctionsFile.testTrue(cacheDeviceListed);
+				expect(cacheDeviceListed).to.be.true;
 				done();
 			});
 		}

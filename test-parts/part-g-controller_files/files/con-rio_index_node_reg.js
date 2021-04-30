@@ -259,7 +259,7 @@ function handleCheckNodeExist()
 			it("Correct Return Value", function()
 			{
 				commonFunctionsFile.testType(checkNodeExistReturn, 'boolean');
-				commonFunctionsFile.testTrue(checkNodeExistReturn);
+				expect(checkNodeExistReturn).to.be.true;
 			});
 			
 		});
@@ -462,7 +462,7 @@ function handleRegisterNode()
 			
 			it("Unregister Function Successful", function(done)
 			{
-				commonFunctionsFile.testTrue(unregisterNodeSpy.calledOnce);
+				expect(unregisterNodeSpy.calledOnce).to.be.true;
 				commonFunctionsFile.testPresent(unregisterNodeSpy.firstCall);
 				
 				commonFunctionsFile.testPresent(unregisterNodeSpy.firstCall.args);
@@ -583,7 +583,7 @@ function coordinateCheckNodeExistInvalidCall(invalidArg)
 	expect(checkNodeExistSpy.lastCall.exception).to.be.undefined;
 					
 	commonFunctionsFile.testType(checkNodeExistSpy.lastCall.returnValue, 'boolean');
-	commonFunctionsFile.testFalse(checkNodeExistSpy.lastCall.returnValue);
+	expect(checkNodeExistSpy.lastCall.returnValue).to.be.false;
 }
 
 
@@ -628,7 +628,7 @@ function handleStaticDeleteObject()
 		{
 			spyFile.verifyDeleteDeviceCalled(nodeTestID, true, deleteObjectSpy.called, deleteObjectSpy.lastCall);
 			expect(deleteObjectSpy.lastCall.exception).to.be.undefined;
-			commonFunctionsFile.testTrue(objCallFlag);
+			expect(objCallFlag).to.be.true;
 			done();
 		});
 		
@@ -669,7 +669,7 @@ function handleAfterList()
 		it("Test Device Absent", function()
 		{
 			var listFlag = commonFile.callTestIdListed(afterList, nodeTestID);
-			commonFunctionsFile.testFalse(listFlag);
+			expect(listFlag).to.be.false;
 		});
 		
 		it("Device List Intact", function()

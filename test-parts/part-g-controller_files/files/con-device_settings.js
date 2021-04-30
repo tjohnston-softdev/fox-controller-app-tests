@@ -196,7 +196,7 @@ function checkScaleDecimalValueFunction()
 		{
 			settingsFile.scaleDecimalValue(9002, 0, 0, 10);
 				
-			commonFunctionsFile.testTrue(scaleSpy.calledOnce);
+			expect(scaleSpy.calledOnce).to.be.true;
 			expect(scaleSpy.firstCall.args).to.deep.equal([9002, 0, 0, 10]);
 			commonFunctionsFile.testPresent(scaleSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(scaleSpy.firstCall.returnValue, 'number');
@@ -207,7 +207,7 @@ function checkScaleDecimalValueFunction()
 		{
 			settingsFile.scaleDecimalValue(null, null, 0, 10);
 				
-			commonFunctionsFile.testTrue(scaleSpy.calledTwice);
+			expect(scaleSpy.calledTwice).to.be.true;
 			expect(scaleSpy.secondCall.args).to.deep.equal([null, null, 0, 10]);
 			commonFunctionsFile.testPresent(scaleSpy.secondCall.returnValue);
 			commonFunctionsFile.testType(scaleSpy.secondCall.returnValue, 'number');
@@ -297,7 +297,7 @@ function checkGetModelFunction()
 		{
 			settingsFile.getModel(testModelName);
 			
-			commonFunctionsFile.testTrue(modelSpy.calledOnce);
+			expect(modelSpy.calledOnce).to.be.true;
 			expect(modelSpy.firstCall.args).to.deep.equal([testModelName]);
 			commonFunctionsFile.testPresent(modelSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(modelSpy.firstCall.returnValue, 'object');
@@ -400,11 +400,11 @@ function checkSignalValidationResult(v, expectedOut)
 	
 	if (expectedOut === true)
 	{
-		commonFunctionsFile.testTrue(v);
+		expect(v).to.be.true;
 	}
 	else
 	{
-		commonFunctionsFile.testFalse(v);
+		expect(v).to.be.false;
 	}
 	
 }

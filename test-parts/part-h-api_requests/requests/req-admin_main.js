@@ -192,7 +192,7 @@ function handleLog()
 		it("Valid Contents", function()
 		{
 			commonFunctionsFile.testObjectPropertyContent(logRead, 'success', 'boolean');
-			commonFunctionsFile.testTrue(logRead.success);
+			expect(logRead.success).to.be.true;
 			commonFunctionsFile.testString(logRead.logs);
 		});
 		

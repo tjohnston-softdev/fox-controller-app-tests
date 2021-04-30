@@ -150,7 +150,7 @@ function handleNodeListDispose()
 
 function verifyNodeListCalled(nArg)
 {
-	commonFunctionsFile.testTrue(nListSpy.called);
+	expect(nListSpy.called).to.be.true;
 	commonFunctionsFile.testPresent(nListSpy.lastCall);
 	
 	commonFunctionsFile.testPresent(nListSpy.lastCall.args);

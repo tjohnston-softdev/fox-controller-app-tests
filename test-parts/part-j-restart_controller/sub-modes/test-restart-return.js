@@ -15,14 +15,14 @@ function testProcessReturnObject(procRetObj)
 	
 	commonFunctionsFile.testObjectPropertyDefinition(procRetObj, 'success');
 	commonFunctionsFile.testObjectPropertyContent(procRetObj, 'success', 'boolean');
-	commonFunctionsFile.testTrue(procRetObj.success);
+	expect(procRetObj.success).to.be.true;
 }
 
 
 function testOfflineCheckResult(offlineReturn)
 {
 	var offlineRead = requestFile.getApplicationOnlineResult(offlineReturn);
-	commonFunctionsFile.testFalse(offlineRead);
+	expect(offlineRead).to.be.false;
 }
 
 

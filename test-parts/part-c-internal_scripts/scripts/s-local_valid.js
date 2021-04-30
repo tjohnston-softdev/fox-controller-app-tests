@@ -129,35 +129,35 @@ function handleTimezoneOffsetFunction()
 		{
 			localValidFile.validateTimezoneOffset(timeEarlyValid, false);
 			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeEarlyValid, false);
-			commonFunctionsFile.testTrue(timeSpy.lastCall.returnValue);
+			expect(timeSpy.lastCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Late Valid", function()
 		{
 			localValidFile.validateTimezoneOffset(timeLateValid, false);
 			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeLateValid, false);
-			commonFunctionsFile.testTrue(timeSpy.lastCall.returnValue);
+			expect(timeSpy.lastCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Early Invalid", function()
 		{
 			localValidFile.validateTimezoneOffset(timeEarlyInvalid, false);
 			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeEarlyInvalid, false);
-			commonFunctionsFile.testFalse(timeSpy.lastCall.returnValue);
+			expect(timeSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Call - Late Invalid", function()
 		{
 			localValidFile.validateTimezoneOffset(timeLateInvalid, false);
 			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeLateInvalid, false);
-			commonFunctionsFile.testFalse(timeSpy.lastCall.returnValue);
+			expect(timeSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Call - Invalid Prefix", function()
 		{
 			localValidFile.validateTimezoneOffset(timeWrongPrefix, false);
 			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeWrongPrefix, false);
-			commonFunctionsFile.testFalse(timeSpy.lastCall.returnValue);
+			expect(timeSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -190,14 +190,14 @@ function handleDriveLetterFunction()
 		{
 			localValidFile.validateDriveLetter(driveValid, false);
 			localCommonFile.callValidateSpyObject(driveSpy.calledOnce, driveSpy.firstCall, driveValid, false);
-			commonFunctionsFile.testTrue(driveSpy.firstCall.returnValue);
+			expect(driveSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			localValidFile.validateDriveLetter(driveInvalid, false);
 			localCommonFile.callValidateSpyObject(driveSpy.calledTwice, driveSpy.secondCall, driveInvalid, false);
-			commonFunctionsFile.testFalse(driveSpy.secondCall.returnValue);
+			expect(driveSpy.secondCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -229,14 +229,14 @@ function handleDrivePathFunction()
 		{
 			localValidFile.validateDrivePath(dPathValid, false);
 			localCommonFile.callValidateSpyObject(dPathSpy.calledOnce, dPathSpy.firstCall, dPathValid, false);
-			commonFunctionsFile.testTrue(dPathSpy.firstCall.returnValue);
+			expect(dPathSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			localValidFile.validateDrivePath(dPathInvalid, false);
 			localCommonFile.callValidateSpyObject(dPathSpy.calledTwice, dPathSpy.secondCall, dPathInvalid, false);
-			commonFunctionsFile.testFalse(dPathSpy.secondCall.returnValue);
+			expect(dPathSpy.secondCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -271,14 +271,14 @@ function handleFilenameFunction()
 		{
 			localValidFile.validateFilename(fnValid, false);
 			localCommonFile.callValidateSpyObject(fnSpy.calledOnce, fnSpy.firstCall, fnValid, false);
-			commonFunctionsFile.testTrue(fnSpy.firstCall.returnValue);
+			expect(fnSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			localValidFile.validateFilename(fnInvalid, false);
 			localCommonFile.callValidateSpyObject(fnSpy.calledTwice, fnSpy.secondCall, fnInvalid, false);
-			commonFunctionsFile.testFalse(fnSpy.secondCall.returnValue);
+			expect(fnSpy.secondCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -316,21 +316,21 @@ function handleRioPrefixFunction()
 		{
 			localValidFile.validateRioPrefix(prefixValid, false);
 			localCommonFile.callValidateSpyObject(pxSpy.calledOnce, pxSpy.firstCall, prefixValid, false);
-			commonFunctionsFile.testTrue(pxSpy.firstCall.returnValue);
+			expect(pxSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			localValidFile.validateRioPrefix(prefixInvalid, false);
 			localCommonFile.callValidateSpyObject(pxSpy.calledTwice, pxSpy.secondCall, prefixInvalid, false);
-			commonFunctionsFile.testFalse(pxSpy.secondCall.returnValue);
+			expect(pxSpy.secondCall.returnValue).to.be.false;
 		});
 		
 		it("Call - Negative Index", function()
 		{
 			localValidFile.validateRioPrefix(prefixNegative, false);
 			localCommonFile.callValidateSpyObject(pxSpy.called, pxSpy.lastCall, prefixNegative, false);
-			commonFunctionsFile.testFalse(pxSpy.lastCall.returnValue);
+			expect(pxSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -372,35 +372,35 @@ function handleRequirementPathFunction()
 		{
 			localValidFile.validateRequirementPath(rForwardValid, false);
 			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rForwardValid, false);
-			commonFunctionsFile.testTrue(rSpy.lastCall.returnValue);
+			expect(rSpy.lastCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Valid Backward", function()
 		{
 			localValidFile.validateRequirementPath(rBackwardValid, false);
 			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rBackwardValid, false);
-			commonFunctionsFile.testTrue(rSpy.lastCall.returnValue);
+			expect(rSpy.lastCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Valid Sibling", function()
 		{
 			localValidFile.validateRequirementPath(rSiblingValid, false);
 			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rSiblingValid, false);
-			commonFunctionsFile.testTrue(rSpy.lastCall.returnValue);
+			expect(rSpy.lastCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Sibling", function()
 		{
 			localValidFile.validateRequirementPath(rSiblingInvalid, false);
 			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rSiblingInvalid, false);
-			commonFunctionsFile.testFalse(rSpy.lastCall.returnValue);
+			expect(rSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			localValidFile.validateRequirementPath(rFormatInvalid, false);
 			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rFormatInvalid, false);
-			commonFunctionsFile.testFalse(rSpy.lastCall.returnValue);
+			expect(rSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -434,21 +434,21 @@ function handleRioTextFunction()
 		{
 			localValidFile.validateRioText(textValid, false);
 			localCommonFile.callValidateSpyObject(rioTextSpy.calledOnce, rioTextSpy.firstCall, textValid, false);
-			commonFunctionsFile.testTrue(rioTextSpy.firstCall.returnValue);
+			expect(rioTextSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			localValidFile.validateRioText(textInvalid, false);
 			localCommonFile.callValidateSpyObject(rioTextSpy.calledTwice, rioTextSpy.secondCall, textInvalid, false);
-			commonFunctionsFile.testFalse(rioTextSpy.secondCall.returnValue);
+			expect(rioTextSpy.secondCall.returnValue).to.be.false;
 		});
 		
 		it("Call - Negative Number", function()
 		{
 			localValidFile.validateRioText(textNegative, false);
 			localCommonFile.callValidateSpyObject(rioTextSpy.called, rioTextSpy.lastCall, textNegative, false);
-			commonFunctionsFile.testFalse(rioTextSpy.lastCall.returnValue);
+			expect(rioTextSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()

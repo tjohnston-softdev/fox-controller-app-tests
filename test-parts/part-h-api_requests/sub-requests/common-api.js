@@ -39,7 +39,7 @@ function testArrayIpFourValue(iArray, iProp, iEmpty)
 			elementIpValid = false;
 		}
 		
-		commonFunctionsFile.testTrue(elementIpValid);
+		expect(elementIpValid).to.be.true;
 	}
 }
 
@@ -73,7 +73,7 @@ function testArrayIpSixValue(iArray, iProp, iEmpty)
 			currentValid = false;
 		}
 		
-		commonFunctionsFile.testTrue(currentValid);
+		expect(currentValid).to.be.true;
 	}
 }
 
@@ -104,7 +104,7 @@ function testArrayMacValue(iArray, iProp, iEmpty)
 			currentValid = false;
 		}
 		
-		commonFunctionsFile.testTrue(currentValid);
+		expect(currentValid).to.be.true;
 	}
 }
 
@@ -150,7 +150,7 @@ function testDhcpMacShortValue(dhcpArray)
 			dhcpShortValid = true;
 		}
 		
-		commonFunctionsFile.testTrue(dhcpShortValid);
+		expect(dhcpShortValid).to.be.true;
 	}
 }
 
@@ -190,7 +190,7 @@ function testFileNameArray(fnArray, fnProperty)
 		elementName = elementObject[fnProperty];
 		elementValid = localValidFile.validateFilename(elementName);
 		
-		commonFunctionsFile.testTrue(elementValid);
+		expect(elementValid).to.be.true;
 	}
 }
 

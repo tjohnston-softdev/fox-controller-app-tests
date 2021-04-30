@@ -68,27 +68,27 @@ function verifyIpAddressVerFour()
 		{
 			validatorModule.isIP(ipStringFile.testString, 4);
 			
-			commonFunctionsFile.testTrue(ipSpy.calledOnce);
+			expect(ipSpy.calledOnce).to.be.true;
 			expect(ipSpy.firstCall.args).to.deep.equal([ipStringFile.testString, 4]);
 			expect(ipSpy.firstCall.exception).to.be.undefined;
 			
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.firstCall.returnValue, 'boolean');
-			commonFunctionsFile.testTrue(ipSpy.firstCall.returnValue);
+			expect(ipSpy.firstCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Empty", function()
 		{
 			validatorModule.isIP("", 4);
 			
-			commonFunctionsFile.testTrue(ipSpy.calledTwice);
+			expect(ipSpy.calledTwice).to.be.true;
 			expect(ipSpy.secondCall.args).to.deep.equal(["", 4]);
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.secondCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.secondCall.returnValue, 'boolean');
-			commonFunctionsFile.testFalse(ipSpy.secondCall.returnValue);
+			expect(ipSpy.secondCall.returnValue).to.be.false;
 		});
 		
 		
@@ -96,13 +96,13 @@ function verifyIpAddressVerFour()
 		{
 			validatorModule.isIP(ipStringFile.invalidString, 4);
 			
-			commonFunctionsFile.testTrue(ipSpy.called);
+			expect(ipSpy.called).to.be.true;
 			expect(ipSpy.lastCall.args).to.deep.equal([ipStringFile.invalidString, 4]);
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.lastCall.returnValue, 'boolean');
-			commonFunctionsFile.testFalse(ipSpy.lastCall.returnValue);
+			expect(ipSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -134,13 +134,13 @@ function verifyIpAddressVerSix()
 		{
 			validatorModule.isIP(sixValid, 6);
 			
-			commonFunctionsFile.testTrue(ipSpy.calledOnce);
+			expect(ipSpy.calledOnce).to.be.true;
 			expect(ipSpy.firstCall.args).to.deep.equal([sixValid, 6]);
 			expect(ipSpy.firstCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.firstCall.returnValue, 'boolean');
-			commonFunctionsFile.testTrue(ipSpy.firstCall.returnValue);
+			expect(ipSpy.firstCall.returnValue).to.be.true;
 			
 		});
 		
@@ -148,26 +148,26 @@ function verifyIpAddressVerSix()
 		{
 			validatorModule.isIP(sixLoop, 6);
 			
-			commonFunctionsFile.testTrue(ipSpy.calledTwice);
+			expect(ipSpy.calledTwice).to.be.true;
 			expect(ipSpy.secondCall.args).to.deep.equal([sixLoop, 6]);
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.secondCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.secondCall.returnValue, 'boolean');
-			commonFunctionsFile.testTrue(ipSpy.secondCall.returnValue);
+			expect(ipSpy.secondCall.returnValue).to.be.true;
 		});
 		
 		it("Call - Invalid", function()
 		{
 			validatorModule.isIP(sixInvalid, 6);
 			
-			commonFunctionsFile.testTrue(ipSpy.called);
+			expect(ipSpy.called).to.be.true;
 			expect(ipSpy.lastCall.args).to.deep.equal([sixInvalid, 6]);
 			expect(ipSpy.lastCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
 			commonFunctionsFile.testType(ipSpy.lastCall.returnValue, 'boolean');
-			commonFunctionsFile.testFalse(ipSpy.lastCall.returnValue);
+			expect(ipSpy.lastCall.returnValue).to.be.false;
 		});
 		
 		it("Complete", function()
@@ -214,13 +214,13 @@ function verifyMacAddressFunction()
 		it("Call - Valid Format", function()
 		{
 			var validResult = validatorModule.isMACAddress(macValid);
-			commonFunctionsFile.testTrue(validResult);
+			expect(validResult).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
 			var invalidResult = validatorModule.isMACAddress(macInvalid);
-			commonFunctionsFile.testFalse(invalidResult);
+			expect(invalidResult).to.be.false;
 		});
 		
 		

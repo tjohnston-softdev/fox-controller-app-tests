@@ -394,8 +394,8 @@ function stringToNumber(numberString)
 
 exports.testPlaceholder = checkPlaceholder;
 exports.testPresent = checkPresent;
-exports.testTrue = checkTrue;
-exports.testFalse = checkFalse;
+//exports.testTrue = checkTrue;
+//exports.testFalse = checkFalse;
 exports.testAbove = checkAbove;
 exports.testBelow = checkBelow;
 exports.testLeast = checkLeast;

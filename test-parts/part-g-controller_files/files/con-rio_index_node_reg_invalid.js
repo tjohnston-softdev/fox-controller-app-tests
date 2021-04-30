@@ -502,7 +502,7 @@ function handleTestDelete()
 		{
 			spyFile.verifyDeleteDeviceCalled(testID, true, deleteSpy.called, deleteSpy.lastCall);
 			expect(deleteSpy.lastCall.exception).to.be.undefined;
-			commonFunctionsFile.testTrue(deleteConfirmed);
+			expect(deleteConfirmed).to.be.true;
 			done();
 		});
 		

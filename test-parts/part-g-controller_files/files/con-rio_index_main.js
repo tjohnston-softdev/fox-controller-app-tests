@@ -75,7 +75,7 @@ function handleInitializationFunction()
 		
 		it("Initialization Event Successful", function()
 		{
-			commonFunctionsFile.testTrue(initSpy.calledOnce);
+			expect(initSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(initSpy.firstCall);
 			expect(initSpy.firstCall.args).to.deep.equal([]);
 			expect(initSpy.firstCall.returnValue).to.be.undefined;
@@ -110,8 +110,8 @@ function handleInitializationCompleteFunction()
 		
 		it("Event Successful", function()
 		{
-			commonFunctionsFile.testTrue(compSpy.called);
-			commonFunctionsFile.testTrue(compSpy.calledOnce);
+			expect(compSpy.called).to.be.true;
+			expect(compSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(compSpy.firstCall);
 			
 			commonFunctionsFile.testPresent(compSpy.firstCall.args);
@@ -126,7 +126,7 @@ function handleInitializationCompleteFunction()
 			expect(compSpy.firstCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(triggerFlag);
-			commonFunctionsFile.testTrue(triggerFlag);
+			expect(triggerFlag).to.be.true;
 		});
 		
 		it("Event Disposed", function()
@@ -175,7 +175,7 @@ function checkFunctionDefinitionLoop(functionNameArray)
 		fi = fi + 1;
 	}
 	
-	commonFunctionsFile.testTrue(allValid);
+	expect(allValid).to.be.true;
 }
 
 

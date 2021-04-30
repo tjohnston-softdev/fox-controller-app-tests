@@ -95,7 +95,7 @@ function handleDeviceClasses()
 		{
 			new deviceModelFile.StoredDevice(testDeviceValidModel);
 			
-			commonFunctionsFile.testTrue(storeDeviceSpy.calledOnce);
+			expect(storeDeviceSpy.calledOnce).to.be.true;
 			expect(storeDeviceSpy.firstCall.args).to.deep.equal([testDeviceValidModel]);
 			commonFunctionsFile.testPresent(storeDeviceSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(storeDeviceSpy.firstCall.returnValue, 'object');
@@ -196,7 +196,7 @@ function handleDeviceClasses()
 		{
 			new deviceConnectFile.ConnectedDevice(storeDeviceValid);
 			
-			commonFunctionsFile.testTrue(connectSpy.calledOnce);
+			expect(connectSpy.calledOnce).to.be.true;
 			expect(connectSpy.firstCall.args).to.deep.equal([storeDeviceValid]);
 			commonFunctionsFile.testPresent(connectSpy.firstCall.returnValue);
 			commonFunctionsFile.testType(connectSpy.firstCall.returnValue, 'object');

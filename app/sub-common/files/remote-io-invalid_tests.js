@@ -27,7 +27,7 @@ function validateStatusInvalid(sReturn, sValue)
 	commonFunctionsFile.testObjectPropertyContent(sReturn, 'isRunning', 'boolean');
 	
 	expect(sReturn.id).to.equal(sValue);
-	commonFunctionsFile.testFalse(sReturn.isRunning);
+	expect(sReturn.isRunning).to.be.false;
 }
 
 exports.callValidateStatusInvalid = validateStatusInvalid;

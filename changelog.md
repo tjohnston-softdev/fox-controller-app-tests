@@ -1,38 +1,70 @@
 # Changelog
 
 **./app/test-common.js**
-* Removed 'checkNull' function.
+* Removed functions:
+	* checkTrue
+	* checkFalse
+* Replaced with direct calls to `expect`
 
 ---
 
-**./test-parts/**
-* Replaced `commonFunctionsFile.testNull` with direct call to `expect`
-* Affected Files:
-	* part-b-external_modules/modules/pkg-request.js
-	* part-e-rio_settings/settings/set-functions.js
-	* part-g-controller-files/sub-files/rio-spy_functions.js
-	* part-g-controller-files/files/
-		* con-device_settings.js
-		* con-rio_index_node_list.js
-		* con-rio_index_node_reg.js
-		* con-rio_index_node_reg_invalid.js
-	* part-h-api_requests/requests/
-		* req-admin_health.js
-		* req-admin_main.js
-		* req-alarm.js
-		* req-devices_crud.js
-		* req-devices_crud_invalid.js
-		* req-devices_modify_invalid.js
-		* req-storage.js
-	* part-i-frontend/parts/
-		* a-check_database_empty.js
-		* b-add_all_devices.js
-		* c-get_device_list.js
-		* e-list_avaliable_nodes.js
-		* g-get_device_properties.js
-		* h-delete_added_devices.js
-		* i-clear_cache.js
-	* part-j-reset_controller/modes/
-		* mode-factory_reset.js
-		* mode-reboot.js
-		* mode-restart.js
+**Affected Files**
+* ./app/
+	* sub-common/
+		* files/
+			* check-model-integrity.js
+			* remote-io-invalid_tests.js
+			* test-device-common.js
+* ./test-parts/
+	* part-b-external_modules/
+		* modules/
+			* pkg-net.js
+			* pkg-os.js
+			* pkg-request.js
+			* pkg-validator.js
+	* part-c-internal_scripts/
+		* scripts/
+			* s-local_valid.js
+			* s-request_api.js
+		* sub-scripts/
+			* common-local_valid.js
+			* common-request.js
+	* part-e-rio_settings/
+		* settings/
+			* set-functions.js
+	* part-g-controller_files/
+		* files/
+			* con-device_classes.js
+			* con-device_settings.js
+			* con-rio_factories.js
+			* con-rio_index_main.js
+			* con-rio_index_node_list.js
+			* con-rio_index_node_reg.js
+			* con-rio_index_node_reg_invalid.js
+		* sub-files/
+			* rio-spy_functions.js
+	* part-h-api_requests/
+		* requests/
+			* req-admin_health.js
+			* req-admin_main.js
+			* req-devices_crud.js
+			* req-storage.js
+		* sub-requests/
+			* common-api.js
+			* common-database.js
+			* common-health.js
+			* common-storage.js
+	* part-i-api_frontend/
+		* parts/
+			* d-check_device_list.js
+			* i-clear_cache.js
+		* sub-parts/
+			* common-nodes.js
+	* part-j-controller_reset/
+		* sub-modes/
+			* test-restart-return.js
+
+---
+
+**./app/sub-common/files/check-model-integrity.js**
+* Added 'chai' requirement.

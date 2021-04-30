@@ -49,7 +49,7 @@ function verifyPlatformFunction()
 		{
 			osModule.platform();
 			
-			commonFunctionsFile.testTrue(platformSpy.calledOnce);
+			expect(platformSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(platformSpy.firstCall);
 			
 			expect(platformSpy.firstCall.args).to.deep.equal([]);
@@ -65,7 +65,7 @@ function verifyPlatformFunction()
 			
 			commonFunctionsFile.testPresent(supportFlag);
 			commonFunctionsFile.testType(supportFlag, 'boolean');
-			commonFunctionsFile.testTrue(supportFlag);
+			expect(supportFlag).to.be.true;
 		});
 		
 		it("Complete", function()

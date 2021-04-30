@@ -118,7 +118,7 @@ function testStatusControlSyntax(sca)
 		sIndex = sIndex + 1;
 	}
 	
-	commonFunctionsFile.testTrue(canContinue);
+	expect(canContinue).to.be.true;
 }
 
 
@@ -155,7 +155,7 @@ function testStatusControlIntegrity(sca)
 		sIndex = sIndex + 1;
 	}
 	
-	commonFunctionsFile.testTrue(canContinue);
+	expect(canContinue).to.be.true;
 	
 }
 

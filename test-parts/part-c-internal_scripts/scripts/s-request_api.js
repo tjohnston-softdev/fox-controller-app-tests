@@ -66,7 +66,7 @@ function checkHostUrlString()
 		{
 			var urlSyntax = /^http:\/\/localhost:([0-9]{4})$/i;
 			var urlResult = urlSyntax.test(requestFile.hostUrl);
-			commonFunctionsFile.testTrue(urlResult);
+			expect(urlResult).to.be.true;
 		});
 		
 	});
@@ -642,7 +642,7 @@ function runOfflineResult(offArg)
 {
 	var offResult = requestFile.getApplicationOnlineResult(offArg);
 	commonFunctionsFile.testPresent(offResult);
-	commonFunctionsFile.testFalse(offResult);
+	expect(offResult).to.be.false;
 }
 
 function runRefuseError(reArg)

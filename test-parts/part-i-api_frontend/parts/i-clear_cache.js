@@ -36,7 +36,7 @@ function handleClearCache()
 		{
 			commonFunctionsFile.testPresent(clearResult);
 			commonFunctionsFile.testType(clearResult, 'boolean');
-			commonFunctionsFile.testTrue(clearResult);
+			expect(clearResult).to.be.true;
 			
 			done();
 		});

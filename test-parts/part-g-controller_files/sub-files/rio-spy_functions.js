@@ -13,7 +13,7 @@ const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 function verifyRemoteIoList(listError, listCalled, callObject)
 {
-	commonFunctionsFile.testTrue(listCalled);
+	expect(listCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 		
 	commonFunctionsFile.testPresent(callObject.args);
@@ -30,7 +30,7 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 
 function verifyAddDevice(addDeviceArg, addCalled, callObject)
 {
-	commonFunctionsFile.testTrue(addCalled);
+	expect(addCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -48,7 +48,7 @@ function verifyAddDevice(addDeviceArg, addCalled, callObject)
 
 function verifyGetDevice(getDeviceArg, getCalled, callObject)
 {
-	commonFunctionsFile.testTrue(getCalled);
+	expect(getCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -66,7 +66,7 @@ function verifyGetDevice(getDeviceArg, getCalled, callObject)
 
 function verifyGetDeviceStatus(getStatusArg, getStatusCalled, callObject)
 {
-	commonFunctionsFile.testTrue(getStatusCalled);
+	expect(getStatusCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -78,7 +78,7 @@ function verifyGetDeviceStatus(getStatusArg, getStatusCalled, callObject)
 
 function verifyCheckNodeExists(existArg, existCalled, callObject)
 {
-	commonFunctionsFile.testTrue(existCalled);
+	expect(existCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -90,7 +90,7 @@ function verifyCheckNodeExists(existArg, existCalled, callObject)
 
 function verifyGetIoProperties(propArg, propCalled, callObject)
 {
-	commonFunctionsFile.testTrue(propCalled);
+	expect(propCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -103,7 +103,7 @@ function verifyGetIoProperties(propArg, propCalled, callObject)
 
 function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 {
-	commonFunctionsFile.testTrue(regCalled);
+	expect(regCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -123,7 +123,7 @@ function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 
 function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aToggle)
 {
-	commonFunctionsFile.testTrue(setCalled);
+	expect(setCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -136,7 +136,7 @@ function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aTog
 
 function verifyModifyDevice(modifyArg, modifyCalled, callObject)
 {
-	commonFunctionsFile.testTrue(modifyCalled);
+	expect(modifyCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -154,7 +154,7 @@ function verifyModifyDevice(modifyArg, modifyCalled, callObject)
 
 function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 {
-	commonFunctionsFile.testTrue(deleteCalled);
+	expect(deleteCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
@@ -177,7 +177,7 @@ function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 
 function verifyGetNodeConfig(ncIdArg, ncCalled, ncCallObject)
 {
-	commonFunctionsFile.testTrue(ncCalled);
+	expect(ncCalled).to.be.true;
 	commonFunctionsFile.testPresent(ncCallObject);
 	
 	commonFunctionsFile.testPresent(ncCallObject.args);
