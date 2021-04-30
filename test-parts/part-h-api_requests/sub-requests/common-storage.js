@@ -78,7 +78,7 @@ function testDriveTotalObject(tObject, tPlatform)
 	}
 	
 	commonFunctionsFile.testType(tObject.size, tType);
-	commonFunctionsFile.testPositive(tSize);
+	expect(tSize).to.be.above(0);
 }
 
 function testDriveUsedObject(uObject)

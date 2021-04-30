@@ -54,7 +54,7 @@ function handleCheckPrepare()
 			
 			commonFunctionsFile.testPresent(addCount);
 			commonFunctionsFile.testType(addCount, 'number');
-			commonFunctionsFile.testPositive(addCount);
+			expect(addCount).to.be.above(0);
 			
 			done();
 		});

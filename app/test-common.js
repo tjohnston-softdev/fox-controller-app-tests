@@ -14,16 +14,6 @@ function checkPresent(o)
 	expect(o).to.not.be.null;
 }
 
-function checkPositive(nVal)
-{
-	expect(nVal).to.be.above(0);
-}
-
-function checkNegative(nVal)
-{
-	expect(nVal).to.be.below(0);
-}
-
 function checkBinary(nVal)
 {
 	expect(nVal).to.be.oneOf([0, 1]);
@@ -349,8 +339,6 @@ function stringToNumber(numberString)
 
 exports.testPlaceholder = checkPlaceholder;
 exports.testPresent = checkPresent;
-exports.testPositive = checkPositive;
-exports.testNegative = checkNegative;
 exports.testBinary = checkBinary;
 exports.testPercent = checkPercent;
 exports.testType = checkType;

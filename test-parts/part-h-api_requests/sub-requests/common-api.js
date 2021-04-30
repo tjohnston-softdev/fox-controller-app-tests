@@ -119,7 +119,7 @@ function testDhcpLeaseExpireValues(dhcpArray)
 	for (dhcpIndex = 0; dhcpIndex < dhcpArray.length; dhcpIndex = dhcpIndex + 1)
 	{
 		dhcpObject = dhcpArray[dhcpIndex];
-		commonFunctionsFile.testPositive(dhcpObject.leaseExpiry);
+		expect(dhcpObject.leaseExpiry).to.be.at.least(1);
 	}
 }
 
@@ -159,8 +159,8 @@ function testWriteTimestamp(wObject, modifiedProperty, createdProperty)
 	var modifiedValue = wObject[modifiedProperty];
 	var createdValue = wObject[createdProperty];
 	
-	commonFunctionsFile.testPositive(modifiedValue);
-	commonFunctionsFile.testPositive(createdValue);
+	expect(modifiedValue).to.be.above(0);
+	expect(createdValue).to.be.above(0);
 	expect(modifiedValue).to.be.at.least(createdValue);
 }
 
@@ -212,7 +212,7 @@ function testPositiveNumberProperty(parentObject, propName)
 {
 	commonFunctionsFile.testObjectPropertyDefinition(parentObject, propName);
 	commonFunctionsFile.testObjectPropertyContent(parentObject, propName, 'number');
-	commonFunctionsFile.testPositive(parentObject[propName]);
+	expect(parentObject[propName]).to.be.above(0);
 }
 
 function testPositiveNumberPropertyArray(parentArray, propName)
@@ -225,7 +225,7 @@ function testPositiveNumberPropertyArray(parentArray, propName)
 	{
 		aObject = parentArray[aIndex];
 		aValue = aObject[propName];
-		commonFunctionsFile.testPositive(aValue);
+		expect(aValue).to.be.above(0);
 	}
 }
 

@@ -55,7 +55,7 @@ function testHealthEnvironmentValue(eObject, eProp, ePlatform)
 	
 	if (ePlatform === 'win32' || ePlatform === 'mac' || ePlatform === 'darwin')
 	{
-		commonFunctionsFile.testNegative(eObject[eProp]);
+		expect(eObject[eProp]).to.be.below(0);
 	}
 	else
 	{
