@@ -16,11 +16,9 @@ function testLocalValid()
 	{
 		checkLocalValidationFileExists();
 		handleExampleFunction();
-		handleMacAddressFunction();
 		handleTimezoneOffsetFunction();
 		handleDriveLetterFunction();
 		handleDrivePathFunction();
-		handleIpSixFunction();
 		handleFilenameFunction();
 		handleRioPrefixFunction();
 		handleRequirementPathFunction();
@@ -103,18 +101,6 @@ function handleExampleFunction()
 			exampleSpy.restore();
 		});
 		
-	});
-}
-
-
-function handleMacAddressFunction()
-{
-	describe("MAC Address (validateMac)", function()
-	{
-		it("Placeholder", function()
-		{
-			commonFunctionsFile.testTrue(true);
-		});
 	});
 }
 
@@ -264,17 +250,6 @@ function handleDrivePathFunction()
 }
 
 
-function handleIpSixFunction()
-{
-	describe("IPv6 Address (validateIpAddressSix)", function()
-	{
-		it("Placeholder", function()
-		{
-			commonFunctionsFile.testTrue(true);
-		});
-	});
-	
-}
 
 function handleFilenameFunction()
 {
