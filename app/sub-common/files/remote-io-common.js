@@ -346,7 +346,7 @@ function testNodeConfigObjectStructure(confObj)
 	commonFunctionsFile.testString(confObj.id);
 	commonFunctionsFile.testString(confObj.type);
 	commonFunctionsFile.testString(confObj.z);
-	commonFunctionsFile.testStringNeutral(confObj.name);
+	expect(confObj.name).to.be.a("string");
 	commonFunctionsFile.testString(confObj.deviceId);
 	commonFunctionsFile.testString(confObj.ioSetId);
 	commonFunctionsFile.testType(confObj.x, 'number');

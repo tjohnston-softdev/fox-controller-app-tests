@@ -72,28 +72,6 @@ function checkString(sDef)
 	expect(sDef.length).to.be.at.least(1);
 }
 
-function checkStringNeutral(sDef)
-{
-	expect(sDef).to.be.a('string');
-}
-
-function checkStringInclude(sDef, sIncl)
-{
-	expect(sDef).to.have.string(sIncl);
-}
-
-function checkStringStartsWith(sDef, sStart)
-{
-	var sFlag = sDef.startsWith(sStart);
-	expect(sFlag).to.be.true;
-}
-
-function checkStringEndsWith(sDef, sEnd)
-{
-	var sFlag = sDef.endsWith(sEnd);
-	expect(sFlag).to.be.true;
-}
-
 
 function checkAllElements(aDef, eType)
 {
@@ -347,10 +325,6 @@ exports.testArrayNeutral = checkArrayNeutral;
 exports.testArrayEmpty = checkArrayEmpty;
 exports.testArrayDynamic = checkArrayDynamic;
 exports.testString = checkString;
-exports.testStringNeutral = checkStringNeutral;
-exports.testStringInclude = checkStringInclude;
-exports.testStringStartsWith = checkStringStartsWith;
-exports.testStringEndsWith = checkStringEndsWith;
 exports.testAllElements = checkAllElements;
 exports.testObjectAllPropertiesType = checkObjectAllPropertiesType
 exports.testObjectMatchKV = checkObjectMatchKV;
