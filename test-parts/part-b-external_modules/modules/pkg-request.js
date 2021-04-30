@@ -121,7 +121,7 @@ function checkRequestReturn(r)
 	validateGivenProperty(r.request.uri, 'href', 'string');
 	
 	expect(r.statusCode).to.equal(200);
-	commonFunctionsFile.testLeast(r.body.length, 1);
+	expect(r.body.length).to.be.at.least(1);
 	expect(r.request.method).to.equal('GET');
 	expect(r.request.uri.href).to.equal(addressFile.pingAddress);
 	

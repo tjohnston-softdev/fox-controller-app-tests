@@ -14,16 +14,6 @@ function checkPresent(o)
 	expect(o).to.not.be.null;
 }
 
-function checkTrue(v)
-{
-	expect(v).to.be.true;
-}
-
-function checkFalse(v)
-{
-	expect(v).to.be.false
-}
-
 function checkAbove(givenNumber, tgtNumber)
 {
 	expect(givenNumber).to.be.above(tgtNumber);
@@ -54,16 +44,6 @@ function checkNegative(nVal)
 	expect(nVal).to.be.below(0);
 }
 
-function checkZero(nVal)
-{
-	expect(nVal).to.equal(0);
-}
-
-function checkZeroLeast(nVal)
-{
-	expect(nVal).to.be.at.least(0);
-}
-
 function checkBinary(nVal)
 {
 	expect(nVal).to.be.oneOf([0, 1]);
@@ -73,11 +53,6 @@ function checkBinary(nVal)
 function checkPercent(percVal)
 {
 	expect(percVal).to.be.within(0.00, 100.00);
-}
-
-function checkWithin(nVal, nLower, nUpper)
-{
-	expect(nVal).to.be.within(nLower, nUpper);
 }
 
 
@@ -394,19 +369,10 @@ function stringToNumber(numberString)
 
 exports.testPlaceholder = checkPlaceholder;
 exports.testPresent = checkPresent;
-//exports.testTrue = checkTrue;
-//exports.testFalse = checkFalse;
-exports.testAbove = checkAbove;
-exports.testBelow = checkBelow;
-exports.testLeast = checkLeast;
-exports.testMost = checkMost;
 exports.testPositive = checkPositive;
 exports.testNegative = checkNegative;
-exports.testZero = checkZero;
-exports.testZeroLeast = checkZeroLeast;
 exports.testBinary = checkBinary;
 exports.testPercent = checkPercent;
-exports.testWithin = checkWithin;
 exports.testType = checkType;
 exports.testArray = checkArray;
 exports.testArrayNeutral = checkArrayNeutral;

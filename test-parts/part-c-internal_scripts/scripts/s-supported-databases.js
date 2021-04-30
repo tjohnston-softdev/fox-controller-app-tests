@@ -43,7 +43,7 @@ function checkMarginNumber()
 		it("Valid Number", function()
 		{
 			commonFunctionsFile.testObjectPropertyContent(supportedDatabaseDefinitionFile, 'folderErrorMargin', 'number');
-			commonFunctionsFile.testZeroLeast(supportedDatabaseDefinitionFile.folderErrorMargin);
+			expect(supportedDatabaseDefinitionFile.folderErrorMargin).to.be.at.least(0);
 		});
 		
 	});
@@ -119,7 +119,7 @@ function testDefinitionSizes(dArray)
 	for (tIndex = 0; tIndex < dArray.length; tIndex = tIndex + 1)
 	{
 		tElement = dArray[tIndex];
-		commonFunctionsFile.testZeroLeast(tElement.cleanSize);
+		expect(tElement.cleanSize).to.be.at.least(0);
 	}
 }
 

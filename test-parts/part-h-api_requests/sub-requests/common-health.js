@@ -44,8 +44,8 @@ function testHealthNumberMaximum(srcObject, propName, maxVal)
 {
 	commonFunctionsFile.testObjectPropertyDefinition(srcObject, propName);
 	commonFunctionsFile.testObjectPropertyContent(srcObject, propName, 'number');
-	commonFunctionsFile.testZeroLeast(srcObject[propName]);
-	commonFunctionsFile.testMost(srcObject[propName], maxVal);
+	expect(srcObject[propName]).to.be.at.least(0);
+	expect(srcObject[propName]).to.be.at.most(maxVal);
 }
 
 function testHealthEnvironmentValue(eObject, eProp, ePlatform)
@@ -59,7 +59,7 @@ function testHealthEnvironmentValue(eObject, eProp, ePlatform)
 	}
 	else
 	{
-		commonFunctionsFile.testZeroLeast(eObject[eProp]);
+		expect(eObject[eProp]).to.be.at.least(0);
 	}
 }
 

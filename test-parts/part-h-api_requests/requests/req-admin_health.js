@@ -227,7 +227,7 @@ function handleRam()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject.mem, 'buffcache');
 			commonFunctionsFile.testObjectPropertyContent(healthObject.mem, 'buffcache', 'number');
-			commonFunctionsFile.testMost(healthObject.mem.buffcache, healthObject.mem.total);
+			expect(healthObject.mem.buffcache).to.be.at.most(healthObject.mem.total);
 		});
 		
 		it("Total Swap Bytes (mem.swaptotal)", function()
@@ -460,7 +460,7 @@ function handleLog()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject.logSize[0], 'size');
 			commonFunctionsFile.testObjectPropertyContent(healthObject.logSize[0], 'size', 'number');
-			commonFunctionsFile.testZeroLeast(healthObject.logSize[0].size);
+			expect(healthObject.logSize[0].size).to.be.at.least(0);
 		});
 	
 		it("Directory Flag (logSize.isDirectory)", function()

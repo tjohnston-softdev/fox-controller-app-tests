@@ -86,8 +86,8 @@ function testDriveUsedObject(uObject)
 	var totalValue = commonFunctionsFile.convertStringToNumber(uObject.size);
 	var usedValue = uObject.used;
 		
-	commonFunctionsFile.testZeroLeast(usedValue);
-	commonFunctionsFile.testMost(usedValue, totalValue);
+	expect(usedValue).to.be.at.least(0);
+	expect(usedValue).to.be.at.most(totalValue);
 }
 
 function testDrivePercentageObject(percentObject)

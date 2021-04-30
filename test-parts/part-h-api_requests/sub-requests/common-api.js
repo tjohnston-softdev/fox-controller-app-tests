@@ -161,8 +161,7 @@ function testWriteTimestamp(wObject, modifiedProperty, createdProperty)
 	
 	commonFunctionsFile.testPositive(modifiedValue);
 	commonFunctionsFile.testPositive(createdValue);
-	
-	commonFunctionsFile.testLeast(modifiedValue, createdValue);
+	expect(modifiedValue).to.be.at.least(createdValue);
 }
 
 function testWriteTimestampArray(wArray, arrayModifyProperty, arrayCreateProperty)
@@ -204,8 +203,7 @@ function testZeroLeastArray(objectArray, numberProperty)
 	{
 		elementObject = objectArray[elementIndex];
 		elementValue = elementObject[numberProperty];
-		
-		commonFunctionsFile.testZeroLeast(elementValue);
+		expect(elementValue).to.be.at.least(0);
 	}
 }
 

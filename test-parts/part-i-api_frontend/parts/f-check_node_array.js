@@ -93,7 +93,7 @@ function handleDeviceCount()
 		
 		it("Nodes Present", function(done)
 		{
-			commonFunctionsFile.testLeast(nCount, 1);
+			expect(nCount).to.be.at.least(1);
 			done();
 		});
 		
