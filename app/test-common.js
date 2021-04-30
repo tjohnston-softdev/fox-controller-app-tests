@@ -14,26 +14,6 @@ function checkPresent(o)
 	expect(o).to.not.be.null;
 }
 
-function checkAbove(givenNumber, tgtNumber)
-{
-	expect(givenNumber).to.be.above(tgtNumber);
-}
-
-function checkBelow(givenNumber, tgtNumber)
-{
-	expect(givenNumber).to.be.below(tgtNumber);
-}
-
-function checkLeast(givenNumber, tgtNumber)
-{
-	expect(givenNumber).to.be.at.least(tgtNumber);
-}
-
-function checkMost(givenNumber, tgtNumber)
-{
-	expect(givenNumber).to.be.at.most(tgtNumber);
-}
-
 function checkPositive(nVal)
 {
 	expect(nVal).to.be.above(0);
@@ -52,7 +32,7 @@ function checkBinary(nVal)
 
 function checkPercent(percVal)
 {
-	expect(percVal).to.be.within(0.00, 100.00);
+	expect(percVal).to.be.within(0, 100);
 }
 
 
