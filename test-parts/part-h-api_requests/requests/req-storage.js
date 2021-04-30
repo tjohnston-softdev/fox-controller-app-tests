@@ -81,7 +81,7 @@ function handleFileList()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(fileListRequestError);
+			expect(fileListRequestError).to.be.null;
 			commonFunctionsFile.testPresent(fileListRequestReturn);
 			done();
 		});
@@ -174,7 +174,7 @@ function handleUserStorageCreate()
 		it("Test File Write Successful", function(done)
 		{
 			commonFunctionsFile.testTrue(fileWriteComplete);
-			commonFunctionsFile.testNull(fileWriteError);
+			expect(fileWriteError).to.be.null;
 			done();
 		});
 		
@@ -212,7 +212,7 @@ function handleFileDownload()
 		it("Download Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(fileDownloadReturn);
-			commonFunctionsFile.testNull(fileDownloadError);
+			expect(fileDownloadError).to.be.null;
 			done();
 		});
 		
@@ -258,7 +258,7 @@ function handleUserStorageDelete()
 		it("File Remove Successful", function(done)
 		{
 			commonFunctionsFile.testTrue(fileRemoveComplete);
-			commonFunctionsFile.testNull(fileRemoveError);
+			expect(fileRemoveError).to.be.null;
 			done();
 		});
 		
@@ -275,7 +275,7 @@ function handleUserStorageDelete()
 		it("Folder Remove Successful", function(done)
 		{
 			commonFunctionsFile.testTrue(folderRemoveComplete);
-			commonFunctionsFile.testNull(folderRemoveError);
+			expect(folderRemoveError).to.be.null;
 			done();
 		});
 		
@@ -314,7 +314,7 @@ function handleGlobalStatus()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(gStatusError);
+			expect(gStatusError).to.be.null;
 			commonFunctionsFile.testPresent(gStatusReturn);
 			done();
 		});

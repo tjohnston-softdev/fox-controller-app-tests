@@ -55,7 +55,7 @@ function handleRetrieve()
 		it("List Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(retrieveReturn);
-			commonFunctionsFile.testNull(retrieveError);
+			expect(retrieveError).to.be.null;
 			done();
 		});
 		

@@ -122,7 +122,7 @@ function handleCurrentDeviceList()
 		
 		it("List Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(currentListError);
+			expect(currentListError).to.be.null;
 			commonFunctionsFile.testPresent(currentListResult);
 			done();
 		});
@@ -175,7 +175,7 @@ function handleTestAdd()
 		
 		it("Add Successful", function(done)
 		{
-			commonFunctionsFile.testNull(addResultError);
+			expect(addResultError).to.be.null;
 			commonFunctionsFile.testPresent(addResultReturn);
 			
 			addResultRead = apiRequestScript.callReadApiResponseObject(addResultReturn);
@@ -232,7 +232,7 @@ function handleTestGet()
 		
 		it("Get Successful", function(done)
 		{
-			commonFunctionsFile.testNull(getError);
+			expect(getError).to.be.null;
 			commonFunctionsFile.testPresent(getReturn);
 			
 			getRead = apiRequestScript.callReadApiResponseObject(getReturn);
@@ -334,7 +334,7 @@ function handleUnchangedModifyTest()
 		
 		it("Modification Passed", function(done)
 		{
-			commonFunctionsFile.testNull(ucUpdateError);
+			expect(ucUpdateError).to.be.null;
 			commonFunctionsFile.testPresent(ucUpdateReturn);
 			
 			ucUpdateRead = apiRequestScript.callReadApiResponseObject(ucUpdateReturn);
@@ -610,7 +610,7 @@ function handleAfterDeviceList()
 		
 		it("List Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(afterListError);
+			expect(afterListError).to.be.null;
 			commonFunctionsFile.testPresent(afterListReturn);
 			done();
 		});
@@ -689,7 +689,7 @@ function catchModificationError(modifyErrorObject, modifyFunctionReturn, targetE
 {
 	var extractedMessage = null;
 	
-	commonFunctionsFile.testNull(modifyErrorObject);
+	expect(modifyErrorObject).to.be.null;
 	commonFunctionsFile.testPresent(modifyFunctionReturn);
 	
 	extractedMessage = apiRequestScript.callReadApiResponseError(modifyFunctionReturn);
@@ -711,7 +711,7 @@ function checkModifyTestObjectDeleted(mdError, mdResult)
 {
 	var returnedObject = null;
 	
-	commonFunctionsFile.testNull(mdError);
+	expect(mdError).to.be.null;
 	commonFunctionsFile.testPresent(mdResult);
 	
 	returnedObject = apiRequestScript.callReadApiResponseObject(mdResult);

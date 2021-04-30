@@ -14,12 +14,6 @@ function checkPresent(o)
 	expect(o).to.not.be.null;
 }
 
-function checkNull(o)
-{
-	expect(o).to.not.be.undefined;
-	expect(o).to.be.null;
-}
-
 function checkTrue(v)
 {
 	expect(v).to.be.true;
@@ -400,7 +394,6 @@ function stringToNumber(numberString)
 
 exports.testPlaceholder = checkPlaceholder;
 exports.testPresent = checkPresent;
-exports.testNull = checkNull;
 exports.testTrue = checkTrue;
 exports.testFalse = checkFalse;
 exports.testAbove = checkAbove;

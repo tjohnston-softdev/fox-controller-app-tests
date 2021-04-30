@@ -157,7 +157,7 @@ function handleTestDevice()
 			spyFile.verifyAddDeviceCalled(addObject, addSpy.called, addSpy.lastCall);
 			
 			expect(addSpy.lastCall.exception).to.be.undefined;
-			commonFunctionsFile.testNull(addError);
+			expect(addError).to.be.null;
 			
 			commonFunctionsFile.testPresent(addID);
 			commonFunctionsFile.testString(addID);

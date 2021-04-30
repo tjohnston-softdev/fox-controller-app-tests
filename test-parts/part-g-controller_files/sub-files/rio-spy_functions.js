@@ -25,7 +25,7 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 	commonFunctionsFile.testType(callObject.callback, 'function');
 					
 	expect(callObject.exception).to.be.undefined;
-	commonFunctionsFile.testNull(listError);
+	expect(listError).to.be.null;
 }
 
 function verifyAddDevice(addDeviceArg, addCalled, callObject)

@@ -106,7 +106,7 @@ function handleDeviceDefaultValues()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(defaultsReturn);
-			commonFunctionsFile.testNull(defaultsError);
+			expect(defaultsError).to.be.null;
 			done();
 		});
 		
@@ -184,7 +184,7 @@ function handleBeforeListTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(beforeListReturn);
-			commonFunctionsFile.testNull(beforeListError);
+			expect(beforeListError).to.be.null;
 			done();
 		});
 		
@@ -252,7 +252,7 @@ function handleCreateDeviceTest()
 			it("Request Successful", function(done)
 			{
 				commonFunctionsFile.testPresent(createReturn);
-				commonFunctionsFile.testNull(createError);
+				expect(createError).to.be.null;
 				done();
 			});
 			
@@ -320,7 +320,7 @@ function handleUpdateAddTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(addUpdateReturn);
-			commonFunctionsFile.testNull(addUpdateError);
+			expect(addUpdateError).to.be.null;
 			done();
 		});
 		
@@ -371,7 +371,7 @@ function handleReadDeviceTest()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(deviceError);
+			expect(deviceError).to.be.null;
 			commonFunctionsFile.testPresent(deviceReturn);
 			done();
 		});
@@ -437,7 +437,7 @@ function handleDeviceStatusTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(statusReturn);
-			commonFunctionsFile.testNull(statusError);
+			expect(statusError).to.be.null;
 			done();
 		});
 		
@@ -518,7 +518,7 @@ function handleUpdateDeviceTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(modifyReturn);
-			commonFunctionsFile.testNull(modifyError);
+			expect(modifyError).to.be.null;
 			done();
 		});
 		
@@ -594,7 +594,7 @@ function handleUpdateReviewTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(reviewReturn);
-			commonFunctionsFile.testNull(reviewError);
+			expect(reviewError).to.be.null;
 			done();
 		});
 		
@@ -656,7 +656,7 @@ function handleDeleteFlagTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(flagReturn);
-			commonFunctionsFile.testNull(flagError);
+			expect(flagError).to.be.null;
 			done();
 		});
 		
@@ -718,7 +718,7 @@ function handleDeleteObjectTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(deleteReturn);
-			commonFunctionsFile.testNull(deleteError);
+			expect(deleteError).to.be.null;
 			done();
 		});
 		
@@ -782,7 +782,7 @@ function handleUpdateDeleteTest()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(deleteUpdateReturn);
-			commonFunctionsFile.testNull(deleteUpdateError);
+			expect(deleteUpdateError).to.be.null;
 			done();
 		});
 		

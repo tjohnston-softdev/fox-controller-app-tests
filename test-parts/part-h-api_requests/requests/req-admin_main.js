@@ -49,7 +49,7 @@ function handleDhcpClients()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(dhcpRequestError);
+			expect(dhcpRequestError).to.be.null;
 			commonFunctionsFile.testPresent(dhcpRequestReturn);
 			done();
 		});
@@ -120,7 +120,7 @@ function handleDefaultObject()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(defaultObjectError);
+			expect(defaultObjectError).to.be.null;
 			commonFunctionsFile.testPresent(defaultObjectReturn);
 			done();
 		});
@@ -169,7 +169,7 @@ function handleLog()
 	
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(logError);
+			expect(logError).to.be.null;
 			commonFunctionsFile.testPresent(logReturn);
 			done();
 		});

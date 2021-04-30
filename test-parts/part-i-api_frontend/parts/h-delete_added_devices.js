@@ -73,7 +73,7 @@ function deleteCurrentDevice(currentID)
 	
 	it("Request Successful", function(done)
 	{
-		commonFunctionsFile.testNull(deviceDeleteError);
+		expect(deviceDeleteError).to.be.null;
 		commonFunctionsFile.testPresent(deviceDeleteReturn);
 		done();
 	});

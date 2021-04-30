@@ -513,7 +513,7 @@ function readInvalidResults(iCallbackError, iCallbackObject, expectedError)
 {
 	var extractedMessage = null;
 	
-	commonFunctionsFile.testNull(iCallbackError);
+	expect(iCallbackError).to.be.null;
 	commonFunctionsFile.testPresent(iCallbackObject);
 	
 	extractedMessage = apiRequestScript.callReadApiResponseError(iCallbackObject);
@@ -525,7 +525,7 @@ function readInvalidStatus(sCallbackError, sCallbackObject, sArgument)
 {
 	var extractedObject = null;
 	
-	commonFunctionsFile.testNull(sCallbackError);
+	expect(sCallbackError).to.be.null;
 	commonFunctionsFile.testPresent(sCallbackObject);
 	
 	extractedObject = apiRequestScript.callReadApiResponseObject(sCallbackObject);
@@ -536,7 +536,7 @@ function readInvalidDelete(dCallbackError, dCallbackResult)
 {
 	var extractedObject = null;
 	
-	commonFunctionsFile.testNull(dCallbackError);
+	expect(dCallbackError).to.be.null;
 	commonFunctionsFile.testPresent(dCallbackResult);
 	
 	extractedObject = apiRequestScript.callReadApiResponseObject(dCallbackResult);

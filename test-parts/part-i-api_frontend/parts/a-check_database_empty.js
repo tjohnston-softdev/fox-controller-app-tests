@@ -49,7 +49,7 @@ function handleDatabaseRetrieve()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(listError);
+			expect(listError).to.be.null;
 			commonFunctionsFile.testPresent(listReturn);
 			done();
 		});

@@ -64,7 +64,7 @@ function handleFoxRestart()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(foxRestartError);
+			expect(foxRestartError).to.be.null;
 			commonFunctionsFile.testPresent(foxRestartReturn);
 			done();
 		});

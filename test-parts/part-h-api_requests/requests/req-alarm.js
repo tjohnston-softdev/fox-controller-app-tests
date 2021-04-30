@@ -47,7 +47,7 @@ function handleList()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(listRequestError);
+			expect(listRequestError).to.be.null;
 			commonFunctionsFile.testPresent(listRequestReturn);
 			done();
 		});
@@ -116,7 +116,7 @@ function handleAvailable()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(avRequestError);
+			expect(avRequestError).to.be.null;
 			commonFunctionsFile.testPresent(avRequestReturn);
 			done();
 		});

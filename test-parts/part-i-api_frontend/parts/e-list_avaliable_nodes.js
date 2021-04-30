@@ -76,7 +76,7 @@ function testCurrentManufacturerApi(mName)
 	
 	it("Request Successful", function(done)
 	{
-		commonFunctionsFile.testNull(apiRequestError);
+		expect(apiRequestError).to.be.null;
 		commonFunctionsFile.testPresent(apiRequestReturn);
 		done();
 	});

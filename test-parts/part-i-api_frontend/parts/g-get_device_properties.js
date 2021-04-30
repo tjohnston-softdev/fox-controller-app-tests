@@ -106,7 +106,7 @@ function testCurrentDeviceStatus(mName, dName, id)
 	
 	it("Request Successful", function(done)
 	{
-		commonFunctionsFile.testNull(dRequestError);
+		expect(dRequestError).to.be.null;
 		commonFunctionsFile.testPresent(dRequestReturn);
 		done();
 	});

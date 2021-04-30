@@ -69,7 +69,7 @@ function handleDatatabaseListCheck()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(dbError);
+			expect(dbError).to.be.null;
 			commonFunctionsFile.testPresent(dbReturn);
 			done();
 		});

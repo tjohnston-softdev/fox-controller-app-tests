@@ -51,7 +51,7 @@ function handleProcessRestart()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(processRestartError);
+			expect(processRestartError).to.be.null;
 			commonFunctionsFile.testPresent(processRestartReturn);
 			done();
 		});

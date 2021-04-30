@@ -50,7 +50,7 @@ function verifyRequestFunction()
 			{
 				
 				checkRequestSpy(addressFile.pingAddress);
-				commonFunctionsFile.testNull(reqError);
+				expect(reqError).to.be.null;
 				checkRequestReturn(reqReturn);
 				done();
 			});

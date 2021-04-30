@@ -57,7 +57,7 @@ function getHealthObject()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testNull(healthError);
+			expect(healthError).to.be.null;
 			commonFunctionsFile.testPresent(healthReturn);
 			done();
 		});

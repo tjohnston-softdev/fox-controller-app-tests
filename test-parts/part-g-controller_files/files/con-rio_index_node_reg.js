@@ -176,7 +176,7 @@ function handleStaticAdd()
 			spyFile.verifyAddDeviceCalled(commonJsonObjectsFile.nodeDevice, addObjectSpy.called, addObjectSpy.lastCall);
 			
 			expect(addObjectSpy.lastCall.exception).to.be.undefined;
-			commonFunctionsFile.testNull(sCallbackErr);
+			expect(sCallbackErr).to.be.null;
 			
 			commonFunctionsFile.testPresent(sCallbackID);
 			commonFunctionsFile.testString(sCallbackID);
@@ -215,7 +215,7 @@ function handleStaticGet()
 		{
 			spyFile.verifyGetDeviceCalled(nodeTestID, getObjectSpy.called, getObjectSpy.lastCall);
 			expect(getObjectSpy.lastCall.exception).to.be.undefined;
-			commonFunctionsFile.testNull(sObjectError);
+			expect(sObjectError).to.be.null;
 			
 			commonFunctionsFile.testPresent(nodeTestObject);
 			commonFunctionsFile.testType(nodeTestObject, 'object');

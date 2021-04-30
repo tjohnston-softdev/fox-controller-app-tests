@@ -74,7 +74,7 @@ function handleNodeListFull()
 		{
 			verifyNodeListCalled(null);
 			expect(nListSpy.lastCall.exception).to.be.undefined;
-			commonFunctionsFile.testNull(nErrorReturn);
+			expect(nErrorReturn).to.be.null;
 		});
 		
 		it("Node Array Returned", function()
@@ -170,7 +170,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 {
 	verifyNodeListCalled(mName);
 	expect(nListSpy.lastCall.exception).to.be.undefined;
-	commonFunctionsFile.testNull(mError);
+	expect(mError).to.be.null;
 	
 	commonFunctionsFile.testPresent(mDevices);
 	commonFunctionsFile.testArrayNeutral(mDevices);

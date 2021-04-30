@@ -121,7 +121,7 @@ function addCurrentSupportedModel(dModel)
 	it("Add Request Successful", function(done)
 	{
 		commonFunctionsFile.testPresent(addReturn);
-		commonFunctionsFile.testNull(addError);
+		expect(addError).to.be.null;
 		done();
 	});
 	

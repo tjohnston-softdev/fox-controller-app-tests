@@ -317,7 +317,7 @@ function checkGetModelFunction()
 			
 			commonFunctionsFile.testPresent(modelSpy.lastCall);
 			expect(modelSpy.lastCall.args).to.deep.equal([unknownModelName]);
-			commonFunctionsFile.testNull(modelSpy.lastCall.returnValue);
+			expect(modelSpy.lastCall.returnValue).to.be.null;
 		});
 		
 		it("Complete", function()

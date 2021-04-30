@@ -149,7 +149,7 @@ function checkParsePrefixFunction()
 		
 			commonFunctionsFile.testPresent(prefixSpy.lastCall);
 			expect(prefixSpy.lastCall.args).to.deep.equal([prefixIndexObject.invalid]);
-			commonFunctionsFile.testNull(prefixSpy.lastCall.returnValue);
+			expect(prefixSpy.lastCall.returnValue).to.be.null;
 		});
 		
 		it("Call - Invalid Type", function()
@@ -188,7 +188,7 @@ function checkParseIndexFunction()
 			
 			commonFunctionsFile.testPresent(indexSpy.lastCall);
 			expect(indexSpy.lastCall.args).to.deep.equal([prefixIndexObject.invalid]);
-			commonFunctionsFile.testNull(indexSpy.lastCall.returnValue);
+			expect(indexSpy.lastCall.returnValue).to.be.null;
 		});
 		
 		it("Call - Invalid Type", function()

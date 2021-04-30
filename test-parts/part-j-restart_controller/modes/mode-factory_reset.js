@@ -161,7 +161,7 @@ function handleFactoryResult()
 		it("Request Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(factoryResetRequestReturn);
-			commonFunctionsFile.testNull(factoryResetRequestError);
+			expect(factoryResetRequestError).to.be.null;
 			done();
 		});
 		
