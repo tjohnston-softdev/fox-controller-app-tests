@@ -10,134 +10,146 @@ const negativeError = "Must be an object: -1";
 
 
 function writeKeyNotFoundErrorString(kText)
-{	
-	var ep1 = "Key not found in database ";
-	var ep2 = "[" + kText + "]";
-	
-	var res = ep1 + ep2;
+{
+	var res = "Key not found in database [" + kText + "]";
 	return res;
 }
 
 
 function writeRemoteIoPropertyErrorString(pName, rVal)
 {
-	var ep1 = "." + pName;
-	var ep2 = " = " + rVal;
-	var ep3 = " is not supported!";
+	var res = "";
 	
-	var res = ep1 + ep2 + ep3;
+	res += ".";
+	res += pName;
+	res += " = ";
+	res += rVal;
+	res += " is not supported!";
+	
 	return res;
 }
 
 function writeRemoteIoPropertySupportString(pName, rVal)
 {
-	var ep1 = "Property .";
-	var ep2 = pName + " = " + rVal;
-	var ep3 = " is not supported!";
+	var res = "";
 	
-	var res = ep1 + ep2 + ep3;
+	res += "Property .";
+	res += pName;
+	res += " = ";
+	res += rVal;
+	res += " is not supported!";
+	
 	return res;
 }
 
 function writeRemoteIoPropertyConstructString(pName, eType, rVal)
 {
-	var ep1 = "Invalid type! ";
-	var ep2 = pName + " must be ";
-	var ep3 = "'" + eType + "'";
-	var ep4 = " when got value " + rVal;
-	var ep5 = " in StoredDevice during construction";
+	var res = "";
 	
-	var res = ep1 + ep2 + ep3 + ep4 + ep5;
+	res += "Invalid type! ";
+	res += pName;
+	res += " must be '";
+	res += eType;
+	res += "' when got value ";
+	res += rVal;
+	res += " in StoredDevice during construction";
+	
 	return res;
 }
 
 function writeConnectDevicePropertyErrorString(pName, eType, rVal)
-{
-	var ep1 = "Invalid type! ";
-	var ep2 = pName + " must be ";
-	var ep3 = "'" + eType + "'";
-	var ep4 = " when got value " + rVal;
-	var ep5 = " in StoredDevice during setting";
+{	
+	var res = "";
 	
-	var res = ep1 + ep2 + ep3 + ep4 + ep5;
+	res += "Invalid type! ";
+	res += pName;
+	res += " must be '";
+	res += eType;
+	res += "' when got value ";
+	res += rVal;
+	res += " in StoredDevice during setting";
+	
 	return res;
 }
 
 
 function writeSetDeviceOutputWrongError(pName, rVal)
 {
-	var ep1 = "Wrong " + pName;
-	var ep2 = "  = ";
-	var ep3 = rVal;
+	var res = "";
 	
-	var res = ep1 + ep2 + ep3;
+	res += "Wrong ";
+	res += pName;
+	res += " = ";
+	res += rVal;
+	
 	return res;
 }
 
 function writeRegisterPrefixIndexError(badValue)
 {
-	var ep1 = "Wrong ioPrefix or ioIndex in nodeConfig.ioSetId";
-	var ep2 = " = ";
-	var ep3 = badValue;
-	
-	var res = ep1 + ep2 + ep3;
+	var res = "Wrong ioPrefix or ioIndex in nodeConfig.ioSetId = " + badValue;
 	return res;
 }
 
 function writeUnexpectedTokenErrorString(tokenValue, tokenPosition)
 {
 	var setToken = 0;
+	var res = "";
 	
 	if (tokenPosition >= 0)
 	{
 		setToken = tokenPosition;
 	}
 	
-	var p1 = "Unexpected token " + tokenValue;
-	var p2 = " in JSON at position " + tokenPosition;
+	res += "Unexpected token ";
+	res += tokenValue;
+	res += " in JSON at position ";
+	res += tokenPosition;
 	
-	var res = p1 + p2;
 	return res;
 }
 
 function writeUnexpectedTokenErrorStringNull()
 {
-	var nRes = writeUnexpectedTokenErrorString("n", 0);
-	return nRes;
+	var nullRes = writeUnexpectedTokenErrorString("n", 0);
+	return nullRes;
 }
 
 function writeUnexpectedTokenErrorStringType()
 {
-	var tRes = writeUnexpectedTokenErrorString("-", 0);
-	return tRes;
+	var typeRes = writeUnexpectedTokenErrorString("-", 0);
+	return typeRes;
 }
 
 
 
 function writeTestString()
 {
-	var tStr = "Test";
-	return tStr;
+	var testValue = "Test";
+	return testValue;
 }
 
-exports.nullObject = nullObjectError;
-exports.idMissing = idMissingError;
-exports.ipInvalid = ipInvalidError;
-exports.deviceNotObject = deviceNotObjectError;
-exports.getPropertiesUndefined = getPropertiesUndefinedError;
-exports.keyArg = keyArgError;
-exports.missingModule = missingModuleError;
-exports.connectObject = connectObjectError;
-exports.negativeNumberObject = negativeError;
-exports.writeKeyNotFoundError = writeKeyNotFoundErrorString;
-exports.writeRemoteIoPropertyError = writeRemoteIoPropertyErrorString;
-exports.writeRemoteIoPropertySupport = writeRemoteIoPropertySupportString;
-exports.writeRemoteIoPropertyConstruct = writeRemoteIoPropertyConstructString;
-exports.writeConnectDeviceProperty = writeConnectDevicePropertyErrorString;
-exports.writeSetDeviceOutputWrong = writeSetDeviceOutputWrongError;
-exports.writeRegisterPrefixIndex = writeRegisterPrefixIndexError;
-exports.writeUnexpectedTokenError = writeUnexpectedTokenErrorString;
-exports.writeUnexpectedTokenErrorNull = writeUnexpectedTokenErrorStringNull;
-exports.writeUnexpectedTokenErrorType = writeUnexpectedTokenErrorStringType;
-exports.writeTest = writeTestString;
 
+module.exports =
+{
+	nullObject: nullObjectError,
+	idMissing: idMissingError,
+	ipInvalid: ipInvalidError,
+	deviceNotObject: deviceNotObjectError,
+	getPropertiesUndefined: getPropertiesUndefinedError,
+	keyArg: keyArgError,
+	missingModule: missingModuleError,
+	connectObject: connectObjectError,
+	negativeNumberObject: negativeError,
+	writeKeyNotFoundError: writeKeyNotFoundErrorString,
+	writeRemoteIoPropertyError: writeRemoteIoPropertyErrorString,
+	writeRemoteIoPropertySupport: writeRemoteIoPropertySupportString,
+	writeRemoteIoPropertyConstruct: writeRemoteIoPropertyConstructString,
+	writeConnectDeviceProperty: writeConnectDevicePropertyErrorString,
+	writeSetDeviceOutputWrong: writeSetDeviceOutputWrongError,
+	writeRegisterPrefixIndex: writeRegisterPrefixIndexError,
+	writeUnexpectedTokenError: writeUnexpectedTokenErrorString,
+	writeUnexpectedTokenErrorNull: writeUnexpectedTokenErrorStringNull,
+	writeUnexpectedTokenErrorType: writeUnexpectedTokenErrorStringType,
+	writeTest: writeTestString
+};
