@@ -28,7 +28,7 @@ function testArrayIpFourValue(iArray, iProp, iEmpty)
 		
 		if (elementIP.length > 0)
 		{
-			elementIpValid = validatorModule.isIP(elementIP);
+			elementIpValid = validatorModule.isIP(elementIP, 4);
 		}
 		else if (iEmpty === true)
 		{
@@ -46,16 +46,34 @@ function testArrayIpFourValue(iArray, iProp, iEmpty)
 function testArrayIpSixValue(iArray, iProp, iEmpty)
 {
 	var elementIndex = 0;
-	var elementObject = null;
-	var elementIP = null;
-	var elementIpValid = null;
+	var currentObject = null;
+	var currentIP = null;
+	var currentValid = null;
 	
 	for (elementIndex = 0; elementIndex < iArray.length; elementIndex = elementIndex + 1)
 	{
-		elementObject = iArray[elementIndex];
-		elementIP = elementObject[iProp];
-		elementIpValid = localValidFile.validateIpAddressSix(elementIP, iEmpty);
-		commonFunctionsFile.testTrue(elementIpValid);
+		currentObject = iArray[elementIndex];
+		currentIP = currentObject[iProp];
+		currentValid = false;
+		
+		if (currentIP === "::1")
+		{
+			currentValid = true;
+		}
+		else if (currentIP.length > 0)
+		{
+			currentValid = validatorModule.isIP(currentIP, 6);
+		}
+		else if (iEmpty === true)
+		{
+			currentValid = true;
+		}
+		else
+		{
+			currentValid = false;
+		}
+		
+		commonFunctionsFile.testTrue(currentValid);
 	}
 }
 
@@ -63,16 +81,30 @@ function testArrayIpSixValue(iArray, iProp, iEmpty)
 function testArrayMacValue(iArray, iProp, iEmpty)
 {
 	var elementIndex = 0;
-	var elementObject = null;
-	var elementMAC = null;
-	var elementMacValid = null;
+	var currentObject = null;
+	var currentMac = null;
+	var currentValid = null;
 	
 	for (elementIndex = 0; elementIndex < iArray.length; elementIndex = elementIndex + 1)
 	{
-		elementObject = iArray[elementIndex];
-		elementMAC = elementObject[iProp];
-		elementMacValid = localValidFile.validateMac(elementMAC, iEmpty);
-		commonFunctionsFile.testTrue(elementMacValid);
+		currentObject = iArray[elementIndex];
+		currentMac = currentObject[iProp];
+		currentValid = false;
+		
+		if (currentMac.length > 0)
+		{
+			currentValid = validatorModule.isMACAddress(currentMac);
+		}
+		else if (currentMac === "" && iEmpty === true)
+		{
+			currentValid = true;
+		}
+		else
+		{
+			currentValid = false;
+		}
+		
+		commonFunctionsFile.testTrue(currentValid);
 	}
 }
 

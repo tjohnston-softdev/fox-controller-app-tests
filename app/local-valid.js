@@ -1,8 +1,6 @@
-const macSyntax = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i;
 const timeOffsetSyntax = /^GMT\+(([0-1][0-9])|([2][0-3]))[0-5][0-9]$/i;
 const driveLetterSyntax = /^[A-Z][:]([\\\/])?$/i;
 const drivePathSyntax = /^\/dev\/([0-9a-zA-Z]*)$/i;
-const ipSixSyntax = /^((?=.*::)(?!.*::.+::)(::)?([\dA-F]{1,4}:(:|\b)|){5}|([\dA-F]{1,4}:){6})((([\dA-F]{1,4}((?!\3)::|:\b|$))|(?!\2\3)){2}|(((2[0-4]|1\d|[1-9])?\d|25[0-5])\.?\b){4})$/i;
 const filenameSyntax =  /^([^\\\/]+)$/;
 const rioPrefixSyntax = /^(A|D|R)(I|O)-([0-9]+)$/i;
 const requirementPathSyntax = /^(([.][\\\/])|(([.]{2}[\\\/])+))([^\\\/]+[\\\/])*([^\\\/]+)$/i;
@@ -11,12 +9,6 @@ const requirementPathSyntax = /^(([.][\\\/])|(([.]{2}[\\\/])+))([^\\\/]+[\\\/])*
 function validateExample(testString, testSyntax, allowEmpty)
 {
 	var res = checkRegEx(testString, testSyntax, allowEmpty);
-	return res;
-}
-
-function validateMacAddress(macString, allowEmpty)
-{
-	var res = checkRegEx(macString, macSyntax, allowEmpty);
 	return res;
 }
 
@@ -38,27 +30,6 @@ function validateDrivePathString(dString, allowEmpty)
 	return res;
 }
 
-
-function validateIpAddressSixString(ipString, allowEmpty)
-{
-	var sixValidation = checkRegEx(ipString, ipSixSyntax, allowEmpty);
-	var res = false;
-	
-	if (sixValidation === true)
-	{
-		res = true;
-	}
-	else if (ipString === "::1")
-	{
-		res = true;
-	}
-	else
-	{
-		res = false;
-	}
-	
-	return res;
-}
 
 function validateFilenameString(fnString, allowEmpty)
 {
@@ -171,11 +142,9 @@ function checkRegEx(subjectString, subjectSyntax, allowEmptyString)
 module.exports =
 {
 	validateExampleTest: validateExample,
-	validateMac: validateMacAddress,
 	validateTimezoneOffset: validateTimezoneOffsetString,
 	validateDriveLetter: validateDriveLetterString,
 	validateDrivePath: validateDrivePathString,
-	validateIpAddressSix: validateIpAddressSixString,
 	validateFilename: validateFilenameString,
 	validateRioPrefix: validateRioPrefixString,
 	validateRequirementPath: validateRequirementPathString,
