@@ -68,27 +68,27 @@ function handleNodePrepare()
 		it("Remote IO Index", function(done)
 		{
 			commonFunctionsFile.testPresent(rioFile);
-			commonFunctionsFile.testType(rioFile, 'object');
+			expect(rioFile).to.be.an("object");
 			done();
 		});
 		
 		it("Remote IO Settings", function(done)
 		{
 			commonFunctionsFile.testPresent(rioSetFile);
-			commonFunctionsFile.testType(rioSetFile, 'object');
+			expect(rioSetFile).to.be.an("object");
 			done();
 		});
 		
 		it("Sub-Files", function(done)
 		{
 			commonFunctionsFile.testPresent(commonFile);
-			commonFunctionsFile.testType(commonFile, 'object');
+			expect(commonFile).to.be.an("object");
 			
 			commonFunctionsFile.testPresent(spyFile);
-			commonFunctionsFile.testType(spyFile, 'object');
+			expect(spyFile).to.be.an("object");
 			
 			commonFunctionsFile.testPresent(rioArgFile);
-			commonFunctionsFile.testType(rioArgFile, 'object');
+			expect(rioArgFile).to.be.an("object");
 			
 			done();
 		});
@@ -218,7 +218,7 @@ function handleStaticGet()
 			expect(sObjectError).to.be.null;
 			
 			commonFunctionsFile.testPresent(nodeTestObject);
-			commonFunctionsFile.testType(nodeTestObject, 'object');
+			expect(nodeTestObject).to.be.an("object");
 			commonFile.callTestDeviceObjectStructure(nodeTestObject);
 			
 			done();
@@ -258,7 +258,6 @@ function handleCheckNodeExist()
 			
 			it("Correct Return Value", function()
 			{
-				commonFunctionsFile.testType(checkNodeExistReturn, 'boolean');
 				expect(checkNodeExistReturn).to.be.true;
 			});
 			
@@ -315,7 +314,7 @@ function handleGetIoProperties()
 			it("Property Object Returned", function()
 			{
 				commonFunctionsFile.testPresent(getIoPropertiesReturn);
-				commonFunctionsFile.testType(getIoPropertiesReturn, 'object');
+				expect(getIoPropertiesReturn).to.be.an("object");
 			});
 			
 			it("Object Structure Valid", function()
@@ -325,8 +324,8 @@ function handleGetIoProperties()
 				commonFunctionsFile.testObjectPropertyDefinition(getIoPropertiesReturn, 'CONTROL');
 				
 				commonFunctionsFile.testString(getIoPropertiesReturn.name);
-				commonFunctionsFile.testArray(getIoPropertiesReturn.STATUS);
-				commonFunctionsFile.testArray(getIoPropertiesReturn.CONTROL);
+				commonFunctionsFile.testArrayPopulated(getIoPropertiesReturn.STATUS);
+				commonFunctionsFile.testArrayPopulated(getIoPropertiesReturn.CONTROL);
 			});
 			
 			it("Status and Control Arrays Valid", function()
@@ -387,7 +386,7 @@ function handleNodeConfig()
 		it("Correct Return Structure", function(done)
 		{
 			commonFunctionsFile.testPresent(nodeConfigObject);
-			commonFunctionsFile.testType(nodeConfigObject, 'object');
+			expect(nodeConfigObject).to.be.an("object");
 			commonFile.callTestNodeConfigObjectStructure(nodeConfigObject);
 			done();
 		});
@@ -430,7 +429,7 @@ function handleRegisterNode()
 			it("Callback Function Returned", function(done)
 			{
 				commonFunctionsFile.testPresent(registerNodeSpy.lastCall.returnValue);
-				commonFunctionsFile.testType(registerNodeSpy.lastCall.returnValue, 'function');
+				expect(registerNodeSpy.lastCall.returnValue).to.be.a("function");
 				registerReturn = registerNodeSpy.lastCall.returnValue;
 				done();
 			});
@@ -444,7 +443,7 @@ function handleRegisterNode()
 			it("Callback Function Remembered", function(done)
 			{
 				commonFunctionsFile.testPresent(registerReturn);
-				commonFunctionsFile.testType(registerReturn, 'function');
+				expect(registerReturn).to.be.a("function");
 				done();
 			});
 			
@@ -466,7 +465,7 @@ function handleRegisterNode()
 				commonFunctionsFile.testPresent(unregisterNodeSpy.firstCall);
 				
 				commonFunctionsFile.testPresent(unregisterNodeSpy.firstCall.args);
-				commonFunctionsFile.testArrayNeutral(unregisterNodeSpy.firstCall.args);
+				expect(unregisterNodeSpy.firstCall.args).to.be.an("array");
 				expect(unregisterNodeSpy.firstCall.args).to.deep.equal([]);
 				
 				expect(unregisterNodeSpy.firstCall.callback).to.be.undefined;
@@ -581,8 +580,6 @@ function coordinateCheckNodeExistInvalidCall(invalidArg)
 	
 	spyFile.verifyCheckNodeExistCalled(invalidArg, checkNodeExistSpy.called, checkNodeExistSpy.lastCall);
 	expect(checkNodeExistSpy.lastCall.exception).to.be.undefined;
-					
-	commonFunctionsFile.testType(checkNodeExistSpy.lastCall.returnValue, 'boolean');
 	expect(checkNodeExistSpy.lastCall.returnValue).to.be.false;
 }
 

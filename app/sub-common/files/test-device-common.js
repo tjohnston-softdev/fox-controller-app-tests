@@ -55,7 +55,7 @@ function testAddModifyReturnContents(returnedObject)
 function testFrontendAddSuccessful(returnedObject)
 {
 	commonFunctionsFile.testPresent(returnedObject);
-	commonFunctionsFile.testType(returnedObject, 'object');
+	expect(returnedObject).to.be.an("object");
 	testAddModifyReturnProperties(returnedObject);
 	testAddModifyReturnContents(returnedObject);
 }
@@ -70,7 +70,7 @@ function testFrontendAddIdValid(returnedObjectID)
 function testFrontendDeleteSuccessful(returnedObject)
 {
 	commonFunctionsFile.testPresent(returnedObject);
-	commonFunctionsFile.testType(returnedObject, 'object');
+	expect(returnedObject).to.be.an("object");
 	commonFunctionsFile.testObjectPropertyDefinition(returnedObject, 'success');
 	commonFunctionsFile.testObjectPropertyContent(returnedObject, 'success', 'boolean');
 	expect(returnedObject.success).to.be.true;

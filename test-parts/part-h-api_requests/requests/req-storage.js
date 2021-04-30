@@ -46,7 +46,7 @@ function handleUserStorageTestPaths()
 		it("Retrieve Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(userStorageTestPaths);
-			commonFunctionsFile.testType(userStorageTestPaths, 'object');
+			expect(userStorageTestPaths).to.be.an("object");
 			done();
 		});
 		
@@ -328,7 +328,7 @@ function handleGlobalStatus()
 		it("Correct Return Structure", function()
 		{
 			commonFunctionsFile.testPresent(gStatusRead);
-			commonFunctionsFile.testType(gStatusRead, 'object');
+			expect(gStatusRead).to.be.an("object");
 		});
 		
 		it("Correct Properties", function()

@@ -25,7 +25,7 @@ function checkSupportFileExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(supportedDatabaseDefinitionFile);
-			commonFunctionsFile.testType(supportedDatabaseDefinitionFile, 'object');
+			expect(supportedDatabaseDefinitionFile).to.be.an("object");
 		});
 	});
 }
@@ -72,7 +72,7 @@ function checkDefinitionObject()
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctionsFile.testArray(definitionArrayObject);
+			commonFunctionsFile.testArrayPopulated(definitionArrayObject);
 			commonFunctionsFile.testAllElements(definitionArrayObject, 'object');
 		});
 		

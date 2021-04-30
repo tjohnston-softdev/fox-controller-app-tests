@@ -50,7 +50,7 @@ function checkManufacturerArrayRead(ma)
 		
 		it("Array Returned", function()
 		{
-			commonFunctionsFile.testArray(ma);
+			commonFunctionsFile.testArrayPopulated(ma);
 			commonFunctionsFile.testAllElements(ma, 'object');
 		});
 		
@@ -117,7 +117,7 @@ function checkIoConfigArrayProperty(mObj)
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testArray(mObj.ioConfigs);
+			commonFunctionsFile.testArrayPopulated(mObj.ioConfigs);
 		});
 		
 		it("All Elements Objects", function()

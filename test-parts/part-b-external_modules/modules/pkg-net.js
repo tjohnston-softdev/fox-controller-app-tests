@@ -29,7 +29,7 @@ function verifyNetExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(netModule);
-			commonFunctionsFile.testType(netModule, 'object');
+			expect(netModule).to.be.an("object");
 		});
 	});
 }
@@ -58,7 +58,6 @@ function verifyNetIpFunction()
 			expect(ipSpy.firstCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.firstCall.returnValue, 'boolean');
 			expect(ipSpy.firstCall.returnValue).to.be.true;
 		});
 		
@@ -93,7 +92,6 @@ function callInvalidIP(a)
 	expect(ipSpy.called).to.be.true;
 	expect(ipSpy.lastCall.args).to.deep.equal([a]);
 	commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
-	commonFunctionsFile.testType(ipSpy.lastCall.returnValue, 'boolean');
 	expect(ipSpy.lastCall.returnValue).to.be.false;
 }
 

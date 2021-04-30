@@ -41,7 +41,7 @@ function checkNodeRequestExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(requestFile);
-			commonFunctionsFile.testType(requestFile, 'object');
+			expect(requestFile).to.be.an("object");
 		});
 		
 	});

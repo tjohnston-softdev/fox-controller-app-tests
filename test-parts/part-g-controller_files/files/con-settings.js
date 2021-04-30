@@ -28,7 +28,7 @@ function checkRequiredSettingsFiles()
 		it("Controller Settings (settings)", function()
 		{
 			commonFunctionsFile.testPresent(controllerSettingsFile);
-			commonFunctionsFile.testType(controllerSettingsFile, 'object');
+			expect(controllerSettingsFile).to.be.an("object");
 		});
 	});
 }

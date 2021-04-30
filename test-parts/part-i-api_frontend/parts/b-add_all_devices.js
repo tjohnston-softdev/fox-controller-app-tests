@@ -37,7 +37,7 @@ function addPrepare()
 		it("Supported Models Retrieved", function(done)
 		{
 			commonFunctionsFile.testPresent(modelArray);
-			commonFunctionsFile.testArray(modelArray);
+			commonFunctionsFile.testArrayPopulated(modelArray);
 			commonFunctionsFile.testAllElements(modelArray, 'object');
 			
 			done();

@@ -28,7 +28,7 @@ function checkFileIncluded()
 		it("Successfully Included", function()
 		{
 			commonFunctionsFile.testPresent(ioSettingsFile);
-			commonFunctionsFile.testType(ioSettingsFile, 'object');
+			expect(ioSettingsFile).to.be.an("object");
 		});
 	});
 }

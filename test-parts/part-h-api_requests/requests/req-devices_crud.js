@@ -62,7 +62,7 @@ function handleSupportedModels()
 		it("Retrieve Successful", function(done)
 		{
 			commonFunctionsFile.testPresent(modelObjectArray);
-			commonFunctionsFile.testArray(modelObjectArray);
+			commonFunctionsFile.testArrayPopulated(modelObjectArray);
 			done();
 		});
 		
@@ -120,14 +120,14 @@ function handleDeviceDefaultValues()
 		it("Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(defaultsRead);
-			commonFunctionsFile.testType(defaultsRead, 'object');
+			expect(defaultsRead).to.be.an("object");
 			done();
 		});
 		
 		it("Supported Device Types (deviceTypes)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'deviceTypes');
-			commonFunctionsFile.testArray(defaultsRead.deviceTypes);
+			commonFunctionsFile.testArrayPopulated(defaultsRead.deviceTypes);
 			commonFunctionsFile.testAllElements(defaultsRead.deviceTypes, 'string');
 			expect(defaultsRead.deviceTypes).to.deep.equal(["Remote IO","Motor Drive"]);
 			
@@ -138,7 +138,7 @@ function handleDeviceDefaultValues()
 		it("Manufacturers (rioMakers)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'rioMakers');
-			commonFunctionsFile.testArray(defaultsRead.rioMakers);
+			commonFunctionsFile.testArrayPopulated(defaultsRead.rioMakers);
 			commonFunctionsFile.testAllElements(defaultsRead.rioMakers, 'string');
 			expect(defaultsRead.rioMakers).to.deep.equal(deviceArrayLists.manufacturers);
 			
@@ -148,7 +148,7 @@ function handleDeviceDefaultValues()
 		it("Models (rioModelTypes)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'rioModelTypes');
-			commonFunctionsFile.testArray(defaultsRead.rioModelTypes);
+			commonFunctionsFile.testArrayPopulated(defaultsRead.rioModelTypes);
 			commonFunctionsFile.testAllElements(defaultsRead.rioModelTypes, 'string');
 			expect(defaultsRead.rioModelTypes).to.deep.equal(deviceArrayLists.models);
 			
@@ -265,7 +265,7 @@ function handleCreateDeviceTest()
 			it("Object Returned", function(done)
 			{
 				commonFunctionsFile.testPresent(createRead);
-				commonFunctionsFile.testType(createRead, 'object');
+				expect(createRead).to.be.an("object");
 				done();
 			});
 			
@@ -385,7 +385,7 @@ function handleReadDeviceTest()
 		it("Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(deviceRead);
-			commonFunctionsFile.testType(deviceRead, 'object');
+			expect(deviceRead).to.be.an("object");
 			done();
 		});
 		
@@ -450,7 +450,7 @@ function handleDeviceStatusTest()
 		it("Status Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(statusRead);
-			commonFunctionsFile.testType(statusRead, 'object');
+			expect(statusRead).to.be.an("object");
 			done();
 		});
 		
@@ -460,7 +460,7 @@ function handleDeviceStatusTest()
 			commonFunctionsFile.testObjectPropertyDefinition(statusRead, 'isRunning');
 			
 			commonFunctionsFile.testString(statusRead.id);
-			commonFunctionsFile.testType(statusRead.isRunning, 'boolean');
+			expect(statusRead.isRunning).to.be.a("boolean");
 			
 			done();
 		});
@@ -531,7 +531,7 @@ function handleUpdateDeviceTest()
 		it("Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(modifyRead);
-			commonFunctionsFile.testType(modifyRead, 'object');
+			expect(modifyRead).to.be.an("object");
 			done();
 		});
 		
@@ -558,7 +558,7 @@ function handleUpdateDeviceTest()
 			localModify = modifyObject;
 			
 			commonFunctionsFile.testPresent(localModify);
-			commonFunctionsFile.testType(localModify, 'object');
+			expect(localModify).to.be.an("object");
 			expect(localModify).to.equal(modifyObject);
 			
 			done();
@@ -607,7 +607,7 @@ function handleUpdateReviewTest()
 		it("Return Valid", function(done)
 		{
 			commonFunctionsFile.testPresent(reviewRead);
-			commonFunctionsFile.testType(reviewRead, 'object');
+			expect(reviewRead).to.be.an("object");
 			
 			rioCommon.callTestDeviceObjectStructure(reviewRead);
 			expect(reviewRead.id).to.equal(testID);
@@ -669,7 +669,7 @@ function handleDeleteFlagTest()
 		it("Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(flagRead);
-			commonFunctionsFile.testType(flagRead, 'object');
+			expect(flagRead).to.be.an("object");
 			done();
 		});
 		
@@ -731,7 +731,7 @@ function handleDeleteObjectTest()
 		it("Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(deleteRead);
-			commonFunctionsFile.testType(deleteRead, 'object');
+			expect(deleteRead).to.be.an("object");
 			done();
 		});
 		

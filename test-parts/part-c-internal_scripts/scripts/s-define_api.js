@@ -24,7 +24,7 @@ function fileTest()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(defineFile);
-			commonFunctionsFile.testType(defineFile, 'object');
+			expect(defineFile).to.be.an("object");
 		});
 		
 	});
@@ -42,7 +42,7 @@ function arrayTest()
 		
 		it("Array Type", function()
 		{
-			commonFunctionsFile.testArray(defineFile.definitions);
+			commonFunctionsFile.testArrayPopulated(defineFile.definitions);
 		});
 		
 		it("Valid Contents", function()

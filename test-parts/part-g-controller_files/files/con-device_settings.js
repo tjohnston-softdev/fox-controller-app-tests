@@ -44,7 +44,7 @@ function checkDeviceSettingsFileExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(settingsFile);
-			commonFunctionsFile.testType(settingsFile, 'object');
+			expect(settingsFile).to.be.an("object");
 		});
 	});
 }
@@ -57,19 +57,19 @@ function checkSupportedModelDefinitions()
 		it("Valid Object Type", function()
 		{
 			commonFunctionsFile.testPresent(supportedListObject);
-			commonFunctionsFile.testType(supportedListObject, 'object');
+			expect(supportedListObject).to.be.an("object");
 		});
 		
 		it("Manufacturers", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'dbManufacturers');
-			commonFunctionsFile.testArray(supportedListObject.dbManufacturers);
+			commonFunctionsFile.testArrayPopulated(supportedListObject.dbManufacturers);
 		});
 		
 		it("Models", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'dbModels');
-			commonFunctionsFile.testArray(supportedListObject.dbModels);
+			commonFunctionsFile.testArrayPopulated(supportedListObject.dbModels);
 		});
 		
 	});
@@ -113,7 +113,7 @@ function checkDeviceTypeArrayProperty()
 		
 		it("Array", function()
 		{
-			commonFunctionsFile.testArray(settingsFile.deviceTypes);
+			commonFunctionsFile.testArrayPopulated(settingsFile.deviceTypes);
 		});
 		
 		it("All elements strings", function()
@@ -199,7 +199,7 @@ function checkScaleDecimalValueFunction()
 			expect(scaleSpy.calledOnce).to.be.true;
 			expect(scaleSpy.firstCall.args).to.deep.equal([9002, 0, 0, 10]);
 			commonFunctionsFile.testPresent(scaleSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(scaleSpy.firstCall.returnValue, 'number');
+			expect(scaleSpy.firstCall.returnValue).to.be.a("number");
 			expect(scaleSpy.firstCall.returnValue).to.equal(1.374);
 		});
 		
@@ -210,7 +210,7 @@ function checkScaleDecimalValueFunction()
 			expect(scaleSpy.calledTwice).to.be.true;
 			expect(scaleSpy.secondCall.args).to.deep.equal([null, null, 0, 10]);
 			commonFunctionsFile.testPresent(scaleSpy.secondCall.returnValue);
-			commonFunctionsFile.testType(scaleSpy.secondCall.returnValue, 'number');
+			expect(scaleSpy.secondCall.returnValue).to.be.a("number");
 			expect(scaleSpy.secondCall.returnValue).to.equal(0);
 		});
 		
@@ -221,7 +221,7 @@ function checkScaleDecimalValueFunction()
 			commonFunctionsFile.testPresent(scaleSpy.lastCall);
 			expect(scaleSpy.lastCall.args).to.deep.equal([null, custErr, 0, 10]);
 			commonFunctionsFile.testPresent(scaleSpy.lastCall.returnValue);
-			commonFunctionsFile.testType(scaleSpy.lastCall.returnValue, 'number');
+			expect(scaleSpy.lastCall.returnValue).to.be.a("number");
 			expect(scaleSpy.lastCall.returnValue).to.equal(custErr);
 		});
 		
@@ -300,7 +300,7 @@ function checkGetModelFunction()
 			expect(modelSpy.calledOnce).to.be.true;
 			expect(modelSpy.firstCall.args).to.deep.equal([testModelName]);
 			commonFunctionsFile.testPresent(modelSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(modelSpy.firstCall.returnValue, 'object');
+			expect(modelSpy.firstCall.returnValue).to.be.an("object");
 			
 			commonFunctionsFile.testObjectPropertyDefinition(modelSpy.firstCall.returnValue, 'modelType');
 			commonFunctionsFile.testObjectPropertyContent(modelSpy.firstCall.returnValue, 'modelType', 'string');
@@ -341,7 +341,7 @@ function checkManufacturerListProperty()
 		
 		it("Array", function()
 		{
-			commonFunctionsFile.testArray(settingsFile.listRioMakers);
+			commonFunctionsFile.testArrayPopulated(settingsFile.listRioMakers);
 		});
 		
 		it("All elements strings", function()
@@ -369,7 +369,7 @@ function checkModelTypeListProperty()
 		
 		it("Array", function()
 		{
-			commonFunctionsFile.testArray(settingsFile.listRioModelTypes);
+			commonFunctionsFile.testArrayPopulated(settingsFile.listRioModelTypes);
 		});
 		
 		it("All elements strings", function()
@@ -389,14 +389,14 @@ function checkModelTypeListProperty()
 function checkSignalConvertResult(v, expectedOut)
 {
 	commonFunctionsFile.testPresent(v);
-	commonFunctionsFile.testType(v, 'string');
+	expect(v).to.be.a("string");
 	expect(v).to.equal(expectedOut);
 }
 
 function checkSignalValidationResult(v, expectedOut)
 {
 	commonFunctionsFile.testPresent(v);
-	commonFunctionsFile.testType(v, 'boolean');
+	expect(v).to.be.a("boolean");
 	
 	if (expectedOut === true)
 	{

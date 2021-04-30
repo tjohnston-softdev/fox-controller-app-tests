@@ -55,7 +55,7 @@ function handleNodeInvalidPrepare()
 		it("Remote IO Index", function(done)
 		{
 			commonFunctionsFile.testPresent(rioFile);
-			commonFunctionsFile.testType(rioFile, 'object');
+			expect(rioFile).to.be.an("object");
 			
 			done();
 		});
@@ -63,13 +63,13 @@ function handleNodeInvalidPrepare()
 		it("Sub-Files", function(done)
 		{
 			commonFunctionsFile.testPresent(commonFile);
-			commonFunctionsFile.testType(commonFile, 'object');
+			expect(commonFile).to.be.an("object");
 			
 			commonFunctionsFile.testPresent(spyFile);
-			commonFunctionsFile.testType(spyFile, 'object');
+			expect(spyFile).to.be.an("object");
 			
 			commonFunctionsFile.testPresent(rioArgFile);
-			commonFunctionsFile.testType(rioArgFile, 'object');
+			expect(rioArgFile).to.be.an("object");
 			
 			done();
 		});
@@ -203,7 +203,7 @@ function handleTestConfig()
 		it("Correct Return Structure", function(done)
 		{
 			commonFunctionsFile.testPresent(registerConfigObject);
-			commonFunctionsFile.testType(registerConfigObject, 'object');
+			expect(registerConfigObject).to.be.an("object");
 			commonFile.callTestNodeConfigObjectStructure(registerConfigObject);
 			
 			done();

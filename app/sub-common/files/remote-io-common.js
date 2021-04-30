@@ -349,11 +349,9 @@ function testNodeConfigObjectStructure(confObj)
 	expect(confObj.name).to.be.a("string");
 	commonFunctionsFile.testString(confObj.deviceId);
 	commonFunctionsFile.testString(confObj.ioSetId);
-	commonFunctionsFile.testType(confObj.x, 'number');
-	commonFunctionsFile.testType(confObj.y, 'number');
-	commonFunctionsFile.testArrayNeutral(confObj.wires);
-	
-	
+	expect(confObj.x).to.be.a('number');
+	expect(confObj.y).to.be.a('number');
+	expect(confObj.wires).to.be.an("array");
 }
 
 
@@ -390,7 +388,7 @@ function testIdListed(da, targetDeviceID)
 function testLocalArray(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
-	commonFunctionsFile.testArray(locArr);
+	commonFunctionsFile.testArrayPopulated(locArr);
 }
 
 function testLocalArrayEmpty(locArr)
@@ -402,7 +400,7 @@ function testLocalArrayEmpty(locArr)
 function testLocalArrayNeutral(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
-	commonFunctionsFile.testArrayNeutral(locArr);
+	expect(locArr).to.be.an("array");
 }
 
 

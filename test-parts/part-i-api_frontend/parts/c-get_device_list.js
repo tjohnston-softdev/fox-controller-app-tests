@@ -74,7 +74,7 @@ function handleRetrieve()
 		it("Supported Models Retrieved", function(done)
 		{
 			commonFunctionsFile.testPresent(modelReferenceArray);
-			commonFunctionsFile.testArray(modelReferenceArray);
+			commonFunctionsFile.testArrayPopulated(modelReferenceArray);
 			commonFunctionsFile.testAllElements(modelReferenceArray, 'object');
 			
 			done();

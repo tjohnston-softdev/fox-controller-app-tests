@@ -26,7 +26,7 @@ function verifyOsExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(osModule);
-			commonFunctionsFile.testType(osModule, 'object');
+			expect(osModule).to.be.an("object");
 		});
 	});
 }
@@ -64,7 +64,6 @@ function verifyPlatformFunction()
 			var supportFlag = osStringFile.checkOsSupported(platformSpy.firstCall.returnValue);
 			
 			commonFunctionsFile.testPresent(supportFlag);
-			commonFunctionsFile.testType(supportFlag, 'boolean');
 			expect(supportFlag).to.be.true;
 		});
 		

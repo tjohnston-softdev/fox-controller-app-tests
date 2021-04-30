@@ -30,7 +30,7 @@ function checkRequiredServiceFiles()
 		it("Service Main (service.main)", function()
 		{
 			commonFunctionsFile.testPresent(serviceFile);
-			commonFunctionsFile.testType(serviceFile, 'object');
+			expect(serviceFile).to.be.an("object");
 		});
 	});
 }

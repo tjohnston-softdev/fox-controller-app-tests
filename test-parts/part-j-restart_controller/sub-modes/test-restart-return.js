@@ -11,7 +11,7 @@ const requestFile = require(commonPaths.requestApi);
 function testProcessReturnObject(procRetObj)
 {
 	commonFunctionsFile.testPresent(procRetObj);
-	commonFunctionsFile.testType(procRetObj, 'object');
+	expect(procRetObj).to.be.an("object");
 	
 	commonFunctionsFile.testObjectPropertyDefinition(procRetObj, 'success');
 	commonFunctionsFile.testObjectPropertyContent(procRetObj, 'success', 'boolean');

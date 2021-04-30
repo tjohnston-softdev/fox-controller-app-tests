@@ -32,7 +32,7 @@ function checkSettingsIncluded()
 		it("Included", function()
 		{
 			commonFunctionsFile.testPresent(settingsFile);
-			commonFunctionsFile.testType(settingsFile, 'object');
+			expect(settingsFile).to.be.an("object");
 		});
 	});
 }

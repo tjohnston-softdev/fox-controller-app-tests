@@ -25,20 +25,9 @@ function checkPercent(percVal)
 	expect(percVal).to.be.within(0, 100);
 }
 
-
-function checkType(oDef, oType)
-{
-	expect(oDef).to.be.an(oType);
-}
-
-function checkArray(aDef)
+function checkArrayPopulated(aDef)
 {
 	expect(aDef).to.be.an('array').that.is.not.empty;
-}
-
-function checkArrayNeutral(aDef)
-{
-	expect(aDef).to.be.an('array');
 }
 
 function checkArrayEmpty(aDef)
@@ -81,7 +70,7 @@ function checkAllElements(aDef, eType)
 	while (objectInd >= 0 && objectInd < aDef.length && aDef != null)
 	{
 		currentObject = aDef[objectInd];
-		checkType(currentObject, eType);
+		expect(currentObject).to.be.an(eType);
 		objectInd = objectInd + 1;
 	}
 	
@@ -319,9 +308,7 @@ exports.testPlaceholder = checkPlaceholder;
 exports.testPresent = checkPresent;
 exports.testBinary = checkBinary;
 exports.testPercent = checkPercent;
-exports.testType = checkType;
-exports.testArray = checkArray;
-exports.testArrayNeutral = checkArrayNeutral;
+exports.testArrayPopulated = checkArrayPopulated;
 exports.testArrayEmpty = checkArrayEmpty;
 exports.testArrayDynamic = checkArrayDynamic;
 exports.testString = checkString;

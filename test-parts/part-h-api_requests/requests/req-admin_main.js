@@ -63,7 +63,7 @@ function handleDhcpClients()
 		it("Correct Array Structure", function()
 		{
 			commonFunctionsFile.testPresent(dhcpRead);
-			commonFunctionsFile.testArray(dhcpRead);
+			commonFunctionsFile.testArrayPopulated(dhcpRead);
 			commonFunctionsFile.testAllElements(dhcpRead, 'object');
 		});
 		
@@ -134,7 +134,7 @@ function handleDefaultObject()
 		it("Correct Object Returned", function()
 		{
 			commonFunctionsFile.testPresent(defaultObjectRead);
-			commonFunctionsFile.testType(defaultObjectRead, 'object');
+			expect(defaultObjectRead).to.be.an("object");
 			
 			commonFunctionsFile.testObjectPropertyDefinition(defaultObjectRead, 'message');
 			commonFunctionsFile.testObjectPropertyContent(defaultObjectRead, 'message', 'string');
@@ -183,7 +183,7 @@ function handleLog()
 		it("Valid Return Structure", function()
 		{
 			commonFunctionsFile.testPresent(logRead);
-			commonFunctionsFile.testType(logRead, 'object');
+			expect(logRead).to.be.an("object");
 		
 			commonFunctionsFile.testObjectPropertyDefinition(logRead, 'success');
 			commonFunctionsFile.testObjectPropertyDefinition(logRead, 'logs');

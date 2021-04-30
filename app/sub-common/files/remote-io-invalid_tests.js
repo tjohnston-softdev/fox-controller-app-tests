@@ -20,7 +20,7 @@ function validateGeneralInvalid(generalMessage, generalTarget)
 function validateStatusInvalid(sReturn, sValue)
 {
 	commonFunctionsFile.testPresent(sReturn);
-	commonFunctionsFile.testType(sReturn, 'object');
+	expect(sReturn).to.be.an("object");
 	
 	commonFunctionsFile.testObjectPropertyDefinition(sReturn, 'id');
 	commonFunctionsFile.testObjectPropertyDefinition(sReturn, 'isRunning');

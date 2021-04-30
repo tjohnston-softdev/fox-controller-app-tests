@@ -33,7 +33,7 @@ function checkLocalValidationFileExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(localValidFile);
-			commonFunctionsFile.testType(localValidFile, 'object');
+			expect(localValidFile).to.be.an("object");
 		});
 	});
 }

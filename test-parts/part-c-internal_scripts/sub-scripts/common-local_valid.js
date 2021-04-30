@@ -13,13 +13,13 @@ function validateSpyObject(sCalledFlag, sCallObject, aString, aEmpty)
 	commonFunctionsFile.testPresent(sCallObject);
 	
 	commonFunctionsFile.testPresent(sCallObject.args);
-	commonFunctionsFile.testArray(sCallObject.args);
+	commonFunctionsFile.testArrayPopulated(sCallObject.args);
 	expect(sCallObject.args).to.deep.equal([aString, aEmpty]);
 	
 	expect(sCallObject.exception).to.be.undefined;
 	
 	commonFunctionsFile.testPresent(sCallObject.returnValue);
-	commonFunctionsFile.testType(sCallObject.returnValue, 'boolean');
+	expect(sCallObject.returnValue).to.be.a("boolean");
 }
 
 function validateFullPathSpyObject(sCalledFlag, sCallObject, aString, aAbsolute, aFile, aEmpty)
@@ -28,14 +28,13 @@ function validateFullPathSpyObject(sCalledFlag, sCallObject, aString, aAbsolute,
 	commonFunctionsFile.testPresent(sCallObject);
 	
 	commonFunctionsFile.testPresent(sCallObject.args);
-	commonFunctionsFile.testArray(sCallObject.args);
+	commonFunctionsFile.testArrayPopulated(sCallObject.args);
 	expect(sCallObject.args).to.deep.equal([aString, aAbsolute, aFile, aEmpty]);
 	
 	expect(sCallObject.exception).to.be.undefined;
 	
 	commonFunctionsFile.testPresent(sCallObject.returnValue);
-	commonFunctionsFile.testType(sCallObject.returnValue, 'boolean');
-	
+	expect(sCallObject.returnValue).to.be.a("boolean");
 }
 
 function validateExampleSpy(sCallFlag, sCallObject, aString, aSynt, aEmpty)
@@ -44,14 +43,14 @@ function validateExampleSpy(sCallFlag, sCallObject, aString, aSynt, aEmpty)
 	commonFunctionsFile.testPresent(sCallObject);
 	
 	commonFunctionsFile.testPresent(sCallObject.args);
-	commonFunctionsFile.testArray(sCallObject.args);
+	commonFunctionsFile.testArrayPopulated(sCallObject.args);
 	expect(sCallObject.args).to.deep.equal([aString, aSynt, aEmpty]);
 }
 
 function validateExampleResult(eRes, eTarget)
 {
 	commonFunctionsFile.testPresent(eRes);
-	commonFunctionsFile.testType(eRes, 'boolean');
+	expect(eRes).to.be.a("boolean");
 	
 	if (eTarget === true)
 	{

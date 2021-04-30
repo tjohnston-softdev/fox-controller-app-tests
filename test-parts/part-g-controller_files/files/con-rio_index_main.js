@@ -29,7 +29,7 @@ function checkFileObjects()
 		it("Remote IO Index File (remote-io.index)", function()
 		{
 			commonFunctionsFile.testPresent(indexFile);
-			commonFunctionsFile.testType(indexFile, 'object');
+			expect(indexFile).to.be.an("object");
 		});
 		
 	});
@@ -115,13 +115,13 @@ function handleInitializationCompleteFunction()
 			commonFunctionsFile.testPresent(compSpy.firstCall);
 			
 			commonFunctionsFile.testPresent(compSpy.firstCall.args);
-			commonFunctionsFile.testArray(compSpy.firstCall.args);
+			commonFunctionsFile.testArrayPopulated(compSpy.firstCall.args);
 			
 			commonFunctionsFile.testPresent(compSpy.firstCall.args[0]);
-			commonFunctionsFile.testType(compSpy.firstCall.args[0], 'function');
+			expect(compSpy.firstCall.args[0]).to.be.a("function");
 			
 			commonFunctionsFile.testPresent(compSpy.firstCall.callback);
-			commonFunctionsFile.testType(compSpy.firstCall.callback, 'function');
+			expect(compSpy.firstCall.callback).to.be.a("function");
 			
 			expect(compSpy.firstCall.exception).to.be.undefined;
 			

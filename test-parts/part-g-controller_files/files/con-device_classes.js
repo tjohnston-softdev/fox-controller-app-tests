@@ -43,13 +43,13 @@ function handleDeviceFiles()
 		it("Device Model (device-model.class)", function()
 		{
 			commonFunctionsFile.testPresent(deviceModelFile);
-			commonFunctionsFile.testType(deviceModelFile, 'object');
+			expect(deviceModelFile).to.be.an("object");
 		});
 		
 		it("Connected Device (device.class)", function()
 		{
 			commonFunctionsFile.testPresent(deviceConnectFile);
-			commonFunctionsFile.testType(deviceConnectFile, 'object');
+			expect(deviceConnectFile).to.be.an("object");
 		});
 		
 	});
@@ -63,7 +63,7 @@ function handleDeviceConstructors()
 		it(storeDeviceDesc, function(done)
 		{
 			commonFunctionsFile.testPresent(deviceModelFile.StoredDevice);
-			commonFunctionsFile.testType(deviceModelFile.StoredDevice, 'function');
+			expect(deviceModelFile.StoredDevice).to.be.a("function");
 			storeDeviceSpy = sinon.spy(deviceModelFile, 'StoredDevice');
 			
 			done();
@@ -72,7 +72,7 @@ function handleDeviceConstructors()
 		it(connectDesc, function(done)
 		{
 			commonFunctionsFile.testPresent(deviceConnectFile.ConnectedDevice);
-			commonFunctionsFile.testType(deviceConnectFile.ConnectedDevice, 'function');
+			expect(deviceConnectFile.ConnectedDevice).to.be.a("function");
 			connectSpy = sinon.spy(deviceConnectFile, 'ConnectedDevice');
 			
 			done();
@@ -98,7 +98,7 @@ function handleDeviceClasses()
 			expect(storeDeviceSpy.calledOnce).to.be.true;
 			expect(storeDeviceSpy.firstCall.args).to.deep.equal([testDeviceValidModel]);
 			commonFunctionsFile.testPresent(storeDeviceSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(storeDeviceSpy.firstCall.returnValue, 'object');
+			expect(storeDeviceSpy.firstCall.returnValue).to.be.an("object");
 			storeDeviceValid = storeDeviceSpy.firstCall.returnValue;
 			
 			verifyStoredDeviceReturn(testDeviceValidModel, storeDeviceValid);
@@ -199,7 +199,7 @@ function handleDeviceClasses()
 			expect(connectSpy.calledOnce).to.be.true;
 			expect(connectSpy.firstCall.args).to.deep.equal([storeDeviceValid]);
 			commonFunctionsFile.testPresent(connectSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(connectSpy.firstCall.returnValue, 'object');
+			expect(connectSpy.firstCall.returnValue).to.be.an("object");
 			commonFunctionsFile.testObjectPropertyDefinition(connectSpy.firstCall.returnValue, 'storedDevice');
 			commonFunctionsFile.testObjectPropertyContent(connectSpy.firstCall.returnValue, 'storedDevice', 'object');
 			expect(connectSpy.firstCall.returnValue.storedDevice).to.equal(storeDeviceValid);
@@ -359,7 +359,7 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 function verifyStoredDeviceReturn(sObject, rObject)
 {
 	commonFunctionsFile.testPresent(rObject);
-	commonFunctionsFile.testType(rObject, 'object');
+	expect(rObject).to.be.an("object");
 	commonFile.callTestDeviceDeletedStructure(rObject);
 	
 	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'id');

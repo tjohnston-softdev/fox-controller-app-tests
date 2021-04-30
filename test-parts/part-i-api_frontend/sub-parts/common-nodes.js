@@ -15,7 +15,7 @@ const localValidFile = require(commonPaths.localValid);
 function testNodeObjectArrayStructure(nodeObjArray)
 {
 	commonFunctionsFile.testPresent(nodeObjArray);
-	commonFunctionsFile.testArrayNeutral(nodeObjArray);
+	expect(nodeObjArray).to.be.an("array");
 	commonFunctionsFile.testAllElements(nodeObjArray, 'object');
 }
 

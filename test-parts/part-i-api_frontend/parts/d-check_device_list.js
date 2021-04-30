@@ -41,7 +41,7 @@ function handleCheckPrepare()
 		
 		it("Device List Valid", function(done)
 		{
-			commonFunctionsFile.testArray(listTest);
+			commonFunctionsFile.testArrayPopulated(listTest);
 			commonFunctionsFile.testAllElements(listTest, 'object');
 			rioCommon.callTestDeviceArrayStructure(listTest);
 			
@@ -53,7 +53,7 @@ function handleCheckPrepare()
 			var addCount = retrieveCountFromCache();
 			
 			commonFunctionsFile.testPresent(addCount);
-			commonFunctionsFile.testType(addCount, 'number');
+			expect(addCount).to.be.a("number");
 			expect(addCount).to.be.above(0);
 			
 			done();

@@ -34,16 +34,16 @@ function checkRequiredFilesExist()
 		it("Factory File (remote-io.factories)", function()
 		{
 			commonFunctionsFile.testPresent(factoryFile);
-			commonFunctionsFile.testType(factoryFile, 'object');
+			expect(factoryFile).to.be.an("object");
 		});
 		
 		it("Sub-Files (rioCommon, rioFactoryReturn)", function()
 		{
 			commonFunctionsFile.testPresent(rioCommonFile);
-			commonFunctionsFile.testType(rioCommonFile, 'object');
+			expect(rioCommonFile).to.be.an("object");
 			
 			commonFunctionsFile.testPresent(rioCheckFile);
-			commonFunctionsFile.testType(rioCheckFile, 'object');
+			expect(rioCheckFile).to.be.an("object");
 		});
 		
 	});
@@ -60,7 +60,7 @@ function handleRemoteIoModuleFunction()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(factoryFile.RemoteIoModule);
-			commonFunctionsFile.testType(factoryFile.RemoteIoModule, 'function');
+			expect(factoryFile.RemoteIoModule).to.be.a("function");
 			moduleSpy = sinon.spy(factoryFile, 'RemoteIoModule');
 		});
 		
@@ -72,7 +72,7 @@ function handleRemoteIoModuleFunction()
 			expect(moduleSpy.calledOnce).to.be.true;
 			expect(moduleSpy.firstCall.args).to.deep.equal([remoteIoTestDevice]);
 			commonFunctionsFile.testPresent(moduleSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(moduleSpy.firstCall.returnValue, 'object');
+			expect(moduleSpy.firstCall.returnValue).to.be.an("object");
 			
 			rioCheckFile.checkFactoryReturn(moduleSpy.firstCall.returnValue);
 			moduleSpy.restore();

@@ -39,7 +39,7 @@ function verifyRequestFunction()
 	{
 		it("Exists", function(done)
 		{
-			commonFunctionsFile.testType(aReq, 'function');
+			expect(aReq).to.be.a("function");
 			rSpy = sinon.spy(aReq);
 			done();
 		});
@@ -95,22 +95,22 @@ function checkRequestSpy(reqArg)
 	commonFunctionsFile.testPresent(rSpy.lastCall);
 	
 	commonFunctionsFile.testPresent(rSpy.lastCall.args);
-	commonFunctionsFile.testArray(rSpy.lastCall.args);
+	commonFunctionsFile.testArrayPopulated(rSpy.lastCall.args);
 	
 	expect(rSpy.lastCall.args[0]).to.not.be.undefined;
 	expect(rSpy.lastCall.args[0]).to.equal(reqArg);
 
 	commonFunctionsFile.testPresent(rSpy.lastCall.args[1]);
-	commonFunctionsFile.testType(rSpy.lastCall.args[1], 'function');
+	expect(rSpy.lastCall.args[1]).to.be.a("function");
 
 	commonFunctionsFile.testPresent(rSpy.lastCall.callback);
-	commonFunctionsFile.testType(rSpy.lastCall.callback, 'function');
+	expect(rSpy.lastCall.callback).to.be.a("function");
 }
 
 function checkRequestReturn(r)
 {
 	commonFunctionsFile.testPresent(r);
-	commonFunctionsFile.testType(r, 'object');
+	expect(r).to.be.an("object");
 	
 	validateGivenProperty(r, 'statusCode', 'number');
 	validateGivenProperty(r, 'body', 'string');

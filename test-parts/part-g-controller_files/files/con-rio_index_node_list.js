@@ -33,13 +33,13 @@ function handleNodeListPrepare()
 		it("Remote IO Index", function()
 		{
 			commonFunctionsFile.testPresent(indexFile);
-			commonFunctionsFile.testType(indexFile, 'object');
+			expect(indexFile).to.be.an("object");
 		});
 		
 		it("Remote IO Sub-File", function()
 		{
 			commonFunctionsFile.testPresent(rioSubCommonFile);
-			commonFunctionsFile.testType(rioSubCommonFile, 'object');
+			expect(rioSubCommonFile).to.be.an("object");
 		});
 		
 		
@@ -80,7 +80,7 @@ function handleNodeListFull()
 		it("Node Array Returned", function()
 		{
 			commonFunctionsFile.testPresent(nListReturn);
-			commonFunctionsFile.testArrayNeutral(nListReturn);
+			expect(nListReturn).to.be.an("array");
 		});
 		
 		it("Array Structure Valid", function()
@@ -154,16 +154,16 @@ function verifyNodeListCalled(nArg)
 	commonFunctionsFile.testPresent(nListSpy.lastCall);
 	
 	commonFunctionsFile.testPresent(nListSpy.lastCall.args);
-	commonFunctionsFile.testArray(nListSpy.lastCall.args);
+	commonFunctionsFile.testArrayPopulated(nListSpy.lastCall.args);
 	
 	expect(nListSpy.lastCall.args[0]).to.not.be.undefined;
 	expect(nListSpy.lastCall.args[0]).to.equal(nArg);
 	
 	commonFunctionsFile.testPresent(nListSpy.lastCall.args[1]);
-	commonFunctionsFile.testType(nListSpy.lastCall.args[1], 'function');
+	expect(nListSpy.lastCall.args[1]).to.be.a("function");
 	
 	commonFunctionsFile.testPresent(nListSpy.lastCall.callback);
-	commonFunctionsFile.testType(nListSpy.lastCall.callback, 'function');
+	expect(nListSpy.lastCall.callback).to.be.a("function");
 }
 
 function verifyNodeListManufacturer(mName, mError, mDevices)
@@ -173,7 +173,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	expect(mError).to.be.null;
 	
 	commonFunctionsFile.testPresent(mDevices);
-	commonFunctionsFile.testArrayNeutral(mDevices);
+	expect(mDevices).to.be.an("array");
 	rioSubCommonFile.callTestPropertyArrayStructure(mDevices);
 }
 

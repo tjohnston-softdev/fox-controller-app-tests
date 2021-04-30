@@ -27,7 +27,7 @@ function checkSettingsFile()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(controllerRedSettingsFile);
-			commonFunctionsFile.testType(controllerRedSettingsFile, 'object');
+			expect(controllerRedSettingsFile).to.be.an("object");
 		});
 	});
 }

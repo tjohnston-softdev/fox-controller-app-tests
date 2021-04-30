@@ -38,10 +38,10 @@ function checkPrepare()
 		it("Files Ready", function(done)
 		{
 			commonFunctionsFile.testPresent(settingsFile);
-			commonFunctionsFile.testType(settingsFile, 'object');
+			expect(settingsFile).to.be.an("object");
 			
 			commonFunctionsFile.testPresent(prefixIndexFile);
-			commonFunctionsFile.testType(prefixIndexFile, 'object');
+			expect(prefixIndexFile).to.be.an("object");
 			
 			done();
 		});
@@ -51,7 +51,7 @@ function checkPrepare()
 			prefixIndexObject = prefixIndexFile.callGetIoSetObject();
 			
 			commonFunctionsFile.testPresent(prefixIndexObject);
-			commonFunctionsFile.testType(prefixIndexObject, 'object');
+			expect(prefixIndexObject).to.be.an("object");
 			
 			done();
 		});
@@ -86,7 +86,7 @@ function checkGetSignalTypeFunction()
 			expect(gSpy.calledOnce).to.be.true;
 			expect(gSpy.firstCall.args).to.deep.equal([aValid]);
 			commonFunctionsFile.testPresent(gSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(gSpy.firstCall.returnValue, 'number');
+			expect(gSpy.firstCall.returnValue).to.be.a("number");
 			expect(gSpy.firstCall.returnValue).to.equal(0);
 		});
 		
@@ -97,7 +97,7 @@ function checkGetSignalTypeFunction()
 			commonFunctionsFile.testPresent(gSpy.lastCall);
 			expect(gSpy.lastCall.args).to.deep.equal([aInvalid]);
 			commonFunctionsFile.testPresent(gSpy.lastCall.returnValue);
-			commonFunctionsFile.testType(gSpy.lastCall.returnValue, 'number');
+			expect(gSpy.lastCall.returnValue).to.be.a("number");
 			expect(gSpy.lastCall.returnValue).to.equal(1);
 		});
 		
@@ -108,7 +108,7 @@ function checkGetSignalTypeFunction()
 			commonFunctionsFile.testPresent(gSpy.lastCall);
 			expect(gSpy.lastCall.args).to.deep.equal([aInvalidType]);
 			commonFunctionsFile.testPresent(gSpy.lastCall.returnValue);
-			commonFunctionsFile.testType(gSpy.lastCall.returnValue, 'number');
+			expect(gSpy.lastCall.returnValue).to.be.a("number");
 			expect(gSpy.lastCall.returnValue).to.equal(1);
 		});
 		
@@ -119,7 +119,7 @@ function checkGetSignalTypeFunction()
 			commonFunctionsFile.testPresent(gSpy.lastCall);
 			expect(gSpy.lastCall.args).to.deep.equal([null]);
 			commonFunctionsFile.testPresent(gSpy.lastCall.returnValue);
-			commonFunctionsFile.testType(gSpy.lastCall.returnValue, 'number');
+			expect(gSpy.lastCall.returnValue).to.be.a("number");
 			expect(gSpy.lastCall.returnValue).to.equal(1);
 		});
 		
@@ -139,7 +139,7 @@ function checkParsePrefixFunction()
 			expect(prefixSpy.calledOnce).to.be.true;
 			expect(prefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.valid]);
 			commonFunctionsFile.testPresent(prefixSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(prefixSpy.firstCall.returnValue, 'string');
+			expect(prefixSpy.firstCall.returnValue).to.be.a("string");
 			expect(prefixSpy.firstCall.returnValue).to.equal(prefixIndexObject.code);
 		});
 		
@@ -178,7 +178,7 @@ function checkParseIndexFunction()
 			expect(indexSpy.calledOnce).to.be.true;
 			expect(indexSpy.firstCall.args).to.deep.equal([prefixIndexObject.valid]);
 			commonFunctionsFile.testPresent(indexSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(indexSpy.firstCall.returnValue, 'number');
+			expect(indexSpy.firstCall.returnValue).to.be.a("number");
 			expect(indexSpy.firstCall.returnValue).to.equal(prefixIndexObject.index);
 		});
 		

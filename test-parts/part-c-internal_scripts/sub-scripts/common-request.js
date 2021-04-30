@@ -31,7 +31,7 @@ function validateResponseArray(arrayCalled, callObject, callArg)
 	expect(callObject.exception).to.be.undefined;
 	
 	commonFunctionsFile.testPresent(callObject.returnValue);
-	commonFunctionsFile.testArray(callObject.returnValue);
+	commonFunctionsFile.testArrayPopulated(callObject.returnValue);
 	commonFunctionsFile.testAllElements(callObject.returnValue, 'object');
 	
 	commonFunctionsFile.testPropertyDefinitions(callObject.returnValue, 'value');
@@ -52,7 +52,7 @@ function validateResponseObject(objectCalled, callObject, callArg)
 	expect(callObject.exception).to.be.undefined;
 			
 	commonFunctionsFile.testPresent(callObject.returnValue);
-	commonFunctionsFile.testType(callObject.returnValue, 'object');
+	expect(callObject.returnValue).to.be.an("object");
 			
 	commonFunctionsFile.testObjectPropertyDefinition(callObject.returnValue, 'exampleProperty');
 	commonFunctionsFile.testObjectPropertyContent(callObject.returnValue, 'exampleProperty', 'string');
@@ -117,7 +117,7 @@ function validateOptionsBase(optCalledFlag, optCallObject)
 	commonFunctionsFile.testPresent(optCallObject);
 	
 	commonFunctionsFile.testPresent(optCallObject.args);
-	commonFunctionsFile.testArray(optCallObject.args);
+	commonFunctionsFile.testArrayPopulated(optCallObject.args);
 	
 	expect(optCallObject.exception).to.be.undefined;
 }
@@ -135,7 +135,7 @@ function validateDeleteOptionsArguments(optCallObject, aUrl, aFlag)
 function validateOptionsReturn(optCallObject, desiredUrl, desiredMethod, desiredBody)
 {
 	commonFunctionsFile.testPresent(optCallObject.returnValue);
-	commonFunctionsFile.testType(optCallObject.returnValue, 'object');
+	expect(optCallObject.returnValue).to.be.an("object");
 	
 	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'url');
 	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'method');

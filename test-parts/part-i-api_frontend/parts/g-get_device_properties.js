@@ -120,7 +120,7 @@ function testCurrentDeviceStatus(mName, dName, id)
 	it("Object Returned", function(done)
 	{
 		commonFunctionsFile.testPresent(dRequestRead);
-		commonFunctionsFile.testType(dRequestRead, 'object');
+		expect(dRequestRead).to.be.an("object");
 		
 		done();
 	});
@@ -145,14 +145,14 @@ function testCurrentDeviceStatus(mName, dName, id)
 	
 	it("Correct Status Array", function(done)
 	{
-		commonFunctionsFile.testArray(dRequestRead.STATUS);
+		commonFunctionsFile.testArrayPopulated(dRequestRead.STATUS);
 		validateStatusControlArray(dRequestRead.STATUS);
 		done();
 	});
 	
 	it("Correct Control Array", function(done)
 	{
-		commonFunctionsFile.testArray(dRequestRead.CONTROL);
+		commonFunctionsFile.testArrayPopulated(dRequestRead.CONTROL);
 		validateStatusControlArray(dRequestRead.CONTROL);
 		done();
 	});

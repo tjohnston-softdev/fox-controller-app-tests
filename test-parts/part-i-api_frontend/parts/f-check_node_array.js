@@ -38,7 +38,7 @@ function handleStructure()
 		
 		it("Correct Array Structure", function(done)
 		{
-			commonFunctionsFile.testType(nodeCacheObject, 'object');
+			expect(nodeCacheObject).to.be.an("object");
 			nodeCommonFile.callTestNodeStorageObject(nodeCacheObject);
 			done();
 		});
@@ -57,7 +57,7 @@ function handleManufacturerProperties()
 			mList = commonFunctionsFile.getObjectProperties(nodeCacheObject);
 			
 			commonFunctionsFile.testPresent(mList);
-			commonFunctionsFile.testArray(mList);
+			commonFunctionsFile.testArrayPopulated(mList);
 			
 			done();
 		});

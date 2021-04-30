@@ -31,7 +31,7 @@ function verifyValidatorExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(validatorModule);
-			commonFunctionsFile.testType(validatorModule, 'object');
+			expect(validatorModule).to.be.an("object");
 		});
 	});
 }
@@ -74,7 +74,6 @@ function verifyIpAddressVerFour()
 			
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.firstCall.returnValue, 'boolean');
 			expect(ipSpy.firstCall.returnValue).to.be.true;
 		});
 		
@@ -87,7 +86,6 @@ function verifyIpAddressVerFour()
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.secondCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.secondCall.returnValue, 'boolean');
 			expect(ipSpy.secondCall.returnValue).to.be.false;
 		});
 		
@@ -101,7 +99,6 @@ function verifyIpAddressVerFour()
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.lastCall.returnValue, 'boolean');
 			expect(ipSpy.lastCall.returnValue).to.be.false;
 		});
 		
@@ -139,7 +136,6 @@ function verifyIpAddressVerSix()
 			expect(ipSpy.firstCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.firstCall.returnValue, 'boolean');
 			expect(ipSpy.firstCall.returnValue).to.be.true;
 			
 		});
@@ -153,7 +149,6 @@ function verifyIpAddressVerSix()
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.secondCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.secondCall.returnValue, 'boolean');
 			expect(ipSpy.secondCall.returnValue).to.be.true;
 		});
 		
@@ -166,7 +161,6 @@ function verifyIpAddressVerSix()
 			expect(ipSpy.lastCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
-			commonFunctionsFile.testType(ipSpy.lastCall.returnValue, 'boolean');
 			expect(ipSpy.lastCall.returnValue).to.be.false;
 		});
 		

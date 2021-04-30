@@ -27,7 +27,7 @@ function checkRemoteIoSettingsFileExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(settingsFile);
-			commonFunctionsFile.testType(settingsFile, 'object');
+			expect(settingsFile).to.be.an("object");
 		});
 	});
 }

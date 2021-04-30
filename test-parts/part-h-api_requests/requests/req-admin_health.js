@@ -71,7 +71,7 @@ function getHealthObject()
 		it("Object Returned", function(done)
 		{
 			commonFunctionsFile.testPresent(healthObject);
-			commonFunctionsFile.testType(healthObject, 'object');
+			expect(healthObject).to.be.an("object");
 			done();
 		});
 		
@@ -176,7 +176,7 @@ function handleSpeed()
 		it("Array (cpuCurrentSpeed.cores)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject.cpuCurrentSpeed, 'cores');
-			commonFunctionsFile.testArray(healthObject.cpuCurrentSpeed.cores);
+			commonFunctionsFile.testArrayPopulated(healthObject.cpuCurrentSpeed.cores);
 			commonFunctionsFile.testAllElements(healthObject.cpuCurrentSpeed.cores, 'number');
 			expect(healthObject.cpuCurrentSpeed.cores).to.all.be.above(0);
 		});
@@ -256,7 +256,7 @@ function handleFileSystem()
 		it("File System Array (fsSize)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'fsSize');
-			commonFunctionsFile.testArray(healthObject.fsSize);
+			commonFunctionsFile.testArrayPopulated(healthObject.fsSize);
 			commonFunctionsFile.testAllElements(healthObject.fsSize, 'object');
 		});
 		
@@ -339,7 +339,7 @@ function handleNetwork()
 		it("Network Interface Array (networkInterfaces)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'networkInterfaces');
-			commonFunctionsFile.testArray(healthObject.networkInterfaces);
+			commonFunctionsFile.testArrayPopulated(healthObject.networkInterfaces);
 			commonFunctionsFile.testAllElements(healthObject.networkInterfaces, 'object');
 		});
 		
@@ -387,7 +387,7 @@ function handleDatabase()
 		it("Database Array (databaseSize)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'databaseSize');
-			commonFunctionsFile.testArray(healthObject.databaseSize);
+			commonFunctionsFile.testArrayPopulated(healthObject.databaseSize);
 			commonFunctionsFile.testAllElements(healthObject.databaseSize, 'object');
 			expect(healthObject.databaseSize.length).to.equal(2);
 		});
@@ -444,7 +444,7 @@ function handleLog()
 		it("Log Array (logSize)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'logSize');
-			commonFunctionsFile.testArray(healthObject.logSize);
+			commonFunctionsFile.testArrayPopulated(healthObject.logSize);
 			commonFunctionsFile.testAllElements(healthObject.logSize, 'object');
 			expect(healthObject.logSize.length).to.equal(1);
 		});

@@ -27,7 +27,7 @@ function checkPathFileExists()
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(requestPathFile);
-			commonFunctionsFile.testType(requestPathFile, 'object');
+			expect(requestPathFile).to.be.an("object");
 		});
 	});
 }

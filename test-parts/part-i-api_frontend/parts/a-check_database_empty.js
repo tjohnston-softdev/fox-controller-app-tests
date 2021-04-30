@@ -70,7 +70,7 @@ function handleDatabaseCheck()
 		it("Device List Exists", function(done)
 		{
 			commonFunctionsFile.testPresent(retrievedDatabaseList);
-			commonFunctionsFile.testArrayNeutral(retrievedDatabaseList);
+			expect(retrievedDatabaseList).to.be.an("array");
 			done();
 		});
 		

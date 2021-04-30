@@ -17,12 +17,12 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 		
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	commonFunctionsFile.testPresent(callObject.args[0]);
-	commonFunctionsFile.testType(callObject.args[0], 'function');
+	expect(callObject.args[0]).to.be.a("function");
 	
 	commonFunctionsFile.testPresent(callObject.callback);
-	commonFunctionsFile.testType(callObject.callback, 'function');
+	expect(callObject.callback).to.be.a("function");
 					
 	expect(callObject.exception).to.be.undefined;
 	expect(listError).to.be.null;
@@ -34,16 +34,16 @@ function verifyAddDevice(addDeviceArg, addCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(addDeviceArg);
 	
 	commonFunctionsFile.testPresent(callObject.args[1]);
-	commonFunctionsFile.testType(callObject.args[1], 'function');
+	expect(callObject.args[1]).to.be.a("function");
 	
 	commonFunctionsFile.testPresent(callObject.callback);
-	commonFunctionsFile.testType(callObject.callback, 'function');
+	expect(callObject.callback).to.be.a("function");
 }
 
 function verifyGetDevice(getDeviceArg, getCalled, callObject)
@@ -52,16 +52,16 @@ function verifyGetDevice(getDeviceArg, getCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(getDeviceArg);
 	
 	commonFunctionsFile.testPresent(callObject.args[1]);
-	commonFunctionsFile.testType(callObject.args[1], 'function');
+	expect(callObject.args[1]).to.be.a("function");
 	
 	commonFunctionsFile.testPresent(callObject.callback);
-	commonFunctionsFile.testType(callObject.callback, 'function');
+	expect(callObject.callback).to.be.a("function");
 }
 
 function verifyGetDeviceStatus(getStatusArg, getStatusCalled, callObject)
@@ -70,7 +70,7 @@ function verifyGetDeviceStatus(getStatusArg, getStatusCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(getStatusArg);
@@ -82,7 +82,7 @@ function verifyCheckNodeExists(existArg, existCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(existArg);
@@ -94,7 +94,7 @@ function verifyGetIoProperties(propArg, propCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(propArg);
@@ -107,7 +107,7 @@ function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(aMode);
@@ -116,7 +116,7 @@ function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 	expect(callObject.args[1]).to.equal(aObject);
 	
 	commonFunctionsFile.testPresent(callObject.args[2]);
-	commonFunctionsFile.testType(callObject.args[2], 'function');
+	expect(callObject.args[2]).to.be.a("function");
 }
 
 
@@ -127,7 +127,7 @@ function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aTog
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	expect(callObject.args).to.deep.equal([aID, aPrefix, aIndex, aToggle]);
 	
 	expect(callObject.returnValue).to.be.undefined;
@@ -140,16 +140,16 @@ function verifyModifyDevice(modifyArg, modifyCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(modifyArg);
 	
 	commonFunctionsFile.testPresent(callObject.args[1]);
-	commonFunctionsFile.testType(callObject.args[1], 'function');
+	expect(callObject.args[1]).to.be.a("function");
 	
 	commonFunctionsFile.testPresent(callObject.callback);
-	commonFunctionsFile.testType(callObject.callback, 'function');
+	expect(callObject.callback).to.be.a("function");
 }
 
 function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
@@ -158,7 +158,7 @@ function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArray(callObject.args);
+	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.not.be.undefined;
 	expect(callObject.args[0]).to.equal(deleteArg);
@@ -167,10 +167,10 @@ function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 	expect(callObject.args[1]).to.equal(flagArg);
 	
 	commonFunctionsFile.testPresent(callObject.args[2]);
-	commonFunctionsFile.testType(callObject.args[2], 'function');
+	expect(callObject.args[2]).to.be.a("function");
 	
 	commonFunctionsFile.testPresent(callObject.callback);
-	commonFunctionsFile.testType(callObject.callback, 'function');
+	expect(callObject.callback).to.be.a("function");
 }
 
 
@@ -181,7 +181,7 @@ function verifyGetNodeConfig(ncIdArg, ncCalled, ncCallObject)
 	commonFunctionsFile.testPresent(ncCallObject);
 	
 	commonFunctionsFile.testPresent(ncCallObject.args);
-	commonFunctionsFile.testArray(ncCallObject.args);
+	commonFunctionsFile.testArrayPopulated(ncCallObject.args);
 	
 	expect(ncCallObject.args[0]).to.not.be.undefined;
 	expect(ncCallObject.args[0]).to.equal(ncIdArg);
