@@ -3,19 +3,18 @@ function defineFoxPaths()
 	var foxRoot = "../../../../fox-controller-app/";
 	var defineRes = {};
 	
-	defineRes["serviceMainFile"] = foxRoot + "service.main";
-	defineRes["settingsFile"] = foxRoot + "settings";
-	defineRes["redSettingsFile"] = foxRoot + "node-red-settings";
-	defineRes["rioSettingsFile"] = foxRoot + "fox-devices/remote_io/remote_io.settings";
-	defineRes["advantechFile"] = foxRoot + "fox-devices/remote_io/advantech.models";
-	defineRes["moxaFile"] = foxRoot + "fox-devices/remote_io/moxa.models";
-	defineRes["sonoffFile"] = foxRoot + "fox-devices/remote_io/sonoff.models";
-	defineRes["deviceSettingsFile"] = foxRoot + "fox-devices/device.settings";
-	defineRes["storedDeviceClassFile"] = foxRoot + "fox-devices/_classes/device-model.class";
-	defineRes["connectedDeviceClassFile"] = foxRoot + "fox-devices/_classes/device.class";
-	defineRes["rioFactoriesFile"] = foxRoot + "fox-devices/remote_io/remote-io.factories";
-	defineRes["rioIndexFile"] = foxRoot + "fox-devices/remote_io/remote-io.index";
-	defineRes["relativePaths"] = true;
+	defineRes["serviceMainFile"] = foxRoot + "service.main.js";
+	defineRes["settingsFile"] = foxRoot + "settings.js";
+	defineRes["redSettingsFile"] = foxRoot + "node-red-settings.js";
+	defineRes["rioSettingsFile"] = foxRoot + "fox-devices/remote_io/remote_io.settings.js";
+	defineRes["advantechFile"] = foxRoot + "fox-devices/remote_io/advantech.models.js";
+	defineRes["moxaFile"] = foxRoot + "fox-devices/remote_io/moxa.models.js";
+	defineRes["sonoffFile"] = foxRoot + "fox-devices/remote_io/sonoff.models.js";
+	defineRes["deviceSettingsFile"] = foxRoot + "fox-devices/device.settings.js";
+	defineRes["storedDeviceClassFile"] = foxRoot + "fox-devices/_classes/device-model.class.js";
+	defineRes["connectedDeviceClassFile"] = foxRoot + "fox-devices/_classes/device.class.js";
+	defineRes["rioFactoriesFile"] = foxRoot + "fox-devices/remote_io/remote-io.factories.js";
+	defineRes["rioIndexFile"] = foxRoot + "fox-devices/remote_io/remote-io.index.js";
 	
 	return defineRes;
 }
