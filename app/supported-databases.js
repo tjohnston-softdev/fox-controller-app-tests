@@ -2,11 +2,24 @@ const folderErrorMarginSize = 290;
 
 function getSupportedDatabasesArray()
 {
-	var rioDB = {"dbName": "remote-io.db", "folder": true, "cleanSize": 0};
-	var alarmDB = {"dbName": "alarms_history.sqlite3", "folder": false, "cleanSize": 8192};
-	var res = [rioDB, alarmDB];
+	var res = [];
+	
+	defineDatabase("remote-io.db", true, 0, res);
+	defineDatabase("alarms_history.sqlite3", false, 8192, res);
 	
 	return res;
+}
+
+
+function defineDatabase(pName, pFolder, pCleanSize, resultArray)
+{
+	var definedObject = {};
+	
+	definedObject["dbName"] = pName;
+	definedObject["folder"] = pFolder;
+	definedObject["cleanSize"] = pCleanSize;
+	
+	resultArray.push(definedObject);
 }
 
 module.exports =

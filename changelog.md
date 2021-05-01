@@ -1,11 +1,9 @@
 # Changelog
 
-**./app/local-valid.js**
-* Removed the following:
-	* 'requirementPathSyntax' global.
-	* 'validateRequirementPathString' function.
-
----
-
-**./test-parts/part-c-internal_scripts/scripts/s-local_valid.js**
-* Removed 'handleRequirementPathFunction'
+**./app/supported-databases.js**
+* Moved supported database object definition to its own function 'defineDatabase'
+	* Properties are defined individually.
+	* Database object is added to the array without return.
+* getSupportedDatabasesArray
+	* Removed 'rioDB' and 'alarmDB' variables.
+	* 'res' starts as empty. It is populated with 'defineDatabase'
