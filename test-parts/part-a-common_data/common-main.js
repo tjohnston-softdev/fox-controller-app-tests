@@ -1,14 +1,9 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const cPathFile = require("./items/itm-app_paths");
+const cObjectFile = require("./items/itm-common_objects");
+const cErrorFile = require("./items/itm-common_errors");
 
 function coordinateCommon()
 {
-	var cPathFile = require("./items/itm-app_paths");
-	var cObjectFile = require("./items/itm-common_objects");
-	var cErrorFile = require("./items/itm-common_errors");
-	
 	describe("A - Common Data", function()
 	{
 		cPathFile.callTestCommonPaths();
@@ -17,4 +12,8 @@ function coordinateCommon()
 	});
 }
 
-exports.callCommon = coordinateCommon;
+
+module.exports =
+{
+	callCommon: coordinateCommon
+};
