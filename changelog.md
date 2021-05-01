@@ -1,36 +1,54 @@
 # Changelog
 
-**./test-parts/part-a-common_data/items/itm-app_paths.js**
-* Renamed globals:
-	* 'commonPathsFox' to 'foxPaths'
-	* 'propertyListFox' to 'propertyList'
-* Removed '../sub-items/path-lists' requirement.
-* 'propertyList' is now assigned using 'writeFoxPropertyNames'
-* checkPaths
-	* Split 'foxPaths' property value type into its own function 'handlePathType'
-	* Removed 'currentType' variable.
-	* Declared 'currentStringType' variable - Whether 'currentValue' is a string.
-	* Split path validation into its own function 'handleFileExists'
-	* Removed 'currentAbsolute' variable.
-	* Revised loop IF structures to reflect new error handling.
-	* If an element fails, 'allFilesExist' is now set to False.
-* handlePathType
-	* New function.
-	* Validates 'foxPaths' property value type.
-	* Must be a non-empty string.
-* handleFileExists
-	* New function.
-	* Checks whether a FOX Controller script file exists.
-	* Resolves relative path to absolute.
-* Replaced `exports` with `module.exports`
+**./app/common-objects.js**
+* Removed 'exampleObject'
 
 ---
 
-**./test-parts/part-a-common_data/sub-items/path-lists.js**
-* Removed functions:
-	* getAppPathsArray
-	* getSubCommonPathsArray
-* Moved 'getFoxPathsArray' function into:
-	* ../items/itm-app_paths.js
-	* Exists as 'writeFoxPropertyNames'
-* This file is now empty.
+**./test-parts/part-a-common_data/items/itm-common_objects.js - Globals**
+* Removed 'chai-things' and 'sinon' modules.
+* 'commonPaths.commonObjects' is now required directly.
+* Renamed 'commonObjectContentFile' to 'commonObjectsFile'
+
+---
+
+**./test-parts/part-a-common_data/items/itm-common_objects.js - Removed Functions**
+* getCommonObjectFile
+* verifyObjectFileExists
+* verifyObjectPropertiesValid
+* handleString
+* retrievePropertyObject
+* executeRegisterNodeObject
+* quoteProperty
+* testObjectStringValue
+* quoteName
+
+---
+
+**./test-parts/part-a-common_data/items/itm-common_objects.js - Structure**
+* 'testCommonObjects' has expanded into three `it` blocks:
+	* The 'unknownID' string.
+	* Device objects (eg. 'crudDevice')
+	* 'getRegisterNode' function.
+
+---
+
+**./test-parts/part-a-common_data/items/itm-common_objects.js - Other Functions**
+* handleDeviceObject
+	* When assigning 'deviceObj', it now reads 'commonObjectsFile' directly.
+	* Renamed parameter to 'devicePropName'
+	* Replaced calls to 'testObjectStringValue' with 'testString'
+* handleRegisterNodeObject
+	* Renamed 'getRegisterReturn' to 'registerResult'
+	* When assigning 'registerResult', the function is called directly.
+	* Replaced calls to 'testObjectStringValue' with 'testString'
+* Rewrote these functions using chai expectations:
+	* testObjectType
+	* testObjectFunction
+	* testString
+	* testObjectProperty
+
+---
+
+**./test-parts/part-a-common_data/items/itm-common_objects.js - Public**
+* Replaced `exports` with `module.exports`

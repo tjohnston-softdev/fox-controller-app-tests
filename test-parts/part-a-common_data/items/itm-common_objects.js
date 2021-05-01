@@ -1,290 +1,126 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
-
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonObjectContentFile = getCommonObjectFile();
+const commonObjectsFile = require(commonPaths.commonObjects);
 const und = 'undefined';
+
 
 function testCommonObjects()
 {
 	describe("Common Objects", function()
 	{
-		verifyObjectFileExists();
-		verifyObjectPropertiesValid();
+		it("Unknown ID", function()
+		{
+			testString(commonObjectsFile.unknownID);
+		});
+		
+		it("Device Objects", function()
+		{
+			handleDeviceObject('testDevice');
+			handleDeviceObject('crudDevice');
+			handleDeviceObject('modifiedDevice');
+			handleDeviceObject('nodeDevice');
+		});
+		
+		it("Node Object", function()
+		{
+			handleRegisterNodeObject();
+		});
+		
 	});
 }
 
-function verifyObjectFileExists()
+
+
+function handleDeviceObject(devicePropName)
 {
-	it("File Exists (common-objects)", function()
-	{
-		expect(commonObjectContentFile).to.not.be.undefined;
-		expect(commonObjectContentFile).to.not.be.null;
-		expect(commonObjectContentFile).to.be.an('object');
-	});
-}
-
-
-
-function verifyObjectPropertiesValid()
-{
-	it("Objects Valid", function()
-	{
-		handleString('unknownID');
-		handleDeviceObject('testDevice');
-		handleDeviceObject('crudDevice');
-		handleDeviceObject('modifiedDevice');
-		handleDeviceObject('nodeDevice');
-		handleRegisterNodeObject();
-	});
-}
-
-function handleString(hStringName)
-{
-	var hStringValue = retrievePropertyObject(hStringName);
-	testString(hStringName, hStringValue);
-}
-
-
-
-function handleDeviceObject(dName)
-{
-	var deviceObj = retrievePropertyObject(dName);
+	var deviceObj = commonObjectsFile[devicePropName];
 	
-	testObjectType(dName, deviceObj);
+	testObjectType(deviceObj);
 	
-	testObjectProperty(dName, deviceObj, 'id', 'string');
-	testObjectProperty(dName, deviceObj, 'deviceType', 'string');
-	testObjectProperty(dName, deviceObj, 'maker', 'string');
-	testObjectProperty(dName, deviceObj, 'model', 'string');
-	testObjectProperty(dName, deviceObj, 'name', 'string');
-	testObjectProperty(dName, deviceObj, 'desc', 'string');
-	testObjectProperty(dName, deviceObj, 'ipAddress', 'string');
-	testObjectProperty(dName, deviceObj, 'username', 'string');
-	testObjectProperty(dName, deviceObj, 'password', 'string');
-	testObjectProperty(dName, deviceObj, 'isEnabled', 'boolean');
+	testObjectProperty(deviceObj, 'id', 'string');
+	testObjectProperty(deviceObj, 'deviceType', 'string');
+	testObjectProperty(deviceObj, 'maker', 'string');
+	testObjectProperty(deviceObj, 'model', 'string');
+	testObjectProperty(deviceObj, 'name', 'string');
+	testObjectProperty(deviceObj, 'desc', 'string');
+	testObjectProperty(deviceObj, 'ipAddress', 'string');
+	testObjectProperty(deviceObj, 'username', 'string');
+	testObjectProperty(deviceObj, 'password', 'string');
+	testObjectProperty(deviceObj, 'isEnabled', 'boolean');
 	
-	testObjectStringValue(deviceObj, 'id');
-	testObjectStringValue(deviceObj, 'deviceType');
-	testObjectStringValue(deviceObj, 'maker');
-	testObjectStringValue(deviceObj, 'model');
-	testObjectStringValue(deviceObj, 'name');
-	testObjectStringValue(deviceObj, 'desc');
-	testObjectStringValue(deviceObj, 'ipAddress');
-	testObjectStringValue(deviceObj, 'username');
-	testObjectStringValue(deviceObj, 'password');
+	testString(deviceObj.id);
+	testString(deviceObj.deviceType);
+	testString(deviceObj.maker);
+	testString(deviceObj.model);
+	testString(deviceObj.name);
+	testString(deviceObj.desc);
+	testString(deviceObj.ipAddress);
+	testString(deviceObj.username);
+	testString(deviceObj.password);
 }
 
 function handleRegisterNodeObject()
 {
 	var getRegisterName = 'nodeConfigObject';
-	var getRegisterReturn = null;
+	var registerResult = null;
 	
 	testObjectFunction('getRegisterNode');
-	getRegisterReturn = executeRegisterNodeObject("Example Device", "Example Node", "RO-0");
+	registerResult = commonObjectsFile.getRegisterNode("Example Device", "Example Node", "RO-0");
 	
-	testObjectType(getRegisterName, getRegisterReturn);
+	testObjectType(registerResult);
 	
-	testObjectProperty(getRegisterName, getRegisterReturn, 'id', 'string');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'type', 'string');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'z', 'string');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'name', 'string');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'deviceId', 'string');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'ioSetId', 'string');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'x', 'number');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'y', 'number');
-	testObjectProperty(getRegisterName, getRegisterReturn, 'wires', 'array');
+	testObjectProperty(registerResult, 'id', 'string');
+	testObjectProperty(registerResult, 'type', 'string');
+	testObjectProperty(registerResult, 'z', 'string');
+	testObjectProperty(registerResult, 'name', 'string');
+	testObjectProperty(registerResult, 'deviceId', 'string');
+	testObjectProperty(registerResult, 'ioSetId', 'string');
+	testObjectProperty(registerResult, 'x', 'number');
+	testObjectProperty(registerResult, 'y', 'number');
+	testObjectProperty(registerResult, 'wires', 'array');
 	
-	testObjectStringValue(getRegisterReturn, 'id');
-	testObjectStringValue(getRegisterReturn, 'type');
-	testObjectStringValue(getRegisterReturn, 'z');
-	testObjectStringValue(getRegisterReturn, 'deviceId');
-	testObjectStringValue(getRegisterReturn, 'ioSetId');
+	testString(registerResult.id);
+	testString(registerResult.type);
+	testString(registerResult.z);
+	testString(registerResult.deviceId);
+	testString(registerResult.ioSetId);
 }
 
 
 
 
-function testObjectType(propName, propObject)
+function testObjectType(propObject)
 {
-	var propType = typeof propObject;
-	var propQuote = quoteName(propName);
-	var propSuccess = false;
-	
-	if (propObject !== null && propType !== und && propType === 'object')
-	{
-		propSuccess = true;
-	}
-	else if (propObject !== null && propType !== und)
-	{
-		propSuccess = false;
-		throw new Error(propQuote + " is not an object.");
-	}
-	else
-	{
-		propSuccess = false;
-		throw new Error(propQuote + " does not exist.");
-	}
-	
-	expect(propSuccess).to.be.true;
+	expect(propObject).to.not.be.undefined;
+	expect(propObject).to.not.be.null;
+	expect(propObject).to.be.an("object");
 }
 
-function testObjectFunction(fName)
+function testObjectFunction(funcName)
 {
-	var fType = typeof commonObjectContentFile[fName];
-	var fQuote = quoteName(fName);
-	var fSuccess = false;
-	
-	if (commonObjectContentFile[fName] !== null && fType !== und && fType === 'function')
-	{
-		fSuccess = true;
-	}
-	else if (commonObjectContentFile[fName] !== null && fType !== und)
-	{
-		fSuccess = false;
-		throw new Error(fQuote + " is not a function.");
-	}
-	else
-	{
-		fSuccess = false;
-		throw new Error(fQuote + " does not exist.");
-	}
-	
-	expect(fSuccess).to.be.true;
+	var functionValue = commonObjectsFile[funcName];
+	expect(functionValue).to.be.a("function");
 }
 
-function testString(strName, strText)
+
+function testString(strText)
 {
-	var propType = typeof strText;
-	var propQuote = quoteName(strName);
-	var stringSuccess = false;
-	
-	if (strText !== null && propType !== und && propType === 'string' && strText.length >= 1)
-	{
-		stringSuccess = true;
-	}
-	else if (strText !== null && propType !== und && propType === 'string')
-	{
-		stringSuccess = false;
-		throw new Error(propQuote + " cannot be empty.");
-	}
-	else if (strText !== null && propType !== und)
-	{
-		stringSuccess = false;
-		throw new Error(propQuote + " is not a string.");
-	}
-	else
-	{
-		stringSuccess = false;
-		throw new Error(propQuote + " does not exist.");
-	}
-	
-	expect(stringSuccess).to.be.true;
+	expect(strText).to.be.a("string");
+	expect(strText).to.not.be.empty;
 }
 
-function testObjectProperty(tName, tObject, propName, desiredType)
+function testObjectProperty(tObject, propName, desiredType)
 {
-	var propType = typeof tObject[propName];
-	var propArray = Array.isArray(tObject[propName]);
-	var propSuccess = false;
+	var propValue = tObject[propName];
 	
-	var objQuote = quoteName(tName);
-	var propQuote = quoteName(propName);
-	var combinedQuote = quoteProperty(tName, propName);
-	
-	if (tObject[propName] !== null && propType !== und && propType === 'object' && propArray === true)
-	{
-		propSuccess = true;
-	}
-	else if (tObject[propName] !== null && propType !== und && propType === desiredType)
-	{
-		propSuccess = true;
-	}
-	else if (tObject[propName] !== null && propType !== und)
-	{
-		propSuccess = false;
-		throw new Error(combinedQuote + " is not a "+ desiredType);
-	}
-	else
-	{
-		propSuccess = false;
-		throw new Error(objQuote + " does not have the property " + propQuote);
-	}
-	
-	expect(propSuccess).to.be.true;
+	expect(propValue).to.not.be.undefined;
+	expect(propValue).to.not.be.null;
+	expect(propValue).to.be.a(desiredType);
 }
 
-function testObjectStringValue(targetObject, stringPropertyName)
+
+module.exports =
 {
-	testString(stringPropertyName, targetObject[stringPropertyName]);
-}
-
-
-function retrievePropertyObject(propObjectName)
-{
-	var vResult = null;
-	
-	try
-	{
-		vResult = commonObjectContentFile[propObjectName];
-	}
-	catch(e)
-	{
-		vResult = null;
-	}
-	
-	return vResult;
-}
-
-function executeRegisterNodeObject(di, ni, ioSet)
-{
-	var res = null;
-	
-	try
-	{
-		res = commonObjectContentFile.getRegisterNode(di, ni, ioSet);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-
-
-
-function quoteName(n)
-{
-	var quoted = "'" + n + "'";
-	return quoted;
-}
-
-function quoteProperty(o, p)
-{
-	var combined = o + "." + p;
-	var cRes = quoteName(combined);
-	return cRes;
-}
-
-
-function getCommonObjectFile()
-{
-	var res = null;
-	
-	try
-	{
-		res = require(commonPaths.commonObjects);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestCommonObjects = testCommonObjects;
+	callTestCommonObjects: testCommonObjects
+};

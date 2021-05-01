@@ -1,11 +1,5 @@
 const unknownIDString = "Unknown Device";
 
-const exampleObject =
-{
-	"exists": true,
-	"relevant": false
-};
-
 const testDeviceObject =
 {
         id: 'OO4EM1vva',
@@ -89,7 +83,6 @@ function getRegisterNodeObject(regDeviceID, regNodeID, regPrefixInd)
 module.exports =
 {
 	unknownID: unknownIDString,
-	example: exampleObject,
 	testDevice: testDeviceObject,
 	crudDevice: crudDeviceObject,
 	modifiedDevice: modifiedDeviceObject,
