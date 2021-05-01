@@ -8,15 +8,15 @@ function checkPlaceholder()
 	expect(true).to.be.true;
 }
 
-function checkPresent(o)
+function checkPresent(preVal)
 {
-	expect(o).to.not.be.undefined;
-	expect(o).to.not.be.null;
+	expect(preVal).to.not.be.undefined;
+	expect(preVal).to.not.be.null;
 }
 
-function checkBinary(nVal)
+function checkBinary(numVal)
 {
-	expect(nVal).to.be.oneOf([0, 1]);
+	expect(numVal).to.be.oneOf([0, 1]);
 }
 
 
@@ -25,51 +25,52 @@ function checkPercent(percVal)
 	expect(percVal).to.be.within(0, 100);
 }
 
-function checkArrayPopulated(aDef)
+function checkArrayPopulated(arrDef)
 {
-	expect(aDef).to.be.an('array').that.is.not.empty;
+	expect(arrDef).to.be.an('array');
+	expect(arrDef).to.not.be.empty;
 }
 
-function checkArrayEmpty(aDef)
+function checkArrayEmpty(arrDef)
 {
-	expect(aDef).to.be.an('array');
-	expect(aDef).to.be.empty;
+	expect(arrDef).to.be.an('array');
+	expect(arrDef).to.be.empty;
 }
 
 
-function checkArrayDynamic(aDef, sFlag)
+function checkArrayDynamic(arrDef, lengthFlag)
 {
-	if (sFlag > 0)
+	if (lengthFlag > 0)
 	{
-		expect(aDef).to.be.an('array').that.is.not.empty;
+		expect(arrDef).to.be.an('array').that.is.not.empty;
 	}
-	else if (sFlag < 0)
+	else if (lengthFlag < 0)
 	{
-		expect(aDef).to.be.an('array').that.is.empty;
+		expect(arrDef).to.be.an('array').that.is.empty;
 	}
 	else
 	{
-		expect(aDef).to.be.an('array');
+		expect(arrDef).to.be.an('array');
 	}
 }
 
 
 
-function checkString(sDef)
+function checkString(strDef)
 {
-	expect(sDef).to.be.a('string');
-	expect(sDef.length).to.be.at.least(1);
+	expect(strDef).to.be.a('string');
+	expect(strDef.length).to.be.at.least(1);
 }
 
 
-function checkAllElements(aDef, eType)
+function checkAllElements(arrDef, eType)
 {
 	var objectInd = 0;
 	var currentObject = null;
 	
-	while (objectInd >= 0 && objectInd < aDef.length && aDef != null)
+	for (objectInd = 0; objectInd < arrDef.length; objectInd = objectInd + 1)
 	{
-		currentObject = aDef[objectInd];
+		currentObject = arrDef[objectInd];
 		expect(currentObject).to.be.an(eType);
 		objectInd = objectInd + 1;
 	}
@@ -79,11 +80,14 @@ function checkAllElements(aDef, eType)
 
 function checkObjectAllPropertiesType(objDef, allType)
 {
+	var currentVal = null;
+	
 	for (currentProp in objDef)
 	{
-		expect(objDef[currentProp]).to.not.be.undefined;
-		expect(objDef[currentProp]).to.not.be.null;
-		expect(objDef[currentProp]).to.be.a(allType);
+		currentVal = objDef[currentProp];
+		expect(currentVal).to.not.be.undefined;
+		expect(currentVal).to.not.be.null;
+		expect(currentVal).to.be.an(allType);
 	}
 }
 
@@ -93,9 +97,9 @@ function checkObjectMatchKV(objDef)
 	
 	for (currentKey in objDef)
 	{
-		expect(objDef[currentKey]).to.not.be.undefined;
-		expect(objDef[currentKey]).to.not.be.null;
 		currentVal = objDef[currentKey];
+		expect(currentVal).to.not.be.undefined;
+		expect(currentVal).to.not.be.null;
 		expect(currentVal).to.equal(currentKey);
 	}
 }
@@ -107,12 +111,11 @@ function checkObjectMatchKVInsensitive(objDef)
 	
 	for (currentProp in objDef)
 	{
-		expect(objDef[currentProp]).to.not.be.undefined;
-		expect(objDef[currentProp]).to.not.be.null;
-		
 		currentKey = currentProp.toLowerCase();
 		currentVal = objDef[currentProp].toLowerCase();
 		
+		expect(currentVal).to.not.be.undefined;
+		expect(currentVal).to.not.be.null;
 		expect(currentVal).to.equal(currentKey);
 	}
 	
@@ -135,9 +138,16 @@ function checkBothObjectsSameProperties(oSrc, oTgt)
 
 function checkBothObjectsHaveSamePropertyValue(oSrc, oTgt, oProp)
 {
+	var srcVal = null;
+	var tgtVal = null;
+	
 	expect(oSrc).to.have.property(oProp);
 	expect(oTgt).to.have.property(oProp);
-	expect(oSrc[oProp]).to.equal(oTgt[oProp]);
+	
+	srcVal = oSrc[oProp];
+	tgtVal = oTgt[oProp];
+	
+	expect(srcVal).to.equal(tgtVal);
 }
 
 function checkObjectPropertyDefinition(oDef, pName)
@@ -232,7 +242,7 @@ function checkPropertyStringRequiredArray(aDef, pName)
 	var oInd = 0;
 	var currentObject = null;
 	
-	while (oInd >= 0 && oInd < aDef.length && aDef != null)
+	for (oInd = 0; oInd < aDef.length; oInd = oInd + 1)
 	{
 		currentObject = aDef[oInd];
 		checkPropertyStringRequiredObject(currentObject, pName);
@@ -242,21 +252,20 @@ function checkPropertyStringRequiredArray(aDef, pName)
 
 function checkInvalidFunctionResult(rArray, expMsg)
 {
-	expect(rArray[0]).to.not.be.undefined;
-	expect(rArray[0]).to.not.be.null;
-	expect(rArray[0]).to.be.a('boolean');
-	expect(rArray[0]).to.be.false;
+	var successElement = null;
+	var messageElement = null;
 	
-	expect(rArray[1]).to.not.be.undefined;
-	expect(rArray[1]).to.not.be.null;
-	expect(rArray[1]).to.equal(expMsg);
+	expect(rArray).to.be.an("array");
+	expect(rArray.length).to.be.at.least(2);
+	
+	successElement = rArray[0];
+	messageElement = rArray[1];
+	
+	expect(successElement).to.be.false;
+	expect(messageElement).to.equal(expMsg);
 }
 
-function checkEcho(echoObject)
-{
-	console.log(echoObject);
-	expect(true).to.be.true;
-}
+
 
 function cloneJsonObject(originalObject)
 {
@@ -279,11 +288,13 @@ function getJsonObjectProperties(intendedObject)
 
 function getJsonObjectValues(intendedObject)
 {
+	var retValue = null;
 	var res = [];
 	
 	for (prop in intendedObject)
 	{
-		res.push(intendedObject[prop]);
+		retValue = intendedObject[prop];
+		res.push(retValue);
 	}
 	
 	return res;
@@ -297,41 +308,36 @@ function outputCallbackMessage(cHeader, errorArg, objectArg)
 	console.log("Object: " + objectArg);
 }
 
-function stringToNumber(numberString)
+
+module.exports =
 {
-	var convertedNumber = Math.pow(numberString, 1);
-	return convertedNumber;
-}
-
-
-exports.testPlaceholder = checkPlaceholder;
-exports.testPresent = checkPresent;
-exports.testBinary = checkBinary;
-exports.testPercent = checkPercent;
-exports.testArrayPopulated = checkArrayPopulated;
-exports.testArrayEmpty = checkArrayEmpty;
-exports.testArrayDynamic = checkArrayDynamic;
-exports.testString = checkString;
-exports.testAllElements = checkAllElements;
-exports.testObjectAllPropertiesType = checkObjectAllPropertiesType
-exports.testObjectMatchKV = checkObjectMatchKV;
-exports.testObjectMatchKVInsensitive = checkObjectMatchKVInsensitive;
-exports.testBothObjectsSameProperties = checkBothObjectsSameProperties;
-exports.testBothObjectsHaveSamePropertyValue = checkBothObjectsHaveSamePropertyValue;
-exports.testObjectPropertyDefinition = checkObjectPropertyDefinition;
-exports.testObjectPropertyContent = checkObjectPropertyContent;
-exports.testObjectPropertyAbsent = checkObjectPropertyAbsent;
-exports.testObjectSearchValue = checkObjectSearchValue;
-exports.testPropertySearchValues = checkPropertySearchValues;
-exports.testPropertyDefinitions = checkPropertyDefinitions;
-exports.testPropertyContents = checkPropertyContents;
-exports.testPropertyAbsentDefinitions = checkPropertyAbsentDefinitions;
-exports.testPropertyStringRequiredObject = checkPropertyStringRequiredObject;
-exports.testPropertyStringRequiredArray = checkPropertyStringRequiredArray;
-exports.testInvalidFunctionResult = checkInvalidFunctionResult;
-exports.testEcho = checkEcho;
-exports.cloneObject = cloneJsonObject;
-exports.getObjectProperties = getJsonObjectProperties;
-exports.getObjectValues = getJsonObjectValues;
-exports.displayCallbackMessage = outputCallbackMessage;
-exports.convertStringToNumber = stringToNumber;
+	testPlaceholder: checkPlaceholder,
+	testPresent: checkPresent,
+	testBinary: checkBinary,
+	testPercent: checkPercent,
+	testArrayPopulated: checkArrayPopulated,
+	testArrayEmpty: checkArrayEmpty,
+	testArrayDynamic: checkArrayDynamic,
+	testString: checkString,
+	testAllElements: checkAllElements,
+	testObjectAllPropertiesType: checkObjectAllPropertiesType,
+	testObjectMatchKV: checkObjectMatchKV,
+	testObjectMatchKVInsensitive: checkObjectMatchKVInsensitive,
+	testBothObjectsSameProperties: checkBothObjectsSameProperties,
+	testBothObjectsHaveSamePropertyValue: checkBothObjectsHaveSamePropertyValue,
+	testObjectPropertyDefinition: checkObjectPropertyDefinition,
+	testObjectPropertyContent: checkObjectPropertyContent,
+	testObjectPropertyAbsent: checkObjectPropertyAbsent,
+	testObjectSearchValue: checkObjectSearchValue,
+	testPropertySearchValues: checkPropertySearchValues,
+	testPropertyDefinitions: checkPropertyDefinitions,
+	testPropertyContents: checkPropertyContents,
+	testPropertyAbsentDefinitions: checkPropertyAbsentDefinitions,
+	testPropertyStringRequiredObject: checkPropertyStringRequiredObject,
+	testPropertyStringRequiredArray: checkPropertyStringRequiredArray,
+	testInvalidFunctionResult: checkInvalidFunctionResult,
+	cloneObject: cloneJsonObject,
+	getObjectProperties: getJsonObjectProperties,
+	getObjectValues: getJsonObjectValues,
+	displayCallbackMessage: outputCallbackMessage
+};

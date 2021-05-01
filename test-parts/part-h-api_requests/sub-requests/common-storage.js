@@ -69,7 +69,7 @@ function testDriveTotalObject(tObject, tPlatform)
 	if (tPlatform === 'win32')
 	{
 		tType = 'string'
-		tSize = commonFunctionsFile.convertStringToNumber(tObject.size);
+		tSize = parseFloat(tObject.size);
 	}
 	else
 	{
@@ -83,7 +83,7 @@ function testDriveTotalObject(tObject, tPlatform)
 
 function testDriveUsedObject(uObject)
 {
-	var totalValue = commonFunctionsFile.convertStringToNumber(uObject.size);
+	var totalValue = parseFloat(uObject.size);
 	var usedValue = uObject.used;
 		
 	expect(usedValue).to.be.at.least(0);
