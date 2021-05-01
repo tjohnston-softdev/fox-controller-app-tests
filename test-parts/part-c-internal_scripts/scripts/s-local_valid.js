@@ -21,7 +21,6 @@ function testLocalValid()
 		handleDrivePathFunction();
 		handleFilenameFunction();
 		handleRioPrefixFunction();
-		handleRequirementPathFunction();
 		handleRioTextFunction();
 	});
 }
@@ -340,75 +339,6 @@ function handleRioPrefixFunction()
 		
 	});
 	
-}
-
-
-
-
-
-
-function handleRequirementPathFunction()
-{
-	var rForwardValid = "./folder/subfolder/file";
-	var rBackwardValid = "../../../folder/subfolder/file";
-	var rSiblingValid = "./file";
-	
-	var rSiblingInvalid = "file";
-	var rFormatInvalid = "folder/subfolder/file";
-	
-	var rSpy = null;
-	
-	describe("Requirement Path (validateRequirementPath)", function()
-	{
-		it("Function Exists", function(done)
-		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateRequirementPath');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateRequirementPath', 'function');
-			rSpy = sinon.spy(localValidFile, 'validateRequirementPath');
-			done();
-		});
-		
-		it("Call - Valid Forward", function()
-		{
-			localValidFile.validateRequirementPath(rForwardValid, false);
-			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rForwardValid, false);
-			expect(rSpy.lastCall.returnValue).to.be.true;
-		});
-		
-		it("Call - Valid Backward", function()
-		{
-			localValidFile.validateRequirementPath(rBackwardValid, false);
-			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rBackwardValid, false);
-			expect(rSpy.lastCall.returnValue).to.be.true;
-		});
-		
-		it("Call - Valid Sibling", function()
-		{
-			localValidFile.validateRequirementPath(rSiblingValid, false);
-			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rSiblingValid, false);
-			expect(rSpy.lastCall.returnValue).to.be.true;
-		});
-		
-		it("Call - Invalid Sibling", function()
-		{
-			localValidFile.validateRequirementPath(rSiblingInvalid, false);
-			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rSiblingInvalid, false);
-			expect(rSpy.lastCall.returnValue).to.be.false;
-		});
-		
-		it("Call - Invalid Format", function()
-		{
-			localValidFile.validateRequirementPath(rFormatInvalid, false);
-			localCommonFile.callValidateSpyObject(rSpy.called, rSpy.lastCall, rFormatInvalid, false);
-			expect(rSpy.lastCall.returnValue).to.be.false;
-		});
-		
-		it("Complete", function()
-		{
-			rSpy.restore();
-		});
-		
-	});
 }
 
 

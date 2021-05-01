@@ -3,7 +3,6 @@ const driveLetterSyntax = /^[A-Z][:]([\\\/])?$/i;
 const drivePathSyntax = /^\/dev\/([0-9a-zA-Z]*)$/i;
 const filenameSyntax =  /^([^\\\/]+)$/;
 const rioPrefixSyntax = /^(A|D|R)(I|O)-([0-9]+)$/i;
-const requirementPathSyntax = /^(([.][\\\/])|(([.]{2}[\\\/])+))([^\\\/]+[\\\/])*([^\\\/]+)$/i;
 
 
 function validateExample(testString, testSyntax, allowEmpty)
@@ -147,6 +146,5 @@ module.exports =
 	validateDrivePath: validateDrivePathString,
 	validateFilename: validateFilenameString,
 	validateRioPrefix: validateRioPrefixString,
-	validateRequirementPath: validateRequirementPathString,
 	validateRioText: validateRioTextString
 };
