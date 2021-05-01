@@ -2,7 +2,7 @@ const nullObjectError = "Must be an object: null";
 const idMissingError = "ID property missing!";
 const ipInvalidError = "ipAddress must be an IP address!";
 const deviceNotObjectError = 'device must be an object';
-const getPropertiesUndefinedError = "Cannot read property 'getRioDeviceProperties' of undefined";
+const rioPropertiesUndefinedError = "Cannot read property 'getRioDeviceProperties' of undefined";
 const keyArgError = "get() requires a key argument";
 const missingModuleError = "Module doesn't exist! (disabled or deleted)";
 const connectObjectError = "_storedDevice must be instance of StoredDevice";
@@ -136,7 +136,7 @@ module.exports =
 	idMissing: idMissingError,
 	ipInvalid: ipInvalidError,
 	deviceNotObject: deviceNotObjectError,
-	getPropertiesUndefined: getPropertiesUndefinedError,
+	rioPropertiesUndefined: rioPropertiesUndefinedError,
 	keyArg: keyArgError,
 	missingModule: missingModuleError,
 	connectObject: connectObjectError,
