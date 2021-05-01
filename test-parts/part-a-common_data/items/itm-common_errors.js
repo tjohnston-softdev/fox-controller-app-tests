@@ -14,7 +14,7 @@ function testCommonErrors()
 			testStringProperty('idMissing');
 			testStringProperty('ipInvalid');
 			testStringProperty('deviceNotObject');
-			testStringProperty('getPropertiesUndefined');
+			testStringProperty('rioPropertiesUndefined');
 			testStringProperty('keyArg');
 			testStringProperty('missingModule');
 			testStringProperty('connectObject');
