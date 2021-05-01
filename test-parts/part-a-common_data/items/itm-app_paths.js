@@ -2,9 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const chai = require("chai");
 const expect = require("chai").expect;
-const commonPathsFox = require("../../../app/paths/files/fox-paths");
-const listFile = require("../sub-items/path-lists");
-const propertyListFox = listFile.getFoxPaths();
+const foxPaths = require("../../../app/paths/files/fox-paths");
+const propertyList = writeFoxPropertyNames();
 
 
 function testCommonPaths()
@@ -13,8 +12,8 @@ function testCommonPaths()
 	{
 		it("Property Array Retrieved", function()
 		{
-			expect(propertyListFox).to.be.an("array");
-			expect(propertyListFox).to.not.be.empty;
+			expect(propertyList).to.be.an("array");
+			expect(propertyList).to.not.be.empty;
 		});
 		
 		it("Property Names Valid", function()
@@ -41,9 +40,9 @@ function checkPropertyListArray()
 	
 	var allElementsValid = true;
 	
-	while (elementIndex >= 0 && elementIndex < propertyListFox.length && allElementsValid === true)
+	while (elementIndex >= 0 && elementIndex < propertyList.length && allElementsValid === true)
 	{
-		currentValue = propertyListFox[elementIndex];
+		currentValue = propertyList[elementIndex];
 		currentType = typeof currentValue;
 		currentValid = false;
 		
@@ -54,7 +53,7 @@ function checkPropertyListArray()
 		else
 		{
 			allElementsValid = false;
-			throw new Error("All 'propertyListFox' elements must be non-empty strings.");
+			throw new Error("All 'propertyList' elements must be non-empty strings.");
 		}
 		
 		elementIndex = elementIndex + 1;
@@ -69,33 +68,27 @@ function checkPaths()
 	var pathIndex = 0;
 	var currentName = "";
 	var currentValue = "";
-	var currentType = "";
+	var currentStringType = false;
 	var currentAbsolute = "";
 	var currentExists = false;
 	
 	var allFilesExist = true;
 	
-	while (pathIndex >= 0 && pathIndex < propertyListFox.length && allFilesExist === true)
+	while (pathIndex >= 0 && pathIndex < propertyList.length && allFilesExist === true)
 	{
-		currentName = propertyListFox[pathIndex];
-		currentValue = commonPathsFox[currentName];
-		currentType = typeof currentValue;
-		currentAbsolute = "";
+		currentName = propertyList[pathIndex];
+		currentValue = foxPaths[currentName];
+		currentStringType = handlePathType(currentName, currentValue);
 		currentExists = false;
 		
-		if (currentType === "string" && currentValue.length > 0)
+		if (currentStringType === true)
 		{
-			currentAbsolute = path.resolve(__dirname, currentValue);
-			currentExists = fs.existsSync(currentAbsolute);
+			currentExists = handleFileExists(currentName, currentValue);
 		}
 		
-		if (currentExists === true)
+		if (currentExists !== true)
 		{
-			currentValid = true;
-		}
-		else
-		{
-			throw new Error("FOX file does not exist.");
+			allFilesExist = false;
 		}
 		
 		pathIndex = pathIndex + 1;
@@ -105,4 +98,62 @@ function checkPaths()
 }
 
 
-exports.callTestCommonPaths = testCommonPaths;
+
+function handlePathType(pName, pValue)
+{
+	var pType = typeof pValue;
+	var handleRes = false;
+	var flaggedMessage = "";
+	
+	if (pType === "string" && pValue.length > 0)
+	{
+		handleRes = true;
+	}
+	else
+	{
+		handleRes = false;
+		flaggedMessage = "'foxPaths." + pName + "' must be a non-empty string.";
+		throw new Error(flaggedMessage);
+	}
+	
+	return handleRes;
+}
+
+
+
+function handleFileExists(pName, relativePath)
+{
+	var absolutePath = path.resolve(__dirname, relativePath);
+	var handleRes = fs.existsSync(absolutePath);
+	var flaggedMessage = "";
+	
+	if (handleRes !== true)
+	{
+		flaggedMessage += "'foxPaths.";
+		flaggedMessage += pName;
+		flaggedMessage += "' path does not exist.\n";
+		flaggedMessage += absolutePath;
+		
+		throw new Error(flaggedMessage);
+	}
+	
+	return handleRes;
+}
+
+
+function writeFoxPropertyNames()
+{
+	var arrayResult = [];
+	
+	arrayResult.push("serviceMainFile", "settingsFile", "redSettingsFile", "rioSettingsFile");
+	arrayResult.push("advantechFile", "moxaFile", "sonoffFile", "deviceSettingsFile");
+	arrayResult.push("storedDeviceClassFile", "connectedDeviceClassFile", "rioFactoriesFile", "rioIndexFile");
+	
+	return arrayResult;
+}
+
+
+module.exports =
+{
+	callTestCommonPaths: testCommonPaths
+};

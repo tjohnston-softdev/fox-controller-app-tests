@@ -1,82 +1,36 @@
 # Changelog
 
-**Test Status**
-* FOX Controller file paths are being read and resolved correctly.
-* New file path tests are successful.
-
----
-
-**./app/paths/files/**
-* These files are now exempt from testing:
-	* app-paths.js
-	* sub-common-paths.js
-
----
-
-**./app/paths/files/fox-paths.js**
-* Added `.js` file extension to the file names for 'defineRes' properties.
-* Removed 'relativePaths' result property.
-
----
-
 **./test-parts/part-a-common_data/items/itm-app_paths.js**
-* Added 'fs' requirement.
-* Added 'path' requirement.
-* Removed 'chai-things' requirement.
-* Removed 'sinon' requirement.
-* Removed globals:
-	* 'relativeTarget' - Merged into 'commonPathsFox'.
-	* commonPathsSub
-	* propertyListApp
-	* propertyListSub
-* 'commonPathsFox' is now required directly
-	* ../../../app/paths/files/fox-paths
-* 'listFile' is now required directly
-	* ../sub-items/path-lists
-* Changes to 'propertyListFox' global:
-	* Now a constant.
-	* Assigned inline by calling 'listFile'
+* Renamed globals:
+	* 'commonPathsFox' to 'foxPaths'
+	* 'propertyListFox' to 'propertyList'
+* Removed '../sub-items/path-lists' requirement.
+* 'propertyList' is now assigned using 'writeFoxPropertyNames'
+* checkPaths
+	* Split 'foxPaths' property value type into its own function 'handlePathType'
+	* Removed 'currentType' variable.
+	* Declared 'currentStringType' variable - Whether 'currentValue' is a string.
+	* Split path validation into its own function 'handleFileExists'
+	* Removed 'currentAbsolute' variable.
+	* Revised loop IF structures to reflect new error handling.
+	* If an element fails, 'allFilesExist' is now set to False.
+* handlePathType
+	* New function.
+	* Validates 'foxPaths' property value type.
+	* Must be a non-empty string.
+* handleFileExists
+	* New function.
+	* Checks whether a FOX Controller script file exists.
+	* Resolves relative path to absolute.
+* Replaced `exports` with `module.exports`
 
 ---
 
-**./test-parts/part-a-common_data/items/itm-app_paths.js - Removed Functions**
-* verifyAppFileExists
-* verifyFoxFileExists
-* verifySubFileExists
-* verifyPropertyListFileExists
-* verifyPropertyListsRetrieved
-* verifyPropertyListsValid
-* verifyPathsValid
-* getCommonPathsFile
-* getPropertyListFile
-* writeArrayError
-* writePathError
-
----
-
-**./test-parts/part-a-common_data/items/itm-app_paths.js - checkPropertyListArray**
-* Removed parameters:
-	* 'pArray' - Now uses 'propertyListFox'
-	* 'aName' - Strings are defined locally.
-* Removed 'aErrorString' variable
-* Renamed variables:
-	* 'currentElementIndex' to 'elementIndex'
-	* 'currentElementType' to 'currentType'
-	* 'currentElementValid' to 'currentValid'
-	* 'overallValid' to 'allElementsValid'
-* Declared 'currentValue' variable - Stores element value.
-* 'currentType' is assigned using 'currentValue'
-* Rewrote loop iteration IF condition for simplicity.
-* Removed structures:
-	* `if (currentValid !== true)`
-	* `if (allElementsValid !== true)`
-* Rewrote error message without relying on variables.
-
----
-
-**./test-parts/part-a-common_data/items/itm-app_paths.js - checkPaths**
-* This function has been rewritten from the ground up.
-	* Loops through 'propertyListFox' for property names.
-	* Reads property from 'commonPathsFox'
-	* Checks whether the file actually exists.
-	* Uses a generic error message for now.
+**./test-parts/part-a-common_data/sub-items/path-lists.js**
+* Removed functions:
+	* getAppPathsArray
+	* getSubCommonPathsArray
+* Moved 'getFoxPathsArray' function into:
+	* ../items/itm-app_paths.js
+	* Exists as 'writeFoxPropertyNames'
+* This file is now empty.
