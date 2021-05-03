@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const validModule = require("validator");
+const validator = require("validator");
 
 
 
@@ -106,7 +106,7 @@ function validateRandomIp(ipCalled, ipCallObject)
 	commonFunctionsFile.testPresent(ipCallObject.returnValue);
 	commonFunctionsFile.testString(ipCallObject.returnValue);
 	
-	returnValid = validModule.isIP(ipCallObject.returnValue);
+	returnValid = validator.isIP(ipCallObject.returnValue);
 	expect(returnValid).to.be.true;
 }
 
@@ -165,19 +165,18 @@ function validateDeleteOptionsReturn(optCallObject, desiredPermFlag)
 	expect(optCallObject.returnValue.headers['delete-permanently']).to.equal(desiredPermFlag);
 }
 
-
-
-
-
-exports.callValidateWriteUrl = validateWriteUrl;
-exports.callValidateResponseArray = validateResponseArray;
-exports.callValidateResponseObject = validateResponseObject;
-exports.callValidateResponseString = validateResponseString;
-exports.callWriteReplyErrorExample = writeReplyErrorExample;
-exports.callValidateOnlineResult = validateOnlineResult;
-exports.callValidateRandomIp = validateRandomIp;
-exports.callValidateOptionsBase = validateOptionsBase;
-exports.callValidateOptionsArguments = validateOptionsArguments;
-exports.callValidateDeleteOptionsArguments = validateDeleteOptionsArguments;
-exports.callValidateOptionsReturn = validateOptionsReturn;
-exports.callValidateDeleteOptionsReturn = validateDeleteOptionsReturn;
+module.exports =
+{
+	callValidateWriteUrl: validateWriteUrl,
+	callValidateResponseArray: validateResponseArray,
+	callValidateResponseObject: validateResponseObject,
+	callValidateResponseString: validateResponseString,
+	callWriteReplyErrorExample: writeReplyErrorExample,
+	callValidateOnlineResult: validateOnlineResult,
+	callValidateRandomIp: validateRandomIp,
+	callValidateOptionsBase: validateOptionsBase,
+	callValidateOptionsArguments: validateOptionsArguments,
+	callValidateDeleteOptionsArguments: validateDeleteOptionsArguments,
+	callValidateOptionsReturn: validateOptionsReturn,
+	callValidateDeleteOptionsReturn: validateDeleteOptionsReturn
+};

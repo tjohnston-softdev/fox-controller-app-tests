@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const supportedDatabaseDefinitionFile = getSupportedFile();
+const databaseFile = require(commonPaths.supportedDatabases);
 
 
 function testSupportedDatabases()
@@ -24,8 +24,8 @@ function checkSupportFileExists()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testPresent(supportedDatabaseDefinitionFile);
-			expect(supportedDatabaseDefinitionFile).to.be.an("object");
+			commonFunctionsFile.testPresent(databaseFile);
+			expect(databaseFile).to.be.an("object");
 		});
 	});
 }
@@ -37,13 +37,13 @@ function checkMarginNumber()
 	{
 		it("Property Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(supportedDatabaseDefinitionFile, 'folderErrorMargin');
+			commonFunctionsFile.testObjectPropertyDefinition(databaseFile, 'folderErrorMargin');
 		});
 		
 		it("Valid Number", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(supportedDatabaseDefinitionFile, 'folderErrorMargin', 'number');
-			expect(supportedDatabaseDefinitionFile.folderErrorMargin).to.be.at.least(0);
+			commonFunctionsFile.testObjectPropertyContent(databaseFile, 'folderErrorMargin', 'number');
+			expect(databaseFile.folderErrorMargin).to.be.at.least(0);
 		});
 		
 	});
@@ -58,14 +58,14 @@ function checkDefinitionObject()
 	{
 		it("Function Exists", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(supportedDatabaseDefinitionFile, 'getSupportedDatabases');
-			commonFunctionsFile.testObjectPropertyContent(supportedDatabaseDefinitionFile, 'getSupportedDatabases', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(databaseFile, 'getSupportedDatabases');
+			commonFunctionsFile.testObjectPropertyContent(databaseFile, 'getSupportedDatabases', 'function');
 			done();
 		});
 		
 		it("Function Works", function(done)
 		{
-			definitionArrayObject = supportedDatabaseDefinitionFile.getSupportedDatabases();
+			definitionArrayObject = databaseFile.getSupportedDatabases();
 			commonFunctionsFile.testPresent(definitionArrayObject);
 			done();
 		});
@@ -124,21 +124,7 @@ function testDefinitionSizes(dArray)
 }
 
 
-
-function getSupportedFile()
+module.exports =
 {
-	var fileRes = null;
-	
-	try
-	{
-		fileRes = require(commonPaths.supportedDatabases);
-	}
-	catch(e)
-	{
-		fileRes = null;
-	}
-	
-	return fileRes;
-}
-
-exports.callTestSupportedDatabases = testSupportedDatabases;
+	callTestSupportedDatabases: testSupportedDatabases
+};

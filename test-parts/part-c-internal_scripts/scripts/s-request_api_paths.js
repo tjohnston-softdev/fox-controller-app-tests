@@ -7,7 +7,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 
-const requestPathFile = getRequestPathFile();
+const requestPathFile = require(commonPaths.requestApiPaths);
 
 
 function testRequestPaths()
@@ -59,22 +59,7 @@ function handleIndividualPath(propertyName, descriptionName)
 }
 
 
-
-
-function getRequestPathFile()
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(commonPaths.requestApiPaths);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRequestPaths = testRequestPaths;
+	callTestRequestPaths: testRequestPaths
+};

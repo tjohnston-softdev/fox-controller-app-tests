@@ -62,7 +62,11 @@ function validateExampleResult(eRes, eTarget)
 	}
 }
 
-exports.callValidateSpyObject = validateSpyObject;
-exports.callValidateFullPathSpyObject = validateFullPathSpyObject;
-exports.callValidateExampleSpy = validateExampleSpy;
-exports.callValidateExampleResult = validateExampleResult;
+
+module.exports =
+{
+	callValidateSpyObject: validateSpyObject,
+	callValidateFullPathSpyObject: validateFullPathSpyObject,
+	callValidateExampleSpy: validateExampleSpy,
+	callValidateExampleResult: validateExampleResult
+};

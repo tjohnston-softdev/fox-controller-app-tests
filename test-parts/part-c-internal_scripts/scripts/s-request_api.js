@@ -6,7 +6,7 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
-const requestFile = getRequestFile();
+const requestFile = require(commonPaths.requestApi);
 const requestModule = require("request");
 
 const readNullError = "Cannot read property 'body' of null";
@@ -694,22 +694,7 @@ function createReplyObject(bContent)
 	return r;
 }
 
-
-function getRequestFile()
+module.exports =
 {
-	var dRes = null;
-	
-	try
-	{
-		dRes = require(commonPaths.requestApi);
-	}
-	catch(e)
-	{
-		dRes = null;
-	}
-	
-	return dRes;
-}
-
-
-exports.callTestRequest = testRequest;
+	callTestRequest: testRequest
+};

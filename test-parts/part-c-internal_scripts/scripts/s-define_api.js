@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const defineFile = getDefinitionFile();
+const defineFile = require(commonPaths.defineApi);
 
 function testDefine()
 {
@@ -69,22 +69,7 @@ function manufacturerArrayLoop()
 }
 
 
-
-function getDefinitionFile()
+module.exports =
 {
-	var dRes = null;
-	
-	try
-	{
-		dRes = require(commonPaths.defineApi);
-	}
-	catch(e)
-	{
-		console.log(e.message);
-		dRes = null;
-	}
-	
-	return dRes;
-}
-
-exports.callTestDefine = testDefine;
+	callTestDefine: testDefine
+};

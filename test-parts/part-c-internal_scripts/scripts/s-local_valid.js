@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const localValidFile = getLocalValidationFile();
+const localValidFile = require(commonPaths.localValid);
 const localCommonFile = require("../sub-scripts/common-local_valid");
 
 var exampleSpy = null;
@@ -422,21 +422,7 @@ function callExampleInvalid(eString, eSyntax, eEmpty, eError)
 }
 
 
-
-function getLocalValidationFile()
+module.exports =
 {
-	var dRes = null;
-	
-	try
-	{
-		dRes = require(commonPaths.localValid);
-	}
-	catch(e)
-	{
-		dRes = null;
-	}
-	
-	return dRes;
-}
-
-exports.callTestLocalValid = testLocalValid;
+	callTestLocalValid: testLocalValid
+};
