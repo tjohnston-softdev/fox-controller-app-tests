@@ -5,9 +5,8 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const requireFunctionFile = require("../sub-modules/require-node-module");
-const addressFile = require("../sub-modules/ip-strings");
-const aReq = requireFunctionFile.requireModuleSafe('request');
+const ipStrings = require("../sub-modules/ip-strings");
+const aReq = require("request");
 
 var rSpy = null;
 
@@ -46,10 +45,10 @@ function verifyRequestFunction()
 		
 		it("Call - Valid", function(done)
 		{
-			rSpy(addressFile.pingAddress, function(reqError, reqReturn)
+			rSpy(ipStrings.pingAddress, function(reqError, reqReturn)
 			{
 				
-				checkRequestSpy(addressFile.pingAddress);
+				checkRequestSpy(ipStrings.pingAddress);
 				expect(reqError).to.be.null;
 				checkRequestReturn(reqReturn);
 				done();
@@ -123,7 +122,7 @@ function checkRequestReturn(r)
 	expect(r.statusCode).to.equal(200);
 	expect(r.body.length).to.be.at.least(1);
 	expect(r.request.method).to.equal('GET');
-	expect(r.request.uri.href).to.equal(addressFile.pingAddress);
+	expect(r.request.uri.href).to.equal(ipStrings.pingAddress);
 	
 }
 

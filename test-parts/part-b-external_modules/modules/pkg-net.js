@@ -5,9 +5,8 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const requireFunctionFile = require("../sub-modules/require-node-module");
-const ipStringFile = require("../sub-modules/ip-strings");
-const netModule = requireFunctionFile.requireModuleSafe('net');
+const ipStrings = require("../sub-modules/ip-strings");
+const netModule = require("net");
 
 var ipSpy = null;
 
@@ -49,12 +48,12 @@ function verifyNetIpFunction()
 		
 		it("Call - Valid", function()
 		{
-			netModule.isIPv4(ipStringFile.testString);
+			netModule.isIPv4(ipStrings.testString);
 			
 			expect(ipSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(ipSpy.firstCall);
 			
-			expect(ipSpy.firstCall.args).to.deep.equal([ipStringFile.testString]);
+			expect(ipSpy.firstCall.args).to.deep.equal([ipStrings.testString]);
 			expect(ipSpy.firstCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.firstCall.returnValue);
@@ -63,7 +62,7 @@ function verifyNetIpFunction()
 		
 		it("Call - Invalid Format", function()
 		{
-			callInvalidIP(ipStringFile.invalidString);
+			callInvalidIP(ipStrings.invalidString);
 		});
 		
 		it("Call - Invalid Type", function()
@@ -95,4 +94,7 @@ function callInvalidIP(a)
 	expect(ipSpy.lastCall.returnValue).to.be.false;
 }
 
-exports.callTestNetDependency = testNetDependency;
+module.exports =
+{
+	callTestNetDependency: testNetDependency
+};

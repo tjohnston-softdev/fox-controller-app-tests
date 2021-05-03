@@ -109,7 +109,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (m === 'debug')
 	{
-		deviceApiPart.callCoordinateApiRequests();
+		externalPart.callExternal();
 	}
 	else if (m === '')
 	{
@@ -127,17 +127,18 @@ describe("FOX Controller Test Script", function()
 });
 
 
-
-//commonPart.callCommon();
-//externalPart.callExternal();
-//internalPart.callInternal();
-//onlinePart.callOnline();
-//onlinePart.callOffline();
-//settingsPart.callSettings();
-//modelsPart.callModels();
-//controllerPart.callController();
-//deviceApiPart.callCoordinateApiRequests();
-//frontendPart.callCoordinateFrontendTesting();
-//processPart.callCoordinateRestart();
-//processPart.callCoordinateReboot();
+/*
+	commonPart.callCommon();
+	externalPart.callExternal();
+	internalPart.callInternal();
+	onlinePart.callOnline();
+	onlinePart.callOffline();
+	settingsPart.callSettings();
+	modelsPart.callModels();
+	controllerPart.callController();
+	deviceApiPart.callCoordinateApiRequests();
+	frontendPart.callCoordinateFrontendTesting();
+	processPart.callCoordinateRestart();
+	processPart.callCoordinateReboot();
+*/
 //processPart.callCoordinateFactoryReset();

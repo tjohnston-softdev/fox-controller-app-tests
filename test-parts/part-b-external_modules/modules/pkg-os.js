@@ -5,9 +5,8 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const requireFunctionFile = require("../sub-modules/require-node-module");
-const osStringFile = require("../sub-modules/os-strings");
-const osModule = requireFunctionFile.requireModuleSafe('os');
+const osStrings = require("../sub-modules/os-strings");
+const osModule = require("os");
 
 function testOsDependency()
 {
@@ -61,7 +60,7 @@ function verifyPlatformFunction()
 		
 		it("Supported Operating System", function()
 		{
-			var supportFlag = osStringFile.checkOsSupported(platformSpy.firstCall.returnValue);
+			var supportFlag = osStrings.checkOsSupported(platformSpy.firstCall.returnValue);
 			
 			commonFunctionsFile.testPresent(supportFlag);
 			expect(supportFlag).to.be.true;
@@ -78,4 +77,8 @@ function verifyPlatformFunction()
 	
 }
 
-exports.callTestOsDependency = testOsDependency;
+
+module.exports =
+{
+	callTestOsDependency: testOsDependency
+};

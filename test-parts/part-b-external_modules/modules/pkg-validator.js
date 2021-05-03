@@ -5,9 +5,8 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const requireFunctionFile = require("../sub-modules/require-node-module");
-const ipStringFile = require("../sub-modules/ip-strings");
-const validatorModule = requireFunctionFile.requireModuleSafe('validator');
+const ipStrings = require("../sub-modules/ip-strings");
+const validatorModule = require("validator");
 
 function testValidatorDependency()
 {
@@ -66,10 +65,10 @@ function verifyIpAddressVerFour()
 		
 		it("Call - Valid", function()
 		{
-			validatorModule.isIP(ipStringFile.testString, 4);
+			validatorModule.isIP(ipStrings.testString, 4);
 			
 			expect(ipSpy.calledOnce).to.be.true;
-			expect(ipSpy.firstCall.args).to.deep.equal([ipStringFile.testString, 4]);
+			expect(ipSpy.firstCall.args).to.deep.equal([ipStrings.testString, 4]);
 			expect(ipSpy.firstCall.exception).to.be.undefined;
 			
 			
@@ -92,10 +91,10 @@ function verifyIpAddressVerFour()
 		
 		it("Call - Invalid Format", function()
 		{
-			validatorModule.isIP(ipStringFile.invalidString, 4);
+			validatorModule.isIP(ipStrings.invalidString, 4);
 			
 			expect(ipSpy.called).to.be.true;
-			expect(ipSpy.lastCall.args).to.deep.equal([ipStringFile.invalidString, 4]);
+			expect(ipSpy.lastCall.args).to.deep.equal([ipStrings.invalidString, 4]);
 			expect(ipSpy.secondCall.exception).to.be.undefined;
 			
 			commonFunctionsFile.testPresent(ipSpy.lastCall.returnValue);
@@ -243,4 +242,8 @@ function ipInvalidCall(ipArg)
 	return res;
 }
 
-exports.callTestValidatorDependency = testValidatorDependency;
+
+module.exports =
+{
+	callTestValidatorDependency: testValidatorDependency
+};

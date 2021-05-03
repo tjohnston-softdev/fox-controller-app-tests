@@ -1,15 +1,10 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const eOperatingSystemFile = require("./modules/pkg-os");
+const eValidatorFile = require("./modules/pkg-validator");
+const eNetFile = require("./modules/pkg-net");
+const eRequestFile = require("./modules/pkg-request");
 
 function coordinateExternal()
 {
-	var eOperatingSystemFile = require("./modules/pkg-os");
-	var eValidatorFile = require("./modules/pkg-validator");
-	var eNetFile = require("./modules/pkg-net");
-	var eRequestFile = require("./modules/pkg-request");
-	
 	describe("B - External Modules", function()
 	{
 		eOperatingSystemFile.callTestOsDependency();
@@ -19,4 +14,7 @@ function coordinateExternal()
 	});
 }
 
-exports.callExternal = coordinateExternal;
+module.exports =
+{
+	callExternal: coordinateExternal
+};
