@@ -1,10 +1,13 @@
-const testIP = "192.168.1.1";
-const invalidIP = "192.168.1.2.3";
-const testPingAddress = 'https://www.google.com/';
-
-module.exports =
+function defineIpStrings()
 {
-	testString: testIP,
-	invalidString: invalidIP,
-	pingAddress: testPingAddress
-};
+	var defineRes = {};
+	
+	defineRes["testString"] = "192.168.1.1";
+	defineRes["invalidString"] = "192.168.1.2.3";
+	defineRes["pingAddress"] = "https://www.google.com/";
+	
+	return defineRes;
+}
+
+
+module.exports = defineIpStrings();
