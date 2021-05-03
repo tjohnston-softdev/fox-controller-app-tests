@@ -6,15 +6,11 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const localValidFile = require(commonPaths.localValid);
-const localCommonFile = require("../sub-scripts/common-local_valid");
-
-var exampleSpy = null;
 
 function testLocalValid()
 {
 	describe("Local Validation", function()
 	{
-		checkLocalValidationFileExists();
 		handleExampleFunction();
 		handleTimezoneOffsetFunction();
 		handleDriveLetterFunction();
@@ -25,18 +21,6 @@ function testLocalValid()
 	});
 }
 
-function checkLocalValidationFileExists()
-{
-	describe("File", function()
-	{
-		it("Exists", function()
-		{
-			commonFunctionsFile.testPresent(localValidFile);
-			expect(localValidFile).to.be.an("object");
-		});
-	});
-}
-
 
 function handleExampleFunction()
 {
@@ -44,17 +28,15 @@ function handleExampleFunction()
 	var exampleValid = "Hello";
 	var exampleInvalid = "Invalid";
 	
-	var nullLengthError = "Cannot read property 'length' of null";
-	var subjectSyntaxError = "subjectSyntax.test is not a function";
+	var nullError = "Cannot read property 'length' of null";
+	var syntaxError = "subjectSyntax.test is not a function";
 	
 	describe("Example (validateExampleTest)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateExampleTest');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateExampleTest', 'function');
-			exampleSpy = sinon.spy(localValidFile, 'validateExampleTest');
-			done();
 		});
 		
 		it("Call - Valid String", function()
@@ -80,24 +62,19 @@ function handleExampleFunction()
 		
 		it("Call - Null", function()
 		{
-			callExampleInvalid(null, exampleSyntax, false, nullLengthError);
+			callExampleInvalid(null, exampleSyntax, false, nullError);
 			callExampleInvalid(exampleValid, null, false, "Cannot read property 'test' of null");
-			callExampleInvalid(null, null, null, nullLengthError);
+			callExampleInvalid(null, null, null, nullError);
 		});
 		
 		it("Call - Empty Syntax", function()
 		{
-			callExampleInvalid(exampleValid, "", false, subjectSyntaxError);
+			callExampleInvalid(exampleValid, "", false, syntaxError);
 		});
 		
 		it("Call - Invalid Type", function()
 		{
-			callExampleInvalid(exampleValid, -1, false, subjectSyntaxError);;
-		});
-		
-		it("Complete", function()
-		{
-			exampleSpy.restore();
+			callExampleInvalid(exampleValid, -1, false, syntaxError);
 		});
 		
 	});
@@ -112,58 +89,43 @@ function handleTimezoneOffsetFunction()
 	var timeLateInvalid = "GMT+5678";
 	var timeWrongPrefix = "UTC+1234";
 	
-	var timeSpy = null;
-	
 	describe("Timezone Offset Code (validateTimezoneOffset)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateTimezoneOffset');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateTimezoneOffset', 'function');
-			timeSpy = sinon.spy(localValidFile, 'validateTimezoneOffset');
-			done();
 		});
 		
 		it("Call - Early Valid", function()
 		{
-			localValidFile.validateTimezoneOffset(timeEarlyValid, false);
-			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeEarlyValid, false);
-			expect(timeSpy.lastCall.returnValue).to.be.true;
+			var earlyValidRes = localValidFile.validateTimezoneOffset(timeEarlyValid, false);
+			expect(earlyValidRes).to.be.true;
 		});
 		
 		it("Call - Late Valid", function()
 		{
-			localValidFile.validateTimezoneOffset(timeLateValid, false);
-			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeLateValid, false);
-			expect(timeSpy.lastCall.returnValue).to.be.true;
+			var lateValidRes = localValidFile.validateTimezoneOffset(timeLateValid, false);
+			expect(lateValidRes).to.be.true;
 		});
 		
 		it("Call - Early Invalid", function()
 		{
-			localValidFile.validateTimezoneOffset(timeEarlyInvalid, false);
-			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeEarlyInvalid, false);
-			expect(timeSpy.lastCall.returnValue).to.be.false;
+			var earlyInvalidRes = localValidFile.validateTimezoneOffset(timeEarlyInvalid, false);
+			expect(earlyInvalidRes).to.be.false;
 		});
 		
 		it("Call - Late Invalid", function()
 		{
-			localValidFile.validateTimezoneOffset(timeLateInvalid, false);
-			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeLateInvalid, false);
-			expect(timeSpy.lastCall.returnValue).to.be.false;
+			var lateInvalidRes = localValidFile.validateTimezoneOffset(timeLateInvalid, false);
+			expect(lateInvalidRes).to.be.false;
 		});
 		
 		it("Call - Invalid Prefix", function()
 		{
-			localValidFile.validateTimezoneOffset(timeWrongPrefix, false);
-			localCommonFile.callValidateSpyObject(timeSpy.called, timeSpy.lastCall, timeWrongPrefix, false);
-			expect(timeSpy.lastCall.returnValue).to.be.false;
+			var invalidPrefixRes = localValidFile.validateTimezoneOffset(timeWrongPrefix, false);
+			expect(invalidPrefixRes).to.be.false;
 		});
-		
-		it("Complete", function()
-		{
-			timeSpy.restore();
-		});
-		
 		
 	});
 }
@@ -171,37 +133,30 @@ function handleTimezoneOffsetFunction()
 
 function handleDriveLetterFunction()
 {
-	var driveValid = "C:";
-	var driveInvalid = "3:";
-	var driveSpy = null;
+	var driveValidString = "C:";
+	var driveInvalidString = "3:";
+	
+	var driveValidRes = false;
+	var driveInvalidRes = false;
 	
 	describe("Drive Letter (validateDriveLetter)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateDriveLetter');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateDriveLetter', 'function');
-			driveSpy = sinon.spy(localValidFile, 'validateDriveLetter');
-			done();
 		});
 		
 		it("Call - Valid Format", function()
 		{
-			localValidFile.validateDriveLetter(driveValid, false);
-			localCommonFile.callValidateSpyObject(driveSpy.calledOnce, driveSpy.firstCall, driveValid, false);
-			expect(driveSpy.firstCall.returnValue).to.be.true;
+			driveValidRes = localValidFile.validateDriveLetter(driveValidString, false);
+			expect(driveValidRes).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			localValidFile.validateDriveLetter(driveInvalid, false);
-			localCommonFile.callValidateSpyObject(driveSpy.calledTwice, driveSpy.secondCall, driveInvalid, false);
-			expect(driveSpy.secondCall.returnValue).to.be.false;
-		});
-		
-		it("Complete", function()
-		{
-			driveSpy.restore();
+			driveInvalidRes = localValidFile.validateDriveLetter(driveInvalidString, false);
+			expect(driveInvalidRes).to.be.false;
 		});
 	
 	});
@@ -210,39 +165,31 @@ function handleDriveLetterFunction()
 
 function handleDrivePathFunction()
 {
-	var dPathValid = "/dev/root";
-	var dPathInvalid = "C:";
-	var dPathSpy = null;
+	var validPathString = "/dev/root";
+	var invalidPathString = "C:";
+	
+	var validPathRes = false;
+	var invalidPathRes = false;
 	
 	describe("Drive Path (validateDrivePath)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateDrivePath');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateDrivePath', 'function');
-			dPathSpy = sinon.spy(localValidFile, 'validateDrivePath');
-			done();
 		});
 		
 		it("Call - Valid Format", function()
 		{
-			localValidFile.validateDrivePath(dPathValid, false);
-			localCommonFile.callValidateSpyObject(dPathSpy.calledOnce, dPathSpy.firstCall, dPathValid, false);
-			expect(dPathSpy.firstCall.returnValue).to.be.true;
+			validPathRes = localValidFile.validateDrivePath(validPathString, false);
+			expect(validPathRes).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			localValidFile.validateDrivePath(dPathInvalid, false);
-			localCommonFile.callValidateSpyObject(dPathSpy.calledTwice, dPathSpy.secondCall, dPathInvalid, false);
-			expect(dPathSpy.secondCall.returnValue).to.be.false;
+			invalidPathRes = localValidFile.validateDrivePath(invalidPathString, false);
+			expect(invalidPathRes).to.be.false;
 		});
-		
-		it("Complete", function()
-		{
-			dPathSpy.restore();
-		});
-		
 		
 	});
 	
@@ -252,39 +199,31 @@ function handleDrivePathFunction()
 
 function handleFilenameFunction()
 {
-	var fnValid = "example.txt";
-	var fnInvalid = "fi/le.txt";
-	var fnSpy = null;
+	var validFileString = "example.txt";
+	var invalidFileString = "fi/le.txt";
+	
+	var validFileRes = false;
+	var invalidFileRes = false;
 	
 	describe("File Name (validateFilename)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateFilename');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateFilename', 'function');
-			fnSpy = sinon.spy(localValidFile, 'validateFilename');
-			done();
 		});
 		
 		it("Call - Valid Format", function()
 		{
-			localValidFile.validateFilename(fnValid, false);
-			localCommonFile.callValidateSpyObject(fnSpy.calledOnce, fnSpy.firstCall, fnValid, false);
-			expect(fnSpy.firstCall.returnValue).to.be.true;
+			validFileRes = localValidFile.validateFilename(validFileString, false);
+			expect(validFileRes).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			localValidFile.validateFilename(fnInvalid, false);
-			localCommonFile.callValidateSpyObject(fnSpy.calledTwice, fnSpy.secondCall, fnInvalid, false);
-			expect(fnSpy.secondCall.returnValue).to.be.false;
+			invalidFileRes = localValidFile.validateFilename(invalidFileString, false);
+			expect(invalidFileRes).to.be.false;
 		});
-		
-		it("Complete", function()
-		{
-			fnSpy.restore();
-		});
-		
 		
 	});
 	
@@ -296,45 +235,38 @@ function handleFilenameFunction()
 
 function handleRioPrefixFunction()
 {
-	var prefixValid = "AO-3";
-	var prefixInvalid = "OA-5";
-	var prefixNegative = "DI--1";
-	var pxSpy = null;
+	var validPrefixString = "AO-3";
+	var invalidPrefixString = "OA-5";
+	var negativePrefixString = "DI--1";
+	
+	var validPrefixRes = false;
+	var invalidPrefixRes = false;
+	var negativePrefixRes = false;
 	
 	describe("Remote IO Prefix (validateRioPrefix)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateRioPrefix');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateRioPrefix', 'function');
-			pxSpy = sinon.spy(localValidFile, 'validateRioPrefix');
-			done();
 		});
 		
 		it("Call - Valid Format", function()
 		{
-			localValidFile.validateRioPrefix(prefixValid, false);
-			localCommonFile.callValidateSpyObject(pxSpy.calledOnce, pxSpy.firstCall, prefixValid, false);
-			expect(pxSpy.firstCall.returnValue).to.be.true;
+			validPrefixRes = localValidFile.validateRioPrefix(validPrefixString, false);
+			expect(validPrefixRes).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			localValidFile.validateRioPrefix(prefixInvalid, false);
-			localCommonFile.callValidateSpyObject(pxSpy.calledTwice, pxSpy.secondCall, prefixInvalid, false);
-			expect(pxSpy.secondCall.returnValue).to.be.false;
+			invalidPrefixRes = localValidFile.validateRioPrefix(invalidPrefixString, false);
+			expect(invalidPrefixRes).to.be.false;
 		});
 		
 		it("Call - Negative Index", function()
 		{
-			localValidFile.validateRioPrefix(prefixNegative, false);
-			localCommonFile.callValidateSpyObject(pxSpy.called, pxSpy.lastCall, prefixNegative, false);
-			expect(pxSpy.lastCall.returnValue).to.be.false;
-		});
-		
-		it("Complete", function()
-		{
-			pxSpy.restore();
+			negativePrefixRes = localValidFile.validateRioPrefix(negativePrefixString, false);
+			expect(negativePrefixRes).to.be.false;
 		});
 		
 	});
@@ -345,45 +277,38 @@ function handleRioPrefixFunction()
 
 function handleRioTextFunction()
 {
-	var textValid = "Analogue Output 3";
-	var textInvalid = "Output Analogue 5";
-	var textNegative = "Digital Input -1";
-	var rioTextSpy = null;
+	var validString = "Analogue Output 3";
+	var invalidString = "Output Analogue 5";
+	var negativeString = "Digital Input -1";
+	
+	var validRes = false;
+	var invalidRes = false;
+	var negativeRes = false;
 	
 	describe("Remote IO Text (validateRioText)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateRioText');
 			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateRioText', 'function');
-			rioTextSpy = sinon.spy(localValidFile, 'validateRioText');
-			done();
 		});
 		
 		it("Call - Valid Format", function()
 		{
-			localValidFile.validateRioText(textValid, false);
-			localCommonFile.callValidateSpyObject(rioTextSpy.calledOnce, rioTextSpy.firstCall, textValid, false);
-			expect(rioTextSpy.firstCall.returnValue).to.be.true;
+			validRes = localValidFile.validateRioText(validString, false);
+			expect(validRes).to.be.true;
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			localValidFile.validateRioText(textInvalid, false);
-			localCommonFile.callValidateSpyObject(rioTextSpy.calledTwice, rioTextSpy.secondCall, textInvalid, false);
-			expect(rioTextSpy.secondCall.returnValue).to.be.false;
+			invalidRes = localValidFile.validateRioText(invalidString, false);
+			expect(invalidRes).to.be.false;
 		});
 		
 		it("Call - Negative Number", function()
 		{
-			localValidFile.validateRioText(textNegative, false);
-			localCommonFile.callValidateSpyObject(rioTextSpy.called, rioTextSpy.lastCall, textNegative, false);
-			expect(rioTextSpy.lastCall.returnValue).to.be.false;
-		});
-		
-		it("Complete", function()
-		{
-			rioTextSpy.restore();
+			negativeRes = localValidFile.validateRioText(negativeString, false);
+			expect(negativeRes).to.be.false;
 		});
 	});
 	
@@ -392,15 +317,21 @@ function handleRioTextFunction()
 
 
 
-function callExampleValid(eString, eSyntax, eEmpty, eResult)
+function callExampleValid(eString, eSyntax, eEmpty, eTarget)
 {
-	localValidFile.validateExampleTest(eString, eSyntax, eEmpty);
-	localCommonFile.callValidateExampleSpy(exampleSpy.called, exampleSpy.lastCall, eString, eSyntax, eEmpty);
-	expect(exampleSpy.lastCall.exception).to.be.undefined;
-	localCommonFile.callValidateExampleResult(exampleSpy.lastCall.returnValue, eResult);
+	var exampleRes = localValidFile.validateExampleTest(eString, eSyntax, eEmpty);
+	
+	if (eTarget === true)
+	{
+		expect(exampleRes).to.be.true;
+	}
+	else
+	{
+		expect(exampleRes).to.be.false;
+	}
 }
 
-function callExampleInvalid(eString, eSyntax, eEmpty, eError)
+function callExampleInvalid(eString, eSyntax, eEmpty, eErrorText)
 {
 	var callComplete = false;
 	var thrownError = "";
@@ -417,8 +348,7 @@ function callExampleInvalid(eString, eSyntax, eEmpty, eError)
 	}
 	
 	var cRes = [callComplete, thrownError];
-	localCommonFile.callValidateExampleSpy(exampleSpy.called, exampleSpy.lastCall, eString, eSyntax, eEmpty);
-	commonFunctionsFile.testInvalidFunctionResult(cRes, eError);
+	commonFunctionsFile.testInvalidFunctionResult(cRes, eErrorText);
 }
 
 
