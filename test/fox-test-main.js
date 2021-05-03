@@ -109,7 +109,8 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (m === 'debug')
 	{
-		internalPart.callInternal();
+		onlinePart.callOnline();
+		onlinePart.callOffline();
 	}
 	else if (m === '')
 	{

@@ -1,12 +1,6 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
-
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommonFull);
 const requestFile = require(commonPaths.requestApi);
-const requestModule = require('request');
+const request = require('request');
 
 function testOnline()
 {
@@ -35,7 +29,7 @@ function coordinateOnlineCheck(onlineFlag)
 	
 	it("Application Request", function(done)
 	{
-		requestModule(requestFile.hostUrl, function(rError, rReturn)
+		request(requestFile.hostUrl, function(rError, rReturn)
 		{
 			reqError = rError;
 			reqReturn = rReturn;
@@ -88,29 +82,29 @@ function validateOverallResult(expectedOnlineFlag, resultingOnlineFlag)
 	
 }
 
-function runOnlineCheck(r)
+function runOnlineCheck(foxOnline)
 {
 	var res = false;
 	
-	if (r === true)
+	if (foxOnline === true)
 	{
 		res = true;
 	}
 	else
 	{
-		offlineError();
+		throw new Error("FOX Application is currently offline.");
 	}
 	
 	return res;
 }
 
-function runOfflineCheck(r)
+function runOfflineCheck(foxOnline)
 {
 	var res = false;
 	
-	if (r === true)
+	if (foxOnline === true)
 	{
-		onlineError();
+		throw new Error("FOX Application is currently online.");
 	}
 	else
 	{
@@ -120,15 +114,9 @@ function runOfflineCheck(r)
 	return res;
 }
 
-function offlineError()
-{
-	throw new Error("FOX Application is currently offline.");
-}
 
-function onlineError()
+module.exports =
 {
-	throw new Error("FOX Application is currently online.");
-}
-
-exports.callTestOnline = testOnline;
-exports.callTestOffline = testOffline;
+	callTestOnline: testOnline,
+	callTestOffline: testOffline
+};

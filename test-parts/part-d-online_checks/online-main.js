@@ -1,15 +1,8 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
-
 const mainPartDescription = "D - Online Checks";
-const checkFilepath = "./checks/chk-online"
+const chkOnlineFile = require("./checks/chk-online")
 
 function coordinateOnline()
 {
-	var chkOnlineFile = require(checkFilepath);
-	
 	describe(mainPartDescription, function()
 	{
 		chkOnlineFile.callTestOnline();
@@ -18,13 +11,15 @@ function coordinateOnline()
 
 function coordinateOffline()
 {
-	var chkOnlineFile = require(checkFilepath);
-	
 	describe(mainPartDescription, function()
 	{
 		chkOnlineFile.callTestOffline();
 	});
 }
 
-exports.callOnline = coordinateOnline;
-exports.callOffline = coordinateOffline;
+
+module.exports =
+{
+	callOnline: coordinateOnline,
+	callOffline: coordinateOffline
+};
