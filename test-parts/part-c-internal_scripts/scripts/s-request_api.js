@@ -1,25 +1,22 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const validator = require("validator");
+const requestModule = require("request");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const requestFile = require(commonPaths.requestApi);
-const requestModule = require("request");
+const commonRequestFunctions = require("../sub-scripts/common-request");
 
 const readNullError = "Cannot read property 'body' of null";
-const emptyReplyObject = createReplyObject("");
+const emptyReplyObject = commonRequestFunctions.createReplyObject("");
 const validUrl = "http://localhost:3000/api/example";
-
-const commonRequestFunctions = require("../sub-scripts/common-request");
 
 function testRequest()
 {
 	describe("API Request", function()
 	{
-		checkNodeRequestExists();
 		checkHostUrlString();
 		checkWriteUrl();
 		checkRequestResponseArray();
@@ -31,19 +28,6 @@ function testRequest()
 		checkRandomIp();
 		checkOptionsObject();
 		checkDeleteOptionsObject();
-	});
-}
-
-function checkNodeRequestExists()
-{
-	describe("Request File", function()
-	{
-		it("Exists", function()
-		{
-			commonFunctionsFile.testPresent(requestFile);
-			expect(requestFile).to.be.an("object");
-		});
-		
 	});
 }
 
@@ -89,16 +73,12 @@ function checkWriteUrl()
 		
 		it("Call - Valid", function()
 		{
-			var urlSpy = sinon.spy(requestFile, 'callWriteApiUrl');
-			
 			var linkRoot = requestFile.hostUrl + "/api/";
-			var argumentsTogether = folderArg + '/' + fileArg;
-			var urlReturn = linkRoot + argumentsTogether;
+			var linkPath = folderArg + '/' + fileArg;
+			var inputURL = linkRoot + linkPath;
 			
-			requestFile.callWriteApiUrl(folderArg, fileArg);
-			commonRequestFunctions.callValidateWriteUrl(urlSpy.calledOnce, urlSpy.firstCall, folderArg, fileArg, urlReturn);
-			
-			urlSpy.restore();
+			var actualURL = requestFile.callWriteApiUrl(folderArg, fileArg);
+			expect(actualURL).to.equal(inputURL);
 		});
 		
 		it("Call - Empty", function()
@@ -145,13 +125,10 @@ function checkRequestResponseArray()
 		it("Call - Valid", function()
 		{
 			var respString = '[{"value":"x","text":"y","name":"z"}]';
-			var respArg = createReplyObject(respString);
-			var respSpy = sinon.spy(requestFile, 'callReadApiResponseArray');
+			var inputResp = commonRequestFunctions.createReplyObject(respString);
+			var actualResp = requestFile.callReadApiResponseArray(inputResp);
 			
-			requestFile.callReadApiResponseArray(respArg);
-			commonRequestFunctions.callValidateResponseArray(respSpy.calledOnce, respSpy.firstCall, respArg);
-			
-			respSpy.restore();
+			commonRequestFunctions.callValidateResponseArray(actualResp);
 		});
 		
 		it("Call - Empty Body", function()
@@ -183,29 +160,26 @@ function checkRequestResponseObject()
 	var jsonString = '{"exampleProperty":"exampleValue"}';
 	var jsonObject = JSON.parse(jsonString);
 	
-	var objectSpy = null;
-	
 	describe("Read API Response Object (callReadApiResponseObject)", function()
 	{
 		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callReadApiResponseObject');
 			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callReadApiResponseObject', 'function');
-			objectSpy = sinon.spy(requestFile, 'callReadApiResponseObject');
 		});
 		
 		it("Call - Valid String", function()
 		{
-			var objectArg = createReplyObject(jsonString);
-			requestFile.callReadApiResponseObject(objectArg);
-			commonRequestFunctions.callValidateResponseObject(objectSpy.called, objectSpy.lastCall, objectArg);
+			var inputResp = commonRequestFunctions.createReplyObject(jsonString);
+			var actualResp = requestFile.callReadApiResponseObject(inputResp);
+			commonRequestFunctions.callValidateResponseObject(actualResp);
 		});
 		
 		it("Call - Valid Object", function()
 		{
-			var objectArg = createReplyObject(jsonObject);
-			requestFile.callReadApiResponseObject(objectArg);
-			commonRequestFunctions.callValidateResponseObject(objectSpy.called, objectSpy.lastCall, objectArg);
+			var inputResp = commonRequestFunctions.createReplyObject(jsonObject);
+			var actualResp = requestFile.callReadApiResponseObject(inputResp);
+			commonRequestFunctions.callValidateResponseObject(actualResp);
 		});
 		
 		
@@ -229,12 +203,6 @@ function checkRequestResponseObject()
 			runReadResponseInvalidObject(-1, posError);
 		});
 		
-		it("Complete", function()
-		{
-			objectSpy.restore();
-		})
-		
-		
 	});
 }
 
@@ -242,7 +210,6 @@ function checkRequestResponseString()
 {
 	describe("Read API Response String (callReadApiResponseString)", function()
 	{
-		
 		var emptyError = "HTTP Reply is empty";
 		var stringTypeError = "Invalid Reply object type";
 		
@@ -255,14 +222,11 @@ function checkRequestResponseString()
 		it("Call - Valid", function()
 		{
 			var bodyString = "Example Body";
-			var objectArg = createReplyObject(bodyString);
-			var stringSpy = sinon.spy(requestFile, 'callReadApiResponseString');
+			var inputReply = commonRequestFunctions.createReplyObject(bodyString);
+			var actualReply = requestFile.callReadApiResponseString(inputReply);
 			
-			requestFile.callReadApiResponseString(objectArg);
-			commonRequestFunctions.callValidateResponseString(stringSpy.calledOnce, stringSpy.firstCall, objectArg, bodyString);
-			
-			
-			stringSpy.restore();
+			commonFunctionsFile.testString(actualReply);
+			expect(actualReply).to.equal(bodyString);
 		});
 		
 		it("Call - Empty Body", function()
@@ -272,7 +236,8 @@ function checkRequestResponseString()
 		
 		it("Call - Missing Body", function()
 		{
-			runReadResponseInvalidString({}, emptyError);
+			var emptyObj = {};
+			runReadResponseInvalidString(emptyObj, emptyError);
 		});
 		
 		it("Call - Null", function()
@@ -307,31 +272,29 @@ function checkRequestResponseError()
 		{
 			var validErrorString = "Example Message";
 			var validReplyString = commonRequestFunctions.callWriteReplyErrorExample(validErrorString);
-			var objectArg = createReplyObject(validReplyString);
-			var errorSpy = sinon.spy(requestFile, 'callReadApiResponseError');
+			var inputReply = commonRequestFunctions.createReplyObject(validReplyString);
+			var actualError = requestFile.callReadApiResponseError(inputReply);
 			
-			requestFile.callReadApiResponseError(objectArg);
-			commonRequestFunctions.callValidateResponseString(errorSpy.calledOnce, errorSpy.firstCall, objectArg, validErrorString);
-			
-			errorSpy.restore();
+			commonFunctionsFile.testString(actualError);
+			expect(actualError).to.equal(validErrorString);
 		});
 		
 		it("Call - Empty Message", function()
 		{
-			var emptyMessageArg = createReplyObject("<h1></h1>");
-			runReadResponseInvalidError(emptyMessageArg, "HTTP Error Message is empty");
+			var emptyMsg = commonRequestFunctions.createReplyObject("<h1></h1>");
+			runReadResponseInvalidError(emptyMsg, "HTTP Error Message is empty");
 		});
 		
 		it("Call - Mismatch", function()
 		{
-			var mismatchArg = createReplyObject("<html><body></h1>Example<h1></body></html>");
-			runReadResponseInvalidError(mismatchArg, incorrectErrorFormat);
+			var invalidHTML = commonRequestFunctions.createReplyObject("<html><body></h1>Example<h1></body></html>");
+			runReadResponseInvalidError(invalidHTML, incorrectErrorFormat);
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			var formatArg = createReplyObject("<b>Example</b>");
-			runReadResponseInvalidError(formatArg, incorrectErrorFormat);
+			var formatHTML = commonRequestFunctions.createReplyObject("<b>Example</b>");
+			runReadResponseInvalidError(formatHTML, incorrectErrorFormat);
 		});
 		
 		
@@ -352,29 +315,28 @@ function checkOnlineResult()
 		
 		it("Call - Online", function()
 		{
-			var onlineArg = {"statusCode":200};
-			var onlineSpy = sinon.spy(requestFile, 'getApplicationOnlineResult');
-			
-			requestFile.getApplicationOnlineResult(onlineArg);
-			
-			commonRequestFunctions.callValidateOnlineResult(onlineSpy.calledOnce, onlineSpy.firstCall, onlineArg);
-			
-			onlineSpy.restore();
+			var inputReply = {"statusCode":200};
+			var onlineRes = requestFile.getApplicationOnlineResult(inputReply);
+			expect(onlineRes).to.be.true;
 		});
 		
 		it("Call - Offline", function()
 		{
-			runOfflineResult(null);
+			var offlineRes = requestFile.getApplicationOnlineResult(null);
+			expect(offlineRes).to.be.false;
 		});
 		
 		it("Call - Missing Status Code", function()
 		{
-			runOfflineResult({});
+			var emptyObj = {};
+			var statusRes = requestFile.getApplicationOnlineResult(emptyObj);
+			expect(statusRes).to.be.false;
 		});
 		
 		it("Call - Invalid Type", function()
 		{
-			runOfflineResult(-1);
+			var invalidTypeRes = requestFile.getApplicationOnlineResult(-1);
+			expect(invalidTypeRes).to.be.false;
 		});
 		
 		
@@ -410,14 +372,13 @@ function checkRandomIp()
 			commonFunctionsFile.testObjectPropertyContent(requestFile, 'generateIpAddress', 'function');
 		});
 		
-		it("Function Works", function()
+		it("Generation Successful", function()
 		{
-			var randomSpy = sinon.spy(requestFile, 'generateIpAddress');
-			
-			requestFile.generateIpAddress();
-			commonRequestFunctions.callValidateRandomIp(randomSpy.calledOnce, randomSpy.firstCall);
-			
-			randomSpy.restore();
+			var randIP = requestFile.generateIpAddress();
+			var ipValid = false;
+			commonFunctionsFile.testString(randIP);
+			ipValid = validator.isIP(randIP, 4);
+			expect(ipValid).to.be.true;
 		});
 		
 	});
@@ -444,15 +405,8 @@ function checkOptionsObject()
 		
 		it("Call - Valid", function()
 		{
-			var optionSpy = sinon.spy(requestFile, 'getRequestOptions');
-			
-			requestFile.getRequestOptions(validUrl, oValidMethod, oValidBody);
-			
-			commonRequestFunctions.callValidateOptionsBase(optionSpy.calledOnce, optionSpy.firstCall);
-			commonRequestFunctions.callValidateOptionsArguments(optionSpy.firstCall, validUrl, oValidMethod, oValidBody);
-			commonRequestFunctions.callValidateOptionsReturn(optionSpy.firstCall, validUrl, oValidMethod, oValidBody);
-			
-			optionSpy.restore();
+			var optionsRes = requestFile.getRequestOptions(validUrl, oValidMethod, oValidBody);
+			commonRequestFunctions.callValidateOptionsReturn(optionsRes, validUrl, oValidMethod, oValidBody);
 		});
 		
 		it("Call - Invalid URL", function()
@@ -490,32 +444,26 @@ function checkOptionsObject()
 function checkDeleteOptionsObject()
 {
 	describe("Get Delete Request Options Object (getDeleteOptions)", function()
-	{
-		var deleteFlagError = "";
-		var deleteOptionsSpy = null;
+	{	
+		var trueRes = null;
+		var falseRes = null;
 		
 		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'getDeleteOptions');
 			commonFunctionsFile.testObjectPropertyContent(requestFile, 'getDeleteOptions', 'function');
-			deleteOptionsSpy = sinon.spy(requestFile, 'getDeleteOptions');
 		});
 		
 		it("Call - True", function()
 		{
-			requestFile.getDeleteOptions(validUrl, true);
-			runDeleteResults(deleteOptionsSpy.calledOnce, deleteOptionsSpy.firstCall, true);
+			trueRes = requestFile.getDeleteOptions(validUrl, true);
+			runDeleteResults(trueRes, true);
 		});
 		
 		it("Call - False", function()
 		{
-			requestFile.getDeleteOptions(validUrl, false);
-			runDeleteResults(deleteOptionsSpy.calledTwice, deleteOptionsSpy.secondCall, false);
-		});
-		
-		it("Complete", function()
-		{
-			deleteOptionsSpy.restore();
+			falseRes = requestFile.getDeleteOptions(validUrl, false);
+			runDeleteResults(falseRes, false);
 		});
 		
 		
@@ -523,17 +471,11 @@ function checkDeleteOptionsObject()
 	});
 }
 
-function runDeleteResults(dCalled, dCallObject, dFlagArgument)
+function runDeleteResults(deleteObj, flagArg)
 {
-	commonRequestFunctions.callValidateOptionsBase(dCalled, dCallObject);
-	commonRequestFunctions.callValidateDeleteOptionsArguments(dCallObject, validUrl, dFlagArgument);
-	
-	commonRequestFunctions.callValidateOptionsReturn(dCallObject, validUrl, 'DELETE', null);
-	commonRequestFunctions.callValidateDeleteOptionsReturn(dCallObject, dFlagArgument);
+	commonRequestFunctions.callValidateOptionsReturn(deleteObj, validUrl, 'DELETE', null);
+	commonRequestFunctions.callValidateDeleteOptionsReturn(deleteObj, flagArg);
 }
-
-
-
 
 
 function runRequestUrlInvalid(foArg, fiArg, eError)
@@ -638,13 +580,6 @@ function runReadResponseInvalidError(iArg, eError)
 }
 
 
-function runOfflineResult(offArg)
-{
-	var offResult = requestFile.getApplicationOnlineResult(offArg);
-	commonFunctionsFile.testPresent(offResult);
-	expect(offResult).to.be.false;
-}
-
 function runRefuseError(reArg)
 {
 	var supposedText = "API request failed. - " + reArg;
@@ -688,11 +623,6 @@ function runOptionError(oeUrl, oeMethod, oeBody, oeText)
 }
 
 
-function createReplyObject(bContent)
-{
-	var r = {"body":bContent};
-	return r;
-}
 
 module.exports =
 {

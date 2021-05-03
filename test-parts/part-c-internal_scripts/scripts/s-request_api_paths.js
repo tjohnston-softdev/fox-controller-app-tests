@@ -1,12 +1,7 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
-
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-
 const requestPathFile = require(commonPaths.requestApiPaths);
 
 
@@ -14,21 +9,7 @@ function testRequestPaths()
 {
 	describe("API Request Paths", function()
 	{
-		checkPathFileExists();
 		checkPathProperties();
-	});
-}
-
-
-function checkPathFileExists()
-{
-	describe("Request Path File", function()
-	{
-		it("Exists", function()
-		{
-			commonFunctionsFile.testPresent(requestPathFile);
-			expect(requestPathFile).to.be.an("object");
-		});
 	});
 }
 

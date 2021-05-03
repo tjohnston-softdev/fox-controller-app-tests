@@ -1,76 +1,35 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const validator = require("validator");
 
 
-
-function validateWriteUrl(writeCalled, writeObject, writeFolder, writeFile, writtenReturn)
-{
-	expect(writeCalled).to.be.true;
-	commonFunctionsFile.testPresent(writeObject);
+function validateResponseArray(resultObj)
+{	
+	commonFunctionsFile.testPresent(resultObj);
+	commonFunctionsFile.testArrayPopulated(resultObj);
+	commonFunctionsFile.testAllElements(resultObj, 'object');
 	
-	expect(writeObject.args).to.deep.equal([writeFolder, writeFile]);
-	expect(writeObject.exception).to.be.undefined;
-	
-	commonFunctionsFile.testPresent(writeObject.returnValue);
-	commonFunctionsFile.testString(writeObject.returnValue);
-	expect(writeObject.returnValue).to.equal(writtenReturn);
+	commonFunctionsFile.testPropertyDefinitions(resultObj, 'value');
+	commonFunctionsFile.testPropertyDefinitions(resultObj, 'text');
+	commonFunctionsFile.testPropertyDefinitions(resultObj, 'name');
+			
+	commonFunctionsFile.testPropertyContents(resultObj, 'value', 'string');
+	commonFunctionsFile.testPropertyContents(resultObj, 'text', 'string');
+	commonFunctionsFile.testPropertyContents(resultObj, 'name', 'string');
 }
 
-function validateResponseArray(arrayCalled, callObject, callArg)
+function validateResponseObject(resultObj)
 {
-	expect(arrayCalled).to.be.true;
-	commonFunctionsFile.testPresent(callObject);
-	
-	expect(callObject.args).to.deep.equal([callArg]);
-	expect(callObject.exception).to.be.undefined;
-	
-	commonFunctionsFile.testPresent(callObject.returnValue);
-	commonFunctionsFile.testArrayPopulated(callObject.returnValue);
-	commonFunctionsFile.testAllElements(callObject.returnValue, 'object');
-	
-	commonFunctionsFile.testPropertyDefinitions(callObject.returnValue, 'value');
-	commonFunctionsFile.testPropertyDefinitions(callObject.returnValue, 'text');
-	commonFunctionsFile.testPropertyDefinitions(callObject.returnValue, 'name');
+	commonFunctionsFile.testPresent(resultObj);
+	expect(resultObj).to.be.an("object");
 			
-	commonFunctionsFile.testPropertyContents(callObject.returnValue, 'value', 'string');
-	commonFunctionsFile.testPropertyContents(callObject.returnValue, 'text', 'string');
-	commonFunctionsFile.testPropertyContents(callObject.returnValue, 'name', 'string');
-}
-
-function validateResponseObject(objectCalled, callObject, callArg)
-{
-	expect(objectCalled).to.be.true;
-	commonFunctionsFile.testPresent(callObject);
-			
-	expect(callObject.args).to.deep.equal([callArg]);
-	expect(callObject.exception).to.be.undefined;
-			
-	commonFunctionsFile.testPresent(callObject.returnValue);
-	expect(callObject.returnValue).to.be.an("object");
-			
-	commonFunctionsFile.testObjectPropertyDefinition(callObject.returnValue, 'exampleProperty');
-	commonFunctionsFile.testObjectPropertyContent(callObject.returnValue, 'exampleProperty', 'string');
-	commonFunctionsFile.testString(callObject.returnValue.exampleProperty);
-	expect(callObject.returnValue.exampleProperty).to.equal("exampleValue");
-}
-
-function validateResponseString(stringCalled, callObject, callArg, expectedResult)
-{
-	expect(stringCalled).to.be.true;
-	commonFunctionsFile.testPresent(callObject);
-	
-	expect(callObject.args).to.deep.equal([callArg]);
-	expect(callObject.exception).to.be.undefined;
-	
-	commonFunctionsFile.testPresent(callObject.returnValue);
-	commonFunctionsFile.testString(callObject.returnValue);
-	expect(callObject.returnValue).to.equal(expectedResult);
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'exampleProperty');
+	commonFunctionsFile.testObjectPropertyContent(resultObj, 'exampleProperty', 'string');
+	commonFunctionsFile.testString(resultObj.exampleProperty);
+	expect(resultObj.exampleProperty).to.equal("exampleValue");
 }
 
 function writeReplyErrorExample(rMessage)
@@ -83,100 +42,53 @@ function writeReplyErrorExample(rMessage)
 }
 
 
-function validateOnlineResult(oCalledFlag, oCallObject, oArg)
+
+function validateOptionsReturn(resultObj, desiredUrl, desiredMethod, desiredBody)
 {
-	expect(oCalledFlag).to.be.true;
-	commonFunctionsFile.testPresent(oCallObject);
+	commonFunctionsFile.testPresent(resultObj);
+	expect(resultObj).to.be.an("object");
 	
-	expect(oCallObject.args).to.deep.equal([oArg]);
-	expect(oCallObject.exception).to.be.undefined;
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'url');
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'method');
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'body');
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'json');
 	
-	commonFunctionsFile.testPresent(oCallObject.returnValue);
-	expect(oCallObject.returnValue).to.be.true;
+	expect(resultObj.url).to.equal(desiredUrl);
+	expect(resultObj.method).to.equal(desiredMethod);
+	expect(resultObj.body).to.equal(desiredBody);
+	expect(resultObj.json).to.be.true;
 }
 
-function validateRandomIp(ipCalled, ipCallObject)
+function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 {
-	var returnValid = null;
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'headers');
+	commonFunctionsFile.testObjectPropertyContent(resultObj, 'headers', 'object');
 	
-	expect(ipCalled).to.be.true;
-	commonFunctionsFile.testPresent(ipCallObject);
-	expect(ipCallObject.exception).to.be.undefined;
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'Content-Type');
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'delete-permanently');
 	
-	commonFunctionsFile.testPresent(ipCallObject.returnValue);
-	commonFunctionsFile.testString(ipCallObject.returnValue);
+	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'Content-Type', 'string');
+	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'delete-permanently', 'boolean');
 	
-	returnValid = validator.isIP(ipCallObject.returnValue);
-	expect(returnValid).to.be.true;
+	commonFunctionsFile.testString(resultObj.headers['Content-Type']);
+	expect(resultObj.headers['delete-permanently']).to.equal(desiredPermFlag);
 }
 
 
-function validateOptionsBase(optCalledFlag, optCallObject)
+function createRequestReplyObject(bContent)
 {
-	expect(optCalledFlag).to.be.true;
-	commonFunctionsFile.testPresent(optCallObject);
-	
-	commonFunctionsFile.testPresent(optCallObject.args);
-	commonFunctionsFile.testArrayPopulated(optCallObject.args);
-	
-	expect(optCallObject.exception).to.be.undefined;
+	var r = {"body":bContent};
+	return r;
 }
 
-function validateOptionsArguments(optCallObject, aUrl, aMethod, aBody)
-{
-	expect(optCallObject.args).to.deep.equal([aUrl, aMethod, aBody]);
-}
 
-function validateDeleteOptionsArguments(optCallObject, aUrl, aFlag)
-{
-	expect(optCallObject.args).to.deep.equal([aUrl, aFlag]);
-}
-
-function validateOptionsReturn(optCallObject, desiredUrl, desiredMethod, desiredBody)
-{
-	commonFunctionsFile.testPresent(optCallObject.returnValue);
-	expect(optCallObject.returnValue).to.be.an("object");
-	
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'url');
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'method');
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'body');
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'json');
-	
-	expect(optCallObject.returnValue.url).to.equal(desiredUrl);
-	expect(optCallObject.returnValue.method).to.equal(desiredMethod);
-	expect(optCallObject.returnValue.body).to.equal(desiredBody);
-	
-	commonFunctionsFile.testObjectPropertyContent(optCallObject.returnValue, 'json', 'boolean');
-	expect(optCallObject.returnValue.json).to.be.true;
-}
-
-function validateDeleteOptionsReturn(optCallObject, desiredPermFlag)
-{
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue, 'headers');
-	commonFunctionsFile.testObjectPropertyContent(optCallObject.returnValue, 'headers', 'object');
-	
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue.headers, 'Content-Type');
-	commonFunctionsFile.testObjectPropertyDefinition(optCallObject.returnValue.headers, 'delete-permanently');
-	
-	commonFunctionsFile.testObjectPropertyContent(optCallObject.returnValue.headers, 'Content-Type', 'string');
-	commonFunctionsFile.testObjectPropertyContent(optCallObject.returnValue.headers, 'delete-permanently', 'boolean');
-	
-	commonFunctionsFile.testString(optCallObject.returnValue.headers['Content-Type']);
-	expect(optCallObject.returnValue.headers['delete-permanently']).to.equal(desiredPermFlag);
-}
 
 module.exports =
 {
-	callValidateWriteUrl: validateWriteUrl,
 	callValidateResponseArray: validateResponseArray,
 	callValidateResponseObject: validateResponseObject,
-	callValidateResponseString: validateResponseString,
 	callWriteReplyErrorExample: writeReplyErrorExample,
-	callValidateOnlineResult: validateOnlineResult,
-	callValidateRandomIp: validateRandomIp,
-	callValidateOptionsBase: validateOptionsBase,
-	callValidateOptionsArguments: validateOptionsArguments,
-	callValidateDeleteOptionsArguments: validateDeleteOptionsArguments,
 	callValidateOptionsReturn: validateOptionsReturn,
-	callValidateDeleteOptionsReturn: validateDeleteOptionsReturn
+	callValidateDeleteOptionsReturn: validateDeleteOptionsReturn,
+	createReplyObject: createRequestReplyObject
 };

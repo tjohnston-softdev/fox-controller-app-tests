@@ -9,11 +9,11 @@ function coordinateInternal()
 {
 	describe("C - Internal Scripts", function()
 	{
-		iValidFile.callTestLocalValid();
-		iDefineFile.callTestDefine();
+		//iValidFile.callTestLocalValid();
+		//iDefineFile.callTestDefine();
 		iRequestFile.callTestRequest();
 		iRequestPathFile.callTestRequestPaths();
-		iDatabaseFile.callTestSupportedDatabases();
+		//iDatabaseFile.callTestSupportedDatabases();
 	});
 }
 

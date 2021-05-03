@@ -1,122 +1,211 @@
 # Changelog
 
-### ./test-parts/part-c-internal_scripts/scripts/s-local_valid.js
+### ./test-parts/part-c-internal_scripts/internal-main.js
 
-**Globals**
-* Removed module requirements:
-	* chai-things
-	* sinon
-	* ../sub-scripts/common-local_valid
-* Removed 'exampleSpy' global.
-* Removed all calls to 'localCommon'
-
-\
-**checkLocalValidationFileExists**
-* Removed function.
-
-\
-**handleExampleFunction**
-* Renamed variables:
-	* 'nullLengthError' variable to 'nullError'
-	* 'subjectSyntaxError' variable to 'syntaxError'
-* Changes to "Function Exists" test
-	* Removed 'done' callback.
-	* Removed 'exampleSpy' assignment.
-* Removed stray semicolon from "Call - Invalid Type" test.
-* Removed "Complete" test.
-
-\
-**handleTimezoneOffsetFunction**
-* Removed 'timeSpy' variable.
-* Changes to "Function Exists" test
-	* Removed 'done' callback.
-	* Removed 'timeSpy' assignment.
-* Changes to "Call - " tests
-	* Added result variable.
-	* Checked for desired outcome.
-* Removed "Complete" test.
-
-\
-**handleDriveLetterFunction**
-* Removed 'driveSpy' variable.
-* Renamed variables:
-	* 'driveValid' to 'driveValidString'
-	* 'driveInvalid' to 'driveInvalidString'
-* Declared new variables:
-	* 'driveValidRes' - Result variable for "Call - Valid Format"
-	* 'driveInvalidRes' - Result variable for "Call - Invalid Format"
-* Removed "Complete" test.
-* Removed 'done' callback from "Function Exists" test.
-
-\
-**handleDrivePathFunction**
-* Removed 'dPathSpy' variable.
-* Renamed variables:
-	* 'dPathValid' to 'validPathString'
-	* 'dPathInvalid' to 'invalidPathString'
-* Declared new variables:
-	* 'validPathRes' - Result variable for "Call - Valid Format"
-	* 'invalidPathRes' - Result variable for "Call - Invalid Format"
-* Removed "Complete" test.
-* Removed 'done' callback from "Function Exists" test.
-
-\
-**handleFilenameFunction**
-* Removed 'fnSpy' variable.
-* Renamed variables:
-	* 'fnValid' to 'validFileString'
-	* 'fnInvalid' to 'invalidFileString'
-* Declared new variables
-	* 'validFileRes' - Result variable for "Call - Valid Format"
-	* 'invalidFileRes' - Result variable for "Call - Invalid Format"
-* Removed "Complete" test.
-* Removed 'done' callback from "Function Exists" test.
-
-\
-**handleRioPrefixFunction**
-* Removed 'pxSpy' variable.
-* Renamed variables:
-	* 'prefixValid' to 'validPrefixString'
-	* 'prefixInvalid' to 'invalidPrefixString'
-	* 'prefixNegative' to 'negativePrefixString'
-* Declared result variables:
-	* 'validPrefixRes' - Result variable for "Call - Valid Format"
-	* 'invalidPrefixRes' - Result variable for "Call - Invalid Format"
-	* 'negativePrefixRes' - Result variable for "Call - Negative Index"
-* Removed "Complete" test.
-* Removed 'done' callback from "Function Exists" test.
-
-\
-**handleRioTextFunction**
-* Removed 'rioTextSpy' variable.
-* Renamed variables:
-	* 'textValid' to 'validString'
-	* 'textInvalid' to 'invalidString'
-	* 'textNegative' to 'negativeString'
-* Declared result variables:
-	* 'validRes' - Result variable for "Call - Valid Format"
-	* 'invalidRes' - Result variable for "Call - Invalid Format"
-	* 'negativeRes' - Result variable for "Call - Negative Number"
-* Removed "Complete" test.
-* Removed 'done' callback from "Function Exists" test.
-
-\
-**callExampleValid**
-* Declared 'exampleRes' variable.
-	* Consumes result of `localValidFile.validateExampleTest`
-* Removed calls to 'localCommonFile'
-* Removed 'exception' check.
-* Added checks for 'exampleRes' depending on desired value.
-* Renamed 'eResult' parameter to 'eTarget'
-
-\
-**callExampleInvalid**
-* Removed call to 'localCommonFile'
-* Renamed 'eError' parameter to 'eErrorText'
+**Changes**
+* Commented out calls to:
+	* iValidFile
+	* iDefineFile
+	* iDatabaseFile
 
 ---
 
-### ./test-parts/part-c-internal_scripts/sub-scripts/common-local_valid.js
-* This file is now empty
-	* The 'spy' functions are obsolete
-	* 'validateExampleResult' was merged into parent.
+### ./test-parts/part-c-internal_scripts/scripts/s-request_api.js
+
+**Module Requirements**
+* Removed 'chai-things'
+* Removed 'sinon'
+* Added 'validator'
+
+\
+**Removed Functions**
+* checkNodeRequestExists
+* runOfflineResult
+
+\
+**checkWriteUrl - Changes to "Call - Valid" test:**
+* Removed 'urlSpy' variable.
+* Renamed variables:
+	* 'argumentsTogether' variable to 'linkPath'
+	* 'urlReturn' variable to 'inputURL'
+* Declared 'actualURL' variable.
+	* Consumes `requestFile.callWriteApiUrl` result.
+* Added equality check between 'inputURL' and 'actualURL'
+
+\
+**checkRequestResponseArray**
+* Changes to "Call - Valid" test:
+	* Removed 'respSpy' variable.
+	* Renamed 'respArg' variable to 'inputResp'
+	* Declared 'actualResp' variable. - Consumes `callReadApiResponseArray` result.
+	* 'callValidateResponseArray' only uses 'actualResp' as argument.
+
+\
+**checkRequestResponseObject**
+* Removed 'objectSpy' variable.
+* Removed "Complete" test.
+* Changes to "Call - Valid String" and "Call - Valid Object" tests:
+	* Renamed 'objectArg' variable to 'inputResp'
+	* Declared 'actualResp' variable. - Consumes `callReadApiResponseObject` result.
+	* 'callValidateResponseObject' only uses 'actualResp' as argument.
+
+\
+**checkRequestResponseString**
+* Changes to "Call - Valid" test:
+	* Renamed 'objectArg' variable to 'inputReply'
+	* Removed 'stringSpy' variable.
+	* Declared 'actualReply' variable - Consumes `callReadApiResponseString` result.
+	* Removed call to 'commonRequestFunctions'
+	* Added 'testString' check to 'actualReply'
+	* Added equality check between 'bodyString' and 'actualReply'
+* Changes to "Call - Missing Body" test:
+	* Declared 'emptyObj' variable. - Empty JSON object.
+	* 'emptyObj' is used for 'runReadResponseInvalidString' argument.
+
+\
+**checkRequestResponseError**
+* Changes to "Call - Valid" test:
+	* Renamed 'objectArg' variable to 'inputReply'
+	* Removed 'errorSpy' variable.
+	* Declared 'actualError' variable - Consumes `callReadApiResponseError` result.
+	* Removed call to 'commonRequestFunctions'
+	* Added 'testString' check to 'actualError'
+	* Added equality check between 'validErrorString' and 'actualError'
+* Renamed variables across invalid tests:
+	* 'emptyMessageArg' variable to 'emptyMsg'
+	* 'mismatchArg' to 'invalidHTML'
+	* 'formatArg' to 'formatHTML'
+
+\
+**checkOnlineResult**
+* Changes to "Call - Online" test:
+	* Renamed 'onlineArg' variable to 'inputReply'
+	* Removed 'onlineSpy' variable.
+	* Declared 'onlineRes' variable - Consumes `getApplicationOnlineResult`
+	* Removed call to 'commonRequestFunctions'
+	* Checks whether 'onlineRes' is true.
+* Changes to "Call - Offline" and "Call - Invalid Type" tests:
+	* Removed call to 'runOfflineResult'
+	* Calls 'getApplicationOnlineResult' directly.
+	* Result variable must be false.
+* Changes to "Call - Missing Status Code" test:
+	* Declared 'emptyObj' variable. - Empty JSON object.
+	* Declared 'statusRes' variable - Used for result.
+	* Removed call to 'runOfflineResult'
+	* Calls 'getApplicationOnlineResult' directly.
+	* 'statusRes' must be false.
+
+\
+**checkRandomIp**
+* Renamed "Function Works" to "Generation Successful"
+* Changes to "Generation Successful" test:
+	* Removed 'randomSpy' variable.
+	* Declared 'randIP' variable - Consumes `generateIpAddress` result.
+	* Removed call to 'commonRequestFunctions'
+	* Declared 'ipValid' variable - Stores whether 'randIP' is valid.
+	* Checks whether 'randIP' is a string.
+	* Validates 'randIP' using 'validator' library.
+	* 'ipValid' must be true.
+
+\
+**checkOptionsObject**
+* Changes to "Call - Valid" test:
+	* Removed 'optionSpy' variable.
+	* Declared 'optionsRes' variable - Consumes `getRequestOptions` result.
+	* Removed 'callValidateOptionsBase'
+	* Removed 'callValidateOptionsArguments'
+
+\
+**checkDeleteOptionsObject**
+* Removed both variables.
+* Removed "Complete" test.
+* Declared result variables:
+	* 'trueRes' - Result variable for "Call - True"
+	* 'falseRes' - Result variable for "Call - False"
+
+\
+**runDeleteResults**
+* Removed parameters:
+	* dCalled
+	* dCallObject
+* Renamed 'dFlagArgument' parameter to 'flagArg'
+* Declared 'deleteObj' parameter.
+* Removed function calls:
+	* commonRequestFunctions.callValidateOptionsBase
+	* commonRequestFunctions.callValidateDeleteOptionsArguments
+
+\
+**createReplyObject**
+* Moved to ../sub-scripts/common-request
+	* Exists as 'createRequestReplyObject'
+	* Called publicly as 'createReplyObject'
+
+---
+
+### ./test-parts/part-c-internal_scripts/scripts/s-request_api_paths.js
+
+**Changes**
+* Removed Module Requirements
+	* chai-things
+	* sinon
+	* commonPaths.commonErrors
+* Removed 'checkPathFileExists' function.
+
+---
+
+### ./test-parts/part-c-internal_scripts/sub-scripts/common-request.js
+
+**Removed Requirements**
+* sinon
+* validator
+
+\
+**Removed Functions**
+* validateWriteUrl
+* validateResponseString
+* validateRandomIp
+* validateOnlineResult
+* validateOptionsBase
+* validateOptionsArguments
+* validateDeleteOptionsArguments
+
+\
+**validateResponseArray**
+* Removed parameters:
+	* arrayCalled
+	* callObject
+	* callArg
+* Added new parameter 'resultObj'
+* Removed checks:
+	* 'arrayCalled' is true.
+	* 'callObject' exists.
+	* 'callObject.args' deep equal.
+	* 'callObject.exception' does not exist.
+* Replaced 'callObject.returnValue' with 'resultObj'
+
+\
+**validateResponseObject**
+* Removed parameters:
+	* objectCalled
+	* callObject
+	* callArg
+* Added new parameter 'resultObj'
+* Removed checks:
+	* 'objectCalled' is true.
+	* 'callObject' exists.
+	* 'callObject.args' deep equal.
+	* 'callObject.exception' does not exist.
+* Replaced 'callObject.returnValue' with 'resultObj'
+
+\
+**validateOptionsReturn**
+* Removed 'optCallObject' parameter.
+* Added 'resultObj' parameter.
+* Replaced 'optCallObject.returnValue' with 'resultObj'
+* Removed 'commonFunctionsFile.testObjectPropertyContent' call.
+
+\
+**validateDeleteOptionsReturn**
+* Removed 'optCallObject' parameter.
+* Added 'resultObj' parameter.
+* Replaced 'optCallObject.returnValue' with 'resultObj'
