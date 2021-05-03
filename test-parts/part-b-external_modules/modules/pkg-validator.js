@@ -13,8 +13,8 @@ function testValidatorDependency()
 		verifyFunctionsExist();
 		verifyIpAddressVerFour();
 		verifyIpAddressVerSix();
-		verifyIpAddressInvalid();
 		verifyMacAddressFunction();
+		verifyExceptions();
 	});
 	
 	
@@ -117,25 +117,6 @@ function verifyIpAddressVerSix()
 }
 
 
-function verifyIpAddressInvalid()
-{
-	describe("IP Address - Invalid", function()
-	{
-		it("Invalid Type", function()
-		{
-			var invalidTypeRes = ipInvalidCall(-1);
-			commonFunctionsFile.testInvalidFunctionResult(invalidTypeRes, "Expected a string but received a number");
-		});
-		
-		it("Null", function()
-		{
-			var nullRes = ipInvalidCall(null);
-			commonFunctionsFile.testInvalidFunctionResult(nullRes, "Expected a string but received a null");
-		});
-	});
-}
-
-
 function verifyMacAddressFunction()
 {
 	var macValid = "00-14-22-01-23-45";
@@ -167,14 +148,35 @@ function verifyMacAddressFunction()
 }
 
 
-function ipInvalidCall(ipArg)
+
+function verifyExceptions()
+{
+	describe("Exceptions", function()
+	{
+		it("Invalid Type", function()
+		{
+			var invalidTypeRes = handleInvalidCall(-1);
+			commonFunctionsFile.testInvalidFunctionResult(invalidTypeRes, "Expected a string but received a number");
+		});
+		
+		it("Null", function()
+		{
+			var nullRes = handleInvalidCall(null);
+			commonFunctionsFile.testInvalidFunctionResult(nullRes, "Expected a string but received a null");
+		});
+	});
+}
+
+
+
+function handleInvalidCall(invalidArg)
 {
 	var validationComplete = false;
 	var validationMessage = "";
 	
 	try
 	{
-		validator.isIP(ipArg);
+		validator.isIP(invalidArg);
 		validationComplete = true;
 	}
 	catch(e)
