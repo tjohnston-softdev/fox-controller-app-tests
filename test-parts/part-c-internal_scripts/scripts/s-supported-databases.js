@@ -12,21 +12,8 @@ function testSupportedDatabases()
 {
 	describe("Supported Database Definitions", function()
 	{
-		checkSupportFileExists();
 		checkMarginNumber();
 		checkDefinitionObject();
-	});
-}
-
-function checkSupportFileExists()
-{
-	describe("File", function()
-	{
-		it("Exists", function()
-		{
-			commonFunctionsFile.testPresent(databaseFile);
-			expect(databaseFile).to.be.an("object");
-		});
 	});
 }
 
@@ -52,45 +39,43 @@ function checkMarginNumber()
 
 function checkDefinitionObject()
 {
-	var definitionArrayObject = null;
+	var definitionArray = null;
 	
 	describe("Get Supported Definition Array (getSupportedDatabases)", function()
 	{
-		it("Function Exists", function(done)
+		it("Function Exists", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(databaseFile, 'getSupportedDatabases');
 			commonFunctionsFile.testObjectPropertyContent(databaseFile, 'getSupportedDatabases', 'function');
-			done();
 		});
 		
-		it("Function Works", function(done)
+		it("Function Works", function()
 		{
-			definitionArrayObject = databaseFile.getSupportedDatabases();
-			commonFunctionsFile.testPresent(definitionArrayObject);
-			done();
+			definitionArray = databaseFile.getSupportedDatabases();
+			commonFunctionsFile.testPresent(definitionArray);
 		});
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctionsFile.testArrayPopulated(definitionArrayObject);
-			commonFunctionsFile.testAllElements(definitionArrayObject, 'object');
+			commonFunctionsFile.testArrayPopulated(definitionArray);
+			commonFunctionsFile.testAllElements(definitionArray, 'object');
 		});
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(definitionArrayObject, 'dbName');
-			commonFunctionsFile.testPropertyDefinitions(definitionArrayObject, 'folder');
-			commonFunctionsFile.testPropertyDefinitions(definitionArrayObject, 'cleanSize');
+			commonFunctionsFile.testPropertyDefinitions(definitionArray, 'dbName');
+			commonFunctionsFile.testPropertyDefinitions(definitionArray, 'folder');
+			commonFunctionsFile.testPropertyDefinitions(definitionArray, 'cleanSize');
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testPropertyContents(definitionArrayObject, 'dbName', 'string');
-			commonFunctionsFile.testPropertyContents(definitionArrayObject, 'folder', 'boolean');
-			commonFunctionsFile.testPropertyContents(definitionArrayObject, 'cleanSize', 'number');
+			commonFunctionsFile.testPropertyContents(definitionArray, 'dbName', 'string');
+			commonFunctionsFile.testPropertyContents(definitionArray, 'folder', 'boolean');
+			commonFunctionsFile.testPropertyContents(definitionArray, 'cleanSize', 'number');
 			
-			testDefinitionNames(definitionArrayObject);
-			testDefinitionSizes(definitionArrayObject);
+			testDefinitionNames(definitionArray);
+			testDefinitionSizes(definitionArray);
 		});
 		
 	});
@@ -101,25 +86,25 @@ function checkDefinitionObject()
 
 function testDefinitionNames(dArray)
 {
-	var tIndex = 0;
-	var tElement = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (tIndex = 0; tIndex < dArray.length; tIndex = tIndex + 1)
+	for (loopIndex = 0; loopIndex < dArray.length; loopIndex = loopIndex + 1)
 	{
-		tElement = dArray[tIndex];
-		commonFunctionsFile.testString(tElement.dbName);
+		currentObject = dArray[loopIndex];
+		commonFunctionsFile.testString(currentObject.dbName);
 	}
 }
 
 function testDefinitionSizes(dArray)
 {
-	var tIndex = 0;
-	var tElement = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (tIndex = 0; tIndex < dArray.length; tIndex = tIndex + 1)
+	for (loopIndex = 0; loopIndex < dArray.length; loopIndex = loopIndex + 1)
 	{
-		tElement = dArray[tIndex];
-		expect(tElement.cleanSize).to.be.at.least(0);
+		currentObject = dArray[loopIndex];
+		expect(currentObject.cleanSize).to.be.at.least(0);
 	}
 }
 
