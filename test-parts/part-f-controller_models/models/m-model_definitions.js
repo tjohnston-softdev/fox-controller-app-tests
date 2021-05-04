@@ -1,35 +1,31 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
-
 const ioFile = require(foxPath.rioSettingsFile);
 
-const advantechFull = foxPath.advantechFile;
-const moxaFull = foxPath.moxaFile
-const sonoffFull = foxPath.sonoffFile
+const advantechDefinitions = require(foxPath.advantechFile);
+const moxaDefinitions = require(foxPath.moxaFile);
+const sonoffDefinitions = require(foxPath.sonoffFile);
 
 
 function testModelDefinitionFiles()
 {
 	describe("Model Definitions", function()
 	{
-		handleManufacturerFile(advantechFull, "Advantech");
-		handleManufacturerFile(moxaFull, "Moxa");
-		handleManufacturerFile(sonoffFull, "Sonoff");
+		handleManufacturerFile(advantechDefinitions, "Advantech");
+		handleManufacturerFile(moxaDefinitions, "Moxa");
+		handleManufacturerFile(sonoffDefinitions, "Sonoff");
 	});
 }
 
 
 
-function handleManufacturerFile(manufacturerPath, manufacturerName)
+function handleManufacturerFile(manufacturerArray, manufacturerName)
 {
-	var manufacturerArray = readModelArray(manufacturerPath);
 	var manufacturerDesc = manufacturerName + " Model Definitions";
 	
 	describe(manufacturerDesc, function()
@@ -39,39 +35,39 @@ function handleManufacturerFile(manufacturerPath, manufacturerName)
 	});
 }
 
-function checkManufacturerArrayRead(ma)
+function checkManufacturerArrayRead(modelArr)
 {
 	describe("Definition File", function()
 	{
 		it("Successfully Read", function()
 		{
-			commonFunctionsFile.testPresent(ma);
+			commonFunctionsFile.testPresent(modelArr);
 		});
 		
 		it("Array Returned", function()
 		{
-			commonFunctionsFile.testArrayPopulated(ma);
-			commonFunctionsFile.testAllElements(ma, 'object');
+			commonFunctionsFile.testArrayPopulated(modelArr);
+			commonFunctionsFile.testAllElements(modelArr, 'object');
 		});
 		
 		it("Model Types Defined", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(ma, 'modelType');
-			commonFunctionsFile.testPropertyContents(ma, 'modelType', 'string');
+			commonFunctionsFile.testPropertyDefinitions(modelArr, 'modelType');
+			commonFunctionsFile.testPropertyContents(modelArr, 'modelType', 'string');
 		});
 	});
 }
 
-function checkModelsLoop(ma)
+function checkModelsLoop(modelArr)
 {
 	var mIndex = 0;
 	var mObject = null;
 	var mQuote = "";
 	var mDesc = "";
 	
-	while (mIndex >= 0 && mIndex < ma.length && ma !== null)
+	while (mIndex >= 0 && mIndex < modelArr.length && modelArr !== null)
 	{
-		mObject = ma[mIndex];
+		mObject = modelArr[mIndex];
 		mQuote = "'" + mObject.modelType + "'";
 		mDesc = "Model - " + mQuote;
 		
@@ -230,21 +226,7 @@ function checkFunctionProperties(mObj)
 	});
 }
 
-
-function readModelArray(fPath)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(fPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestModelDefinitionFiles = testModelDefinitionFiles;
+	callTestModelDefinitionFiles: testModelDefinitionFiles
+};

@@ -1,18 +1,14 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const modelDefinitionsFile = require("./models/m-model_definitions");
 
 function coordinateModels()
-{
-	var cSettingsIntegrationFile = require("./models/m-settings_integration");
-	var cModelDefinitionsFile = require("./models/m-model_definitions");
-	
+{	
 	describe("F - Controller Models", function()
 	{
-		cSettingsIntegrationFile.callTestRemoteIoIntegration();
-		cModelDefinitionsFile.callTestModelDefinitionFiles();
+		modelDefinitionsFile.callTestModelDefinitionFiles();
 	});
 }
 
-exports.callModels = coordinateModels;
+module.exports =
+{
+	callModels: coordinateModels
+};

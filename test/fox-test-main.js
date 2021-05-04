@@ -109,7 +109,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (m === 'debug')
 	{
-		settingsPart.callSettings();
+		modelsPart.callModels();
 	}
 	else if (m === '')
 	{
