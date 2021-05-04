@@ -52,6 +52,7 @@ function checkGetSignalTypeFunction()
 			settingsFile.getSignalType(argValidString);
 			
 			expect(validStringSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(validStringSpy.firstCall);
 			expect(validStringSpy.firstCall.args).to.deep.equal([argValidString]);
 			expect(validStringSpy.firstCall.returnValue).to.equal(0);
 			
@@ -65,8 +66,9 @@ function checkGetSignalTypeFunction()
 			settingsFile.getSignalType(argInvalidString);
 			
 			expect(invalidStringSpy.calledOnce).to.be.true;
-			expect(invalidStringSpy.lastCall.args).to.deep.equal([argInvalidString]);
-			expect(invalidStringSpy.lastCall.returnValue).to.equal(1);
+			commonFunctionsFile.testPresent(validStringSpy.firstCall);
+			expect(invalidStringSpy.firstCall.args).to.deep.equal([argInvalidString]);
+			expect(invalidStringSpy.firstCall.returnValue).to.equal(1);
 			
 			invalidStringSpy.restore();
 			done();
