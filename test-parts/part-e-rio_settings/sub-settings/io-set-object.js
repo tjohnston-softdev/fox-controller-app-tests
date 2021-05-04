@@ -1,34 +1,19 @@
 function getIoSetObject()
-{
-	var validString = null;
-	var invalidString = null;
-	var splitResult = null;
-	var validCodeParse = null;
-	var validIndexParse = null;
-	var errType = null;
-	var errNull = null;
-	var oRes = null;
+{	
+	var validString = 'RO-67';
+	var invalidString = 'UNKNOWN-X';
+	var codeSplit = validString.split("-");
+	var numberElement = codeSplit[1];
+	var objectRes = {};
 	
-	try
-	{
-		validString = 'RO-67';
-		invalidString = 'UNKNOWN-X';
+	objectRes["validInput"] = validString;
+	objectRes["invalidInput"] = invalidString;
+	objectRes["parsedCode"] = codeSplit[0];
+	objectRes["parsedIndex"] = Number.parseInt(numberElement);
+	objectRes["typeErrorText"] = "ioSetId.split is not a function";
+	objectRes["nullErrorText"] = "Cannot read property 'split' of null";
 	
-		splitResult = validString.split('-');
-		validCodeParse = splitResult[0];
-		validIndexParse = Number.parseInt(splitResult[1]);
-		
-		errType = "ioSetId.split is not a function"
-		errNull = "Cannot read property 'split' of null";
-		
-		oRes = {"valid": validString, "invalid": invalidString, "code": validCodeParse, "index": validIndexParse, "eType": errType, "eNull": errNull};
-	}
-	catch(e)
-	{
-		oRes = null;
-	}
-	
-	return oRes;
+	return objectRes;
 }
 
-exports.callGetIoSetObject = getIoSetObject;
+module.exports = getIoSetObject();

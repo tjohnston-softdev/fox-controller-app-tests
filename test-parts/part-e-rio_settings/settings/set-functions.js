@@ -1,6 +1,5 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
 const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
@@ -9,13 +8,9 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 
 const subRequire = require("../sub-settings/get-rio-set");
 const settingsFile = require(foxPath.rioSettingsFile);
-const prefixIndexFile = require("../sub-settings/io-set-object");
+const prefixIndexObject = require("../sub-settings/io-set-object");
 
-var prefixIndexObject = null;
 
-var gSpy = null;
-var prefixSpy = null;
-var indexSpy = null;
 
 function testRemoteIoFunctions()
 {
@@ -26,8 +21,6 @@ function testRemoteIoFunctions()
 		checkGetSignalTypeFunction();
 		checkParsePrefixFunction();
 		checkParseIndexFunction();
-		
-		checkDispose();
 	});
 }
 
@@ -35,92 +28,74 @@ function checkPrepare()
 {
 	describe("Preperation", function()
 	{
-		it("Files Ready", function(done)
+		it("Prefix Index Object Retrieved", function()
 		{
-			commonFunctionsFile.testPresent(settingsFile);
-			expect(settingsFile).to.be.an("object");
-			
-			commonFunctionsFile.testPresent(prefixIndexFile);
-			expect(prefixIndexFile).to.be.an("object");
-			
-			done();
-		});
-		
-		it("Prefix Index Object Retrieved", function(done)
-		{
-			prefixIndexObject = prefixIndexFile.callGetIoSetObject();
-			
 			commonFunctionsFile.testPresent(prefixIndexObject);
 			expect(prefixIndexObject).to.be.an("object");
-			
-			done();
 		});
-		
-		it("Spy Objects Assigned", function(done)
-		{
-			gSpy = sinon.spy(settingsFile, 'getSignalType');
-			prefixSpy = sinon.spy(settingsFile, 'parseIoPrefix');
-			indexSpy = sinon.spy(settingsFile, 'parseIoIndex');
-			
-			done();
-		});
-		
-		
 	});
 }
 
 
 function checkGetSignalTypeFunction()
 {
-	var aValid = 'DI';
-	var aInvalid = 'UNKNOWN';
-	var aInvalidType = -1;
+	var argValidString = 'DI';
+	var argInvalidString = 'UNKNOWN';
+	var argInvalidType = -1;
 	
 	describe("Function - Get Signal Type (getSignalType)", function()
 	{
 		
-		it("Call - Valid IO Type", function()
+		it("Call - Valid IO Type", function(done)
 		{
-			settingsFile.getSignalType(aValid);
+			var validStringSpy = sinon.spy(settingsFile, 'getSignalType');
+			settingsFile.getSignalType(argValidString);
 			
-			expect(gSpy.calledOnce).to.be.true;
-			expect(gSpy.firstCall.args).to.deep.equal([aValid]);
-			commonFunctionsFile.testPresent(gSpy.firstCall.returnValue);
-			expect(gSpy.firstCall.returnValue).to.be.a("number");
-			expect(gSpy.firstCall.returnValue).to.equal(0);
+			expect(validStringSpy.calledOnce).to.be.true;
+			expect(validStringSpy.firstCall.args).to.deep.equal([argValidString]);
+			expect(validStringSpy.firstCall.returnValue).to.equal(0);
+			
+			validStringSpy.restore();
+			done();
 		});
 		
-		it("Call - Invalid IO Type", function()
+		it("Call - Invalid IO Type", function(done)
 		{
-			settingsFile.getSignalType(aInvalid);
+			var invalidStringSpy = sinon.spy(settingsFile, 'getSignalType');
+			settingsFile.getSignalType(argInvalidString);
 			
-			commonFunctionsFile.testPresent(gSpy.lastCall);
-			expect(gSpy.lastCall.args).to.deep.equal([aInvalid]);
-			commonFunctionsFile.testPresent(gSpy.lastCall.returnValue);
-			expect(gSpy.lastCall.returnValue).to.be.a("number");
-			expect(gSpy.lastCall.returnValue).to.equal(1);
+			expect(invalidStringSpy.calledOnce).to.be.true;
+			expect(invalidStringSpy.lastCall.args).to.deep.equal([argInvalidString]);
+			expect(invalidStringSpy.lastCall.returnValue).to.equal(1);
+			
+			invalidStringSpy.restore();
+			done();
 		});
 		
-		it("Call - Invalid Type", function()
+		it("Call - Invalid Type", function(done)
 		{
-			settingsFile.getSignalType(aInvalidType);
+			var invalidTypeSpy = sinon.spy(settingsFile, 'getSignalType');
+			settingsFile.getSignalType(argInvalidType);
 			
-			commonFunctionsFile.testPresent(gSpy.lastCall);
-			expect(gSpy.lastCall.args).to.deep.equal([aInvalidType]);
-			commonFunctionsFile.testPresent(gSpy.lastCall.returnValue);
-			expect(gSpy.lastCall.returnValue).to.be.a("number");
-			expect(gSpy.lastCall.returnValue).to.equal(1);
+			expect(invalidTypeSpy.called).to.be.true;
+			expect(invalidTypeSpy.firstCall.args).to.deep.equal([argInvalidType]);
+			expect(invalidTypeSpy.firstCall.returnValue).to.equal(1);
+			
+			invalidTypeSpy.restore();
+			done();
 		});
 		
-		it("Call - Null", function()
+		it("Call - Null", function(done)
 		{
+			var nullSpy = sinon.spy(settingsFile, 'getSignalType');
 			settingsFile.getSignalType(null);
 			
-			commonFunctionsFile.testPresent(gSpy.lastCall);
-			expect(gSpy.lastCall.args).to.deep.equal([null]);
-			commonFunctionsFile.testPresent(gSpy.lastCall.returnValue);
-			expect(gSpy.lastCall.returnValue).to.be.a("number");
-			expect(gSpy.lastCall.returnValue).to.equal(1);
+			expect(nullSpy.called).to.be.true;
+			expect(nullSpy.firstCall.args).to.deep.equal([null]);
+			expect(nullSpy.firstCall.returnValue).to.equal(1);
+			
+			nullSpy.restore();
+			done();
 		});
 		
 		
@@ -132,34 +107,41 @@ function checkParsePrefixFunction()
 	describe("Function - Parse Prefix (parseIoPrefix)", function()
 	{
 		
-		it("Call - Valid Prefix", function()
+		it("Call - Valid Prefix", function(done)
 		{
-			settingsFile.parseIoPrefix(prefixIndexObject.valid);
+			var validPrefixSpy = sinon.spy(settingsFile, 'parseIoPrefix');
+			settingsFile.parseIoPrefix(prefixIndexObject.validInput);
 		
-			expect(prefixSpy.calledOnce).to.be.true;
-			expect(prefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.valid]);
-			commonFunctionsFile.testPresent(prefixSpy.firstCall.returnValue);
-			expect(prefixSpy.firstCall.returnValue).to.be.a("string");
-			expect(prefixSpy.firstCall.returnValue).to.equal(prefixIndexObject.code);
+			expect(validPrefixSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(validPrefixSpy.firstCall);
+			expect(validPrefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.validInput]);
+			expect(validPrefixSpy.firstCall.returnValue).to.equal(prefixIndexObject.parsedCode);
+			
+			validPrefixSpy.restore();
+			done();
 		});
 		
-		it("Call - Invalid Prefix", function()
+		it("Call - Invalid Prefix", function(done)
 		{
-			settingsFile.parseIoPrefix(prefixIndexObject.invalid);
+			var invalidPrefixSpy = sinon.spy(settingsFile, 'parseIoPrefix');
+			settingsFile.parseIoPrefix(prefixIndexObject.invalidInput);
 		
-			commonFunctionsFile.testPresent(prefixSpy.lastCall);
-			expect(prefixSpy.lastCall.args).to.deep.equal([prefixIndexObject.invalid]);
-			expect(prefixSpy.lastCall.returnValue).to.be.null;
+			commonFunctionsFile.testPresent(invalidPrefixSpy.firstCall);
+			expect(invalidPrefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.invalidInput]);
+			expect(invalidPrefixSpy.firstCall.returnValue).to.be.null;
+			
+			invalidPrefixSpy.restore();
+			done();
 		});
 		
 		it("Call - Invalid Type", function()
 		{
-			parseIoPrefixInvalidCall(-1, prefixIndexObject.eType);
+			parseIoPrefixInvalidCall(-1, prefixIndexObject.typeErrorText);
 		});
 		
 		it("Call - Null", function()
 		{
-			parseIoPrefixInvalidCall(null, prefixIndexObject.eNull);
+			parseIoPrefixInvalidCall(null, prefixIndexObject.nullErrorText);
 		});
 		
 	});	
@@ -171,73 +153,60 @@ function checkParseIndexFunction()
 	describe("Function - Parse Index (parseIoIndex)", function()
 	{
 		
-		it("Call - Valid Prefix", function()
+		it("Call - Valid Prefix", function(done)
 		{
-			settingsFile.parseIoIndex(prefixIndexObject.valid);
+			var validSpy = sinon.spy(settingsFile, 'parseIoIndex');
+			settingsFile.parseIoIndex(prefixIndexObject.validInput);
 			
-			expect(indexSpy.calledOnce).to.be.true;
-			expect(indexSpy.firstCall.args).to.deep.equal([prefixIndexObject.valid]);
-			commonFunctionsFile.testPresent(indexSpy.firstCall.returnValue);
-			expect(indexSpy.firstCall.returnValue).to.be.a("number");
-			expect(indexSpy.firstCall.returnValue).to.equal(prefixIndexObject.index);
+			expect(validSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(validSpy.firstCall);
+			expect(validSpy.firstCall.args).to.deep.equal([prefixIndexObject.validInput]);
+			expect(validSpy.firstCall.returnValue).to.equal(prefixIndexObject.parsedIndex);
+			
+			validSpy.restore();
+			done();
 		});
 		
-		it("Call - Invalid Prefix", function()
+		it("Call - Invalid Prefix", function(done)
 		{
-			settingsFile.parseIoIndex(prefixIndexObject.invalid);
+			var invalidSpy = sinon.spy(settingsFile, 'parseIoIndex');
+			settingsFile.parseIoIndex(prefixIndexObject.invalidInput);
 			
-			commonFunctionsFile.testPresent(indexSpy.lastCall);
-			expect(indexSpy.lastCall.args).to.deep.equal([prefixIndexObject.invalid]);
-			expect(indexSpy.lastCall.returnValue).to.be.null;
+			commonFunctionsFile.testPresent(invalidSpy.firstCall);
+			expect(invalidSpy.firstCall.args).to.deep.equal([prefixIndexObject.invalidInput]);
+			expect(invalidSpy.firstCall.returnValue).to.be.null;
+			
+			invalidSpy.restore();
+			done();
 		});
 		
 		it("Call - Invalid Type", function()
 		{
-			parseIoIndexInvalidCall(-1, prefixIndexObject.eType);
+			parseIoIndexInvalidCall(-1, prefixIndexObject.typeErrorText);
 		});
 		
 		it("Call - Null", function()
 		{
-			parseIoIndexInvalidCall(null, prefixIndexObject.eNull);
+			parseIoIndexInvalidCall(null, prefixIndexObject.nullErrorText);
 		});
 		
 	});
 }
 
-
-function checkDispose()
-{
-	describe("Disposal", function()
-	{
-		it("Prefix Index Object", function()
-		{
-			prefixIndexObject = null;
-		});
-		
-		it("Spy Objects", function()
-		{
-			gSpy.restore();
-			indexSpy.restore();
-			prefixSpy.restore();
-		});
-	});
-}
 
 
 function parseIoPrefixInvalidCall(invalidArg, exceptMessage)
 {
-	var parseReturn = null;
 	var parseComplete = false;
 	var parseError = "";
 	
 	try
 	{
-		parseReturn = settingsFile.parseIoPrefix(invalidArg);
+		settingsFile.parseIoPrefix(invalidArg);
 		parseComplete = true;
 	}
 	catch(e)
 	{
-		parseReturn = null;
 		parseComplete = false;
 		parseError = e.message;
 	}
@@ -246,20 +215,19 @@ function parseIoPrefixInvalidCall(invalidArg, exceptMessage)
 	commonFunctionsFile.testInvalidFunctionResult(parseRes, exceptMessage);
 }
 
+
 function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 {
-	var parseReturn = null;
 	var parseComplete = false;
 	var parseError = "";
 	
 	try
 	{
-		parseReturn = settingsFile.parseIoIndex(invalidArg);
+		settingsFile.parseIoIndex(invalidArg);
 		parseComplete = true;
 	}
 	catch(e)
 	{
-		parseReturn = null;
 		parseComplete = false;
 		parseError = e.message;
 	}
