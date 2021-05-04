@@ -22,7 +22,7 @@ function testRemoteIoProperties()
 
 function checkPrefixesProperty()
 {
-	describe("IO Prefixes (ioPrefixes)", function()
+	describe("Property - IO Prefixes (ioPrefixes)", function()
 	{
 		it("Valid Type", function()
 		{
@@ -43,7 +43,7 @@ function checkPrefixesProperty()
 
 function checkNamesProperty()
 {
-	describe("IO Names (ioNames)", function()
+	describe("Property - IO Names (ioNames)", function()
 	{
 		it("Valid Type", function()
 		{
@@ -64,7 +64,7 @@ function checkNamesProperty()
 
 function checkIoTypesProperty()
 {
-	describe("IO Types (ioTypes)", function()
+	describe("Property - IO Types (ioTypes)", function()
 	{
 		it("Valid Type", function()
 		{
@@ -86,7 +86,7 @@ function checkIoTypesProperty()
 
 function checkSignalTypeProperty()
 {
-	describe("Signal Type (signalType)", function()
+	describe("Property - Signal Type (signalType)", function()
 	{
 		it("Valid Type", function()
 		{
@@ -102,7 +102,7 @@ function checkSignalTypeProperty()
 
 function checkBinarySignalProperty()
 {
-	describe("Binary Signal (binSignal)", function()
+	describe("Property - Binary Signal (binSignal)", function()
 	{
 		
 		it("Valid Type", function()
