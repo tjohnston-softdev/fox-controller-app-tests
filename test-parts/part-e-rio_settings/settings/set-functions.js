@@ -8,8 +8,8 @@ const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 
 const subRequire = require("../sub-settings/get-rio-set");
-const settingsFile = subRequire.getRemoteIoSettingsFile();
-const prefixIndexFile = getPrefixIndexFile();
+const settingsFile = require(foxPath.rioSettingsFile);
+const prefixIndexFile = require("../sub-settings/io-set-object");
 
 var prefixIndexObject = null;
 
@@ -269,21 +269,7 @@ function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 }
 
 
-
-function getPrefixIndexFile()
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require("../sub-settings/io-set-object");
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRemoteIoFunctions = testRemoteIoFunctions;
+	callTestRemoteIoFunctions: testRemoteIoFunctions
+};

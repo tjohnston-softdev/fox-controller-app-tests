@@ -1,41 +1,61 @@
 # Changelog
 
-**Test Status**
-* The (on/off)line tests themselves work as intended.
-* However, the offline request timeout cannot be caught in less than 2 seconds.
-	* Unit tests time out after 2 seconds.
-* Since I will be replacing the HTTP request library, this can be left alone until afterwards.
-
----
-
 **./test/fox-test-main.js**
-* The 'debug' test mode now checks if the Controller is (on/off)line.
-	* Both tests are performed at once.
+* 'debug' testing mode now calls "Part E - Remote IO Settings"
 
 ---
 
-**./test-parts/part-d-online_checks/online-main.js**
+**./test-parts/part-e-rio_settings/rio-settings-main.js**
 * Removed module requirements:
 	* chai
 	* chai-things
 	* sinon
-* Removed 'checkFilepath' global.
-* './checks/chk-online' is now required directly and not inside a function.
+* File requirements are required globally and not inside a function.
+* Uncommented function calls.
 * Replaced `exports` with `module.exports`
 
 ---
 
-**./test-parts/part-d-online_checks/checks/chk-online.js**
-* Removed module requirements:
-	* chai
+**./test-parts/part-e-rio_settings/settings/set-main.js**
+* Removed requirements:
 	* chai-things
 	* sinon
-	* commonPaths.testCommonFull
-* Merged:
-	* 'offlineError' into 'runOnlineCheck'
-	* 'onlineError' into 'runOfflineCheck'
-* Renamed 'requestModule' to 'request'
-* Renamed the parameter in these functions to 'foxOnline'
-	* runOnlineCheck
-	* runOfflineCheck
+	* ../sub-settings/get-rio-set
+* 'foxPath.rioSettingsFile' is now required directly.
+* Removed the 'checkRemoteIoSettingsFileExists' function.
 * Replaced `exports` with `module.exports`
+
+---
+
+**./test-parts/part-e-rio_settings/settings/set-props.js**
+* Removed requirements:
+	* chai-things
+	* sinon
+	* ../sub-settings/get-rio-set
+* 'foxPath.rioSettingsFile' is now required directly.
+* Removed the 'checkSettingsIncluded' function.
+* Removed "Property - " from descriptions.
+* Renamed "All properties strings" tests to "All Strings"
+* Fixed capitalization for these tests:
+	* "All Key-Value **p**airs **m**atch"
+	* "Uses **s**ame **p**refixes"
+* checkSignalTypeProperty
+	* Renamed "All properties numbers" test to "All Numbers"
+* Replaced `exports` with `module.exports`
+
+---
+
+**./test-parts/part-e-rio_settings/settings/set-functions.js**
+* Removed requirements:
+	* chai-things
+	* ../sub-settings/get-rio-set
+* The following files are now required directly:
+	* foxPath.rioSettingsFile'
+	* ../sub-settings/io-set-object
+* Removed 'getPrefixIndexFile' function.
+* Replaced `exports` with `module.exports`
+
+---
+
+**./test-parts/part-e-rio_settings/sub-settings/get-rio-set.js**
+* This file is now empty.

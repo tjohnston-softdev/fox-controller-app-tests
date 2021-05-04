@@ -1,34 +1,17 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-
-const subRequire = require("../sub-settings/get-rio-set");
-const settingsFile = subRequire.getRemoteIoSettingsFile();
+const settingsFile = require(foxPath.rioSettingsFile);
 
 
 function testRemoteIoSettings()
 {
 	describe("Main", function()
 	{
-		checkRemoteIoSettingsFileExists();
 		checkExports();
-	});
-}
-
-function checkRemoteIoSettingsFileExists()
-{
-	describe("Settings File", function()
-	{
-		it("Exists", function()
-		{
-			commonFunctionsFile.testPresent(settingsFile);
-			expect(settingsFile).to.be.an("object");
-		});
 	});
 }
 
@@ -71,8 +54,7 @@ function checkExports()
 	});
 }
 
-
-
-
-
-exports.callTestRemoteIoSettings = testRemoteIoSettings;
+module.exports =
+{
+	callTestRemoteIoSettings: testRemoteIoSettings
+};
