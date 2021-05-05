@@ -4,34 +4,33 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const ioFile = require(foxPath.rioSettingsFile);
 
-const advantechDefinitions = require(foxPath.advantechFile);
-const moxaDefinitions = require(foxPath.moxaFile);
-const sonoffDefinitions = require(foxPath.sonoffFile);
+const advantechModels = require(foxPath.advantechFile);
+const moxaModels = require(foxPath.moxaFile);
+const sonoffModels = require(foxPath.sonoffFile);
 
 
 function testModelDefinitionFiles()
 {
 	describe("Model Definitions", function()
 	{
-		handleManufacturerFile(advantechDefinitions, "Advantech");
-		handleManufacturerFile(moxaDefinitions, "Moxa");
-		handleManufacturerFile(sonoffDefinitions, "Sonoff");
+		handleManufacturerFile(advantechModels, "Advantech");
+		handleManufacturerFile(moxaModels, "Moxa");
+		handleManufacturerFile(sonoffModels, "Sonoff");
 	});
 }
 
 
 
-function handleManufacturerFile(manufacturerArray, manufacturerName)
+function handleManufacturerFile(modelArray, manufacturerName)
 {
 	var manufacturerDesc = manufacturerName + " Model Definitions";
 	
 	describe(manufacturerDesc, function()
 	{
-		checkManufacturerArrayRead(manufacturerArray);
-		checkModelsLoop(manufacturerArray);
+		checkManufacturerArrayRead(modelArray);
+		checkModelsLoop(modelArray);
 	});
 }
 
@@ -42,11 +41,11 @@ function checkManufacturerArrayRead(modelArr)
 		it("Successfully Read", function()
 		{
 			commonFunctionsFile.testPresent(modelArr);
+			commonFunctionsFile.testArrayPopulated(modelArr);
 		});
 		
-		it("Array Returned", function()
+		it("Correct Structure", function()
 		{
-			commonFunctionsFile.testArrayPopulated(modelArr);
 			commonFunctionsFile.testAllElements(modelArr, 'object');
 		});
 		
@@ -60,171 +59,171 @@ function checkManufacturerArrayRead(modelArr)
 
 function checkModelsLoop(modelArr)
 {
-	var mIndex = 0;
-	var mObject = null;
-	var mQuote = "";
-	var mDesc = "";
+	var modelIndex = 0;
+	var currentModel = null;
+	var currentQuote = "";
+	var currentDesc = "";
 	
-	while (mIndex >= 0 && mIndex < modelArr.length && modelArr !== null)
+	for (modelIndex = 0; modelIndex < modelArr.length; modelIndex = modelIndex + 1)
 	{
-		mObject = modelArr[mIndex];
-		mQuote = "'" + mObject.modelType + "'";
-		mDesc = "Model - " + mQuote;
+		currentModel = modelArr[modelIndex];
+		currentQuote = "'" + currentModel.modelType + "'";
+		currentDesc = "Model - " + currentQuote;
 		
-		describe(mDesc, function()
+		describe(currentDesc, function()
 		{
-			checkCommunicationTypeProperty(mObject);
-			checkIoConfigArrayProperty(mObject);
-			checkTotalPollProperty(mObject);
-			checkPollIntervalProperty(mObject);
-			checkInfoUrlProperty(mObject);
-			checkManufacturerProperty(mObject);
-			checkFunctionProperties(mObject);
+			checkCommunicationTypeProperty(currentModel);
+			checkIoConfigArrayProperty(currentModel);
+			checkTotalPollProperty(currentModel);
+			checkPollIntervalProperty(currentModel);
+			checkInfoUrlProperty(currentModel);
+			checkManufacturerProperty(currentModel);
+			checkFunctionProperties(currentModel);
 		});
-		
-		mIndex = mIndex + 1;
 	}
 }
 
-function checkCommunicationTypeProperty(mObj)
+function checkCommunicationTypeProperty(modelObj)
 {
 	describe("Property - Communication Type (commsType)", function()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'commsType');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'commsType');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testString(mObj.commsType);
+			commonFunctionsFile.testString(modelObj.commsType);
 		});
 	});
 }
 
-function checkIoConfigArrayProperty(mObj)
+function checkIoConfigArrayProperty(modelObj)
 {
 	describe("Property - IO Config Array (ioConfigs)", function()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'ioConfigs');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'ioConfigs');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testArrayPopulated(mObj.ioConfigs);
+			commonFunctionsFile.testArrayPopulated(modelObj.ioConfigs);
 		});
 		
 		it("All Elements Objects", function()
 		{
-			commonFunctionsFile.testAllElements(mObj.ioConfigs, 'object');
+			commonFunctionsFile.testAllElements(modelObj.ioConfigs, 'object');
 		});
 		
 		it("Object Structures Valid", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(mObj.ioConfigs, 'ioType');
-			commonFunctionsFile.testPropertyDefinitions(mObj.ioConfigs, 'ioPrefix');
-			commonFunctionsFile.testPropertyDefinitions(mObj.ioConfigs, 'length');
+			commonFunctionsFile.testPropertyDefinitions(modelObj.ioConfigs, 'ioType');
+			commonFunctionsFile.testPropertyDefinitions(modelObj.ioConfigs, 'ioPrefix');
+			commonFunctionsFile.testPropertyDefinitions(modelObj.ioConfigs, 'length');
 			
-			commonFunctionsFile.testPropertyContents(mObj.ioConfigs, 'ioType', 'string');
-			commonFunctionsFile.testPropertyContents(mObj.ioConfigs, 'ioPrefix', 'string');
-			commonFunctionsFile.testPropertyContents(mObj.ioConfigs, 'length', 'number');
+			commonFunctionsFile.testPropertyContents(modelObj.ioConfigs, 'ioType', 'string');
+			commonFunctionsFile.testPropertyContents(modelObj.ioConfigs, 'ioPrefix', 'string');
+			commonFunctionsFile.testPropertyContents(modelObj.ioConfigs, 'length', 'number');
 		});
 		
 		it("IO Type Referental Integrity", function()
 		{
-			commonFunctionsFile.testPropertySearchValues(mObj.ioConfigs, 'ioType', ioFile.ioTypes);
+			commonFunctionsFile.testPropertySearchValues(modelObj.ioConfigs, 'ioType', ioFile.ioTypes);
 		});
 		
 		it("IO Prefix Referental Integrity", function()
 		{
-			commonFunctionsFile.testPropertySearchValues(mObj.ioConfigs, 'ioPrefix', ioFile.ioPrefixes);
+			commonFunctionsFile.testPropertySearchValues(modelObj.ioConfigs, 'ioPrefix', ioFile.ioPrefixes);
 		});
 	});
 }
 
-function checkTotalPollProperty(mObj)
+function checkTotalPollProperty(modelObj)
 {
 	describe("Property - Total Polls (totalPolls)", function()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'totalPolls');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'totalPolls');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(mObj, 'totalPolls', 'number');
+			commonFunctionsFile.testObjectPropertyContent(modelObj, 'totalPolls', 'number');
 		});
 	});
 }
 
-function checkPollIntervalProperty(mObj)
+function checkPollIntervalProperty(modelObj)
 {
 	describe("Property - Polling Interval (pollingInterval)", function()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'pollingInterval');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'pollingInterval');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(mObj, 'pollingInterval', 'number');
+			commonFunctionsFile.testObjectPropertyContent(modelObj, 'pollingInterval', 'number');
 		});
 	});
 }
 
-function checkInfoUrlProperty(mObj)
+function checkInfoUrlProperty(modelObj)
 {
 	describe("Property - Information URL (infoUrl)", function()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'infoUrl');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'infoUrl');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testString(mObj.infoUrl);
+			commonFunctionsFile.testString(modelObj.infoUrl);
 		});
 	});
 }
 
-function checkManufacturerProperty(mObj)
+function checkManufacturerProperty(modelObj)
 {
 	describe("Property - Manufacturer (maker)", function()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'maker');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'maker');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testString(mObj.maker);
+			commonFunctionsFile.testString(modelObj.maker);
 		});
 	});
 }
 
-function checkFunctionProperties(mObj)
+function checkFunctionProperties(modelObj)
 {
-	describe("Property - Functions", function()
+	describe("Functions", function()
 	{
 		it("Device Data Function Exists (readAndWriteDeviceData)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'readAndWriteDeviceData');
-			commonFunctionsFile.testObjectPropertyContent(mObj, 'readAndWriteDeviceData', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'readAndWriteDeviceData');
+			commonFunctionsFile.testObjectPropertyContent(modelObj, 'readAndWriteDeviceData', 'function');
 		});
 		
 		it("Information Parse Function Exists (parseDeviceInfo)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(mObj, 'parseDeviceInfo');
-			commonFunctionsFile.testObjectPropertyContent(mObj, 'parseDeviceInfo', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(modelObj, 'parseDeviceInfo');
+			commonFunctionsFile.testObjectPropertyContent(modelObj, 'parseDeviceInfo', 'function');
 		});
 	});
 }
+
+
 
 module.exports =
 {
