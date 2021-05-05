@@ -10,9 +10,9 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const commonFile = getRemoteIoCommonFile();
-const deviceModelFile = getDeviceClassFile(foxPath.storedDeviceClassFile);
-const deviceConnectFile = getDeviceClassFile(foxPath.connectedDeviceClassFile);
+const commonFile = require(subCommonPath.rioCommonFile);
+const deviceModelFile = require(foxPath.storedDeviceClassFile);
+const deviceConnectFile = require(foxPath.connectedDeviceClassFile);
 
 const testDeviceValidModel = commonJsonObjectsFile.testDevice;
 const testDeviceInvalidModel = cloneInvalidModel();
@@ -20,38 +20,14 @@ const testDeviceInvalidModel = cloneInvalidModel();
 var storeDeviceDesc = "Stored Device Class (StoredDevice, device-model.class)";
 var connectDesc = "Connected Device Class (ConnectedDevice, device.class)";
 
-var storeDeviceSpy = null;
-var connectSpy = null;
-
 
 
 function testDeviceClasses()
 {
 	describe("Device Classes", function()
 	{
-		handleDeviceFiles();
 		handleDeviceConstructors();
 		handleDeviceClasses();
-	});
-}
-
-
-function handleDeviceFiles()
-{
-	describe("Device Class Files", function()
-	{
-		it("Device Model (device-model.class)", function()
-		{
-			commonFunctionsFile.testPresent(deviceModelFile);
-			expect(deviceModelFile).to.be.an("object");
-		});
-		
-		it("Connected Device (device.class)", function()
-		{
-			commonFunctionsFile.testPresent(deviceConnectFile);
-			expect(deviceConnectFile).to.be.an("object");
-		});
-		
 	});
 }
 
@@ -60,22 +36,16 @@ function handleDeviceConstructors()
 {
 	describe("Device Class Constructors", function()
 	{
-		it(storeDeviceDesc, function(done)
+		it(storeDeviceDesc, function()
 		{
 			commonFunctionsFile.testPresent(deviceModelFile.StoredDevice);
 			expect(deviceModelFile.StoredDevice).to.be.a("function");
-			storeDeviceSpy = sinon.spy(deviceModelFile, 'StoredDevice');
-			
-			done();
 		});
 		
-		it(connectDesc, function(done)
+		it(connectDesc, function()
 		{
 			commonFunctionsFile.testPresent(deviceConnectFile.ConnectedDevice);
 			expect(deviceConnectFile.ConnectedDevice).to.be.a("function");
-			connectSpy = sinon.spy(deviceConnectFile, 'ConnectedDevice');
-			
-			done();
 		});
 		
 	});
@@ -93,16 +63,19 @@ function handleDeviceClasses()
 	{
 		it("Call - Valid Model", function(done)
 		{
+			var validStoredDeviceSpy = sinon.spy(deviceModelFile, 'StoredDevice');
 			new deviceModelFile.StoredDevice(testDeviceValidModel);
 			
-			expect(storeDeviceSpy.calledOnce).to.be.true;
-			expect(storeDeviceSpy.firstCall.args).to.deep.equal([testDeviceValidModel]);
-			commonFunctionsFile.testPresent(storeDeviceSpy.firstCall.returnValue);
-			expect(storeDeviceSpy.firstCall.returnValue).to.be.an("object");
-			storeDeviceValid = storeDeviceSpy.firstCall.returnValue;
+			expect(validStoredDeviceSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(validStoredDeviceSpy.firstCall);
+			expect(validStoredDeviceSpy.firstCall.args).to.deep.equal([testDeviceValidModel]);
+			
+			commonFunctionsFile.testPresent(validStoredDeviceSpy.firstCall.returnValue);
+			expect(validStoredDeviceSpy.firstCall.returnValue).to.be.an("object");
+			storeDeviceValid = validStoredDeviceSpy.firstCall.returnValue;
 			
 			verifyStoredDeviceReturn(testDeviceValidModel, storeDeviceValid);
-			storeDeviceSpy.restore();
+			validStoredDeviceSpy.restore();
 			
 			done();
 		});
@@ -194,17 +167,21 @@ function handleDeviceClasses()
 		
 		it("Call - Valid Model", function(done)
 		{
+			var validConnectedDeviceSpy = sinon.spy(deviceConnectFile, 'ConnectedDevice');
 			new deviceConnectFile.ConnectedDevice(storeDeviceValid);
 			
-			expect(connectSpy.calledOnce).to.be.true;
-			expect(connectSpy.firstCall.args).to.deep.equal([storeDeviceValid]);
-			commonFunctionsFile.testPresent(connectSpy.firstCall.returnValue);
-			expect(connectSpy.firstCall.returnValue).to.be.an("object");
-			commonFunctionsFile.testObjectPropertyDefinition(connectSpy.firstCall.returnValue, 'storedDevice');
-			commonFunctionsFile.testObjectPropertyContent(connectSpy.firstCall.returnValue, 'storedDevice', 'object');
-			expect(connectSpy.firstCall.returnValue.storedDevice).to.equal(storeDeviceValid);
+			expect(validConnectedDeviceSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(validConnectedDeviceSpy.firstCall);
+			expect(validConnectedDeviceSpy.firstCall.args).to.deep.equal([storeDeviceValid]);
 			
-			connectSpy.restore();
+			commonFunctionsFile.testPresent(validConnectedDeviceSpy.firstCall.returnValue);
+			expect(validConnectedDeviceSpy.firstCall.returnValue).to.be.an("object");
+			
+			commonFunctionsFile.testObjectPropertyDefinition(validConnectedDeviceSpy.firstCall.returnValue, 'storedDevice');
+			commonFunctionsFile.testObjectPropertyContent(validConnectedDeviceSpy.firstCall.returnValue, 'storedDevice', 'object');
+			expect(validConnectedDeviceSpy.firstCall.returnValue.storedDevice).to.equal(storeDeviceValid);
+			
+			validConnectedDeviceSpy.restore();
 			done();
 		});
 		
@@ -266,42 +243,42 @@ function handleDeviceClasses()
 
 function callStoredDeviceUnsupported(callObject)
 {
-	var comp = false;
-	var err = "";
+	var storedDeviceComplete = false;
+	var storedDeviceError = "";
 	
 	try
 	{
 		new deviceModelFile.StoredDevice(callObject.jsonObject);
-		comp = true;
+		storedDeviceComplete = true;
 	}
 	catch(e)
 	{
-		comp = false;
-		err = e.message;
+		storedDeviceComplete = false;
+		storedDeviceError = e.message;
 	}
 	
-	var callResult = [comp, err];
+	var callResult = [storedDeviceComplete, storedDeviceError];
 	commonFunctionsFile.testInvalidFunctionResult(callResult, callObject.errorMessage);
 }
 
 
 function callConnectedDeviceUnsupported(a, expectedError)
 {
-	var comp = false;
-	var err = "";
+	var connectionComplete = false;
+	var connectionError = "";
 	
 	try
 	{
 		new deviceConnectFile.ConnectedDevice(a);
-		comp = true;
+		connectionComplete = true;
 	}
 	catch(e)
 	{
-		comp = false;
-		err = e.message;
+		connectionComplete = false;
+		connectionError = e.message;
 	}
 	
-	var callResult = [comp, err];
+	var callResult = [connectionComplete, connectionError];
 	commonFunctionsFile.testInvalidFunctionResult(callResult, expectedError);
 }
 
@@ -320,16 +297,16 @@ function callConnectedDeviceUnknown()
 
 function callConnectedDeviceStringProperty(sName)
 {
-	var sInvalid = -1;
-	var stringErrorText = commonErrorStringsFile.writeConnectDeviceProperty(sName, "string", sInvalid);
-	callConnectedDeviceStructureError(sName, sInvalid, stringErrorText);
+	var invalidStr = -1;
+	var stringErrorText = commonErrorStringsFile.writeConnectDeviceProperty(sName, "string", invalidStr);
+	callConnectedDeviceStructureError(sName, invalidStr, stringErrorText);
 }
 
 function callConnectedDeviceBooleanProperty(bName)
 {
-	var bInvalid = -1;
-	var booleanErrorText = commonErrorStringsFile.writeConnectDeviceProperty(bName, "boolean", bInvalid);
-	callConnectedDeviceStructureError(bName, bInvalid, booleanErrorText);
+	var invalidBoolean = -1;
+	var booleanErrorText = commonErrorStringsFile.writeConnectDeviceProperty(bName, "boolean", invalidBoolean);
+	callConnectedDeviceStructureError(bName, invalidBoolean, booleanErrorText);
 }
 
 function callConnectedDeviceStructureError(propName, propValue, propError)
@@ -337,7 +314,6 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 	var invalidObject = cloneInvalidModel();
 	var structureChanged = false;
 	var thrownError = "";
-	
 	
 	try
 	{
@@ -382,40 +358,7 @@ function cloneInvalidModel()
 	return invRes;
 }
 
-
-function getRemoteIoCommonFile()
+module.exports =
 {
-	var cRes = null;
-	
-	
-	try
-	{
-		cRes = require(subCommonPath.rioCommonFile);
-	}
-	catch(e)
-	{
-		cRes = null;
-	}
-	
-	
-	return cRes;
-}
-
-
-function getDeviceClassFile(dPath)
-{
-	var res = null;
-	
-	try
-	{
-		res = require(dPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestDeviceClasses = testDeviceClasses;
+	callTestDeviceClasses: testDeviceClasses
+};

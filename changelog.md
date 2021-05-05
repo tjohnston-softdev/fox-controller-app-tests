@@ -3,89 +3,67 @@
 ### ./test-parts/part-g-controller_files/controller-main.js
 
 **Changes**
-* Commented out all function calls except for 'cDeviceSettingsFile'
+* All function calls are commented out except for 'cDeviceClassesFile'
 
 ---
 
-### ./test-parts/part-g-controller_files/files/con-device_settings.js
+### ./test-parts/part-g-controller_files/files/con-device_classes.js
 
 **Globals**
-* 'foxPath.deviceSettingsFile' is now required directly.
-* Renamed:
-	* 'advantechModelContents' to 'advantechModels'
-	* 'moxaModelContents' to 'moxaModels'
-	* 'sonoffModelContents' to 'sonoffModels'
+* These files are now required directly:
+	* subCommonPath.rioCommonFile
+	* foxPath.storedDeviceClassFile
+	* foxPath.connectedDeviceClassFile
+* Removed spy globals:
+	* storeDeviceSpy
+	* connectSpy
 
 \
 **Removed Functions**
-* checkDeviceSettingsFileExists
-* getDeviceSettingsFile
-* checkSignalConvertResult
+* getRemoteIoCommonFile
+* getDeviceClassFile
+* handleDeviceFiles
 
 \
-**Fixed Capitalization**
-* Affected test names:
-	* "All **p**roperties **s**trings"
-	* "All **e**lements **s**trings"
+**handleDeviceConstructors**
+* Removed:
+	* 'storeDeviceSpy' assignment.
+	* 'connectSpy' assignment.
+	* 'done' callbacks.
 
 \
-**checkDeviceTypeArrayProperty**
-* Renamed "Array" test to "Populated Array"
+**handleDeviceClasses - StoredDevice**
+* Specific changes to "Call - Valid Model"
+	* Spy is now defined locally instead of globally.
+	* Replaced 'storeDeviceSpy' with 'validStoredDeviceSpy'
+	* Added 'testPresent' check for 'firstCall'
 
 \
-**checkBinSignalFunction**
-* Replaced 'checkSignalConvertResult' calls with direct expectations.
-* Result variable must equal desired value.
+**handleDeviceClasses - ConnectedDevice**
+* Specific changes to "Call - Valid Model"
+	* Spy is now defined locally instead of globally.
+	* Replaced 'connectSpy' with 'validConnectedDeviceSpy'
+	* Added 'testPresent' check for 'firstCall'
 
 \
-**checkScaleDecimalValueFunction**
-* Removed 'scaleSpy' variable.
-	* Spies are now defined for individual tests and are not shared.
-* Specific changes to "Call - Valid" test
-	* Added 'done' callback.
-	* Removed 'testPresent' call for 'returnValue'
-	* Removed number checks for 'returnValue'
-* Specific changes to "Call - Default Error Value" test:
-	* Added 'done' callback.
-	* Removed 'testPresent' call for 'returnValue'
-	* Removed number checks for 'returnValue'
-	* Replaced 'calledTwice' with 'calledOnce'
-	* Replaced 'secondCall' with 'firstCall'
-* Specific changes to "Call - Custom Error Value" test:
-	* Added 'done' callback.
-	* Removed 'testPresent' call for 'returnValue'
-	* Removed number checks for 'returnValue'
-	* Replaced 'lastCall' with 'firstCall'
-* Removed "Complete" test.
+**callStoredDeviceUnsupported**
+* Renamed variables:
+	* 'comp' to 'storedDeviceComplete'
+	* 'err' to 'storedDeviceError'
 
 \
-**checkGetModelFunction**
-* Removed 'modelSpy' variable.
-	* Spies are now defined for individual tests and are not shared.
-* Specific changes to "Call - Supported" test:
-	* Added 'done' callback.
-	* Added 'testPresent' check to 'supportedSpy.firstCall'
-* Specific changes to "Call - Unsupported" test:
-	* Added 'done' callback.
-	* Replaced 'lastCall' with 'firstCall'
-* Removed "Complete" test.
+**callConnectedDeviceUnsupported**
+* Renamed variables:
+	* 'comp to 'connectionComplete'
+	* 'err' to 'connectionError'
 
 \
-**checkSignalValidationResult**
-* Renamed 'v' parameter to 'actualOut'
-* Removed 'commonFunctionsFile.testPresent' call.
-* Removed `expect(v).to.be.a("boolean");`
+**callConnectedDeviceStringProperty**
+* Renamed 'sInvalid' variable to 'invalidStr'
 
 \
-**getSupportedLists**
-* Renamed result properties:
-	* 'dbManufacturers' to 'manufacturers'
-	* 'dbModels' to 'models'
-* Renamed map parameter from 'o' to 'currentObj'
-* Removed 'null' catch assignments:
-	* allModelsArray
-	* derivedManufacturers
-	* derivedModels
+**callConnectedDeviceBooleanProperty**
+* Renamed 'bInvalid' variable to 'invalidBoolean'
 
 \
 **Public**
