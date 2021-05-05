@@ -6,13 +6,12 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-
 const ioSetFile = require(foxPath.rioSettingsFile);
-const advantechModelContents = require(foxPath.advantechFile);
-const moxaModelContents = require(foxPath.moxaFile);
-const sonoffModelContents = require(foxPath.sonoffFile);
+const advantechModels = require(foxPath.advantechFile);
+const moxaModels = require(foxPath.moxaFile);
+const sonoffModels = require(foxPath.sonoffFile);
+const settingsFile = require(foxPath.deviceSettingsFile);
 
-const settingsFile = getDeviceSettingsFile();
 const supportedListObject = getSupportedLists();
 
 
@@ -20,7 +19,6 @@ function testDeviceSettings()
 {
 	describe("Device Settings", function()
 	{
-		checkDeviceSettingsFileExists();
 		checkSupportedModelDefinitions();
 		
 		checkDeviceTypeObjectProperty();
@@ -37,18 +35,6 @@ function testDeviceSettings()
 	});
 }
 
-function checkDeviceSettingsFileExists()
-{
-	describe("Settings File (device.settings)", function()
-	{
-		it("Exists", function()
-		{
-			commonFunctionsFile.testPresent(settingsFile);
-			expect(settingsFile).to.be.an("object");
-		});
-	});
-}
-
 
 function checkSupportedModelDefinitions()
 {
@@ -62,14 +48,14 @@ function checkSupportedModelDefinitions()
 		
 		it("Manufacturers", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'dbManufacturers');
-			commonFunctionsFile.testArrayPopulated(supportedListObject.dbManufacturers);
+			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'manufacturers');
+			commonFunctionsFile.testArrayPopulated(supportedListObject.manufacturers);
 		});
 		
 		it("Models", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'dbModels');
-			commonFunctionsFile.testArrayPopulated(supportedListObject.dbModels);
+			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'models');
+			commonFunctionsFile.testArrayPopulated(supportedListObject.models);
 		});
 		
 	});
@@ -90,7 +76,7 @@ function checkDeviceTypeObjectProperty()
 			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'deviceType', 'object');
 		});
 		
-		it("All properties strings", function()
+		it("All Properties Strings", function()
 		{
 			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.deviceType, 'string');
 		});
@@ -111,12 +97,12 @@ function checkDeviceTypeArrayProperty()
 			commonFunctionsFile.testPresent(settingsFile.deviceTypes);
 		});
 		
-		it("Array", function()
+		it("Populated Array", function()
 		{
 			commonFunctionsFile.testArrayPopulated(settingsFile.deviceTypes);
 		});
 		
-		it("All elements strings", function()
+		it("All Elements Strings", function()
 		{
 			commonFunctionsFile.testAllElements(settingsFile.deviceTypes, 'string');
 		});
@@ -138,7 +124,7 @@ function checkCommunicationTypeProperty()
 			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'communicationType', 'object');
 		});
 		
-		it("All properties strings", function()
+		it("All Properties Strings", function()
 		{
 			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.communicationType, 'string');
 		});
@@ -160,19 +146,19 @@ function checkBinSignalFunction()
 		it("Call - On", function()
 		{
 			var onRes = settingsFile.convertToBinSignal(1);
-			checkSignalConvertResult(onRes, ioSetFile.binSignal.ON);
+			expect(onRes).to.equal(ioSetFile.binSignal.ON);
 		});
 		
 		it("Call - Off", function()
 		{
 			var offRes = settingsFile.convertToBinSignal(0);
-			checkSignalConvertResult(offRes, ioSetFile.binSignal.OFF);
+			expect(offRes).to.equal(ioSetFile.binSignal.OFF);
 		});
 		
 		it("Call - Null", function()
 		{
 			var nullRes = settingsFile.convertToBinSignal();
-			checkSignalConvertResult(nullRes, ioSetFile.binSignal.OFF);
+			expect(nullRes).to.equal(ioSetFile.binSignal.OFF);
 		});
 		
 	});
@@ -180,7 +166,6 @@ function checkBinSignalFunction()
 
 function checkScaleDecimalValueFunction()
 {
-	var scaleSpy = null;
 	var custErr = -99;
 	
 	describe("Function - Scale Decimal Value (scaleDecimalValue)", function()
@@ -189,45 +174,46 @@ function checkScaleDecimalValueFunction()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'scaleDecimalValue');
 			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'scaleDecimalValue', 'function');
-			scaleSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
 		});
 		
-		it("Call - Valid", function()
+		it("Call - Valid", function(done)
 		{
+			var validSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
 			settingsFile.scaleDecimalValue(9002, 0, 0, 10);
 				
-			expect(scaleSpy.calledOnce).to.be.true;
-			expect(scaleSpy.firstCall.args).to.deep.equal([9002, 0, 0, 10]);
-			commonFunctionsFile.testPresent(scaleSpy.firstCall.returnValue);
-			expect(scaleSpy.firstCall.returnValue).to.be.a("number");
-			expect(scaleSpy.firstCall.returnValue).to.equal(1.374);
+			expect(validSpy.calledOnce).to.be.true;
+			expect(validSpy.firstCall.args).to.deep.equal([9002, 0, 0, 10]);
+			expect(validSpy.firstCall.returnValue).to.equal(1.374);
+			
+			validSpy.restore();
+			done();
 		});
 		
-		it("Call - Default Error Value", function()
+		it("Call - Default Error Value", function(done)
 		{
+			var defaultErrorSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
 			settingsFile.scaleDecimalValue(null, null, 0, 10);
 				
-			expect(scaleSpy.calledTwice).to.be.true;
-			expect(scaleSpy.secondCall.args).to.deep.equal([null, null, 0, 10]);
-			commonFunctionsFile.testPresent(scaleSpy.secondCall.returnValue);
-			expect(scaleSpy.secondCall.returnValue).to.be.a("number");
-			expect(scaleSpy.secondCall.returnValue).to.equal(0);
+			expect(defaultErrorSpy.calledOnce).to.be.true;
+			expect(defaultErrorSpy.firstCall.args).to.deep.equal([null, null, 0, 10]);
+			expect(defaultErrorSpy.firstCall.returnValue).to.equal(0);
+			
+			defaultErrorSpy.restore();
+			done();
 		});
 		
-		it("Call - Custom Error Value", function()
+		it("Call - Custom Error Value", function(done)
 		{
+			var customErrorSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
 			settingsFile.scaleDecimalValue(null, custErr, 0, 10);
 			
-			commonFunctionsFile.testPresent(scaleSpy.lastCall);
-			expect(scaleSpy.lastCall.args).to.deep.equal([null, custErr, 0, 10]);
-			commonFunctionsFile.testPresent(scaleSpy.lastCall.returnValue);
-			expect(scaleSpy.lastCall.returnValue).to.be.a("number");
-			expect(scaleSpy.lastCall.returnValue).to.equal(custErr);
-		});
-		
-		it("Complete", function()
-		{
-			scaleSpy.restore();
+			expect(customErrorSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(customErrorSpy.firstCall);
+			expect(customErrorSpy.firstCall.args).to.deep.equal([null, custErr, 0, 10]);
+			expect(customErrorSpy.firstCall.returnValue).to.equal(custErr);
+			
+			customErrorSpy.restore();
+			done();
 		});
 		
 	});
@@ -278,7 +264,6 @@ function checkValidateBinSignalFunction()
 
 function checkGetModelFunction()
 {
-	var modelSpy = null;
 	var testModelName = 'WISE-4060';
 	var testModelManufacturer = 'Advantech';
 	var unknownModelName = "Unknown Model";
@@ -290,39 +275,43 @@ function checkGetModelFunction()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'getModel');
 			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'getModel', 'function');
-			modelSpy = sinon.spy(settingsFile, 'getModel');
 		});
 		
-		it("Call - Supported", function()
+		it("Call - Supported", function(done)
 		{
+			var supportedSpy = sinon.spy(settingsFile, 'getModel');
 			settingsFile.getModel(testModelName);
 			
-			expect(modelSpy.calledOnce).to.be.true;
-			expect(modelSpy.firstCall.args).to.deep.equal([testModelName]);
-			commonFunctionsFile.testPresent(modelSpy.firstCall.returnValue);
-			expect(modelSpy.firstCall.returnValue).to.be.an("object");
+			expect(supportedSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(supportedSpy.firstCall);
+			expect(supportedSpy.firstCall.args).to.deep.equal([testModelName]);
 			
-			commonFunctionsFile.testObjectPropertyDefinition(modelSpy.firstCall.returnValue, 'modelType');
-			commonFunctionsFile.testObjectPropertyContent(modelSpy.firstCall.returnValue, 'modelType', 'string');
-			expect(modelSpy.firstCall.returnValue.modelType).to.equal(testModelName);
+			commonFunctionsFile.testPresent(supportedSpy.firstCall.returnValue);
+			expect(supportedSpy.firstCall.returnValue).to.be.an("object");
 			
-			commonFunctionsFile.testObjectPropertyDefinition(modelSpy.firstCall.returnValue, 'maker');
-			commonFunctionsFile.testObjectPropertyContent(modelSpy.firstCall.returnValue, 'maker', 'string');
-			expect(modelSpy.firstCall.returnValue.maker).to.equal(testModelManufacturer);
+			commonFunctionsFile.testObjectPropertyDefinition(supportedSpy.firstCall.returnValue, 'modelType');
+			commonFunctionsFile.testObjectPropertyContent(supportedSpy.firstCall.returnValue, 'modelType', 'string');
+			expect(supportedSpy.firstCall.returnValue.modelType).to.equal(testModelName);
+			
+			commonFunctionsFile.testObjectPropertyDefinition(supportedSpy.firstCall.returnValue, 'maker');
+			commonFunctionsFile.testObjectPropertyContent(supportedSpy.firstCall.returnValue, 'maker', 'string');
+			expect(supportedSpy.firstCall.returnValue.maker).to.equal(testModelManufacturer);
+			
+			supportedSpy.restore();
+			done();
 		});
 		
-		it("Call - Unsupported", function()
+		it("Call - Unsupported", function(done)
 		{
+			var unsupportedSpy = sinon.spy(settingsFile, 'getModel');
 			settingsFile.getModel(unknownModelName);
 			
-			commonFunctionsFile.testPresent(modelSpy.lastCall);
-			expect(modelSpy.lastCall.args).to.deep.equal([unknownModelName]);
-			expect(modelSpy.lastCall.returnValue).to.be.null;
-		});
-		
-		it("Complete", function()
-		{
-			modelSpy.restore();
+			commonFunctionsFile.testPresent(unsupportedSpy.firstCall);
+			expect(unsupportedSpy.firstCall.args).to.deep.equal([unknownModelName]);
+			expect(unsupportedSpy.firstCall.returnValue).to.be.null;
+			
+			unsupportedSpy.restore();
+			done();
 		});
 		
 	});
@@ -344,14 +333,14 @@ function checkManufacturerListProperty()
 			commonFunctionsFile.testArrayPopulated(settingsFile.listRioMakers);
 		});
 		
-		it("All elements strings", function()
+		it("All Elements Strings", function()
 		{
 			commonFunctionsFile.testAllElements(settingsFile.listRioMakers, 'string');
 		});
 		
 		it("Matching Contents", function()
 		{
-			expect(settingsFile.listRioMakers).to.deep.equal(supportedListObject.dbManufacturers);
+			expect(settingsFile.listRioMakers).to.deep.equal(supportedListObject.manufacturers);
 		});
 		
 	});
@@ -372,39 +361,28 @@ function checkModelTypeListProperty()
 			commonFunctionsFile.testArrayPopulated(settingsFile.listRioModelTypes);
 		});
 		
-		it("All elements strings", function()
+		it("All Elements Strings", function()
 		{
 			commonFunctionsFile.testAllElements(settingsFile.listRioModelTypes, 'string');
 		});
 		
 		it("Matching Contents", function()
 		{
-			expect(settingsFile.listRioModelTypes).to.deep.equal(supportedListObject.dbModels);
+			expect(settingsFile.listRioModelTypes).to.deep.equal(supportedListObject.models);
 		});
 		
 	});
 }
 
-
-function checkSignalConvertResult(v, expectedOut)
+function checkSignalValidationResult(actualOut, expectedOut)
 {
-	commonFunctionsFile.testPresent(v);
-	expect(v).to.be.a("string");
-	expect(v).to.equal(expectedOut);
-}
-
-function checkSignalValidationResult(v, expectedOut)
-{
-	commonFunctionsFile.testPresent(v);
-	expect(v).to.be.a("boolean");
-	
 	if (expectedOut === true)
 	{
-		expect(v).to.be.true;
+		expect(actualOut).to.be.true;
 	}
 	else
 	{
-		expect(v).to.be.false;
+		expect(actualOut).to.be.false;
 	}
 	
 }
@@ -418,37 +396,23 @@ function getSupportedLists()
 	
 	try
 	{
-		allModelsArray = advantechModelContents.concat(moxaModelContents, sonoffModelContents);
-		derivedManufacturers = allModelsArray.map(o => { return o.maker});
-		derivedModels = allModelsArray.map(o => { return o.modelType});
+		allModelsArray = advantechModels.concat(moxaModels, sonoffModels);
+		derivedManufacturers = allModelsArray.map(currentObj => { return currentObj.maker});
+		derivedModels = allModelsArray.map(currentObj => { return currentObj.modelType});
 		
-		resultObject = {"dbManufacturers": derivedManufacturers, "dbModels": derivedModels};
+		resultObject = {"manufacturers": derivedManufacturers, "models": derivedModels};
 	}
 	catch(e)
 	{
-		allModelsArray = null;
-		derivedManufacturers = null;
-		derivedModels = null;
 		resultObject = null;
 	}
+	
 	
 	return resultObject;
 }
 
-function getDeviceSettingsFile()
-{
-	var res = null;
-	
-	try
-	{
-		res = require(foxPath.deviceSettingsFile);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
 
-exports.callTestDeviceSettings = testDeviceSettings;
+module.exports =
+{
+	callTestDeviceSettings: testDeviceSettings
+};

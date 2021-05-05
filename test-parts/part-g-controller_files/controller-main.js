@@ -15,6 +15,7 @@ function coordinateController()
 	describe("G - Controller Files", function()
 	{
 		cDeviceSettingsFile.callTestDeviceSettings();
+		/*
 		cDeviceClassesFile.callTestDeviceClasses();
 		cRioFactoriesFile.callTestRemoteIoFactories();
 		cRioIndexMainFile.callTestRemoteIoIndexMain();
@@ -24,6 +25,7 @@ function coordinateController()
 		cServiceMainFile.callTestServiceMain();
 		cSettingsMainFile.callTestControllerSettings();
 		cNodeRedMainFile.callTestNodeRedSettings();
+		*/
 	});
 }
 
