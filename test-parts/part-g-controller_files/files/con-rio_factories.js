@@ -10,9 +10,9 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const rioCommonFile = getCommonFile(subCommonPath.rioCommonFile);
-const rioCheckFile = getCommonFile("../sub-files/rio-factory_return");
-const factoryFile = getFactoryFile();
+const rioCommonFile = require(subCommonPath.rioCommonFile);
+const rioCheckFile = require("../sub-files/rio-factory_return");
+const factoryFile = require(foxPath.rioFactoriesFile);
 
 const remoteIoTestDevice = commonJsonObjectsFile.testDevice;
 
@@ -21,31 +21,7 @@ function testRemoteIoFactories()
 {
 	describe("Remote IO Factories", function()
 	{
-		checkRequiredFilesExist();
 		handleRemoteIoModuleFunction();
-	});
-}
-
-
-function checkRequiredFilesExist()
-{
-	describe("Required Files", function()
-	{
-		it("Factory File (remote-io.factories)", function()
-		{
-			commonFunctionsFile.testPresent(factoryFile);
-			expect(factoryFile).to.be.an("object");
-		});
-		
-		it("Sub-Files (rioCommon, rioFactoryReturn)", function()
-		{
-			commonFunctionsFile.testPresent(rioCommonFile);
-			expect(rioCommonFile).to.be.an("object");
-			
-			commonFunctionsFile.testPresent(rioCheckFile);
-			expect(rioCheckFile).to.be.an("object");
-		});
-		
 	});
 }
 
@@ -53,29 +29,30 @@ function checkRequiredFilesExist()
 
 function handleRemoteIoModuleFunction()
 {
-	var moduleSpy = null;
-	
 	describe("Function - Remote IO Module (RemoteIoModule)", function()
 	{
 		it("Exists", function()
 		{
 			commonFunctionsFile.testPresent(factoryFile.RemoteIoModule);
 			expect(factoryFile.RemoteIoModule).to.be.a("function");
-			moduleSpy = sinon.spy(factoryFile, 'RemoteIoModule');
 		});
 		
 		
-		it("Call - Valid", function()
+		it("Call - Valid", function(done)
 		{
+			var moduleSpy = sinon.spy(factoryFile, 'RemoteIoModule');
 			factoryFile.RemoteIoModule(remoteIoTestDevice);
 			
 			expect(moduleSpy.calledOnce).to.be.true;
+			commonFunctionsFile.testPresent(moduleSpy.firstCall);
 			expect(moduleSpy.firstCall.args).to.deep.equal([remoteIoTestDevice]);
 			commonFunctionsFile.testPresent(moduleSpy.firstCall.returnValue);
 			expect(moduleSpy.firstCall.returnValue).to.be.an("object");
 			
 			rioCheckFile.checkFactoryReturn(moduleSpy.firstCall.returnValue);
+			
 			moduleSpy.restore();
+			done();
 		});
 		
 		
@@ -150,9 +127,6 @@ function handleRemoteIoModuleFunction()
 }
 
 
-
-
-
 function callRemoteIoModuleInvalid(rioInvalidObject)
 {
 	var remoteComplete = false;
@@ -175,37 +149,7 @@ function callRemoteIoModuleInvalid(rioInvalidObject)
 }
 
 
-function getCommonFile(commonPath)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(commonPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-
-function getFactoryFile()
-{
-	var res = null;
-	
-	try
-	{
-		res = require(foxPath.rioFactoriesFile);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRemoteIoFactories = testRemoteIoFactories;
+	callTestRemoteIoFactories: testRemoteIoFactories
+};

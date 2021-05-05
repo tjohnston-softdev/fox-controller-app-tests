@@ -1,13 +1,7 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
-
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 
 function checkFactoryReturnValid(factReturnObject)
@@ -25,4 +19,8 @@ function checkFactoryReturnValid(factReturnObject)
 	commonFunctionsFile.testObjectPropertyContent(factReturnObject, 'getCommsErrors', 'function');
 }
 
-exports.checkFactoryReturn = checkFactoryReturnValid;
+
+module.exports =
+{
+	checkFactoryReturn: checkFactoryReturnValid
+};
