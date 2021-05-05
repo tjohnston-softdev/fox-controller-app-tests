@@ -7,12 +7,11 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const indexFile = getIndexFileRequirement(foxPath.rioIndexFile);
-const rioSubCommonFile = getIndexFileRequirement(subCommonPath.rioCommonFile);
+const indexFile = require(foxPath.rioIndexFile);
+const rioSubCommonFile = require(subCommonPath.rioCommonFile);
 
-var nListSpy = null;
+var nodeListSpy = null;
 
 
 function testRemoteIoIndexNodeList()
@@ -29,23 +28,11 @@ function testRemoteIoIndexNodeList()
 function handleNodeListPrepare()
 {
 	describe("Node List Preperation", function()
-	{
-		it("Remote IO Index", function()
+	{	
+		it("Spy Object Assigned", function(done)
 		{
-			commonFunctionsFile.testPresent(indexFile);
-			expect(indexFile).to.be.an("object");
-		});
-		
-		it("Remote IO Sub-File", function()
-		{
-			commonFunctionsFile.testPresent(rioSubCommonFile);
-			expect(rioSubCommonFile).to.be.an("object");
-		});
-		
-		
-		it("Spy Object Assigned", function()
-		{
-			nListSpy = sinon.spy(indexFile, 'listRiosForNode');
+			nodeListSpy = sinon.spy(indexFile, 'listRiosForNode');
+			done();
 		});
 		
 	});
@@ -55,17 +42,17 @@ function handleNodeListPrepare()
 
 function handleNodeListFull()
 {
-	var nListReturn = null;
-	var nErrorReturn = null;
+	var retrievedNodeList = null;
+	var retrievedError = null;
 	
 	describe("Full Node List (listRiosForNode)", function()
 	{
 		it("Function Called", function(done)
 		{
-			indexFile.listRiosForNode(null, (allErr, allDevices) =>
+			indexFile.listRiosForNode(null, function(allDevicesErr, allDevicesList)
 			{
-				nListReturn = allDevices;
-				nErrorReturn = allErr;
+				retrievedNodeList = allDevicesList;
+				retrievedError = allDevicesErr;
 				done();
 			});
 		});
@@ -73,19 +60,19 @@ function handleNodeListFull()
 		it("Call Successful", function()
 		{
 			verifyNodeListCalled(null);
-			expect(nListSpy.lastCall.exception).to.be.undefined;
-			expect(nErrorReturn).to.be.null;
+			expect(nodeListSpy.lastCall.exception).to.be.undefined;
+			expect(retrievedError).to.be.null;
 		});
 		
 		it("Node Array Returned", function()
 		{
-			commonFunctionsFile.testPresent(nListReturn);
-			expect(nListReturn).to.be.an("array");
+			commonFunctionsFile.testPresent(retrievedNodeList);
+			expect(retrievedNodeList).to.be.an("array");
 		});
 		
 		it("Array Structure Valid", function()
 		{
-			rioSubCommonFile.callTestPropertyArrayStructure(nListReturn);
+			rioSubCommonFile.callTestPropertyArrayStructure(retrievedNodeList);
 		});
 		
 	});
@@ -93,36 +80,36 @@ function handleNodeListFull()
 
 function handleNodeListManufacturers()
 {
-	var nAdvantech = "advantech";
-	var nMoxa = "moxa";
-	var nSonoff = "sonoff";
+	var advantechName = "advantech";
+	var moxaName = "moxa";
+	var sonoffName = "sonoff";
 	
 	describe("Manufacturer Node Lists (listRiosForNode)", function()
 	{
 		
 		it("Advantech", function(done)
 		{
-			indexFile.listRiosForNode(nAdvantech, (advErr, advDevices) =>
+			indexFile.listRiosForNode(advantechName, (advErr, advDevices) =>
 			{
-				verifyNodeListManufacturer(nAdvantech, advErr, advDevices);
+				verifyNodeListManufacturer(advantechName, advErr, advDevices);
 				done();
 			});
 		});
 		
 		it("Moxa", function(done)
 		{
-			indexFile.listRiosForNode(nMoxa, (mxaErr, mxaDevices) =>
+			indexFile.listRiosForNode(moxaName, (mxaErr, mxaDevices) =>
 			{
-				verifyNodeListManufacturer(nMoxa, mxaErr, mxaDevices);
+				verifyNodeListManufacturer(moxaName, mxaErr, mxaDevices);
 				done();
 			});
 		});
 		
 		it("Sonoff", function(done)
 		{
-			indexFile.listRiosForNode(nSonoff, (sonErr, sonDevices) =>
+			indexFile.listRiosForNode(sonoffName, (sonErr, sonDevices) =>
 			{
-				verifyNodeListManufacturer(nSonoff, sonErr, sonDevices);
+				verifyNodeListManufacturer(sonoffName, sonErr, sonDevices);
 				done();
 			});
 		});
@@ -137,9 +124,10 @@ function handleNodeListDispose()
 {
 	describe("Node List Dispose", function()
 	{
-		it("Spy Object", function()
+		it("Spy Object", function(done)
 		{
-			nListSpy.restore();
+			nodeListSpy.restore();
+			done();
 		});
 	});
 }
@@ -150,26 +138,27 @@ function handleNodeListDispose()
 
 function verifyNodeListCalled(nArg)
 {
-	expect(nListSpy.called).to.be.true;
-	commonFunctionsFile.testPresent(nListSpy.lastCall);
+	expect(nodeListSpy.called).to.be.true;
+	commonFunctionsFile.testPresent(nodeListSpy.lastCall);
 	
-	commonFunctionsFile.testPresent(nListSpy.lastCall.args);
-	commonFunctionsFile.testArrayPopulated(nListSpy.lastCall.args);
+	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args);
+	commonFunctionsFile.testArrayPopulated(nodeListSpy.lastCall.args);
 	
-	expect(nListSpy.lastCall.args[0]).to.not.be.undefined;
-	expect(nListSpy.lastCall.args[0]).to.equal(nArg);
+	expect(nodeListSpy.lastCall.args[0]).to.not.be.undefined;
+	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);
 	
-	commonFunctionsFile.testPresent(nListSpy.lastCall.args[1]);
-	expect(nListSpy.lastCall.args[1]).to.be.a("function");
+	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args[1]);
+	expect(nodeListSpy.lastCall.args[1]).to.be.a("function");
 	
-	commonFunctionsFile.testPresent(nListSpy.lastCall.callback);
-	expect(nListSpy.lastCall.callback).to.be.a("function");
+	commonFunctionsFile.testPresent(nodeListSpy.lastCall.callback);
+	expect(nodeListSpy.lastCall.callback).to.be.a("function");
 }
+
 
 function verifyNodeListManufacturer(mName, mError, mDevices)
 {
 	verifyNodeListCalled(mName);
-	expect(nListSpy.lastCall.exception).to.be.undefined;
+	expect(nodeListSpy.lastCall.exception).to.be.undefined;
 	expect(mError).to.be.null;
 	
 	commonFunctionsFile.testPresent(mDevices);
@@ -177,20 +166,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	rioSubCommonFile.callTestPropertyArrayStructure(mDevices);
 }
 
-function getIndexFileRequirement(frPath)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(frPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRemoteIoIndexNodeList = testRemoteIoIndexNodeList;
+	callTestRemoteIoIndexNodeList: testRemoteIoIndexNodeList
+};
