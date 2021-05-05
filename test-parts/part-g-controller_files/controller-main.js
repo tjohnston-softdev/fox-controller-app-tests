@@ -1,21 +1,17 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const cDeviceSettingsFile = require("./files/con-device_settings");
+const cDeviceClassesFile = require("./files/con-device_classes");
+const cRioFactoriesFile = require("./files/con-rio_factories");
+const cRioIndexMainFile = require("./files/con-rio_index_main");
+const cRioIndexNodeListFile = require("./files/con-rio_index_node_list");
+const cRioIndexNodeRegisterFile = require("./files/con-rio_index_node_reg");
+const cRioIndexNodeRegisterInvalid = require("./files/con-rio_index_node_reg_invalid");
+const cServiceMainFile = require("./files/con-service_main");
+const cSettingsMainFile = require("./files/con-settings");
+const cNodeRedMainFile = require("./files/con-settings_red");
+
 
 function coordinateController()
 {
-	var cDeviceSettingsFile = require("./files/con-device_settings");
-	var cDeviceClassesFile = require("./files/con-device_classes");
-	var cRioFactoriesFile = require("./files/con-rio_factories");
-	var cRioIndexMainFile = require("./files/con-rio_index_main");
-	var cRioIndexNodeListFile = require("./files/con-rio_index_node_list");
-	var cRioIndexNodeRegisterFile = require("./files/con-rio_index_node_reg");
-	var cRioIndexNodeRegisterInvalid = require("./files/con-rio_index_node_reg_invalid");
-	var cServiceMainFile = require("./files/con-service_main");
-	var cSettingsMainFile = require("./files/con-settings");
-	var cNodeRedMainFile = require("./files/con-settings_red");
-	
 	describe("G - Controller Files", function()
 	{
 		cDeviceSettingsFile.callTestDeviceSettings();
@@ -31,4 +27,7 @@ function coordinateController()
 	});
 }
 
-exports.callController = coordinateController;
+module.exports =
+{
+	callController: coordinateController
+};

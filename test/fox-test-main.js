@@ -109,7 +109,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (m === 'debug')
 	{
-		modelsPart.callModels();
+		controllerPart.callController();
 	}
 	else if (m === '')
 	{
