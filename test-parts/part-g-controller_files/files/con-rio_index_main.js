@@ -7,31 +7,16 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
+const indexFile = require(foxPath.rioIndexFile);
 
-const indexFile = getFileRequirement(foxPath.rioIndexFile);
 
 function testRemoteIoIndexMain()
 {
 	describe("Remote IO Index Main", function()
 	{
-		checkFileObjects();
 		checkIndexFunctionsExist();
 		handleInitializationFunction();
 		handleInitializationCompleteFunction();
-	});
-}
-
-function checkFileObjects()
-{
-	describe("File Objects", function()
-	{
-		
-		it("Remote IO Index File (remote-io.index)", function()
-		{
-			commonFunctionsFile.testPresent(indexFile);
-			expect(indexFile).to.be.an("object");
-		});
-		
 	});
 }
 
@@ -73,18 +58,21 @@ function handleInitializationFunction()
 			done();
 		});
 		
-		it("Initialization Event Successful", function()
+		it("Initialization Event Successful", function(done)
 		{
 			expect(initSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(initSpy.firstCall);
 			expect(initSpy.firstCall.args).to.deep.equal([]);
 			expect(initSpy.firstCall.returnValue).to.be.undefined;
 			expect(initSpy.firstCall.exception).to.be.undefined;
+			
+			done();
 		});
 		
-		it("Initialization Disposed", function()
+		it("Initialization Disposed", function(done)
 		{
 			initSpy.restore();
+			done();
 		});
 		
 	});
@@ -108,9 +96,8 @@ function handleInitializationCompleteFunction()
 			});
 		});
 		
-		it("Event Successful", function()
+		it("Event Successful", function(done)
 		{
-			expect(compSpy.called).to.be.true;
 			expect(compSpy.calledOnce).to.be.true;
 			commonFunctionsFile.testPresent(compSpy.firstCall);
 			
@@ -124,14 +111,16 @@ function handleInitializationCompleteFunction()
 			expect(compSpy.firstCall.callback).to.be.a("function");
 			
 			expect(compSpy.firstCall.exception).to.be.undefined;
-			
-			commonFunctionsFile.testPresent(triggerFlag);
 			expect(triggerFlag).to.be.true;
+			
+			done();
 		});
 		
-		it("Event Disposed", function()
+		
+		it("Event Disposed", function(done)
 		{
 			compSpy.restore();
+			done();
 		});
 		
 		
@@ -141,71 +130,35 @@ function handleInitializationCompleteFunction()
 
 
 
-function checkFunctionDefinitionLoop(functionNameArray)
+function checkFunctionDefinitionLoop(nameArray)
 {
-	var fi = 0;
+	var loopIndex = 0;
 	var currentName = "";
-	var currentQuote = "";
-	var currentExport = "";
-	var currentExists = false;
-	var allValid = true;
+	var currentFunction = null;
 	
-	while (fi >= 0 && fi < functionNameArray.length && allValid === true)
+	for (loopIndex = 0; loopIndex < nameArray.length; loopIndex = loopIndex + 1)
 	{
-		currentName = functionNameArray[fi];
-		currentQuote = "'" + currentName + "'";
-		currentExport = typeof indexFile[currentName];
-		currentExists = false;
+		currentName = nameArray[loopIndex];
+		currentFunction = indexFile[currentName];
 		
-		if (indexFile[currentName] !== null && currentExport !== 'undefined' && currentExport === 'function')
-		{
-			currentExists = true;
-		}
-		else
-		{
-			currentExists = false;
-			throw new Error(currentQuote + " is not a valid function");
-		}
-		
-		if (currentExists !== true)
-		{
-			allValid = false;
-		}
-		
-		fi = fi + 1;
+		commonFunctionsFile.testPresent(currentFunction);
+		expect(currentFunction).to.be.a("function");
 	}
-	
-	expect(allValid).to.be.true;
 }
 
 
 function getCrudFunctions()
 {
-	var cRes = [];
+	var namesList = [];
 	
-	cRes.push('listRemoteIoDevices');
-	cRes.push('addRemoteIoDevice', 'getRemoteIoDevice', 'modRemoteIoDevice', 'delRemoteIoDevice');
-	cRes.push('getRioDeviceStatus');
+	namesList.push('listRemoteIoDevices');
+	namesList.push('addRemoteIoDevice', 'getRemoteIoDevice', 'modRemoteIoDevice', 'delRemoteIoDevice');
+	namesList.push('getRioDeviceStatus');
 	
-	return cRes;
+	return namesList;
 }
 
-
-
-function getFileRequirement(frPath)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(frPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRemoteIoIndexMain = testRemoteIoIndexMain;
+	callTestRemoteIoIndexMain: testRemoteIoIndexMain
+};
