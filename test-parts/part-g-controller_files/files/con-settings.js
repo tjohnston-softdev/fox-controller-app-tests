@@ -6,30 +6,15 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-
-const controllerSettingsFile = getSettingsMainRequirement();
+const controllerSettingsFile = require(foxPath.settingsFile);
 
 
 function testControllerSettings()
 {
 	describe("Controller Settings", function()
 	{
-		checkRequiredSettingsFiles();
 		handleFlagProperties();
 		handlePathProperties();
-	});
-}
-
-function checkRequiredSettingsFiles()
-{
-	describe("Required Files", function()
-	{
-		it("Controller Settings (settings)", function()
-		{
-			commonFunctionsFile.testPresent(controllerSettingsFile);
-			expect(controllerSettingsFile).to.be.an("object");
-		});
 	});
 }
 
@@ -96,25 +81,7 @@ function handlePathProperties()
 	});
 }
 
-
-
-
-
-
-function getSettingsMainRequirement()
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(foxPath.settingsFile);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestControllerSettings = testControllerSettings;
+	callTestControllerSettings: testControllerSettings
+};

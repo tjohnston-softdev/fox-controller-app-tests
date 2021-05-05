@@ -1,25 +1,27 @@
 # Changelog
 
-**./test-parts/part-g-controller_files/files/con-rio_index_node_list.js**
-* Removed 'commonPaths.commonObjects' requirement.
-* Renamed 'nListSpy' global to 'nodeListSpy'
-* Removed 'getIndexFileRequirement' function.
-* These files are now required directly:
-	* foxPath.rioIndexFile
-	* subCommonPath.rioCommonFile
-* handleNodeListPrepare
-	* Removed "Remote IO Index" test.
-	* Removed "Remote IO Sub-File" test.
-	* Added 'done' callback to "Spy Object Assigned" test.
-* handleNodeListFull
-	* Renamed 'nListReturn' variable to 'retrievedNodeList'
-	* Renamed 'nErrorReturn' variable to 'retrievedError'
-	* Restructured callback for 'indexFile.listRiosForNode'
-	* Renamed 'allErr' callback parameter to 'allDevicesErr'
-	* Renamed 'allDevices' callback parameter to 'allDevicesList'
-* handleNodeListManufacturers
-	* Renamed 'nAdvantech' variable to 'advantechName'
-	* Renamed 'nMoxa' variable to 'moxaName'
-	* Renamed 'nSonoff' variable to 'sonoffName'
-* handleNodeListDispose
-	* Added 'done' callback.
+**./test-parts/part-g-controller_files/controller-main.js**
+* Uncommented all function calls.
+
+---
+
+**./test-parts/part-g-controller_files/files/con-settings.js**
+* Removed requirements:
+	* sinon
+	* commonPaths.commonObjects
+* 'foxPath.settingsFile' is now required directly.
+* Removed functions:
+	* checkRequiredSettingsFiles
+	* getSettingsMainRequirement
+* Replaced `exports` with `module.exports`
+
+---
+
+**./test-parts/part-g-controller_files/files/con-settings_red.js**
+* Removed requirements:
+	* sinon
+	* chai-things
+	* commonPaths.localValid
+	* commonPaths.commonObjects
+* 'foxPath.redSettingsFile' is now required directly.
+* Removed the 'getRedSettingsMainRequirement' function.

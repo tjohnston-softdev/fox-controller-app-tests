@@ -1,15 +1,10 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const localValidFile = require(commonPaths.localValid);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-
-const controllerRedSettingsFile = getRedSettingsMainRequirement();
+const controllerRedSettingsFile = require(foxPath.redSettingsFile);
 
 
 function testNodeRedSettings()
@@ -33,21 +28,7 @@ function checkSettingsFile()
 }
 
 
-function getRedSettingsMainRequirement()
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(foxPath.redSettingsFile);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-
-exports.callTestNodeRedSettings = testNodeRedSettings;
+	callTestNodeRedSettings: testNodeRedSettings
+};
