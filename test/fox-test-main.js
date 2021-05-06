@@ -140,5 +140,5 @@ describe("FOX Controller Test Script", function()
 	frontendPart.callCoordinateFrontendTesting();
 	processPart.callCoordinateRestart();
 	processPart.callCoordinateReboot();
+	processPart.callCoordinateFactoryReset();
 */
-//processPart.callCoordinateFactoryReset();
