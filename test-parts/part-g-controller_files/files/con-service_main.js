@@ -1,37 +1,20 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-
-const serviceFile = getServiceMainRequirement(foxPath.serviceMainFile);
+const serviceFile = require(foxPath.serviceMainFile);
 
 
 function testServiceMain()
 {
 	describe("Service Main", function()
 	{
-		checkRequiredServiceFiles();
 		handleControllerObject();
 		handleGeneralFunctions();
 		handleRedFunctions();
 		handleProcessFunctions();
-	});
-}
-
-function checkRequiredServiceFiles()
-{
-	describe("Required Files", function()
-	{
-		it("Service Main (service.main)", function()
-		{
-			commonFunctionsFile.testPresent(serviceFile);
-			expect(serviceFile).to.be.an("object");
-		});
 	});
 }
 
@@ -133,27 +116,7 @@ function handleProcessFunctions()
 	});
 }
 
-
-
-
-
-
-
-
-function getServiceMainRequirement(sPath)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(sPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestServiceMain = testServiceMain;
+	callTestServiceMain: testServiceMain
+};
