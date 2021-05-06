@@ -567,52 +567,6 @@ function handleSetDeviceOutput()
 }
 
 
-
-
-function callSetDeviceOutputVerification(sdoSpyCalled, sdoCallObject, sdoID, sdoPre, sdoInd, sdoBin)
-{
-	spyFile.verifySetDeviceOutputCalled(sdoSpyCalled, sdoCallObject, sdoID, sdoPre, sdoInd, sdoBin);
-}
-
-
-
-function coordinateSetDeviceOutputInvalidCall(invalidSpy, invalidID, invalidPrefix, invalidIndex, invalidToggle)
-{
-	rioFile.setDeviceOutput(invalidID, invalidPrefix, invalidIndex, invalidToggle);
-	callSetDeviceOutputVerification(true, invalidSpy.lastCall, invalidID, invalidPrefix, invalidIndex, invalidToggle);
-}
-
-
-
-function coordinateCheckNodeExistInvalidCall(invalidArg)
-{
-	var invalidRes = rioFile.isNodeExists(invalidArg);
-	expect(invalidRes).to.be.false;
-}
-
-
-
-function coordinateGetIoPropertiesInvalidCall(invalidArg)
-{
-	var ioComplete = false;
-	var ioError = "";
-	
-	try
-	{
-		rioFile.getIoProperties(invalidArg);
-		ioComplete = true;
-	}
-	catch(e)
-	{
-		ioComplete = false;
-		ioError = e.message;
-	}
-	
-	var ioRes = [ioComplete, ioError];
-	commonFunctionsFile.testInvalidFunctionResult(ioRes, commonErrorStringsFile.rioPropertiesUndefined);
-}
-
-
 function handleStaticDeleteObject()
 {
 	describe("Delete Static Object (delRemoteIoDevice, remote-io-index)", function()
@@ -738,6 +692,49 @@ function handleNodeDispose()
 		});
 		
 	});
+}
+
+function callSetDeviceOutputVerification(sdoSpyCalled, sdoCallObject, sdoID, sdoPre, sdoInd, sdoBin)
+{
+	spyFile.verifySetDeviceOutputCalled(sdoSpyCalled, sdoCallObject, sdoID, sdoPre, sdoInd, sdoBin);
+}
+
+
+
+function coordinateSetDeviceOutputInvalidCall(invalidSpy, invalidID, invalidPrefix, invalidIndex, invalidToggle)
+{
+	rioFile.setDeviceOutput(invalidID, invalidPrefix, invalidIndex, invalidToggle);
+	callSetDeviceOutputVerification(true, invalidSpy.lastCall, invalidID, invalidPrefix, invalidIndex, invalidToggle);
+}
+
+
+
+function coordinateCheckNodeExistInvalidCall(invalidArg)
+{
+	var invalidRes = rioFile.isNodeExists(invalidArg);
+	expect(invalidRes).to.be.false;
+}
+
+
+
+function coordinateGetIoPropertiesInvalidCall(invalidArg)
+{
+	var ioComplete = false;
+	var ioError = "";
+	
+	try
+	{
+		rioFile.getIoProperties(invalidArg);
+		ioComplete = true;
+	}
+	catch(e)
+	{
+		ioComplete = false;
+		ioError = e.message;
+	}
+	
+	var ioRes = [ioComplete, ioError];
+	commonFunctionsFile.testInvalidFunctionResult(ioRes, commonErrorStringsFile.rioPropertiesUndefined);
 }
 
 
