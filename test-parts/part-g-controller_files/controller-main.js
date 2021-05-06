@@ -20,9 +20,9 @@ function coordinateController()
 		cRioFactoriesFile.callTestRemoteIoFactories();
 		cRioIndexMainFile.callTestRemoteIoIndexMain();
 		cRioIndexNodeListFile.callTestRemoteIoIndexNodeList();
+		cRioIndexNodeRegisterFile.callTestRemoteIoIndexNodeReg();
 		*/
 		
-		cRioIndexNodeRegisterFile.callTestRemoteIoIndexNodeReg();
 		cRioIndexNodeRegisterInvalid.callTestRemoteIoIndexRegisterInvalid();
 		
 		/*

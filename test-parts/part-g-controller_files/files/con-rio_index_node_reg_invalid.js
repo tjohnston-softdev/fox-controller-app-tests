@@ -10,10 +10,10 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const rioFile = getRequiredRegisterFile(foxPath.rioIndexFile);
-const commonFile = getRequiredRegisterFile(subCommonPath.rioCommonFile);
-const spyFile = getRequiredRegisterFile("../sub-files/rio-spy_functions");
-const rioArgFile = getRequiredRegisterFile("../sub-files/rio-node_args");
+const rioFile = require(foxPath.rioIndexFile);
+const commonFile = require(subCommonPath.rioCommonFile);
+const spyFile = require("../sub-files/rio-spy_functions");
+const rioArgFile = require("../sub-files/rio-node_args");
 
 var listSpy = null;
 var registerSpy = null;
@@ -51,31 +51,8 @@ function testRemoteIoIndexRegisterInvalid()
 function handleNodeInvalidPrepare()
 {
 	describe("Preperation", function()
-	{
-		it("Remote IO Index", function(done)
-		{
-			commonFunctionsFile.testPresent(rioFile);
-			expect(rioFile).to.be.an("object");
-			
-			done();
-		});
-		
-		it("Sub-Files", function(done)
-		{
-			commonFunctionsFile.testPresent(commonFile);
-			expect(commonFile).to.be.an("object");
-			
-			commonFunctionsFile.testPresent(spyFile);
-			expect(spyFile).to.be.an("object");
-			
-			commonFunctionsFile.testPresent(rioArgFile);
-			expect(rioArgFile).to.be.an("object");
-			
-			done();
-		});
-		
-		
-		it("Spy Objects Assigned", function(done)
+	{	
+		it("Global Spy Objects Assigned", function(done)
 		{
 			listSpy = sinon.spy(rioFile, 'listRemoteIoDevices');
 			registerSpy = sinon.spy(rioFile, 'registerNode');
@@ -95,7 +72,7 @@ function handleNodeInvalidPrepare()
 
 function handleOriginalList()
 {
-	var oError = null;
+	var origErr = null;
 	
 	describe("Original Device List", function()
 	{
@@ -104,7 +81,7 @@ function handleOriginalList()
 			rioFile.listRemoteIoDevices(function(listError, listDevices)
 			{
 				originalDeviceList = listDevices;
-				oError = listError;
+				origErr = listError;
 				
 				done();
 			});
@@ -112,7 +89,7 @@ function handleOriginalList()
 		
 		it("List Successful", function(done)
 		{
-			spyFile.verifyRemoteIoListCalled(oError, listSpy.called, listSpy.lastCall);
+			spyFile.verifyRemoteIoListCalled(origErr, listSpy.called, listSpy.lastCall);
 			done();
 		});
 		
@@ -144,10 +121,10 @@ function handleTestDevice()
 			addSpy = sinon.spy(rioFile, 'addRemoteIoDevice');
 			addObject = commonFunctionsFile.cloneObject(commonJsonObjectsFile.crudDevice);
 			
-			rioFile.addRemoteIoDevice(addObject, function(aError, aID)
+			rioFile.addRemoteIoDevice(addObject, function(addRioErr, addedID)
 			{
-				addID = aID;
-				addError = aError;
+				addID = addedID;
+				addError = addRioErr;
 				done();
 			});
 		});
@@ -163,8 +140,6 @@ function handleTestDevice()
 			commonFunctionsFile.testString(addID);
 					
 			testID = addID;
-			
-			addSpy.restore();
 			done();
 		});
 		
@@ -175,38 +150,31 @@ function handleTestDevice()
 			expect(testID).to.equal(addID);
 			done();
 		});
+		
+		it("Add Spy Disposed", function(done)
+		{
+			addSpy.restore();
+			done();
+		});
 	});
 }
 
 
 function handleTestConfig()
 {
-	var conSpy = null;
-	
 	describe("Test Config", function()
 	{
-		it("Node Config Function Called", function(done)
+		it("Retrieved", function(done)
 		{
-			conSpy = sinon.spy(commonJsonObjectsFile, 'getRegisterNode');
 			registerConfigObject = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, registerArgumentObject.correctSet);
 			done();
 		});
 		
-		it("Function Successful", function(done)
-		{
-			spyFile.verifyGetNodeConfigCalled(testID, conSpy.called, conSpy.lastCall);
-			
-			conSpy.restore();
-			done();
-		});
-		
-		it("Correct Return Structure", function(done)
+		it("Correct Return Structure", function()
 		{
 			commonFunctionsFile.testPresent(registerConfigObject);
 			expect(registerConfigObject).to.be.an("object");
 			commonFile.callTestNodeConfigObjectStructure(registerConfigObject);
-			
-			done();
 		});
 		
 	});
@@ -293,22 +261,22 @@ function handleNodeID()
 	{
 		it("Unknown ID", function(done)
 		{
-			var iFormatObject = commonJsonObjectsFile.getRegisterNode(testID, "???", registerArgumentObject.correctSet);
-			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, iFormatObject);
+			var formatObject = commonJsonObjectsFile.getRegisterNode(testID, "???", registerArgumentObject.correctSet);
+			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, formatObject);
 			done();
 		});
 		
 		it("Invalid ID Type", function(done)
 		{
-			var iTypeObject = commonJsonObjectsFile.getRegisterNode(testID, -1, registerArgumentObject.correctSet);
-			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, iTypeObject);
+			var typeObject = commonJsonObjectsFile.getRegisterNode(testID, -1, registerArgumentObject.correctSet);
+			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, typeObject);
 			done();
 		});
 		
 		it("Null", function(done)
 		{
-			var iPropObject = commonJsonObjectsFile.getRegisterNode(testID, null, registerArgumentObject.correctSet);
-			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, iPropObject);
+			var propObject = commonJsonObjectsFile.getRegisterNode(testID, null, registerArgumentObject.correctSet);
+			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, propObject);
 			done();
 		});
 		
@@ -373,8 +341,8 @@ function handleIndexOverflow()
 	{
 		it("Overflow", function(done)
 		{
-			var iOverflow = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, "RO-10000");
-			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, iOverflow);
+			var overflowObject = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, "RO-10000");
+			coordinateRegisterNodeInvalidNeutral(registerArgumentObject.regMode, overflowObject);
 			
 			done();
 		});
@@ -387,16 +355,16 @@ function handleIoSetObject()
 	{	
 		it("Invalid Object Type", function(done)
 		{
-			var iTypeSet = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, -1);
-			coordinateRegisterNodeInvalidThrow(registerArgumentObject.regMode, iTypeSet, "ioSetId.split is not a function");
+			var typeSet = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, -1);
+			coordinateRegisterNodeInvalidThrow(registerArgumentObject.regMode, typeSet, "ioSetId.split is not a function");
 			
 			done();
 		});
 		
 		it("Null", function(done)
 		{
-			var iNullSet = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, null);
-			coordinateRegisterNodeInvalidThrow(registerArgumentObject.regMode, iNullSet, "Cannot read property 'split' of null");
+			var nullSet = commonJsonObjectsFile.getRegisterNode(testID, registerArgumentObject.correctID, null);
+			coordinateRegisterNodeInvalidThrow(registerArgumentObject.regMode, nullSet, "Cannot read property 'split' of null");
 			
 			done();
 		});
@@ -422,14 +390,10 @@ function coordinateRegisterNodeInvalidCallback(reMode, reObject, expectedReturnE
 	rioFile.registerNode(reMode, reObject, function(callbackError, callbackObject)
 	{
 		var callbackParse = getCallbackErrorMessage(callbackError);
-		
 		spyFile.verifyRegisterNodeCalled(registerSpy.called, registerSpy.lastCall, reMode, reObject);
+		
 		expect(registerSpy.lastCall.exception).to.be.undefined;
-		
-		commonFunctionsFile.testPresent(callbackParse);
-		commonFunctionsFile.testString(callbackParse);
 		expect(callbackObject).to.be.undefined;
-		
 		expect(callbackParse).to.equal(expectedReturnError);
 	});
 }
@@ -444,7 +408,6 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 		rioFile.registerNode(tMode, tObject, function(regErr, regObj)
 		{
 			regComplete = true;
-			console.log(regErr);
 		});
 	}
 	catch(e)
@@ -460,22 +423,22 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 function getCallbackErrorMessage(eObject)
 {
 	var eType = typeof eObject;
-	var mRes = null;
+	var messageRes = null;
 	
-	if (eType === 'object')
+	if (eType === "string")
 	{
-		mRes = eObject.message;
+		messageRes = eObject;
 	}
-	else if (eType === 'string')
+	else if (eObject !== undefined && eObject !== null && eType === "object")
 	{
-		mRes = eObject;
+		messageRes = eObject.message;
 	}
 	else
 	{
-		mRes = null;
+		messageRes = null;
 	}
 	
-	return mRes;
+	return messageRes;
 }
 
 
@@ -487,10 +450,14 @@ function handleTestDelete()
 	
 	describe("Delete Test Device", function()
 	{
-		it("Delete Function Called", function(done)
+		it("Spy Assigned", function(done)
 		{
 			deleteSpy = sinon.spy(rioFile, 'delRemoteIoDevice');
-			
+			done();
+		});
+		
+		it("Function Called", function(done)
+		{
 			rioFile.delRemoteIoDevice(testID, true, function()
 			{
 				deleteConfirmed = true;
@@ -500,13 +467,13 @@ function handleTestDelete()
 		
 		it("Delete Successful", function(done)
 		{
-			spyFile.verifyDeleteDeviceCalled(testID, true, deleteSpy.called, deleteSpy.lastCall);
-			expect(deleteSpy.lastCall.exception).to.be.undefined;
+			spyFile.verifyDeleteDeviceCalled(testID, true, deleteSpy.called, deleteSpy.firstCall);
+			expect(deleteSpy.firstCall.exception).to.be.undefined;
 			expect(deleteConfirmed).to.be.true;
 			done();
 		});
 		
-		it("Delete Test Complete", function(done)
+		it("Spy Disposed", function(done)
 		{
 			deleteSpy.restore();
 			done();
@@ -564,10 +531,11 @@ function handleNodeInvalidDispose()
 {
 	describe("Disposal", function()
 	{
-		it("Function Spy Objects", function()
+		it("Global Spy Objects Disposed", function(done)
 		{
 			listSpy.restore();
 			registerSpy.restore();
+			done();
 		});
 		
 		it("Test Device ID", function()
@@ -593,21 +561,7 @@ function handleNodeInvalidDispose()
 	});
 }
 
-
-function getRequiredRegisterFile(rPth)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(rPth);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRemoteIoIndexRegisterInvalid = testRemoteIoIndexRegisterInvalid;
+	callTestRemoteIoIndexRegisterInvalid: testRemoteIoIndexRegisterInvalid
+};
