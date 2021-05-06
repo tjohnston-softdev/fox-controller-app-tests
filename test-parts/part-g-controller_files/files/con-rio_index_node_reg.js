@@ -10,27 +10,16 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const rioFile = getIndexFileRequirement(foxPath.rioIndexFile);
+const rioFile = require(foxPath.rioIndexFile);
 const rioSetFile = require(foxPath.rioSettingsFile);
-const commonFile = getIndexFileRequirement(subCommonPath.rioCommonFile);
-const spyFile = getIndexFileRequirement("../sub-files/rio-spy_functions");
-const rioArgFile = getIndexFileRequirement("../sub-files/rio-node_args");
-
-var listAllSpy = null;
-var addObjectSpy = null;
-var getObjectSpy = null;
-var checkNodeExistSpy = null;
-var propertySpy = null;
-var nodeObjectSpy = null;
-var registerNodeSpy = null;
-var setOutputSpy = null;
-var deleteObjectSpy = null;
+const commonFile = require(subCommonPath.rioCommonFile);
+const spyFile = require("../sub-files/rio-spy_functions");
+const rioArgFile = require("../sub-files/rio-node_args");
 
 var registerArguments = null;
 var correctPrefix = null;
 var correctIndex = null;
 var correctBinary = null;
-
 
 var origDeviceList = null;
 var nodeTestID = null;
@@ -65,51 +54,6 @@ function handleNodePrepare()
 {
 	describe("Preperation", function()
 	{
-		it("Remote IO Index", function(done)
-		{
-			commonFunctionsFile.testPresent(rioFile);
-			expect(rioFile).to.be.an("object");
-			done();
-		});
-		
-		it("Remote IO Settings", function(done)
-		{
-			commonFunctionsFile.testPresent(rioSetFile);
-			expect(rioSetFile).to.be.an("object");
-			done();
-		});
-		
-		it("Sub-Files", function(done)
-		{
-			commonFunctionsFile.testPresent(commonFile);
-			expect(commonFile).to.be.an("object");
-			
-			commonFunctionsFile.testPresent(spyFile);
-			expect(spyFile).to.be.an("object");
-			
-			commonFunctionsFile.testPresent(rioArgFile);
-			expect(rioArgFile).to.be.an("object");
-			
-			done();
-		});
-		
-		
-		
-		it("Spy Objects Assigned", function(done)
-		{
-			listAllSpy = sinon.spy(rioFile, 'listRemoteIoDevices');
-			addObjectSpy = sinon.spy(rioFile, 'addRemoteIoDevice');
-			getObjectSpy = sinon.spy(rioFile, 'getRemoteIoDevice');
-			checkNodeExistSpy = sinon.spy(rioFile, 'isNodeExists');
-			propertySpy = sinon.spy(rioFile, 'getIoProperties');
-			nodeObjectSpy = sinon.spy(commonJsonObjectsFile, 'getRegisterNode');
-			registerNodeSpy = sinon.spy(rioFile, 'registerNode');
-			setOutputSpy = sinon.spy(rioFile, 'setDeviceOutput');
-			deleteObjectSpy = sinon.spy(rioFile, 'delRemoteIoDevice');
-			
-			done();
-		});
-		
 		it("Function Arguments Assigned", function(done)
 		{
 			registerArguments = rioArgFile.getRegisterArguments();
@@ -119,21 +63,27 @@ function handleNodePrepare()
 			
 			done();
 		});
-		
-		
 	});
 }
 
 
 function handleBeforeList()
 {
+	var beforeListSpy = null;
 	var beforeError = null;
 	
 	describe("List All Devices (listRemoteIoDevices, remote-io.index)", function()
 	{
+		
+		it("Spy Assigned", function(done)
+		{
+			beforeListSpy = sinon.spy(rioFile, 'listRemoteIoDevices');
+			done();
+		});
+		
 		it("List Function Called", function(done)
 		{
-			rioFile.listRemoteIoDevices((err, devices) =>
+			rioFile.listRemoteIoDevices(function(err, devices)
 			{
 				origDeviceList = devices;
 				beforeError = err;
@@ -142,15 +92,24 @@ function handleBeforeList()
 			
 		});
 		
-		it("Function Called Successfully", function()
+		it("Function Called Successfully", function(done)
 		{
-			spyFile.verifyRemoteIoListCalled(beforeError, listAllSpy.called, listAllSpy.lastCall);
+			spyFile.verifyRemoteIoListCalled(beforeError, beforeListSpy.called, beforeListSpy.firstCall);
+			done();
 		});
 		
-		it("Return Valid", function()
+		it("Return Valid", function(done)
 		{
 			commonFile.callTestDeviceListValidReturnDynamic(origDeviceList);
+			done();
 		});
+		
+		it("Spy Disposed", function(done)
+		{
+			beforeListSpy.restore();
+			done();
+		});
+		
 	});	
 }
 
@@ -158,37 +117,49 @@ function handleStaticAdd()
 {
 	describe("Add Static Object (addRemoteIoDevice, remote-io.index)", function()
 	{
-		var sCallbackID = null;
-		var sCallbackErr = null;
+		var staticAddSpy = null;
+		var staticID = null;
+		var staticErr = null;
+		
+		it("Spy Assigned", function(done)
+		{
+			staticAddSpy = sinon.spy(rioFile, 'addRemoteIoDevice');
+			done();
+		});
 		
 		it("Add Function Called", function(done)
 		{
-			rioFile.addRemoteIoDevice(commonJsonObjectsFile.nodeDevice, function(aError, aID)
+			rioFile.addRemoteIoDevice(commonJsonObjectsFile.nodeDevice, function(addingErr, addedID)
 			{
-				sCallbackID = aID;
-				sCallbackErr = aError;
+				staticID = addedID;
+				staticErr = addingErr;
 				done();
 			});
 		});
 		
 		it("Add Successful", function(done)
 		{
-			spyFile.verifyAddDeviceCalled(commonJsonObjectsFile.nodeDevice, addObjectSpy.called, addObjectSpy.lastCall);
+			spyFile.verifyAddDeviceCalled(commonJsonObjectsFile.nodeDevice, staticAddSpy.called, staticAddSpy.firstCall);
 			
-			expect(addObjectSpy.lastCall.exception).to.be.undefined;
-			expect(sCallbackErr).to.be.null;
+			expect(staticAddSpy.firstCall.exception).to.be.undefined;
+			expect(staticErr).to.be.null;
 			
-			commonFunctionsFile.testPresent(sCallbackID);
-			commonFunctionsFile.testString(sCallbackID);
+			commonFunctionsFile.testPresent(staticID);
+			commonFunctionsFile.testString(staticID);
 					
-			nodeTestID = sCallbackID;
+			nodeTestID = staticID;
 			done();
 		});
 		
 		it("Object ID Retained", function(done)
 		{
-			commonFunctionsFile.testPresent(nodeTestID);
-			commonFunctionsFile.testString(nodeTestID);
+			expect(nodeTestID).to.equal(staticID);
+			done();
+		});
+		
+		it("Spy Disposed", function(done)
+		{
+			staticAddSpy.restore();
 			done();
 		});
 		
@@ -199,23 +170,30 @@ function handleStaticGet()
 {
 	describe("Get Static Object (getRemoteIoDevice, remote-io.index)", function()
 	{
-		var sObjectError = null;
+		var staticGetSpy = null;
+		var staticErr = null;
+		
+		it("Spy Assigned", function(done)
+		{
+			staticGetSpy = sinon.spy(rioFile, 'getRemoteIoDevice');
+			done();
+		});
 		
 		it("Get Function Called", function(done)
 		{
-			rioFile.getRemoteIoDevice(nodeTestID, (gError, gDevice) =>
+			rioFile.getRemoteIoDevice(nodeTestID, function(gError, gDevice)
 			{
 				nodeTestObject = gDevice;
-				sObjectError = gError;
+				staticErr = gError;
 				done();
 			});
 		});
 		
 		it("Get Successful", function(done)
 		{
-			spyFile.verifyGetDeviceCalled(nodeTestID, getObjectSpy.called, getObjectSpy.lastCall);
-			expect(getObjectSpy.lastCall.exception).to.be.undefined;
-			expect(sObjectError).to.be.null;
+			spyFile.verifyGetDeviceCalled(nodeTestID, staticGetSpy.called, staticGetSpy.firstCall);
+			expect(staticGetSpy.firstCall.exception).to.be.undefined;
+			expect(staticErr).to.be.null;
 			
 			commonFunctionsFile.testPresent(nodeTestObject);
 			expect(nodeTestObject).to.be.an("object");
@@ -231,6 +209,12 @@ function handleStaticGet()
 			done();
 		});
 		
+		it("Spy Disposed", function(done)
+		{
+			staticGetSpy.restore();
+			done();
+		});
+		
 		
 	});
 }
@@ -240,25 +224,19 @@ function handleCheckNodeExist()
 {
 	describe("Function - Check Node Exists (isNodeExists, remote-io.index)", function()
 	{
-		var checkNodeExistReturn = null;
+		var checkExistRes = null;
 		
 		describe("Valid Device ID", function()
 		{
 			it("Function Called", function(done)
 			{
-				checkNodeExistReturn = rioFile.isNodeExists(nodeTestID);
+				checkExistRes = rioFile.isNodeExists(nodeTestID);
 				done();
-			});
-			
-			it("Call Successful", function()
-			{
-				spyFile.verifyCheckNodeExistCalled(nodeTestID, checkNodeExistSpy.called, checkNodeExistSpy.lastCall);
-				expect(checkNodeExistSpy.lastCall.exception).to.be.undefined;
 			});
 			
 			it("Correct Return Value", function()
 			{
-				expect(checkNodeExistReturn).to.be.true;
+				expect(checkExistRes).to.be.true;
 			});
 			
 		});
@@ -288,55 +266,46 @@ function handleCheckNodeExist()
 
 
 
-
-
-
 function handleGetIoProperties()
 {
 	describe("Function - Get IO Properties (getIoProperties, remote-io.index)", function()
 	{
-		var getIoPropertiesReturn = null;
+		var propertyRes = null;
 		
 		describe("Valid Device ID", function()
 		{
 			it("Function Called", function(done)
 			{
-				getIoPropertiesReturn = rioFile.getIoProperties(nodeTestID);
+				propertyRes = rioFile.getIoProperties(nodeTestID);
 				done();
-			});
-			
-			it("Call Successful", function()
-			{
-				spyFile.verifyGetIoPropertiesCalled(nodeTestID, propertySpy.called, propertySpy.lastCall);
-				expect(propertySpy.lastCall.exception).to.be.undefined;
 			});
 			
 			it("Property Object Returned", function()
 			{
-				commonFunctionsFile.testPresent(getIoPropertiesReturn);
-				expect(getIoPropertiesReturn).to.be.an("object");
+				commonFunctionsFile.testPresent(propertyRes);
+				expect(propertyRes).to.be.an("object");
 			});
 			
 			it("Object Structure Valid", function()
 			{
-				commonFunctionsFile.testObjectPropertyDefinition(getIoPropertiesReturn, 'name');
-				commonFunctionsFile.testObjectPropertyDefinition(getIoPropertiesReturn, 'STATUS');
-				commonFunctionsFile.testObjectPropertyDefinition(getIoPropertiesReturn, 'CONTROL');
+				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'name');
+				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'STATUS');
+				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'CONTROL');
 				
-				commonFunctionsFile.testString(getIoPropertiesReturn.name);
-				commonFunctionsFile.testArrayPopulated(getIoPropertiesReturn.STATUS);
-				commonFunctionsFile.testArrayPopulated(getIoPropertiesReturn.CONTROL);
+				commonFunctionsFile.testString(propertyRes.name);
+				commonFunctionsFile.testArrayPopulated(propertyRes.STATUS);
+				commonFunctionsFile.testArrayPopulated(propertyRes.CONTROL);
 			});
 			
 			it("Status and Control Arrays Valid", function()
 			{
-				commonFile.callTestPropertyArrayStructure(getIoPropertiesReturn.STATUS);
-				commonFile.callTestPropertyArrayStructure(getIoPropertiesReturn.CONTROL);
+				commonFile.callTestPropertyArrayStructure(propertyRes.STATUS);
+				commonFile.callTestPropertyArrayStructure(propertyRes.CONTROL);
 			});
 			
-			it("Matching Name", function()
+			it("Matching Names", function()
 			{
-				expect(getIoPropertiesReturn.name).to.equal(commonJsonObjectsFile.nodeDevice.name);
+				expect(propertyRes.name).to.equal(commonJsonObjectsFile.nodeDevice.name);
 			});
 			
 		});
@@ -371,15 +340,9 @@ function handleNodeConfig()
 {
 	describe("Function - Get Node Config Object (getRegisterNode, common-objects)", function()
 	{
-		it("Node Config Function Called", function(done)
+		it("Function Called", function(done)
 		{
 			nodeConfigObject = commonJsonObjectsFile.getRegisterNode(nodeTestID, registerArguments.correctID, registerArguments.correctSet);
-			done();
-		});
-		
-		it("Node Config Function Successful", function(done)
-		{
-			spyFile.verifyGetNodeConfigCalled(nodeTestID, nodeObjectSpy.called, nodeObjectSpy.lastCall);
 			done();
 		});
 		
@@ -400,7 +363,10 @@ function handleNodeConfig()
 
 function handleRegisterNode()
 {
+	var registerSpy = null;
+	var unregisterNodeSpy = null;
 	var registerReturn = null;
+	var registerComplete = false;
 	
 	describe("Function - Register Node (registerNode, remote-io.index)", function()
 	{	
@@ -408,29 +374,42 @@ function handleRegisterNode()
 		describe("Valid Register (registerNode, remote-io-index)", function()
 		{
 			
-			it("Register Function Called", function(done)
+			it("Register Spy Assigned", function(done)
+			{
+				registerSpy = sinon.spy(rioFile, 'registerNode');
+				done();
+			});
+			
+			it("Register Called", function(done)
 			{
 				rioFile.registerNode(registerArguments.regMode, nodeConfigObject, function(retError, retObject)
 				{
-					commonFunctionsFile.displayCallbackMessage("Register Function Complete.", retError, retObject);
+					registerComplete = true;
 				});
 				
 				done();
 			});
 			
 			
-			it("Register Function Successful", function(done)
+			it("Register Successful", function(done)
 			{
-				spyFile.verifyRegisterNodeCalled(registerNodeSpy.called, registerNodeSpy.lastCall, registerArguments.regMode, nodeConfigObject);
-				expect(registerNodeSpy.lastCall.exception).to.be.undefined;
+				spyFile.verifyRegisterNodeCalled(registerSpy.called, registerSpy.firstCall, registerArguments.regMode, nodeConfigObject);
+				expect(registerSpy.firstCall.exception).to.be.undefined;
 				done();
 			});
 			
 			it("Callback Function Returned", function(done)
 			{
-				commonFunctionsFile.testPresent(registerNodeSpy.lastCall.returnValue);
-				expect(registerNodeSpy.lastCall.returnValue).to.be.a("function");
-				registerReturn = registerNodeSpy.lastCall.returnValue;
+				commonFunctionsFile.testPresent(registerSpy.firstCall.returnValue);
+				expect(registerSpy.firstCall.returnValue).to.be.a("function");
+				registerReturn = registerSpy.firstCall.returnValue;
+				done();
+			});
+			
+			
+			it("Register Spy Disposed", function(done)
+			{
+				registerSpy.restore();
 				done();
 			});
 			
@@ -438,7 +417,6 @@ function handleRegisterNode()
 		
 		describe("Valid Unregister (registerNode callback, device-model.class)", function()
 		{
-			var unregisterNodeSpy = null;
 			
 			it("Callback Function Remembered", function(done)
 			{
@@ -490,11 +468,20 @@ function handleRegisterNode()
 function handleSetDeviceOutput()
 {
 	
+	var setDeviceOutputSpy = null;
+	var setInvalidSpy = null;
+	
 	describe("Function - Set Device Output (remote-io.index, setDeviceOutput)", function()
 	{
 		
 		describe("Valid Device ID", function()
 		{
+			it("Spy Assigned", function(done)
+			{
+				setDeviceOutputSpy = sinon.spy(rioFile, 'setDeviceOutput');
+				done();
+			});
+			
 			it("Set Output Function Called", function(done)
 			{
 				rioFile.setDeviceOutput(nodeTestID, correctPrefix, correctIndex, correctBinary);
@@ -503,8 +490,14 @@ function handleSetDeviceOutput()
 			
 			it("Set Output Function Successful", function()
 			{
-				callSetDeviceOutputVerification(nodeTestID, correctPrefix, correctIndex, correctBinary);
-				expect(setOutputSpy.lastCall.exception).to.be.undefined;
+				callSetDeviceOutputVerification(setDeviceOutputSpy.called, setDeviceOutputSpy.firstCall, nodeTestID, correctPrefix, correctIndex, correctBinary);
+				expect(setDeviceOutputSpy.firstCall.exception).to.be.undefined;
+			});
+			
+			it("Spy Disposed", function(done)
+			{
+				setDeviceOutputSpy.restore();
+				done();
 			});
 			
 		});
@@ -512,42 +505,60 @@ function handleSetDeviceOutput()
 		
 		describe("Invalid Calls", function()
 		{
-			it("Unknown Device ID", function()
+			it("Spy Assigned", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(commonJsonObjectsFile.unknownID, correctPrefix, correctIndex, correctBinary);
+				setInvalidSpy = sinon.spy(rioFile, 'setDeviceOutput');
+				done();
 			});
 			
-			it("Invalid ID Type", function()
+			it("Unknown Device ID", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(-1, correctPrefix, correctIndex, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(null, correctPrefix, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, commonJsonObjectsFile.unknownID, correctPrefix, correctIndex, correctBinary);
+				done();
 			});
 			
-			it("Invalid Prefix", function()
+			it("Invalid ID Type", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, "XYZ", correctIndex, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, -1, correctIndex, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, null, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, -1, correctPrefix, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, null, correctPrefix, correctIndex, correctBinary);
+				done();
 			});
 			
-			it("Invalid Index", function()
+			it("Invalid Prefix", function(done)
+			{
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, "XYZ", correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, -1, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, null, correctIndex, correctBinary);
+				done();
+			});
+			
+			it("Invalid Index", function(done)
 			{	
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, NaN, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, "3", correctBinary);
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, null, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, NaN, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, "3", correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, null, correctBinary);
+				done();
 			});
 			
-			it("Overflow Index", function()
+			it("Overflow Index", function(done)
 			{
 				var indexOverflowError = "Example Message";
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, 10000, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, 10000, correctBinary);
+				done();
 			});
 			
-			it("Invalid Binary Signal", function()
+			it("Invalid Binary Signal", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, correctIndex, "UNKNOWN");
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, correctIndex, -1);
-				coordinateSetDeviceOutputInvalidCall(nodeTestID, correctPrefix, correctIndex, null);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, correctIndex, "UNKNOWN");
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, correctIndex, -1);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, correctIndex, null);
+				done();
+			});
+			
+			it("Spy Disposed", function(done)
+			{
+				setInvalidSpy.restore();
+				done();
 			});
 			
 		});
@@ -559,28 +570,25 @@ function handleSetDeviceOutput()
 
 
 
-function callSetDeviceOutputVerification(sdoID, sdoPre, sdoInd, sdoBin)
+function callSetDeviceOutputVerification(sdoSpyCalled, sdoCallObject, sdoID, sdoPre, sdoInd, sdoBin)
 {
-	spyFile.verifySetDeviceOutputCalled(setOutputSpy.called, setOutputSpy.lastCall, sdoID, sdoPre, sdoInd, sdoBin);
+	spyFile.verifySetDeviceOutputCalled(sdoSpyCalled, sdoCallObject, sdoID, sdoPre, sdoInd, sdoBin);
 }
 
 
 
-function coordinateSetDeviceOutputInvalidCall(invalidID, invalidPrefix, invalidIndex, invalidToggle)
+function coordinateSetDeviceOutputInvalidCall(invalidCallObject, invalidID, invalidPrefix, invalidIndex, invalidToggle)
 {
 	rioFile.setDeviceOutput(invalidID, invalidPrefix, invalidIndex, invalidToggle);
-	callSetDeviceOutputVerification(invalidID, invalidPrefix, invalidIndex, invalidToggle);
+	callSetDeviceOutputVerification(true, invalidCallObject, invalidID, invalidPrefix, invalidIndex, invalidToggle);
 }
 
 
 
 function coordinateCheckNodeExistInvalidCall(invalidArg)
 {
-	rioFile.isNodeExists(invalidArg);
-	
-	spyFile.verifyCheckNodeExistCalled(invalidArg, checkNodeExistSpy.called, checkNodeExistSpy.lastCall);
-	expect(checkNodeExistSpy.lastCall.exception).to.be.undefined;
-	expect(checkNodeExistSpy.lastCall.returnValue).to.be.false;
+	var invalidRes = rioFile.isNodeExists(invalidArg);
+	expect(invalidRes).to.be.false;
 }
 
 
@@ -610,22 +618,36 @@ function handleStaticDeleteObject()
 {
 	describe("Delete Static Object (delRemoteIoDevice, remote-io-index)", function()
 	{
-		var objCallFlag = false;
+		var deleteSpy = null;
+		var deleteFinished = false;
+		
+		
+		it("Spy Assigned", function(done)
+		{
+			deleteSpy = sinon.spy(rioFile, 'delRemoteIoDevice');
+			done();
+		});
 		
 		it("Delete Function Called", function(done)
 		{
 			rioFile.delRemoteIoDevice(nodeTestID, true, function()
 			{
-				objCallFlag = true;
+				deleteFinished = true;
 				done();
 			});
 		});
 		
 		it("Delete Successful", function(done)
 		{
-			spyFile.verifyDeleteDeviceCalled(nodeTestID, true, deleteObjectSpy.called, deleteObjectSpy.lastCall);
-			expect(deleteObjectSpy.lastCall.exception).to.be.undefined;
-			expect(objCallFlag).to.be.true;
+			spyFile.verifyDeleteDeviceCalled(nodeTestID, true, deleteSpy.called, deleteSpy.firstCall);
+			expect(deleteSpy.firstCall.exception).to.be.undefined;
+			expect(deleteFinished).to.be.true;
+			done();
+		});
+		
+		it("Spy Disposed", function(done)
+		{
+			deleteSpy.restore();
 			done();
 		});
 		
@@ -636,16 +658,23 @@ function handleStaticDeleteObject()
 
 function handleAfterList()
 {
-	var afterList = null;
+	var afterListSpy = null;
+	var afterListArray = null;
 	var afterError = null;
 	
 	describe("Compare Device List (listRemoteIoDevices, remote-io.index)", function()
 	{
-		it("List Function Called", function(done)
+		it("Spy Assigned", function(done)
 		{
-			rioFile.listRemoteIoDevices((aErr, aDevices) =>
+			afterListSpy = sinon.spy(rioFile, 'listRemoteIoDevices');
+			done();
+		});
+		
+		it("Function Called", function(done)
+		{
+			rioFile.listRemoteIoDevices(function(aErr, aDevices)
 			{
-				afterList = aDevices;
+				afterListArray = aDevices;
 				afterError = aErr;
 				done();
 			});
@@ -653,25 +682,31 @@ function handleAfterList()
 		});
 		
 		
-		it("Function Called Successfully", function()
+		it("Call Successful", function()
 		{
-			spyFile.verifyRemoteIoListCalled(afterError, listAllSpy.called, listAllSpy.lastCall);
+			spyFile.verifyRemoteIoListCalled(afterError, afterListSpy.called, afterListSpy.firstCall);
 		});
 		
 		it("Return Valid", function()
 		{
-			commonFile.callTestDeviceListValidReturnDynamic(afterList);
+			commonFile.callTestDeviceListValidReturnDynamic(afterListArray);
 		});
 		
 		it("Test Device Absent", function()
 		{
-			var listFlag = commonFile.callTestIdListed(afterList, nodeTestID);
+			var listFlag = commonFile.callTestIdListed(afterListArray, nodeTestID);
 			expect(listFlag).to.be.false;
 		});
 		
 		it("Device List Intact", function()
 		{
-			expect(afterList).to.deep.equal(origDeviceList);
+			expect(afterListArray).to.deep.equal(origDeviceList);
+		});
+		
+		it("Spy Disposed", function(done)
+		{
+			afterListSpy.restore();
+			done();
 		});
 		
 		
@@ -682,20 +717,7 @@ function handleAfterList()
 function handleNodeDispose()
 {
 	describe("Dispose", function()
-	{
-		it("Spy Objects", function()
-		{
-			listAllSpy.restore();
-			addObjectSpy.restore();
-			getObjectSpy.restore();
-			checkNodeExistSpy.restore();
-			propertySpy.restore();
-			nodeObjectSpy.restore();
-			registerNodeSpy.restore();
-			setOutputSpy.restore();
-			deleteObjectSpy.restore();
-		});
-		
+	{	
 		it("Function Arguments", function()
 		{
 			registerArguments = null;
@@ -720,23 +742,7 @@ function handleNodeDispose()
 }
 
 
-
-
-
-function getIndexFileRequirement(frPath)
+module.exports =
 {
-	var res = null;
-	
-	try
-	{
-		res = require(frPath);
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
-	return res;
-}
-
-exports.callTestRemoteIoIndexNodeReg = testRemoteIoIndexNodeReg;
+	callTestRemoteIoIndexNodeReg: testRemoteIoIndexNodeReg
+};
