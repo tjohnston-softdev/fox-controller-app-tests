@@ -1,25 +1,14 @@
 function defineRegisterArguments()
 {
-	var res = null;
+	var res = {};
 	
-	try
-	{
-		res =
-		{
-			"regMode": 'STATUS',
-			"correctID": 'b9d6e1a.088782',
-			"correctSet": 'RO-0',
-			"invalidSet": 'XY-Z'
-		};
-	}
-	catch(e)
-	{
-		res = null;
-	}
-	
+	res["regMode"] = 'STATUS';
+	res["correctID"] = 'b9d6e1a.088782';
+	res["correctSet"] = 'RO-0';
+	res["invalidSet"] = 'XY-Z';
 	
 	return res;
 }
 
-exports.getRegisterArguments = defineRegisterArguments;
-exports.isObjectType = true;
+
+module.exports = defineRegisterArguments();

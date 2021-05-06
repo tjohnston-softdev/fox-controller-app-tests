@@ -13,12 +13,11 @@ const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const rioFile = require(foxPath.rioIndexFile);
 const commonFile = require(subCommonPath.rioCommonFile);
 const spyFile = require("../sub-files/rio-spy_functions");
-const rioArgFile = require("../sub-files/rio-node_args");
+const registerArgumentObject = require("../sub-files/rio-node_args");
 
 var listSpy = null;
 var registerSpy = null;
 
-var registerArgumentObject = null;
 var originalDeviceList = null;
 var testID = null;
 var registerConfigObject = null;
@@ -59,13 +58,6 @@ function handleNodeInvalidPrepare()
 			
 			done();
 		});
-		
-		
-		it("Arguments Retrieved", function(done)
-		{
-			registerArgumentObject = rioArgFile.getRegisterArguments();
-			done();
-		});	
 		
 	});
 }
@@ -541,11 +533,6 @@ function handleNodeInvalidDispose()
 		it("Test Device ID", function()
 		{
 			testID = null;
-		});
-		
-		it("Argument Object", function()
-		{
-			registerArgumentObject = null;
 		});
 		
 		it("Original Device List", function()

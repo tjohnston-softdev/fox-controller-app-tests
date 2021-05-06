@@ -14,22 +14,16 @@ function coordinateController()
 {
 	describe("G - Controller Files", function()
 	{
-		/*
 		cDeviceSettingsFile.callTestDeviceSettings();
 		cDeviceClassesFile.callTestDeviceClasses();
 		cRioFactoriesFile.callTestRemoteIoFactories();
 		cRioIndexMainFile.callTestRemoteIoIndexMain();
 		cRioIndexNodeListFile.callTestRemoteIoIndexNodeList();
 		cRioIndexNodeRegisterFile.callTestRemoteIoIndexNodeReg();
-		*/
-		
 		cRioIndexNodeRegisterInvalid.callTestRemoteIoIndexRegisterInvalid();
-		
-		/*
 		cServiceMainFile.callTestServiceMain();
 		cSettingsMainFile.callTestControllerSettings();
 		cNodeRedMainFile.callTestNodeRedSettings();
-		*/
 	});
 }
 

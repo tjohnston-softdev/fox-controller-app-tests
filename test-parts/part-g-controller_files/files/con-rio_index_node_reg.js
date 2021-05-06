@@ -14,9 +14,8 @@ const rioFile = require(foxPath.rioIndexFile);
 const rioSetFile = require(foxPath.rioSettingsFile);
 const commonFile = require(subCommonPath.rioCommonFile);
 const spyFile = require("../sub-files/rio-spy_functions");
-const rioArgFile = require("../sub-files/rio-node_args");
+const registerArguments = require("../sub-files/rio-node_args");
 
-var registerArguments = null;
 var correctPrefix = null;
 var correctIndex = null;
 var correctBinary = null;
@@ -56,7 +55,6 @@ function handleNodePrepare()
 	{
 		it("Function Arguments Assigned", function(done)
 		{
-			registerArguments = rioArgFile.getRegisterArguments();
 			correctPrefix = rioSetFile.ioPrefixes.RO;
 			correctIndex = 3;
 			correctBinary = rioSetFile.binSignal.ON;
@@ -673,7 +671,6 @@ function handleNodeDispose()
 	{	
 		it("Function Arguments", function()
 		{
-			registerArguments = null;
 			correctPrefix = null;
 			correctIndex = null;
 			correctBinary = null;
