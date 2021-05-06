@@ -513,45 +513,44 @@ function handleSetDeviceOutput()
 			
 			it("Unknown Device ID", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, commonJsonObjectsFile.unknownID, correctPrefix, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, commonJsonObjectsFile.unknownID, correctPrefix, correctIndex, correctBinary);
 				done();
 			});
 			
 			it("Invalid ID Type", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, -1, correctPrefix, correctIndex, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, null, correctPrefix, correctIndex, correctBinary);
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, -1, correctPrefix, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, null, correctPrefix, correctIndex, correctBinary);
 				done();
 			});
 			
 			it("Invalid Prefix", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, "XYZ", correctIndex, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, -1, correctIndex, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, null, correctIndex, correctBinary);
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, "XYZ", correctIndex, correctBinary);
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, -1, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, null, correctIndex, correctBinary);
 				done();
 			});
 			
 			it("Invalid Index", function(done)
 			{	
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, NaN, correctBinary);
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, "3", correctBinary);
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, null, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, NaN, correctBinary);
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, "3", correctBinary);
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, null, correctBinary);
 				done();
 			});
 			
 			it("Overflow Index", function(done)
 			{
-				var indexOverflowError = "Example Message";
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, 10000, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, 10000, correctBinary);
 				done();
 			});
 			
 			it("Invalid Binary Signal", function(done)
 			{
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, correctIndex, "UNKNOWN");
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, correctIndex, -1);
-				coordinateSetDeviceOutputInvalidCall(setInvalidSpy.lastCall, nodeTestID, correctPrefix, correctIndex, null);
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, "UNKNOWN");
+				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, -1);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, null);
 				done();
 			});
 			
@@ -577,10 +576,10 @@ function callSetDeviceOutputVerification(sdoSpyCalled, sdoCallObject, sdoID, sdo
 
 
 
-function coordinateSetDeviceOutputInvalidCall(invalidCallObject, invalidID, invalidPrefix, invalidIndex, invalidToggle)
+function coordinateSetDeviceOutputInvalidCall(invalidSpy, invalidID, invalidPrefix, invalidIndex, invalidToggle)
 {
 	rioFile.setDeviceOutput(invalidID, invalidPrefix, invalidIndex, invalidToggle);
-	callSetDeviceOutputVerification(true, invalidCallObject, invalidID, invalidPrefix, invalidIndex, invalidToggle);
+	callSetDeviceOutputVerification(true, invalidSpy.lastCall, invalidID, invalidPrefix, invalidIndex, invalidToggle);
 }
 
 
