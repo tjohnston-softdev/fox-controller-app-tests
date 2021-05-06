@@ -609,7 +609,7 @@ function coordinateGetIoPropertiesInvalidCall(invalidArg)
 	}
 	
 	var ioRes = [ioComplete, ioError];
-	commonFunctionsFile.testInvalidFunctionResult(ioRes, commonErrorStringsFile.getPropertiesUndefined);
+	commonFunctionsFile.testInvalidFunctionResult(ioRes, commonErrorStringsFile.rioPropertiesUndefined);
 }
 
 
