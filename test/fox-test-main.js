@@ -11,12 +11,9 @@ const onlinePart = require("../test-parts/part-d-online_checks/online-main");
 const settingsPart = require("../test-parts/part-e-rio_settings/rio-settings-main");
 const modelsPart = require("../test-parts/part-f-controller_models/models-main");
 const controllerPart = require("../test-parts/part-g-controller_files/controller-main");
-
-/*
 const deviceApiPart = require("../test-parts/part-h-api_requests/api-main");
-const frontendPart = require("../test-parts/part-i-api_frontend/front-main");
-const processPart = require("../test-parts/part-j-restart_controller/restart-main");
-*/
+//const frontendPart = require("../test-parts/part-i-api_frontend/front-main");
+//const processPart = require("../test-parts/part-j-restart_controller/restart-main");
 
 chai.use(chaiThings);
 
