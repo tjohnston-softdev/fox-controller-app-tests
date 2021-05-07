@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const validator = require("validator");
-const requestModule = require("request");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
@@ -478,14 +477,14 @@ function runDeleteResults(deleteObj, flagArg)
 }
 
 
-function runRequestUrlInvalid(foArg, fiArg, eError)
+function runRequestUrlInvalid(folderArg, fileArg, eError)
 {
 	var comp = false;
 	var msg = null;
 	
 	try
 	{
-		requestFile.callWriteApiUrl(foArg, fiArg);
+		requestFile.callWriteApiUrl(folderArg, fileArg);
 		comp = true;
 	}
 	catch(e)
@@ -494,18 +493,18 @@ function runRequestUrlInvalid(foArg, fiArg, eError)
 		msg = e.message;
 	}
 	
-	var iRes = [comp, msg];
-	commonFunctionsFile.testInvalidFunctionResult(iRes, eError);
+	var invalidUrlRes = [comp, msg];
+	commonFunctionsFile.testInvalidFunctionResult(invalidUrlRes, eError);
 }
 
-function runReadResponseInvalidArray(iArg, eError)
+function runReadResponseInvalidArray(invalidArg, eError)
 {
 	var comp = false;
 	var msg = null;
 	
 	try
 	{
-		requestFile.callReadApiResponseArray(iArg);
+		requestFile.callReadApiResponseArray(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -514,18 +513,18 @@ function runReadResponseInvalidArray(iArg, eError)
 		msg = e.message;
 	}
 	
-	var iRes = [comp, msg];
-	commonFunctionsFile.testInvalidFunctionResult(iRes, eError);
+	var invalidArrayRes = [comp, msg];
+	commonFunctionsFile.testInvalidFunctionResult(invalidArrayRes, eError);
 }
 
-function runReadResponseInvalidObject(iArg, eError)
+function runReadResponseInvalidObject(invalidArg, eError)
 {
 	var comp = false;
 	var msg = null;
 	
 	try
 	{
-		requestFile.callReadApiResponseObject(iArg);
+		requestFile.callReadApiResponseObject(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -534,18 +533,18 @@ function runReadResponseInvalidObject(iArg, eError)
 		msg = e.message;
 	}
 	
-	var iRes = [comp, msg];
-	commonFunctionsFile.testInvalidFunctionResult(iRes, eError);
+	var invalidObjectRes = [comp, msg];
+	commonFunctionsFile.testInvalidFunctionResult(invalidObjectRes, eError);
 }
 
-function runReadResponseInvalidString(iArg, eError)
+function runReadResponseInvalidString(invalidArg, eError)
 {
 	var comp = false;
 	var msg = null;
 	
 	try
 	{
-		requestFile.callReadApiResponseString(iArg);
+		requestFile.callReadApiResponseString(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -554,19 +553,19 @@ function runReadResponseInvalidString(iArg, eError)
 		msg = e.message;
 	}
 	
-	var iRes = [comp, msg];
-	commonFunctionsFile.testInvalidFunctionResult(iRes, eError);
+	var invalidStringRes = [comp, msg];
+	commonFunctionsFile.testInvalidFunctionResult(invalidStringRes, eError);
 }
 
 
-function runReadResponseInvalidError(iArg, eError)
+function runReadResponseInvalidError(invalidArg, eError)
 {
 	var comp = false;
 	var msg = null;
 	
 	try
 	{
-		requestFile.callReadApiResponseError(iArg);
+		requestFile.callReadApiResponseError(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -575,41 +574,41 @@ function runReadResponseInvalidError(iArg, eError)
 		msg = e.message;
 	}
 	
-	var iRes = [comp, msg];
-	commonFunctionsFile.testInvalidFunctionResult(iRes, eError);
+	var invalidRes = [comp, msg];
+	commonFunctionsFile.testInvalidFunctionResult(invalidRes, eError);
 }
 
 
-function runRefuseError(reArg)
+function runRefuseError(refuseArg)
 {
-	var supposedText = "API request failed. - " + reArg;
-	var rCompleted = false;
-	var rMessage = "";
+	var supposedText = "API request failed. - " + refuseArg;
+	var refComplete = false;
+	var refMsg = "";
 	
 	try
 	{
-		requestFile.showApiRequestRefusedError(reArg);
-		rCompleted = true;
+		requestFile.showApiRequestRefusedError(refuseArg);
+		refComplete = true;
 	}
 	catch(e)
 	{
-		rCompleted = false;
-		rMessage = e.message;
+		refComplete = false;
+		refMsg = e.message;
 	}
 	
-	var reResult = [rCompleted, rMessage];
+	var reResult = [refComplete, refMsg];
 	commonFunctionsFile.testInvalidFunctionResult(reResult, supposedText);
 }
 
 
-function runOptionError(oeUrl, oeMethod, oeBody, oeText)
+function runOptionError(urlArg, methodArg, bodyArg, eError)
 {
 	var oComplete = false;
 	var oMessage = "";
 	
 	try
 	{
-		requestFile.getRequestOptions(oeUrl, oeMethod, oeBody);
+		requestFile.getRequestOptions(urlArg, methodArg, bodyArg);
 	}
 	catch(e)
 	{
@@ -618,7 +617,7 @@ function runOptionError(oeUrl, oeMethod, oeBody, oeText)
 	}
 	
 	var oResult = [oComplete, oMessage];
-	commonFunctionsFile.testInvalidFunctionResult(oResult, oeText);
+	commonFunctionsFile.testInvalidFunctionResult(oResult, eError);
 	
 }
 

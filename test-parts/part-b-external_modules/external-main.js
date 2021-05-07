@@ -6,8 +6,8 @@ function coordinateExternal()
 {
 	describe("B - External Modules", function()
 	{
-		//eOperatingSystemFile.callTestOsDependency();
-		//eValidatorFile.callTestValidatorDependency();
+		eOperatingSystemFile.callTestOsDependency();
+		eValidatorFile.callTestValidatorDependency();
 		eNeedleFile.callTestNeedle();
 	});
 }

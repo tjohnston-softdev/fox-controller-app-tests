@@ -1,6 +1,6 @@
 const commonPaths = require("../../../app/paths/files/app-paths");
 const requestFile = require(commonPaths.requestApi);
-const request = require('request');
+const needle = require("needle");
 
 function testOnline()
 {
@@ -29,7 +29,7 @@ function coordinateOnlineCheck(onlineFlag)
 	
 	it("Application Request", function(done)
 	{
-		request(requestFile.hostUrl, function(rError, rReturn)
+		needle.get(requestFile.hostUrl, {timeout: 1750}, function(rError, rReturn)
 		{
 			reqError = rError;
 			reqReturn = rReturn;
@@ -51,33 +51,33 @@ function coordinateOnlineCheck(onlineFlag)
 	
 }
 
-function writeCheckDescription(oFlag)
+function writeCheckDescription(desiredStatus)
 {
-	var cDesc = "";
+	var descRes = "";
 	
-	if (oFlag === true)
+	if (desiredStatus === true)
 	{
-		cDesc = "Currently Online";
+		descRes = "Currently Online";
 	}
 	else
 	{
-		cDesc = "Currently Offline";
+		descRes = "Currently Offline";
 	}
 	
-	return cDesc;
+	return descRes;
 }
 
-function validateOverallResult(expectedOnlineFlag, resultingOnlineFlag)
+function validateOverallResult(expectStatus, resultStatus)
 {
 	var resultSuccessful = false;
 	
-	if (expectedOnlineFlag === true)
+	if (expectStatus === true)
 	{
-		resultSuccessful = runOnlineCheck(resultingOnlineFlag);
+		resultSuccessful = runOnlineCheck(resultStatus);
 	}
 	else
 	{
-		resultSuccessful = runOfflineCheck(resultingOnlineFlag);
+		resultSuccessful = runOfflineCheck(resultStatus);
 	}
 	
 }
