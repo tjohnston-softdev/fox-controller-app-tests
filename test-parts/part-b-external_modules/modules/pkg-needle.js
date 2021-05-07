@@ -16,6 +16,7 @@ function testNeedle()
 		verifyPostRequest();
 		verifyPutRequest();
 		verifyDeleteRequest();
+		verifyTimeoutRequest();
 	});
 }
 
@@ -119,6 +120,26 @@ function verifyDeleteRequest()
 		});
 	});
 	
+}
+
+
+function verifyTimeoutRequest()
+{
+	describe("Timeout", function()
+	{
+		it("Caught", function(done)
+		{
+			needle.get("http://", {timeout: 1000}, function (timeoutErr, timeoutRes)
+			{
+				expect(timeoutErr).to.be.an.instanceof(Error);
+				expect(timeoutErr.message).to.equal("socket hang up");
+				expect(timeoutErr.code).to.equal("ECONNRESET");
+				expect(timeoutRes).to.be.undefined;
+				
+				done();
+			});
+		});
+	});
 }
 
 
