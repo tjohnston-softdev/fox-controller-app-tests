@@ -263,7 +263,7 @@ function checkGetModelFunction()
 			
 			commonFunctionsFile.testObjectPropertyDefinition(supportedRes, 'modelType');
 			commonFunctionsFile.testObjectPropertyContent(supportedRes, 'modelType', 'string');
-			expect(supportedSpy.firstCall.returnValue.modelType).to.equal(testModelName);
+			expect(supportedRes.modelType).to.equal(testModelName);
 			
 			commonFunctionsFile.testObjectPropertyDefinition(supportedRes, 'maker');
 			commonFunctionsFile.testObjectPropertyContent(supportedRes, 'maker', 'string');
