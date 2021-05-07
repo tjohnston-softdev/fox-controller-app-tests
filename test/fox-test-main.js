@@ -6,6 +6,8 @@ const sinon = require('sinon');
 
 const commonPart = require("../test-parts/part-a-common_data/common-main");
 const externalPart = require("../test-parts/part-b-external_modules/external-main");
+
+/*
 const internalPart = require("../test-parts/part-c-internal_scripts/internal-main");
 const onlinePart = require("../test-parts/part-d-online_checks/online-main");
 const settingsPart = require("../test-parts/part-e-rio_settings/rio-settings-main");
@@ -14,6 +16,7 @@ const controllerPart = require("../test-parts/part-g-controller_files/controller
 const deviceApiPart = require("../test-parts/part-h-api_requests/api-main");
 const frontendPart = require("../test-parts/part-i-api_frontend/front-main");
 const processPart = require("../test-parts/part-j-restart_controller/restart-main");
+*/
 
 chai.use(chaiThings);
 
@@ -109,7 +112,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (m === 'debug')
 	{
-		controllerPart.callController();
+		externalPart.callExternal();
 	}
 	else if (m === '')
 	{
