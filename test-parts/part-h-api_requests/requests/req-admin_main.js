@@ -1,16 +1,13 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
-
 const apiCommonFile = require("../sub-requests/common-api");
-const adminFolder = apiPaths.adminApi;
 
 
 
@@ -28,8 +25,6 @@ function testAdminApis()
 function handleDhcpClients()
 {
 	var dhcpUrl = null;
-	var dhcpRequestReturn = null;
-	var dhcpRequestError = null;
 	var dhcpRead = null;
 	
 	describe("DHCP Clients (dhcp-clients)", function()
@@ -37,27 +32,15 @@ function handleDhcpClients()
 		
 		it("Request Made", function(done)
 		{
-			dhcpUrl = apiRequestScript.callWriteApiUrl(adminFolder, "dhcp-clients");
+			dhcpUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "dhcp-clients");
 			
-			reqModule(dhcpUrl, function(aError, aResult)
+			needle.get(dhcpUrl, function(adminErr, adminRes)
 			{
-				dhcpRequestError = aError;
-				dhcpRequestReturn = aResult;
+				expect(adminErr).to.be.null;
+				commonFunctionsFile.testPresent(adminRes);
+				dhcpRead = adminRes.body;
 				done();
 			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(dhcpRequestError).to.be.null;
-			commonFunctionsFile.testPresent(dhcpRequestReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			dhcpRead = apiRequestScript.callReadApiResponseArray(dhcpRequestReturn);
-			done();
 		});
 		
 		it("Correct Array Structure", function()
@@ -98,49 +81,33 @@ function handleDhcpClients()
 
 function handleDefaultObject()
 {
-	var defaultObjectUrl = null;
-	var defaultObjectError = null;
-	var defaultObjectReturn = null;
-	var defaultObjectRead = null;
+	var defaultUrl = null;
+	var defaultRead = null;
 	
 	describe("Default Object (defaults)", function()
 	{
 		
 		it("Request Made", function(done)
 		{
-			defaultObjectUrl = apiRequestScript.callWriteApiUrl(adminFolder, "defaults");
+			defaultUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "defaults");
 			
-			reqModule(defaultObjectUrl, function(aError, aResult)
+			needle.get(defaultUrl, function(adminErr, adminRes)
 			{
-				defaultObjectError = aError;
-				defaultObjectReturn = aResult;
+				expect(adminErr).to.be.null;
+				commonFunctionsFile.testPresent(adminRes);
+				defaultRead = apiRequestScript.callReadApiResponseObject(adminRes);
 				done();
 			});
 		});
 		
-		it("Request Successful", function(done)
-		{
-			expect(defaultObjectError).to.be.null;
-			commonFunctionsFile.testPresent(defaultObjectReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			defaultObjectRead = apiRequestScript.callReadApiResponseObject(defaultObjectReturn);
-			done();
-		});
-		
 		it("Correct Object Returned", function()
 		{
-			commonFunctionsFile.testPresent(defaultObjectRead);
-			expect(defaultObjectRead).to.be.an("object");
+			commonFunctionsFile.testPresent(defaultRead);
+			expect(defaultRead).to.be.an("object");
 			
-			commonFunctionsFile.testObjectPropertyDefinition(defaultObjectRead, 'message');
-			commonFunctionsFile.testObjectPropertyContent(defaultObjectRead, 'message', 'string');
-			
-			commonFunctionsFile.testString(defaultObjectRead.message);
-			expect(defaultObjectRead.message).to.equal("adminApi");
+			commonFunctionsFile.testObjectPropertyDefinition(defaultRead, 'message');
+			commonFunctionsFile.testObjectPropertyContent(defaultRead, 'message', 'string');
+			expect(defaultRead.message).to.equal("adminApi");
 		});
 		
 	});
@@ -151,33 +118,20 @@ function handleLog()
 	describe("Controller Logs (logs)", function()
 	{
 		var logUrl = null;
-		var logError = null;
-		var logReturn = null;
 		var logRead = null;
 	
 		it("Request Made", function(done)
 		{
-			logUrl = apiRequestScript.callWriteApiUrl(adminFolder, "logs");
+			logUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "logs");
 		
-			reqModule(logUrl, function(aError, aResult)
+			needle.get(logUrl, function(adminErr, adminRes)
 			{
-				logError = aError;
-				logReturn = aResult;
+				expect(adminErr).to.be.null;
+				commonFunctionsFile.testPresent(adminRes);
+				logRead = apiRequestScript.callReadApiResponseObject(adminRes);
+				
 				done();
 			});
-		});
-	
-		it("Request Successful", function(done)
-		{
-			expect(logError).to.be.null;
-			commonFunctionsFile.testPresent(logReturn);
-			done();
-		});
-	
-		it("Results Read", function(done)
-		{
-			logRead = apiRequestScript.callReadApiResponseObject(logReturn);
-			done();
 		});
 	
 		it("Valid Return Structure", function()
@@ -191,7 +145,6 @@ function handleLog()
 	
 		it("Valid Contents", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(logRead, 'success', 'boolean');
 			expect(logRead.success).to.be.true;
 			commonFunctionsFile.testString(logRead.logs);
 		});
@@ -199,4 +152,7 @@ function handleLog()
 	});
 }
 
-exports.callTestAdminApis = testAdminApis;
+module.exports =
+{
+	callTestAdminApis: testAdminApis
+};
