@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
@@ -176,44 +175,22 @@ function checkScaleDecimalValueFunction()
 			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'scaleDecimalValue', 'function');
 		});
 		
-		it("Call - Valid", function(done)
+		it("Call - Valid", function()
 		{
-			var validSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
-			settingsFile.scaleDecimalValue(9002, 0, 0, 10);
-				
-			expect(validSpy.calledOnce).to.be.true;
-			expect(validSpy.firstCall.args).to.deep.equal([9002, 0, 0, 10]);
-			expect(validSpy.firstCall.returnValue).to.equal(1.374);
-			
-			validSpy.restore();
-			done();
+			var validRes = settingsFile.scaleDecimalValue(9002, 0, 0, 10);
+			expect(validRes).to.equal(1.374);
 		});
 		
-		it("Call - Default Error Value", function(done)
+		it("Call - Default Error Value", function()
 		{
-			var defaultErrorSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
-			settingsFile.scaleDecimalValue(null, null, 0, 10);
-				
-			expect(defaultErrorSpy.calledOnce).to.be.true;
-			expect(defaultErrorSpy.firstCall.args).to.deep.equal([null, null, 0, 10]);
-			expect(defaultErrorSpy.firstCall.returnValue).to.equal(0);
-			
-			defaultErrorSpy.restore();
-			done();
+			var defaultErrorRes = settingsFile.scaleDecimalValue(null, null, 0, 10);
+			expect(defaultErrorRes).to.equal(0);
 		});
 		
-		it("Call - Custom Error Value", function(done)
+		it("Call - Custom Error Value", function()
 		{
-			var customErrorSpy = sinon.spy(settingsFile, 'scaleDecimalValue');
-			settingsFile.scaleDecimalValue(null, custErr, 0, 10);
-			
-			expect(customErrorSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(customErrorSpy.firstCall);
-			expect(customErrorSpy.firstCall.args).to.deep.equal([null, custErr, 0, 10]);
-			expect(customErrorSpy.firstCall.returnValue).to.equal(custErr);
-			
-			customErrorSpy.restore();
-			done();
+			var customErrorRes = settingsFile.scaleDecimalValue(null, custErr, 0, 10);
+			expect(customErrorRes).to.equal(custErr);
 		});
 		
 	});
@@ -277,41 +254,26 @@ function checkGetModelFunction()
 			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'getModel', 'function');
 		});
 		
-		it("Call - Supported", function(done)
+		it("Call - Supported", function()
 		{
-			var supportedSpy = sinon.spy(settingsFile, 'getModel');
-			settingsFile.getModel(testModelName);
+			var supportedRes = settingsFile.getModel(testModelName);
 			
-			expect(supportedSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(supportedSpy.firstCall);
-			expect(supportedSpy.firstCall.args).to.deep.equal([testModelName]);
+			commonFunctionsFile.testPresent(supportedRes);
+			expect(supportedRes).to.be.an("object");
 			
-			commonFunctionsFile.testPresent(supportedSpy.firstCall.returnValue);
-			expect(supportedSpy.firstCall.returnValue).to.be.an("object");
-			
-			commonFunctionsFile.testObjectPropertyDefinition(supportedSpy.firstCall.returnValue, 'modelType');
-			commonFunctionsFile.testObjectPropertyContent(supportedSpy.firstCall.returnValue, 'modelType', 'string');
+			commonFunctionsFile.testObjectPropertyDefinition(supportedRes, 'modelType');
+			commonFunctionsFile.testObjectPropertyContent(supportedRes, 'modelType', 'string');
 			expect(supportedSpy.firstCall.returnValue.modelType).to.equal(testModelName);
 			
-			commonFunctionsFile.testObjectPropertyDefinition(supportedSpy.firstCall.returnValue, 'maker');
-			commonFunctionsFile.testObjectPropertyContent(supportedSpy.firstCall.returnValue, 'maker', 'string');
-			expect(supportedSpy.firstCall.returnValue.maker).to.equal(testModelManufacturer);
-			
-			supportedSpy.restore();
-			done();
+			commonFunctionsFile.testObjectPropertyDefinition(supportedRes, 'maker');
+			commonFunctionsFile.testObjectPropertyContent(supportedRes, 'maker', 'string');
+			expect(supportedRes.maker).to.equal(testModelManufacturer);
 		});
 		
-		it("Call - Unsupported", function(done)
+		it("Call - Unsupported", function()
 		{
-			var unsupportedSpy = sinon.spy(settingsFile, 'getModel');
-			settingsFile.getModel(unknownModelName);
-			
-			commonFunctionsFile.testPresent(unsupportedSpy.firstCall);
-			expect(unsupportedSpy.firstCall.args).to.deep.equal([unknownModelName]);
-			expect(unsupportedSpy.firstCall.returnValue).to.be.null;
-			
-			unsupportedSpy.restore();
-			done();
+			var unsupportedRes = settingsFile.getModel(unknownModelName);
+			expect(unsupportedRes).to.be.null;
 		});
 		
 	});

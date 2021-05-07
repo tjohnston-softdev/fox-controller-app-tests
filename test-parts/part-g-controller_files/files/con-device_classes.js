@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
@@ -57,25 +56,16 @@ function handleDeviceConstructors()
 function handleDeviceClasses()
 {
 	var storeDeviceValid = null;
-	var storeDeviceInvalid = null;
 	
 	describe(storeDeviceDesc, function()
 	{
 		it("Call - Valid Model", function(done)
 		{
-			var validStoredDeviceSpy = sinon.spy(deviceModelFile, 'StoredDevice');
-			new deviceModelFile.StoredDevice(testDeviceValidModel);
+			storeDeviceValid = new deviceModelFile.StoredDevice(testDeviceValidModel);
 			
-			expect(validStoredDeviceSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(validStoredDeviceSpy.firstCall);
-			expect(validStoredDeviceSpy.firstCall.args).to.deep.equal([testDeviceValidModel]);
-			
-			commonFunctionsFile.testPresent(validStoredDeviceSpy.firstCall.returnValue);
-			expect(validStoredDeviceSpy.firstCall.returnValue).to.be.an("object");
-			storeDeviceValid = validStoredDeviceSpy.firstCall.returnValue;
-			
+			commonFunctionsFile.testPresent(storeDeviceValid);
+			expect(storeDeviceValid).to.be.an("object");
 			verifyStoredDeviceReturn(testDeviceValidModel, storeDeviceValid);
-			validStoredDeviceSpy.restore();
 			
 			done();
 		});
@@ -167,21 +157,15 @@ function handleDeviceClasses()
 		
 		it("Call - Valid Model", function(done)
 		{
-			var validConnectedDeviceSpy = sinon.spy(deviceConnectFile, 'ConnectedDevice');
-			new deviceConnectFile.ConnectedDevice(storeDeviceValid);
+			var connectRes = new deviceConnectFile.ConnectedDevice(storeDeviceValid);
 			
-			expect(validConnectedDeviceSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(validConnectedDeviceSpy.firstCall);
-			expect(validConnectedDeviceSpy.firstCall.args).to.deep.equal([storeDeviceValid]);
+			commonFunctionsFile.testPresent(connectRes);
+			expect(connectRes).to.be.an("object");
 			
-			commonFunctionsFile.testPresent(validConnectedDeviceSpy.firstCall.returnValue);
-			expect(validConnectedDeviceSpy.firstCall.returnValue).to.be.an("object");
+			commonFunctionsFile.testObjectPropertyDefinition(connectRes, 'storedDevice');
+			commonFunctionsFile.testObjectPropertyContent(connectRes, 'storedDevice', 'object');
+			expect(connectRes.storedDevice).to.equal(storeDeviceValid);
 			
-			commonFunctionsFile.testObjectPropertyDefinition(validConnectedDeviceSpy.firstCall.returnValue, 'storedDevice');
-			commonFunctionsFile.testObjectPropertyContent(validConnectedDeviceSpy.firstCall.returnValue, 'storedDevice', 'object');
-			expect(validConnectedDeviceSpy.firstCall.returnValue.storedDevice).to.equal(storeDeviceValid);
-			
-			validConnectedDeviceSpy.restore();
 			done();
 		});
 		
@@ -243,12 +227,13 @@ function handleDeviceClasses()
 
 function callStoredDeviceUnsupported(callObject)
 {
+	var storedDeviceObject = null;
 	var storedDeviceComplete = false;
 	var storedDeviceError = "";
 	
 	try
 	{
-		new deviceModelFile.StoredDevice(callObject.jsonObject);
+		storedDeviceObject = new deviceModelFile.StoredDevice(callObject.jsonObject);
 		storedDeviceComplete = true;
 	}
 	catch(e)
@@ -264,12 +249,13 @@ function callStoredDeviceUnsupported(callObject)
 
 function callConnectedDeviceUnsupported(a, expectedError)
 {
+	var connectObject = null;
 	var connectionComplete = false;
 	var connectionError = "";
 	
 	try
 	{
-		new deviceConnectFile.ConnectedDevice(a);
+		connectObject = new deviceConnectFile.ConnectedDevice(a);
 		connectionComplete = true;
 	}
 	catch(e)

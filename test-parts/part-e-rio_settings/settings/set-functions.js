@@ -1,12 +1,9 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-
-const subRequire = require("../sub-settings/get-rio-set");
 const settingsFile = require(foxPath.rioSettingsFile);
 const prefixIndexObject = require("../sub-settings/io-set-object");
 
@@ -39,65 +36,30 @@ function checkPrepare()
 
 function checkGetSignalTypeFunction()
 {
-	var argValidString = 'DI';
-	var argInvalidString = 'UNKNOWN';
-	var argInvalidType = -1;
-	
 	describe("Function - Get Signal Type (getSignalType)", function()
 	{
-		
-		it("Call - Valid IO Type", function(done)
+		it("Call - Valid IO Type", function()
 		{
-			var validStringSpy = sinon.spy(settingsFile, 'getSignalType');
-			settingsFile.getSignalType(argValidString);
-			
-			expect(validStringSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(validStringSpy.firstCall);
-			expect(validStringSpy.firstCall.args).to.deep.equal([argValidString]);
-			expect(validStringSpy.firstCall.returnValue).to.equal(0);
-			
-			validStringSpy.restore();
-			done();
+			var validStringRes = settingsFile.getSignalType("DI");
+			expect(validStringRes).to.equal(0);
 		});
 		
-		it("Call - Invalid IO Type", function(done)
+		it("Call - Invalid IO Type", function()
 		{
-			var invalidStringSpy = sinon.spy(settingsFile, 'getSignalType');
-			settingsFile.getSignalType(argInvalidString);
-			
-			expect(invalidStringSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(validStringSpy.firstCall);
-			expect(invalidStringSpy.firstCall.args).to.deep.equal([argInvalidString]);
-			expect(invalidStringSpy.firstCall.returnValue).to.equal(1);
-			
-			invalidStringSpy.restore();
-			done();
+			var invalidStringRes = settingsFile.getSignalType("UNKNOWN");
+			expect(invalidStringRes).to.equal(1);
 		});
 		
-		it("Call - Invalid Type", function(done)
+		it("Call - Invalid Type", function()
 		{
-			var invalidTypeSpy = sinon.spy(settingsFile, 'getSignalType');
-			settingsFile.getSignalType(argInvalidType);
-			
-			expect(invalidTypeSpy.called).to.be.true;
-			expect(invalidTypeSpy.firstCall.args).to.deep.equal([argInvalidType]);
-			expect(invalidTypeSpy.firstCall.returnValue).to.equal(1);
-			
-			invalidTypeSpy.restore();
-			done();
+			var invalidTypeRes = settingsFile.getSignalType(-1);
+			expect(invalidTypeRes).to.equal(1);
 		});
 		
-		it("Call - Null", function(done)
+		it("Call - Null", function()
 		{
-			var nullSpy = sinon.spy(settingsFile, 'getSignalType');
-			settingsFile.getSignalType(null);
-			
-			expect(nullSpy.called).to.be.true;
-			expect(nullSpy.firstCall.args).to.deep.equal([null]);
-			expect(nullSpy.firstCall.returnValue).to.equal(1);
-			
-			nullSpy.restore();
-			done();
+			var nullRes = settingsFile.getSignalType(null);
+			expect(nullRes).to.equal(1);
 		});
 		
 		
@@ -109,31 +71,16 @@ function checkParsePrefixFunction()
 	describe("Function - Parse Prefix (parseIoPrefix)", function()
 	{
 		
-		it("Call - Valid Prefix", function(done)
+		it("Call - Valid Prefix", function()
 		{
-			var validPrefixSpy = sinon.spy(settingsFile, 'parseIoPrefix');
-			settingsFile.parseIoPrefix(prefixIndexObject.validInput);
-		
-			expect(validPrefixSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(validPrefixSpy.firstCall);
-			expect(validPrefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.validInput]);
-			expect(validPrefixSpy.firstCall.returnValue).to.equal(prefixIndexObject.parsedCode);
-			
-			validPrefixSpy.restore();
-			done();
+			var validRes = settingsFile.parseIoPrefix(prefixIndexObject.validInput);
+			expect(validRes).to.equal(prefixIndexObject.parsedCode);
 		});
 		
-		it("Call - Invalid Prefix", function(done)
+		it("Call - Invalid Prefix", function()
 		{
-			var invalidPrefixSpy = sinon.spy(settingsFile, 'parseIoPrefix');
-			settingsFile.parseIoPrefix(prefixIndexObject.invalidInput);
-		
-			commonFunctionsFile.testPresent(invalidPrefixSpy.firstCall);
-			expect(invalidPrefixSpy.firstCall.args).to.deep.equal([prefixIndexObject.invalidInput]);
-			expect(invalidPrefixSpy.firstCall.returnValue).to.be.null;
-			
-			invalidPrefixSpy.restore();
-			done();
+			var invalidRes = settingsFile.parseIoPrefix(prefixIndexObject.invalidInput);
+			expect(invalidRes).to.be.null;
 		});
 		
 		it("Call - Invalid Type", function()
@@ -154,32 +101,16 @@ function checkParseIndexFunction()
 	
 	describe("Function - Parse Index (parseIoIndex)", function()
 	{
-		
-		it("Call - Valid Prefix", function(done)
+		it("Call - Valid Prefix", function()
 		{
-			var validSpy = sinon.spy(settingsFile, 'parseIoIndex');
-			settingsFile.parseIoIndex(prefixIndexObject.validInput);
-			
-			expect(validSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(validSpy.firstCall);
-			expect(validSpy.firstCall.args).to.deep.equal([prefixIndexObject.validInput]);
-			expect(validSpy.firstCall.returnValue).to.equal(prefixIndexObject.parsedIndex);
-			
-			validSpy.restore();
-			done();
+			var validRes = settingsFile.parseIoIndex(prefixIndexObject.validInput);
+			expect(validRes).to.equal(prefixIndexObject.parsedIndex);
 		});
 		
-		it("Call - Invalid Prefix", function(done)
+		it("Call - Invalid Prefix", function()
 		{
-			var invalidSpy = sinon.spy(settingsFile, 'parseIoIndex');
-			settingsFile.parseIoIndex(prefixIndexObject.invalidInput);
-			
-			commonFunctionsFile.testPresent(invalidSpy.firstCall);
-			expect(invalidSpy.firstCall.args).to.deep.equal([prefixIndexObject.invalidInput]);
-			expect(invalidSpy.firstCall.returnValue).to.be.null;
-			
-			invalidSpy.restore();
-			done();
+			var invalidRes = settingsFile.parseIoIndex(prefixIndexObject.invalidInput);
+			expect(invalidRes).to.be.null;
 		});
 		
 		it("Call - Invalid Type", function()

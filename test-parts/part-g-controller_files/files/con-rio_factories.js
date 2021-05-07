@@ -38,21 +38,13 @@ function handleRemoteIoModuleFunction()
 		});
 		
 		
-		it("Call - Valid", function(done)
+		it("Call - Valid", function()
 		{
-			var moduleSpy = sinon.spy(factoryFile, 'RemoteIoModule');
-			factoryFile.RemoteIoModule(remoteIoTestDevice);
+			var moduleRes = factoryFile.RemoteIoModule(remoteIoTestDevice);
 			
-			expect(moduleSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(moduleSpy.firstCall);
-			expect(moduleSpy.firstCall.args).to.deep.equal([remoteIoTestDevice]);
-			commonFunctionsFile.testPresent(moduleSpy.firstCall.returnValue);
-			expect(moduleSpy.firstCall.returnValue).to.be.an("object");
-			
-			rioCheckFile.checkFactoryReturn(moduleSpy.firstCall.returnValue);
-			
-			moduleSpy.restore();
-			done();
+			commonFunctionsFile.testPresent(moduleRes);
+			expect(moduleRes).to.be.an("object");
+			rioCheckFile.checkFactoryReturn(moduleRes);
 		});
 		
 		
