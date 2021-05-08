@@ -12,7 +12,7 @@ const apiRequestScript = require(commonPaths.requestApi);
 const apiCommonFile = require("../sub-requests/common-api");
 const storageCommonFile = require("../sub-requests/common-storage");
 
-var testFile = null;
+var testFile = storageCommonFile.getUserStoragePaths();
 var currentPlatform = os.platform();
 
 
@@ -20,28 +20,11 @@ function testStorageAPIs()
 {
 	describe("Storage APIs (storage)", function()
 	{
-		handleUserStorageTestPaths();
 		handleFileList();
 		handleUserStorageCreate();
 		handleFileDownload();
 		handleUserStorageDelete();
 		handleGlobalStatus();
-	});
-}
-
-
-function handleUserStorageTestPaths()
-{
-	describe("User Storage Test Paths", function()
-	{
-		it("Paths Retrieved", function(done)
-		{
-			testFile = storageCommonFile.getUserStoragePaths();
-			commonFunctionsFile.testPresent(testFile);
-			expect(testFile).to.be.an("object");
-			done();
-		});
-		
 	});
 }
 
@@ -248,12 +231,6 @@ function handleUserStorageDelete()
 		{
 			expect(folderRemoveComplete).to.be.true;
 			expect(folderRemoveError).to.be.null;
-			done();
-		});
-		
-		it("Paths Disposed", function(done)
-		{
-			testFile = null;
 			done();
 		});
 		

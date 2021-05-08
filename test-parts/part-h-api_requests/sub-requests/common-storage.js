@@ -132,38 +132,38 @@ function testMountArray(fsArray, fsPlatform)
 
 function testDriveTotalArray(fsArray, fsPlatform)
 {
-	var fsIndex = 0;
-	var fsObject = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (fsIndex = 0; fsIndex < fsArray.length; fsIndex = fsIndex + 1)
+	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
-		fsObject = fsArray[fsIndex];
-		testDriveTotalObject(fsObject, fsPlatform);
+		currentObject = fsArray[loopIndex];
+		testDriveTotalObject(currentObject, fsPlatform);
 	}
 	
 }
 
 function testDriveUsedArray(fsArray)
 {
-	var fsIndex = 0;
-	var fsObject = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (fsIndex = 0; fsIndex < fsArray.length; fsIndex = fsIndex + 1)
+	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
-		fsObject = fsArray[fsIndex];
-		testDriveUsedObject(fsObject);
+		currentObject = fsArray[loopIndex];
+		testDriveUsedObject(currentObject);
 	}
 }
 
 function testDrivePercentagesArray(fsArray)
 {
-	var fsIndex = 0;
-	var fsObject = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (fsIndex = 0; fsIndex < fsArray.length; fsIndex = fsIndex + 1)
+	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
-		fsObject = fsArray[fsIndex];
-		testDrivePercentageObject(fsObject);
+		currentObject = fsArray[loopIndex];
+		testDrivePercentageObject(currentObject);
 	}
 }
 
