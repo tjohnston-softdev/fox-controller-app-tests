@@ -1,16 +1,13 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
-
 const apiCommonFile = require("../sub-requests/common-api");
-const alarmFolder = apiPaths.alarmApi;
 
 
 
@@ -26,8 +23,6 @@ function testAlarmApis()
 function handleList()
 {
 	var listUrl = null;
-	var listRequestReturn = null;
-	var listRequestError = null;
 	var listRead = null;
 	
 	describe("Alarm History List (list/all?limit=10)", function()
@@ -35,27 +30,16 @@ function handleList()
 		
 		it("Request Made", function(done)
 		{
-			listUrl = apiRequestScript.callWriteApiUrl(alarmFolder, "list/all?limit=10");
+			listUrl = apiRequestScript.callWriteApiUrl(apiPaths.alarmApi, "list/all?limit=10");
 			
-			reqModule(listUrl, function(aError, aResult)
+			needle.get(listUrl, function(alarmErr, alarmRes)
 			{
-				listRequestError = aError;
-				listRequestReturn = aResult;
+				expect(alarmErr).to.be.null;
+				commonFunctionsFile.testPresent(alarmRes);
+				//listRead = apiRequestScript.callReadApiResponseArray(alarmRes);
+				listRead = alarmRes.body;
 				done();
 			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(listRequestError).to.be.null;
-			commonFunctionsFile.testPresent(listRequestReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			listRead = apiRequestScript.callReadApiResponseArray(listRequestReturn);
-			done();
 		});
 		
 		it("Correct Array Structure", function()
@@ -94,68 +78,55 @@ function handleList()
 
 function handleAvailable()
 {
-	var avUrl = null;
-	var avRequestReturn = null;
-	var avRequestError = null;
-	var avRead = null;
+	var availabilityUrl = null;
+	var retrievedData = null;
 	
 	describe("Available (available)", function()
 	{
 		
 		it("Request Made", function(done)
 		{
-			avUrl = apiRequestScript.callWriteApiUrl(alarmFolder, "available");
+			availabilityUrl = apiRequestScript.callWriteApiUrl(apiPaths.alarmApi, "available");
 			
-			reqModule(avUrl, function(aError, aResult)
+			needle.get(availabilityUrl, function(alarmErr, alarmRes)
 			{
-				avRequestError = aError;
-				avRequestReturn = aResult;
+				expect(alarmErr).to.be.null;
+				commonFunctionsFile.testPresent(alarmRes);
+				//retrievedData = apiRequestScript.callReadApiResponseArray();
+				retrievedData = alarmRes.body;
 				done();
 			});
 		});
 		
-		it("Request Successful", function(done)
-		{
-			expect(avRequestError).to.be.null;
-			commonFunctionsFile.testPresent(avRequestReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			avRead = apiRequestScript.callReadApiResponseArray(avRequestReturn);
-			done();
-		});
-		
 		it("Correct Array Structure", function()
 		{
-			commonFunctionsFile.testPresent(avRead);
-			commonFunctionsFile.testArrayEmpty(avRead);
-			commonFunctionsFile.testAllElements(avRead, 'object');
+			commonFunctionsFile.testPresent(retrievedData);
+			commonFunctionsFile.testArrayEmpty(retrievedData);
+			commonFunctionsFile.testAllElements(retrievedData, 'object');
 		});
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(avRead, 'id');
-			commonFunctionsFile.testPropertyDefinitions(avRead, 'name');
-			commonFunctionsFile.testPropertyDefinitions(avRead, 'okText');
-			commonFunctionsFile.testPropertyDefinitions(avRead, 'alarmText');
-			commonFunctionsFile.testPropertyDefinitions(avRead, 'alarmColor');
+			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'id');
+			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'name');
+			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'okText');
+			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'alarmText');
+			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'alarmColor');
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testPropertyContents(avRead, 'id', 'string');
-			commonFunctionsFile.testPropertyContents(avRead, 'name', 'string');
-			commonFunctionsFile.testPropertyContents(avRead, 'okText', 'string');
-			commonFunctionsFile.testPropertyContents(avRead, 'alarmText', 'string');
-			commonFunctionsFile.testPropertyContents(avRead, 'alarmColor', 'string');
+			commonFunctionsFile.testPropertyContents(retrievedData, 'id', 'string');
+			commonFunctionsFile.testPropertyContents(retrievedData, 'name', 'string');
+			commonFunctionsFile.testPropertyContents(retrievedData, 'okText', 'string');
+			commonFunctionsFile.testPropertyContents(retrievedData, 'alarmText', 'string');
+			commonFunctionsFile.testPropertyContents(retrievedData, 'alarmColor', 'string');
 			
-			commonFunctionsFile.testPropertyStringRequiredArray(avRead, 'id');
-			commonFunctionsFile.testPropertyStringRequiredArray(avRead, 'name');
-			commonFunctionsFile.testPropertyStringRequiredArray(avRead, 'okText');
-			commonFunctionsFile.testPropertyStringRequiredArray(avRead, 'alarmText');
-			commonFunctionsFile.testPropertyStringRequiredArray(avRead, 'alarmColor');
+			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'id');
+			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'name');
+			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'okText');
+			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'alarmText');
+			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'alarmColor');
 		});
 		
 		
@@ -165,4 +136,7 @@ function handleAvailable()
 	
 }
 
-exports.callTestAlarmApis = testAlarmApis;
+module.exports =
+{
+	callTestAlarmApis: testAlarmApis
+};
