@@ -5,7 +5,6 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;

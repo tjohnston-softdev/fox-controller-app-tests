@@ -1,125 +1,38 @@
 # Changelog
 
-**./test/fox-test-main.js**
-* Uncommented requirements:
-	* settingsPart
-	* modelsPart
-	* controllerPart
+**Test Status**
+* When running the 'request' test mode, some file access related errors still occur.
 
 ---
 
-**./app/sub-common/files/load-fox-path.js**
-* New file - Used to require FOX Controller files in a try-catch manner.
+**./app/paths/files/sub-common-paths.js**
+* Merged into 'app-paths.js'
+* This file is now empty.
 
 ---
 
 **./app/paths/files/app-paths.js**
-* Added new path property 'loadFox' - Refers to:
-	* ./app/sub-common/files/load-fox-path.js
-
+* Removed 'subCommonRelative' property.
 ---
 
-**./test-parts/part-e-rio_settings/settings/set-main.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.rioSettingsFile' is now required using 'loadFoxFile'
-* Declared 'checkFile' function.
-	* Used to test whether the FOX Controller file was successfully loaded.
-
----
-
-**./test-parts/part-e-rio_settings/settings/set-props.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.rioSettingsFile' is now required using 'loadFoxFile'
-
----
-
-**./test-parts/part-e-rio_settings/settings/set-functions.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.rioSettingsFile' is now required using 'loadFoxFile'
-* Removed 'checkPrepare' function.
-
----
-
-**./test-parts/part-f-controller_models/models/m-model_definitions.js**
-* Added requirement for 'commonPaths.loadFox'
-* The following files are now required using 'loadFoxFile'
-	* foxPath.rioSettingsFile
-	* foxPath.advantechFile
-	* foxPath.moxaFile
-	* foxPath.sonoffFile
-* Declared 'checkFiles' function.
-	* Used to test whether the FOX Controller files were successfully loaded.
-	* Separate tests for 'Remote IO Settings' and 'Model Definitions'
-
----
-
-**./test-parts/part-g-controller_files/files/con-device_settings.js**
-* Added requirement for 'commonPaths.loadFox'
-* The following files are now required using 'loadFoxFile'
-	* foxPath.rioSettingsFile
-	* foxPath.advantechFile
-	* foxPath.moxaFile
-	* foxPath.sonoffFile
-	* foxPath.deviceSettingsFile
-* Declared 'checkFiles' function.
-	* Used to test whether the FOX Controller files were successfully loaded.
-	* Separate tests for 'Remote IO Settings', 'Model Definitions', and 'Device Settings'
-
----
-
-**./test-parts/part-g-controller_files/files/con-device_classes.js**
-* Added requirement for 'commonPaths.loadFox'
-* The following files are now required using 'loadFoxFile'
-	* foxPath.storedDeviceClassFile
-	* foxPath.connectedDeviceClassFile
-* Declared 'checkFiles' function.
-	* Used to test whether the class files were successfully loaded.
-
----
-
-**./test-parts/part-g-controller_files/files/con-rio_factories.js**
-* Requirements
-	* Removed 'sinon'
-	* Added 'commonPaths.loadFox'
-* 'foxPath.rioFactoriesFile' is now required using 'loadFoxFile'
-* Declared 'checkFile' function.
-	* Used to test whether the FOX Controller file was successfully loaded.
-
----
-
-**./test-parts/part-g-controller_files/files/con-rio_index_main.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.rioIndexFile' is now required using 'loadFoxFile'
-* Declared 'checkFile' function.
-	* Used to test whether the FOX Controller file was successfully loaded.
-
----
-
-**./test-parts/part-g-controller_files/files/con-rio_index_node_reg.js**
-* Added requirement for 'commonPaths.loadFox'
-* The following files are now required using 'loadFoxFile'
-	* foxPath.rioIndexFile
-	* foxPath.rioSettingsFile
-* Added "Files Loaded" test to 'handleNodePrepare'
-
----
-
-**./test-parts/part-g-controller_files/files/con-service_main.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.serviceMainFile' is now required using 'loadFoxFile'
-* Declared 'checkFile' function.
-	* Used to test whether the FOX Controller file was successfully loaded.
-
----
-
-**./test-parts/part-g-controller_files/files/con-settings.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.settingsFile' is now required using 'loadFoxFile'
-* Declared 'checkFile' function.
-	* Used to test whether the FOX Controller file was successfully loaded.
-
----
-
-**./test-parts/part-g-controller_files/files/con-settings_red.js**
-* Added requirement for 'commonPaths.loadFox'
-* 'foxPath.redSettingsFile' is now required using 'loadFoxFile'
+**Affected Files**
+* ./test-parts/
+	* part-g-controller_files/files/
+		* con-device_classes.js
+		* con-rio_factories.js
+		* con-rio_index_node_list.js
+		* con-rio_index_node_reg.js
+		* con-rio_index_node_reg_invalid.js
+	* part-h-api_requests/requests/
+		* req-devices_crud.js
+		* req-devices_crud_invalid.js
+		* req-devices_modify_invalid.js
+	* part-i-api_frontend/parts/
+		* a-check_database_empty.js
+		* b-add_all_devices.js
+		* c-get_device_list.js
+		* d-check_device_list.js
+		* e-list_avaliable_nodes.js
+		* f-check_node_array.js
+		* g-get_device_properties.js
+		* h-delete_added_devices.js

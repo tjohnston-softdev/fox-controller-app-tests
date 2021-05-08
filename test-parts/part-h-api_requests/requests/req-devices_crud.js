@@ -5,7 +5,6 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -16,10 +15,10 @@ const apiCommonFile = require("../sub-requests/common-api");
 const deviceFolder = apiPaths.devicesApi;
 const deviceRio = apiPaths.rioApiSub;
 
-const modelFunctionsFile = require(subCommonPath.getModelsFile);
-const modelIntegrityFile = require(subCommonPath.checkModelIntegrityFile);
-const rioCommon = require(subCommonPath.rioCommonFile);
-const deviceCommon = require(subCommonPath.deviceCommonFile);
+const modelFunctionsFile = require(commonPaths.getModelsFile);
+const modelIntegrityFile = require(commonPaths.checkModelIntegrityFile);
+const rioCommon = require(commonPaths.rioCommonFile);
+const deviceCommon = require(commonPaths.deviceCommonFile);
 
 const modelObjectArray = modelFunctionsFile.retrieveAllSupportedModels();
 

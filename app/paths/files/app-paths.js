@@ -1,11 +1,11 @@
 function defineAppPaths()
 {
 	var appRoot = "../../../app/";
+	var subCommonFolder = appRoot + "sub-common/files/";
 	var testCommonName = "test-common";
 	var defineRes = {};
 	
 	defineRes["foxRelative"] = appRoot + "paths/files/fox-paths";
-	defineRes["subCommonRelative"] = appRoot + "paths/files/sub-common-paths";
 	defineRes["commonErrors"] = appRoot + "common-errors";
 	defineRes["commonObjects"] = appRoot + "common-objects";
 	defineRes["defineApi"] = appRoot + "define-api";
@@ -14,8 +14,15 @@ function defineAppPaths()
 	defineRes["requestApi"] = appRoot + "request-api";
 	defineRes["requestApiPaths"] = appRoot + "request-api-paths";
 	defineRes["supportedDatabases"] = appRoot + "supported-databases";
+	
 	defineRes["testCommon"] = testCommonName;
 	defineRes["testCommonFull"] = appRoot + testCommonName;
+	
+	defineRes["getModelsFile"] = subCommonFolder + "get-models";
+	defineRes["checkModelIntegrityFile"] = subCommonFolder + "check-model-integrity";
+	defineRes["rioCommonFile"] = subCommonFolder + "remote-io-common";
+	defineRes["rioCommonInvalidFile"] = subCommonFolder + "remote-io-invalid_tests";
+	defineRes["deviceCommonFile"] = subCommonFolder + "test-device-common";
 	
 	return defineRes;
 }
