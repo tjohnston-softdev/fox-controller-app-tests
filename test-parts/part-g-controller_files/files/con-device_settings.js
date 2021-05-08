@@ -5,11 +5,13 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const ioSetFile = require(foxPath.rioSettingsFile);
-const advantechModels = require(foxPath.advantechFile);
-const moxaModels = require(foxPath.moxaFile);
-const sonoffModels = require(foxPath.sonoffFile);
-const settingsFile = require(foxPath.deviceSettingsFile);
+const loadFoxFile = require(commonPaths.loadFox);
+
+const ioSetFile = loadFoxFile(foxPath.rioSettingsFile);
+const advantechModels = loadFoxFile(foxPath.advantechFile);
+const moxaModels = loadFoxFile(foxPath.moxaFile);
+const sonoffModels = loadFoxFile(foxPath.sonoffFile);
+const settingsFile = loadFoxFile(foxPath.deviceSettingsFile);
 
 const supportedListObject = getSupportedLists();
 
@@ -18,6 +20,7 @@ function testDeviceSettings()
 {
 	describe("Device Settings", function()
 	{
+		checkFiles();
 		checkSupportedModelDefinitions();
 		
 		checkDeviceTypeObjectProperty();
@@ -31,6 +34,31 @@ function testDeviceSettings()
 		checkGetModelFunction();
 		checkManufacturerListProperty();
 		checkModelTypeListProperty();
+	});
+}
+
+
+function checkFiles()
+{
+	describe("Controller Files", function()
+	{
+		it("Remote IO Settings Loaded", function()
+		{
+			commonFunctionsFile.testPresent(ioSetFile);
+		});
+		
+		it("Model Definitions Loaded", function()
+		{
+			commonFunctionsFile.testPresent(advantechModels);
+			commonFunctionsFile.testPresent(moxaModels);
+			commonFunctionsFile.testPresent(sonoffModels);
+		});
+		
+		it("Device Settings Loaded", function()
+		{
+			commonFunctionsFile.testPresent(settingsFile);
+		});
+		
 	});
 }
 

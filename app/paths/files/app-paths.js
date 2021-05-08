@@ -9,6 +9,7 @@ function defineAppPaths()
 	defineRes["commonErrors"] = appRoot + "common-errors";
 	defineRes["commonObjects"] = appRoot + "common-objects";
 	defineRes["defineApi"] = appRoot + "define-api";
+	defineRes["loadFox"] = appRoot + "sub-common/files/load-fox-file";
 	defineRes["localValid"] = appRoot + "local-valid";
 	defineRes["requestApi"] = appRoot + "request-api";
 	defineRes["requestApiPaths"] = appRoot + "request-api-paths";

@@ -4,32 +4,18 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const settingsFile = require(foxPath.rioSettingsFile);
+const loadFoxFile = require(commonPaths.loadFox);
 const prefixIndexObject = require("../sub-settings/io-set-object");
-
+const settingsFile = loadFoxFile(foxPath.rioSettingsFile);
 
 
 function testRemoteIoFunctions()
 {
 	describe("Functions", function()
 	{
-		checkPrepare();
-		
 		checkGetSignalTypeFunction();
 		checkParsePrefixFunction();
 		checkParseIndexFunction();
-	});
-}
-
-function checkPrepare()
-{
-	describe("Preperation", function()
-	{
-		it("Prefix Index Object Retrieved", function()
-		{
-			commonFunctionsFile.testPresent(prefixIndexObject);
-			expect(prefixIndexObject).to.be.an("object");
-		});
 	});
 }
 

@@ -6,15 +6,29 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const controllerSettingsFile = require(foxPath.settingsFile);
+const loadFoxFile = require(commonPaths.loadFox);
+const controllerSettingsFile = loadFoxFile(foxPath.settingsFile);
 
 
 function testControllerSettings()
 {
 	describe("Controller Settings", function()
 	{
+		checkFile();
 		handleFlagProperties();
 		handlePathProperties();
+	});
+}
+
+
+function checkFile()
+{
+	describe("File", function()
+	{
+		it("Loaded", function()
+		{
+			commonFunctionsFile.testPresent(controllerSettingsFile);
+		});
 	});
 }
 

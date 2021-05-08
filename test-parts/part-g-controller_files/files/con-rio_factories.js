@@ -1,18 +1,18 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
+const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const rioCommonFile = require(subCommonPath.rioCommonFile);
 const rioCheckFile = require("../sub-files/rio-factory_return");
-const factoryFile = require(foxPath.rioFactoriesFile);
+const factoryFile = loadFoxFile(foxPath.rioFactoriesFile);
 
 const remoteIoTestDevice = commonJsonObjectsFile.testDevice;
 
@@ -21,10 +21,23 @@ function testRemoteIoFactories()
 {
 	describe("Remote IO Factories", function()
 	{
+		checkFile();
 		handleRemoteIoModuleFunction();
 	});
 }
 
+
+
+function checkFile()
+{
+	describe("File", function()
+	{
+		it("Loaded", function()
+		{
+			commonFunctionsFile.testPresent(factoryFile);
+		});
+	});
+}
 
 
 function handleRemoteIoModuleFunction()

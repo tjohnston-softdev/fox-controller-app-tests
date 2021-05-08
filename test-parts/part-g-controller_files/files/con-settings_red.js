@@ -4,7 +4,8 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const controllerRedSettingsFile = require(foxPath.redSettingsFile);
+const loadFoxFile = require(commonPaths.loadFox);
+const controllerRedSettingsFile = loadFoxFile(foxPath.redSettingsFile);
 
 
 function testNodeRedSettings()

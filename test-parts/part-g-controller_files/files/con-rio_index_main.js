@@ -6,19 +6,34 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
+const loadFoxFile = require(commonPaths.loadFox);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
-const indexFile = require(foxPath.rioIndexFile);
+const indexFile = loadFoxFile(foxPath.rioIndexFile);
 
 
 function testRemoteIoIndexMain()
 {
 	describe("Remote IO Index Main", function()
 	{
+		checkFile();
 		checkIndexFunctionsExist();
 		handleInitializationFunction();
 		handleInitializationCompleteFunction();
 	});
 }
+
+
+function checkFile()
+{
+	describe("File", function()
+	{
+		it("Loaded", function()
+		{
+			commonFunctionsFile.testPresent(indexFile);
+		});
+	});
+}
+
 
 function checkIndexFunctionsExist()
 {

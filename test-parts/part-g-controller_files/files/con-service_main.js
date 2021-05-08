@@ -4,17 +4,31 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const serviceFile = require(foxPath.serviceMainFile);
+const loadFoxFile = require(commonPaths.loadFox);
+const serviceFile = loadFoxFile(foxPath.serviceMainFile);
 
 
 function testServiceMain()
 {
 	describe("Service Main", function()
 	{
+		checkFile();
 		handleControllerObject();
 		handleGeneralFunctions();
 		handleRedFunctions();
 		handleProcessFunctions();
+	});
+}
+
+
+function checkFile()
+{
+	describe("File", function()
+	{
+		it("Loaded", function()
+		{
+			commonFunctionsFile.testPresent(serviceFile);
+		});
 	});
 }
 

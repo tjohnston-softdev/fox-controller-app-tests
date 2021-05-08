@@ -4,20 +4,42 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const ioFile = require(foxPath.rioSettingsFile);
+const loadFoxFile = require(commonPaths.loadFox);
+const ioFile = loadFoxFile(foxPath.rioSettingsFile);
 
-const advantechModels = require(foxPath.advantechFile);
-const moxaModels = require(foxPath.moxaFile);
-const sonoffModels = require(foxPath.sonoffFile);
+const advantechModels = loadFoxFile(foxPath.advantechFile);
+const moxaModels = loadFoxFile(foxPath.moxaFile);
+const sonoffModels = loadFoxFile(foxPath.sonoffFile);
 
 
 function testModelDefinitionFiles()
 {
 	describe("Model Definitions", function()
 	{
+		checkFiles();
 		handleManufacturerFile(advantechModels, "Advantech");
 		handleManufacturerFile(moxaModels, "Moxa");
 		handleManufacturerFile(sonoffModels, "Sonoff");
+	});
+}
+
+
+function checkFiles()
+{
+	describe("Controller Files", function()
+	{
+		it("Remote IO Settings Loaded", function()
+		{
+			commonFunctionsFile.testPresent(ioFile);
+		});
+		
+		it("Model Definitions Loaded", function()
+		{
+			commonFunctionsFile.testPresent(advantechModels);
+			commonFunctionsFile.testPresent(moxaModels);
+			commonFunctionsFile.testPresent(sonoffModels);
+		});
+		
 	});
 }
 

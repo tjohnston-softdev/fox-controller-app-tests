@@ -6,12 +6,13 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
+const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const commonFile = require(subCommonPath.rioCommonFile);
-const deviceModelFile = require(foxPath.storedDeviceClassFile);
-const deviceConnectFile = require(foxPath.connectedDeviceClassFile);
+const deviceModelFile = loadFoxFile(foxPath.storedDeviceClassFile);
+const deviceConnectFile = loadFoxFile(foxPath.connectedDeviceClassFile);
 
 const testDeviceValidModel = commonJsonObjectsFile.testDevice;
 const testDeviceInvalidModel = cloneInvalidModel();
@@ -25,8 +26,22 @@ function testDeviceClasses()
 {
 	describe("Device Classes", function()
 	{
+		checkFiles();
 		handleDeviceConstructors();
 		handleDeviceClasses();
+	});
+}
+
+
+function checkFiles()
+{
+	describe("Class Files", function()
+	{
+		it("Loaded", function()
+		{
+			commonFunctionsFile.testPresent(deviceModelFile);
+			commonFunctionsFile.testPresent(deviceConnectFile);
+		});
 	});
 }
 

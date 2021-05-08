@@ -7,11 +7,12 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const subCommonPath = require(commonPaths.subCommonRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
+const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const rioFile = require(foxPath.rioIndexFile);
-const rioSetFile = require(foxPath.rioSettingsFile);
+const rioFile = loadFoxFile(foxPath.rioIndexFile);
+const rioSetFile = loadFoxFile(foxPath.rioSettingsFile);
 const commonFile = require(subCommonPath.rioCommonFile);
 const spyFile = require("../sub-files/rio-spy_functions");
 const registerArguments = require("../sub-files/rio-node_args");
@@ -53,6 +54,13 @@ function handleNodePrepare()
 {
 	describe("Preperation", function()
 	{
+		
+		it("Files Loaded", function()
+		{
+			commonFunctionsFile.testPresent(rioFile);
+			commonFunctionsFile.testPresent(rioSetFile);
+		});
+		
 		it("Function Arguments Assigned", function(done)
 		{
 			correctPrefix = rioSetFile.ioPrefixes.RO;
