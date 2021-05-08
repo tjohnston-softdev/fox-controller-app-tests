@@ -1,54 +1,50 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const localValidFile = require(commonPaths.localValid);
 
 
-function testDrivePropertyDefinitionsObject(dObject)
+function testDrivePropertyDefinitionsObject(driveObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(dObject, 'fs');
-	commonFunctionsFile.testObjectPropertyDefinition(dObject, 'type');
-	commonFunctionsFile.testObjectPropertyDefinition(dObject, 'size');
-	commonFunctionsFile.testObjectPropertyDefinition(dObject, 'used');
-	commonFunctionsFile.testObjectPropertyDefinition(dObject, 'use');
-	commonFunctionsFile.testObjectPropertyDefinition(dObject, 'mount');
+	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'fs');
+	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'type');
+	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'size');
+	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'used');
+	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'use');
+	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'mount');
 }
 
 
-function testDriveLetterObject(dObject, dPlatform)
+function testDriveLetterObject(driveObj, devPlatform)
 {
-	var dValue = dObject['fs'];
-	var dLetterValid = false;
+	var letterValue = driveObj['fs'];
+	var letterValid = false;
 	
-	if (dPlatform === 'win32')
+	if (devPlatform === 'win32')
 	{
-		dLetterValid = localValidFile.validateDriveLetter(dValue);
+		letterValid = localValidFile.validateDriveLetter(letterValue);
 	}
 	else
 	{
-		dLetterValid = localValidFile.validateDrivePath(dValue);
+		letterValid = localValidFile.validateDrivePath(letterValue);
 	}
 	
-	expect(dLetterValid).to.be.true;
+	expect(letterValid).to.be.true;
 }
 
-function testMountObject(dObject, dPlatform)
+function testMountObject(driveObj, devPlatform)
 {
-	var dValue = dObject['mount'];
+	var mountValue = driveObj['mount'];
 	var mountValid = false;
 	
-	if (dPlatform === 'win32')
+	if (devPlatform === 'win32')
 	{
-		mountValid = localValidFile.validateDriveLetter(dValue);
+		mountValid = localValidFile.validateDriveLetter(mountValue);
 	}
-	else if (dValue === "/")
+	else if (mountValue === "/")
 	{
 		mountValid = true;
 	}
@@ -61,30 +57,30 @@ function testMountObject(dObject, dPlatform)
 
 
 
-function testDriveTotalObject(tObject, tPlatform)
+function testDriveTotalObject(driveObj, devPlatform)
 {
-	var tSize = null;
-	var tType = null;
+	var preparedSize = -1;
+	var targetType = "";
 	
-	if (tPlatform === 'win32')
+	if (devPlatform === 'win32')
 	{
-		tType = 'string'
-		tSize = parseFloat(tObject.size);
+		targetType = 'string'
+		preparedSize = parseFloat(driveObj.size);
 	}
 	else
 	{
-		tType = 'number'
-		tSize = tObject.size;
+		targetType = 'number'
+		preparedSize = driveObj.size;
 	}
 	
-	expect(tObject.size).to.be.a(tType);
-	expect(tSize).to.be.above(0);
+	expect(driveObj.size).to.be.a(targetType);
+	expect(preparedSize).to.be.above(0);
 }
 
-function testDriveUsedObject(uObject)
+function testDriveUsedObject(driveObj)
 {
-	var totalValue = parseFloat(uObject.size);
-	var usedValue = uObject.used;
+	var totalValue = parseFloat(driveObj.size);
+	var usedValue = driveObj.used;
 		
 	expect(usedValue).to.be.at.least(0);
 	expect(usedValue).to.be.at.most(totalValue);
@@ -97,13 +93,13 @@ function testDrivePercentageObject(percentObject)
 
 function testDrivePropertyDefinitionsArray(fsArray)
 {
-	var fsIndex = 0;
-	var fsObject = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (fsIndex = 0; fsIndex < fsArray.length; fsIndex = fsIndex + 1)
+	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
-		fsObject = fsArray[fsIndex];
-		testDrivePropertyDefinitionsObject(fsObject);
+		currentObject = fsArray[loopIndex];
+		testDrivePropertyDefinitionsObject(currentObject);
 	}
 }
 
@@ -111,25 +107,25 @@ function testDrivePropertyDefinitionsArray(fsArray)
 
 function testDriveLettersArray(fsArray, fsPlatform)
 {
-	var fsIndex = 0;
-	var fsObject = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (fsIndex = 0; fsIndex < fsArray.length; fsIndex = fsIndex + 1)
+	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
-		fsObject = fsArray[fsIndex];
-		testDriveLetterObject(fsObject, fsPlatform);
+		currentObject = fsArray[loopIndex];
+		testDriveLetterObject(currentObject, fsPlatform);
 	}
 }
 
 function testMountArray(fsArray, fsPlatform)
 {
-	var fsIndex = 0;
-	var fsObject = null;
+	var loopIndex = 0;
+	var currentObject = null;
 	
-	for (fsIndex = 0; fsIndex < fsArray.length; fsIndex = fsIndex + 1)
+	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
-		fsObject = fsArray[fsIndex];
-		testMountObject(fsObject, fsPlatform);
+		currentObject = fsArray[loopIndex];
+		testMountObject(currentObject, fsPlatform);
 	}
 }
 
@@ -188,52 +184,32 @@ function testFileFlags(fList)
 
 function defineUserStoragePaths()
 {
-	var tName = null;
-	var tFolder = null;
-	var tPath = null;
-	var tContent = null;
+	var localName = "test-file.txt";
+	var localFolder = "../user-storage";
+	var localFullPath = localFolder + '/' + localName;
+	var localContents = "Test File Contents";
 	
-	var res = null;
+	var res = {};
 	
-	try
-	{
-		tName = "test-file.txt";
-		tFolder = "../user-storage";
-		tPath = tFolder + '/' + tName;
-		tContent = "Test File Contents";
-		
-		res =
-		{
-			"storageTestFileName": tName,
-			"storageTestFolderPath": tFolder,
-			"storageTestFilePath": tPath,
-			"storageTestFileContent": tContent
-		}
-	}
-	catch(e)
-	{
-		tName = null;
-		tFolder = null;
-		tPath = null;
-		tContent = null;
-		
-		res = null;
-	}
+	res["name"] = localName;
+	res["folder"] = localFolder;
+	res["fullPath"] = localFullPath;
+	res["contents"] = localContents;
 	
 	return res;
 }
 
 
 
-function testFolderCreationResult(eObject)
+function testFolderCreationResult(errObj)
 {
 	var successful = false;
 	
-	if (eObject !== null && eObject.code === 'EEXIST')
+	if (errObj !== null && errObj.code === 'EEXIST')
 	{
 		successful = true;
 	}
-	else if (eObject !== null)
+	else if (errObj !== null)
 	{
 		successful = false;
 	}
@@ -246,19 +222,21 @@ function testFolderCreationResult(eObject)
 }
 
 
-exports.callTestDrivePropertyDefinitionsObject = testDrivePropertyDefinitionsObject;
-exports.callTestDriveLetterObject = testDriveLetterObject;
-exports.callTestMountObject = testMountObject;
-exports.callTestDriveTotalObject = testDriveTotalObject;
-exports.callTestDriveUsedObject = testDriveUsedObject;
-exports.callTestDrivePercentageObject = testDrivePercentageObject;
-exports.callTestDrivePropertyDefinitionsArray = testDrivePropertyDefinitionsArray;
-exports.callTestDriveLettersArray = testDriveLettersArray;
-exports.callTestMountArray = testMountArray;
-exports.callTestDriveTotalArray = testDriveTotalArray;
-exports.callTestDriveUsedArray = testDriveUsedArray;
-exports.callTestDrivePercentagesArray = testDrivePercentagesArray;
-exports.callTestFileFlags = testFileFlags;
-exports.getUserStoragePaths = defineUserStoragePaths;
-exports.callTestFolderCreationResult = testFolderCreationResult;
-
+module.exports =
+{
+	callTestDrivePropertyDefinitionsObject: testDrivePropertyDefinitionsObject,
+	callTestDriveLetterObject: testDriveLetterObject,
+	callTestMountObject: testMountObject,
+	callTestDriveTotalObject: testDriveTotalObject,
+	callTestDriveUsedObject: testDriveUsedObject,
+	callTestDrivePercentageObject: testDrivePercentageObject,
+	callTestDrivePropertyDefinitionsArray: testDrivePropertyDefinitionsArray,
+	callTestDriveLettersArray: testDriveLettersArray,
+	callTestMountArray: testMountArray,
+	callTestDriveTotalArray: testDriveTotalArray,
+	callTestDriveUsedArray: testDriveUsedArray,
+	callTestDrivePercentagesArray: testDrivePercentagesArray,
+	callTestFileFlags: testFileFlags,
+	getUserStoragePaths: defineUserStoragePaths,
+	callTestFolderCreationResult: testFolderCreationResult
+};

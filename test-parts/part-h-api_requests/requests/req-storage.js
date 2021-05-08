@@ -1,22 +1,19 @@
+const fs = require('fs');
+const os = require('os');
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
-const fsModule = require('fs');
-const osModule = require('os');
-
 const apiCommonFile = require("../sub-requests/common-api");
 const storageCommonFile = require("../sub-requests/common-storage");
-const storageFolder = apiPaths.storageApi;
 
-var userStorageTestPaths = null;
-var currentPlatform = osModule.platform();
+var testFile = null;
+var currentPlatform = os.platform();
 
 
 function testStorageAPIs()
@@ -37,16 +34,11 @@ function handleUserStorageTestPaths()
 {
 	describe("User Storage Test Paths", function()
 	{
-		it("Retrieve Function Called", function(done)
+		it("Paths Retrieved", function(done)
 		{
-			userStorageTestPaths = storageCommonFile.getUserStoragePaths();
-			done();
-		});
-		
-		it("Retrieve Successful", function(done)
-		{
-			commonFunctionsFile.testPresent(userStorageTestPaths);
-			expect(userStorageTestPaths).to.be.an("object");
+			testFile = storageCommonFile.getUserStoragePaths();
+			commonFunctionsFile.testPresent(testFile);
+			expect(testFile).to.be.an("object");
 			done();
 		});
 		
@@ -59,8 +51,6 @@ function handleUserStorageTestPaths()
 function handleFileList()
 {
 	var fileListUrl = null;
-	var fileListRequestReturn = null;
-	var fileListRequestError = null;
 	var fileListRead = null;
 	
 	describe("User File List (user-files/list)", function()
@@ -68,28 +58,15 @@ function handleFileList()
 		
 		it("Request Made", function(done)
 		{
-			fileListUrl = apiRequestScript.callWriteApiUrl(storageFolder, "user-files/list");
+			fileListUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, "user-files/list");
 			
-			reqModule(fileListUrl, function(sError, sResult)
+			needle.get(fileListUrl, function(storageErr, storageRes)
 			{
-				fileListRequestError = sError;
-				fileListRequestReturn = sResult;
+				expect(storageErr).to.be.null;
+				commonFunctionsFile.testPresent(storageRes);
+				fileListRead = storageRes.body;
 				done();
 			});
-		});
-		
-		
-		it("Request Successful", function(done)
-		{
-			expect(fileListRequestError).to.be.null;
-			commonFunctionsFile.testPresent(fileListRequestReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			fileListRead = apiRequestScript.callReadApiResponseArray(fileListRequestReturn);
-			done();
 		});
 		
 		it("Correct Array Structure", function()
@@ -146,7 +123,7 @@ function handleUserStorageCreate()
 		
 		it("Storage Folder Called", function(done)
 		{
-			fsModule.mkdir(userStorageTestPaths.storageTestFolderPath, function(foError)
+			fs.mkdir(testFile.folder, function(foError)
 			{
 				folderComplete = true;
 				folderError = foError;
@@ -163,7 +140,7 @@ function handleUserStorageCreate()
 		
 		it("Test File Write Called", function(done)
 		{
-			fsModule.writeFile(userStorageTestPaths.storageTestFilePath, userStorageTestPaths.storageTestFileContent, function(fwError)
+			fs.writeFile(testFile.fullPath, testFile.contents, function(fwError)
 			{
 				fileWriteComplete = true;
 				fileWriteError = fwError;
@@ -186,7 +163,7 @@ function handleUserStorageCreate()
 
 function handleFileDownload()
 {
-	var testFileRelative = null;
+	var relPath = null;
 	
 	var fileDownloadUrl = null;
 	var fileDownloadReturn = null;
@@ -198,10 +175,10 @@ function handleFileDownload()
 		
 		it("Download Request Made", function(done)
 		{
-			testFileRelative = "user-files/download/" + userStorageTestPaths.storageTestFileName;
-			fileDownloadUrl = apiRequestScript.callWriteApiUrl(storageFolder, testFileRelative);
+			relPath = "user-files/download/" + testFile.name;
+			fileDownloadUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, relPath);
 			
-			reqModule(fileDownloadUrl, function(sError, sResult)
+			needle.get(fileDownloadUrl, function(sError, sResult)
 			{
 				fileDownloadError = sError;
 				fileDownloadReturn = sResult;
@@ -213,11 +190,6 @@ function handleFileDownload()
 		{
 			commonFunctionsFile.testPresent(fileDownloadReturn);
 			expect(fileDownloadError).to.be.null;
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
 			fileDownloadRead = apiRequestScript.callReadApiResponseString(fileDownloadReturn);
 			done();
 		});
@@ -226,7 +198,7 @@ function handleFileDownload()
 		{
 			commonFunctionsFile.testPresent(fileDownloadRead);
 			commonFunctionsFile.testString(fileDownloadRead);
-			expect(fileDownloadRead).to.equal(userStorageTestPaths.storageTestFileContent);
+			expect(fileDownloadRead).to.equal(testFile.contents);
 			
 			done();
 		});
@@ -247,7 +219,7 @@ function handleUserStorageDelete()
 	{
 		it("File Remove Called", function(done)
 		{
-			fsModule.unlink(userStorageTestPaths.storageTestFilePath, function(unlinkError)
+			fs.unlink(testFile.fullPath, function(unlinkError)
 			{
 				fileRemoveComplete = true;
 				fileRemoveError = unlinkError;
@@ -264,7 +236,7 @@ function handleUserStorageDelete()
 		
 		it("Folder Remove Called", function(done)
 		{
-			fsModule.rmdir(userStorageTestPaths.storageTestFolderPath, function(dError)
+			fs.rmdir(testFile.folder, function(dError)
 			{
 				folderRemoveComplete = true;
 				folderRemoveError = dError;
@@ -281,7 +253,7 @@ function handleUserStorageDelete()
 		
 		it("Paths Disposed", function(done)
 		{
-			userStorageTestPaths = null;
+			testFile = null;
 			done();
 		});
 		
@@ -292,68 +264,56 @@ function handleUserStorageDelete()
 
 function handleGlobalStatus()
 {
-	var gStatusUrl = null;
-	var gStatusReturn = null;
-	var gStatusError = null;
-	var gStatusRead = null;
+	var statusUrl = null;
+	var statusRead = null;
 	
 	describe("Global Status (global/status)", function()
 	{
 		
 		it("Request Made", function(done)
 		{
-			gStatusUrl = apiRequestScript.callWriteApiUrl(storageFolder, "global/status");
+			statusUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, "global/status");
 			
-			reqModule(gStatusUrl, function(sError, sResult)
+			needle.get(statusUrl, function(statusErr, statusRes)
 			{
-				gStatusError = sError;
-				gStatusReturn = sResult;
+				expect(statusErr).to.be.null;
+				commonFunctionsFile.testPresent(statusRes);
+				statusRead = apiRequestScript.callReadApiResponseObject(statusRes);
 				done();
 			});	
 		});
 		
-		it("Request Successful", function(done)
-		{
-			expect(gStatusError).to.be.null;
-			commonFunctionsFile.testPresent(gStatusReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			gStatusRead = apiRequestScript.callReadApiResponseObject(gStatusReturn);
-			done();
-		});
-		
 		it("Correct Return Structure", function()
 		{
-			commonFunctionsFile.testPresent(gStatusRead);
-			expect(gStatusRead).to.be.an("object");
+			commonFunctionsFile.testPresent(statusRead);
+			expect(statusRead).to.be.an("object");
 		});
 		
 		it("Correct Properties", function()
 		{
-			storageCommonFile.callTestDrivePropertyDefinitionsObject(gStatusRead);
+			storageCommonFile.callTestDrivePropertyDefinitionsObject(statusRead);
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testString(gStatusRead.fs);
-			commonFunctionsFile.testString(gStatusRead.type);
-			commonFunctionsFile.testObjectPropertyContent(gStatusRead, 'used', 'number');
-			commonFunctionsFile.testObjectPropertyContent(gStatusRead, 'use', 'number');
-			commonFunctionsFile.testString(gStatusRead.mount);
+			commonFunctionsFile.testString(statusRead.fs);
+			commonFunctionsFile.testString(statusRead.type);
+			commonFunctionsFile.testObjectPropertyContent(statusRead, 'used', 'number');
+			commonFunctionsFile.testObjectPropertyContent(statusRead, 'use', 'number');
+			commonFunctionsFile.testString(statusRead.mount);
 			
-			storageCommonFile.callTestDriveLetterObject(gStatusRead, currentPlatform);
-			storageCommonFile.callTestDriveTotalObject(gStatusRead, currentPlatform);
-			storageCommonFile.callTestDriveUsedObject(gStatusRead);
-			storageCommonFile.callTestDrivePercentageObject(gStatusRead);
-			storageCommonFile.callTestMountObject(gStatusRead, currentPlatform);
+			storageCommonFile.callTestDriveLetterObject(statusRead, currentPlatform);
+			storageCommonFile.callTestDriveTotalObject(statusRead, currentPlatform);
+			storageCommonFile.callTestDriveUsedObject(statusRead);
+			storageCommonFile.callTestDrivePercentageObject(statusRead);
+			storageCommonFile.callTestMountObject(statusRead, currentPlatform);
 		});
 		
 	});
 }
 
 
-
-exports.callTestStorageAPIs = testStorageAPIs;
+module.exports =
+{
+	callTestStorageAPIs: testStorageAPIs
+};
