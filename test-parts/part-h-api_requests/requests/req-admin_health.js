@@ -1,22 +1,21 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
-const osModule = require('os');
+const os = require('os');
+const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 
-const apiCommonFile = require("../sub-requests/common-api");
-const dbCommonFile = require("../sub-requests/common-database");
-const healthCommonFile = require("../sub-requests/common-health");
-const storageCommonFile = require("../sub-requests/common-storage");
+const commonApi = require("../sub-requests/common-api");
+const commonDatabase = require("../sub-requests/common-database");
+const commonHealth = require("../sub-requests/common-health");
+const commonStorage = require("../sub-requests/common-storage");
 
 var healthObject = null;
-var currentPlatform = osModule.platform();
+var currentPlatform = os.platform();
 
 function testHealthApi()
 {
@@ -38,8 +37,6 @@ function testHealthApi()
 function getHealthObject()
 {
 	var healthUrl = null;
-	var healthReturn = null;
-	var healthError = null;
 	
 	describe("Health Request", function()
 	{
@@ -47,25 +44,13 @@ function getHealthObject()
 		{
 			healthUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "health");
 			
-			reqModule(healthUrl, function(hError, hResult)
+			needle.get(healthUrl, function(healthErr, healthRes)
 			{
-				healthError = hError;
-				healthReturn = hResult;
+				expect(healthErr).to.be.null;
+				commonFunctionsFile.testPresent(healthRes);
+				healthObject = apiRequestScript.callReadApiResponseObject(healthRes);
 				done();
 			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(healthError).to.be.null;
-			commonFunctionsFile.testPresent(healthReturn);
-			done();
-		});
-		
-		it("Results Read", function(done)
-		{
-			healthObject = apiRequestScript.callReadApiResponseObject(healthReturn);
-			done();
 		});
 		
 		it("Object Returned", function(done)
@@ -87,19 +72,18 @@ function handleIdentification()
 		it("Version (version)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'version');
-			commonFunctionsFile.testObjectPropertyContent(healthObject, 'version', 'string');
+			commonFunctionsFile.testString(healthObject.version);
 		});
 		
 		it("Serial Number (serialNumber)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'serialNumber');
-			commonFunctionsFile.testObjectPropertyContent(healthObject, 'serialNumber', 'string');
 			commonFunctionsFile.testString(healthObject.serialNumber);
 		});
 		
 		it("Device (device)", function()
 		{
-			healthCommonFile.callTestHealthDeviceObject(healthObject, currentPlatform);
+			commonHealth.callTestHealthDeviceObject(healthObject, currentPlatform);
 		});
 		
 	});
@@ -118,19 +102,19 @@ function handleTime()
 		
 		it("Current Time (time.current)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.time, 'current');
+			commonApi.callTestPositiveNumberProperty(healthObject.time, 'current');
 		});
 		
 		it("Total Uptime (time.uptime)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.time, 'uptime');
+			commonApi.callTestPositiveNumberProperty(healthObject.time, 'uptime');
 		});
 		
 		it("Timezone Offset Code (time.timezone)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject.time, 'timezone');
 			commonFunctionsFile.testString(healthObject.time.timezone);
-			healthCommonFile.callTestHealthTimezoneCodeValue(healthObject.time.timezone);
+			commonHealth.callTestHealthTimezoneCodeValue(healthObject.time.timezone);
 		});
 		
 		it("Timezone Name (time.timezoneName)", function()
@@ -141,7 +125,7 @@ function handleTime()
 		
 		it("Process Time (time.process)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.time, 'process');
+			commonApi.callTestPositiveNumberProperty(healthObject.time, 'process');
 		});
 		
 		
@@ -160,17 +144,17 @@ function handleSpeed()
 		
 		it("Minimum (cpuCurrentSpeed.min)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.cpuCurrentSpeed, 'min');
+			commonApi.callTestPositiveNumberProperty(healthObject.cpuCurrentSpeed, 'min');
 		});
 		
 		it("Maximum (cpuCurrentSpeed.max)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.cpuCurrentSpeed, 'max');
+			commonApi.callTestPositiveNumberProperty(healthObject.cpuCurrentSpeed, 'max');
 		});
 		
 		it("Average (cpuCurrentSpeed.avg)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.cpuCurrentSpeed, 'avg');
+			commonApi.callTestPositiveNumberProperty(healthObject.cpuCurrentSpeed, 'avg');
 		});
 		
 		it("Array (cpuCurrentSpeed.cores)", function()
@@ -180,9 +164,6 @@ function handleSpeed()
 			commonFunctionsFile.testAllElements(healthObject.cpuCurrentSpeed.cores, 'number');
 			expect(healthObject.cpuCurrentSpeed.cores).to.all.be.above(0);
 		});
-		
-		
-		
 		
 	});
 }
@@ -200,27 +181,27 @@ function handleRam()
 		
 		it("Total Amount (mem.total)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.mem, 'total');
+			commonApi.callTestPositiveNumberProperty(healthObject.mem, 'total');
 		});
 		
 		it("Currently Free (mem.free)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'free', healthObject.mem.total);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'free', healthObject.mem.total);
 		});
 		
 		it("Currently in Use (mem.used)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'used', healthObject.mem.total);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'used', healthObject.mem.total);
 		});
 		
 		it("Active Memory (mem.active)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'active', healthObject.mem.total);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'active', healthObject.mem.total);
 		});
 		
 		it("Avaliable Memory (mem.available)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'available', healthObject.mem.total);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'available', healthObject.mem.total);
 		});
 		
 		it("Buffer Cache (mem.buffcache)", function()
@@ -232,17 +213,17 @@ function handleRam()
 		
 		it("Total Swap Bytes (mem.swaptotal)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'swaptotal', healthObject.mem.total);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'swaptotal', healthObject.mem.total);
 		});
 		
 		it("Used Swap Bytes (mem.swapused)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'swapused', healthObject.mem.swaptotal);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'swapused', healthObject.mem.swaptotal);
 		});
 		
 		it("Free Swap Bytes (mem.swapfree)", function()
 		{
-			healthCommonFile.callTestHealthNumberMaximum(healthObject.mem, 'swapfree', healthObject.mem.swaptotal);
+			commonHealth.callTestHealthNumberMaximum(healthObject.mem, 'swapfree', healthObject.mem.swaptotal);
 		});
 		
 	});
@@ -262,7 +243,7 @@ function handleFileSystem()
 		
 		it("File System Properties (fsSize)", function()
 		{
-			storageCommonFile.callTestDrivePropertyDefinitionsArray(healthObject.fsSize);
+			commonStorage.callTestDrivePropertyDefinitionsArray(healthObject.fsSize);
 		});
 		
 		
@@ -273,29 +254,30 @@ function handleFileSystem()
 		
 		it("Drive Type (fsSize.type)", function()
 		{
-			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'type', 'string')
+			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'type', 'string');
 		});
 		
 		it("Drive Size (fsSize.size)", function()
 		{
-			storageCommonFile.callTestDriveTotalArray(healthObject.fsSize, currentPlatform);
+			commonStorage.callTestDriveTotalArray(healthObject.fsSize, currentPlatform);
 		});
 		
 		it("Amount Used (fsSize.used)", function()
 		{
 			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'used', 'number');
-			storageCommonFile.callTestDriveUsedArray(healthObject.fsSize);
+			commonStorage.callTestDriveUsedArray(healthObject.fsSize);
 		});
 		
 		it("Used Percentage (fsSize.use)", function()
 		{
 			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'use', 'number');
-			storageCommonFile.callTestDrivePercentagesArray(healthObject.fsSize);
+			commonStorage.callTestDrivePercentagesArray(healthObject.fsSize);
 		});
 		
 		it("Mount (fsSize.mount)", function()
 		{
-			testDriveMount(healthObject.fsSize);
+			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'mount', 'string');
+			commonStorage.callTestMountArray(healthObject.fsSize, currentPlatform);
 		});
 		
 	});
@@ -314,17 +296,17 @@ function handleEnvironment()
 		
 		it("Temperature (environment.temperature)", function()
 		{
-			healthCommonFile.callTestHealthEnvironmentValue(healthObject.environment, 'temperature', currentPlatform);
+			commonHealth.callTestHealthEnvironmentValue(healthObject.environment, 'temperature', currentPlatform);
 		});
 		
 		it("Humidity (environment.humidity)", function()
 		{
-			healthCommonFile.callTestHealthEnvironmentValue(healthObject.environment, 'humidity', currentPlatform);
+			commonHealth.callTestHealthEnvironmentValue(healthObject.environment, 'humidity', currentPlatform);
 		});
 		
 		it("Dummy Flag (environment.isDummy)", function()
 		{
-			healthCommonFile.callTestHealthEnvironmentDummy(healthObject.environment, currentPlatform);
+			commonHealth.callTestHealthEnvironmentDummy(healthObject.environment, currentPlatform);
 		});
 		
 		
@@ -353,21 +335,21 @@ function handleNetwork()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'ip4');
 			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'ip4', 'string');
-			apiCommonFile.callTestArrayIpFourValue(healthObject.networkInterfaces, 'ip4', true);
+			commonApi.callTestArrayIpFourValue(healthObject.networkInterfaces, 'ip4', true);
 		});
 		
 		it("IP Address v6 (networkInterfaces.ip6)", function()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'ip6');
 			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'ip6', 'string');
-			apiCommonFile.callTestArrayIpSixValue(healthObject.networkInterfaces, 'ip6', true);
+			commonApi.callTestArrayIpSixValue(healthObject.networkInterfaces, 'ip6', true);
 		});
 		
 		it("MAC Address (networkInterfaces.mac)", function()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'mac');
 			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'mac', 'string');
-			apiCommonFile.callTestArrayMacValue(healthObject.networkInterfaces, 'mac', true);
+			commonApi.callTestArrayMacValue(healthObject.networkInterfaces, 'mac', true);
 		});
 		
 		it("Internal Flag (networkInterfaces.internal)", function()
@@ -396,40 +378,40 @@ function handleDatabase()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'name');
 			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'name', 'string');
-			dbCommonFile.callTestDatabaseNames(healthObject.databaseSize);
+			commonDatabase.callTestDatabaseNames(healthObject.databaseSize);
 		});
 		
 		it("Database Size (databaseSize.size)", function()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'size');
 			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'size', 'number');
-			dbCommonFile.callTestDatabaseSizesEmpty(healthObject.databaseSize, currentPlatform);
+			commonDatabase.callTestDatabaseSizesEmpty(healthObject.databaseSize, currentPlatform);
 		});
 		
 		it("Directory Flag (databaseSize.isDirectory)", function()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'isDirectory');
 			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'isDirectory', 'boolean');
-			dbCommonFile.callTestDatabaseFolderFlags(healthObject.databaseSize);
+			commonDatabase.callTestDatabaseFolderFlags(healthObject.databaseSize);
 		});
 		
 		it("Modified (databaseSize.modified)", function()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'modified');
 			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'modified', 'number');
-			apiCommonFile.callTestPositiveNumberPropertyArray(healthObject.databaseSize, 'modified');
+			commonApi.callTestPositiveNumberPropertyArray(healthObject.databaseSize, 'modified');
 		});
 		
 		it("Created (databaseSize.created)", function()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'created');
 			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'created', 'number');
-			apiCommonFile.callTestPositiveNumberPropertyArray(healthObject.databaseSize, 'created');
+			commonApi.callTestPositiveNumberPropertyArray(healthObject.databaseSize, 'created');
 		});
 		
 		it("Timestamps Valid (databaseSize.modified, created)", function()
 		{
-			apiCommonFile.callTestWriteTimestampArray(healthObject.databaseSize, 'modified', 'created');
+			commonApi.callTestWriteTimestampArray(healthObject.databaseSize, 'modified', 'created');
 		});
 		
 		
@@ -440,53 +422,53 @@ function handleLog()
 {
 	describe("Log", function()
 	{
+		var logObject = null;
 		
-		it("Log Array (logSize)", function()
+		it("Log Array (logSize)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'logSize');
 			commonFunctionsFile.testArrayPopulated(healthObject.logSize);
 			commonFunctionsFile.testAllElements(healthObject.logSize, 'object');
 			expect(healthObject.logSize.length).to.equal(1);
+			
+			logObject = healthObject.logSize[0];
+			done();
 		});
 	
 		it("Log Name (logSize.name)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.logSize[0], 'name');
-			commonFunctionsFile.testString(healthObject.logSize[0].name);
-			expect(healthObject.logSize[0].name).to.equal("fox-controller.log");
+			commonFunctionsFile.testObjectPropertyDefinition(logObject, 'name');
+			expect(logObject.name).to.equal("fox-controller.log");
 		});
 	
 		it("Log Size (logSize.size)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.logSize[0], 'size');
-			commonFunctionsFile.testObjectPropertyContent(healthObject.logSize[0], 'size', 'number');
-			expect(healthObject.logSize[0].size).to.be.at.least(0);
+			commonFunctionsFile.testObjectPropertyDefinition(logObject, 'size');
+			commonFunctionsFile.testObjectPropertyContent(logObject, 'size', 'number');
+			expect(logObject.size).to.be.at.least(0);
 		});
 	
 		it("Directory Flag (logSize.isDirectory)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.logSize[0], 'isDirectory');
-			commonFunctionsFile.testObjectPropertyContent(healthObject.logSize[0], 'isDirectory', 'boolean');
-			expect(healthObject.logSize[0].isDirectory).to.be.false;
+			commonFunctionsFile.testObjectPropertyDefinition(logObject, 'isDirectory');
+			expect(logObject.isDirectory).to.be.false;
 		});
 	
 		it("Modified (logSize.modified)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.logSize[0], 'modified');
+			commonApi.callTestPositiveNumberProperty(logObject, 'modified');
 		});
 	
 		it("Created (logSize.created)", function()
 		{
-			apiCommonFile.callTestPositiveNumberProperty(healthObject.logSize[0], 'created');
+			commonApi.callTestPositiveNumberProperty(logObject, 'created');
 		});
 		
 		
 		it("Timestamps Valid (logSize.modified, created)", function()
 		{
-			apiCommonFile.callTestWriteTimestamp(healthObject.logSize[0], 'modified', 'created');
+			commonApi.callTestWriteTimestamp(logObject, 'modified', 'created');
 		});
-		
-		
 		
 	});
 }
@@ -496,18 +478,12 @@ function handleLog()
 function testDriveLetter(fsObject)
 {
 	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
-	storageCommonFile.callTestDriveLettersArray(fsObject, currentPlatform);
+	commonStorage.callTestDriveLettersArray(fsObject, currentPlatform);
 }
 
-function testDriveMount(fsObject)
+
+
+module.exports =
 {
-	commonFunctionsFile.testPropertyContents(fsObject, 'mount', 'string');
-	storageCommonFile.callTestMountArray(fsObject, currentPlatform);
-}
-
-
-
-
-
-
-exports.callTestHealthApi = testHealthApi;
+	callTestHealthApi: testHealthApi
+};

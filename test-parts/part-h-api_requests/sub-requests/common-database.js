@@ -1,14 +1,9 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-const localValidFile = require(commonPaths.localValid);
 
 const supportedDatabasesFile = require(commonPaths.supportedDatabases);
 const supportedDatabasesArray = supportedDatabasesFile.getSupportedDatabases();
@@ -16,21 +11,21 @@ const supportedDatabasesArray = supportedDatabasesFile.getSupportedDatabases();
 
 function getSupportedDatabaseNames()
 {
-	var dInd = 0;
-	var dElement = null;
-	var dPropertyType = null;
-	var dNames = [];
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentType = "";
+	var nameRes = [];
 	
-	for (dInd = 0; dInd < supportedDatabasesArray.length; dInd = dInd + 1)
+	for (loopIndex = 0; loopIndex < supportedDatabasesArray.length; loopIndex = loopIndex + 1)
 	{
-		dElement = supportedDatabasesArray[dInd];
-		dPropertyType = typeof dElement.dbName;
+		currentObject = supportedDatabasesArray[loopIndex];
+		currentType = typeof currentObject.dbName;
 		
-		if (dElement.dbName !== null && dPropertyType === 'string' && dElement.dbName.length > 0)
+		if (currentType === 'string' && currentObject.dbName.length > 0)
 		{
-			dNames.push(dElement.dbName);
+			nameRes.push(currentObject.dbName);
 		}
-		else if (dElement.dbName !== null && dPropertyType === 'string')
+		else if (currentType === 'string')
 		{
 			throw new Error("Database definition names cannot be empty");
 		}
@@ -38,90 +33,95 @@ function getSupportedDatabaseNames()
 		{
 			throw new Error("Database definitions must have names");
 		}
-		
-		
 	}
 	
-	return dNames;
+	
+	return nameRes;
 }
 
-function getDatabaseDefinitionByObject(dObject)
+
+function getDatabaseDefinitionByObject(targetObject)
 {
-	var dInd = 0;
-	var dElement = null;
-	var dFound = false;
-	var dDefinition = null;
+	var loopIndex = 0;
+	var currentObject = null;
+	var targetFound = false;
+	var retrievedDefinition = null;
 	
-	while (dInd >= 0 && dInd < supportedDatabasesArray.length && dFound !== true)
+	var res = {};
+	
+	while (loopIndex >= 0 && loopIndex < supportedDatabasesArray.length && targetFound !== true)
 	{
-		dElement = supportedDatabasesArray[dInd];
+		currentObject = supportedDatabasesArray[loopIndex];
 		
-		if (dElement.dbName === dObject.name)
+		if (currentObject.dbName === targetObject.name)
 		{
-			dFound = true;
-			dDefinition = dElement;
+			targetFound = true;
+			retrievedDefinition = currentObject;
 		}
 		
-		dInd = dInd + 1;
+		loopIndex = loopIndex + 1;
 	}
 	
-	var res = {"dbFound": dFound, "dbDefinition": dDefinition};
+	
+	res["dbFound"] = targetFound;
+	res["dbDefinition"] = retrievedDefinition;
+	
 	return res;
 }
 
 
-function checkFileDatabaseEmpty(fileDatabaseObject, fileDatabaseDefinition, targetDatabaseName)
+function checkFileDatabaseEmpty(fileObj, fileDef, fileDbName)
 {
 	var res = false;
 	
-	if (fileDatabaseObject.size === fileDatabaseDefinition.dbDefinition.cleanSize)
+	if (fileObj.size === fileDef.dbDefinition.cleanSize)
 	{
 		res = true;
 	}
-	else if (fileDatabaseObject.size > fileDatabaseDefinition.dbDefinition.cleanSize)
+	else if (fileObj.size > fileDef.dbDefinition.cleanSize)
 	{
 		res = false;
-		showEmptyContentError(targetDatabaseName);
+		showEmptyContentError(fileDbName);
 	}
-	else if (fileDatabaseObject.size < fileDatabaseDefinition.dbDefinition.cleanSize)
+	else if (fileObj.size < fileDef.dbDefinition.cleanSize)
 	{
 		res = false;
-		showInvalidSizeError(targetDatabaseName);
+		showInvalidSizeError(fileDbName);
 	}
 	else
 	{
 		res = false;
-		showCurrentSizeCheckError(targetDatabaseName);
+		showCurrentSizeCheckError(fileDbName);
 	}
 	
 	return res;
 }
 
 
-function checkFolderDatabaseEmpty(folderDatabaseObject, folderDatabaseDefinition, targetDatabaseName, platformUsed)
+function checkFolderDatabaseEmpty(folderObj, folderDef, folderDbName, platformUsed)
 {
-	var baseCleanSize = folderDatabaseDefinition.dbDefinition.cleanSize;
+	var baseCleanSize = folderDef.dbDefinition.cleanSize;
 	var maximumCleanSize = getDatabaseFolderMargin(baseCleanSize, platformUsed);
 	var res = false;
 	
-	if (folderDatabaseObject.size >= baseCleanSize && folderDatabaseObject.size <= maximumCleanSize)
+	if (folderObj.size >= baseCleanSize && folderObj.size <= maximumCleanSize)
 	{
 		res = true;
 	}
-	else if (folderDatabaseObject.size > maximumCleanSize)
+	else if (folderObj.size > maximumCleanSize)
 	{
 		res = false;
-		showEmptyContentError(targetDatabaseName);
+		showEmptyContentError(folderDbName);
 	}
-	else if (folderDatabaseObject.size < baseCleanSize)
+	else if (folderObj.size < baseCleanSize)
 	{
 		res = false;
-		showInvalidSizeError(targetDatabaseName);
+		showInvalidSizeError(folderDbName);
 	}
 	else
 	{
 		res = false;
-		showCurrentSizeCheckError(targetDatabaseName);
+		showCurrentSizeCheckError(folderDbName);
 	}
 	
 	
@@ -129,61 +129,61 @@ function checkFolderDatabaseEmpty(folderDatabaseObject, folderDatabaseDefinition
 }
 
 
-function checkFileDatabasePopulated(fileDatabaseObject, fileDatabaseDefinition, targetDatabaseName)
+function checkFileDatabasePopulated(fileObj, fileDef, fileDbName)
 {
 	var res = false;
 	
-	if (fileDatabaseObject.size > fileDatabaseDefinition.dbDefinition.cleanSize)
+	if (fileObj.size > fileDef.dbDefinition.cleanSize)
 	{
 		res = true;
 	}
-	else if (fileDatabaseObject.size === fileDatabaseDefinition.dbDefinition.cleanSize)
+	else if (fileObj.size === fileDef.dbDefinition.cleanSize)
 	{
 		res = false;
-		throw new Error(targetDatabaseName + " is empty");
+		throw new Error(fileDbName + " is empty");
 	}
-	else if (fileDatabaseObject.size < fileDatabaseDefinition.dbDefinition.cleanSize)
+	else if (fileObj.size < fileDef.dbDefinition.cleanSize)
 	{
 		res = false;
-		showInvalidSizeError(targetDatabaseName);
+		showInvalidSizeError(fileDbName);
 	}
 	else
 	{
 		res = false;
-		showCurrentSizeCheckError(targetDatabaseName);
+		showCurrentSizeCheckError(fileDbName);
 	}
 	
 	
 	return res;
 }
 
-function checkFolderDatabasePopulated(folderDatabaseObject, folderDatabaseDefinition, targetDatabaseName, platformUsed)
+function checkFolderDatabasePopulated(folderObj, folderDef, folderDbName, platformUsed)
 {
-	var baseCleanSize = folderDatabaseDefinition.dbDefinition.cleanSize;
+	var baseCleanSize = folderDef.dbDefinition.cleanSize;
 	var maximumCleanSize = getDatabaseFolderMargin(baseCleanSize, platformUsed);
 	var res = false;
 	
-	if (folderDatabaseObject.size > maximumCleanSize)
+	if (folderObj.size > maximumCleanSize)
 	{
 		res = true;
 	}
-	else if (folderDatabaseObject.size >= baseCleanSize && folderDatabaseObject <= maximumCleanSize)
+	else if (folderObj.size >= baseCleanSize && folderObj <= maximumCleanSize)
 	{
 		res = false;
-		showPopulatedFolderEmptyError(targetDatabaseName);
+		showPopulatedFolderEmptyError(folderDbName);
 	}
-	else if (folderDatabaseObject.size > baseCleanSize)
+	else if (folderObj.size > baseCleanSize)
 	{
 		res = false;
-		showInvalidSizeError(targetDatabaseName);
+		showInvalidSizeError(folderDbName);
 	}
 	else
 	{
 		res = false;
-		showCurrentSizeCheckError(targetDatabaseName);
+		showCurrentSizeCheckError(folderDbName);
 	}
 	
-	
+	return res;
 }
 
 
@@ -192,7 +192,7 @@ function checkFolderDatabasePopulated(folderDatabaseObject, folderDatabaseDefini
 
 function getDatabaseFolderMargin(baseNumber, pUsed)
 {
-	var res = null;
+	var res = -1;
 	
 	if (pUsed === 'win32')
 	{
@@ -208,65 +208,58 @@ function getDatabaseFolderMargin(baseNumber, pUsed)
 
 
 
-
-
-
 function testDatabaseNames(dbArray)
 {
 	var expectedNames = getSupportedDatabaseNames();
 	
-	var dbIndex = 0;
-	var dbObject = null;
-	var dbNameIndex = -1;
-	var dbNameValid = false;
+	var loopIndex = 0;
+	var currentObject = null;
+	var currentExists = false;
 	
-	for (dbIndex = 0; dbIndex < dbArray.length; dbIndex = dbIndex + 1)
+	for (loopIndex = 0; loopIndex < dbArray.length; loopIndex = loopIndex + 1)
 	{
-		dbObject = dbArray[dbIndex];
-		dbNameIndex = expectedNames.indexOf(dbObject.name);
-		dbNameValid = false;
-		
-		if (dbNameIndex >= 0 && dbNameIndex < expectedNames.length)
-		{
-			dbNameValid = true;
-		}
-		
-		expect(dbNameValid).to.be.true;
+		currentObject = dbArray[loopIndex];
+		currentExists = expectedNames.includes(currentObject.name);
+		expect(currentExists).to.be.true;
 	}
 }
 
 
 function testDatabaseFolderFlags(dbArray)
 {
-	var dbIndex = 0;
-	var dbObject = null;
-	var dbName = null;
-	var dbTarget = null;
-	var dbValid = false;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentName = "";
+	var currentDirectory = false;
+	var currentDefinition = {};
+	var currentFound = false;
+	var currentValid = false;
 	
-	for (dbIndex = 0; dbIndex < dbArray.length; dbIndex = dbIndex + 1)
+	for (loopIndex = 0; loopIndex < dbArray.length; loopIndex = loopIndex + 1)
 	{
-		dbObject = dbArray[dbIndex];
-		dbName = "'" + dbObject.name + "'";
-		dbTarget = getDatabaseDefinitionByObject(dbObject);
-		dbValid = false;
+		currentObject = dbArray[loopIndex];
+		currentName = "'" + currentObject.name + "'";
+		currentDirectory = currentObject.isDirectory;
+		currentDefinition = getDatabaseDefinitionByObject(currentObject);
+		currentFound = currentDefinition.dbFound;
+		currentValid = false;
 		
-		if (dbTarget.dbFound === true && dbTarget.dbDefinition.folder === dbObject.isDirectory)
+		if (currentFound === true && currentDefinition.dbDefinition.folder === currentDirectory)
 		{
-			dbValid = true;
+			currentValid = true;
 		}
-		else if (dbTarget.dbFound === true)
+		else if (currentFound === true)
 		{
-			dbValid = false;
-			throw new Error(dbName + " directory flag is missing or incorrect");
+			currentValid = false;
+			throw new Error(currentName + " directory flag is missing or incorrect");
 		}
 		else
 		{
-			dbValid = false;
-			showUnknownDatabaseError(dbName);
+			currentValid = false;
+			showUnknownDatabaseError(currentName);
 		}
 		
-		expect(dbValid).to.be.true;
+		expect(currentValid).to.be.true;
 	}
 	
 }
@@ -274,78 +267,82 @@ function testDatabaseFolderFlags(dbArray)
 
 function testDatabaseSizesEmpty(dbArray, dbPlatform)
 {
-	var dbIndex = 0;
-	var dbObject = null;
-	var dbName = null;
-	var dbTarget = null;
-	var dbValid = false;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentName = "";
+	var currentDefinition = {};
+	var currentFound = false;
+	var currentValid = false;
 	
-	for (dbIndex = 0; dbIndex < dbArray.length; dbIndex = dbIndex + 1)
+	for (loopIndex = 0; loopIndex < dbArray.length; loopIndex = loopIndex + 1)
 	{
-		dbObject = dbArray[dbIndex];
-		dbName = "'" + dbObject.name + "'";
-		dbTarget = getDatabaseDefinitionByObject(dbObject);
-		dbValid = false;
+		currentObject = dbArray[loopIndex];
+		currentName = "'" + currentObject.name + "'";
+		currentDefinition = getDatabaseDefinitionByObject(currentObject);
+		currentFound = currentDefinition.dbFound;
+		currentValid = false;
 		
-		if (dbTarget.dbFound === true && dbTarget.dbDefinition.folder === true)
+		if (currentFound === true && currentDefinition.dbDefinition.folder === true)
 		{
-			dbValid = checkFolderDatabaseEmpty(dbObject, dbTarget, dbName, dbPlatform);
+			currentValid = checkFolderDatabaseEmpty(currentObject, currentDefinition, currentName, dbPlatform);
 		}
-		else if (dbTarget.dbFound === true && dbTarget.dbDefinition.folder === false)
+		else if (currentFound === true && currentDefinition.dbDefinition.folder === false)
 		{
-			dbValid = checkFileDatabaseEmpty(dbObject, dbTarget, dbName);
+			currentValid = checkFileDatabaseEmpty(currentObject, currentDefinition, currentName);
 		}
-		else if (dbTarget.dbFound === true)
+		else if (currentFound === true)
 		{
-			dbValid = false;
-			showInvalidStructureError(dbName);
+			currentValid = false;
+			showInvalidStructureError(currentName);
 		}
 		else
 		{
-			dbValid = false;
-			showUnknownDatabaseError(dbName);
+			currentValid = false;
+			showUnknownDatabaseError(currentName);
 		}
 		
-		expect(dbValid).to.be.true;
+		expect(currentValid).to.be.true;
 	}
 }
 
 
 function testDatabaseSizesPopulated(dbArray, dbPlatform)
 {
-	var dbIndex = 0;
-	var dbObject = null;
-	var dbName = null;
-	var dbTarget = null;
-	var dbValid = false;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentName = "";
+	var currentDefinition = {};
+	var currentFound = false;
+	var currentValid = false;
 	
-	for (dbIndex = 0; dbIndex < dbArray.length; dbIndex = dbIndex + 1)
+	for (loopIndex = 0; loopIndex < dbArray.length; loopIndex = loopIndex + 1)
 	{
-		dbObject = dbArray[dbIndex];
-		dbName = "'" + dbObject.name + "'";
-		dbTarget = getDatabaseDefinitionByObject(dbObject);
-		dbValid = false;
+		currentObject = dbArray[loopIndex];
+		currentName = "'" + currentObject.name + "'";
+		currentDefinition = getDatabaseDefinitionByObject(currentObject);
+		currentFound = currentDefinition.dbFound;
+		currentValid = false;
 		
-		if (dbTarget.dbFound === true && dbTarget.dbDefinition.folder === true)
+		if (currentFound === true && currentDefinition.dbDefinition.folder === true)
 		{
-			dbValid = checkFolderDatabasePopulated(dbObject, dbTarget, dbName, dbPlatform);
+			currentValid = checkFolderDatabasePopulated(currentObject, currentDefinition, currentName, dbPlatform);
 		}
-		else if (dbTarget.dbFound === true && dbTarget.dbDefinition.folder === false)
+		else if (currentFound === true && currentDefinition.dbDefinition.folder === false)
 		{
-			dbValid = checkFileDatabasePopulated(dbObject, dbTarget, dbName);
+			currentValid = checkFileDatabasePopulated(currentObject, currentDefinition, currentName);
 		}
-		else if (dbTarget.dbFound === true)
+		else if (currentFound === true)
 		{
-			dbValid = false;
-			showInvalidStructureError(dbName);
+			currentValid = false;
+			showInvalidStructureError(currentName);
 		}
 		else
 		{
-			dbValid = false;
-			showUnknownDatabaseError(dbName);
+			currentValid = false;
+			showUnknownDatabaseError(currentName);
 		}
 		
-		expect(dbValid).to.be.true;
+		expect(currentValid).to.be.true;
 	}
 	
 }
@@ -354,48 +351,57 @@ function testDatabaseSizesPopulated(dbArray, dbPlatform)
 
 
 
-function showInvalidSizeError(dn)
+function showInvalidSizeError(vName)
 {
-	throw new Error("Invalid size for Database " + dn);
+	var flaggedMessage = "Invalid size for Database " + vName;
+	throw new Error(flaggedMessage);
 }
 
-function showCurrentSizeCheckError(dn)
+function showCurrentSizeCheckError(vName)
 {
-	throw new Error("Could not check current size of Database " + dn);
+	var flaggedMessage = "Could not check current size of Database " + vName;
+	throw new Error(flaggedMessage);
 }
 
 
-function showEmptyContentError(dn)
+function showEmptyContentError(vName)
 {
-	throw new Error(dn + " has content. This Database must be cleaned");
+	var flaggedMessage = vName + " has content. This Database must be cleaned.";
+	throw new Error(flaggedMessage);
 }
 
 
 function showPopulatedFolderEmptyError(dn)
 {
-	var p1 = dn + " ";
-	var p2 = "is most likely empty based on the Database's clean size, and folder error margin";
+	var flaggedMessage = "";
 	
-	var folderEmptyMessage = p1 + p2;
+	flaggedMessage += dn;
+	flaggedMessage += " is most likely empty based on the ";
+	flaggedMessage += "Database's clean size, and folder error margin.";
 	
-	throw new Error(folderEmptyMessage);
+	throw new Error(flaggedMessage);
 }
 
 
 
-function showUnknownDatabaseError(dn)
+function showUnknownDatabaseError(vName)
 {
-	throw new Error(dn + " is not a known Controller Database");
+	var flaggedMessage = vName + " is not a known Controller Database.";
+	throw new Error(flaggedMessage);
 }
 
-function showInvalidStructureError(dn)
+function showInvalidStructureError(vName)
 {
-	throw new Error(dn + " has an invalid definition structure");
+	var flaggedMessage = vName + " has an invalid definition structure.";
+	throw new Error(flaggedMessage);
 }
 
 
 
-exports.callTestDatabaseNames = testDatabaseNames;
-exports.callTestDatabaseFolderFlags = testDatabaseFolderFlags;
-exports.callTestDatabaseSizesEmpty = testDatabaseSizesEmpty;
-exports.callTestDatabaseSizesPopulated = testDatabaseSizesPopulated;
+module.exports =
+{
+	callTestDatabaseNames: testDatabaseNames,
+	callTestDatabaseFolderFlags: testDatabaseFolderFlags,
+	callTestDatabaseSizesEmpty: testDatabaseSizesEmpty,
+	callTestDatabaseSizesPopulated: testDatabaseSizesPopulated
+};

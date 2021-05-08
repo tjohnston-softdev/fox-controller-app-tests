@@ -1,59 +1,55 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const localValidFile = require(commonPaths.localValid);
 
 const validatorModule = require("validator");
 
 
-function testArrayIpFourValue(iArray, iProp, iEmpty)
+function testArrayIpFourValue(objectArray, ipProp, ipEmptyAllowed)
 {
-	var elementIndex = 0;
-	var elementObject = null;
-	var elementIP = null;
-	var elementIpValid = null;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentIP = "";
+	var currentValid = false;
 	
-	for (elementIndex = 0; elementIndex < iArray.length; elementIndex = elementIndex + 1)
+	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
-		elementObject = iArray[elementIndex];
-		elementIP = elementObject[iProp];
-		elementIpValid = false;
+		currentObject = objectArray[loopIndex];
+		currentIP = currentObject[ipProp];
+		currentValid = false;
 		
-		if (elementIP.length > 0)
+		if (currentIP.length > 0)
 		{
-			elementIpValid = validatorModule.isIP(elementIP, 4);
+			currentValid = validatorModule.isIP(currentIP, 4);
 		}
-		else if (iEmpty === true)
+		else if (ipEmptyAllowed === true)
 		{
-			elementIpValid = true;
+			currentValid = true;
 		}
 		else
 		{
-			elementIpValid = false;
+			currentValid = false;
 		}
 		
-		expect(elementIpValid).to.be.true;
+		expect(currentValid).to.be.true;
 	}
 }
 
-function testArrayIpSixValue(iArray, iProp, iEmpty)
+function testArrayIpSixValue(objectArray, ipProp, ipEmptyAllowed)
 {
-	var elementIndex = 0;
-	var currentObject = null;
-	var currentIP = null;
-	var currentValid = null;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentIP = "";
+	var currentValid = false;
 	
-	for (elementIndex = 0; elementIndex < iArray.length; elementIndex = elementIndex + 1)
+	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
-		currentObject = iArray[elementIndex];
-		currentIP = currentObject[iProp];
+		currentObject = objectArray[loopIndex];
+		currentIP = currentObject[ipProp];
 		currentValid = false;
 		
 		if (currentIP === "::1")
@@ -64,7 +60,7 @@ function testArrayIpSixValue(iArray, iProp, iEmpty)
 		{
 			currentValid = validatorModule.isIP(currentIP, 6);
 		}
-		else if (iEmpty === true)
+		else if (ipEmptyAllowed === true)
 		{
 			currentValid = true;
 		}
@@ -78,24 +74,24 @@ function testArrayIpSixValue(iArray, iProp, iEmpty)
 }
 
 
-function testArrayMacValue(iArray, iProp, iEmpty)
+function testArrayMacValue(objectArray, macProp, macEmptyAllowed)
 {
-	var elementIndex = 0;
+	var loopIndex = 0;
 	var currentObject = null;
 	var currentMac = null;
 	var currentValid = null;
 	
-	for (elementIndex = 0; elementIndex < iArray.length; elementIndex = elementIndex + 1)
+	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
-		currentObject = iArray[elementIndex];
-		currentMac = currentObject[iProp];
+		currentObject = objectArray[loopIndex];
+		currentMac = currentObject[macProp];
 		currentValid = false;
 		
 		if (currentMac.length > 0)
 		{
 			currentValid = validatorModule.isMACAddress(currentMac);
 		}
-		else if (currentMac === "" && iEmpty === true)
+		else if (currentMac === "" && macEmptyAllowed === true)
 		{
 			currentValid = true;
 		}
@@ -123,139 +119,135 @@ function testDhcpLeaseExpireValues(dhcpArray)
 	}
 }
 
-function testDhcpMacLongValue(dhcpArray, emptyMacAllowed)
+function testDhcpMacLongValue(dhcpArray, dhcpMacOptional)
 {
-	testArrayMacValue(dhcpArray, 'mac', emptyMacAllowed);
+	testArrayMacValue(dhcpArray, 'mac', dhcpMacOptional);
 }
 
 function testDhcpMacShortValue(dhcpArray)
 {
 	var dhcpIndex = 0;
-	var dhcpObject = null;
-	var dhcpSub = null;
-	var originalLower = null;
-	var subLower = null;
-	var dhcpShortValid = false;
+	var currentObject = {};
+	var currentSubstring = "";
+	var currentOrigLower = "";
+	var currentSubLower = "";
 	
 	for (dhcpIndex = 0; dhcpIndex < dhcpArray.length; dhcpIndex = dhcpIndex + 1)
 	{
-		dhcpObject = dhcpArray[dhcpIndex];
-		dhcpSub = dhcpObject.mac.substring(12);
-		originalLower = dhcpObject.shortMac.toLowerCase();
-		subLower = dhcpSub.toLowerCase();
-		dhcpShortValid = false;
+		currentObject = dhcpArray[dhcpIndex];
+		currentSubstring = currentObject.mac.substring(12);
+		currentOrigLower = currentObject.shortMac.toLowerCase();
+		currentSubLower = currentSubstring.toLowerCase();
 		
-		if (subLower === originalLower)
-		{
-			dhcpShortValid = true;
-		}
-		
-		expect(dhcpShortValid).to.be.true;
+		expect(currentOrigLower).to.equal(currentSubLower);
 	}
 }
 
-function testWriteTimestamp(wObject, modifiedProperty, createdProperty)
+function testWriteTimestamp(writeObject, modifiedProperty, createdProperty)
 {
-	var modifiedValue = wObject[modifiedProperty];
-	var createdValue = wObject[createdProperty];
+	var modifiedValue = writeObject[modifiedProperty];
+	var createdValue = writeObject[createdProperty];
 	
 	expect(modifiedValue).to.be.above(0);
 	expect(createdValue).to.be.above(0);
 	expect(modifiedValue).to.be.at.least(createdValue);
 }
 
-function testWriteTimestampArray(wArray, arrayModifyProperty, arrayCreateProperty)
+function testWriteTimestampArray(writeArray, arrayModifyProperty, arrayCreateProperty)
 {
-	var elementIndex = 0;
-	var elementObject = null;
+	var loopIndex = 0;
+	var currentObject = {};
 	
-	for (elementIndex = 0; elementIndex < wArray.length; elementIndex = elementIndex + 1)
+	for (loopIndex = 0; loopIndex < writeArray.length; loopIndex = loopIndex + 1)
 	{
-		elementObject = wArray[elementIndex];
-		testWriteTimestamp(elementObject, arrayModifyProperty, arrayCreateProperty);
+		currentObject = writeArray[loopIndex];
+		testWriteTimestamp(currentObject, arrayModifyProperty, arrayCreateProperty);
 	}
 }
 
-function testFileNameArray(fnArray, fnProperty)
+function testFileNameArray(objectArray, nameProp)
 {
-	var elementIndex = 0;
-	var elementObject = null;
-	var elementName = "";
-	var elementValid = false;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentName = "";
+	var currentValid = false;
 	
-	for (elementIndex = 0; elementIndex < fnArray.length; elementIndex = elementIndex + 1)
+	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
-		elementObject = fnArray[elementIndex];
-		elementName = elementObject[fnProperty];
-		elementValid = localValidFile.validateFilename(elementName);
+		currentObject = objectArray[loopIndex];
+		currentName = currentObject[nameProp];
+		currentValid = localValidFile.validateFilename(currentName);
 		
-		expect(elementValid).to.be.true;
+		expect(currentValid).to.be.true;
 	}
 }
 
-function testZeroLeastArray(objectArray, numberProperty)
+function testZeroLeastArray(objectArray, numberProp)
 {
-	var elementIndex = 0;
-	var elementObject = null;
-	var elementValue = null;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentValue = -1;
 	
-	for (elementIndex = 0; elementIndex < objectArray.length; elementIndex = elementIndex + 1)
+	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
-		elementObject = objectArray[elementIndex];
-		elementValue = elementObject[numberProperty];
-		expect(elementValue).to.be.at.least(0);
+		currentObject = objectArray[loopIndex];
+		currentValue = currentObject[numberProp];
+		expect(currentValue).to.be.at.least(0);
 	}
 }
 
 
 function testPositiveNumberProperty(parentObject, propName)
 {
+	var givenValue = -1;
+	
 	commonFunctionsFile.testObjectPropertyDefinition(parentObject, propName);
 	commonFunctionsFile.testObjectPropertyContent(parentObject, propName, 'number');
-	expect(parentObject[propName]).to.be.above(0);
+	givenValue = parentObject[propName];
+	expect(givenValue).to.be.above(0);
 }
 
 function testPositiveNumberPropertyArray(parentArray, propName)
 {
-	var aIndex = 0;
-	var aObject = null;
-	var aValue = null;
+	var loopIndex = 0;
+	var currentObject = {};
+	var currentValue = -1;
 	
-	for (aIndex = 0; aIndex < parentArray.length; aIndex = aIndex + 1)
+	for (loopIndex = 0; loopIndex < parentArray.length; loopIndex = loopIndex + 1)
 	{
-		aObject = parentArray[aIndex];
-		aValue = aObject[propName];
-		expect(aValue).to.be.above(0);
+		currentObject = parentArray[loopIndex];
+		currentValue = currentObject[propName];
+		expect(currentValue).to.be.above(0);
 	}
 }
 
-function testAlarmStateFlags(alarmObjectArray)
+function testAlarmStateFlags(objectArray)
 {
-	var alarmObjectIndex = 0;
-	var currentAlarmObject = null;
+	var loopIndex = 0;
+	var currentAlarmObject = {};
 	
-	for (alarmObjectIndex = 0; alarmObjectIndex < alarmObjectArray.length; alarmObjectIndex = alarmObjectIndex + 1)
+	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
-		currentAlarmObject = alarmObjectArray[alarmObjectIndex];
+		currentAlarmObject = objectArray[loopIndex];
 		commonFunctionsFile.testBinary(currentAlarmObject.state);
 	}
 }
 
 
 
-
-
-
-exports.callTestArrayIpFourValue = testArrayIpFourValue;
-exports.callTestArrayIpSixValue = testArrayIpSixValue;
-exports.callTestArrayMacValue = testArrayMacValue;
-exports.callTestDhcpLeaseExpireValues = testDhcpLeaseExpireValues;
-exports.callTestDhcpMacLongValue = testDhcpMacLongValue;
-exports.callTestDhcpMacShortValue = testDhcpMacShortValue;
-exports.callTestWriteTimestamp = testWriteTimestamp;
-exports.callTestWriteTimestampArray = testWriteTimestampArray;
-exports.callTestFileNameArray = testFileNameArray;
-exports.callTestZeroLeastArray = testZeroLeastArray;
-exports.callTestPositiveNumberProperty = testPositiveNumberProperty;
-exports.callTestPositiveNumberPropertyArray = testPositiveNumberPropertyArray;
-exports.callTestAlarmStateFlags = testAlarmStateFlags;
+module.exports =
+{
+	callTestArrayIpFourValue: testArrayIpFourValue,
+	callTestArrayIpSixValue: testArrayIpSixValue,
+	callTestArrayMacValue: testArrayMacValue,
+	callTestDhcpLeaseExpireValues: testDhcpLeaseExpireValues,
+	callTestDhcpMacLongValue: testDhcpMacLongValue,
+	callTestDhcpMacShortValue: testDhcpMacShortValue,
+	callTestWriteTimestamp: testWriteTimestamp,
+	callTestWriteTimestampArray: testWriteTimestampArray,
+	callTestFileNameArray: testFileNameArray,
+	callTestZeroLeastArray: testZeroLeastArray,
+	callTestPositiveNumberProperty: testPositiveNumberProperty,
+	callTestPositiveNumberPropertyArray: testPositiveNumberPropertyArray,
+	callTestAlarmStateFlags: testAlarmStateFlags
+};

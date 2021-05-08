@@ -1,35 +1,31 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const localValidFile = require(commonPaths.localValid);
 
 
 
-function testHealthDeviceObject(hObject, hPlatform)
+function testHealthDeviceObject(healthObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(hObject, 'device');
-	commonFunctionsFile.testObjectPropertyContent(hObject, 'device', 'object');
+	commonFunctionsFile.testObjectPropertyDefinition(healthObj, 'device');
+	commonFunctionsFile.testObjectPropertyContent(healthObj, 'device', 'object');
 	
-	commonFunctionsFile.testObjectPropertyDefinition(hObject.device, 'WARNING');
-	commonFunctionsFile.testObjectPropertyDefinition(hObject.device, 'name');
-	commonFunctionsFile.testObjectPropertyDefinition(hObject.device, 'serialNumber');
-	commonFunctionsFile.testObjectPropertyDefinition(hObject.device, 'hardware');
-	commonFunctionsFile.testObjectPropertyDefinition(hObject.device, 'wifiPass');
+	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'WARNING');
+	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'name');
+	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'serialNumber');
+	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'hardware');
+	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'wifiPass');
 	
-	commonFunctionsFile.testString(hObject.device.WARNING);
-	commonFunctionsFile.testString(hObject.device.name);
-	commonFunctionsFile.testString(hObject.device.serialNumber);
-	commonFunctionsFile.testString(hObject.device.hardware);
-	commonFunctionsFile.testString(hObject.device.wifiPass);
+	commonFunctionsFile.testString(healthObj.device.WARNING);
+	commonFunctionsFile.testString(healthObj.device.name);
+	commonFunctionsFile.testString(healthObj.device.serialNumber);
+	commonFunctionsFile.testString(healthObj.device.hardware);
+	commonFunctionsFile.testString(healthObj.device.wifiPass);
 	
-	expect(hObject.device.WARNING).to.equal("DO NOT MODIFY THIS FILE!");
+	expect(healthObj.device.WARNING).to.equal("DO NOT MODIFY THIS FILE!");
 	
 }
 
@@ -42,34 +38,38 @@ function testHealthTimezoneCodeValue(tzCode)
 
 function testHealthNumberMaximum(srcObject, propName, maxVal)
 {
+	var givenValue = -1;
+	
 	commonFunctionsFile.testObjectPropertyDefinition(srcObject, propName);
 	commonFunctionsFile.testObjectPropertyContent(srcObject, propName, 'number');
-	expect(srcObject[propName]).to.be.at.least(0);
-	expect(srcObject[propName]).to.be.at.most(maxVal);
+	givenValue = srcObject[propName];
+	
+	expect(givenValue).to.be.at.least(0);
+	expect(givenValue).to.be.at.most(maxVal);
 }
 
-function testHealthEnvironmentValue(eObject, eProp, ePlatform)
+function testHealthEnvironmentValue(envObject, propName, devPlatform)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(eObject, eProp);
-	commonFunctionsFile.testObjectPropertyContent(eObject, eProp, 'number');
+	commonFunctionsFile.testObjectPropertyDefinition(envObject, propName);
+	commonFunctionsFile.testObjectPropertyContent(envObject, propName, 'number');
+	var givenValue = envObject[propName];
 	
-	if (ePlatform === 'win32' || ePlatform === 'mac' || ePlatform === 'darwin')
+	if (devPlatform === 'win32' || devPlatform === 'mac' || devPlatform === 'darwin')
 	{
-		expect(eObject[eProp]).to.be.below(0);
+		expect(givenValue).to.be.below(0);
 	}
 	else
 	{
-		expect(eObject[eProp]).to.be.at.least(0);
+		expect(givenValue).to.be.at.least(0);
 	}
 }
 
-function testHealthEnvironmentDummy(eObject, ePlatform)
+function testHealthEnvironmentDummy(envObject, devPlatform)
 {
-	if (ePlatform === 'win32' || ePlatform === 'mac' || ePlatform === 'darwin')
+	if (devPlatform === 'win32' || devPlatform === 'mac' || devPlatform === 'darwin')
 	{
-		commonFunctionsFile.testObjectPropertyDefinition(eObject, 'isDummy');
-		commonFunctionsFile.testObjectPropertyContent(eObject, 'isDummy', 'boolean');
-		expect(eObject.isDummy).to.be.true;
+		commonFunctionsFile.testObjectPropertyDefinition(envObject, 'isDummy');
+		expect(envObject.isDummy).to.be.true;
 	}
 	else
 	{
@@ -79,11 +79,11 @@ function testHealthEnvironmentDummy(eObject, ePlatform)
 }
 
 
-
-
-
-exports.callTestHealthDeviceObject = testHealthDeviceObject;
-exports.callTestHealthTimezoneCodeValue = testHealthTimezoneCodeValue;
-exports.callTestHealthNumberMaximum = testHealthNumberMaximum;
-exports.callTestHealthEnvironmentValue = testHealthEnvironmentValue;
-exports.callTestHealthEnvironmentDummy = testHealthEnvironmentDummy;
+module.exports =
+{
+	callTestHealthDeviceObject: testHealthDeviceObject,
+	callTestHealthTimezoneCodeValue: testHealthTimezoneCodeValue,
+	callTestHealthNumberMaximum: testHealthNumberMaximum,
+	callTestHealthEnvironmentValue: testHealthEnvironmentValue,
+	callTestHealthEnvironmentDummy: testHealthEnvironmentDummy
+};
