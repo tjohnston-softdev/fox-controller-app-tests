@@ -71,6 +71,8 @@ function handleDeviceDefaultValues()
 		var deviceArrayLists = null;
 		
 		var defaultsUrl = null;
+		var reqErr = null;
+		var reqReturn = null;
 		var defaultsRead = null;
 		
 		it("Manufacturer Model Lists Retrieved", function(done)
@@ -86,13 +88,27 @@ function handleDeviceDefaultValues()
 			
 			needle.get(defaultsUrl, function(defaultReqErr, defaultReqRes)
 			{
-				expect(defaultReqErr).to.be.null;
-				commonFunctionsFile.testPresent(defaultReqRes);
-				defaultsRead = apiRequestScript.callReadApiResponseObject(defaultReqRes);
+				reqErr = defaultReqErr;
+				reqReturn = defaultReqRes;
 				done();
 			});
-			
-			
+		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(reqErr).to.be.null;
+			commonFunctionsFile.testPresent(reqReturn);
+			expect(reqReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(reqReturn);
+			defaultsRead = reqReturn.body;
+			done();
+		});
+		
+		
+		it("Results Read", function(done)
+		{
+			defaultsRead = apiRequestScript.callReadApiResponseObject(reqReturn);
+			done();
 		});
 		
 		
@@ -143,6 +159,8 @@ function handleBeforeListTest()
 	describe("List Remote IO Devices (devices/remote-io)", function()
 	{
 		var beforeListUrl = null;
+		var beforeErr = null;
+		var beforeReturn = null;
 		
 		it("Request Made", function(done)
 		{
@@ -150,13 +168,23 @@ function handleBeforeListTest()
 			
 			needle.get(beforeListUrl, function(folderListErr, folderListRes)
 			{
-				expect(folderListErr).to.be.null;
-				commonFunctionsFile.testPresent(folderListRes);
-				rioList = folderListRes.body;
+				beforeErr = folderListErr;
+				beforeReturn = folderListRes;
 				done();
 			});
 			
 		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(beforeErr).to.be.null;
+			commonFunctionsFile.testPresent(beforeReturn);
+			expect(beforeReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(beforeReturn);
+			rioList = beforeReturn.body;
+			done();
+		});
+		
 		
 		it("Device Array Returned", function(done)
 		{
@@ -195,6 +223,8 @@ function handleCreateDeviceTest()
 		describe("Valid Device Object", function()
 		{
 			var createUrl = null;
+			var createErr = null;
+			var createReturn = null;
 			var createRead = null;
 			
 			it("Request Made", function(done)
@@ -203,12 +233,28 @@ function handleCreateDeviceTest()
 				
 				needle.post(createUrl, commonJsonObjectsFile.crudDevice, function(addError, addResult)
 				{
-					expect(addError).to.be.null;
-					commonFunctionsFile.testPresent(addResult);
-					createRead = apiRequestScript.callReadApiResponseObject(addResult);
+					createErr = addError;
+					createReturn = addResult;
 					done();
 				});
 			});
+			
+			it("Request Successful", function(done)
+			{
+				expect(createErr).to.be.null;
+				commonFunctionsFile.testPresent(createReturn);
+				expect(createReturn).to.be.an("object");
+				apiRequestScript.callValidateApiResponse(createReturn);
+				done();
+			});
+			
+			it("Results Read", function(done)
+			{
+				createRead = apiRequestScript.callReadApiResponseObject(createReturn);
+				done();
+			});
+			
+			
 			
 			it("Object Returned", function(done)
 			{

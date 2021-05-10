@@ -23,6 +23,8 @@ function testAlarmApis()
 function handleList()
 {
 	var listUrl = null;
+	var listError = null;
+	var listReturn = null;
 	var listRead = null;
 	
 	describe("Alarm History List (list/all?limit=10)", function()
@@ -34,13 +36,22 @@ function handleList()
 			
 			needle.get(listUrl, function(alarmErr, alarmRes)
 			{
-				expect(alarmErr).to.be.null;
-				commonFunctionsFile.testPresent(alarmRes);
-				//listRead = apiRequestScript.callReadApiResponseArray(alarmRes);
-				listRead = alarmRes.body;
+				listError = alarmErr;
+				listReturn = alarmRes;
 				done();
 			});
 		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(listError).to.be.null;
+			commonFunctionsFile.testPresent(listReturn);
+			expect(listReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(listReturn);
+			listRead = listReturn.body;
+			done();
+		});
+		
 		
 		it("Correct Array Structure", function()
 		{
@@ -79,6 +90,8 @@ function handleList()
 function handleAvailable()
 {
 	var availabilityUrl = null;
+	var reqErr = null;
+	var reqReturn = null;
 	var retrievedData = null;
 	
 	describe("Available (available)", function()
@@ -90,13 +103,22 @@ function handleAvailable()
 			
 			needle.get(availabilityUrl, function(alarmErr, alarmRes)
 			{
-				expect(alarmErr).to.be.null;
-				commonFunctionsFile.testPresent(alarmRes);
-				//retrievedData = apiRequestScript.callReadApiResponseArray();
-				retrievedData = alarmRes.body;
+				reqErr = alarmErr;
+				reqReturn = alarmRes;
 				done();
 			});
 		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(reqErr).to.be.null;
+			commonFunctionsFile.testPresent(reqReturn);
+			expect(reqReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(reqReturn);
+			retrievedData = reqReturn.body;
+			done();
+		});
+		
 		
 		it("Correct Array Structure", function()
 		{
@@ -128,9 +150,6 @@ function handleAvailable()
 			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'alarmText');
 			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'alarmColor');
 		});
-		
-		
-		
 		
 	});
 	

@@ -102,6 +102,7 @@ function readApiResponseString(rObject)
 	return rText;
 }
 
+
 function readApiResponseError(eObject)
 {
 	var errorBodyText = readApiResponseString(eObject);
@@ -115,6 +116,32 @@ function readApiResponseError(eObject)
 	}
 	
 	return rText;
+}
+
+
+
+
+function validateApiResponse(respObj)
+{
+	var fullHTML = "";
+	var extractObject = {};
+	var flaggedMessage = "";
+	var validationResult = false;
+	
+	if (respObj.statusCode === 200)
+	{
+		validationResult = true;
+	}
+	else
+	{
+		fullHTML = readApiResponseString(respObj);
+		extractObject = extractErrorText(fullHTML);
+		flaggedMessage = validateExtractedErrorText(extractObject);
+		throw new Error(flaggedMessage);
+	}
+	
+	
+	return validationResult;
 }
 
 
@@ -406,6 +433,7 @@ module.exports =
 	callReadApiResponseObject: readApiResponseObject,
 	callReadApiResponseString: readApiResponseString,
 	callReadApiResponseError: readApiResponseError,
+	callValidateApiResponse: validateApiResponse,
 	getApplicationOnlineResult: requestApplicationOnlineResult,
 	showApiRequestRefusedError: apiRequestRefusedError,
 	generateIpAddress: generateRandomIpAddress,

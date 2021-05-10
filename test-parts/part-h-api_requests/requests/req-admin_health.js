@@ -37,6 +37,8 @@ function testHealthApi()
 function getHealthObject()
 {
 	var healthUrl = null;
+	var healthRequestError = null;
+	var healthRequestReturn = null;
 	
 	describe("Health Request", function()
 	{
@@ -46,11 +48,27 @@ function getHealthObject()
 			
 			needle.get(healthUrl, function(healthErr, healthRes)
 			{
-				expect(healthErr).to.be.null;
-				commonFunctionsFile.testPresent(healthRes);
-				healthObject = apiRequestScript.callReadApiResponseObject(healthRes);
+				healthRequestError = healthErr;
+				healthRequestReturn = healthRes;
 				done();
 			});
+		});
+		
+		
+		it("Request Successful", function(done)
+		{
+			expect(healthRequestError).to.be.null;
+			commonFunctionsFile.testPresent(healthRequestReturn);
+			expect(healthRequestReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(healthRequestReturn);
+			done();
+		});
+		
+		
+		it("Results Read", function(done)
+		{
+			healthObject = apiRequestScript.callReadApiResponseObject(healthRequestReturn);
+			done();
 		});
 		
 		it("Object Returned", function(done)

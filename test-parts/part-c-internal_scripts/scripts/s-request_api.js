@@ -9,7 +9,7 @@ const requestFile = require(commonPaths.requestApi);
 const commonRequestFunctions = require("../sub-scripts/common-request");
 
 const readNullError = "Cannot read property 'body' of null";
-const emptyReplyObject = commonRequestFunctions.createReplyObject("");
+const emptyReplyObject = commonRequestFunctions.createReplyObject(200, "");
 const validUrl = "http://localhost:3000/api/example";
 
 function testRequest()
@@ -22,6 +22,7 @@ function testRequest()
 		checkRequestResponseObject();
 		checkRequestResponseString();
 		checkRequestResponseError();
+		checkRequestResponseValidation();
 		checkOnlineResult();
 		checkRefuseError();
 		checkRandomIp();
@@ -124,7 +125,7 @@ function checkRequestResponseArray()
 		it("Call - Valid", function()
 		{
 			var respString = '[{"value":"x","text":"y","name":"z"}]';
-			var inputResp = commonRequestFunctions.createReplyObject(respString);
+			var inputResp = commonRequestFunctions.createReplyObject(200, respString);
 			var actualResp = requestFile.callReadApiResponseArray(inputResp);
 			
 			commonRequestFunctions.callValidateResponseArray(actualResp);
@@ -169,14 +170,14 @@ function checkRequestResponseObject()
 		
 		it("Call - Valid String", function()
 		{
-			var inputResp = commonRequestFunctions.createReplyObject(jsonString);
+			var inputResp = commonRequestFunctions.createReplyObject(200, jsonString);
 			var actualResp = requestFile.callReadApiResponseObject(inputResp);
 			commonRequestFunctions.callValidateResponseObject(actualResp);
 		});
 		
 		it("Call - Valid Object", function()
 		{
-			var inputResp = commonRequestFunctions.createReplyObject(jsonObject);
+			var inputResp = commonRequestFunctions.createReplyObject(200, jsonObject);
 			var actualResp = requestFile.callReadApiResponseObject(inputResp);
 			commonRequestFunctions.callValidateResponseObject(actualResp);
 		});
@@ -221,7 +222,7 @@ function checkRequestResponseString()
 		it("Call - Valid", function()
 		{
 			var bodyString = "Example Body";
-			var inputReply = commonRequestFunctions.createReplyObject(bodyString);
+			var inputReply = commonRequestFunctions.createReplyObject(200, bodyString);
 			var actualReply = requestFile.callReadApiResponseString(inputReply);
 			
 			commonFunctionsFile.testString(actualReply);
@@ -255,6 +256,7 @@ function checkRequestResponseString()
 }
 
 
+
 function checkRequestResponseError()
 {
 	describe("Read API Response Error (callReadApiResponseError)", function()
@@ -271,7 +273,7 @@ function checkRequestResponseError()
 		{
 			var validErrorString = "Example Message";
 			var validReplyString = commonRequestFunctions.callWriteReplyErrorExample(validErrorString);
-			var inputReply = commonRequestFunctions.createReplyObject(validReplyString);
+			var inputReply = commonRequestFunctions.createReplyObject(500, validReplyString);
 			var actualError = requestFile.callReadApiResponseError(inputReply);
 			
 			commonFunctionsFile.testString(actualError);
@@ -280,20 +282,51 @@ function checkRequestResponseError()
 		
 		it("Call - Empty Message", function()
 		{
-			var emptyMsg = commonRequestFunctions.createReplyObject("<h1></h1>");
+			var emptyMsg = commonRequestFunctions.createReplyObject(500, "<h1></h1>");
 			runReadResponseInvalidError(emptyMsg, "HTTP Error Message is empty");
 		});
 		
 		it("Call - Mismatch", function()
 		{
-			var invalidHTML = commonRequestFunctions.createReplyObject("<html><body></h1>Example<h1></body></html>");
+			var invalidHTML = commonRequestFunctions.createReplyObject(500, "<html><body></h1>Example<h1></body></html>");
 			runReadResponseInvalidError(invalidHTML, incorrectErrorFormat);
 		});
 		
 		it("Call - Invalid Format", function()
 		{
-			var formatHTML = commonRequestFunctions.createReplyObject("<b>Example</b>");
+			var formatHTML = commonRequestFunctions.createReplyObject(500, "<b>Example</b>");
 			runReadResponseInvalidError(formatHTML, incorrectErrorFormat);
+		});
+		
+		
+	});
+}
+
+
+function checkRequestResponseValidation()
+{
+	describe("Validate API Response (callValidateApiResponse)", function()
+	{
+		it("Function Exists", function()
+		{
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callValidateApiResponse');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callValidateApiResponse', 'function');
+		});
+		
+		it("Call - Valid", function()
+		{
+			var validResponseObject = commonRequestFunctions.createReplyObject(200, "Successful");
+			var validResult = requestFile.callValidateApiResponse(validResponseObject);
+			expect(validResult).to.be.true;
+		});
+		
+		it("Call - Invalid", function()
+		{
+			var errString = "Failure";
+			var errHTML = commonRequestFunctions.callWriteReplyErrorExample(errString);
+			var invalidResponseObject = commonRequestFunctions.createReplyObject(500, errHTML);
+			
+			runValidateResponseInvalid(invalidResponseObject, errString);
 		});
 		
 		
@@ -577,6 +610,29 @@ function runReadResponseInvalidError(invalidArg, eError)
 	var invalidRes = [comp, msg];
 	commonFunctionsFile.testInvalidFunctionResult(invalidRes, eError);
 }
+
+
+
+function runValidateResponseInvalid(invalidArg, eError)
+{
+	var comp = false;
+	var msg = null;
+	
+	try
+	{
+		requestFile.callValidateApiResponse(invalidArg);
+		comp = true;
+	}
+	catch(e)
+	{
+		comp = false;
+		msg = e.message;
+	}
+	
+	var invalidRes = [comp, msg];
+	commonFunctionsFile.testInvalidFunctionResult(invalidRes, eError);
+}
+
 
 
 function runRefuseError(refuseArg)

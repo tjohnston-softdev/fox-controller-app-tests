@@ -25,6 +25,8 @@ function testAdminApis()
 function handleDhcpClients()
 {
 	var dhcpUrl = null;
+	var dhcpError = null;
+	var dhcpReturn = null;
 	var dhcpRead = null;
 	
 	describe("DHCP Clients (dhcp-clients)", function()
@@ -36,12 +38,22 @@ function handleDhcpClients()
 			
 			needle.get(dhcpUrl, function(adminErr, adminRes)
 			{
-				expect(adminErr).to.be.null;
-				commonFunctionsFile.testPresent(adminRes);
-				dhcpRead = adminRes.body;
+				dhcpError = adminErr;
+				dhcpReturn = adminRes;
 				done();
 			});
 		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(dhcpError).to.be.null;
+			commonFunctionsFile.testPresent(dhcpReturn);
+			apiRequestScript.callValidateApiResponse(dhcpReturn);
+			dhcpRead = dhcpReturn.body;
+			
+			done();
+		});
+		
 		
 		it("Correct Array Structure", function()
 		{
@@ -82,6 +94,8 @@ function handleDhcpClients()
 function handleDefaultObject()
 {
 	var defaultUrl = null;
+	var defaultError = null;
+	var defaultReturn = null;
 	var defaultRead = null;
 	
 	describe("Default Object (defaults)", function()
@@ -93,12 +107,28 @@ function handleDefaultObject()
 			
 			needle.get(defaultUrl, function(adminErr, adminRes)
 			{
-				expect(adminErr).to.be.null;
-				commonFunctionsFile.testPresent(adminRes);
-				defaultRead = apiRequestScript.callReadApiResponseObject(adminRes);
+				defaultError = adminErr;
+				defaultReturn = adminRes;
 				done();
 			});
 		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(defaultError).to.be.null;
+			commonFunctionsFile.testPresent(defaultReturn);
+			expect(defaultReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(defaultReturn);
+			
+			done();
+		});
+		
+		it("Results Read", function(done)
+		{
+			defaultRead = apiRequestScript.callReadApiResponseObject(defaultReturn);
+			done();
+		});
+		
 		
 		it("Correct Object Returned", function()
 		{
@@ -118,6 +148,8 @@ function handleLog()
 	describe("Controller Logs (logs)", function()
 	{
 		var logUrl = null;
+		var logError = null;
+		var logReturn = null;
 		var logRead = null;
 	
 		it("Request Made", function(done)
@@ -126,13 +158,30 @@ function handleLog()
 		
 			needle.get(logUrl, function(adminErr, adminRes)
 			{
-				expect(adminErr).to.be.null;
-				commonFunctionsFile.testPresent(adminRes);
-				logRead = apiRequestScript.callReadApiResponseObject(adminRes);
-				
+				logError = adminErr;
+				logReturn = adminRes;
 				done();
 			});
 		});
+		
+		
+		it("Request Successful", function(done)
+		{
+			expect(logError).to.be.null;
+			commonFunctionsFile.testPresent(logReturn);
+			expect(logReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(logReturn);
+			
+			done();
+		});
+		
+		
+		it("Results Read", function(done)
+		{
+			logRead = apiRequestScript.callReadApiResponseObject(logReturn);
+			done();
+		});
+		
 	
 		it("Valid Return Structure", function()
 		{

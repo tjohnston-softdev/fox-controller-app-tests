@@ -1,122 +1,134 @@
 # Changelog
 
-### Test Status
-
-**Request**
-* Error handling is different between the 'request' and 'needle' HTTP libraries.
-	* This stands out for POST requests.
-	* Test scripting does not account for these differences yet.
-
----
-
-### ./test-parts/part-h-api_requests/api-main.js
-
-**Changes**
-* Uncommented 'cDevicesFileCrud'
+**./app/request-api.js - validateApiResponse**
+* New function - Used to check whether a HTTP request was successful.
+* If the status code is 200, the request is successful.
+* Otherwise, the error text will be extracted from HTML and thrown.
+* Public name: 'callValidateApiResponse'
 
 ---
 
-### ./test-parts/part-h-api_requests/requests/req-devices_crud.js
+**./test-parts/part-c-internal_scripts/scripts/s-request_api.js**
+* Wrote new functions:
+	* checkRequestResponseValidation
+	* runValidateResponseInvalid
+* Added status code argument to existing 'createReplyObject' calls.
+	* 'emptyReplyObject' - 200
+	* 'checkRequestResponseArray' - 200
+	* 'checkRequestResponseObject' - 200
+	* 'checkRequestResponseString' - 200
+	* 'checkRequestResponseError' - 500
 
-**Globals**
-* Removed module requirements:
-	* sinon
-	* commonPaths.commonErrors
-* Replaced 'request' module requirement with 'needle'
-	* handleDeviceDefaultValues
-	* handleBeforeListTest
-	* handleCreateDeviceTest
-	* handleUpdateAddTest
-	* handleReadDeviceTest
-	* handleDeviceStatusTest
-	* handleUpdateDeviceTest
-	* handleUpdateReviewTest
-	* handleDeleteFlagTest
-	* handleDeleteObjectTest
-	* handleUpdateDeleteTest
+---
 
-\
-**Test Calls**
-* Commented out except for:
-	* handleSupportedModels
-	* handleDeviceDefaultValues
-	* handleBeforeListTest
-	* handleCreateDeviceTest
+**./test-parts/part-c-internal_scripts/sub-scripts/common-request.js**
+* createRequestReplyObject
+	* Renamed 'bContent' parameter to 'rBody'
+	* Added new parameter 'rStatus' - HTTP status code.
+	* Renamed result variable to 'replyRes'
+	* Added 'statusCode' result property.
+	* 'replyRes' is declared as a blank object.
+	* 'replyRes' properties are defined individually.
 
-\
-**handleSupportedModels**
-* Removed "Retrieve Function Called" test.
-* Renamed "Retrieve Successful" test to "Retrieved Successfully"
+---
 
-\
-**handleDeviceDefaultValues**
-* Removed variables:
-	* defaultsError
-	* defaultsReturn
-* Merged these tests into "Request Made"
-	* "Request Successful"
-	* "Results Read"
-* Renamed callback parameters:
-	* 'dError' to 'defaultReqErr'
-	* 'dResult' to 'defaultReqRes'
-* Specific changes to "Supported Device Types"
-	* Moved correct device type array to local variable 'correctTypes'
-	* Removed 'testAllElements' check.
-* Removed 'testAllElements' check from "Manufacturers" and "Models" tests.
+**./test-parts/part-h-api_requests/requests/req-admin_main.js - handleDhcpClients**
+* Declared variables:
+	* dhcpError
+	* dhcpReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
 
-\
-**handleBeforeListTest**
-* Removed variables:
-	* beforeListReturn
-	* beforeListError
-* Merged these tests into "Request Made"
-	* "Request Successful"
-	* "Results Read"
-* Renamed callback parameters:
-	* 'listError' to 'folderListErr'
-	* 'listResult' to 'folderListRes'
-* Removed 'callReadApiResponseArray'
-	* 'folderListRes.body' is used directly.
+---
 
-\
-**handleCreateDeviceTest**
-* Removed variables:
-	* createOptions
-	* createError
+**./test-parts/part-h-api_requests/requests/req-admin_main.js - handleDefaultObject**
+* Declared variables:
+	* defaultError
+	* defaultReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+* Split 'callReadApiResponseObject' to new test "Results Read"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-admin_main.js - handleDefaultObject**
+* Declared variables:
+	* logError
+	* logReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+* Split 'callReadApiResponseObject' to new test "Results Read"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-admin_health.js - getHealthObject**
+* Declared variables:
+	* healthRequestError
+	* healthRequestReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+* Split 'callReadApiResponseObject' to new test "Results Read"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-alarm.js - handleList**
+* Declared variables:
+	* listError
+	* listReturn
+* Removed commented out 'callReadApiResponseArray'
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-alarm.js - handleAvailable**
+* Declared variables:
+	* reqErr
+	* reqReturn
+* Removed commented out 'callReadApiResponseArray'
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-storage.js - handleFileList**
+* Declared variables:
+	* fileReqErr
+	* fileReqReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-storage.js - handleFileDownload**
+* Added to "Download Successful" test:
+	* 'fileDownloadReturn' object type check.
+	* 'callValidateApiResponse' on 'fileDownloadReturn'
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-storage.js - handleGlobalStatus**
+* Declared variables:
+	* statusReqErr
+	* statusReqReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+* Split 'callReadApiResponseObject' to new test "Results Read"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-devices_crud.js - handleDeviceDefaultValues**
+* Declared variables:
+	* reqErr
+	* reqReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+* Split 'callReadApiResponseObject' to new test "Results Read"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-devices_crud.js - handleBeforeListTest**
+* Declared variables:
+	* beforeErr
+	* beforeReturn
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+
+---
+
+**./test-parts/part-h-api_requests/requests/req-devices_crud.js - handleCreateDeviceTest**
+* Declared variables:
+	* createErr
 	* createReturn
-* Merged these tests into "Request Made"
-	* "Request Successful"
-	* "Results Read"
-* Has result errors.
-
-\
-**handleUpdateAddTest**
-* Removed variables:
-	* addUpdateError
-	* addUpdateReturn
-* Merged these tests into "Request Made"
-	* "Request Successful"
-	* "Results Read"
-* Removed 'callReadApiResponseArray'
-	* 'addListResult.body' is used directly.
-
-\
-**handleReadDeviceTest**
-* Removed variables:
-	* deviceError
-	* deviceReturn
-* Merged these tests into "Request Made"
-	* "Request Successful"
-	* "Results Read"
-
-\
-**handleDeviceStatusTest**
-* Removed variables:
-	* statusError
-	* statusReturn
-* Merged these tests into "Request Made"
-	* "Request Successful"
-	* "Results Read"
-* Renamed callback parameters:
-	* 'sError' to 'statusReqErr'
-	* 'sResult' to 'statusReqRes'
+* Split the callback result checking in "Request Made" to new test "Request Successful"
+* Split 'callReadApiResponseObject' to new test "Results Read"

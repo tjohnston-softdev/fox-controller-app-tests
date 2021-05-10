@@ -75,10 +75,14 @@ function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 }
 
 
-function createRequestReplyObject(bContent)
+function createRequestReplyObject(rStatus, rBody)
 {
-	var r = {"body":bContent};
-	return r;
+	var replyRes = {};
+	
+	replyRes["statusCode"] = rStatus;
+	replyRes["body"] = rBody;
+	
+	return replyRes;
 }
 
 

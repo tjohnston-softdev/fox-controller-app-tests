@@ -34,6 +34,8 @@ function testStorageAPIs()
 function handleFileList()
 {
 	var fileListUrl = null;
+	var fileReqErr = null;
+	var fileReqReturn = null;
 	var fileListRead = null;
 	
 	describe("User File List (user-files/list)", function()
@@ -45,12 +47,24 @@ function handleFileList()
 			
 			needle.get(fileListUrl, function(storageErr, storageRes)
 			{
-				expect(storageErr).to.be.null;
-				commonFunctionsFile.testPresent(storageRes);
-				fileListRead = storageRes.body;
+				fileReqErr = storageErr;
+				fileReqReturn = storageRes;
 				done();
 			});
 		});
+		
+		
+		it("Request Successful", function(done)
+		{
+			expect(fileReqErr).to.be.null;
+			commonFunctionsFile.testPresent(fileReqReturn);
+			expect(fileReqReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(fileReqReturn);
+			fileListRead = fileReqReturn.body;
+			done();
+		});
+		
+		
 		
 		it("Correct Array Structure", function()
 		{
@@ -171,9 +185,12 @@ function handleFileDownload()
 		
 		it("Download Successful", function(done)
 		{
-			commonFunctionsFile.testPresent(fileDownloadReturn);
 			expect(fileDownloadError).to.be.null;
+			commonFunctionsFile.testPresent(fileDownloadReturn);
+			expect(fileDownloadReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(fileDownloadReturn);
 			fileDownloadRead = apiRequestScript.callReadApiResponseString(fileDownloadReturn);
+			
 			done();
 		});
 		
@@ -242,6 +259,8 @@ function handleUserStorageDelete()
 function handleGlobalStatus()
 {
 	var statusUrl = null;
+	var statusReqErr = null;
+	var statusReqReturn = null;
 	var statusRead = null;
 	
 	describe("Global Status (global/status)", function()
@@ -253,12 +272,28 @@ function handleGlobalStatus()
 			
 			needle.get(statusUrl, function(statusErr, statusRes)
 			{
-				expect(statusErr).to.be.null;
-				commonFunctionsFile.testPresent(statusRes);
-				statusRead = apiRequestScript.callReadApiResponseObject(statusRes);
+				statusReqErr = statusErr;
+				statusReqReturn = statusRes;
 				done();
 			});	
 		});
+		
+		it("Request Successful", function(done)
+		{
+			expect(statusReqErr).to.be.null;
+			commonFunctionsFile.testPresent(statusReqReturn);
+			expect(statusReqReturn).to.be.an("object");
+			apiRequestScript.callValidateApiResponse(statusReqReturn);
+			done();
+		});
+		
+		it("Results Read", function(done)
+		{
+			statusRead = apiRequestScript.callReadApiResponseObject(statusReqReturn);
+			done();
+		});
+		
+		
 		
 		it("Correct Return Structure", function()
 		{
