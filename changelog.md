@@ -1,38 +1,36 @@
 # Changelog
 
 **Test Status**
-* When running the 'request' test mode, some file access related errors still occur.
+* Offline Controller file testing is successful.
+* Controller file lock errors still occur for online testing.
+	* When requiring files the conventional way, the Controller files are locked before the test mode is even chosen.
+	* We have to reinstate requiring Controller files during testing.
+	* This mainly affects Remote IO Index.
 
 ---
 
-**./app/paths/files/sub-common-paths.js**
-* Merged into 'app-paths.js'
-* This file is now empty.
+**./app/sub-common/files/get-models.js**
+* 'commonPaths.loadFox' is now required.
+* getAllSupportedModels
+	* Model definition requirements are now scoped globally using 'loadFoxFile'
+	* The try-catch structure remains.
+* getManufacturerModels
+	* Renamed 'supportedIndex' to 'loopIndex'
+	* Replaced 'supportIndex' with 'loopIndex'
+	* Renamed 'supportedElement' to 'currentElement'
+	* 'currentElement' is now declared as a blank object.
+	* 'res' is now declared as a blank object before the loop begins.
+	* Removed 'manufacturerArray' variable. Replaced with 'res.manufacturers'
+	* Removed 'modelArray' variable. Replaces with 'res.models'
+* Replaced `exports` with `module.exports`
 
 ---
 
-**./app/paths/files/app-paths.js**
-* Removed 'subCommonRelative' property.
----
-
-**Affected Files**
-* ./test-parts/
-	* part-g-controller_files/files/
-		* con-device_classes.js
-		* con-rio_factories.js
-		* con-rio_index_node_list.js
-		* con-rio_index_node_reg.js
-		* con-rio_index_node_reg_invalid.js
-	* part-h-api_requests/requests/
-		* req-devices_crud.js
-		* req-devices_crud_invalid.js
-		* req-devices_modify_invalid.js
-	* part-i-api_frontend/parts/
-		* a-check_database_empty.js
-		* b-add_all_devices.js
-		* c-get_device_list.js
-		* d-check_device_list.js
-		* e-list_avaliable_nodes.js
-		* f-check_node_array.js
-		* g-get_device_properties.js
-		* h-delete_added_devices.js
+**./test-parts/part-g-controller_files/files/**
+* Changes:
+	* 'commonPaths.loadFox' is now required.
+	* 'foxPath.rioIndexFile' is now required using 'loadFoxFile'
+	* Although the FOX Controller file is required in a safe manner, it is not checked.
+* Affected files:
+	* con-rio_index_node_list.js
+	* con-rio_index_node_reg_invalid.js

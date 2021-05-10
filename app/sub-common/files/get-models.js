@@ -1,21 +1,18 @@
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
+const loadFoxFile = require(commonPaths.loadFox);
+const advantechDefs = loadFoxFile(foxPath.advantechFile);
+const moxaDefs = loadFoxFile(foxPath.moxaFile);
+const sonoffDefs = loadFoxFile(foxPath.sonoffFile);
 
 
 function getAllSupportedModels()
 {
-	var mAdvantech = null;
-	var mMoxa = null;
-	var mSonoff = null;
 	var resArray = null;
 	
 	try
 	{
-		mAdvantech = require(foxPath.advantechFile);
-		mMoxa = require(foxPath.moxaFile);
-		mSonoff = require(foxPath.sonoffFile);
-		
-		resArray = mAdvantech.concat(mMoxa, mSonoff);
+		resArray = advantechDefs.concat(moxaDefs, sonoffDefs);
 	}
 	catch(e)
 	{
@@ -28,22 +25,26 @@ function getAllSupportedModels()
 
 function getManufacturerModels(sList)
 {
-	var supportedIndex = 0;
-	var supportedElement = null;
-	var manufacturerArray = [];
-	var modelArray = [];
+	var loopIndex = 0;
+	var currentElement = {};
+	var res = {};
 	
-	for (supportIndex = 0; supportIndex < sList.length; supportIndex = supportIndex + 1)
+	res["manufacturers"] = [];
+	res["models"] = [];
+	
+	for (loopIndex = 0; loopIndex < sList.length; loopIndex = loopIndex + 1)
 	{
-		supportedElement = sList[supportIndex];
-		manufacturerArray.push(supportedElement.maker);
-		modelArray.push(supportedElement.modelType);
+		currentElement = sList[loopIndex];
+		res.manufacturers.push(currentElement.maker);
+		res.models.push(currentElement.modelType);
 	}
 	
-	var res = {"manufacturers": manufacturerArray, "models": modelArray};
 	return res;
 }
 
 
-exports.retrieveAllSupportedModels = getAllSupportedModels;
-exports.retrieveManufacturerModels = getManufacturerModels;
+module.exports =
+{
+	retrieveAllSupportedModels: getAllSupportedModels,
+	retrieveManufacturerModels: getManufacturerModels
+};

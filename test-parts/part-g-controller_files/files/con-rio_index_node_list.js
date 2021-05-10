@@ -6,8 +6,8 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-
-const indexFile = require(foxPath.rioIndexFile);
+const loadFoxFile = require(commonPaths.loadFox);
+const indexFile = loadFoxFile(foxPath.rioIndexFile);
 const rioSubCommonFile = require(commonPaths.rioCommonFile);
 
 var nodeListSpy = null;
