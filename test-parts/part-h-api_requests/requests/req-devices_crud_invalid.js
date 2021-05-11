@@ -408,10 +408,10 @@ function sendStatusRequest(statusURL, invalidEntry, statusDone)
 
 function sendDeleteRequest(deleteURL, deleteDone)
 {
-	var delOpts = apiRequestScript.getDeleteOptions(deleteURL, false);
+	var delOpts = apiRequestScript.getDeleteOptions(false);
 	var extractedObject = null;
 	
-	needle.delete(deleteURL, null, delOpts.headers, function(deleteReqErr, deleteReqRes)
+	needle.delete(deleteURL, null, delOpts, function(deleteReqErr, deleteReqRes)
 	{
 		expect(deleteReqErr).to.be.null;
 		commonFunctionsFile.testPresent(deleteReqRes);

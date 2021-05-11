@@ -517,9 +517,9 @@ function handleTestDelete()
 		
 		it("Delete Called", function(done)
 		{
-			delOptions = apiRequestScript.getDeleteOptions(testObjectLink, true);
+			delOptions = apiRequestScript.getDeleteOptions(true);
 			
-			needle.delete(testObjectLink, null, delOptions.headers, function(callbackError, callbackResult)
+			needle.delete(testObjectLink, null, delOptions, function(callbackError, callbackResult)
 			{
 				delError = callbackError;
 				delReturn = callbackResult;

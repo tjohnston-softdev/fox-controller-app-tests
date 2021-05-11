@@ -26,7 +26,6 @@ function testRequest()
 		checkOnlineResult();
 		checkRefuseError();
 		checkRandomIp();
-		checkOptionsObject();
 		checkDeleteOptionsObject();
 	});
 }
@@ -417,62 +416,6 @@ function checkRandomIp()
 }
 
 
-function checkOptionsObject()
-{
-	describe("Get Request Options Object (getRequestOptions)", function()
-	{
-		var oValidMethod = 'POST';
-		var oValidBody = {"objectFlag": true};
-		
-		var urlFormatError = "Invalid URL format. Must refer to localhost:3000";
-		var urlTypeError = "URL must be a non-empty string";
-		var urlMissingError = "URL argument missing or null";
-		var methodError = "Invalid request method. Must be GET, POST, PUT, or DELETE";
-		
-		it("Function Exists", function()
-		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'getRequestOptions');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'getRequestOptions', 'function');
-		});
-		
-		it("Call - Valid", function()
-		{
-			var optionsRes = requestFile.getRequestOptions(validUrl, oValidMethod, oValidBody);
-			commonRequestFunctions.callValidateOptionsReturn(optionsRes, validUrl, oValidMethod, oValidBody);
-		});
-		
-		it("Call - Invalid URL", function()
-		{
-			runOptionError("http://localhost:2000", oValidMethod, oValidBody, urlFormatError);
-		});
-		
-		it("Call - Missing URL", function()
-		{
-			runOptionError("", oValidMethod, oValidBody, urlTypeError);
-		});
-		
-		
-		it("Call - Invalid Method", function()
-		{
-			runOptionError(validUrl, 'INVALID', oValidBody, methodError);
-		});
-		
-		it("Call - Invalid Type", function()
-		{
-			runOptionError(-1, oValidMethod, oValidBody, urlTypeError);
-			runOptionError(validUrl, -1, oValidBody, methodError);
-		});
-		
-		it("Call - Null", function()
-		{
-			runOptionError(null, oValidMethod, oValidBody, urlMissingError);
-			runOptionError(validUrl, null, oValidBody, methodError);
-		});
-		
-	});
-}
-
-
 function checkDeleteOptionsObject()
 {
 	describe("Get Delete Request Options Object (getDeleteOptions)", function()
@@ -488,14 +431,19 @@ function checkDeleteOptionsObject()
 		
 		it("Call - True", function()
 		{
-			trueRes = requestFile.getDeleteOptions(validUrl, true);
+			trueRes = requestFile.getDeleteOptions(true);
 			runDeleteResults(trueRes, true);
 		});
 		
 		it("Call - False", function()
 		{
-			falseRes = requestFile.getDeleteOptions(validUrl, false);
+			falseRes = requestFile.getDeleteOptions(false);
 			runDeleteResults(falseRes, false);
+		});
+		
+		it("Call - Invalid", function()
+		{
+			runOptionError(null, "Invalid permanant flag. Must be True or False");
 		});
 		
 		
@@ -657,14 +605,15 @@ function runRefuseError(refuseArg)
 }
 
 
-function runOptionError(urlArg, methodArg, bodyArg, eError)
+function runOptionError(deleteArg, eError)
 {
 	var oComplete = false;
 	var oMessage = "";
 	
 	try
 	{
-		requestFile.getRequestOptions(urlArg, methodArg, bodyArg);
+		requestFile.getDeleteOptions(deleteArg);
+		oComplete = true;
 	}
 	catch(e)
 	{

@@ -624,7 +624,7 @@ function handleDeleteFlagTest()
 {
 	describe("Flag Remote IO Device Deleted (devices/remote-io/testID)", function()
 	{
-		var flagObject = null;
+		var flagOpts = null;
 		var flagUrl = null;
 		var flagError = null;
 		var flagReturn = null;
@@ -633,9 +633,9 @@ function handleDeleteFlagTest()
 		it("Request Made", function(done)
 		{
 			flagUrl = deviceCommon.callGetRudUrl(testID);
-			flagObject = apiRequestScript.getDeleteOptions(flagUrl, false);
+			flagOpts = apiRequestScript.getDeleteOptions(false);
 			
-			needle.delete(flagUrl, null, flagObject.headers, function(delReqErr, delReqRes)
+			needle.delete(flagUrl, null, flagOpts, function(delReqErr, delReqRes)
 			{
 				flagError = delReqErr;
 				flagReturn = delReqRes;
@@ -679,7 +679,7 @@ function handleDeleteFlagTest()
 
 function handleDeleteObjectTest()
 {
-	var deleteObject = null;
+	var deleteOpts = null;
 	var deleteUrl = null;
 	var deleteError = null;
 	var deleteReturn = null;
@@ -690,9 +690,9 @@ function handleDeleteObjectTest()
 		it("Request Made", function(done)
 		{
 			deleteUrl = deviceCommon.callGetRudUrl(testID);
-			deleteObject = apiRequestScript.getDeleteOptions(deleteUrl, false);
+			deleteOpts = apiRequestScript.getDeleteOptions(false);
 		
-			needle.delete(deleteUrl, null, deleteObject.headers, function(delReqErr, delReqRes)
+			needle.delete(deleteUrl, null, deleteOpts, function(delReqErr, delReqRes)
 			{
 				deleteError = delReqErr;
 				deleteReturn = delReqRes;

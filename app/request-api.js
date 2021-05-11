@@ -176,44 +176,23 @@ function generateRandomIpAddress()
 	return ipResultString;
 }
 
-function getRequestOptionsObject(oLink, oMethod, oBody)
+function getDeleteOptionsObject(permVal)
 {
-	var methodUpper = readOptionMethodArgument(oMethod);
-	var linkValid = checkOptionUrlArgument(oLink);
-	var methodValid = checkOptionMethodArgument(methodUpper);
-	var oRes = null;
+	var optionsRes = {};
+	optionsRes["json"] = true;
 	
-	if (linkValid === true && methodValid === true)
-	{	
-		oRes = {};
-		
-		oRes["url"] = oLink;
-		oRes["method"] = methodUpper;
-		oRes["body"] = oBody;
-		oRes["json"] = true;
-	}
-	
-	return oRes;
-}
-
-function getDeleteOptionsObject(dLink, dPerm)
-{
-	var permType = typeof dPerm;
-	var dRes = getRequestOptionsObject(dLink, 'DELETE', null);
-	
-	if (permType === 'boolean')
+	if (permVal === true || permVal === false)
 	{
-		dRes["headers"] = {};
-		dRes.headers["Content-Type"] = "text/plain";
-		dRes.headers["delete-permanently"] = dPerm;
+		optionsRes["headers"] = {};
+		optionsRes.headers["content_type"] = "text/plain";
+		optionsRes.headers["delete-permanently"] = permVal;
 	}
 	else
 	{
-		dRes = null;
 		throw new Error("Invalid permanant flag. Must be True or False");
 	}
 	
-	return dRes;
+	return optionsRes;
 }
 
 
@@ -437,6 +416,5 @@ module.exports =
 	getApplicationOnlineResult: requestApplicationOnlineResult,
 	showApiRequestRefusedError: apiRequestRefusedError,
 	generateIpAddress: generateRandomIpAddress,
-	getRequestOptions: getRequestOptionsObject,
 	getDeleteOptions: getDeleteOptionsObject
 };

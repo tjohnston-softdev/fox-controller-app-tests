@@ -43,34 +43,29 @@ function writeReplyErrorExample(rMessage)
 
 
 
-function validateOptionsReturn(resultObj, desiredUrl, desiredMethod, desiredBody)
+function validateOptionsReturn()
 {
-	commonFunctionsFile.testPresent(resultObj);
-	expect(resultObj).to.be.an("object");
 	
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'url');
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'method');
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'body');
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'json');
-	
-	expect(resultObj.url).to.equal(desiredUrl);
-	expect(resultObj.method).to.equal(desiredMethod);
-	expect(resultObj.body).to.equal(desiredBody);
-	expect(resultObj.json).to.be.true;
 }
 
 function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 {
+	commonFunctionsFile.testPresent(resultObj);
+	expect(resultObj).to.be.an("object");
+	
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'json');
+	expect(resultObj.json).to.be.true;
+	
 	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'headers');
 	commonFunctionsFile.testObjectPropertyContent(resultObj, 'headers', 'object');
 	
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'Content-Type');
+	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'content_type');
 	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'delete-permanently');
 	
-	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'Content-Type', 'string');
+	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'content_type', 'string');
 	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'delete-permanently', 'boolean');
 	
-	commonFunctionsFile.testString(resultObj.headers['Content-Type']);
+	commonFunctionsFile.testString(resultObj.headers['content_type']);
 	expect(resultObj.headers['delete-permanently']).to.equal(desiredPermFlag);
 }
 
@@ -92,7 +87,6 @@ module.exports =
 	callValidateResponseArray: validateResponseArray,
 	callValidateResponseObject: validateResponseObject,
 	callWriteReplyErrorExample: writeReplyErrorExample,
-	callValidateOptionsReturn: validateOptionsReturn,
 	callValidateDeleteOptionsReturn: validateDeleteOptionsReturn,
 	createReplyObject: createRequestReplyObject
 };

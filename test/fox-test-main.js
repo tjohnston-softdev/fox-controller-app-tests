@@ -109,7 +109,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (m === 'debug')
 	{
-		externalPart.callExternal();
+		internalPart.callInternal();
 	}
 	else if (m === '')
 	{
