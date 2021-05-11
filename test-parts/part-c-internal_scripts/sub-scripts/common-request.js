@@ -42,12 +42,6 @@ function writeReplyErrorExample(rMessage)
 }
 
 
-
-function validateOptionsReturn()
-{
-	
-}
-
 function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 {
 	commonFunctionsFile.testPresent(resultObj);
