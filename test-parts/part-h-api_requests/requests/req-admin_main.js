@@ -1,12 +1,12 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const needle = require("needle");
+const chaiThings = require('chai-things');;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
+const httpRequests = require(commonPaths.httpRequestsFile);
 const apiCommonFile = require("../sub-requests/common-api");
 
 
@@ -25,7 +25,6 @@ function testAdminApis()
 function handleDhcpClients()
 {
 	var dhcpUrl = null;
-	var dhcpError = null;
 	var dhcpReturn = null;
 	var dhcpRead = null;
 	
@@ -35,22 +34,13 @@ function handleDhcpClients()
 		it("Request Made", function(done)
 		{
 			dhcpUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "dhcp-clients");
-			
-			needle.get(dhcpUrl, function(adminErr, adminRes)
-			{
-				dhcpError = adminErr;
-				dhcpReturn = adminRes;
-				done();
-			});
+			dhcpReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(dhcpUrl, dhcpReturn, done);
 		});
 		
-		it("Request Successful", function(done)
+		it("Results Read", function(done)
 		{
-			expect(dhcpError).to.be.null;
-			commonFunctionsFile.testPresent(dhcpReturn);
-			apiRequestScript.callValidateApiResponse(dhcpReturn);
-			dhcpRead = dhcpReturn.body;
-			
+			dhcpRead = dhcpReturn.body;	
 			done();
 		});
 		
@@ -94,7 +84,6 @@ function handleDhcpClients()
 function handleDefaultObject()
 {
 	var defaultUrl = null;
-	var defaultError = null;
 	var defaultReturn = null;
 	var defaultRead = null;
 	
@@ -104,23 +93,8 @@ function handleDefaultObject()
 		it("Request Made", function(done)
 		{
 			defaultUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "defaults");
-			
-			needle.get(defaultUrl, function(adminErr, adminRes)
-			{
-				defaultError = adminErr;
-				defaultReturn = adminRes;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(defaultError).to.be.null;
-			commonFunctionsFile.testPresent(defaultReturn);
-			expect(defaultReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(defaultReturn);
-			
-			done();
+			defaultReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(defaultUrl, defaultReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -155,24 +129,8 @@ function handleLog()
 		it("Request Made", function(done)
 		{
 			logUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "logs");
-		
-			needle.get(logUrl, function(adminErr, adminRes)
-			{
-				logError = adminErr;
-				logReturn = adminRes;
-				done();
-			});
-		});
-		
-		
-		it("Request Successful", function(done)
-		{
-			expect(logError).to.be.null;
-			commonFunctionsFile.testPresent(logReturn);
-			expect(logReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(logReturn);
-			
-			done();
+			logReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(logUrl, logReturn, done);
 		});
 		
 		

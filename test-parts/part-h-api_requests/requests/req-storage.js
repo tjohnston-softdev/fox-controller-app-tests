@@ -3,12 +3,12 @@ const os = require('os');
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
+const httpRequests = require(commonPaths.httpRequestsFile);
 const apiCommonFile = require("../sub-requests/common-api");
 const storageCommonFile = require("../sub-requests/common-storage");
 
@@ -34,7 +34,6 @@ function testStorageAPIs()
 function handleFileList()
 {
 	var fileListUrl = null;
-	var fileReqErr = null;
 	var fileReqReturn = null;
 	var fileListRead = null;
 	
@@ -44,26 +43,16 @@ function handleFileList()
 		it("Request Made", function(done)
 		{
 			fileListUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, "user-files/list");
-			
-			needle.get(fileListUrl, function(storageErr, storageRes)
-			{
-				fileReqErr = storageErr;
-				fileReqReturn = storageRes;
-				done();
-			});
+			fileReqReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(fileListUrl, fileReqReturn, done);
 		});
 		
 		
-		it("Request Successful", function(done)
+		it("Results Read", function(done)
 		{
-			expect(fileReqErr).to.be.null;
-			commonFunctionsFile.testPresent(fileReqReturn);
-			expect(fileReqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(fileReqReturn);
 			fileListRead = fileReqReturn.body;
 			done();
 		});
-		
 		
 		
 		it("Correct Array Structure", function()
@@ -164,8 +153,6 @@ function handleFileDownload()
 	
 	var fileDownloadUrl = null;
 	var fileDownloadReturn = null;
-	var fileDownloadError = null;
-	var fileDownloadRead = null;
 	
 	describe("User File Download (user-files/download/test-file.txt)", function()
 	{
@@ -174,32 +161,13 @@ function handleFileDownload()
 		{
 			relPath = "user-files/download/" + testFile.name;
 			fileDownloadUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, relPath);
-			
-			needle.get(fileDownloadUrl, function(sError, sResult)
-			{
-				fileDownloadError = sError;
-				fileDownloadReturn = sResult;
-				done();
-			});
+			fileDownloadReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(fileDownloadUrl, fileDownloadReturn, done);
 		});
 		
 		it("Download Successful", function(done)
 		{
-			expect(fileDownloadError).to.be.null;
-			commonFunctionsFile.testPresent(fileDownloadReturn);
-			expect(fileDownloadReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(fileDownloadReturn);
-			fileDownloadRead = apiRequestScript.callReadApiResponseString(fileDownloadReturn);
-			
-			done();
-		});
-		
-		it("File Contents Returned", function(done)
-		{
-			commonFunctionsFile.testPresent(fileDownloadRead);
-			commonFunctionsFile.testString(fileDownloadRead);
-			expect(fileDownloadRead).to.equal(testFile.contents);
-			
+			expect(fileDownloadReturn.body).to.equal(testFile.contents);
 			done();
 		});
 		
@@ -259,8 +227,7 @@ function handleUserStorageDelete()
 function handleGlobalStatus()
 {
 	var statusUrl = null;
-	var statusReqErr = null;
-	var statusReqReturn = null;
+	var statusReturn = null;
 	var statusRead = null;
 	
 	describe("Global Status (global/status)", function()
@@ -269,31 +236,16 @@ function handleGlobalStatus()
 		it("Request Made", function(done)
 		{
 			statusUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, "global/status");
-			
-			needle.get(statusUrl, function(statusErr, statusRes)
-			{
-				statusReqErr = statusErr;
-				statusReqReturn = statusRes;
-				done();
-			});	
+			statusReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(statusUrl, statusReturn, done);
 		});
 		
-		it("Request Successful", function(done)
-		{
-			expect(statusReqErr).to.be.null;
-			commonFunctionsFile.testPresent(statusReqReturn);
-			expect(statusReqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(statusReqReturn);
-			done();
-		});
 		
 		it("Results Read", function(done)
 		{
-			statusRead = apiRequestScript.callReadApiResponseObject(statusReqReturn);
+			statusRead = apiRequestScript.callReadApiResponseObject(statusReturn);
 			done();
 		});
-		
-		
 		
 		it("Correct Return Structure", function()
 		{

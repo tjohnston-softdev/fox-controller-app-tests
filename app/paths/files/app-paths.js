@@ -23,6 +23,7 @@ function defineAppPaths()
 	defineRes["rioCommonFile"] = subCommonFolder + "remote-io-common";
 	defineRes["rioCommonInvalidFile"] = subCommonFolder + "remote-io-invalid_tests";
 	defineRes["deviceCommonFile"] = subCommonFolder + "test-device-common";
+	defineRes["httpRequestsFile"] = subCommonFolder + "http-requests";
 	
 	return defineRes;
 }

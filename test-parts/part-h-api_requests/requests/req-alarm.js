@@ -1,12 +1,12 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
+const httpRequests = require(commonPaths.httpRequestsFile);
 const apiCommonFile = require("../sub-requests/common-api");
 
 
@@ -23,7 +23,6 @@ function testAlarmApis()
 function handleList()
 {
 	var listUrl = null;
-	var listError = null;
 	var listReturn = null;
 	var listRead = null;
 	
@@ -33,21 +32,12 @@ function handleList()
 		it("Request Made", function(done)
 		{
 			listUrl = apiRequestScript.callWriteApiUrl(apiPaths.alarmApi, "list/all?limit=10");
-			
-			needle.get(listUrl, function(alarmErr, alarmRes)
-			{
-				listError = alarmErr;
-				listReturn = alarmRes;
-				done();
-			});
+			listReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(listUrl, listReturn, done);
 		});
 		
-		it("Request Successful", function(done)
+		it("Results Read", function(done)
 		{
-			expect(listError).to.be.null;
-			commonFunctionsFile.testPresent(listReturn);
-			expect(listReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(listReturn);
 			listRead = listReturn.body;
 			done();
 		});
@@ -81,8 +71,6 @@ function handleList()
 			commonFunctionsFile.testPropertyStringRequiredArray(listRead, 'name');
 		});
 		
-		
-		
 	});
 }
 
@@ -90,8 +78,7 @@ function handleList()
 function handleAvailable()
 {
 	var availabilityUrl = null;
-	var reqErr = null;
-	var reqReturn = null;
+	var availabilityReturn = null;
 	var retrievedData = null;
 	
 	describe("Available (available)", function()
@@ -100,22 +87,13 @@ function handleAvailable()
 		it("Request Made", function(done)
 		{
 			availabilityUrl = apiRequestScript.callWriteApiUrl(apiPaths.alarmApi, "available");
-			
-			needle.get(availabilityUrl, function(alarmErr, alarmRes)
-			{
-				reqErr = alarmErr;
-				reqReturn = alarmRes;
-				done();
-			});
+			availabilityReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(availabilityUrl, availabilityReturn, done);
 		});
 		
-		it("Request Successful", function(done)
+		it("Results Read", function(done)
 		{
-			expect(reqErr).to.be.null;
-			commonFunctionsFile.testPresent(reqReturn);
-			expect(reqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(reqReturn);
-			retrievedData = reqReturn.body;
+			retrievedData = availabilityReturn.body;
 			done();
 		});
 		

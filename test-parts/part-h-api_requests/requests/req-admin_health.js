@@ -2,12 +2,12 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 const os = require('os');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 const commonApi = require("../sub-requests/common-api");
 const commonDatabase = require("../sub-requests/common-database");
@@ -37,37 +37,20 @@ function testHealthApi()
 function getHealthObject()
 {
 	var healthUrl = null;
-	var healthRequestError = null;
-	var healthRequestReturn = null;
+	var healthReturn = null;
 	
 	describe("Health Request", function()
 	{
 		it("Request Made", function(done)
 		{
 			healthUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "health");
-			
-			needle.get(healthUrl, function(healthErr, healthRes)
-			{
-				healthRequestError = healthErr;
-				healthRequestReturn = healthRes;
-				done();
-			});
+			healthReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(healthUrl, healthReturn, done);
 		});
-		
-		
-		it("Request Successful", function(done)
-		{
-			expect(healthRequestError).to.be.null;
-			commonFunctionsFile.testPresent(healthRequestReturn);
-			expect(healthRequestReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(healthRequestReturn);
-			done();
-		});
-		
 		
 		it("Results Read", function(done)
 		{
-			healthObject = apiRequestScript.callReadApiResponseObject(healthRequestReturn);
+			healthObject = apiRequestScript.callReadApiResponseObject(healthReturn);
 			done();
 		});
 		
