@@ -63,6 +63,62 @@ function requestDeleteSuccessful(endpointURL, deletePermStatus, outputObject, re
 }
 
 
+function requestGetInvalid(endpointURL, invalidMessage, reqDone)
+{
+	sendGet(endpointURL, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		handleErrorMessage(requestRes, invalidMessage);
+		reqDone();
+	});
+}
+
+
+function requestPostInvalid(endpointURL, postBody, invalidMessage, reqDone)
+{
+	sendPost(endpointURL, postBody, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		handleErrorMessage(requestRes, invalidMessage);
+		reqDone();
+		
+	});
+}
+
+
+function requestPutInvalid(endpointURL, putBody, invalidMessage, reqDone)
+{
+	sendPut(endpointURL, putBody, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		handleErrorMessage(requestRes, invalidMessage);
+		reqDone();
+	});
+}
+
+
+function requestDeleteInvalid(endpointURL, reqDone)
+{
+	sendDelete(endpointURL, false, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		handleInvalidDelete(requestRes);
+		reqDone();
+	});
+}
+
+
+function requestStatusInvalid(endpointURL, statusEntry, reqDone)
+{
+	sendGet(endpointURL, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		handleInvalidStatus(requestRes, statusEntry);
+		reqDone();
+	});
+}
+
+
 
 function sendGet(httpURL, httpCallback)
 {
@@ -111,6 +167,39 @@ function handleCallbackArguments(argError, argResp)
 }
 
 
+function handleErrorMessage(respObj, tgtMsg)
+{
+	var extractedMessage = apiRequestScript.callReadApiResponseError(respObj);
+	expect(extractedMessage).to.equal(tgtMsg);
+}
+
+
+function handleInvalidStatus(respObj, sInput)
+{
+	var extractedObject = apiRequestScript.callReadApiResponseObject(respObj);
+	
+	commonFunctionsFile.testPresent(extractedObject);
+	expect(extractedObject).to.be.an("object");
+	
+	commonFunctionsFile.testObjectPropertyDefinition(extractedObject, 'id');
+	commonFunctionsFile.testObjectPropertyDefinition(extractedObject, 'isRunning');
+	
+	expect(extractedObject.id).to.equal(sInput);
+	expect(extractedObject.isRunning).to.be.false;
+}
+
+
+function handleInvalidDelete(respObj)
+{
+	var extractedObject = apiRequestScript.callReadApiResponseObject(respObj);
+	
+	commonFunctionsFile.testPresent(extractedObject);
+	expect(extractedObject).to.be.an("object");
+	commonFunctionsFile.testObjectPropertyDefinition(extractedObject, 'success');
+	expect(extractedObject.success).to.be.true;
+}
+
+
 
 module.exports =
 {
@@ -118,5 +207,11 @@ module.exports =
 	getSuccessful: requestGetSuccessful,
 	postSuccessful: requestPostSuccessful,
 	putSuccessful: requestPutSuccessful,
-	deleteSuccessful: requestDeleteSuccessful
+	deleteSuccessful: requestDeleteSuccessful,
+	getInvalid: requestGetInvalid,
+	postInvalid: requestPostInvalid,
+	putInvalid: requestPutInvalid,
+	deleteInvalid: requestDeleteInvalid,
+	statusInvalid: requestStatusInvalid,
+	checkDeleteResult: handleInvalidDelete
 };

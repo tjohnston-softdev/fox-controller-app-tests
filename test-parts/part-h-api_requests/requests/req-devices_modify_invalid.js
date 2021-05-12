@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
@@ -10,8 +9,8 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const rioCommon = require(commonPaths.rioCommonFile);
-const rioCommonInvalid = require(commonPaths.rioCommonInvalidFile);
 const deviceCommon = require(commonPaths.deviceCommonFile);
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 var urlList = null;
 var urlCreate = null;
@@ -105,21 +104,13 @@ function handleCurrentDeviceList()
 	{
 		it("List Request Sent", function(done)
 		{	
-			needle.get(urlList, function(callbackError, callbackResult)
-			{
-				listResult = callbackResult;
-				listErr = callbackError;
-				done();
-			});
-			
+			listResult = httpRequests.defineOutput();
+			httpRequests.getSuccessful(urlList, listResult, done);
 		});
 		
-		it("List Request Successful", function(done)
+		
+		it("Results Read", function(done)
 		{
-			expect(listErr).to.be.null;
-			commonFunctionsFile.testPresent(listResult);
-			expect(listResult).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(listResult);
 			currentDeviceList = listResult.body;
 			done();
 		});
@@ -140,7 +131,6 @@ function handleTestAdd()
 	describe("Add Test Device", function()
 	{
 		var addObject = null;
-		var addResultError = null;
 		var addResultReturn = null;
 		var addResultRead = null;
 		var addKey = null;
@@ -153,22 +143,8 @@ function handleTestAdd()
 		
 		it("Add Request Called", function(done)
 		{
-			needle.post(urlCreate, addObject, {json: true}, function(callbackError, callbackResult)
-			{
-				addResultError = callbackError;
-				addResultReturn = callbackResult;
-				done();
-			});
-		});
-		
-		it("Add Request Successful", function(done)
-		{
-			expect(addResultError).to.be.null;
-			commonFunctionsFile.testPresent(addResultReturn);
-			expect(addResultReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(addResultReturn);
-			
-			done();
+			addResultReturn = httpRequests.defineOutput();
+			httpRequests.postSuccessful(urlCreate, addObject, addResultReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -184,7 +160,6 @@ function handleTestAdd()
 			deviceCommon.callTestFrontendAddIdValid(addKey);
 			done();
 		});
-		
 		
 		
 		it("Test Object ID Stored", function(done)
@@ -227,21 +202,8 @@ function handleTestGet()
 		
 		it("Get Request Called", function(done)
 		{
-			needle.get(testObjectLink, function(callbackError, callbackResult)
-			{
-				getError = callbackError;
-				getReturn = callbackResult;
-				done();
-			});
-		});
-		
-		it("Get Request Successful", function(done)
-		{
-			expect(getError).to.be.null;
-			commonFunctionsFile.testPresent(getReturn);
-			expect(getReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(getReturn);
-			done();
+			getReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(testObjectLink, getReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -273,20 +235,12 @@ function handleInvalidArgumentTests()
 	{
 		it("Null", function(done)
 		{
-			needle.put(testObjectLink, "null", {json: true}, function(callbackError, callbackResult)
-			{
-				catchModificationError(callbackError, callbackResult, nullMessage);
-				done();
-			});
+			httpRequests.putInvalid(testObjectLink, "null", nullMessage, done);
 		});
 		
 		it("Invalid Type", function(done)
-		{
-			needle.put(testObjectLink, -1, {json: true}, function(callbackError, callbackResult)
-			{
-				catchModificationError(callbackError, callbackResult, typeMessage);
-				done();
-			});
+		{	
+			httpRequests.putInvalid(testObjectLink, -1, typeMessage, done);
 		});
 		
 		
@@ -298,27 +252,16 @@ function handleUnchangedModifyTest()
 {
 	describe("Unchanged Device", function()
 	{
-		var updateReqErr = null;
 		var updateReqReturn = null;
-		var updateReqRead = null;
 		
 		it("Modification Called", function(done)
-		{	
-			needle.put(testObjectLink, testObjectDefinition, {json: true}, function(callbackError, callbackResult)
-			{
-				updateReqReturn = callbackResult;
-				updateReqErr = callbackError;
-				done();
-			});
+		{
+			updateReqReturn = httpRequests.defineOutput();
+			httpRequests.putSuccessful(testObjectLink, testObjectDefinition, updateReqReturn, done);
 		});
 		
 		it("Modification Passed", function(done)
 		{
-			expect(updateReqErr).to.be.null;
-			commonFunctionsFile.testPresent(updateReqReturn);
-			expect(updateReqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(updateReqReturn);
-			
 			ucUpdateRead = apiRequestScript.callReadApiResponseObject(updateReqReturn);
 			
 			deviceCommon.callTestAddModifyReturnProperties(ucUpdateRead);
@@ -346,20 +289,9 @@ function handleUnknownIdModifyTest()
 			done();
 		});
 		
-		it("Modification Called", function(done)
-		{
-			needle.put(testObjectLink, invalidEntry, {json: true}, function(callbackError, callbackResult)
-			{
-				updateReqReturn = callbackResult;
-				updateReqErr = callbackError;
-				done();
-			});
-		});
-		
 		it("Error Flagged", function(done)
 		{
-			catchModificationError(updateReqErr, updateReqReturn, unknownIdMessage);
-			done();
+			httpRequests.putInvalid(testObjectLink, invalidEntry, unknownIdMessage, done);
 		});
 		
 	});
@@ -371,8 +303,6 @@ function handleUnknownDeviceTypeModifyTest()
 	describe("Unknown Device Type (deviceType)", function()
 	{
 		var invalidEntry = null;
-		var updateReqErr = null;
-		var updateReqReturn = null;
 		
 		it("Modification Defined", function(done)
 		{
@@ -381,20 +311,9 @@ function handleUnknownDeviceTypeModifyTest()
 			done();
 		});
 		
-		it("Modification Called", function(done)
-		{
-			needle.put(testObjectLink, invalidEntry, {json: true}, function(callbackError, callbackResult)
-			{
-				updateReqReturn = callbackResult;
-				updateReqErr = callbackError;
-				done();
-			});
-		});
-		
 		it("Error Flagged", function(done)
 		{
-			catchModificationError(updateReqErr, updateReqReturn, deviceTypeObject.oValue.errorMessage);
-			done();
+			httpRequests.putInvalid(testObjectLink, invalidEntry, deviceTypeObject.oValue.errorMessage, done);
 		});
 	});
 }
@@ -404,8 +323,6 @@ function handleUnknownManufacturerModifyTest()
 	describe("Unknown Manufacturer (maker)", function()
 	{
 		var invalidEntry = null;
-		var updateReqErr = null;
-		var updateReqReturn = null;
 		
 		it("Modification Defined", function(done)
 		{
@@ -414,23 +331,10 @@ function handleUnknownManufacturerModifyTest()
 			done();
 		});
 		
-		it("Modification Called", function(done)
-		{
-			needle.put(testObjectLink, invalidEntry, {json: true}, function(callbackError, callbackResult)
-			{
-				updateReqReturn = callbackResult;
-				updateReqErr = callbackError;
-				done();
-			});
-		});
-		
 		it("Error Flagged", function(done)
 		{
-			catchModificationError(updateReqErr, updateReqReturn, manufacturerObject.oValue.errorMessage);
-			done();
+			httpRequests.putInvalid(testObjectLink, invalidEntry, manufacturerObject.oValue.errorMessage, done);
 		});
-		
-		
 		
 	});
 }
@@ -441,8 +345,6 @@ function handleUnknownModelModifyTest()
 	describe("Unknown Model (model)", function()
 	{
 		var invalidEntry = null;
-		var updateReqErr = null;
-		var updateReqReturn = null;
 		
 		it("Modification Defined", function(done)
 		{
@@ -451,20 +353,9 @@ function handleUnknownModelModifyTest()
 			done();
 		});
 		
-		it("Modification Called", function(done)
-		{
-			needle.put(testObjectLink, invalidEntry, {json: true}, function(callbackError, callbackResult)
-			{
-				updateReqReturn = callbackResult;
-				updateReqErr = callbackError;
-				done();
-			});
-		});
-		
 		it("Error Flagged", function(done)
 		{
-			catchModificationError(updateReqErr, updateReqReturn, modelObject.oValue.errorMessage);
-			done();
+			httpRequests.putInvalid(testObjectLink, invalidEntry, modelObject.oValue.errorMessage, done);
 		});
 		
 	});
@@ -486,20 +377,9 @@ function handleBadIpAddressModifyTest()
 			done();
 		});
 		
-		it("Modification Called", function(done)
-		{
-			needle.put(testObjectLink, ipObject, {json: true}, function(callbackError, callbackResult)
-			{
-				ipUpdateReturn = callbackResult;
-				ipUpdateError = callbackError;
-				done();
-			});
-		});
-		
 		it("Error Flagged", function(done)
 		{
-			catchModificationError(ipUpdateError, ipUpdateReturn, ipAddressObject.oFormat.errorMessage);
-			done();
+			httpRequests.putInvalid(testObjectLink, ipObject, ipAddressObject.oFormat.errorMessage, done);
 		});
 		
 	});
@@ -511,25 +391,17 @@ function handleTestDelete()
 {
 	describe("Delete Test Device", function()
 	{
-		var delOptions = null;
-		var delError = null;
 		var delReturn = null;
 		
 		it("Delete Called", function(done)
 		{
-			delOptions = apiRequestScript.getDeleteOptions(true);
-			
-			needle.delete(testObjectLink, null, delOptions, function(callbackError, callbackResult)
-			{
-				delError = callbackError;
-				delReturn = callbackResult;
-				done();
-			});
+			delReturn = httpRequests.defineOutput();
+			httpRequests.deleteSuccessful(testObjectLink, true, delReturn, done);
 		});
 		
 		it("Delete Successful", function(done)
 		{
-			checkModifyTestObjectDeleted(delError, delReturn);
+			httpRequests.checkDeleteResult(delReturn);
 			done();
 		});
 		
@@ -542,29 +414,21 @@ function handleAfterDeviceList()
 {
 	describe("Check Device List Intact", function()
 	{
-		var afterListError = null;
 		var afterListReturn = null;
 		var afterListRead = null;
 		
 		it("List Request Sent", function(done)
-		{
-			needle.get(urlList, function(afterErr, afterRes)
-			{
-				afterListError = afterErr;
-				afterListReturn = afterRes;
-				done();
-			});
+		{			
+			afterListReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(urlList, afterListReturn, done);
 		});
 		
-		it("List Request Successful", function(done)
+		it("Results Read", function(done)
 		{
-			expect(afterListError).to.be.null;
-			commonFunctionsFile.testPresent(afterListReturn);
-			expect(afterListReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(afterListReturn);
 			afterListRead = afterListReturn.body;
 			done();
 		});
+		
 		
 		it("Valid Return", function(done)
 		{
@@ -624,36 +488,11 @@ function handleDispose()
 }
 
 
-
-function catchModificationError(modifyErrorObject, modifyReturnObject, targetErrorString)
-{
-	var extractedMessage = null;
-	
-	expect(modifyErrorObject).to.be.null;
-	commonFunctionsFile.testPresent(modifyReturnObject);
-	expect(modifyReturnObject).to.be.an("object");
-	
-	extractedMessage = apiRequestScript.callReadApiResponseError(modifyReturnObject);
-	expect(extractedMessage).to.equal(targetErrorString);
-}
-
-
 function checkModifyTestObjectGet(gResultObject, gTargetID, gOriginalObject)
 {
 	rioCommon.callTestDeviceObjectStructure(gResultObject);
 	expect(gResultObject.id).to.equal(gTargetID);
 	rioCommon.callCompareGetDeviceToOriginal(gResultObject, gOriginalObject);
-}
-
-function checkModifyTestObjectDeleted(mdError, mdResult)
-{
-	var returnedObject = null;
-	
-	expect(mdError).to.be.null;
-	commonFunctionsFile.testPresent(mdResult);
-	
-	returnedObject = apiRequestScript.callReadApiResponseObject(mdResult);
-	deviceCommon.callTestFrontendDeleteSuccessful(returnedObject);
 }
 
 

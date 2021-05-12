@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
@@ -10,7 +9,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const rioCommon = require(commonPaths.rioCommonFile);
-const rioCommonInvalid = require(commonPaths.rioCommonInvalidFile);
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 const apiCommonFile = require("../sub-requests/common-api");
 const deviceCommon = require(commonPaths.deviceCommonFile);
@@ -96,13 +95,13 @@ function handleCreateInvalid()
 			
 			it("Null", function(done)
 			{
-				sendCreateRequest("null", objectNullError, done);
+				httpRequests.postInvalid(urlCreate, "null", objectNullError, done);
 			});
 			
 			
 			it("Invalid Object Type", function(done)
 			{	
-				sendCreateRequest(-1, objectTypeError, done);
+				httpRequests.postInvalid(urlCreate, -1, objectTypeError, done);
 			});
 			
 		});
@@ -119,24 +118,23 @@ function handleCreateInvalid()
 			
 			it("Invalid Value", function(done)
 			{
-				var postBody = deviceTypeErrors.oValue.jsonObject;
+				var invalidBody = deviceTypeErrors.oValue.jsonObject;
 				var postErrMsg = deviceTypeErrors.oValue.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
-				
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Type", function(done)
 			{
-				var postBody = deviceTypeErrors.oType.jsonObject;
+				var invalidBody = deviceTypeErrors.oType.jsonObject;
 				var postErrMsg = deviceTypeErrors.oType.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Missing Property", function(done)
 			{
-				var postBody = deviceTypeErrors.oProp.jsonObject;
+				var invalidBody = deviceTypeErrors.oProp.jsonObject;
 				var postErrMsg = deviceTypeErrors.oProp.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 		});
@@ -154,24 +152,24 @@ function handleCreateInvalid()
 			
 			it("Unknown Manufacturer", function(done)
 			{
-				var postBody = manufacturerErrors.oValue.jsonObject;
+				var invalidBody = manufacturerErrors.oValue.jsonObject;
 				var postErrMsg = manufacturerErrors.oValue.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Value Type", function(done)
 			{
-				var postBody = manufacturerErrors.oType.jsonObject;
+				var invalidBody = manufacturerErrors.oType.jsonObject;
 				var postErrMsg = manufacturerErrors.oType.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			
 			it("Missing Property", function(done)
 			{
-				var postBody = manufacturerErrors.oProp.jsonObject;
+				var invalidBody = manufacturerErrors.oProp.jsonObject;
 				var postErrMsg = manufacturerErrors.oProp.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 		});
@@ -188,23 +186,23 @@ function handleCreateInvalid()
 			
 			it("Unknown Model", function(done)
 			{
-				var postBody = modelErrors.oValue.jsonObject;
+				var invalidBody = modelErrors.oValue.jsonObject;
 				var postErrMsg = modelErrors.oValue.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Value Type", function(done)
 			{
-				var postBody = modelErrors.oType.jsonObject;
+				var invalidBody = modelErrors.oType.jsonObject;
 				var postErrMsg = modelErrors.oType.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Missing Property", function(done)
 			{
-				var postBody = modelErrors.oProp.jsonObject;
+				var invalidBody = modelErrors.oProp.jsonObject;
 				var postErrMsg = modelErrors.oProp.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 		});
 		
@@ -221,30 +219,30 @@ function handleCreateInvalid()
 			
 			it("Invalid IP Format", function(done)
 			{
-				var postBody = ipErrors.oFormat.jsonObject;
+				var invalidBody = ipErrors.oFormat.jsonObject;
 				var postErrMsg = ipErrors.oFormat.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid String Value", function(done)
 			{
-				var postBody = ipErrors.oValue.jsonObject;
+				var invalidBody = ipErrors.oValue.jsonObject;
 				var postErrMsg = ipErrors.oValue.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Value Type", function(done)
 			{
-				var postBody = ipErrors.oType.jsonObject;
+				var invalidBody = ipErrors.oType.jsonObject;
 				var postErrMsg = ipErrors.oType.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Missing Property", function(done)
 			{
-				var postBody = ipErrors.oProp.jsonObject;
+				var invalidBody = ipErrors.oProp.jsonObject;
 				var postErrMsg = ipErrors.oProp.errorMessage;
-				sendCreateRequest(postBody, postErrMsg, done);
+				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 		});
@@ -264,19 +262,19 @@ function handleReadInvalid()
 			it("Unknown ID", function(done)
 			{
 				var unknownErrStr = commonErrorStringsFile.writeKeyNotFoundError(crudUnknownID);
-				sendReadRequest(urlRudUnknown, unknownErrStr, done);
+				httpRequests.getInvalid(urlRudUnknown, unknownErrStr, done);
 			});
 			
 			it("Invalid ID", function(done)
 			{
 				var invalidErrStr = commonErrorStringsFile.writeKeyNotFoundError(crudInvalidID);
-				sendReadRequest(urlRudInvalid, invalidErrStr, done);
+				httpRequests.getInvalid(urlRudInvalid, invalidErrStr, done);
 			});
 			
 			it("Blank ID", function(done)
 			{
 				var nullErrStr = commonErrorStringsFile.writeKeyNotFoundError(null);
-				sendReadRequest(urlRudBlank, nullErrStr, done);
+				httpRequests.getInvalid(urlRudBlank, nullErrStr, done);
 			});
 		});
 	});
@@ -292,17 +290,17 @@ function handleStatusInvalid()
 		{
 			it("Unknown ID", function(done)
 			{
-				sendStatusRequest(urlStatusUnknown, crudUnknownID, done);
+				httpRequests.statusInvalid(urlStatusUnknown, crudUnknownID, done);
 			});
 			
 			it("Invalid ID", function(done)
 			{
-				sendStatusRequest(urlStatusInvalid, crudInvalidID, done);
+				httpRequests.statusInvalid(urlStatusInvalid, crudInvalidID, done);
 			});
 			
 			it("Blank ID", function(done)
 			{
-				sendStatusRequest(urlStatusBlank, "null", done);
+				httpRequests.statusInvalid(urlStatusBlank, "null", done);
 			});
 			
 		});
@@ -319,17 +317,17 @@ function handleDeleteInvalid()
 		{
 			it("Unknown ID", function(done)
 			{
-				sendDeleteRequest(urlRudUnknown, done);	
+				httpRequests.deleteInvalid(urlRudUnknown, done);
 			});
 			
 			it("Invalid ID", function(done)
 			{
-				sendDeleteRequest(urlRudInvalid, done);
+				httpRequests.deleteInvalid(urlRudInvalid, done);
 			});
 			
 			it("Blank ID", function(done)
 			{
-				sendDeleteRequest(urlRudBlank, done);
+				httpRequests.deleteInvalid(urlRudBlank, done);
 			});
 			
 		});
@@ -367,75 +365,6 @@ function handleUrlDispose()
 		
 	});
 }
-
-
-function sendCreateRequest(invalidEntry, invalidMsg, createDone)
-{
-	needle.post(urlCreate, invalidEntry, {json: true}, function(createReqErr, createReqRes)
-	{
-		readInvalidResults(createReqErr, createReqRes, invalidMsg);
-		createDone();
-	});
-}
-
-
-function sendReadRequest(readURL, invalidMsg, readDone)
-{
-	needle.get(readURL, function(readReqErr, readReqRes)
-	{
-		readInvalidResults(readReqErr, readReqRes, invalidMsg);
-		readDone();
-	});
-}
-
-
-function sendStatusRequest(statusURL, invalidEntry, statusDone)
-{
-	var extractedObject = null;
-	
-	needle.get(statusURL, function(statusReqErr, statusReqRes)
-	{
-		expect(statusReqErr).to.be.null;
-		commonFunctionsFile.testPresent(statusReqRes);
-		expect(statusReqRes).to.be.an("object");
-		extractedObject = apiRequestScript.callReadApiResponseObject(statusReqRes);
-		rioCommonInvalid.callValidateStatusInvalid(extractedObject, invalidEntry);
-		
-		statusDone();
-	});
-}
-
-
-function sendDeleteRequest(deleteURL, deleteDone)
-{
-	var delOpts = apiRequestScript.getDeleteOptions(false);
-	var extractedObject = null;
-	
-	needle.delete(deleteURL, null, delOpts, function(deleteReqErr, deleteReqRes)
-	{
-		expect(deleteReqErr).to.be.null;
-		commonFunctionsFile.testPresent(deleteReqRes);
-		expect(deleteReqRes).to.be.an("object");
-		extractedObject = apiRequestScript.callReadApiResponseObject(deleteReqRes);
-		deviceCommon.callTestFrontendDeleteSuccessful(extractedObject);
-		
-		deleteDone();
-	});
-}
-
-
-function readInvalidResults(callbackErr, callbackObject, expectedError)
-{
-	var extractedMessage = null;
-	
-	expect(callbackErr).to.be.null;
-	commonFunctionsFile.testPresent(callbackObject);
-	expect(callbackObject).to.be.an("object");
-	
-	extractedMessage = apiRequestScript.callReadApiResponseError(callbackObject);
-	rioCommonInvalid.callValidateGeneralInvalid(extractedMessage, expectedError);
-}
-
 
 
 module.exports =
