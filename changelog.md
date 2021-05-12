@@ -25,7 +25,7 @@
 
 ---
 
-### ./part-h-api_requests/api-main.js
+### ./test-parts/part-h-api_requests/api-main.js
 
 **Uncommented calls**
 * cDevicesFileCrudInvalid
@@ -33,7 +33,7 @@
 
 ---
 
-### ./part-h-api_requests/requests/req-devices_crud_invalid.js
+### ./test-parts/part-h-api_requests/requests/req-devices_crud_invalid.js
 
 **General**
 * Removed requirements:
@@ -60,7 +60,7 @@
 
 ---
 
-### ./part-h-api_requests/requests/req-devices_modify_invalid.js
+### ./test-parts/part-h-api_requests/requests/req-devices_modify_invalid.js
 
 **General**
 * Removed requirements:
