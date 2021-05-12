@@ -14,7 +14,7 @@ function coordinateApiRequests()
 		cHealthFile.callTestHealthApi();
 		cAlarmFile.callTestAlarmApis();
 		cStorageFile.callTestStorageAPIs();
-		//cDevicesFileCrud.callTestDeviceCrudApis();
+		cDevicesFileCrud.callTestDeviceCrudApis();
 		//cDevicesFileCrudInvalid.callTestDeviceCrudInvalidApis();
 		//cDevicesFileModifyInvalid.callTestDeviceModifyInvalidApis();
 	});

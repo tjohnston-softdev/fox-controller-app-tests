@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
@@ -9,17 +8,17 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 
-const apiCommonFile = require("../sub-requests/common-api");
-const deviceFolder = apiPaths.devicesApi;
-const deviceRio = apiPaths.rioApiSub;
-
 const modelFunctionsFile = require(commonPaths.getModelsFile);
 const modelIntegrityFile = require(commonPaths.checkModelIntegrityFile);
 const rioCommon = require(commonPaths.rioCommonFile);
 const deviceCommon = require(commonPaths.deviceCommonFile);
+const httpRequests = require(commonPaths.httpRequestsFile);
+const apiCommonFile = require("../sub-requests/common-api");
+
+const deviceFolder = apiPaths.devicesApi;
+const deviceRio = apiPaths.rioApiSub;
 
 const modelObjectArray = modelFunctionsFile.retrieveAllSupportedModels();
-
 
 var rioList = null;
 var testID = null;
@@ -69,7 +68,6 @@ function handleDeviceDefaultValues()
 		var deviceArrayLists = null;
 		
 		var defaultsUrl = null;
-		var reqErr = null;
 		var reqReturn = null;
 		var defaultsRead = null;
 		
@@ -83,23 +81,8 @@ function handleDeviceDefaultValues()
 		it("Request Made", function(done)
 		{
 			defaultsUrl = apiRequestScript.callWriteApiUrl(deviceFolder, "defaults");
-			
-			needle.get(defaultsUrl, function(defaultReqErr, defaultReqRes)
-			{
-				reqErr = defaultReqErr;
-				reqReturn = defaultReqRes;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(reqErr).to.be.null;
-			commonFunctionsFile.testPresent(reqReturn);
-			expect(reqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(reqReturn);
-			defaultsRead = reqReturn.body;
-			done();
+			reqReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(defaultsUrl, reqReturn, done);
 		});
 		
 		
@@ -156,29 +139,19 @@ function handleBeforeListTest()
 {
 	describe("List Remote IO Devices (devices/remote-io)", function()
 	{
-		var beforeListUrl = null;
-		var beforeErr = null;
+		var beforeUrl = null;
 		var beforeReturn = null;
 		
 		it("Request Made", function(done)
 		{
-			beforeListUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
-			
-			needle.get(beforeListUrl, function(folderListErr, folderListRes)
-			{
-				beforeErr = folderListErr;
-				beforeReturn = folderListRes;
-				done();
-			});
-			
+			beforeUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
+			beforeReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(beforeUrl, beforeReturn, done);
 		});
 		
-		it("Request Successful", function(done)
+		
+		it("Results Read", function(done)
 		{
-			expect(beforeErr).to.be.null;
-			commonFunctionsFile.testPresent(beforeReturn);
-			expect(beforeReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(beforeReturn);
 			rioList = beforeReturn.body;
 			done();
 		});
@@ -208,7 +181,6 @@ function handleBeforeListTest()
 			done();
 		});
 		
-		
 	});
 }
 
@@ -221,29 +193,14 @@ function handleCreateDeviceTest()
 		describe("Valid Device Object", function()
 		{
 			var createUrl = null;
-			var createErr = null;
 			var createReturn = null;
 			var createRead = null;
 			
 			it("Request Made", function(done)
 			{
 				createUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
-				
-				needle.post(createUrl, commonJsonObjectsFile.crudDevice, {json: true}, function(addError, addResult)
-				{
-					createErr = addError;
-					createReturn = addResult;
-					done();
-				});
-			});
-			
-			it("Request Successful", function(done)
-			{
-				expect(createErr).to.be.null;
-				commonFunctionsFile.testPresent(createReturn);
-				expect(createReturn).to.be.an("object");
-				apiRequestScript.callValidateApiResponse(createReturn);
-				done();
+				createReturn = httpRequests.defineOutput();
+				httpRequests.postSuccessful(createUrl, commonJsonObjectsFile.crudDevice, createReturn, done);
 			});
 			
 			it("Results Read", function(done)
@@ -291,30 +248,20 @@ function handleUpdateAddTest()
 	describe("Device List Updated - Added", function()
 	{
 		var addUpdateUrl = null;
-		var addReqErr = null;
 		var addReqReturn = null;
 		var addUpdateRead = null;
 		
 		it("Request Made", function(done)
 		{
 			addUpdateUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
-			
-			needle.get(addUpdateUrl, function(addListError, addListResult)
-			{
-				addReqErr = addListError;
-				addReqReturn = addListResult;
-				done();
-			});
+			addReqReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(addUpdateUrl, addReqReturn, done);
 		});
 		
-		it("Request Successful", function(done)
+		
+		it("Results Read", function(done)
 		{
-			expect(addReqErr).to.be.null;
-			commonFunctionsFile.testPresent(addReqReturn);
-			expect(addReqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(addReqReturn);
 			addUpdateRead = addReqReturn.body;
-			
 			done();
 		});
 		
@@ -341,30 +288,14 @@ function handleReadDeviceTest()
 	describe("Read Remote IO Device (devices/remote-io/testID)", function()
 	{
 		var deviceUrl = null;
-		var reqErr = null;
 		var reqReturn = null;
 		var deviceRead = null;
 		
 		it("Request Made", function(done)
 		{
 			deviceUrl = deviceCommon.callGetRudUrl(testID);
-			
-			needle.get(deviceUrl, function(getError, getResult)
-			{
-				reqErr = getError;
-				reqReturn = getResult;
-				done();
-			});
-			
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(reqErr).to.be.null;
-			commonFunctionsFile.testPresent(reqReturn);
-			expect(reqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(reqReturn);
-			done();
+			reqReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(deviceUrl, reqReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -410,29 +341,14 @@ function handleDeviceStatusTest()
 	describe("Get Remote IO Device Status (devices/status/remote-io/testID)", function()
 	{
 		var statusUrl = null;
-		var reqErr = null;
 		var reqReturn = null;
 		var statusRead = null;
 		
 		it("Request Made", function(done)
 		{
 			statusUrl = deviceCommon.callGetStatusUrl(testID);
-			
-			needle.get(statusUrl, function(statusReqErr, statusReqRes)
-			{
-				reqErr = statusReqErr;
-				reqReturn = statusReqRes;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(reqErr).to.be.null;
-			commonFunctionsFile.testPresent(reqReturn);
-			expect(reqReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(reqReturn);
-			done();
+			reqReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(statusUrl, reqReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -482,8 +398,6 @@ function handleUpdateDeviceTest()
 	{
 		var modifyObject = null;
 		var modifyUrl = null;
-		var modifyOptions = null;
-		var modifyError = null;
 		var modifyReturn = null;
 		var modifyRead = null;
 		
@@ -499,23 +413,8 @@ function handleUpdateDeviceTest()
 		it("Request Made", function(done)
 		{
 			modifyUrl = deviceCommon.callGetRudUrl(testID);
-			
-			needle.put(modifyUrl, modifyObject, {json: true}, function(modErr, modRes)
-			{
-				modifyError = modErr;
-				modifyReturn = modRes;
-				done();
-			});
-			
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(modifyError).to.be.null;
-			commonFunctionsFile.testPresent(modifyReturn);
-			expect(modifyReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(modifyReturn);
-			done();
+			modifyReturn = httpRequests.defineOutput();
+			httpRequests.putSuccessful(modifyUrl, modifyObject, modifyReturn, done);			
 		});
 		
 		it("Results Read", function(done)
@@ -567,29 +466,14 @@ function handleUpdateReviewTest()
 	describe("Review Changes", function()
 	{
 		var reviewUrl = null;
-		var reviewError = null;
 		var reviewReturn = null;
 		var reviewRead = null;
 		
 		it("Request Made", function(done)
 		{
 			reviewUrl = deviceCommon.callGetRudUrl(testID);
-			
-			needle.get(reviewUrl, function(getError, getResult)
-			{
-				reviewReturn = getResult;
-				reviewError = getError;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(reviewError).to.be.null;
-			commonFunctionsFile.testPresent(reviewReturn);
-			expect(reviewReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(reviewReturn);
-			done();
+			reviewReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(reviewUrl, reviewReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -624,33 +508,15 @@ function handleDeleteFlagTest()
 {
 	describe("Flag Remote IO Device Deleted (devices/remote-io/testID)", function()
 	{
-		var flagOpts = null;
 		var flagUrl = null;
-		var flagError = null;
 		var flagReturn = null;
 		var flagRead = null;
 		
 		it("Request Made", function(done)
 		{
 			flagUrl = deviceCommon.callGetRudUrl(testID);
-			flagOpts = apiRequestScript.getDeleteOptions(false);
-			
-			needle.delete(flagUrl, null, flagOpts, function(delReqErr, delReqRes)
-			{
-				flagError = delReqErr;
-				flagReturn = delReqRes;
-				done();
-			});
-			
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(flagError).to.be.null;
-			commonFunctionsFile.testPresent(flagReturn);
-			expect(flagReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(flagReturn);
-			done();
+			flagReturn = httpRequests.defineOutput();
+			httpRequests.deleteSuccessful(flagUrl, false, flagReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -679,9 +545,7 @@ function handleDeleteFlagTest()
 
 function handleDeleteObjectTest()
 {
-	var deleteOpts = null;
 	var deleteUrl = null;
-	var deleteError = null;
 	var deleteReturn = null;
 	var deleteRead = null;
 	
@@ -690,23 +554,8 @@ function handleDeleteObjectTest()
 		it("Request Made", function(done)
 		{
 			deleteUrl = deviceCommon.callGetRudUrl(testID);
-			deleteOpts = apiRequestScript.getDeleteOptions(false);
-		
-			needle.delete(deleteUrl, null, deleteOpts, function(delReqErr, delReqRes)
-			{
-				deleteError = delReqErr;
-				deleteReturn = delReqRes;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(deleteError).to.be.null;
-			commonFunctionsFile.testPresent(deleteReturn);
-			expect(deleteReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(deleteReturn);
-			done();
+			deleteReturn = httpRequests.defineOutput();
+			httpRequests.deleteSuccessful(deleteUrl, false, deleteReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -733,7 +582,6 @@ function handleDeleteObjectTest()
 		
 	});
 	
-	
 }
 
 
@@ -743,32 +591,22 @@ function handleUpdateDeleteTest()
 	describe("Device List Updated - Deleted", function()
 	{
 		var deleteUpdateUrl = null;
-		var deleteUpdateError = null;
 		var deleteUpdateReturn = null;
 		var deleteUpdateRead = null;
 		
 		it("Request Made", function(done)
 		{
 			deleteUpdateUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
-			
-			needle.get(deleteUpdateUrl, function(delListError, delListResult)
-			{
-				deleteUpdateReturn = delListResult;
-				deleteUpdateError = delListError;
-				done();
-			});
-			
+			deleteUpdateReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(deleteUpdateUrl, deleteUpdateReturn, done);
 		});
 		
-		it("Request Successful", function(done)
+		it("Results Read", function(done)
 		{
-			expect(deleteUpdateError).to.be.null;
-			commonFunctionsFile.testPresent(deleteUpdateReturn);
-			expect(deleteUpdateReturn).to.be.an("object");
-			apiRequestScript.callValidateApiResponse(deleteUpdateReturn);
 			deleteUpdateRead = deleteUpdateReturn.body;
 			done();
 		});
+		
 		
 		it("Valid Return", function(done)
 		{
@@ -797,7 +635,6 @@ function handleVariableDispose()
 {
 	describe("CRUD Dispose", function()
 	{
-		
 		it("Device List", function(done)
 		{
 			rioList = null;

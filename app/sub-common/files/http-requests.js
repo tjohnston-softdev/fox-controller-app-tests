@@ -27,6 +27,42 @@ function requestGetSuccessful(endpointURL, outputObject, reqDone)
 }
 
 
+function requestPostSuccessful(endpointURL, postBody, outputObject, reqDone)
+{
+	sendPost(endpointURL, postBody, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		apiRequestScript.callValidateApiResponse(requestRes);
+		outputObject.body = requestRes.body;
+		reqDone();
+	});
+}
+
+
+function requestPutSuccessful(endpointURL, putBody, outputObject, reqDone)
+{
+	sendPut(endpointURL, putBody, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		apiRequestScript.callValidateApiResponse(requestRes);
+		outputObject.body = requestRes.body;
+		reqDone();
+	});
+}
+
+
+function requestDeleteSuccessful(endpointURL, deletePermStatus, outputObject, reqDone)
+{
+	sendDelete(endpointURL, deletePermStatus, function(requestErr, requestRes)
+	{
+		handleCallbackArguments(requestErr, requestRes);
+		apiRequestScript.callValidateApiResponse(requestRes);
+		outputObject.body = requestRes.body;
+		reqDone();
+	});
+}
+
+
 
 function sendGet(httpURL, httpCallback)
 {
@@ -79,5 +115,8 @@ function handleCallbackArguments(argError, argResp)
 module.exports =
 {
 	defineOutput: defineOutputObject,
-	getSuccessful: requestGetSuccessful
+	getSuccessful: requestGetSuccessful,
+	postSuccessful: requestPostSuccessful,
+	putSuccessful: requestPutSuccessful,
+	deleteSuccessful: requestDeleteSuccessful
 };

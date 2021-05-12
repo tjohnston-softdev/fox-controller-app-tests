@@ -1,101 +1,117 @@
 # Changelog
 
-**./app/sub-common/files/http-requests.js**
-* New file - Shared code for HTTP requests.
-* Supports methods:
-	* GET
-	* POST
-	* PUT
-	* DELETE
-* Has these public functions so far:
-	* Define result object.
-	* Successful GET request.
+### ./app/sub-common/files/http-requests.js
+
+**New Functions**
+* 'requestPostSuccessful' - Sends successful POST request.
+* 'requestPutSuccessful' - Sends successful PUT request.
+* 'requestDeleteSuccessful' - Sends successful DELETE request.
 
 ---
 
-**./app/paths/files/app-paths.js**
-* Added 'httpRequestsFile' property.
-	* Corresponds to:
-	* ./app/sub-common/files/http-requests.js
+### ./part-h-api_requests/api-main.js
+
+**Changes**
+* Uncommented 'cDevicesFileCrud' call.
 
 ---
 
-**./test-parts/part-h-api_requests/api-main.js**
-* Commented out calls to:
-	* cDevicesFileCrud
-	* cDevicesFileCrudInvalid
-	* cDevicesFileModifyInvalid
+### ./part-h-api_requests/requests/req-devices_crud.js
 
----
+**General**
+* Removed 'needle' module requirement.
+* Required 'commonPaths.httpRequestsFile'
+* Merged HTTP request code.
 
-**./test-parts/part-h-api_requests/requests/req-admin_main.js**
-* Removed 'needle' requirement.
-* Added 'commonPaths.httpRequestsFile' requirement.
-* Rewrote HTTP request code to use 'httpRequests'
-* handleDhcpClients
-	* Removed 'dhcpError' variable.
-	* 'dhcpReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Renamed "Request Successful" to "Results Read"
-	* Removed 'dhcpError' check.
-	* Removed 'callValidateApiResponse'
-	* Removed 'testPresent' check on 'dhcpReturn'
-* handleDefaultObject
-	* Removed 'defaultError' variable.
-	* 'defaultReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Removed the "Request Successful" test.
-* handleLog
-	* Removed the 'logError' variable.
-	* 'logReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Removed the "Request Successful" test.
+\
+**handleDeviceDefaultValues**
+* Removed the 'reqErr' variable.
+* reqReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
 
----
+\
+**handleBeforeListTest**
+* Renamed the 'beforeListUrl' variable to 'beforeUrl'
+* Removed the 'beforeErr' variable.
+* beforeReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Moved the 'rioList' assignment to its own test - "Results Read"
+* Removed the "Request Successful" test.
 
-**./test-parts/part-h-api_requests/requests/req-admin_health.js**
-* Removed 'needle' requirement.
-* Added 'commonPaths.httpRequestsFile' requirement.
-* Rewrote HTTP request code to use 'httpRequests'
-* getHealthObject
-	* Removed 'healthRequestError' variable.
-	* Renamed 'healthRequestReturn' variable to 'healthReturn'
-	* 'healthReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Removed the "Request Successful" test.
+\
+**handleCreateDeviceTest**
+* First successful POST request.
+* Removed the 'createErr' variable.
+* createReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
 
----
+\
+**handleUpdateAddTest**
+* Removed the 'addReqErr' variable.
+* addReqReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Moved the 'addUpdateRead' assignment to its own test - "Results Read"
+* Removed the "Request Successful" test.
 
-**./test-parts/part-h-api_requests/requests/req-alarm.js**
-* Removed 'needle' requirement.
-* Added 'commonPaths.httpRequestsFile' requirement.
-* Rewrote HTTP request code to use 'httpRequests'
-* handleList
-	* Removed the 'listError' variable.
-	* 'listReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Moved 'listRead' assignment to its own test "Results Read"
-	* Removed the "Request Successful" test.
-* handleAvailable
-	* Removed the 'reqErr' variable.
-	* Renamed the 'reqReturn' variable to 'availabilityReturn'
-	* 'reqReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Moved 'retrievedData' assignment to its own test "Results Read"
-	* Removed the "Request Successful" test.
+\
+**handleReadDeviceTest, handleDeviceStatusTest**
+* Removed the 'reqErr' variable.
+* reqReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
 
----
+\
+**handleUpdateDeviceTest**
+* First successful PUT request.
+* Removed variables:
+	* modifyOptions
+	* modifyError
+* modifyReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
 
-**./test-parts/part-h-api_requests/requests/req-storage.js**
-* Removed 'needle' requirement.
-* Added 'commonPaths.httpRequestsFile' requirement.
-* Rewrote HTTP request code to use 'httpRequests'
-* handleFileList
-	* Removed the 'fileReqErr' variable.
-	* 'fileReqReturn' is now assigned during "Request Made" with 'defineOutput'
-	* Moved 'fileListRead' assignment to its own test "Results Read"
-	* Removed the "Request Successful" test.
-* handleFileDownload
-	* Removed the 'fileDownloadError' variable.
-	* Removed the 'fileDownloadRead' variable.
-	* 'fileDownloadReturn' is now assigned during "Request Made" with 'defineOutput'
-	* "Download Successful" now only tests whether the request output matches the test file contents.
-	* Removed the "File Contents Returned" test.
-* handleGlobalStatus
-	* Removed the 'statusReqErr' variable.
-	* Renamed the 'statusReqReturn' variable to 'statusReturn'
-	* Removed the "Request Successful" test.
+\
+**handleUpdateReviewTest**
+* Removed the 'reviewError' variable.
+* reviewReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
+
+\
+**handleDeleteFlagTest**
+* First successful DELETE request.
+* Removed variables:
+	* flagOpts
+	* flagError
+* flagReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
+
+\
+**handleDeleteObjectTest**
+* Removed variables:
+	* deleteOpts
+	* deleteError
+* deleteReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Removed the "Request Successful" test.
+
+\
+**handleUpdateDeleteTest**
+* Removed the 'deleteUpdateError' variable.
+* deleteUpdateReturn
+	* Now assigned during "Request Made"
+	* Assigned using 'httpRequests.defineOutput'
+* Moved the 'deleteUpdateRead' assignment to its own test - "Results Read"
+* Removed the "Request Successful" test.
