@@ -1,7 +1,7 @@
 const cListEmptyFile = require("./parts/a-check_database_empty");
 const cAddDevicesFile = require("./parts/b-add_all_devices");
-/*
 const cGetListFile = require("./parts/c-get_device_list");
+/*
 const cCheckListFile = require("./parts/d-check_device_list");
 const cListAvaliableFile = require("./parts/e-list_avaliable_nodes");
 const cCheckNodeArrayFile = require("./parts/f-check_node_array");
@@ -33,7 +33,7 @@ function callAddDevices()
 		
 		after(function()
 		{
-			//callGetList();
+			callGetList();
 		});
 	});
 }
@@ -47,7 +47,7 @@ function callGetList()
 		
 		after(function()
 		{
-			callCheckList();
+			//callCheckList();
 		});
 	});
 }

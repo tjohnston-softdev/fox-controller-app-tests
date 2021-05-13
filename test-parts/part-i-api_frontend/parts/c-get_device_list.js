@@ -1,19 +1,16 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 const modelFunctionsFile = require(commonPaths.getModelsFile);
 const modelIntegrityFile = require(commonPaths.checkModelIntegrityFile);
 const rioCommon = require(commonPaths.rioCommonFile);
-
 const deviceCommon = require(commonPaths.deviceCommonFile);
+const httpRequests = require(commonPaths.httpRequestsFile);
 const testCacheFile = require("../sub-parts/test-device-cache");
 
 const modelReferenceArray = modelFunctionsFile.retrieveAllSupportedModels();
@@ -35,32 +32,18 @@ function handleRetrieve()
 	describe("Retrieve Device List From Database", function()
 	{
 		var retrieveUrl = null;
-		var retrieveError = null;
 		var retrieveReturn = null;
 		
 		it("List Request Sent", function(done)
 		{
 			retrieveUrl = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
-			
-			reqModule(retrieveUrl, function(callbackError, callbackResult)
-			{
-				retrieveReturn = callbackResult;
-				retrieveError = callbackError;
-				done();
-			});
-			
-		});
-		
-		it("List Request Successful", function(done)
-		{
-			commonFunctionsFile.testPresent(retrieveReturn);
-			expect(retrieveError).to.be.null;
-			done();
+			retrieveReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(retrieveUrl, retrieveReturn, done);
 		});
 		
 		it("List Read", function(done)
 		{
-			resultList = apiRequestScript.callReadApiResponseArray(retrieveReturn);
+			resultList = retrieveReturn.body;
 			done();
 		});
 		
@@ -111,4 +94,7 @@ function handleStore()
 }
 
 
-exports.callTestNodeGetListApi = testNodeGetListApi;
+module.exports =
+{
+	callTestNodeGetListApi: testNodeGetListApi
+}

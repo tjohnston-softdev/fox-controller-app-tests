@@ -3,41 +3,30 @@
 ### ./test-parts/part-i-api_frontend/front-main.js
 
 **Changes**
-* Uncommented 'cAddDevicesFile' requirement.
-* Uncommented 'callAddDevices'
-* Commented out 'callGetList'
+* Uncommented 'cGetListFile' requirement.
+* Uncommented 'callGetList'
+* Commented out 'callCheckList'
 
 ---
 
-### ./test-parts/part-i-api_frontend/parts/b-add_all_devices.js
+### ./test-parts/part-i-api_frontend/parts/c-get_device_list.js
 
 **General**
 * Removed module requirements:
 	* request
 	* sinon
+	* commonPaths.commonObjects
 * Added 'commonPaths.httpRequestsFile' requirement.
 * Replaced `exports` with `module.exports`
 
 \
-**addModelsLoop**
-* Renamed variables:
-	* 'supportedModelIndex' to 'modelIndex'
-	* 'supportedModelElement' to 'currentModel'
-	* 'supportedModelDesc to 'currentDesc'
-* Loop variables are declared as their intended type.
-* Converted the `while` loop to a `for` loop.
-
-\
-**addCurrentSupportedModel**
-* Renamed 'dModel' parameter to 'baseModel'
-* Removed variables:
-	* addOptions
-	* addError
-* Renamed variables:
-	* 'addObject' to 'preparedModel'
-	* 'addID' to 'newObjectID'
-* addReturn
-	* Assigned during "Add Request Sent"
+**handleRetrieve**
+* Removed the 'retrieveError' variable.
+* retrieveReturn
+	* Assigned during "List Request Sent"
 	* Assigned with 'httpRequests.defineOutput'
-* Replaced 'reqModule' with 'httpRequests.postSuccessful'
-* Removed the "Add Request Successful" test.
+* Replaced 'reqModule' with 'httpRequests.getSuccessful'
+* Removed the "List Request Successful" test.
+* Removed 'callReadApiResponseArray'
+	* 'retrieveReturn.body' is used directly.
+	* Assigns 'resultList' variable.
