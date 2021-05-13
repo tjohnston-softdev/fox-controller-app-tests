@@ -1,19 +1,16 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 const rioCommon = require(commonPaths.rioCommonFile);
 
 const deviceCommon = require(commonPaths.deviceCommonFile);
 const testCacheFile = require("../sub-parts/test-device-cache");
 const textCommon = require("../sub-parts/common-text");
+
 
 function testNodeCheckListApi()
 {
@@ -68,24 +65,25 @@ function handleCheckDevicesLoop()
 	var dbDeviceList = retrieveListFromCache();
 	var cacheCount = retrieveCountFromCache();
 	
-	var cacheDeviceIndex = 0;
-	var cacheDeviceElement = null;
-	var cacheDeviceDescription = null;
+	var loopIndex = 0;
+	var currentElement = null;
+	var currentDesc = null;
 	
 	describe("Cache Devices Added", function()
 	{
-		for (cacheDeviceIndex = 0; cacheDeviceIndex < cacheCount; cacheDeviceIndex = cacheDeviceIndex + 1)
+		for (loopIndex = 0; loopIndex < cacheCount; loopIndex = loopIndex + 1)
 		{
-			cacheDeviceElement = testCacheFile.getTestDevice(cacheDeviceIndex);
-			cacheDeviceDescription = textCommon.callWriteDeviceCacheHeader(cacheDeviceElement);
+			currentElement = testCacheFile.getTestDevice(loopIndex);
+			currentDesc = textCommon.callWriteDeviceCacheHeader(currentElement);
 			
-			it(cacheDeviceDescription, function(done)
+			it(currentDesc, function(done)
 			{
-				var cacheDeviceListed = rioCommon.callTestIdListed(dbDeviceList, cacheDeviceElement.key);
+				var cacheDeviceListed = rioCommon.callTestIdListed(dbDeviceList, currentElement.key);
 				expect(cacheDeviceListed).to.be.true;
 				done();
 			});
 		}
+		
 	});
 }
 
@@ -94,7 +92,6 @@ function handleCheckDevicesLoop()
 
 function retrieveListFromCache()
 {
-	
 	var res = null;
 	
 	try
@@ -108,6 +105,7 @@ function retrieveListFromCache()
 	
 	return res;
 }
+
 
 function retrieveCountFromCache()
 {
@@ -125,5 +123,7 @@ function retrieveCountFromCache()
 	return res;
 }
 
-
-exports.callTestNodeCheckListApi = testNodeCheckListApi;
+module.exports =
+{
+	callTestNodeCheckListApi: testNodeCheckListApi
+};
