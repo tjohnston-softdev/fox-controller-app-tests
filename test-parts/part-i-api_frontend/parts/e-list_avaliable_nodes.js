@@ -1,22 +1,22 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
 const testCacheFile = require("../sub-parts/test-device-cache");
 
+
+
 function testNodeListAvaliableApi()
 {
-	describe("List Avaliable Devices (nodes/manufacturer)", function()
+	describe("List Available Devices (nodes/manufacturer)", function()
 	{	
 		listDevicesLoop();
 	});
@@ -24,28 +24,22 @@ function testNodeListAvaliableApi()
 
 
 
-
-
-
 function listDevicesLoop()
 {
-	var currentManufacturerIndex = 0;
-	var currentManufacturerName = null;
-	
+	var manufacturerIndex = 0;
+	var currentName = "";
 	
 	describe("Supported Manufacturers", function()
 	{
 		
-		while (currentManufacturerIndex >= 0 && currentManufacturerIndex < apiDefinitionObject.length && apiDefinitionObject !== null)
+		for (manufacturerIndex = 0; manufacturerIndex < apiDefinitionObject.length; manufacturerIndex = manufacturerIndex + 1)
 		{
-			currentManufacturerName = apiDefinitionObject[currentManufacturerIndex];
+			currentName = apiDefinitionObject[manufacturerIndex];
 			
-			describe(currentManufacturerName, function()
+			describe(currentName, function()
 			{
-				testCurrentManufacturerApi(currentManufacturerName);
+				testCurrentManufacturerApi(currentName);
 			});
-			
-			currentManufacturerIndex = currentManufacturerIndex + 1;
 		}
 		
 	});
@@ -55,63 +49,51 @@ function listDevicesLoop()
 
 function testCurrentManufacturerApi(mName)
 {
-	var apiRequestUrl = null;
-	var apiRequestError = null;
-	var apiRequestReturn = null;
-	var apiRequestRead = null;
+	var searchURL = null;
+	var searchReturn = null;
+	var searchRead = null;
 	
 	it("Request Made", function(done)
 	{
-		apiRequestUrl = apiRequestScript.callWriteApiUrl(apiPaths.nodesApi, mName);
-				
-		reqModule(apiRequestUrl, function(aError, aResult)
-		{
-			apiRequestError = aError;
-			apiRequestReturn = aResult;
-			done();
-		});
-				
-	});
-	
-	it("Request Successful", function(done)
-	{
-		expect(apiRequestError).to.be.null;
-		commonFunctionsFile.testPresent(apiRequestReturn);
-		done();
+		searchURL = apiRequestScript.callWriteApiUrl(apiPaths.nodesApi, mName);
+		searchReturn = httpRequests.defineOutput();
+		httpRequests.getSuccessful(searchURL, searchReturn, done);
 	});
 	
 	it("Results Read", function(done)
 	{
-		apiRequestRead = apiRequestScript.callReadApiResponseArray(apiRequestReturn);
+		searchRead = searchReturn.body;
 		done();
 	});
 	
 	it("Correct Array Structure", function(done)
 	{
-		nodeCommonFile.callTestNodeObjectArrayStructure(apiRequestRead);
+		nodeCommonFile.callTestNodeObjectArrayStructure(searchRead);
 		done();
 	});
 	
 	
 	it("Correct Properties", function(done)
 	{
-		nodeCommonFile.callTestNodeObjectArrayProperties(apiRequestRead);
+		nodeCommonFile.callTestNodeObjectArrayProperties(searchRead);
 		done();
 	});
 	
 	it("Correct Contents", function(done)
 	{
-		nodeCommonFile.callTestNodeObjectArrayContents(apiRequestRead);
+		nodeCommonFile.callTestNodeObjectArrayContents(searchRead);
 		done();
 	});
 	
 	it("Nodes Stored Into Cache", function(done)
 	{
-		testCacheFile.storeNodeArray(mName, apiRequestRead);
+		testCacheFile.storeNodeArray(mName, searchRead);
 		done();
 	});
 	
 }
 
-
-exports.callTestNodeListAvaliableApi = testNodeListAvaliableApi;
+module.exports =
+{
+	callTestNodeListAvaliableApi: testNodeListAvaliableApi
+};
