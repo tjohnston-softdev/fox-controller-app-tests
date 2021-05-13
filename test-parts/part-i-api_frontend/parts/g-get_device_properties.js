@@ -1,15 +1,12 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
-const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
 const nodeTextFile = require("../sub-parts/common-text");
@@ -27,24 +24,22 @@ function testNodeDevicePropertiesApi()
 }
 
 
-
 function getPropertiesLoop()
 {
-	var currentManufacturerIndex = 0;
-	var currentManufacturerName = "";
-	var currentManufacturerArray = null;
+	var loopIndex = 0;
+	var currentName = "";
+	var currentArray = [];
 	
 	describe("Cached Manufacturers", function()
 	{
-		
-		for (currentManufacturerIndex = 0; currentManufacturerIndex < nodeManufacturerArray.length; currentManufacturerIndex = currentManufacturerIndex + 1)
+		for (loopIndex = 0; loopIndex < nodeManufacturerArray.length; loopIndex = loopIndex + 1)
 		{
-			currentManufacturerName = nodeManufacturerArray[currentManufacturerIndex];
-			currentManufacturerArray = testCacheFile.retrieveNodeManufacturer(currentManufacturerName);
+			currentName = nodeManufacturerArray[loopIndex];
+			currentArray = testCacheFile.retrieveNodeManufacturer(currentName);
 			
-			describe(currentManufacturerName, function()
+			describe(currentName, function()
 			{
-				loopCurrentManufacturerStatus(currentManufacturerName, currentManufacturerArray);
+				loopCurrentManufacturerStatus(currentName, currentArray);
 			});
 		}
 	});
@@ -54,105 +49,86 @@ function getPropertiesLoop()
 
 function loopCurrentManufacturerStatus(manufacturerName, deviceArray)
 {
-	var currentDeviceIndex = 0;
-	var currentDeviceObject = null;
-	var currentDeviceName = null;
-	var currentDeviceID = null;
-	var currentDeviceDesc = null;
+	var deviceIndex = 0;
+	var currentObject = {};
+	var currentName = "";
+	var currentID = -1;
+	var currentDesc = "";
 	
-	
-	while (currentDeviceIndex >= 0 && currentDeviceIndex < deviceArray.length && deviceArray !== null)
+	for (deviceIndex = 0; deviceIndex < deviceArray.length; deviceIndex = deviceIndex + 1)
 	{
-		currentDeviceObject = deviceArray[currentDeviceIndex];
-		currentDeviceName = currentDeviceObject.name;
-		currentDeviceID = currentDeviceObject.value;
-		currentDeviceDesc = nodeTextFile.callWriteNodeCacheHeader(currentDeviceObject.text, currentDeviceID);
+		currentObject = deviceArray[deviceIndex];
+		currentName = currentObject.name;
+		currentID = currentObject.value;
+		currentDesc = nodeTextFile.callWriteNodeCacheHeader(currentObject.text, currentID);
 		
-		describe(currentDeviceDesc, function()
+		describe(currentDesc, function()
 		{
-			testCurrentDeviceStatus(manufacturerName, currentDeviceName, currentDeviceID);
+			testCurrentDeviceStatus(manufacturerName, currentName, currentID);
 		});
-		
-		currentDeviceIndex = currentDeviceIndex + 1;
 	}
 	
 }
 
 
 
-function testCurrentDeviceStatus(mName, dName, id)
+function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 {
-	var urlPart = null;
-	
-	var dRequestUrl = null;
-	var dRequestError = null;
-	var dRequestReturn = null;
-	var dRequestRead = null;
+	var deviceURL = null;
+	var deviceReturn = null;
+	var deviceRead = null;
 	
 	it("Request Made", function(done)
 	{
-		dRequestUrl = apiRequestScript.callWriteApiUrl(apiPaths.nodesApi, mName);
-		dRequestUrl = dRequestUrl + "/" + id;
-				
-		reqModule(dRequestUrl, function(aError, aResult)
-		{
-			dRequestError = aError;
-			dRequestReturn = aResult;
-			done();
-		});
-				
-	});
-	
-	it("Request Successful", function(done)
-	{
-		expect(dRequestError).to.be.null;
-		commonFunctionsFile.testPresent(dRequestReturn);
-		done();
+		deviceURL = apiRequestScript.callWriteApiUrl(apiPaths.nodesApi, deviceManufacturer);
+		deviceURL = deviceURL + "/" + deviceID;
+		deviceReturn = httpRequests.defineOutput();
+		
+		httpRequests.getSuccessful(deviceURL, deviceReturn, done);
 	});
 	
 	it("Results Read", function(done)
 	{
-		dRequestRead = apiRequestScript.callReadApiResponseObject(dRequestReturn);
+		deviceRead = apiRequestScript.callReadApiResponseObject(deviceReturn);
 		done();
 	});
 	
 	it("Object Returned", function(done)
 	{
-		commonFunctionsFile.testPresent(dRequestRead);
-		expect(dRequestRead).to.be.an("object");
+		commonFunctionsFile.testPresent(deviceRead);
+		expect(deviceRead).to.be.an("object");
 		
 		done();
 	});
 	
 	it("Correct Properties", function(done)
 	{
-		commonFunctionsFile.testObjectPropertyDefinition(dRequestRead, 'name');
-		commonFunctionsFile.testObjectPropertyDefinition(dRequestRead, 'STATUS');
-		commonFunctionsFile.testObjectPropertyDefinition(dRequestRead, 'CONTROL');
+		commonFunctionsFile.testObjectPropertyDefinition(deviceRead, 'name');
+		commonFunctionsFile.testObjectPropertyDefinition(deviceRead, 'STATUS');
+		commonFunctionsFile.testObjectPropertyDefinition(deviceRead, 'CONTROL');
 		
 		done();
 	});
 	
 	it("Correct Node Name", function(done)
 	{
-		commonFunctionsFile.testObjectPropertyContent(dRequestRead, 'name', 'string');
-		commonFunctionsFile.testString(dRequestRead.name);
-		expect(dRequestRead.name).to.equal(dName);
+		commonFunctionsFile.testObjectPropertyContent(deviceRead, 'name', 'string');
+		expect(deviceRead.name).to.equal(deviceName);
 		
 		done();
 	});
 	
 	it("Correct Status Array", function(done)
 	{
-		commonFunctionsFile.testArrayPopulated(dRequestRead.STATUS);
-		validateStatusControlArray(dRequestRead.STATUS);
+		commonFunctionsFile.testArrayPopulated(deviceRead.STATUS);
+		validateStatusControlArray(deviceRead.STATUS);
 		done();
 	});
 	
 	it("Correct Control Array", function(done)
 	{
-		commonFunctionsFile.testArrayPopulated(dRequestRead.CONTROL);
-		validateStatusControlArray(dRequestRead.CONTROL);
+		commonFunctionsFile.testArrayPopulated(deviceRead.CONTROL);
+		validateStatusControlArray(deviceRead.CONTROL);
 		done();
 	});
 		
@@ -174,18 +150,21 @@ function validateStatusControlArray(scArray)
 
 function callNodeManufacturerPropertyList()
 {
-	var mplRes = null;
+	var listRes = null;
 	
 	try
 	{
-		mplRes = testCacheFile.readNodePropertyList();
+		listRes = testCacheFile.readNodePropertyList();
 	}
 	catch(e)
 	{
-		mplRes = null;
+		listRes = null;
 	}
 	
-	return mplRes;
+	return listRes;
 }
 
-exports.callTestNodeDevicePropertiesApi = testNodeDevicePropertiesApi;
+module.exports =
+{
+	callTestNodeDevicePropertiesApi: testNodeDevicePropertiesApi
+};
