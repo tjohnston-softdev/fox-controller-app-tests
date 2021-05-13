@@ -1,13 +1,24 @@
 # Changelog
 
-**./app/sub-common/files/test-device-common.js**
-* Removed requirements:
+**Test Status**
+* Since 'Part I' still uses the 'request' module, all testing is broken for now.
+
+---
+
+**./test/fox-test-main.js**
+* Uncommented 'frontendPart' requirement.
+
+---
+
+**./test-parts/part-i-api_frontend/front-main.js**
+* Removed module requirements:
+	* chai
+	* chai-things
 	* sinon
-	* commonPaths.foxRelative
-	* commonPaths.commonErrors
-	* commonPaths.commonObjects
-* testAddModifyReturnContents
-	* Removed 'testObjectPropertyContent' checks.
-* testFrontendDeleteSuccessful
-	* Removed 'testObjectPropertyContent' check on 'success'
+* Test files are now required globally instead of within functions.
+	* The path and the file variables are merged.
+	* eg. 'cListEmptyPath' is merged into 'cListEmptyFile'
+* Commented out:
+	* callAddDevices
+	* All requirements except for 'cListEmptyFile'
 * Replaced `exports` with `module.exports`
