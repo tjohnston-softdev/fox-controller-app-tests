@@ -1,18 +1,17 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 const modelFunctionsFile = require(commonPaths.getModelsFile);
 const modelArray = modelFunctionsFile.retrieveAllSupportedModels();
 
 const deviceCommon = require(commonPaths.deviceCommonFile);
+const httpRequests = require(commonPaths.httpRequestsFile);
 const testCacheFile = require("../sub-parts/test-device-cache");
 const textCommon = require("../sub-parts/common-text");
 
@@ -32,7 +31,6 @@ function addPrepare()
 {
 	describe("Add Preperation", function()
 	{
-		
 		it("Supported Models Retrieved", function(done)
 		{
 			commonFunctionsFile.testPresent(modelArray);
@@ -54,74 +52,53 @@ function addPrepare()
 }
 
 
-
-
-
-
 function addModelsLoop()
 {
-	var supportedModelIndex = 0;
-	var supportedModelElement = null;
-	var supportedModelDesc = null;
+	var modelIndex = 0;
+	var currentModel = {};
+	var currentDesc = "";
 	
 	
 	describe("Supported Devices", function()
 	{
-		while (supportedModelIndex >= 0 && supportedModelIndex < modelArray.length && modelArray !== null)
+		for (modelIndex = 0; modelIndex < modelArray.length; modelIndex = modelIndex + 1)
 		{
-			supportedModelElement = modelArray[supportedModelIndex];
-			supportedModelDesc = supportedModelElement.maker + " - " + supportedModelElement.modelType;
+			currentModel = modelArray[modelIndex];
+			currentDesc = currentModel.maker + " - " + currentModel.modelType;
 			
-			describe(supportedModelDesc, function()
+			describe(currentDesc, function()
 			{
-				addCurrentSupportedModel(supportedModelElement);
+				addCurrentSupportedModel(currentModel);
 			});
-			
-			supportedModelIndex = supportedModelIndex + 1;
 		}
 	});
 }
 
 
-function addCurrentSupportedModel(dModel)
+function addCurrentSupportedModel(baseModel)
 {
-	var addObject = null;
-	var addOptions = null;
-	var addError = null;
+	var preparedModel = null;
 	var addReturn = null;
 	var addRead = null;
-	var addID = null;
+	var newObjectID = null;
 	
 	it("Model Object Defined", function(done)
 	{
-		addObject = commonFunctionsFile.cloneObject(commonJsonObjectsFile.testDevice);
+		preparedModel = commonFunctionsFile.cloneObject(commonJsonObjectsFile.testDevice);
 		
-		addObject.maker = dModel.maker;
-		addObject.model = dModel.modelType;
-		addObject.name = textCommon.callWriteDeviceHeader(dModel.maker, dModel.modelType);
-		addObject.desc = textCommon.callWriteDeviceDescription(dModel.maker, dModel.modelType)
-		addObject.ipAddress = apiRequestScript.generateIpAddress();
+		preparedModel.maker = baseModel.maker;
+		preparedModel.model = baseModel.modelType;
+		preparedModel.name = textCommon.callWriteDeviceHeader(baseModel.maker, baseModel.modelType);
+		preparedModel.desc = textCommon.callWriteDeviceDescription(baseModel.maker, baseModel.modelType)
+		preparedModel.ipAddress = apiRequestScript.generateIpAddress();
 		
 		done();
 	});
 	
 	it("Add Request Sent", function(done)
 	{
-		addOptions = apiRequestScript.getRequestOptions(deviceCreateUrl, 'POST', addObject);
-		
-		reqModule.post(addOptions, function(callbackError, callbackResult)
-		{
-			addError = callbackError;
-			addReturn = callbackResult;
-			done();
-		});
-	});
-	
-	it("Add Request Successful", function(done)
-	{
-		commonFunctionsFile.testPresent(addReturn);
-		expect(addError).to.be.null;
-		done();
+		addReturn = httpRequests.defineOutput();
+		httpRequests.postSuccessful(deviceCreateUrl, preparedModel, addReturn, done);
 	});
 	
 	it("Add Results Read", function(done)
@@ -138,13 +115,13 @@ function addCurrentSupportedModel(dModel)
 		commonFunctionsFile.testPresent(addRead.id);
 		commonFunctionsFile.testString(addRead.id);
 		
-		addID = addRead.id;
+		newObjectID = addRead.id;
 		done();
 	});
 	
 	it("Added Device Stored Into Cache", function(done)
 	{
-		testCacheFile.storeTestDevice(dModel.maker, dModel.modelType, addObject.ipAddress, addID);
+		testCacheFile.storeTestDevice(baseModel.maker, baseModel.modelType, preparedModel.ipAddress, newObjectID);
 		done();
 	});
 	
@@ -167,4 +144,7 @@ function getDeviceCreateUrl()
 	return res;
 }
 
-exports.callTestNodeAddApis = testNodeAddApis;
+module.exports =
+{
+	callTestNodeAddApis: testNodeAddApis
+};
