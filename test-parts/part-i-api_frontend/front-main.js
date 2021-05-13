@@ -3,8 +3,8 @@ const cAddDevicesFile = require("./parts/b-add_all_devices");
 const cGetListFile = require("./parts/c-get_device_list");
 const cCheckListFile = require("./parts/d-check_device_list");
 const cListAvaliableFile = require("./parts/e-list_avaliable_nodes");
-/*
 const cCheckNodeArrayFile = require("./parts/f-check_node_array");
+/*
 const cGetDeviceStatusFile = require("./parts/g-get_device_properties");
 const cDeleteDevicesFile = require("./parts/h-delete_added_devices");
 const cClearCacheFile = require("./parts/i-clear_cache");
@@ -73,7 +73,7 @@ function callListAvaliable()
 		
 		after(function()
 		{
-			//callCheckNodeArray();
+			callCheckNodeArray();
 		});
 	});
 }
@@ -86,7 +86,7 @@ function callCheckNodeArray()
 		
 		after(function()
 		{
-			callGetDeviceStatus();
+			//callGetDeviceStatus();
 		});
 		
 	});

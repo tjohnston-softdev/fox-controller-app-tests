@@ -1,19 +1,16 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
-const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
 const testCacheFile = require("../sub-parts/test-device-cache");
 const nodeCacheObject = callNodeCache();
+
 
 function testNodeArrayCheckApi()
 {
@@ -49,31 +46,30 @@ function handleManufacturerProperties()
 {
 	describe("Manufacturer Storage", function()
 	{
-		var mList = null;
+		var manufacturersArray = null;
 		
 		it("Manufacturer Property List Retrieved From Cache", function(done)
 		{
-			mList = commonFunctionsFile.getObjectProperties(nodeCacheObject);
+			manufacturersArray = commonFunctionsFile.getObjectProperties(nodeCacheObject);
 			
-			commonFunctionsFile.testPresent(mList);
-			commonFunctionsFile.testArrayPopulated(mList);
+			commonFunctionsFile.testPresent(manufacturersArray);
+			commonFunctionsFile.testArrayPopulated(manufacturersArray);
 			
 			done();
 		});
 		
 		it("Manufacturer Property List Valid", function(done)
 		{
-			commonFunctionsFile.testAllElements(mList, 'string');
-			nodeCommonFile.callTestNodeManufacturerArray(mList);
+			commonFunctionsFile.testAllElements(manufacturersArray, 'string');
+			nodeCommonFile.callTestNodeManufacturerArray(manufacturersArray);
 			done();
 		});
 		
 		it("All Manufacturers Stored", function(done)
 		{
-			expect(mList).to.deep.equal(apiDefinitionObject);
+			expect(manufacturersArray).to.deep.equal(apiDefinitionObject);
 			done();
 		});
-		
 		
 	});
 }
@@ -82,17 +78,17 @@ function handleDeviceCount()
 {
 	describe("Total Nodes Stored", function()
 	{
-		var nCount = null;
+		var retrievedCount = -1;
 		
 		it("Nodes Counted", function(done)
 		{
-			nCount = nodeCommonFile.callTestNodeStoreCount(nodeCacheObject);
+			retrievedCount = nodeCommonFile.callTestNodeStoreCount(nodeCacheObject);
 			done();
 		});
 		
 		it("Nodes Present", function(done)
 		{
-			expect(nCount).to.be.at.least(1);
+			expect(retrievedCount).to.be.at.least(1);
 			done();
 		});
 		
@@ -116,4 +112,7 @@ function callNodeCache()
 	return res;
 }
 
-exports.callTestNodeArrayCheckApi = testNodeArrayCheckApi;
+module.exports =
+{
+	callTestNodeArrayCheckApi: testNodeArrayCheckApi
+};
