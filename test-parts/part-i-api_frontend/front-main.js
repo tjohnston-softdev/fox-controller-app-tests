@@ -19,7 +19,7 @@ function coordinateFrontendTesting()
 		
 		after(function()
 		{
-			callAddDevices();
+			//callAddDevices();
 		});
 	});
 }

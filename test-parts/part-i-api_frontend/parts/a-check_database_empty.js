@@ -1,19 +1,16 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
+const httpRequests = require(commonPaths.httpRequestsFile);
+const rioCommon = require(commonPaths.rioCommonFile);
 const modelFunctionsFile = require(commonPaths.getModelsFile);
 const modelArray = modelFunctionsFile.retrieveAllSupportedModels();
 
-const deviceCommon = require(commonPaths.deviceCommonFile);
-const rioCommon = require(commonPaths.rioCommonFile);
 var retrievedDatabaseList = null;
 
 function testNodeDatabaseEmptyApi()
@@ -30,32 +27,18 @@ function handleDatabaseRetrieve()
 	describe("Retrieve Device List From Database", function()
 	{
 		var listUrl = null;
-		var listError = null;
 		var listReturn = null;
 		
 		it("Request Sent", function(done)
 		{
 			listUrl = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
-			
-			reqModule(listUrl, function(cError, cResult)
-			{
-				listReturn = cResult;
-				listError = cError;
-				done();
-			});
-			
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(listError).to.be.null;
-			commonFunctionsFile.testPresent(listReturn);
-			done();
+			listReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(listUrl, listReturn, done);
 		});
 		
 		it("Results Read", function(done)
 		{
-			retrievedDatabaseList = apiRequestScript.callReadApiResponseArray(listReturn);
+			retrievedDatabaseList = listReturn.body;
 			done();
 		});
 		
@@ -96,4 +79,8 @@ function handleDatabaseCheck()
 	});
 }
 
-exports.callTestNodeDatabaseEmptyApi = testNodeDatabaseEmptyApi;
+
+module.exports =
+{
+	callTestNodeDatabaseEmptyApi: testNodeDatabaseEmptyApi
+};

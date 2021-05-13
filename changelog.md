@@ -1,24 +1,32 @@
 # Changelog
 
-**Test Status**
-* Since 'Part I' still uses the 'request' module, all testing is broken for now.
+### Test Status
+
+**Part I - Frontend Testing**
+* 'Check Device List Empty' tests pass.
+* Module requirements are no longer broken.
 
 ---
 
-**./test/fox-test-main.js**
-* Uncommented 'frontendPart' requirement.
+### ./test-parts/part-i-api_frontend/parts/a-check_database_empty.js
 
----
-
-**./test-parts/part-i-api_frontend/front-main.js**
+**General**
 * Removed module requirements:
-	* chai
-	* chai-things
+	* request
 	* sinon
-* Test files are now required globally instead of within functions.
-	* The path and the file variables are merged.
-	* eg. 'cListEmptyPath' is merged into 'cListEmptyFile'
-* Commented out:
-	* callAddDevices
-	* All requirements except for 'cListEmptyFile'
+	* commonPaths.commonObjects
+	* commonPaths.deviceCommonFile
+* Added 'commonPaths.httpRequestsFile' requirement.
 * Replaced `exports` with `module.exports`
+
+\
+**handleDatabaseRetrieve**
+* Removed the 'listError' variable.
+* listReturn
+	* Assigned during "Request Sent"
+	* Assigned with 'httpRequests.defineOutput'
+* Replaced 'reqModule' with 'httpRequests.getSuccessful'
+* Removed the "Request Successful" test.
+* Removed 'callReadApiResponseArray'
+	* 'listReturn.body' is used directly.
+	* Used to assign 'retrievedDatabaseList'
