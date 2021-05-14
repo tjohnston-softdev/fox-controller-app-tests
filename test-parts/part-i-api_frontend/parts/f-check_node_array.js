@@ -9,7 +9,7 @@ const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
 const testCacheFile = require("../sub-parts/test-device-cache");
-const nodeCacheObject = callNodeCache();
+var nodeCacheObject = null;
 
 
 function testNodeArrayCheckApi()
@@ -19,6 +19,7 @@ function testNodeArrayCheckApi()
 		handleStructure();
 		handleManufacturerProperties();
 		handleDeviceCount();
+		handleCacheDisposal();
 	});
 }
 
@@ -28,6 +29,7 @@ function handleStructure()
 	{
 		it("Node Array Retrieved From Cache", function(done)
 		{
+			nodeCacheObject = callNodeCache();
 			commonFunctionsFile.testPresent(nodeCacheObject);
 			done();
 		});
@@ -92,6 +94,19 @@ function handleDeviceCount()
 			done();
 		});
 		
+	});
+}
+
+
+function handleCacheDisposal()
+{
+	describe("Local Cache Variable", function()
+	{
+		it("Disposed", function(done)
+		{
+			nodeCacheObject = null;
+			done();
+		});
 	});
 }
 
