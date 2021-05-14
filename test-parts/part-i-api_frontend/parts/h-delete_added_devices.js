@@ -51,7 +51,6 @@ function deleteCurrentDevice(currentID)
 {
 	var deleteURL = null;
 	var deleteReturn = null;
-	var deleteOutcome = null;
 	
 	it("Request Made", function(done)
 	{
@@ -60,15 +59,9 @@ function deleteCurrentDevice(currentID)
 		httpRequests.deleteSuccessful(deleteURL, true, deleteReturn, done);
 	});
 	
-	it("Results Read", function(done)
-	{
-		deleteOutcome = apiRequestScript.callReadApiResponseObject(deleteReturn);
-		done();
-	});
-	
 	it("Device Successfully Deleted", function(done)
 	{
-		httpRequests.checkDeleteResult(deleteOutcome);
+		httpRequests.checkDeleteResult(deleteReturn);
 		done();
 	});
 	

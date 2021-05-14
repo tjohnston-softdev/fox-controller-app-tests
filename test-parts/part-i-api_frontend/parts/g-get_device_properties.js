@@ -11,7 +11,6 @@ const httpRequests = require(commonPaths.httpRequestsFile);
 const nodeCommonFile = require("../sub-parts/common-nodes");
 const nodeTextFile = require("../sub-parts/common-text");
 const testCacheFile = require("../sub-parts/test-device-cache");
-const nodeManufacturerArray = callNodeManufacturerPropertyList();
 
 
 
@@ -26,6 +25,7 @@ function testNodeDevicePropertiesApi()
 
 function getPropertiesLoop()
 {
+	var nodeManufacturerArray = callNodeManufacturerPropertyList();
 	var loopIndex = 0;
 	var currentName = "";
 	var currentArray = [];
