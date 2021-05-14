@@ -1,35 +1,42 @@
 const d = " - ";
 
-function writeDeviceHeader(dhManufacturer, dhModel)
+function writeDeviceHeader(vManufacturer, vModel)
 {
-	var res = dhManufacturer + d + dhModel;
+	var res = vManufacturer + d + vModel;
 	return res;
 }
 
-function writeDeviceCacheHeader(dCacheObject)
+function writeDeviceCacheHeader(cacheObj)
 {
-	var partArray = [dCacheObject.manufacturer, dCacheObject.model, dCacheObject.address, dCacheObject.key];
-	var res = partArray.join(d);
+	var res = [cacheObj.manufacturer, cacheObj.model, cacheObj.address, cacheObj.key].join(d);
 	return res;
 }
 
-function writeNodeCacheHeader(nCacheText, nCacheKey)
+function writeNodeCacheHeader(vText, vKey)
 {
-	var res = nCacheText + d + nCacheKey;
+	var res = vText + d + vKey;
 	return res;
 }
 
 
-function writeDeviceDescription(descManufacturer, descModel)
+function writeDeviceDescription(vManufacturer, vModel)
 {
-	var p1 = "Supported " + descModel + "device ";
-	var p2 = "manufactured by " + descManufacturer + " ";
+	var res = "";
 	
-	var res = p1 + p2;
+	res += "Supported ";
+	res += vModel
+	res += "device manufactured by ";
+	res += vManufacturer;
+	res += " ";
+	
 	return res;	
 }
 
-exports.callWriteDeviceHeader = writeDeviceHeader;
-exports.callWriteDeviceCacheHeader = writeDeviceCacheHeader;
-exports.callWriteNodeCacheHeader = writeNodeCacheHeader;
-exports.callWriteDeviceDescription = writeDeviceDescription;
+
+module.exports =
+{
+	callWriteDeviceHeader: writeDeviceHeader,
+	callWriteDeviceCacheHeader: writeDeviceCacheHeader,
+	callWriteNodeCacheHeader: writeNodeCacheHeader,
+	callWriteDeviceDescription: writeDeviceDescription
+};

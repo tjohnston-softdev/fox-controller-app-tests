@@ -1,13 +1,10 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const localValidFile = require(commonPaths.localValid);
 
 
@@ -18,6 +15,7 @@ function testNodeObjectArrayStructure(nodeObjArray)
 	expect(nodeObjArray).to.be.an("array");
 	commonFunctionsFile.testAllElements(nodeObjArray, 'object');
 }
+
 
 function testNodeObjectArrayProperties(nodeObjArray)
 {
@@ -51,46 +49,46 @@ function testNodeStorageObject(storageObject)
 
 function testNodeStoreCount(storageObject)
 {
-	var currentManufacturerArray = null;
-	var totalStoreCount = 0;
+	var currentArray = [];
+	var totalCount = 0;
 	
-	for (currentManufacturerProperty in storageObject)
+	for (currentManufacturer in storageObject)
 	{
-		currentManufacturerArray = storageObject[currentManufacturerProperty];
-		totalStoreCount = totalStoreCount + currentManufacturerArray.length;
+		currentArray = storageObject[currentManufacturer];
+		totalCount = totalCount + currentArray.length;
 	}
 	
-	return totalStoreCount;
+	return totalCount;
 }
 
 
 
 function testNodeManufacturerArray(nmArray)
 {
-	var manufacturerStringIndex = 0;
-	var manufacturerStringElement = null;
+	var stringIndex = 0;
+	var currentElement = null;
 	
-	for (manufacturerStringIndex = 0; manufacturerStringIndex < nmArray.length; manufacturerStringIndex = manufacturerStringIndex + 1)
+	for (stringIndex = 0; stringIndex < nmArray.length; stringIndex = stringIndex + 1)
 	{
-		manufacturerStringElement = nmArray[manufacturerStringIndex];
-		commonFunctionsFile.testString(manufacturerStringElement);
+		currentElement = nmArray[stringIndex];
+		commonFunctionsFile.testString(currentElement);
 	}
 }
 
 
-function testStatusControlStructure(sca)
+function testStatusControlStructure(structureObj)
 {
-	commonFunctionsFile.testPropertyDefinitions(sca, 'value');
-	commonFunctionsFile.testPropertyDefinitions(sca, 'text');
+	commonFunctionsFile.testPropertyDefinitions(structureObj, 'value');
+	commonFunctionsFile.testPropertyDefinitions(structureObj, 'text');
 	
-	commonFunctionsFile.testPropertyContents(sca, 'value', 'string');
-	commonFunctionsFile.testPropertyContents(sca, 'text', 'string');
+	commonFunctionsFile.testPropertyContents(structureObj, 'value', 'string');
+	commonFunctionsFile.testPropertyContents(structureObj, 'text', 'string');
 }
 
-function testStatusControlSyntax(sca)
+function testStatusControlSyntax(structureObj)
 {
-	var sIndex = 0;
-	var sElement = null;
+	var rioIndex = 0;
+	var currentElement = null;
 	
 	var currentPrefixValid = false;
 	var currentNameValid = false;
@@ -98,11 +96,11 @@ function testStatusControlSyntax(sca)
 	
 	var canContinue = true;
 	
-	while (sIndex >= 0 && sIndex < sca.length && canContinue === true)
+	while (rioIndex >= 0 && rioIndex < structureObj.length && canContinue === true)
 	{
-		sElement = sca[sIndex];
-		currentPrefixValid = localValidFile.validateRioPrefix(sElement.value);
-		currentNameValid = localValidFile.validateRioText(sElement.text);
+		currentElement = structureObj[rioIndex];
+		currentPrefixValid = localValidFile.validateRioPrefix(currentElement.value);
+		currentNameValid = localValidFile.validateRioText(currentElement.text);
 		currentElementValid = false;
 		
 		if (currentPrefixValid === true && currentNameValid === true)
@@ -115,17 +113,17 @@ function testStatusControlSyntax(sca)
 			canContinue = false;
 		}
 		
-		sIndex = sIndex + 1;
+		rioIndex = rioIndex + 1;
 	}
 	
 	expect(canContinue).to.be.true;
 }
 
 
-function testStatusControlIntegrity(sca)
+function testStatusControlIntegrity(structureObj)
 {
-	var sIndex = 0;
-	var sElement = null;
+	var rioIndex = 0;
+	var currentElement = null;
 	
 	var currentPrefixText = null;
 	var currentNameText = null;
@@ -134,11 +132,11 @@ function testStatusControlIntegrity(sca)
 	var currentValid = false;
 	var canContinue = true;
 	
-	while (sIndex >= 0 && sIndex < sca.length && canContinue === true)
+	while (rioIndex >= 0 && rioIndex < structureObj.length && canContinue === true)
 	{
-		sElement = sca[sIndex];
-		currentPrefixText = sElement.value.toLowerCase();
-		currentNameText = sElement.text.toLowerCase();
+		currentElement = structureObj[rioIndex];
+		currentPrefixText = currentElement.value.toLowerCase();
+		currentNameText = currentElement.text.toLowerCase();
 		expectedNameText = writeExpectedNodeName(currentPrefixText);
 		currentValid = false;
 		
@@ -152,63 +150,68 @@ function testStatusControlIntegrity(sca)
 			canContinue = false;
 		}
 		
-		sIndex = sIndex + 1;
+		rioIndex = rioIndex + 1;
 	}
 	
 	expect(canContinue).to.be.true;
 	
 }
 
-function writeExpectedNodeName(pFix)
+function writeExpectedNodeName(enteredPrefix)
 {
+	var firstCharacter = enteredPrefix.charAt(0);
+	var secondCharacter = enteredPrefix.charAt(1);
+	
 	var firstWord = "";
 	var secondWord = "";
 	var thirdWord = "";
 	
-	if (pFix[0] === "a")
+	var fullText = "";
+	
+	
+	if (firstCharacter === "a")
 	{
 		firstWord = "analogue ";
 	}
-	else if (pFix[0] === "d")
+	else if (firstCharacter === "d")
 	{
 		firstWord = "digital ";
 	}
-	else if (pFix[0] === "r")
+	else if (firstCharacter === "r")
 	{
 		firstWord = "relay ";
 	}
 	
-	if (pFix[1] === "i")
+	if (secondCharacter === "i")
 	{
 		secondWord = "input ";
 	}
-	else if (pFix[1] === "o")
+	else if (secondCharacter === "o")
 	{
 		secondWord = "output ";
 	}
 	
-	if (pFix.length > 3)
+	if (enteredPrefix.length > 3)
 	{
-		thirdWord = pFix.substring(3);
+		thirdWord = enteredPrefix.substring(3);
 	}
 	
-	var fullText = firstWord + secondWord + thirdWord;
+	fullText = firstWord + secondWord + thirdWord;
 	fullText = fullText.trim();
 	
 	return fullText;
 }
 
 
-
-
-
-
-exports.callTestNodeObjectArrayStructure = testNodeObjectArrayStructure;
-exports.callTestNodeObjectArrayProperties = testNodeObjectArrayProperties;
-exports.callTestNodeObjectArrayContents = testNodeObjectArrayContents;
-exports.callTestNodeStorageObject = testNodeStorageObject;
-exports.callTestNodeStoreCount = testNodeStoreCount;
-exports.callTestNodeManufacturerArray = testNodeManufacturerArray;
-exports.callTestStatusControlStructure = testStatusControlStructure;
-exports.callTestStatusControlSyntax = testStatusControlSyntax;
-exports.callTestStatusControlIntegrity = testStatusControlIntegrity;
+module.exports =
+{
+	callTestNodeObjectArrayStructure: testNodeObjectArrayStructure,
+	callTestNodeObjectArrayProperties: testNodeObjectArrayProperties,
+	callTestNodeObjectArrayContents: testNodeObjectArrayContents,
+	callTestNodeStorageObject: testNodeStorageObject,
+	callTestNodeStoreCount: testNodeStoreCount,
+	callTestNodeManufacturerArray: testNodeManufacturerArray,
+	callTestStatusControlStructure: testStatusControlStructure,
+	callTestStatusControlSyntax: testStatusControlSyntax,
+	callTestStatusControlIntegrity: testStatusControlIntegrity
+};

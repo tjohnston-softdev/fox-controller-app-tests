@@ -2,15 +2,15 @@ var addedDeviceCache = [];
 var listCache = [];
 var nodeCache = {};
 
-function addDevice(tdManufacturer, tdModel, tdAddress, tdKey)
+
+function addDevice(vManufacturer, vModel, vAddr, vKey)
 {
-	var cacheItem =
-	{
-		"manufacturer": tdManufacturer, 
-		"model": tdModel, 
-		"address": tdAddress,
-		"key": tdKey
-	};
+	var cacheItem = {};
+	
+	cacheItem["manufacturer"] = vManufacturer;
+	cacheItem["model"] = vModel;
+	cacheItem["address"] = vAddr;
+	cacheItem["key"] = vKey;
 	
 	addedDeviceCache.push(cacheItem);
 }
@@ -29,36 +29,34 @@ function getDevice(itemIndex)
 
 function countDevices()
 {
-	var res = addedDeviceCache.length;
-	return res;
+	return addedDeviceCache.length;
 }
 
 
-function setList(v)
+function setList(newValue)
 {
-	listCache = v;
+	listCache = newValue;
 }
 
 function getList()
 {
-	var res = listCache;
-	return res;
+	return listCache;
 }
 
 
-function addNode(nManufacturerName, nDeviceArray)
+function addNode(devManufacturer, devArr)
 {
-	nodeCache[nManufacturerName] = nDeviceArray;
+	nodeCache[devManufacturer] = devArr;
 }
 
-function getNodeManufacturer(mProperty)
+function getNodeManufacturer(mProp)
 {
-	var mType = typeof nodeCache[mProperty];
+	var elementValue = nodeCache[mProp];
 	var res = null;
 	
-	if (nodeCache[mProperty] !== null && mType !== "undefined")
+	if (elementValue !== undefined && elementValue !== null)
 	{
-		res = nodeCache[mProperty];
+		res = elementValue;
 	}
 	
 	return res;
@@ -68,9 +66,9 @@ function getNodePropertyList()
 {
 	var res = [];
 	
-	for (nProp in nodeCache)
+	for (currentProp in nodeCache)
 	{
-		res.push(nProp);
+		res.push(currentProp);
 	}
 	
 	return res;
@@ -81,18 +79,25 @@ function getNodeArrayStructure()
 {
 	var cacheString = JSON.stringify(nodeCache);
 	var structureObject = JSON.parse(cacheString);
+	
+	var currentProp = "";
+	var currentOuter = null;
 	var currentIndex = 0;
+	var currentInner = null;
 	var structureText = "Example Text";
 	
 	for (currentProp in structureObject)
 	{
+		currentOuter = structureObject[currentProp];
 		currentIndex = 0;
+		currentInner = null;
 		
-		for (currentIndex = 0; currentIndex < structureObject[currentProp].length; currentIndex = currentIndex + 1)
+		for (currentIndex = 0; currentIndex < currentOuter.length; currentIndex = currentIndex + 1)
 		{
-			structureObject[currentProp][currentIndex].value = structureText;
-			structureObject[currentProp][currentIndex].text = structureText;
-			structureObject[currentProp][currentIndex].name = structureText;
+			currentInner = currentOuter[currentIndex];
+			currentInner.value = structureText;
+			currentInner.text = structureText;
+			currentInner.name = structureText;
 		}
 	}
 	
@@ -119,6 +124,7 @@ function clearCache()
 	
 	return res;
 }
+
 
 module.exports =
 {
