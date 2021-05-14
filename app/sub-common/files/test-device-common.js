@@ -1,6 +1,5 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
@@ -60,15 +59,6 @@ function testFrontendAddIdValid(returnedObjectID)
 }
 
 
-function testFrontendDeleteSuccessful(returnedObject)
-{
-	commonFunctionsFile.testPresent(returnedObject);
-	expect(returnedObject).to.be.an("object");
-	commonFunctionsFile.testObjectPropertyDefinition(returnedObject, 'success');
-	expect(returnedObject.success).to.be.true;
-}
-
-
 
 module.exports =
 {
@@ -77,6 +67,5 @@ module.exports =
 	callTestAddModifyReturnProperties: testAddModifyReturnProperties,
 	callTestAddModifyReturnContents: testAddModifyReturnContents,
 	callTestFrontendAddSuccessful: testFrontendAddSuccessful,
-	callTestFrontendAddIdValid: testFrontendAddIdValid,
-	callTestFrontendDeleteSuccessful: testFrontendDeleteSuccessful
+	callTestFrontendAddIdValid: testFrontendAddIdValid
 };

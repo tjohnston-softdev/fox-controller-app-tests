@@ -1,15 +1,13 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 const rioCommon = require(commonPaths.rioCommonFile);
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 const deviceCommon = require(commonPaths.deviceCommonFile);
 const testCacheFile = require("../sub-parts/test-device-cache");
@@ -26,22 +24,22 @@ function testNodeDeleteAddedDevicesApi()
 
 function deleteDevicesLoop()
 {
-	var addedDeviceCount = getAddedDeviceCountFromCache();
+	var deviceCount = getAddedDeviceCountFromCache();
 	
-	var addedDeviceIndex = 0;
-	var currentAddedDevice = null;
-	var currentAddedDescription = "";
+	var deviceIndex = 0;
+	var currentDevice = null;
+	var currentDesc = "";
 	
 	describe("Cached Devices", function()
 	{
-		for (addedDeviceIndex = 0; addedDeviceIndex < addedDeviceCount; addedDeviceIndex = addedDeviceIndex + 1)
+		for (deviceIndex = 0; deviceIndex < deviceCount; deviceIndex = deviceIndex + 1)
 		{
-			currentAddedDevice = testCacheFile.getTestDevice(addedDeviceIndex);
-			currentAddedDescription = textCommon.callWriteDeviceCacheHeader(currentAddedDevice);
+			currentDevice = testCacheFile.getTestDevice(deviceIndex);
+			currentDesc = textCommon.callWriteDeviceCacheHeader(currentDevice);
 			
-			describe(currentAddedDescription, function()
+			describe(currentDesc, function()
 			{
-				deleteCurrentDevice(currentAddedDevice.key);
+				deleteCurrentDevice(currentDevice.key);
 			});
 			
 		}
@@ -51,41 +49,26 @@ function deleteDevicesLoop()
 
 function deleteCurrentDevice(currentID)
 {
-	var deviceDeleteUrl = null;
-	var deviceDeleteOptions = null;
-	var deviceDeleteError = null;
-	var deviceDeleteReturn = null;
-	var deviceDeleteRead = null;
+	var deleteURL = null;
+	var deleteReturn = null;
+	var deleteOutcome = null;
 	
 	it("Request Made", function(done)
 	{
-		deviceDeleteUrl = deviceCommon.callGetRudUrl(currentID);
-		deviceDeleteOptions = apiRequestScript.getDeleteOptions(deviceDeleteUrl, true);
-		
-		reqModule.delete(deviceDeleteOptions, function(delCallbackError, delCallbackResult)
-		{
-			deviceDeleteError = delCallbackError;
-			deviceDeleteReturn = delCallbackResult;
-			done();
-		});
-	});
-	
-	it("Request Successful", function(done)
-	{
-		expect(deviceDeleteError).to.be.null;
-		commonFunctionsFile.testPresent(deviceDeleteReturn);
-		done();
+		deleteURL = deviceCommon.callGetRudUrl(currentID);
+		deleteReturn = httpRequests.defineOutput();
+		httpRequests.deleteSuccessful(deleteURL, true, deleteReturn, done);
 	});
 	
 	it("Results Read", function(done)
 	{
-		deviceDeleteRead = apiRequestScript.callReadApiResponseObject(deviceDeleteReturn);
+		deleteOutcome = apiRequestScript.callReadApiResponseObject(deleteReturn);
 		done();
 	});
 	
 	it("Device Successfully Deleted", function(done)
 	{
-		deviceCommon.callTestFrontendDeleteSuccessful(deviceDeleteRead);
+		httpRequests.checkDeleteResult(deleteOutcome);
 		done();
 	});
 	
@@ -107,4 +90,8 @@ function getAddedDeviceCountFromCache()
 	return addRes;
 }
 
-exports.callTestNodeDeleteAddedDevicesApi = testNodeDeleteAddedDevicesApi;
+
+module.exports =
+{
+	callTestNodeDeleteAddedDevicesApi: testNodeDeleteAddedDevicesApi
+};
