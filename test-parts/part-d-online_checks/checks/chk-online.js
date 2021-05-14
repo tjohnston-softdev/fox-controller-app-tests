@@ -1,6 +1,6 @@
 const commonPaths = require("../../../app/paths/files/app-paths");
 const requestFile = require(commonPaths.requestApi);
-const needle = require("needle");
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 function testOnline()
 {
@@ -24,38 +24,34 @@ function coordinateOnlineCheck(onlineFlag)
 {
 	var reqError = null;
 	var reqReturn = null;
-	var checkReturn = null;
+	var retrievedStatus = null;
 	var resultDesc = writeCheckDescription(onlineFlag);
 	
 	it("Application Request", function(done)
 	{
-		needle.get(requestFile.hostUrl, {timeout: 1750}, function(rError, rReturn)
-		{
-			reqError = rError;
-			reqReturn = rReturn;
-			done();
-		});
+		reqReturn = httpRequests.defineOutput();
+		httpRequests.sendPing(reqReturn, done);
 	});
 	
 	it("Status Check", function(done)
 	{
-		checkReturn = requestFile.getApplicationOnlineResult(reqReturn);
+		retrievedStatus = requestFile.getApplicationOnlineResult(reqReturn);
 		done();
 	});
 	
 	it(resultDesc, function(done)
 	{
-		validateOverallResult(onlineFlag, checkReturn);
+		validateOverallResult(onlineFlag, retrievedStatus);
 		done();
 	});
 	
 }
 
-function writeCheckDescription(desiredStatus)
+function writeCheckDescription(onReq)
 {
 	var descRes = "";
 	
-	if (desiredStatus === true)
+	if (onReq === true)
 	{
 		descRes = "Currently Online";
 	}
@@ -67,17 +63,17 @@ function writeCheckDescription(desiredStatus)
 	return descRes;
 }
 
-function validateOverallResult(expectStatus, resultStatus)
+function validateOverallResult(expectStatus, actualStatus)
 {
 	var resultSuccessful = false;
 	
 	if (expectStatus === true)
 	{
-		resultSuccessful = runOnlineCheck(resultStatus);
+		resultSuccessful = runOnlineCheck(actualStatus);
 	}
 	else
 	{
-		resultSuccessful = runOfflineCheck(resultStatus);
+		resultSuccessful = runOfflineCheck(actualStatus);
 	}
 	
 }

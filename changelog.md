@@ -1,16 +1,22 @@
 # Changelog
 
-**./test-parts/part-j-restart_controller/sub-modes/offline-check-delay.js**
-* Wrote function 'delayOfflineTest'
-	* Common timeout function.
-	* Set to one second. (1000ms)
-	* Directly exported by file.
+**./test-parts/part-d-online_check/checks/chk-online.js**
+* Requirements:
+	* Removed 'needle'
+	* Added 'commonPaths.httpRequestsFile'
+* writeCheckDescription
+	* Renamed 'desiredStatus' parameter to 'onReq'
+* validateOverallResult
+	* Renamed 'resultStatus' parameter to 'actualStatus'
 
 ---
 
-**./test-parts/part-j-restart_controller/modes/**
-* Merged offline delay code.
-* Affected files:
-	* mode-restart.js
-	* mode-reboot.js
-	* mode-factory_reset.js
+**./test-parts/part-d-online_check/checks/chk-online.js - coordinateOnlineCheck**
+* Removed the 'reqError' variable.
+* reqReturn
+	* Assigned during "Application Request"
+	* Assigned with httpRequests.defineOutput
+* Replaced HTTP request code.
+	* Before: 'needle.get'
+	* After: 'httpRequests.sendPing'
+* Renamed the 'checkReturn' variable to 'retrievedStatus'
