@@ -11,7 +11,7 @@ const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequestsFile);
 
 const testReturnFile = require("../sub-modes/test-restart-return");
-const delayLength = require("../sub-modes/offline-check-delay");
+const offlineDelay = require("../sub-modes/offline-check-delay");
 
 var currentPlatform = os.platform();
 var factoryReturn = null;
@@ -70,82 +70,52 @@ function handleFactoryDelay()
 	{
 		it("Ten", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Nine", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Eight", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Seven", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Six", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Five", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Four", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Three", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Two", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("One", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 	});

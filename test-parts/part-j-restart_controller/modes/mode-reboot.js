@@ -9,7 +9,7 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
 
 const httpRequests = require(commonPaths.httpRequestsFile);
-const delayLength = require("../sub-modes/offline-check-delay");
+const offlineDelay = require("../sub-modes/offline-check-delay");
 const testReturnFile = require("../sub-modes/test-restart-return");
 
 var currentPlatform = osModule.platform();
@@ -78,28 +78,18 @@ function handleFoxWait()
 	{
 		it("Three", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("Two", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
 		
 		it("One", function(done)
 		{
-			setTimeout(function()
-			{
-				done();
-			}, delayLength)
+			offlineDelay(done);
 		});
-		
 		
 	});
 }
