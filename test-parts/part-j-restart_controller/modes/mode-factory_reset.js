@@ -1,21 +1,21 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
-const osModule = require('os');
+const os = require('os');
+const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
+const httpRequests = require(commonPaths.httpRequestsFile);
 
 const testReturnFile = require("../sub-modes/test-restart-return");
-const delayFile = require("../sub-modes/offline-check-delay");
+const delayLength = require("../sub-modes/offline-check-delay");
 
-var currentPlatform = osModule.platform();
-var factoryResetRequestReturn = null;
-var factoryResetRequestError = null;
+var currentPlatform = os.platform();
+var factoryReturn = null;
+var factoryError = null;
 
 
 function testFactoryReset()
@@ -49,10 +49,10 @@ function handleFactoryReset()
 		{
 			factoryResetUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "factory-reset");
 			
-			reqModule.post(factoryResetUrl, function(aError, aResult)
+			needle.post(factoryResetUrl, null, {json: true}, function(aError, aResult)
 			{
-				factoryResetRequestError = aError;
-				factoryResetRequestReturn = aResult;
+				factoryError = aError;
+				factoryReturn = aResult;
 			});
 			
 			done();
@@ -68,84 +68,84 @@ function handleFactoryDelay()
 {
 	describe("Factory Reset Delay", function()
 	{
-		it("First", function(done)
+		it("Ten", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Second", function(done)
+		it("Nine", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Third", function(done)
+		it("Eight", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Fourth", function(done)
+		it("Seven", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Fifth", function(done)
+		it("Six", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Sixth", function(done)
+		it("Five", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Seventh", function(done)
+		it("Four", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Eighth", function(done)
+		it("Three", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Ninth", function(done)
+		it("Two", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Tenth", function(done)
+		it("One", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
 	});
@@ -160,14 +160,14 @@ function handleFactoryResult()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testPresent(factoryResetRequestReturn);
-			expect(factoryResetRequestError).to.be.null;
+			commonFunctionsFile.testPresent(factoryReturn);
+			expect(factoryError).to.be.null;
 			done();
 		});
 		
 		it("Results Read", function(done)
 		{
-			factoryResetRead = apiRequestScript.callReadApiResponseObject(factoryResetRequestReturn);
+			factoryResetRead = apiRequestScript.callReadApiResponseObject(factoryReturn);
 			done();
 		});
 		
@@ -179,8 +179,8 @@ function handleFactoryResult()
 		
 		it("Reply Disposed", function(done)
 		{
-			factoryResetRequestError = null;
-			factoryResetRequestReturn = null;
+			factoryError = null;
+			factoryReturn = null;
 			done();
 		});
 		
@@ -197,12 +197,9 @@ function handleFactoryOfflineCheck()
 		var factoryOfflineReturn = null;
 		
 		it("Offline Check Sent", function(done)
-		{
-			reqModule(apiRequestScript.hostUrl, function(chkError, chkReturn)
-			{
-				factoryOfflineReturn = chkReturn;
-				done();
-			});
+		{	
+			factoryOfflineReturn = httpRequests.defineOutput();
+			httpRequests.sendPing(factoryOfflineReturn, done);
 		});
 		
 		it("Controller Reset", function(done)
@@ -227,4 +224,7 @@ function handleFactoryPlaceholder()
 	});
 }
 
-exports.callTestFactoryReset = testFactoryReset;
+module.exports =
+{
+	callTestFactoryReset: testFactoryReset
+};

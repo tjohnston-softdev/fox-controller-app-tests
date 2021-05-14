@@ -10,7 +10,7 @@ const apiRequestScript = require(commonPaths.requestApi);
 
 function defineOutputObject()
 {
-	var defineRes = {"body": null};
+	var defineRes = {"body": null, "statusCode": null};
 	return defineRes;
 }
 
@@ -21,7 +21,10 @@ function requestGetSuccessful(endpointURL, outputObject, reqDone)
 	{
 		handleCallbackArguments(requestErr, requestRes);
 		apiRequestScript.callValidateApiResponse(requestRes);
+		
 		outputObject.body = requestRes.body;
+		outputObject.statusCode = requestRes.statusCode;
+		
 		reqDone();
 	});
 }
@@ -33,7 +36,10 @@ function requestPostSuccessful(endpointURL, postBody, outputObject, reqDone)
 	{
 		handleCallbackArguments(requestErr, requestRes);
 		apiRequestScript.callValidateApiResponse(requestRes);
+		
 		outputObject.body = requestRes.body;
+		outputObject.statusCode = requestRes.statusCode;
+		
 		reqDone();
 	});
 }
@@ -45,7 +51,10 @@ function requestPutSuccessful(endpointURL, putBody, outputObject, reqDone)
 	{
 		handleCallbackArguments(requestErr, requestRes);
 		apiRequestScript.callValidateApiResponse(requestRes);
+		
 		outputObject.body = requestRes.body;
+		outputObject.statusCode = requestRes.statusCode;
+		
 		reqDone();
 	});
 }
@@ -57,7 +66,10 @@ function requestDeleteSuccessful(endpointURL, deletePermStatus, outputObject, re
 	{
 		handleCallbackArguments(requestErr, requestRes);
 		apiRequestScript.callValidateApiResponse(requestRes);
+		
 		outputObject.body = requestRes.body;
+		outputObject.statusCode = requestRes.statusCode;
+		
 		reqDone();
 	});
 }
@@ -114,6 +126,21 @@ function requestStatusInvalid(endpointURL, statusEntry, reqDone)
 	{
 		handleCallbackArguments(requestErr, requestRes);
 		handleInvalidStatus(requestRes, statusEntry);
+		reqDone();
+	});
+}
+
+
+function sendApplicationPing(outputObject, reqDone)
+{	
+	needle.get(apiRequestScript.hostUrl, {timeout: 1750}, function(pingErr, pingRes)
+	{
+		if (pingRes !== undefined && pingRes !== null)
+		{
+			outputObject.body = pingRes.body;
+			outputObject.statusCode = pingRes.statusCode;
+		}
+		
 		reqDone();
 	});
 }
@@ -213,5 +240,6 @@ module.exports =
 	putInvalid: requestPutInvalid,
 	deleteInvalid: requestDeleteInvalid,
 	statusInvalid: requestStatusInvalid,
+	sendPing: sendApplicationPing,
 	checkDeleteResult: handleInvalidDelete
 };

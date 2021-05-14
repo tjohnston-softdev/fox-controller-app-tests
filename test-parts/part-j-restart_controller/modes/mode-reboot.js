@@ -1,17 +1,16 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 const osModule = require('os');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
 
+const httpRequests = require(commonPaths.httpRequestsFile);
+const delayLength = require("../sub-modes/offline-check-delay");
 const testReturnFile = require("../sub-modes/test-restart-return");
-const delayFile = require("../sub-modes/offline-check-delay");
 
 var currentPlatform = osModule.platform();
 
@@ -43,7 +42,6 @@ function handleFoxRestart()
 {
 	var foxRestartUrl = null;
 	var foxRestartReturn = null;
-	var foxRestartError = null;
 	var foxRestartRead = null;
 	
 	
@@ -53,20 +51,8 @@ function handleFoxRestart()
 		it("Restart Request Made", function(done)
 		{
 			foxRestartUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "restart/fox");
-			
-			reqModule.post(foxRestartUrl, function(aError, aResult)
-			{
-				foxRestartError = aError;
-				foxRestartReturn = aResult;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(foxRestartError).to.be.null;
-			commonFunctionsFile.testPresent(foxRestartReturn);
-			done();
+			foxRestartReturn = httpRequests.defineOutput();
+			httpRequests.postSuccessful(foxRestartUrl, null, foxRestartReturn, done);
 		});
 		
 		it("Results Read", function(done)
@@ -88,31 +74,30 @@ function handleFoxRestart()
 
 function handleFoxWait()
 {
-	
 	describe("Restart Delay", function()
 	{
-		it("First", function(done)
+		it("Three", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Second", function(done)
+		it("Two", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Third", function(done)
+		it("One", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
 		
@@ -130,11 +115,8 @@ function handleFoxOfflineCheck()
 		
 		it("Offline Check Sent", function(done)
 		{
-			reqModule(apiRequestScript.hostUrl, function(chkError, chkReturn)
-			{
-				foxOfflineReturn = chkReturn;
-				done();
-			});
+			foxOfflineReturn = httpRequests.defineOutput();
+			httpRequests.sendPing(foxOfflineReturn, done);
 		});
 		
 		it("Controller Offline", function(done)
@@ -161,4 +143,8 @@ function handleFoxOfflinePlaceholder()
 	});
 }
 
-exports.callTestFoxRestart = testFoxRestart;
+
+module.exports =
+{
+	callTestFoxRestart: testFoxRestart
+};

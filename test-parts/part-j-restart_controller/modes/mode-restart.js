@@ -1,16 +1,14 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
-
+const httpRequests = require(commonPaths.httpRequestsFile);
+const delayLength = require("../sub-modes/offline-check-delay");
 const testReturnFile = require("../sub-modes/test-restart-return");
-const delayFile = require("../sub-modes/offline-check-delay");
 
 
 function testProcessRestart()
@@ -28,43 +26,29 @@ function testProcessRestart()
 function handleProcessRestart()
 {
 	var processUrl = null;
-	var processRestartError = null;
-	var processRestartReturn = null;
-	var processRestartRead = null;
+	var processReturn = null;
+	var processRead = null;
 	
 	
 	describe("Process Restart Request", function()
 	{
-		
 		it("Restart Request Made", function(done)
 		{
 			processUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "restart/process");
-			
-			reqModule.post(processUrl, function(aError, aResult)
-			{
-				processRestartError = aError;
-				processRestartReturn = aResult;
-				done();
-			});
+			processReturn = httpRequests.defineOutput();
+			httpRequests.postSuccessful(processUrl, null, processReturn, done);
 		});
 		
-		
-		it("Request Successful", function(done)
-		{
-			expect(processRestartError).to.be.null;
-			commonFunctionsFile.testPresent(processRestartReturn);
-			done();
-		});
 		
 		it("Results Read", function(done)
 		{
-			processRestartRead = apiRequestScript.callReadApiResponseObject(processRestartReturn);
+			processRead = apiRequestScript.callReadApiResponseObject(processReturn);
 			done();
 		});
 		
 		it("Correct Return", function(done)
 		{
-			testReturnFile.callTestProcessReturnObject(processRestartRead);
+			testReturnFile.callTestProcessReturnObject(processRead);
 			done();
 		});
 	});
@@ -75,28 +59,28 @@ function handleProcessWait()
 {	
 	describe("Restart Delay", function()
 	{
-		it("First", function(done)
+		it("Three", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Second", function(done)
+		it("Two", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
-		it("Third", function(done)
+		it("One", function(done)
 		{
 			setTimeout(function()
 			{
 				done();
-			}, delayFile.delayValue)
+			}, delayLength)
 		});
 		
 		
@@ -108,30 +92,27 @@ function handleProcessWait()
 
 function handleProcessOfflineCheck()
 {
-	var processOfflineReturn = null;
+	var pingReturn = null;
 	
 	describe("Offline Check", function()
 	{
 		
 		it("Offline Check Sent", function(done)
 		{
-			reqModule(apiRequestScript.hostUrl, function(chkError, chkReturn)
-			{
-				processOfflineReturn = chkReturn;
-				done();
-			});
+			pingReturn = httpRequests.defineOutput();
+			httpRequests.sendPing(pingReturn, done);
 		});
+		
 		
 		it("Controller Offline", function(done)
 		{
-			testReturnFile.callTestOfflineCheckResult(processOfflineReturn);
+			testReturnFile.callTestOfflineCheckResult(pingReturn);
 			done();
 		});
-		
-		
 	});
 }
 
-
-
-exports.callTestProcessRestart = testProcessRestart;
+module.exports =
+{
+	callTestProcessRestart: testProcessRestart
+};

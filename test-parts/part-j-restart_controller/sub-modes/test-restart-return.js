@@ -1,21 +1,18 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const requestFile = require(commonPaths.requestApi);
 
 
-function testProcessReturnObject(procRetObj)
+function testProcessReturnObject(procObj)
 {
-	commonFunctionsFile.testPresent(procRetObj);
-	expect(procRetObj).to.be.an("object");
+	commonFunctionsFile.testPresent(procObj);
+	expect(procObj).to.be.an("object");
 	
-	commonFunctionsFile.testObjectPropertyDefinition(procRetObj, 'success');
-	commonFunctionsFile.testObjectPropertyContent(procRetObj, 'success', 'boolean');
-	expect(procRetObj.success).to.be.true;
+	commonFunctionsFile.testObjectPropertyDefinition(procObj, 'success');
+	expect(procObj.success).to.be.true;
 }
 
 
@@ -26,5 +23,8 @@ function testOfflineCheckResult(offlineReturn)
 }
 
 
-exports.callTestProcessReturnObject = testProcessReturnObject;
-exports.callTestOfflineCheckResult = testOfflineCheckResult;
+module.exports =
+{
+	callTestProcessReturnObject: testProcessReturnObject,
+	callTestOfflineCheckResult: testOfflineCheckResult
+};

@@ -1,14 +1,12 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
+const cRestartFile = require("./modes/mode-restart");
+const cRebootFile = require("./modes/mode-reboot");
+const cFactoryResetFile = require("./modes/mode-factory_reset");
 
 const mainRestartDescription = "J - Restart API Requests";
 
+
 function coordinateRestart()
 {
-	var cRestartFile = require("./modes/mode-restart");
-	
 	describe(mainRestartDescription, function()
 	{
 		cRestartFile.callTestProcessRestart();
@@ -18,8 +16,6 @@ function coordinateRestart()
 
 function coordinateReboot()
 {
-	var cRebootFile = require("./modes/mode-reboot");
-	
 	describe(mainRestartDescription, function()
 	{
 		cRebootFile.callTestFoxRestart();
@@ -29,8 +25,6 @@ function coordinateReboot()
 
 function coordinateFactoryReset()
 {
-	var cFactoryResetFile = require("./modes/mode-factory_reset");
-	
 	describe(mainRestartDescription, function()
 	{
 		cFactoryResetFile.callTestFactoryReset();
@@ -39,6 +33,9 @@ function coordinateFactoryReset()
 
 
 
-exports.callCoordinateRestart = coordinateRestart;
-exports.callCoordinateReboot = coordinateReboot;
-exports.callCoordinateFactoryReset = coordinateFactoryReset;
+module.exports =
+{
+	callCoordinateRestart: coordinateRestart,
+	callCoordinateReboot: coordinateReboot,
+	callCoordinateFactoryReset: coordinateFactoryReset
+};

@@ -1,2 +1,1 @@
-const msPerDelay = 1000;
-exports.delayValue = msPerDelay;
+module.exports = 1000;
