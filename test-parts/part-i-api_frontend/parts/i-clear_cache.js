@@ -1,13 +1,12 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const reqModule = require('request');
+const httpRequests = require(commonPaths.httpRequestsFile);
 const testCacheFile = require("../sub-parts/test-device-cache");
 
 
@@ -49,39 +48,26 @@ function handleDatatabaseListCheck()
 {
 	describe("Check Device List Empty", function()
 	{
-		var dbLink = null;
-		var dbError = null;
-		var dbReturn = null;
-		var dbRead = null;
+		var listURL = null;
+		var listReturn = null;
+		var listRead = null;
 		
 		it("List Request Sent", function(done)
 		{
-			dbLink = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
-			
-			reqModule(dbLink, function(dCallbackError, dCallbackReturn)
-			{
-				dbError = dCallbackError;
-				dbReturn = dCallbackReturn;
-				done();
-			});
-		});
-		
-		it("Request Successful", function(done)
-		{
-			expect(dbError).to.be.null;
-			commonFunctionsFile.testPresent(dbReturn);
-			done();
+			listURL = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+			listReturn = httpRequests.defineOutput();
+			httpRequests.getSuccessful(listURL, listReturn, done);
 		});
 		
 		it("Results Read", function(done)
 		{
-			dbRead = apiRequestScript.callReadApiResponseArray(dbReturn);
+			listRead = listReturn.body;
 			done();
 		});
 		
 		it("Device List Empty", function(done)
 		{
-			commonFunctionsFile.testArrayEmpty(dbRead);
+			commonFunctionsFile.testArrayEmpty(listRead);
 			done();
 		});
 		
@@ -90,4 +76,7 @@ function handleDatatabaseListCheck()
 }
 
 
-exports.callTestNodeClearCacheApi = testNodeClearCacheApi;
+module.exports =
+{
+	callTestNodeClearCacheApi: testNodeClearCacheApi
+};

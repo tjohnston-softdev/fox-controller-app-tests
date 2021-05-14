@@ -6,7 +6,7 @@ const cListAvaliableFile = require("./parts/e-list_avaliable_nodes");
 const cCheckNodeArrayFile = require("./parts/f-check_node_array");
 const cGetDeviceStatusFile = require("./parts/g-get_device_properties");
 const cDeleteDevicesFile = require("./parts/h-delete_added_devices");
-//const cClearCacheFile = require("./parts/i-clear_cache");
+const cClearCacheFile = require("./parts/i-clear_cache");
 
 
 function coordinateFrontendTesting()
@@ -112,7 +112,7 @@ function callDeleteDevices()
 		
 		after(function()
 		{
-			//callClearCache();
+			callClearCache();
 		});
 		
 	});
