@@ -21,7 +21,7 @@ function defineAppPaths()
 	defineRes["getModelsFile"] = subCommonFolder + "get-models";
 	defineRes["checkModelIntegrityFile"] = subCommonFolder + "check-model-integrity";
 	defineRes["rioCommonFile"] = subCommonFolder + "remote-io-common";
-	defineRes["rioCommonInvalidFile"] = subCommonFolder + "remote-io-invalid_tests";
+	defineRes["rioCommonInvalidFile"] = subCommonFolder + "remote-io-invalid_data";
 	defineRes["deviceCommonFile"] = subCommonFolder + "test-device-common";
 	defineRes["httpRequestsFile"] = subCommonFolder + "http-requests";
 	

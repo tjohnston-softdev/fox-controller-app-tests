@@ -9,6 +9,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const rioCommon = require(commonPaths.rioCommonFile);
+const rioInvalid = require(commonPaths.rioCommonInvalidFile);
 const deviceCommon = require(commonPaths.deviceCommonFile);
 const httpRequests = require(commonPaths.httpRequestsFile);
 
@@ -83,10 +84,10 @@ function handlePrepare()
 			nullMessage = commonErrorStringsFile.writeUnexpectedTokenErrorNull();
 			typeMessage = commonErrorStringsFile.writeUnexpectedTokenErrorType();
 			unknownIdMessage = commonErrorStringsFile.writeKeyNotFoundError(commonJsonObjectsFile.unknownID);
-			deviceTypeObject = rioCommon.callInvalidDeviceTypeObject(commonJsonObjectsFile.modifiedDevice);
-			manufacturerObject = rioCommon.callInvalidManufacturerObject(commonJsonObjectsFile.modifiedDevice);
-			modelObject = rioCommon.callInvalidModelObject(commonJsonObjectsFile.modifiedDevice);
-			ipAddressObject = rioCommon.callInvalidIPAddressObject(commonJsonObjectsFile.modifiedDevice);
+			deviceTypeObject = rioInvalid.getDeviceType(commonJsonObjectsFile.modifiedDevice);
+			manufacturerObject = rioInvalid.getManufacturer(commonJsonObjectsFile.modifiedDevice);
+			modelObject = rioInvalid.getModel(commonJsonObjectsFile.modifiedDevice);
+			ipAddressObject = rioInvalid.getIpAddress(commonJsonObjectsFile.modifiedDevice);
 			
 			done();
 		});
@@ -307,13 +308,13 @@ function handleUnknownDeviceTypeModifyTest()
 		it("Modification Defined", function(done)
 		{
 			invalidEntry = cloneAddedDevice();
-			invalidEntry.deviceType = deviceTypeObject.oValue.jsonObject.deviceType;
+			invalidEntry.deviceType = deviceTypeObject.valueCase.jsonObject.deviceType;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, invalidEntry, deviceTypeObject.oValue.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, invalidEntry, deviceTypeObject.valueCase.errorMessage, done);
 		});
 	});
 }
@@ -327,13 +328,13 @@ function handleUnknownManufacturerModifyTest()
 		it("Modification Defined", function(done)
 		{
 			invalidEntry = cloneAddedDevice();
-			invalidEntry.maker = manufacturerObject.oValue.jsonObject.maker;
+			invalidEntry.maker = manufacturerObject.valueCase.jsonObject.maker;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, invalidEntry, manufacturerObject.oValue.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, invalidEntry, manufacturerObject.valueCase.errorMessage, done);
 		});
 		
 	});
@@ -349,13 +350,13 @@ function handleUnknownModelModifyTest()
 		it("Modification Defined", function(done)
 		{
 			invalidEntry = cloneAddedDevice();
-			invalidEntry.model = modelObject.oValue.jsonObject.model;
+			invalidEntry.model = modelObject.valueCase.jsonObject.model;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, invalidEntry, modelObject.oValue.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, invalidEntry, modelObject.valueCase.errorMessage, done);
 		});
 		
 	});
@@ -373,13 +374,13 @@ function handleBadIpAddressModifyTest()
 		it("Modification Defined", function(done)
 		{
 			ipObject = cloneAddedDevice();
-			ipObject.ipAddress = ipAddressObject.oFormat.jsonObject.ipAddress;
+			ipObject.ipAddress = ipAddressObject.formatCase.jsonObject.ipAddress;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, ipObject, ipAddressObject.oFormat.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, ipObject, ipAddressObject.formatCase.errorMessage, done);
 		});
 		
 	});

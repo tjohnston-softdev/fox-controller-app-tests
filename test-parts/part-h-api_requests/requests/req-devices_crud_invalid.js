@@ -9,6 +9,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const rioCommon = require(commonPaths.rioCommonFile);
+const rioInvalid = require(commonPaths.rioCommonInvalidFile);
 const httpRequests = require(commonPaths.httpRequestsFile);
 
 const apiCommonFile = require("../sub-requests/common-api");
@@ -112,28 +113,28 @@ function handleCreateInvalid()
 			
 			it("Errors Defined", function(done)
 			{
-				deviceTypeErrors = rioCommon.callInvalidDeviceTypeObject(commonJsonObjectsFile.crudDevice);
+				deviceTypeErrors = rioInvalid.getDeviceType(commonJsonObjectsFile.crudDevice);
 				done();
 			});
 			
 			it("Invalid Value", function(done)
 			{
-				var invalidBody = deviceTypeErrors.oValue.jsonObject;
-				var postErrMsg = deviceTypeErrors.oValue.errorMessage;
+				var invalidBody = deviceTypeErrors.valueCase.jsonObject;
+				var postErrMsg = deviceTypeErrors.valueCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Type", function(done)
 			{
-				var invalidBody = deviceTypeErrors.oType.jsonObject;
-				var postErrMsg = deviceTypeErrors.oType.errorMessage;
+				var invalidBody = deviceTypeErrors.typeCase.jsonObject;
+				var postErrMsg = deviceTypeErrors.typeCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Missing Property", function(done)
 			{
-				var invalidBody = deviceTypeErrors.oProp.jsonObject;
-				var postErrMsg = deviceTypeErrors.oProp.errorMessage;
+				var invalidBody = deviceTypeErrors.propCase.jsonObject;
+				var postErrMsg = deviceTypeErrors.propCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
@@ -145,30 +146,30 @@ function handleCreateInvalid()
 			
 			it("Errors Defined", function(done)
 			{
-				manufacturerErrors = rioCommon.callInvalidManufacturerObject(commonJsonObjectsFile.crudDevice, true);
+				manufacturerErrors = rioInvalid.getManufacturer(commonJsonObjectsFile.crudDevice, true);
 				done();
 			});
 			
 			
 			it("Unknown Manufacturer", function(done)
 			{
-				var invalidBody = manufacturerErrors.oValue.jsonObject;
-				var postErrMsg = manufacturerErrors.oValue.errorMessage;
+				var invalidBody = manufacturerErrors.valueCase.jsonObject;
+				var postErrMsg = manufacturerErrors.valueCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Value Type", function(done)
 			{
-				var invalidBody = manufacturerErrors.oType.jsonObject;
-				var postErrMsg = manufacturerErrors.oType.errorMessage;
+				var invalidBody = manufacturerErrors.typeCase.jsonObject;
+				var postErrMsg = manufacturerErrors.typeCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			
 			it("Missing Property", function(done)
 			{
-				var invalidBody = manufacturerErrors.oProp.jsonObject;
-				var postErrMsg = manufacturerErrors.oProp.errorMessage;
+				var invalidBody = manufacturerErrors.propCase.jsonObject;
+				var postErrMsg = manufacturerErrors.propCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
@@ -180,28 +181,28 @@ function handleCreateInvalid()
 			
 			it("Errors Defined", function(done)
 			{
-				modelErrors = rioCommon.callInvalidModelObject(commonJsonObjectsFile.crudDevice);
+				modelErrors = rioInvalid.getModel(commonJsonObjectsFile.crudDevice);
 				done();
 			});
 			
 			it("Unknown Model", function(done)
 			{
-				var invalidBody = modelErrors.oValue.jsonObject;
-				var postErrMsg = modelErrors.oValue.errorMessage;
+				var invalidBody = modelErrors.valueCase.jsonObject;
+				var postErrMsg = modelErrors.valueCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Value Type", function(done)
 			{
-				var invalidBody = modelErrors.oType.jsonObject;
-				var postErrMsg = modelErrors.oType.errorMessage;
+				var invalidBody = modelErrors.typeCase.jsonObject;
+				var postErrMsg = modelErrors.typeCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Missing Property", function(done)
 			{
-				var invalidBody = modelErrors.oProp.jsonObject;
-				var postErrMsg = modelErrors.oProp.errorMessage;
+				var invalidBody = modelErrors.propCase.jsonObject;
+				var postErrMsg = modelErrors.propCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 		});
@@ -213,35 +214,35 @@ function handleCreateInvalid()
 			
 			it("Errors Defined", function(done)
 			{
-				ipErrors = rioCommon.callInvalidIPAddressObject(commonJsonObjectsFile.crudDevice);
+				ipErrors = rioInvalid.getIpAddress(commonJsonObjectsFile.crudDevice);
 				done();
 			});
 			
 			it("Invalid IP Format", function(done)
 			{
-				var invalidBody = ipErrors.oFormat.jsonObject;
-				var postErrMsg = ipErrors.oFormat.errorMessage;
+				var invalidBody = ipErrors.formatCase.jsonObject;
+				var postErrMsg = ipErrors.formatCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid String Value", function(done)
 			{
-				var invalidBody = ipErrors.oValue.jsonObject;
-				var postErrMsg = ipErrors.oValue.errorMessage;
+				var invalidBody = ipErrors.valueCase.jsonObject;
+				var postErrMsg = ipErrors.valueCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Invalid Value Type", function(done)
 			{
-				var invalidBody = ipErrors.oType.jsonObject;
-				var postErrMsg = ipErrors.oType.errorMessage;
+				var invalidBody = ipErrors.typeCase.jsonObject;
+				var postErrMsg = ipErrors.typeCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			
 			it("Missing Property", function(done)
 			{
-				var invalidBody = ipErrors.oProp.jsonObject;
-				var postErrMsg = ipErrors.oProp.errorMessage;
+				var invalidBody = ipErrors.propCase.jsonObject;
+				var postErrMsg = ipErrors.propCase.errorMessage;
 				httpRequests.postInvalid(urlCreate, invalidBody, postErrMsg, done);
 			});
 			

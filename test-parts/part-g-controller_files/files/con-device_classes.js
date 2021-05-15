@@ -10,6 +10,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const commonFile = require(commonPaths.rioCommonFile);
+const rioInvalid = require(commonPaths.rioCommonInvalidFile);
 const deviceModelFile = loadFoxFile(foxPath.storedDeviceClassFile);
 const deviceConnectFile = loadFoxFile(foxPath.connectedDeviceClassFile);
 
@@ -86,81 +87,81 @@ function handleDeviceClasses()
 		
 		it("Call - Null", function()
 		{
-			var nullObject = commonFile.callCombineErrorObject(commonErrorStringsFile.deviceNotObject, null);
+			var nullObject = rioInvalid.getError(commonErrorStringsFile.deviceNotObject, null);
 			callStoredDeviceUnsupported(nullObject);
 		});
 		
 		it("Call - Invalid Object Type", function()
 		{
-			var invalidTypeObject = commonFile.callCombineErrorObject(commonErrorStringsFile.deviceNotObject, -1);
+			var invalidTypeObject = rioInvalid.getError(commonErrorStringsFile.deviceNotObject, -1);
 			callStoredDeviceUnsupported(invalidTypeObject);
 		});
 		
 		it("Call - Invalid ID (id)", function()
 		{
-			var invalidIdObject = commonFile.callInvalidIDStringObjectFactory(testDeviceValidModel);
+			var invalidIdObject = rioInvalid.getIdFactory(testDeviceValidModel);
 			
-			callStoredDeviceUnsupported(invalidIdObject.oType);
-			callStoredDeviceUnsupported(invalidIdObject.oProp);
+			callStoredDeviceUnsupported(invalidIdObject.typeCase);
+			callStoredDeviceUnsupported(invalidIdObject.propCase);
 		});
 		
 		it("Call - Invalid Device Type (deviceType)", function()
 		{
-			var invalidTypeObject = commonFile.callInvalidDeviceTypeObject(testDeviceValidModel);
+			var invalidTypeObject = rioInvalid.getDeviceType(testDeviceValidModel);
 			
-			callStoredDeviceUnsupported(invalidTypeObject.oValue);
-			callStoredDeviceUnsupported(invalidTypeObject.oType);
-			callStoredDeviceUnsupported(invalidTypeObject.oProp);
+			callStoredDeviceUnsupported(invalidTypeObject.valueCase);
+			callStoredDeviceUnsupported(invalidTypeObject.typeCase);
+			callStoredDeviceUnsupported(invalidTypeObject.propCase);
 		});
 		
 		it("Call - Invalid Manufacturer (maker)", function()
 		{
-			var invalidManufacturerObject = commonFile.callInvalidManufacturerObject(testDeviceValidModel, false);
+			var invalidManufacturerObject = rioInvalid.getManufacturer(testDeviceValidModel, false);
 			
-			callStoredDeviceUnsupported(invalidManufacturerObject.oValue);
-			callStoredDeviceUnsupported(invalidManufacturerObject.oType);
-			callStoredDeviceUnsupported(invalidManufacturerObject.oProp);
+			callStoredDeviceUnsupported(invalidManufacturerObject.valueCase);
+			callStoredDeviceUnsupported(invalidManufacturerObject.typeCase);
+			callStoredDeviceUnsupported(invalidManufacturerObject.propCase);
 		});
 		
 		it("Call - Invalid Model (model)", function()
 		{
-			var invalidModelObject = commonFile.callInvalidModelObject(testDeviceValidModel);
+			var invalidModelObject = rioInvalid.getModel(testDeviceValidModel);
 			
-			callStoredDeviceUnsupported(invalidModelObject.oValue);
-			callStoredDeviceUnsupported(invalidModelObject.oType);
-			callStoredDeviceUnsupported(invalidModelObject.oProp);
+			callStoredDeviceUnsupported(invalidModelObject.valueCase);
+			callStoredDeviceUnsupported(invalidModelObject.typeCase);
+			callStoredDeviceUnsupported(invalidModelObject.propCase);
 		});
 		
 		it("Call - Invalid Name (name)", function()
 		{
-			var invalidNameObject = commonFile.callInvalidNameStringObject(testDeviceValidModel);
+			var invalidNameObject = rioInvalid.getName(testDeviceValidModel);
 			
-			callStoredDeviceUnsupported(invalidNameObject.oType);
-			callStoredDeviceUnsupported(invalidNameObject.oProp);
+			callStoredDeviceUnsupported(invalidNameObject.typeCase);
+			callStoredDeviceUnsupported(invalidNameObject.propCase);
 		});
 		
 		it("Call - Invalid IP Address (ipAddress)", function()
 		{
-			var invalidAddressObject = commonFile.callInvalidIPAddressObject(testDeviceValidModel);
+			var invalidAddressObject = rioInvalid.getIpAddress(testDeviceValidModel);
 			
-			callStoredDeviceUnsupported(invalidAddressObject.oFormat);
-			callStoredDeviceUnsupported(invalidAddressObject.oValue);
-			callStoredDeviceUnsupported(invalidAddressObject.oType);
-			callStoredDeviceUnsupported(invalidAddressObject.oProp);
+			callStoredDeviceUnsupported(invalidAddressObject.formatCase);
+			callStoredDeviceUnsupported(invalidAddressObject.valueCase);
+			callStoredDeviceUnsupported(invalidAddressObject.typeCase);
+			callStoredDeviceUnsupported(invalidAddressObject.propCase);
 		});
 		
 		it("Call - Invalid Enabled Flag (isEnabled)", function()
 		{
-			var invalidEnabledObject = commonFile.callInvalidEnabledFlagObject(testDeviceValidModel);
+			var invalidEnabledObject = rioInvalid.getEnabled(testDeviceValidModel);
 			
-			callStoredDeviceUnsupported(invalidEnabledObject.oType);
-			callStoredDeviceUnsupported(invalidEnabledObject.oProp);
+			callStoredDeviceUnsupported(invalidEnabledObject.typeCase);
+			callStoredDeviceUnsupported(invalidEnabledObject.propCase);
 		});
 		
 		it("Call - Invalid MAC Address (macAddress)", function()
 		{
-			var invalidMacObject = commonFile.callInvalidMacAddressObject(testDeviceValidModel);
-			callStoredDeviceUnsupported(invalidMacObject.oType);
+			var invalidMacObject = rioInvalid.getMacAddress(testDeviceValidModel);
+			callStoredDeviceUnsupported(invalidMacObject.typeCase);
 		});
 		
 	});

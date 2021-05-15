@@ -10,6 +10,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const rioCommonFile = require(commonPaths.rioCommonFile);
+const rioInvalid = require(commonPaths.rioCommonInvalidFile);
 const rioCheckFile = require("../sub-files/rio-factory_return");
 const factoryFile = loadFoxFile(foxPath.rioFactoriesFile);
 
@@ -62,69 +63,69 @@ function handleRemoteIoModuleFunction()
 		
 		it("Call - Null", function()
 		{
-			var nullErrorObject = rioCommonFile.callCombineErrorObject(commonErrorStringsFile.deviceNotObject, null);
+			var nullErrorObject = rioInvalid.getError(commonErrorStringsFile.deviceNotObject, null);
 			callRemoteIoModuleInvalid(nullErrorObject);
 		});
 		
 		it("Call - Invalid Object Type", function()
 		{
-			var typeErrorObject = rioCommonFile.callCombineErrorObject(commonErrorStringsFile.deviceNotObject, -1);
+			var typeErrorObject = rioInvalid.getError(commonErrorStringsFile.deviceNotObject, -1);
 			callRemoteIoModuleInvalid(typeErrorObject);
 		});
 		
 		
 		it("Call - Invalid Device Type (deviceType)", function()
 		{
-			var deviceTypeErrorObject = rioCommonFile.callInvalidDeviceTypeObjectFactory(remoteIoTestDevice);
-			callRemoteIoModuleInvalid(deviceTypeErrorObject.oType);
-			callRemoteIoModuleInvalid(deviceTypeErrorObject.oProp);
+			var deviceTypeErrorObject = rioInvalid.getDeviceType(remoteIoTestDevice);
+			callRemoteIoModuleInvalid(deviceTypeErrorObject.typeCase);
+			callRemoteIoModuleInvalid(deviceTypeErrorObject.propCase);
 		});
 		
 		
 		it("Call - Invalid ID (id)", function()
 		{	
-			var idErrorObject = rioCommonFile.callInvalidIDStringObjectFactory(remoteIoTestDevice);
-			callRemoteIoModuleInvalid(idErrorObject.oType);
-			callRemoteIoModuleInvalid(idErrorObject.oProp);
+			var idErrorObject = rioInvalid.getIdFactory(remoteIoTestDevice);
+			callRemoteIoModuleInvalid(idErrorObject.typeCase);
+			callRemoteIoModuleInvalid(idErrorObject.propCase);
 		});
 		
 		
 		it("Call - Invalid Manufacturer (maker)", function()
 		{
-			var manufacturerErrorObject = rioCommonFile.callInvalidManufacturerObjectFactory(remoteIoTestDevice);
-			callRemoteIoModuleInvalid(manufacturerErrorObject.oType);
-			callRemoteIoModuleInvalid(manufacturerErrorObject.oProp);
+			var manufacturerErrorObject = rioInvalid.getManufacturer(remoteIoTestDevice, false);
+			callRemoteIoModuleInvalid(manufacturerErrorObject.typeCase);
+			callRemoteIoModuleInvalid(manufacturerErrorObject.propCase);
 		});
 		
 		
 		it("Call - Invalid Model (model)", function()
 		{
-			var modelErrorObject = rioCommonFile.callInvalidModelObjectFactory(remoteIoTestDevice);
-			callRemoteIoModuleInvalid(modelErrorObject.oType);
-			callRemoteIoModuleInvalid(modelErrorObject.oProp);
+			var modelErrorObject = rioInvalid.getModel(remoteIoTestDevice);
+			callRemoteIoModuleInvalid(modelErrorObject.typeCase);
+			callRemoteIoModuleInvalid(modelErrorObject.propCase);
 		});
 		
 		it("Call - Invalid Name (name)", function()
 		{
-			var nameErrorObject = rioCommonFile.callInvalidNameStringObject(remoteIoTestDevice);
-			callRemoteIoModuleInvalid(nameErrorObject.oType);
-			callRemoteIoModuleInvalid(nameErrorObject.oProp);
+			var nameErrorObject = rioInvalid.getName(remoteIoTestDevice);
+			callRemoteIoModuleInvalid(nameErrorObject.typeCase);
+			callRemoteIoModuleInvalid(nameErrorObject.propCase);
 		});
 		
 		
 		it("Call - Invalid IP Address (ipAddress)", function()
 		{
-			var ipErrorObject = rioCommonFile.callInvalidIPAddressObjectFactory(remoteIoTestDevice);
-			callRemoteIoModuleInvalid(ipErrorObject.oType);
-			callRemoteIoModuleInvalid(ipErrorObject.oProp);
+			var ipErrorObject = rioInvalid.getIpAddress(remoteIoTestDevice);
+			callRemoteIoModuleInvalid(ipErrorObject.typeCase);
+			callRemoteIoModuleInvalid(ipErrorObject.propCase);
 		});
 		
 		it("Call - Invalid Enabled Flag (isEnabled", function()
 		{
-			var invalidEnabledObject = rioCommonFile.callInvalidEnabledFlagObject(remoteIoTestDevice);
+			var invalidEnabledObject = rioInvalid.getEnabled(remoteIoTestDevice);
 			
-			callRemoteIoModuleInvalid(invalidEnabledObject.oType);
-			callRemoteIoModuleInvalid(invalidEnabledObject.oProp);
+			callRemoteIoModuleInvalid(invalidEnabledObject.typeCase);
+			callRemoteIoModuleInvalid(invalidEnabledObject.propCase);
 		});
 		
 	});
