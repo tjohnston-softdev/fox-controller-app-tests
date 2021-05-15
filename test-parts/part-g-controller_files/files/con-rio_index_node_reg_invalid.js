@@ -123,7 +123,7 @@ function handleTestDevice()
 		
 		it("Add Successful", function(done)
 		{
-			spyFile.verifyAddDeviceCalled(addObject, addSpy.called, addSpy.lastCall);
+			spyFile.verifyDeviceCalled(addObject, addSpy.called, addSpy.lastCall);
 			
 			expect(addSpy.lastCall.exception).to.be.undefined;
 			expect(addError).to.be.null;

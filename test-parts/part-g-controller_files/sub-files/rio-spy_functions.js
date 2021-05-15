@@ -3,7 +3,6 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 
 
@@ -25,32 +24,16 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 	expect(listError).to.be.null;
 }
 
-function verifyAddDevice(addDeviceArg, addCalled, callObject)
-{
-	expect(addCalled).to.be.true;
-	commonFunctionsFile.testPresent(callObject);
-	
-	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArrayPopulated(callObject.args);
-	
-	expect(callObject.args[0]).to.equal(addDeviceArg);
-	
-	commonFunctionsFile.testPresent(callObject.args[1]);
-	expect(callObject.args[1]).to.be.a("function");
-	
-	commonFunctionsFile.testPresent(callObject.callback);
-	expect(callObject.callback).to.be.a("function");
-}
 
-function verifyGetDevice(getDeviceArg, getCalled, callObject)
+function verifyDevice(deviceArg, deviceCalled, callObject)
 {
-	expect(getCalled).to.be.true;
+	expect(deviceCalled).to.be.true;
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
 	commonFunctionsFile.testArrayPopulated(callObject.args);
 	
-	expect(callObject.args[0]).to.equal(getDeviceArg);
+	expect(callObject.args[0]).to.equal(deviceArg);
 	
 	commonFunctionsFile.testPresent(callObject.args[1]);
 	expect(callObject.args[1]).to.be.a("function");
@@ -107,12 +90,11 @@ function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 	expect(callObject.callback).to.be.a("function");
 }
 
-
-
-
-exports.verifyRemoteIoListCalled = verifyRemoteIoList
-exports.verifyAddDeviceCalled = verifyAddDevice;
-exports.verifyGetDeviceCalled = verifyGetDevice;
-exports.verifyRegisterNodeCalled = verifyRegisterNode;
-exports.verifySetDeviceOutputCalled = verifySetDeviceOutput;
-exports.verifyDeleteDeviceCalled = verifyDeleteDevice;
+module.exports =
+{
+	verifyRemoteIoListCalled: verifyRemoteIoList,
+	verifyDeviceCalled: verifyDevice,
+	verifyRegisterNodeCalled: verifyRegisterNode,
+	verifySetDeviceOutputCalled: verifySetDeviceOutput,
+	verifyDeleteDeviceCalled: verifyDeleteDevice
+};

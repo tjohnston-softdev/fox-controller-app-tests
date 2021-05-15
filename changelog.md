@@ -1,33 +1,18 @@
 # Changelog
 
-### ./app/sub-common/files/remote-io-common.js
-
-**testDeviceArrayStructure**
-* Renamed 'da' parameter to 'deviceArr'
-* Renamed variables:
-	* 'deviceArrayIndex' to 'deviceIndex'
-	* 'currentArrayObject' to 'currentObject'
-* 'currentObject' is declared as a blank object.
-
-\
-**testDeviceObjectStructure**
-* Renamed 'dObj' parameter to 'deviceObj'
-
-\
-**compareGetDeviceToOriginal**
-* Renamed parameters:
-	* 'dGet' to 'retObj'
-	* 'dOrig' to 'origObj'
-
-\
-**testNodeConfigObjectStructure**
-* Renamed 'confObj' parameter to 'configObj'
-
-\
-**testIdListed**
-* Renamed 'da' parameter to 'deviceArr'
-* Renamed 'listedDeviceIndex' variable to 'listIndex'
-
-\
-**Public**
+**./test-parts/part-g-controller_files/sub-files/rio_spy_functions.js**
+* Removed the 'commonPaths.foxRelative' requirement.
+* Wrote new function 'verifyDevice' - Merges:
+	* verifyAddDevice
+	* verifyGetDevice
 * Replaced `exports` with `module.exports`
+
+---
+
+**./test-parts/part-g-controller_files/files/**
+* Replaced with 'verifyDeviceCalled'
+	* verifyAddDeviceCalled
+	* verifyGetDeviceCalled
+* Affected files:
+	* con-rio_index_node_invalid.js
+	* con-rio_index_node_reg.js

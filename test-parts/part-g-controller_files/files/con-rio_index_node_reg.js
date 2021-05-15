@@ -144,7 +144,7 @@ function handleStaticAdd()
 		
 		it("Add Successful", function(done)
 		{
-			spyFile.verifyAddDeviceCalled(commonJsonObjectsFile.nodeDevice, staticAddSpy.called, staticAddSpy.firstCall);
+			spyFile.verifyDeviceCalled(commonJsonObjectsFile.nodeDevice, staticAddSpy.called, staticAddSpy.firstCall);
 			
 			expect(staticAddSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
@@ -196,7 +196,7 @@ function handleStaticGet()
 		
 		it("Get Successful", function(done)
 		{
-			spyFile.verifyGetDeviceCalled(nodeTestID, staticGetSpy.called, staticGetSpy.firstCall);
+			spyFile.verifyDeviceCalled(nodeTestID, staticGetSpy.called, staticGetSpy.firstCall);
 			expect(staticGetSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
 			
