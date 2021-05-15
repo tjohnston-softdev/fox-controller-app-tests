@@ -6,6 +6,7 @@ const needle = require("needle");
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
+const apiPaths = require(commonPaths.requestApiPaths);
 
 
 function defineOutputObject()
@@ -146,6 +147,27 @@ function requestPing(outputObject, reqDone)
 }
 
 
+function requestFactoryReset(outputObject, reqDone)
+{
+	var factoryURL = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "factory-reset");
+	
+	needle.post(factoryURL, null, {json: true}, function(requestErr, requestRes)
+	{
+		outputObject["error"] = requestErr;
+		outputObject["reply"] = requestRes;
+	});
+	
+	reqDone();
+}
+
+
+function checkFactoryResetResult(outputObject)
+{
+	handleCallbackArguments(outputObject.error, outputObject.reply);
+	apiRequestScript.callValidateApiResponse(outputObject.reply);
+}
+
+
 
 function sendGet(httpURL, httpCallback)
 {
@@ -241,5 +263,7 @@ module.exports =
 	deleteInvalid: requestDeleteInvalid,
 	statusInvalid: requestStatusInvalid,
 	ping: requestPing,
+	factoryReset: requestFactoryReset,
+	checkFactoryReset: checkFactoryResetResult,
 	checkDeleteResult: handleInvalidDelete
 };

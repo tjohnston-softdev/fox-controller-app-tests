@@ -2,10 +2,8 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 const os = require('os');
-const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequestsFile);
@@ -14,8 +12,7 @@ const testReturnFile = require("../sub-modes/test-restart-return");
 const offlineDelay = require("../sub-modes/offline-check-delay");
 
 var currentPlatform = os.platform();
-var factoryReturn = null;
-var factoryError = null;
+var factoryOutput = {};
 
 
 function testFactoryReset()
@@ -47,15 +44,7 @@ function handleFactoryReset()
 	{
 		it("Request Made", function(done)
 		{
-			factoryResetUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "factory-reset");
-			
-			needle.post(factoryResetUrl, null, {json: true}, function(aError, aResult)
-			{
-				factoryError = aError;
-				factoryReturn = aResult;
-			});
-			
-			done();
+			httpRequests.factoryReset(factoryOutput, done);
 		});
 		
 	});
@@ -130,14 +119,13 @@ function handleFactoryResult()
 		
 		it("Request Successful", function(done)
 		{
-			commonFunctionsFile.testPresent(factoryReturn);
-			expect(factoryError).to.be.null;
+			httpRequests.checkFactoryReset(factoryOutput);
 			done();
 		});
 		
 		it("Results Read", function(done)
 		{
-			factoryResetRead = apiRequestScript.callReadApiResponseObject(factoryReturn);
+			factoryResetRead = apiRequestScript.callReadApiResponseObject(factoryOutput.reply);
 			done();
 		});
 		
@@ -149,8 +137,7 @@ function handleFactoryResult()
 		
 		it("Reply Disposed", function(done)
 		{
-			factoryError = null;
-			factoryReturn = null;
+			factoryOutput = null;
 			done();
 		});
 		
