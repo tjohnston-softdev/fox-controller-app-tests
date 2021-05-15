@@ -213,7 +213,7 @@ function validateExtractedErrorText(vObject)
 	
 	if (vObject.errorFree === true && vObject.valid === true && vObject.extractedText.length > 0)
 	{
-		validTextResult = vObject.eText;
+		validTextResult = vObject.extractedText;
 	}
 	else if (vObject.errorFree === true && vObject.valid === true)
 	{
