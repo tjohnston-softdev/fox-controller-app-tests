@@ -1,22 +1,16 @@
 # Changelog
 
-**./test-parts/part-d-online_check/checks/chk-online.js**
-* Requirements:
-	* Removed 'needle'
-	* Added 'commonPaths.httpRequestsFile'
-* writeCheckDescription
-	* Renamed 'desiredStatus' parameter to 'onReq'
-* validateOverallResult
-	* Renamed 'resultStatus' parameter to 'actualStatus'
+**./app/sub-common/files/http-requests.js**
+* Renamed the 'sendApplicationPing' function to 'requestPing'
+	* Called publicly as 'ping'
 
 ---
 
-**./test-parts/part-d-online_check/checks/chk-online.js - coordinateOnlineCheck**
-* Removed the 'reqError' variable.
-* reqReturn
-	* Assigned during "Application Request"
-	* Assigned with httpRequests.defineOutput
-* Replaced HTTP request code.
-	* Before: 'needle.get'
-	* After: 'httpRequests.sendPing'
-* Renamed the 'checkReturn' variable to 'retrievedStatus'
+**Affected Files**
+* ./test-parts/
+	* part-d-online_checks/checks/
+		* chk-online.js
+	* part-j-restart_controller/modes/
+		* mode-factory_reset.js
+		* mode-reboot.js
+		* mode-restart.js

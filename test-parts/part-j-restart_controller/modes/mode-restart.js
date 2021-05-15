@@ -90,7 +90,7 @@ function handleProcessOfflineCheck()
 		it("Offline Check Sent", function(done)
 		{
 			pingReturn = httpRequests.defineOutput();
-			httpRequests.sendPing(pingReturn, done);
+			httpRequests.ping(pingReturn, done);
 		});
 		
 		

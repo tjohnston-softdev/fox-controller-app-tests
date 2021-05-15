@@ -30,7 +30,7 @@ function coordinateOnlineCheck(onlineFlag)
 	it("Application Request", function(done)
 	{
 		reqReturn = httpRequests.defineOutput();
-		httpRequests.sendPing(reqReturn, done);
+		httpRequests.ping(reqReturn, done);
 	});
 	
 	it("Status Check", function(done)

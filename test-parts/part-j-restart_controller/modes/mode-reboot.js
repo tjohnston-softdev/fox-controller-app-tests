@@ -106,7 +106,7 @@ function handleFoxOfflineCheck()
 		it("Offline Check Sent", function(done)
 		{
 			foxOfflineReturn = httpRequests.defineOutput();
-			httpRequests.sendPing(foxOfflineReturn, done);
+			httpRequests.ping(foxOfflineReturn, done);
 		});
 		
 		it("Controller Offline", function(done)

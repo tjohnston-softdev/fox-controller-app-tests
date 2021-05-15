@@ -131,7 +131,7 @@ function requestStatusInvalid(endpointURL, statusEntry, reqDone)
 }
 
 
-function sendApplicationPing(outputObject, reqDone)
+function requestPing(outputObject, reqDone)
 {	
 	needle.get(apiRequestScript.hostUrl, {timeout: 1750}, function(pingErr, pingRes)
 	{
@@ -240,6 +240,6 @@ module.exports =
 	putInvalid: requestPutInvalid,
 	deleteInvalid: requestDeleteInvalid,
 	statusInvalid: requestStatusInvalid,
-	sendPing: sendApplicationPing,
+	ping: requestPing,
 	checkDeleteResult: handleInvalidDelete
 };

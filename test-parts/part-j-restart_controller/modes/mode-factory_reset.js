@@ -169,7 +169,7 @@ function handleFactoryOfflineCheck()
 		it("Offline Check Sent", function(done)
 		{	
 			factoryOfflineReturn = httpRequests.defineOutput();
-			httpRequests.sendPing(factoryOfflineReturn, done);
+			httpRequests.ping(factoryOfflineReturn, done);
 		});
 		
 		it("Controller Reset", function(done)
