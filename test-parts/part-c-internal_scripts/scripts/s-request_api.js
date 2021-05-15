@@ -432,13 +432,13 @@ function checkDeleteOptionsObject()
 		it("Call - True", function()
 		{
 			trueRes = requestFile.getDeleteOptions(true);
-			runDeleteResults(trueRes, true);
+			commonRequestFunctions.callValidateDeleteOptionsReturn(trueRes, true);
 		});
 		
 		it("Call - False", function()
 		{
 			falseRes = requestFile.getDeleteOptions(false);
-			runDeleteResults(falseRes, false);
+			commonRequestFunctions.callValidateDeleteOptionsReturn(falseRes, false);
 		});
 		
 		it("Call - Invalid", function()
@@ -449,12 +449,6 @@ function checkDeleteOptionsObject()
 		
 		
 	});
-}
-
-function runDeleteResults(deleteObj, flagArg)
-{
-	commonRequestFunctions.callValidateOptionsReturn(deleteObj, validUrl, 'DELETE', null);
-	commonRequestFunctions.callValidateDeleteOptionsReturn(deleteObj, flagArg);
 }
 
 
