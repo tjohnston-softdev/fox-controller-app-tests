@@ -1,9 +1,22 @@
 # Changelog
 
-**./test/fox-test-main.js**
-* Renamed 'iPrompt' variable to 'promptMode'
-* Removed `e.message` from prompt error message.
-* Renamed the 'm' variable to 'chosenMode'
-* Prompt error message.
-	* Removed `e.message`
-	* Displayed using `console.log` instead of throwing an exception.
+**Summary**
+* Removed unnecessary 'sinon' module requirements.
+
+---
+
+**Affected Files**
+* ./test-parts/
+	* part-c-internal_scripts/
+		* scripts/
+			* s-local_valid.js
+			* s-supported_databases.js
+	* part-g-controller_files/
+		* files/
+			* con-settings.js
+		* sub-files/
+			* rio-spy_functions.js
+* ./app/
+	* sub-common/
+		* files/
+			* remote-io-common.js

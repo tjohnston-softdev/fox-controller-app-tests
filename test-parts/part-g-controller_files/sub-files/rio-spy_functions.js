@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
