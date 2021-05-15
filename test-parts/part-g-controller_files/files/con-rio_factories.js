@@ -9,7 +9,6 @@ const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const rioCommonFile = require(commonPaths.rioCommonFile);
 const rioInvalid = require(commonPaths.rioCommonInvalidFile);
 const rioCheckFile = require("../sub-files/rio-factory_return");
 const factoryFile = loadFoxFile(foxPath.rioFactoriesFile);

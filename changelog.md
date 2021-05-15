@@ -1,18 +1,12 @@
 # Changelog
 
-**./test-parts/part-g-controller_files/sub-files/rio_spy_functions.js**
-* Removed the 'commonPaths.foxRelative' requirement.
-* Wrote new function 'verifyDevice' - Merges:
-	* verifyAddDevice
-	* verifyGetDevice
-* Replaced `exports` with `module.exports`
+**./app/sub-common/files/rio-common.js**
+* Removed unnecessary requirements for this file.
 
 ---
 
-**./test-parts/part-g-controller_files/files/**
-* Replaced with 'verifyDeviceCalled'
-	* verifyAddDeviceCalled
-	* verifyGetDeviceCalled
-* Affected files:
-	* con-rio_index_node_invalid.js
-	* con-rio_index_node_reg.js
+**Affected Files**
+* ./test-parts/
+	* part-g-controller_files/files/con-rio_factories.js
+	* part-h-api_requests\requests\req-devices_crud_invalid.js
+	* part-i-api_frontend\parts\h-delete_added_devices.js

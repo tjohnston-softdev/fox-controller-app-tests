@@ -8,7 +8,6 @@ const commonFunctionsFile = require(commonPaths.testCommonFull);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
-const rioCommon = require(commonPaths.rioCommonFile);
 const rioInvalid = require(commonPaths.rioCommonInvalidFile);
 const httpRequests = require(commonPaths.httpRequestsFile);
 

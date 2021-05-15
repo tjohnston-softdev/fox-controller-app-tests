@@ -6,7 +6,6 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 const apiRequestScript = require(commonPaths.requestApi);
-const rioCommon = require(commonPaths.rioCommonFile);
 const httpRequests = require(commonPaths.httpRequestsFile);
 
 const deviceCommon = require(commonPaths.deviceCommonFile);
