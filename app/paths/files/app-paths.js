@@ -2,7 +2,6 @@ function defineAppPaths()
 {
 	var appRoot = "../../../app/";
 	var subCommonFolder = appRoot + "sub-common/files/";
-	var testCommonName = "test-common";
 	var defineRes = {};
 	
 	defineRes["foxRelative"] = appRoot + "paths/files/fox-paths";
@@ -14,9 +13,7 @@ function defineAppPaths()
 	defineRes["requestApi"] = appRoot + "request-api";
 	defineRes["requestApiPaths"] = appRoot + "request-api-paths";
 	defineRes["supportedDatabases"] = appRoot + "supported-databases";
-	
-	defineRes["testCommon"] = testCommonName;
-	defineRes["testCommonFull"] = appRoot + testCommonName;
+	defineRes["testCommonFull"] = appRoot + "test-common";
 	
 	defineRes["getModelsFile"] = subCommonFolder + "get-models";
 	defineRes["checkModelIntegrityFile"] = subCommonFolder + "check-model-integrity";

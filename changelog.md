@@ -1,4 +1,5 @@
 # Changelog
 
-**./app/request-api.js - validateExtractedErrorText**
-* Replaced 'eText' with 'extractedText'
+**./app/paths/files/app-paths.js**
+* Removed 'testCommon' public property.
+* Merged 'testCommonName' local variable into 'testCommonFull' public property.
