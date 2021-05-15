@@ -72,49 +72,11 @@ function readApiResponseObject(responseObject)
 	return objectResult;
 }
 
-function readApiResponseString(rObject)
-{
-	var inputType = typeof rObject;
-	var bodyType = typeof rObject.body;
-	var correctInput = (rObject !== undefined && rObject !== null);
-	var rText = null;
-	
-	if (correctInput === true && inputType === "object" && bodyType === "string" && rObject.body.length > 0)
-	{
-		rText = rObject.body;
-	}
-	else if (correctInput === true && inputType === "object")
-	{
-		rText = null;
-		throw new Error("HTTP Reply is empty");
-	}
-	else if (correctInput === true)
-	{
-		rText = null;
-		throw new Error("Invalid Reply object type");
-	}
-	else
-	{
-		rText = null;
-		throw new Error("HTTP Reply is null");
-	}
-	
-	return rText;
-}
-
 
 function readApiResponseError(eObject)
 {
-	var errorBodyText = readApiResponseString(eObject);
-	var errorBodyExtract = null;
-	var rText = null;
-	
-	if (errorBodyText !== null)
-	{
-		errorBodyExtract = extractErrorText(errorBodyText);
-		rText = validateExtractedErrorText(errorBodyExtract);
-	}
-	
+	var errorBodyExtract = extractErrorText(eObject.body);
+	var rText = validateExtractedErrorText(errorBodyExtract);
 	return rText;
 }
 
@@ -123,7 +85,6 @@ function readApiResponseError(eObject)
 
 function validateApiResponse(respObj)
 {
-	var fullHTML = "";
 	var extractObject = {};
 	var flaggedMessage = "";
 	var validationResult = false;
@@ -134,8 +95,7 @@ function validateApiResponse(respObj)
 	}
 	else
 	{
-		fullHTML = readApiResponseString(respObj);
-		extractObject = extractErrorText(fullHTML);
+		extractObject = extractErrorText(respObj.body);
 		flaggedMessage = validateExtractedErrorText(extractObject);
 		throw new Error(flaggedMessage);
 	}
@@ -158,10 +118,10 @@ function requestApplicationOnlineResult(aReply)
 	return onlineResult;
 };
 
-function apiRequestRefusedError(eMsg)
+function apiRequestRefusedError(vDesc)
 {
-	var aMsg = "API request failed. - " + eMsg;
-	throw new Error(aMsg);
+	var flagMsg = "API request failed. - " + vDesc;
+	throw new Error(flagMsg);
 }
 
 
@@ -203,9 +163,11 @@ function extractErrorText(eBodyText)
 	var endIndex = -1;
 	var charDifference = -1;
 	
-	var extractedText = "";
-	var extractValid = false;
-	var errorFree = false;
+	var res = {};
+	
+	res["extractedText"] = "";
+	res["valid"] = false;
+	res["errorFree"] = false;
 	
 	try
 	{
@@ -228,21 +190,19 @@ function extractErrorText(eBodyText)
 		
 		if (charDifference >= 0)
 		{
-			extractedText = eBodyText.substr(startExtract, charDifference);
-			extractValid = true;
+			res.extractedText = eBodyText.substr(startExtract, charDifference);
+			res.valid = true;
 		}
 		
-		errorFree = true;
+		res.errorFree = true;
 	}
 	catch(e)
 	{
-		extractedText = "";
-		extractValid = false;
-		errorFree = false;
+		res.extractedText = "";
+		res.valid = false;
+		res.errorFree = false;
 	}
 	
-	
-	var res = {"eText": extractedText, "eSuccess": extractValid, "eSafe": errorFree};
 	return res;
 }
 
@@ -251,16 +211,16 @@ function validateExtractedErrorText(vObject)
 {
 	var validTextResult = null;
 	
-	if (vObject.eSafe === true && vObject.eSuccess === true && vObject.eText.length > 0)
+	if (vObject.errorFree === true && vObject.valid === true && vObject.extractedText.length > 0)
 	{
 		validTextResult = vObject.eText;
 	}
-	else if (vObject.eSafe === true && vObject.eSuccess === true)
+	else if (vObject.errorFree === true && vObject.valid === true)
 	{
 		validTextResult = null;
 		throw new Error("HTTP Error Message is empty");
 	}
-	else if (vObject.eSafe === true)
+	else if (vObject.errorFree === true)
 	{
 		validTextResult = null;
 		throw new Error("Could not extract error message. HTTP reply body uses incorrect format");
@@ -319,70 +279,6 @@ function checkWriteArgument(argValue)
 }
 
 
-function checkOptionUrlArgument(oUrlArg)
-{
-	var validIndex = getUrlValidationIndex(oUrlArg);
-	var urlType = typeof oUrlArg;
-	var urlValid = false;
-	
-	if (oUrlArg !== undefined && oUrlArg !== null && urlType === "string" && oUrlArg.length > 0 && validIndex === 0)
-	{
-		urlValid = true;
-	}
-	else if (oUrlArg !== undefined && oUrlArg !== null && urlType === "string" && oUrlArg.length > 0)
-	{
-		urlValid = false;
-		throw new Error("Invalid URL format. Must refer to localhost:3000");
-	}
-	else if (oUrlArg !== undefined && oUrlArg !== null)
-	{
-		urlValid = false;
-		throw new Error("URL must be a non-empty string");
-	}
-	else
-	{
-		urlValid = false;
-		throw new Error("URL argument missing or null");
-	}
-	
-	return urlValid;
-}
-
-function checkOptionMethodArgument(oMethodArg)
-{
-	var methodValid = false;
-	
-	if (oMethodArg === 'GET' || oMethodArg === 'POST' || oMethodArg === 'PUT' || oMethodArg === 'DELETE')
-	{
-		methodValid = true;
-	}
-	else
-	{
-		methodValid = false;
-		throw new Error("Invalid request method. Must be GET, POST, PUT, or DELETE");
-	}
-	
-	return methodValid;
-}
-
-
-function readOptionMethodArgument(oMethodArg)
-{
-	var readResult = null;
-	
-	try
-	{
-		readResult = oMethodArg.toUpperCase();
-	}
-	catch(e)
-	{
-		readResult = oMethodArg;
-	}
-	
-	return readResult;
-}
-
-
 
 function getUrlValidationIndex(ouArg)
 {
@@ -410,7 +306,6 @@ module.exports =
 	callWriteApiUrl: writeApiUrl,
 	callReadApiResponseArray: readApiResponseArray,
 	callReadApiResponseObject: readApiResponseObject,
-	callReadApiResponseString: readApiResponseString,
 	callReadApiResponseError: readApiResponseError,
 	callValidateApiResponse: validateApiResponse,
 	getApplicationOnlineResult: requestApplicationOnlineResult,

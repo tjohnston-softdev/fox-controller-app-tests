@@ -20,7 +20,6 @@ function testRequest()
 		checkWriteUrl();
 		checkRequestResponseArray();
 		checkRequestResponseObject();
-		checkRequestResponseString();
 		checkRequestResponseError();
 		checkRequestResponseValidation();
 		checkOnlineResult();
@@ -201,55 +200,6 @@ function checkRequestResponseObject()
 		{
 			runReadResponseInvalidObject(-1, posError);
 		});
-		
-	});
-}
-
-function checkRequestResponseString()
-{
-	describe("Read API Response String (callReadApiResponseString)", function()
-	{
-		var emptyError = "HTTP Reply is empty";
-		var stringTypeError = "Invalid Reply object type";
-		
-		it("Function Exists", function()
-		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callReadApiResponseString');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callReadApiResponseString', 'function');
-		});
-		
-		it("Call - Valid", function()
-		{
-			var bodyString = "Example Body";
-			var inputReply = commonRequestFunctions.createReplyObject(200, bodyString);
-			var actualReply = requestFile.callReadApiResponseString(inputReply);
-			
-			commonFunctionsFile.testString(actualReply);
-			expect(actualReply).to.equal(bodyString);
-		});
-		
-		it("Call - Empty Body", function()
-		{
-			runReadResponseInvalidString(emptyReplyObject, emptyError);
-		});
-		
-		it("Call - Missing Body", function()
-		{
-			var emptyObj = {};
-			runReadResponseInvalidString(emptyObj, emptyError);
-		});
-		
-		it("Call - Null", function()
-		{
-			runReadResponseInvalidString(null, readNullError);
-		});
-		
-		it("Call - Invalid Type", function()
-		{
-			runReadResponseInvalidString(-1, stringTypeError);
-		});
-		
-		
 		
 	});
 }
