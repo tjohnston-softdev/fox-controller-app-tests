@@ -1,4 +1,4 @@
-const iPrompt = require('prompt-sync')();
+const promptMode = require('prompt-sync')();
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
@@ -17,7 +17,7 @@ const processPart = require("../test-parts/part-j-restart_controller/restart-mai
 
 chai.use(chaiThings);
 
-var m = getTestModeInput();
+var chosenMode = getTestModeInput();
 
 function getTestModeInput()
 {
@@ -26,14 +26,14 @@ function getTestModeInput()
 	
 	try
 	{
-		inputLine = iPrompt("Enter test mode: ");
+		inputLine = promptMode("Enter test mode: ");
 		textLower = inputLine.toLowerCase();
 	}
 	catch(e)
 	{
 		inputLine = null;
 		textLower = null;
-		throw new Error("Test mode input not successful - " + e.message);
+		console.log("Test mode input not successful.");
 	}
 	
 	return textLower;
@@ -42,54 +42,54 @@ function getTestModeInput()
 
 describe("FOX Controller Test Script", function()
 {
-	var userInputType = typeof m;
+	var userInputType = typeof chosenMode;
 	
-	if (m === 'common')
+	if (chosenMode === 'common')
 	{
 		commonPart.callCommon();
 	}
-	else if (m === 'local')
+	else if (chosenMode === 'local')
 	{
 		externalPart.callExternal();
 		internalPart.callInternal();
 	}
-	else if (m === 'online')
+	else if (chosenMode === 'online')
 	{
 		onlinePart.callOnline();
 	}
-	else if (m === 'cont')
+	else if (chosenMode === 'cont')
 	{
 		onlinePart.callOffline();
 		settingsPart.callSettings();
 		modelsPart.callModels();
 		controllerPart.callController();
 	}
-	else if (m === 'request')
+	else if (chosenMode === 'request')
 	{
 		onlinePart.callOnline();
 		deviceApiPart.callCoordinateApiRequests();
 	}
-	else if (m === 'r-process')
+	else if (chosenMode === 'r-process')
 	{
 		onlinePart.callOnline();
 		processPart.callCoordinateRestart();
 	}
-	else if (m === 'r-fox')
+	else if (chosenMode === 'r-fox')
 	{
 		onlinePart.callOnline();
 		processPart.callCoordinateReboot();
 	}
-	else if (m === 'r-factory')
+	else if (chosenMode === 'r-factory')
 	{
 		onlinePart.callOnline();
 		processPart.callCoordinateFactoryReset();
 	}
-	else if (m === 'front')
+	else if (chosenMode === 'front')
 	{
 		onlinePart.callOnline();
 		frontendPart.callCoordinateFrontendTesting();
 	}
-	else if (m === 'all-cont')
+	else if (chosenMode === 'all-cont')
 	{
 		commonPart.callCommon();
 		externalPart.callExternal();
@@ -99,7 +99,7 @@ describe("FOX Controller Test Script", function()
 		modelsPart.callModels();
 		controllerPart.callController();
 	}
-	else if (m === 'all-api')
+	else if (chosenMode === 'all-api')
 	{
 		commonPart.callCommon();
 		externalPart.callExternal();
@@ -107,11 +107,11 @@ describe("FOX Controller Test Script", function()
 		onlinePart.callOnline();
 		deviceApiPart.callCoordinateApiRequests();
 	}
-	else if (m === 'debug')
+	else if (chosenMode === 'debug')
 	{
 		internalPart.callInternal();
 	}
-	else if (m === '')
+	else if (chosenMode === '')
 	{
 		console.log("No text entered");
 	}
