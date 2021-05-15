@@ -6,59 +6,59 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommonFull);
 
 
-function testDeviceArrayStructure(da)
+function testDeviceArrayStructure(deviceArr)
 {
-	var deviceArrayIndex = 0;
-	var currentArrayObject = null;
+	var deviceIndex = 0;
+	var currentObject = {};
 	
-	for (deviceArrayIndex = 0; deviceArrayIndex < da.length; deviceArrayIndex = deviceArrayIndex + 1)
+	for (deviceIndex = 0; deviceIndex < deviceArr.length; deviceIndex = deviceIndex + 1)
 	{
-		currentArrayObject = da[deviceArrayIndex];
-		testDeviceObjectStructure(currentArrayObject);
+		currentObject = deviceArr[deviceIndex];
+		testDeviceObjectStructure(currentObject);
 	}
 }
 
-function testDeviceObjectStructure(dObj)
+function testDeviceObjectStructure(deviceObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'id');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'maker');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'deviceType');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'model');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'name');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'desc');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'ipAddress');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'username');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'password');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'isEnabled');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, '__modified');
-	commonFunctionsFile.testObjectPropertyDefinition(dObj, 'macAddress');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'id');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'maker');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'deviceType');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'model');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'name');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'desc');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'ipAddress');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'username');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'password');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'isEnabled');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, '__modified');
+	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'macAddress');
 	
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'id', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'maker', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'deviceType', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'model', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'name', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'desc', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'ipAddress', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'username', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'password', 'string');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'isEnabled', 'boolean');
-	commonFunctionsFile.testObjectPropertyContent(dObj, '__modified', 'number');
-	commonFunctionsFile.testObjectPropertyContent(dObj, 'macAddress', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'id', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'maker', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'deviceType', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'model', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'name', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'desc', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'ipAddress', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'username', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'password', 'string');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'isEnabled', 'boolean');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, '__modified', 'number');
+	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'macAddress', 'string');
 }
 
-function compareGetDeviceToOriginal(dGet, dOrig)
+function compareGetDeviceToOriginal(retObj, origObj)
 {
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'deviceType');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'maker');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'model');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'name');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'desc');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'ipAddress');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'username');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'password');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'isEnabled');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(dGet, dOrig, 'macAddress');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'deviceType');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'maker');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'model');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'name');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'desc');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'ipAddress');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'username');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'password');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'isEnabled');
+	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'macAddress');
 }
 
 function testDeviceDeletedStructure(deviceDelObj)
@@ -70,27 +70,27 @@ function testDeviceDeletedStructure(deviceDelObj)
 }
 
 
-function testNodeConfigObjectStructure(confObj)
+function testNodeConfigObjectStructure(configObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'id');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'type');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'z');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'name');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'deviceId');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'ioSetId');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'x');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'y');
-	commonFunctionsFile.testObjectPropertyDefinition(confObj, 'wires');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'id');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'type');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'z');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'name');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'deviceId');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'ioSetId');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'x');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'y');
+	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'wires');
 	
-	commonFunctionsFile.testString(confObj.id);
-	commonFunctionsFile.testString(confObj.type);
-	commonFunctionsFile.testString(confObj.z);
-	expect(confObj.name).to.be.a("string");
-	commonFunctionsFile.testString(confObj.deviceId);
-	commonFunctionsFile.testString(confObj.ioSetId);
-	expect(confObj.x).to.be.a('number');
-	expect(confObj.y).to.be.a('number');
-	expect(confObj.wires).to.be.an("array");
+	commonFunctionsFile.testString(configObj.id);
+	commonFunctionsFile.testString(configObj.type);
+	commonFunctionsFile.testString(configObj.z);
+	expect(configObj.name).to.be.a("string");
+	commonFunctionsFile.testString(configObj.deviceId);
+	commonFunctionsFile.testString(configObj.ioSetId);
+	expect(configObj.x).to.be.a('number');
+	expect(configObj.y).to.be.a('number');
+	expect(configObj.wires).to.be.an("array");
 }
 
 
@@ -103,22 +103,22 @@ function testPropertyArrayStructure(pArr)
 	commonFunctionsFile.testPropertyContents(pArr, 'text', 'string');
 }
 
-function testIdListed(da, targetDeviceID)
+function testIdListed(deviceArr, targetDeviceID)
 {
-	var listedDeviceIndex = 0;
+	var listIndex = 0;
 	var currentListedDevice = null;
 	var targetFound = false;
 	
-	while (listedDeviceIndex >= 0 && listedDeviceIndex < da.length && targetFound !== true)
+	while (listIndex >= 0 && listIndex < deviceArr.length && targetFound !== true)
 	{
-		currentListedDevice = da[listedDeviceIndex];
+		currentListedDevice = deviceArr[listIndex];
 		
 		if (currentListedDevice.id === targetDeviceID)
 		{
 			targetFound = true;
 		}
 		
-		listedDeviceIndex = listedDeviceIndex + 1;
+		listIndex = listIndex + 1;
 	}
 	
 	return targetFound;
@@ -204,18 +204,21 @@ function testDeviceListCommon(dListRet)
 }
 
 
-exports.callTestDeviceArrayStructure = testDeviceArrayStructure;
-exports.callTestDeviceObjectStructure = testDeviceObjectStructure;
-exports.callCompareGetDeviceToOriginal = compareGetDeviceToOriginal;
-exports.callTestDeviceDeletedStructure = testDeviceDeletedStructure;
-exports.callTestNodeConfigObjectStructure = testNodeConfigObjectStructure;
-exports.callTestPropertyArrayStructure = testPropertyArrayStructure;
-exports.callTestIdListed = testIdListed;
-exports.callTestLocalArray = testLocalArray;
-exports.callTestLocalArrayEmpty = testLocalArrayEmpty;
-exports.callTestLocalArrayNeutral = testLocalArrayNeutral;
-exports.callTestLocalArrayDynamic = testLocalArrayDynamic;
-exports.callTestDeviceListValidReturnEmpty = testDeviceListValidReturnEmpty;
-exports.callTestDeviceListValidReturnPopulated = testDeviceListValidReturnPopulated;
-exports.callTestDeviceListValidReturnNeutral = testDeviceListValidReturnNeutral;
-exports.callTestDeviceListValidReturnDynamic = testDeviceListValidReturnDynamic;
+module.exports =
+{
+	callTestDeviceArrayStructure: testDeviceArrayStructure,
+	callTestDeviceObjectStructure: testDeviceObjectStructure,
+	callCompareGetDeviceToOriginal: compareGetDeviceToOriginal,
+	callTestDeviceDeletedStructure: testDeviceDeletedStructure,
+	callTestNodeConfigObjectStructure: testNodeConfigObjectStructure,
+	callTestPropertyArrayStructure: testPropertyArrayStructure,
+	callTestIdListed: testIdListed,
+	callTestLocalArray: testLocalArray,
+	callTestLocalArrayEmpty: testLocalArrayEmpty,
+	callTestLocalArrayNeutral: testLocalArrayNeutral,
+	callTestLocalArrayDynamic: testLocalArrayDynamic,
+	callTestDeviceListValidReturnEmpty: testDeviceListValidReturnEmpty,
+	callTestDeviceListValidReturnPopulated: testDeviceListValidReturnPopulated,
+	callTestDeviceListValidReturnNeutral: testDeviceListValidReturnNeutral,
+	callTestDeviceListValidReturnDynamic: testDeviceListValidReturnDynamic
+};
