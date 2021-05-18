@@ -1,5 +1,9 @@
 # Changelog
 
-**./app/paths/files/app-paths.js**
-* Removed 'testCommon' public property.
-* Merged 'testCommonName' local variable into 'testCommonFull' public property.
+**./app/**
+* Added 'readme.md' files to empty subfolders.
+	* This is so that the folder structure is correctly interpreted by GitHub.
+	* The contents are nothing special. They are just summaries from the documentation.
+* Affected files:
+	* paths/readme.md
+	* sub-common/readme.md

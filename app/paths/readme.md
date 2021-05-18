@@ -1,0 +1,1 @@
+Stores the paths to common files both within the test project and the Controller itself. 

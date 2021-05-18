@@ -1,0 +1,1 @@
+Stores script files that need to be accessed by multiple parts in a co-dependent manner.
