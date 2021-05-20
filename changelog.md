@@ -1,9 +1,12 @@
 # Changelog
 
-**./app/**
-* Added 'readme.md' files to empty subfolders.
-	* This is so that the folder structure is correctly interpreted by GitHub.
-	* The contents are nothing special. They are just summaries from the documentation.
-* Affected files:
-	* paths/readme.md
-	* sub-common/readme.md
+**./package.json**
+* Installed 'clear' module.
+
+---
+
+**./test/fox-test-main.js**
+* Required 'clear' module.
+* Before executing any tests, the console is cleared.
+	* This is done by calling 'clear' at the start of each testing mode within the IF structure.
+	* This only applies for testing, and not warning messages.

@@ -19,6 +19,7 @@
   "dependencies": {
     "chai": "^4.3.4",
     "chai-things": "^0.2.0",
+    "clear": "^0.1.0",
     "mocha": "^8.3.2",
     "needle": "^2.6.0",
     "prompt-sync": "^4.1.6",

@@ -1,3 +1,4 @@
+const clear = require("clear");
 const promptMode = require('prompt-sync')();
 const chai = require("chai");
 const expect = require("chai").expect;
@@ -46,19 +47,23 @@ describe("FOX Controller Test Script", function()
 	
 	if (chosenMode === 'common')
 	{
+		clear();
 		commonPart.callCommon();
 	}
 	else if (chosenMode === 'local')
 	{
+		clear();
 		externalPart.callExternal();
 		internalPart.callInternal();
 	}
 	else if (chosenMode === 'online')
 	{
+		clear();
 		onlinePart.callOnline();
 	}
 	else if (chosenMode === 'cont')
 	{
+		clear();
 		onlinePart.callOffline();
 		settingsPart.callSettings();
 		modelsPart.callModels();
@@ -66,31 +71,37 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (chosenMode === 'request')
 	{
+		clear();
 		onlinePart.callOnline();
 		deviceApiPart.callCoordinateApiRequests();
 	}
 	else if (chosenMode === 'r-process')
 	{
+		clear();
 		onlinePart.callOnline();
 		processPart.callCoordinateRestart();
 	}
 	else if (chosenMode === 'r-fox')
 	{
+		clear();
 		onlinePart.callOnline();
 		processPart.callCoordinateReboot();
 	}
 	else if (chosenMode === 'r-factory')
 	{
+		clear();
 		onlinePart.callOnline();
 		processPart.callCoordinateFactoryReset();
 	}
 	else if (chosenMode === 'front')
 	{
+		clear();
 		onlinePart.callOnline();
 		frontendPart.callCoordinateFrontendTesting();
 	}
 	else if (chosenMode === 'all-cont')
 	{
+		clear();
 		commonPart.callCommon();
 		externalPart.callExternal();
 		internalPart.callInternal();
@@ -101,6 +112,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (chosenMode === 'all-api')
 	{
+		clear();
 		commonPart.callCommon();
 		externalPart.callExternal();
 		internalPart.callInternal();
@@ -109,6 +121,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (chosenMode === 'debug')
 	{
+		clear();
 		internalPart.callInternal();
 	}
 	else if (chosenMode === '')
