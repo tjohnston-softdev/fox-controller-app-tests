@@ -1,6 +1,6 @@
 function defineFoxPaths()
 {
-	var useEmulator = false;
+	var useEmulator = true;
 	var foxRoot = getFoxRoot(useEmulator);
 	var defineRes = {};
 	

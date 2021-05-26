@@ -132,8 +132,8 @@ function verifyTimeoutRequest()
 			needle.get("http://", {timeout: 1000}, function (timeoutErr, timeoutRes)
 			{
 				expect(timeoutErr).to.be.an.instanceof(Error);
-				expect(timeoutErr.message).to.equal("socket hang up");
-				expect(timeoutErr.code).to.equal("ECONNRESET");
+				expect(timeoutErr.message).to.equal("connect ECONNREFUSED 127.0.0.1:80");
+				expect(timeoutErr.code).to.equal("ECONNREFUSED");
 				expect(timeoutRes).to.be.undefined;
 				
 				done();

@@ -1,9 +1,12 @@
 # Changelog
 
-**Test Status**
-* Fixed slash typo for original Controller path.
+**./app/paths/files/fox-paths.js**
+* Emulator build active.
 
 ---
 
-**./app/paths/files/fox-paths.js**
-* Added slash at the end of the original build path in 'getFoxRoot'
+**./test-parts/part-b-external_modules/modules/pkg-needle.js - verifyTimeoutRequest**
+* Changed expected response message.
+	* Before: "socket hang up"
+	* After: "connect ECONNREFUSED 127.0.0.1:80"
+* Changed expected error code from "ECONNRESET" to "ECONNREFUSED"
