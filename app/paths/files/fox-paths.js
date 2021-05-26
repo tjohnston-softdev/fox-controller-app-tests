@@ -1,6 +1,7 @@
 function defineFoxPaths()
 {
-	var foxRoot = "../../../../fox-controller-app/";
+	var useEmulator = false;
+	var foxRoot = getFoxRoot(useEmulator);
 	var defineRes = {};
 	
 	defineRes["serviceMainFile"] = foxRoot + "service.main.js";
@@ -17,6 +18,23 @@ function defineFoxPaths()
 	defineRes["rioIndexFile"] = foxRoot + "fox-devices/remote_io/remote-io.index.js";
 	
 	return defineRes;
+}
+
+
+function getFoxRoot(foxEmu)
+{
+	var pathRes = "";
+	
+	if (foxEmu === true)
+	{
+		pathRes = "../../../../fox-controller-app/";
+	}
+	else
+	{
+		pathRes = "../../../../original/fox-controller-app";
+	}
+	
+	return pathRes;
 }
 
 
