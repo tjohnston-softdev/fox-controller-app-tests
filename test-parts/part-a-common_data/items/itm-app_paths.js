@@ -152,8 +152,4 @@ function writeFoxPropertyNames()
 	return arrayResult;
 }
 
-
-module.exports =
-{
-	callTestCommonPaths: testCommonPaths
-};
+module.exports = testCommonPaths;

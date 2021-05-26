@@ -1,19 +1,15 @@
-const cPathFile = require("./items/itm-app_paths");
-const cObjectFile = require("./items/itm-common_objects");
-const cErrorFile = require("./items/itm-common_errors");
+const pathTests = require("./items/itm-app_paths");
+const objectTests = require("./items/itm-common_objects");
+const errorTests = require("./items/itm-common_errors");
 
 function coordinateCommon()
 {
 	describe("A - Common Data", function()
 	{
-		cPathFile.callTestCommonPaths();
-		cObjectFile.callTestCommonObjects();
-		cErrorFile.callTestCommonErrors();
+		pathTests();
+		objectTests();
+		errorTests();
 	});
 }
 
-
-module.exports =
-{
-	callCommon: coordinateCommon
-};
+module.exports = coordinateCommon;

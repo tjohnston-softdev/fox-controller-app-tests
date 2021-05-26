@@ -2,7 +2,6 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonObjectsFile = require(commonPaths.commonObjects);
-const und = 'undefined';
 
 
 function testCommonObjects()
@@ -119,8 +118,4 @@ function testObjectProperty(tObject, propName, desiredType)
 	expect(propValue).to.be.a(desiredType);
 }
 
-
-module.exports =
-{
-	callTestCommonObjects: testCommonObjects
-};
+module.exports = testCommonObjects;

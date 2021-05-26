@@ -55,7 +55,4 @@ function testStringProperty(pName)
 }
 
 
-module.exports =
-{
-	callTestCommonErrors: testCommonErrors
-};
+module.exports = testCommonErrors;

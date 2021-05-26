@@ -48,7 +48,7 @@ describe("FOX Controller Test Script", function()
 	if (chosenMode === 'common')
 	{
 		clear();
-		commonPart.callCommon();
+		commonPart();
 	}
 	else if (chosenMode === 'local')
 	{
@@ -102,7 +102,7 @@ describe("FOX Controller Test Script", function()
 	else if (chosenMode === 'all-cont')
 	{
 		clear();
-		commonPart.callCommon();
+		commonPart();
 		externalPart.callExternal();
 		internalPart.callInternal();
 		onlinePart.callOffline();
@@ -113,7 +113,7 @@ describe("FOX Controller Test Script", function()
 	else if (chosenMode === 'all-api')
 	{
 		clear();
-		commonPart.callCommon();
+		commonPart();
 		externalPart.callExternal();
 		internalPart.callInternal();
 		onlinePart.callOnline();
