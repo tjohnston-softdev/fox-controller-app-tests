@@ -1,9 +1,5 @@
 # Changelog
 
-**Test Status**
-* Both 'online' and 'offline' test modes work as expected.
-
----
-
 **./test/fox-test-main.js**
-* Added 'offline' testing mode. - Checks whether the controller is offline.
+* Removed comment block containing possible test part calls.
+	* This is being phased out in favour of a simpler structure.
