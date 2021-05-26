@@ -16,5 +16,5 @@ function checkOperatingSystemSupported(osStr)
 
 module.exports =
 {
-	checkOsSupported: checkOperatingSystemSupported
+	checkSupported: checkOperatingSystemSupported
 };

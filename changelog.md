@@ -1,25 +1,34 @@
 # Changelog
 
 **./test/fox-test-main.js**
-* 'commonPart' is called directly.
+* 'externalPart' is called directly.
 
 ---
 
-**./test-parts/part-a-common_data/common-main.js**
+**./test-parts/part-b-external_modules/external-main.js**
 * Renamed global variables:
-	* 'cPathFile' to 'pathTests'
-	* 'cObjectFile' to 'objectTests'
-	* 'cErrorFile' to 'errorTests'
-* Required files are called directly inside 'coordinateCommon'
-* 'coordinateCommon' is exported directly.
+	* 'eOperatingSystemFile' to 'operatingSystemTests'
+	* 'eValidatorFile' to 'validatorTests'
+	* 'eNeedleFile' to 'needleTests'
+* File requirements are called directly inside 'coordinateExternal'
+* 'coordinateExternal' is exported directly.
 
 ---
 
-**./test-parts/part-a/common_data/items/**
-* itm-common_objects.js
-	* Removed the 'und' global variable.
-	* 'testCommonObjects' is exported directly.
-* itm-common_errors.js
-	* 'testCommonErrors' is exported directly.
-* itm-app_paths.js
-	* 'testCommonPaths' is exported directly.
+**./test-parts/part-b-external_modules/modules/**
+* pkg-needle.js
+	* 'testNeedle' is exported directly.
+* pkg-os.js
+	* Replaced 'checkOsSupported' with 'checkSupported'
+	* 'testOsDependency' is exported directly.
+* pkg-request.js
+	* 'testRequest' is exported directly.
+* pkg-validator.js
+	* 'testValidatorDependency' is exported directly.
+
+---
+
+**./test-parts/part-b-external_modules/sub-modules/os-strings.js**
+* Changed 'checkOperatingSystemSupported' public name:
+	* Before: 'checkOsSupported'
+	* After: 'checkSupported'

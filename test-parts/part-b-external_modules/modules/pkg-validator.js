@@ -190,7 +190,4 @@ function handleInvalidCall(invalidArg)
 }
 
 
-module.exports =
-{
-	callTestValidatorDependency: testValidatorDependency
-};
+module.exports = testValidatorDependency;

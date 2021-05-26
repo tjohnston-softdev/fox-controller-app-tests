@@ -198,7 +198,4 @@ function validateCommonProperty(sourceObj, gProp, gType)
 }
 
 
-module.exports =
-{
-	callTestNeedle: testNeedle
-};
+module.exports = testNeedle;

@@ -35,7 +35,7 @@ function verifyPlatformFunction()
 		
 		it("Supported Operating System", function()
 		{
-			var supportFlag = osStrings.checkOsSupported(devicePlatform);
+			var supportFlag = osStrings.checkSupported(devicePlatform);
 			expect(supportFlag).to.be.true;
 		});
 		
@@ -43,8 +43,4 @@ function verifyPlatformFunction()
 	
 }
 
-
-module.exports =
-{
-	callTestOsDependency: testOsDependency
-};
+module.exports = testOsDependency;

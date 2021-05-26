@@ -53,7 +53,7 @@ describe("FOX Controller Test Script", function()
 	else if (chosenMode === 'local')
 	{
 		clear();
-		externalPart.callExternal();
+		externalPart();
 		internalPart.callInternal();
 	}
 	else if (chosenMode === 'online')
@@ -103,7 +103,7 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		commonPart();
-		externalPart.callExternal();
+		externalPart();
 		internalPart.callInternal();
 		onlinePart.callOffline();
 		settingsPart.callSettings();
@@ -114,7 +114,7 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		commonPart();
-		externalPart.callExternal();
+		externalPart();
 		internalPart.callInternal();
 		onlinePart.callOnline();
 		deviceApiPart.callCoordinateApiRequests();

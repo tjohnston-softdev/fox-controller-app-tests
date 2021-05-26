@@ -1,18 +1,15 @@
-const eOperatingSystemFile = require("./modules/pkg-os");
-const eValidatorFile = require("./modules/pkg-validator");
-const eNeedleFile = require("./modules/pkg-needle");
+const operatingSystemTests = require("./modules/pkg-os");
+const validatorTests = require("./modules/pkg-validator");
+const needleTests = require("./modules/pkg-needle");
 
 function coordinateExternal()
 {
 	describe("B - External Modules", function()
 	{
-		eOperatingSystemFile.callTestOsDependency();
-		eValidatorFile.callTestValidatorDependency();
-		eNeedleFile.callTestNeedle();
+		operatingSystemTests();
+		validatorTests();
+		needleTests();
 	});
 }
 
-module.exports =
-{
-	callExternal: coordinateExternal
-};
+module.exports = coordinateExternal;

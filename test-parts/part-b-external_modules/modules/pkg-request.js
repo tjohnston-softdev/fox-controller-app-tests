@@ -83,7 +83,4 @@ function validateGivenProperty(sourceObject, gProp, gType)
 }
 
 
-module.exports =
-{
-	callTestRequest: testRequest
-};
+module.exports = testRequest;
