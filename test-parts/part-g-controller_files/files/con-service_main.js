@@ -130,7 +130,4 @@ function handleProcessFunctions()
 	});
 }
 
-module.exports =
-{
-	callTestServiceMain: testServiceMain
-};
+module.exports = testServiceMain;

@@ -72,7 +72,7 @@ describe("FOX Controller Test Script", function()
 		onlinePart.callOffline();
 		settingsPart();
 		modelsPart();
-		controllerPart.callController();
+		controllerPart();
 	}
 	else if (chosenMode === 'request')
 	{
@@ -113,7 +113,7 @@ describe("FOX Controller Test Script", function()
 		onlinePart.callOffline();
 		settingsPart();
 		modelsPart();
-		controllerPart.callController();
+		controllerPart();
 	}
 	else if (chosenMode === 'all-api')
 	{

@@ -402,7 +402,4 @@ function getSupportedLists()
 }
 
 
-module.exports =
-{
-	callTestDeviceSettings: testDeviceSettings
-};
+module.exports = testDeviceSettings;

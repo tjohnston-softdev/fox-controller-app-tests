@@ -94,7 +94,4 @@ function handlePathProperties()
 	});
 }
 
-module.exports =
-{
-	callTestControllerSettings: testControllerSettings
-};
+module.exports = testControllerSettings;

@@ -173,7 +173,4 @@ function getCrudFunctions()
 	return namesList;
 }
 
-module.exports =
-{
-	callTestRemoteIoIndexMain: testRemoteIoIndexMain
-};
+module.exports = testRemoteIoIndexMain;

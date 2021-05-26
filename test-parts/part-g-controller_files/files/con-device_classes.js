@@ -359,7 +359,4 @@ function cloneInvalidModel()
 	return invRes;
 }
 
-module.exports =
-{
-	callTestDeviceClasses: testDeviceClasses
-};
+module.exports = testDeviceClasses;

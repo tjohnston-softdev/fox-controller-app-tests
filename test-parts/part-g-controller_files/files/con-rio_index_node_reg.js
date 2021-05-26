@@ -742,7 +742,4 @@ function coordinateGetIoPropertiesInvalidCall(invalidArg)
 }
 
 
-module.exports =
-{
-	callTestRemoteIoIndexNodeReg: testRemoteIoIndexNodeReg
-};
+module.exports = testRemoteIoIndexNodeReg;

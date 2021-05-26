@@ -29,7 +29,4 @@ function checkSettingsFile()
 }
 
 
-module.exports =
-{
-	callTestNodeRedSettings: testNodeRedSettings
-};
+module.exports = testNodeRedSettings;

@@ -153,7 +153,4 @@ function callRemoteIoModuleInvalid(rioInvalidObject)
 }
 
 
-module.exports =
-{
-	callTestRemoteIoFactories: testRemoteIoFactories
-};
+module.exports = testRemoteIoFactories;

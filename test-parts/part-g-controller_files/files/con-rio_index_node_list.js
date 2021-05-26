@@ -165,7 +165,4 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	rioSubCommonFile.callTestPropertyArrayStructure(mDevices);
 }
 
-module.exports =
-{
-	callTestRemoteIoIndexNodeList: testRemoteIoIndexNodeList
-};
+module.exports = testRemoteIoIndexNodeList;

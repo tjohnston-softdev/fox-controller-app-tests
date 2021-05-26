@@ -548,7 +548,4 @@ function handleNodeInvalidDispose()
 	});
 }
 
-module.exports =
-{
-	callTestRemoteIoIndexRegisterInvalid: testRemoteIoIndexRegisterInvalid
-};
+module.exports = testRemoteIoIndexRegisterInvalid;
