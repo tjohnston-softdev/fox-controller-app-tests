@@ -31,7 +31,7 @@ function getFoxRoot(foxEmu)
 	}
 	else
 	{
-		pathRes = "../../../../original/fox-controller-app";
+		pathRes = "../../../../original/fox-controller-app/";
 	}
 	
 	return pathRes;
