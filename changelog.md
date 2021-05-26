@@ -1,5 +1,22 @@
 # Changelog
 
 **./test/fox-test-main.js**
-* Removed comment block containing possible test part calls.
-	* This is being phased out in favour of a simpler structure.
+* 'settingsPart' is called directly.
+
+---
+
+**./test-parts/part-e-rio_settings/rio-settings-main.js**
+* Renamed global variables:
+	* 'cRemoteIoSettingsFile' to 'mainTests'
+	* 'cRemoteIoPropertiesFile' to 'propertyTests'
+	* 'cRemoteIoFunctionsFile' to 'functionTests'
+* Required files are called directly inside 'coordinateSettings'
+* 'coordinateSettings' is exported directly.
+
+---
+
+**./test-parts/part-e-rio_settings/settings/**
+* The following functions are exported directly from their respective files:
+	* testRemoteIoProperties (set-props.js)
+	* testRemoteIoSettings (set-main.js)
+	* testRemoteIoFunctions (set-functions.js)

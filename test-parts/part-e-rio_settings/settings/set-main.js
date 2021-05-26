@@ -68,7 +68,4 @@ function checkExports()
 	});
 }
 
-module.exports =
-{
-	callTestRemoteIoSettings: testRemoteIoSettings
-};
+module.exports = testRemoteIoSettings;

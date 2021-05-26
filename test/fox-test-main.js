@@ -70,7 +70,7 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		onlinePart.callOffline();
-		settingsPart.callSettings();
+		settingsPart();
 		modelsPart.callModels();
 		controllerPart.callController();
 	}
@@ -111,7 +111,7 @@ describe("FOX Controller Test Script", function()
 		externalPart();
 		internalPart();
 		onlinePart.callOffline();
-		settingsPart.callSettings();
+		settingsPart();
 		modelsPart.callModels();
 		controllerPart.callController();
 	}

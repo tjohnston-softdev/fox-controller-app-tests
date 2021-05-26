@@ -123,8 +123,4 @@ function checkBinarySignalProperty()
 	});
 }
 
-
-module.exports =
-{
-	callTestRemoteIoProperties: testRemoteIoProperties
-};
+module.exports = testRemoteIoProperties;

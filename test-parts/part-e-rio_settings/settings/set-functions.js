@@ -156,7 +156,4 @@ function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 }
 
 
-module.exports =
-{
-	callTestRemoteIoFunctions: testRemoteIoFunctions
-};
+module.exports = testRemoteIoFunctions;
