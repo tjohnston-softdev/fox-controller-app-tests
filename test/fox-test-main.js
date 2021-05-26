@@ -61,6 +61,11 @@ describe("FOX Controller Test Script", function()
 		clear();
 		onlinePart.callOnline();
 	}
+	else if (chosenMode === 'offline')
+	{
+		clear();
+		onlinePart.callOffline();
+	}
 	else if (chosenMode === 'cont')
 	{
 		clear();
