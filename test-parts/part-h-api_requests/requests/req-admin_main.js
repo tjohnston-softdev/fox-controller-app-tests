@@ -159,7 +159,4 @@ function handleLog()
 	});
 }
 
-module.exports =
-{
-	callTestAdminApis: testAdminApis
-};
+module.exports = testAdminApis;

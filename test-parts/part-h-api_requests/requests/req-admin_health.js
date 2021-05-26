@@ -475,7 +475,6 @@ function handleLog()
 }
 
 
-
 function testDriveLetter(fsObject)
 {
 	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
@@ -484,7 +483,4 @@ function testDriveLetter(fsObject)
 
 
 
-module.exports =
-{
-	callTestHealthApi: testHealthApi
-};
+module.exports = testHealthApi;

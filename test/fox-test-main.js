@@ -78,7 +78,7 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		onlinePart.callOnline();
-		deviceApiPart.callCoordinateApiRequests();
+		deviceApiPart();
 	}
 	else if (chosenMode === 'r-process')
 	{
@@ -122,7 +122,7 @@ describe("FOX Controller Test Script", function()
 		externalPart();
 		internalPart();
 		onlinePart.callOnline();
-		deviceApiPart.callCoordinateApiRequests();
+		deviceApiPart();
 	}
 	else if (chosenMode === 'debug')
 	{

@@ -277,7 +277,4 @@ function handleGlobalStatus()
 }
 
 
-module.exports =
-{
-	callTestStorageAPIs: testStorageAPIs
-};
+module.exports = testStorageAPIs;

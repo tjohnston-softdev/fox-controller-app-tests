@@ -658,7 +658,4 @@ function handleVariableDispose()
 }
 
 
-module.exports =
-{
-	callTestDeviceCrudApis: testDeviceCrudApis
-};
+module.exports = testDeviceCrudApis;

@@ -1,37 +1,30 @@
 # Changelog
 
 **./test/fox-test-main.js**
-* 'controllerPart' is called directly.
+* 'deviceApiPart' is called directly.
 
 ---
 
-**./test-parts/part-g-controller_files/controller-main.js**
+**./test-parts/part-h-api_requests/api-main.js**
 * Renamed global variables:
-	* 'cDeviceSettingsFile' to 'deviceSettingsTests'
-	* 'cDeviceClassesFile' to 'classTests'
-	* 'cRioFactoriesFile' to 'factoryTests'
-	* 'cSettingsMainFile' to 'settingsMainTests'
-	* 'cNodeRedMainFile' to 'redTests'
-* Renamed variables in 'coordinateController'
-	* cRioIndexMainFile' to 'rioIndexMainTests'
-	* 'cRioIndexNodeListFile' to 'rioIndexNodeListTests'
-	* 'cRioIndexNodeRegisterFile' to 'rioIndexRegisterTests'
-	* 'cRioIndexNodeRegisterInvalid' to 'rioIndexRegisterInvalidTests'
-	* 'cServiceMainFile' to 'serviceTests'
-* All required files are called directly in 'coordinateController'
-* 'coordinateController' is exported directly.
+	* 'cAdminFile' to 'adminTests'
+	* 'cHealthFile' to 'healthTests'
+	* 'cAlarmFile' to 'alarmTests'
+	* 'cStorageFile' to 'storageTests'
+	* 'cDevicesFileCrud' to 'crudTests'
+	* 'cDevicesFileCrudInvalid' to 'crudInvalidTests'
+	* 'cDevicesFileModifyInvalid' to 'modifyInvalidTests'
+* File requirements are called directly inside 'coordinateApiRequests'
+* 'coordinateApiRequests' is exported directly.
 
 ---
 
-**./test-parts/part-g-controller_files/files/**
+**./test-parts/part-h-api_requests/requests/**
 * These functions are exported directly from their respective files:
-	* testNodeRedSettings (con-settings_red.js)
-	* testControllerSettings (con-settings.js)
-	* testServiceMain (con-service_main.js)
-	* testDeviceClasses (con-device_classes.js)
-	* testDeviceSettings (con-device_settings.js)
-	* testRemoteIoFactories (con-rio_factories.js)
-	* testRemoteIoIndexMain (con-rio_index_main.js)
-	* testRemoteIoIndexNodeList (con-rio_index_node_list.js)
-	* testRemoteIoIndexNodeReg (con-rio_index_node_reg.js)
-	* testRemoteIoIndexRegisterInvalid (con-rio_index_node_reg_invalid.js)
+	* testStorageAPIs (req-storage.js)
+	* testAdminApis (req-admin_main.js)
+	* testHealthApi (req-admin_health.js)
+	* testAlarmApis (req-alarm.js)
+	* testDeviceCrudApis (req-devices_crud.js)
+	* testDeviceCrudInvalidApis (req-devices_crud_invalid.js)
+	* testDeviceModifyInvalidApis (req-devices_modify_invalid.js)

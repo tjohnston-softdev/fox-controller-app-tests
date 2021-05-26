@@ -1,27 +1,24 @@
-const cAdminFile = require("./requests/req-admin_main");
-const cHealthFile = require("./requests/req-admin_health");
-const cAlarmFile = require("./requests/req-alarm");
-const cStorageFile = require("./requests/req-storage");
-const cDevicesFileCrud = require("./requests/req-devices_crud");
-const cDevicesFileCrudInvalid = require("./requests/req-devices_crud_invalid");
-const cDevicesFileModifyInvalid = require("./requests/req-devices_modify_invalid");
+const adminTests = require("./requests/req-admin_main");
+const healthTests = require("./requests/req-admin_health");
+const alarmTests = require("./requests/req-alarm");
+const storageTests = require("./requests/req-storage");
+const crudTests = require("./requests/req-devices_crud");
+const crudInvalidTests = require("./requests/req-devices_crud_invalid");
+const modifyInvalidTests = require("./requests/req-devices_modify_invalid");
 
 function coordinateApiRequests()
 {
 	describe("H - API Requests", function()
 	{
-		cAdminFile.callTestAdminApis();
-		cHealthFile.callTestHealthApi();
-		cAlarmFile.callTestAlarmApis();
-		cStorageFile.callTestStorageAPIs();
-		cDevicesFileCrud.callTestDeviceCrudApis();
-		cDevicesFileCrudInvalid.callTestDeviceCrudInvalidApis();
-		cDevicesFileModifyInvalid.callTestDeviceModifyInvalidApis();
+		adminTests();
+		healthTests();
+		alarmTests();
+		storageTests();
+		crudTests();
+		crudInvalidTests();
+		modifyInvalidTests();
 	});
 }
 
 
-module.exports =
-{
-	callCoordinateApiRequests: coordinateApiRequests
-};
+module.exports = coordinateApiRequests;

@@ -510,7 +510,4 @@ function cloneAddedDevice()
 }
 
 
-module.exports =
-{
-	callTestDeviceModifyInvalidApis: testDeviceModifyInvalidApis
-};
+module.exports = testDeviceModifyInvalidApis;

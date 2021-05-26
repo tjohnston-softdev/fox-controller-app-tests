@@ -367,7 +367,4 @@ function handleUrlDispose()
 }
 
 
-module.exports =
-{
-	callTestDeviceCrudInvalidApis: testDeviceCrudInvalidApis
-};
+module.exports = testDeviceCrudInvalidApis;

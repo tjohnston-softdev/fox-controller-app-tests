@@ -133,7 +133,4 @@ function handleAvailable()
 	
 }
 
-module.exports =
-{
-	callTestAlarmApis: testAlarmApis
-};
+module.exports = testAlarmApis;
