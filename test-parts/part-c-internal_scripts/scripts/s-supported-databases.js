@@ -108,7 +108,4 @@ function testDefinitionSizes(dArray)
 }
 
 
-module.exports =
-{
-	callTestSupportedDatabases: testSupportedDatabases
-};
+module.exports = testSupportedDatabases;

@@ -54,7 +54,7 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		externalPart();
-		internalPart.callInternal();
+		internalPart();
 	}
 	else if (chosenMode === 'online')
 	{
@@ -104,7 +104,7 @@ describe("FOX Controller Test Script", function()
 		clear();
 		commonPart();
 		externalPart();
-		internalPart.callInternal();
+		internalPart();
 		onlinePart.callOffline();
 		settingsPart.callSettings();
 		modelsPart.callModels();
@@ -115,14 +115,16 @@ describe("FOX Controller Test Script", function()
 		clear();
 		commonPart();
 		externalPart();
-		internalPart.callInternal();
+		internalPart();
 		onlinePart.callOnline();
 		deviceApiPart.callCoordinateApiRequests();
 	}
 	else if (chosenMode === 'debug')
 	{
 		clear();
-		internalPart.callInternal();
+		commonPart();
+		externalPart();
+		internalPart();
 	}
 	else if (chosenMode === '')
 	{

@@ -37,7 +37,4 @@ function manufacturerArrayLoop()
 }
 
 
-module.exports =
-{
-	callTestDefine: testDefine
-};
+module.exports = testDefine;

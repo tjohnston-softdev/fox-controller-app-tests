@@ -572,7 +572,4 @@ function runOptionError(deleteArg, eError)
 
 
 
-module.exports =
-{
-	callTestRequest: testRequest
-};
+module.exports = testRequest;

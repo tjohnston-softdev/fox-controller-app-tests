@@ -40,7 +40,4 @@ function handleIndividualPath(propertyName, descriptionName)
 }
 
 
-module.exports =
-{
-	callTestRequestPaths: testRequestPaths
-};
+module.exports = testRequestPaths;

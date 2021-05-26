@@ -1,34 +1,30 @@
 # Changelog
 
 **./test/fox-test-main.js**
-* 'externalPart' is called directly.
+* 'internalPart' is called directly.
+* 'debug' testing mode now calls:
+	* commonPart
+	* externalPart
+	* internalPart
 
 ---
 
-**./test-parts/part-b-external_modules/external-main.js**
+**./test-parts/part-c-internal_scripts/internal-main.js**
 * Renamed global variables:
-	* 'eOperatingSystemFile' to 'operatingSystemTests'
-	* 'eValidatorFile' to 'validatorTests'
-	* 'eNeedleFile' to 'needleTests'
-* File requirements are called directly inside 'coordinateExternal'
-* 'coordinateExternal' is exported directly.
+	* 'iValidFile' to 'localValidTests'
+	* 'iDefineFile' to 'defineApiTests'
+	* 'iRequestFile' to 'requestApiTests'
+	* 'iRequestPathFile' to 'requestPathTests'
+	* 'iDatabaseFile' to 'dbDefinitionTests'
+* Required files are called directly inside 'coordinateInternal'
+* 'coordinateInternal' is exported directly.
 
 ---
 
-**./test-parts/part-b-external_modules/modules/**
-* pkg-needle.js
-	* 'testNeedle' is exported directly.
-* pkg-os.js
-	* Replaced 'checkOsSupported' with 'checkSupported'
-	* 'testOsDependency' is exported directly.
-* pkg-request.js
-	* 'testRequest' is exported directly.
-* pkg-validator.js
-	* 'testValidatorDependency' is exported directly.
-
----
-
-**./test-parts/part-b-external_modules/sub-modules/os-strings.js**
-* Changed 'checkOperatingSystemSupported' public name:
-	* Before: 'checkOsSupported'
-	* After: 'checkSupported'
+**./test-parts/part-c-internal_scripts/scripts/**
+* Functions are exported directly from their respective files:
+	* 'testDefine' (s-define_api.js)
+	* 'testLocalValid' (s-local_valid.js)
+	* 'testRequest' (s-request_api.js)
+	* 'testRequestPaths' (s-request_api_paths.js)
+	* 'testSupportedDatabases' (s-supported_databases.js)

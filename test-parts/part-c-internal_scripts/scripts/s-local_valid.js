@@ -351,7 +351,4 @@ function callExampleInvalid(eString, eSyntax, eEmpty, eErrorText)
 }
 
 
-module.exports =
-{
-	callTestLocalValid: testLocalValid
-};
+module.exports = testLocalValid;

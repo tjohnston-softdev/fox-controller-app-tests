@@ -1,23 +1,20 @@
-const iValidFile = require("./scripts/s-local_valid");
-const iDefineFile = require("./scripts/s-define_api");
-const iRequestFile = require("./scripts/s-request_api");
-const iRequestPathFile = require("./scripts/s-request_api_paths");
-const iDatabaseFile = require("./scripts/s-supported-databases");
+const localValidTests = require("./scripts/s-local_valid");
+const defineApiTests = require("./scripts/s-define_api");
+const requestApiTests = require("./scripts/s-request_api");
+const requestPathTests = require("./scripts/s-request_api_paths");
+const dbDefinitionTests = require("./scripts/s-supported-databases");
 
 
 function coordinateInternal()
 {
 	describe("C - Internal Scripts", function()
 	{
-		iValidFile.callTestLocalValid();
-		iDefineFile.callTestDefine();
-		iRequestFile.callTestRequest();
-		iRequestPathFile.callTestRequestPaths();
-		iDatabaseFile.callTestSupportedDatabases();
+		localValidTests();
+		defineApiTests();
+		requestApiTests();
+		requestPathTests();
+		dbDefinitionTests();
 	});
 }
 
-module.exports =
-{
-	callInternal: coordinateInternal
-};
+module.exports = coordinateInternal;
