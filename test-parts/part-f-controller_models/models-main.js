@@ -1,14 +1,11 @@
-const modelDefinitionsFile = require("./models/m-model_definitions");
+const definitionTests = require("./models/m-model_definitions");
 
 function coordinateModels()
 {	
 	describe("F - Controller Models", function()
 	{
-		modelDefinitionsFile.callTestModelDefinitionFiles();
+		definitionTests();
 	});
 }
 
-module.exports =
-{
-	callModels: coordinateModels
-};
+module.exports = coordinateModels;

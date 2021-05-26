@@ -247,7 +247,4 @@ function checkFunctionProperties(modelObj)
 
 
 
-module.exports =
-{
-	callTestModelDefinitionFiles: testModelDefinitionFiles
-};
+module.exports = testModelDefinitionFiles;
