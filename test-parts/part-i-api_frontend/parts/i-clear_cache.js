@@ -76,7 +76,4 @@ function handleDatatabaseListCheck()
 }
 
 
-module.exports =
-{
-	callTestNodeClearCacheApi: testNodeClearCacheApi
-};
+module.exports = testNodeClearCacheApi;

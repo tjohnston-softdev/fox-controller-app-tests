@@ -93,7 +93,4 @@ function testCurrentManufacturerApi(mName)
 	
 }
 
-module.exports =
-{
-	callTestNodeListAvaliableApi: testNodeListAvaliableApi
-};
+module.exports = testNodeListAvaliableApi;

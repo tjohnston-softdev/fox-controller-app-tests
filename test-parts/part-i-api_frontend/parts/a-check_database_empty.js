@@ -80,7 +80,4 @@ function handleDatabaseCheck()
 }
 
 
-module.exports =
-{
-	callTestNodeDatabaseEmptyApi: testNodeDatabaseEmptyApi
-};
+module.exports = testNodeDatabaseEmptyApi;

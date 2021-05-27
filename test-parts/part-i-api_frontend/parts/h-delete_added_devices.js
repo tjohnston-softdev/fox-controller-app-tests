@@ -83,7 +83,4 @@ function getAddedDeviceCountFromCache()
 }
 
 
-module.exports =
-{
-	callTestNodeDeleteAddedDevicesApi: testNodeDeleteAddedDevicesApi
-};
+module.exports = testNodeDeleteAddedDevicesApi;

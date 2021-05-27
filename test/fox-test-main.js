@@ -102,7 +102,7 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		onlinePart.callOnline();
-		frontendPart.callCoordinateFrontendTesting();
+		frontendPart();
 	}
 	else if (chosenMode === 'all-cont')
 	{

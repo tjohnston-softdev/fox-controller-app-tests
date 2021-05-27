@@ -123,7 +123,4 @@ function retrieveCountFromCache()
 	return res;
 }
 
-module.exports =
-{
-	callTestNodeCheckListApi: testNodeCheckListApi
-};
+module.exports = testNodeCheckListApi;

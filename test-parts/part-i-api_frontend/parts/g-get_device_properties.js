@@ -164,7 +164,4 @@ function callNodeManufacturerPropertyList()
 	return listRes;
 }
 
-module.exports =
-{
-	callTestNodeDevicePropertiesApi: testNodeDevicePropertiesApi
-};
+module.exports = testNodeDevicePropertiesApi;

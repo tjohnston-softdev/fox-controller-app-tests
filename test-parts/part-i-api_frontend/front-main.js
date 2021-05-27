@@ -1,19 +1,19 @@
-const cListEmptyFile = require("./parts/a-check_database_empty");
-const cAddDevicesFile = require("./parts/b-add_all_devices");
-const cGetListFile = require("./parts/c-get_device_list");
-const cCheckListFile = require("./parts/d-check_device_list");
-const cListAvaliableFile = require("./parts/e-list_avaliable_nodes");
-const cCheckNodeArrayFile = require("./parts/f-check_node_array");
-const cGetDeviceStatusFile = require("./parts/g-get_device_properties");
-const cDeleteDevicesFile = require("./parts/h-delete_added_devices");
-const cClearCacheFile = require("./parts/i-clear_cache");
+const checkDatabaseEmpty = require("./parts/a-check_database_empty");
+const addAllDevices = require("./parts/b-add_all_devices");
+const getDeviceList = require("./parts/c-get_device_list");
+const checkDeviceList = require("./parts/d-check_device_list");
+const listNodes = require("./parts/e-list_avaliable_nodes");
+const checkNodes = require("./parts/f-check_node_array");
+const getDevProps = require("./parts/g-get_device_properties");
+const deleteAddedDevices = require("./parts/h-delete_added_devices");
+const clearCache = require("./parts/i-clear_cache");
 
 
 function coordinateFrontendTesting()
 {
 	describe("I - Frontend Testing", function()
 	{
-		cListEmptyFile.callTestNodeDatabaseEmptyApi();
+		checkDatabaseEmpty();
 		
 		after(function()
 		{
@@ -27,7 +27,7 @@ function callAddDevices()
 {
 	describe("", function()
 	{
-		cAddDevicesFile.callTestNodeAddApis();
+		addAllDevices();
 		
 		after(function()
 		{
@@ -41,7 +41,7 @@ function callGetList()
 {
 	describe("", function()
 	{
-		cGetListFile.callTestNodeGetListApi();
+		getDeviceList();
 		
 		after(function()
 		{
@@ -54,7 +54,7 @@ function callCheckList()
 {
 	describe("", function()
 	{
-		cCheckListFile.callTestNodeCheckListApi();
+		checkDeviceList();
 		
 		after(function()
 		{
@@ -67,7 +67,7 @@ function callListAvaliable()
 {
 	describe("", function()
 	{
-		cListAvaliableFile.callTestNodeListAvaliableApi();
+		listNodes();
 		
 		after(function()
 		{
@@ -80,7 +80,7 @@ function callCheckNodeArray()
 {
 	describe("", function()
 	{
-		cCheckNodeArrayFile.callTestNodeArrayCheckApi();
+		checkNodes();
 		
 		after(function()
 		{
@@ -94,7 +94,7 @@ function callGetDeviceStatus()
 {
 	describe("", function()
 	{
-		cGetDeviceStatusFile.callTestNodeDevicePropertiesApi();
+		getDevProps();
 		
 		after(function()
 		{
@@ -108,7 +108,7 @@ function callDeleteDevices()
 {
 	describe("", function()
 	{
-		cDeleteDevicesFile.callTestNodeDeleteAddedDevicesApi();
+		deleteAddedDevices();
 		
 		after(function()
 		{
@@ -122,12 +122,9 @@ function callClearCache()
 {
 	describe("", function()
 	{
-		cClearCacheFile.callTestNodeClearCacheApi();
+		clearCache();
 	});
 	
 }
 
-module.exports =
-{
-	callCoordinateFrontendTesting: coordinateFrontendTesting
-};
+module.exports = coordinateFrontendTesting;

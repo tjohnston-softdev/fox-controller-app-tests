@@ -127,7 +127,4 @@ function callNodeCache()
 	return res;
 }
 
-module.exports =
-{
-	callTestNodeArrayCheckApi: testNodeArrayCheckApi
-};
+module.exports = testNodeArrayCheckApi;

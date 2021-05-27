@@ -144,7 +144,4 @@ function getDeviceCreateUrl()
 	return res;
 }
 
-module.exports =
-{
-	callTestNodeAddApis: testNodeAddApis
-};
+module.exports = testNodeAddApis;

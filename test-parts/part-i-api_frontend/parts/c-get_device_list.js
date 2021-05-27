@@ -94,7 +94,4 @@ function handleStore()
 }
 
 
-module.exports =
-{
-	callTestNodeGetListApi: testNodeGetListApi
-}
+module.exports = testNodeGetListApi;
