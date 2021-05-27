@@ -1,6 +1,6 @@
-const cRestartFile = require("./modes/mode-restart");
-const cRebootFile = require("./modes/mode-reboot");
-const cFactoryResetFile = require("./modes/mode-factory_reset");
+const restartMode = require("./modes/mode-restart");
+const rebootMode = require("./modes/mode-reboot");
+const factoryResetMode = require("./modes/mode-factory_reset");
 
 const mainRestartDescription = "J - Restart API Requests";
 
@@ -9,7 +9,7 @@ function coordinateRestart()
 {
 	describe(mainRestartDescription, function()
 	{
-		cRestartFile.callTestProcessRestart();
+		restartMode();
 	});
 }
 
@@ -18,7 +18,7 @@ function coordinateReboot()
 {
 	describe(mainRestartDescription, function()
 	{
-		cRebootFile.callTestFoxRestart();
+		rebootMode();
 	});
 }
 
@@ -27,7 +27,7 @@ function coordinateFactoryReset()
 {
 	describe(mainRestartDescription, function()
 	{
-		cFactoryResetFile.callTestFactoryReset();
+		factoryResetMode();
 	});
 }
 
@@ -35,7 +35,7 @@ function coordinateFactoryReset()
 
 module.exports =
 {
-	callCoordinateRestart: coordinateRestart,
-	callCoordinateReboot: coordinateReboot,
-	callCoordinateFactoryReset: coordinateFactoryReset
+	callRestart: coordinateRestart,
+	callReboot: coordinateReboot,
+	callFactoryReset: coordinateFactoryReset
 };

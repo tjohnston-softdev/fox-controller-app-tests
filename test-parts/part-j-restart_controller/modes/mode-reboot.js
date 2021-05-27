@@ -134,7 +134,4 @@ function handleFoxOfflinePlaceholder()
 }
 
 
-module.exports =
-{
-	callTestFoxRestart: testFoxRestart
-};
+module.exports = testFoxRestart;

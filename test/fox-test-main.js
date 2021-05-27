@@ -84,19 +84,19 @@ describe("FOX Controller Test Script", function()
 	{
 		clear();
 		onlinePart.callOnline();
-		processPart.callCoordinateRestart();
+		processPart.callRestart();
 	}
 	else if (chosenMode === 'r-fox')
 	{
 		clear();
 		onlinePart.callOnline();
-		processPart.callCoordinateReboot();
+		processPart.callReboot();
 	}
 	else if (chosenMode === 'r-factory')
 	{
 		clear();
 		onlinePart.callOnline();
-		processPart.callCoordinateFactoryReset();
+		processPart.callFactoryReset();
 	}
 	else if (chosenMode === 'front')
 	{

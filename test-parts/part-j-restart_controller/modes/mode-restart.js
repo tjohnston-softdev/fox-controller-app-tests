@@ -102,7 +102,4 @@ function handleProcessOfflineCheck()
 	});
 }
 
-module.exports =
-{
-	callTestProcessRestart: testProcessRestart
-};
+module.exports = testProcessRestart;

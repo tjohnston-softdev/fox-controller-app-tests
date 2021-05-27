@@ -181,7 +181,4 @@ function handleFactoryPlaceholder()
 	});
 }
 
-module.exports =
-{
-	callTestFactoryReset: testFactoryReset
-};
+module.exports = testFactoryReset;
