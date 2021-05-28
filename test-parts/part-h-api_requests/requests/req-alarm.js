@@ -31,7 +31,7 @@ function handleList()
 		
 		it("Request Made", function(done)
 		{
-			listUrl = apiRequestScript.callWriteApiUrl(apiPaths.alarmApi, "list/all?limit=10");
+			listUrl = apiRequestScript.writeUrl(apiPaths.alarmApi, "list/all?limit=10");
 			listReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(listUrl, listReturn, done);
 		});
@@ -86,7 +86,7 @@ function handleAvailable()
 		
 		it("Request Made", function(done)
 		{
-			availabilityUrl = apiRequestScript.callWriteApiUrl(apiPaths.alarmApi, "available");
+			availabilityUrl = apiRequestScript.writeUrl(apiPaths.alarmApi, "available");
 			availabilityReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(availabilityUrl, availabilityReturn, done);
 		});

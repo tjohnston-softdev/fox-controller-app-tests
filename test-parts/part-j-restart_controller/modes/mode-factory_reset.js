@@ -125,7 +125,7 @@ function handleFactoryResult()
 		
 		it("Results Read", function(done)
 		{
-			factoryResetRead = apiRequestScript.callReadApiResponseObject(factoryOutput.reply);
+			factoryResetRead = apiRequestScript.readResponseObject(factoryOutput.reply);
 			done();
 		});
 		

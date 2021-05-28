@@ -33,7 +33,7 @@ function handleDhcpClients()
 		
 		it("Request Made", function(done)
 		{
-			dhcpUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "dhcp-clients");
+			dhcpUrl = apiRequestScript.writeUrl(apiPaths.adminApi, "dhcp-clients");
 			dhcpReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(dhcpUrl, dhcpReturn, done);
 		});
@@ -92,14 +92,14 @@ function handleDefaultObject()
 		
 		it("Request Made", function(done)
 		{
-			defaultUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "defaults");
+			defaultUrl = apiRequestScript.writeUrl(apiPaths.adminApi, "defaults");
 			defaultReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(defaultUrl, defaultReturn, done);
 		});
 		
 		it("Results Read", function(done)
 		{
-			defaultRead = apiRequestScript.callReadApiResponseObject(defaultReturn);
+			defaultRead = apiRequestScript.readResponseObject(defaultReturn);
 			done();
 		});
 		
@@ -128,7 +128,7 @@ function handleLog()
 	
 		it("Request Made", function(done)
 		{
-			logUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "logs");
+			logUrl = apiRequestScript.writeUrl(apiPaths.adminApi, "logs");
 			logReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(logUrl, logReturn, done);
 		});
@@ -136,7 +136,7 @@ function handleLog()
 		
 		it("Results Read", function(done)
 		{
-			logRead = apiRequestScript.callReadApiResponseObject(logReturn);
+			logRead = apiRequestScript.readResponseObject(logReturn);
 			done();
 		});
 		

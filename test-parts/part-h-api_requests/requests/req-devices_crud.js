@@ -80,7 +80,7 @@ function handleDeviceDefaultValues()
 		
 		it("Request Made", function(done)
 		{
-			defaultsUrl = apiRequestScript.callWriteApiUrl(deviceFolder, "defaults");
+			defaultsUrl = apiRequestScript.writeUrl(deviceFolder, "defaults");
 			reqReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(defaultsUrl, reqReturn, done);
 		});
@@ -88,7 +88,7 @@ function handleDeviceDefaultValues()
 		
 		it("Results Read", function(done)
 		{
-			defaultsRead = apiRequestScript.callReadApiResponseObject(reqReturn);
+			defaultsRead = apiRequestScript.readResponseObject(reqReturn);
 			done();
 		});
 		
@@ -144,7 +144,7 @@ function handleBeforeListTest()
 		
 		it("Request Made", function(done)
 		{
-			beforeUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
+			beforeUrl = apiRequestScript.writeUrl(deviceFolder, deviceRio);
 			beforeReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(beforeUrl, beforeReturn, done);
 		});
@@ -198,14 +198,14 @@ function handleCreateDeviceTest()
 			
 			it("Request Made", function(done)
 			{
-				createUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
+				createUrl = apiRequestScript.writeUrl(deviceFolder, deviceRio);
 				createReturn = httpRequests.defineOutput();
 				httpRequests.postSuccessful(createUrl, commonJsonObjectsFile.crudDevice, createReturn, done);
 			});
 			
 			it("Results Read", function(done)
 			{
-				createRead = apiRequestScript.callReadApiResponseObject(createReturn);
+				createRead = apiRequestScript.readResponseObject(createReturn);
 				done();
 			});
 			
@@ -253,7 +253,7 @@ function handleUpdateAddTest()
 		
 		it("Request Made", function(done)
 		{
-			addUpdateUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
+			addUpdateUrl = apiRequestScript.writeUrl(deviceFolder, deviceRio);
 			addReqReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(addUpdateUrl, addReqReturn, done);
 		});
@@ -300,7 +300,7 @@ function handleReadDeviceTest()
 		
 		it("Results Read", function(done)
 		{
-			deviceRead = apiRequestScript.callReadApiResponseObject(reqReturn);
+			deviceRead = apiRequestScript.readResponseObject(reqReturn);
 			done();
 		});
 		
@@ -353,7 +353,7 @@ function handleDeviceStatusTest()
 		
 		it("Results Read", function(done)
 		{
-			statusRead = apiRequestScript.callReadApiResponseObject(reqReturn);
+			statusRead = apiRequestScript.readResponseObject(reqReturn);
 			done();
 		});
 		
@@ -419,7 +419,7 @@ function handleUpdateDeviceTest()
 		
 		it("Results Read", function(done)
 		{
-			modifyRead = apiRequestScript.callReadApiResponseObject(modifyReturn);
+			modifyRead = apiRequestScript.readResponseObject(modifyReturn);
 			done();
 		});
 		
@@ -478,7 +478,7 @@ function handleUpdateReviewTest()
 		
 		it("Results Read", function(done)
 		{
-			reviewRead = apiRequestScript.callReadApiResponseObject(reviewReturn);
+			reviewRead = apiRequestScript.readResponseObject(reviewReturn);
 			done();
 		});
 		
@@ -521,7 +521,7 @@ function handleDeleteFlagTest()
 		
 		it("Results Read", function(done)
 		{
-			flagRead = apiRequestScript.callReadApiResponseObject(flagReturn);
+			flagRead = apiRequestScript.readResponseObject(flagReturn);
 			done();
 		});
 		
@@ -560,7 +560,7 @@ function handleDeleteObjectTest()
 		
 		it("Results Read", function(done)
 		{
-			deleteRead = apiRequestScript.callReadApiResponseObject(deleteReturn);
+			deleteRead = apiRequestScript.readResponseObject(deleteReturn);
 			done();
 		});
 		
@@ -596,7 +596,7 @@ function handleUpdateDeleteTest()
 		
 		it("Request Made", function(done)
 		{
-			deleteUpdateUrl = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
+			deleteUpdateUrl = apiRequestScript.writeUrl(deviceFolder, deviceRio);
 			deleteUpdateReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(deleteUpdateUrl, deleteUpdateReturn, done);
 		});

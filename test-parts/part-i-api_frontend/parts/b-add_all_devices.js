@@ -103,7 +103,7 @@ function addCurrentSupportedModel(baseModel)
 	
 	it("Add Results Read", function(done)
 	{
-		addRead = apiRequestScript.callReadApiResponseObject(addReturn);
+		addRead = apiRequestScript.readResponseObject(addReturn);
 		done();
 	});
 	
@@ -134,7 +134,7 @@ function getDeviceCreateUrl()
 	
 	try
 	{
-		res = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+		res = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 	}
 	catch(e)
 	{

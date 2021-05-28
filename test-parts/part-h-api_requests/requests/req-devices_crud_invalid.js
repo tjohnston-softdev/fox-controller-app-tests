@@ -48,7 +48,7 @@ function handleUrlWrite()
 	{
 		it("Create", function(done)
 		{
-			urlCreate = apiRequestScript.callWriteApiUrl(deviceFolder, deviceRio);
+			urlCreate = apiRequestScript.writeUrl(deviceFolder, deviceRio);
 			done();
 		});
 		

@@ -10,7 +10,7 @@ const apiRequestFile = require(commonPaths.requestApi);
 
 function getReadUrl(readSubPart, readIdPart)
 {
-	var readBase = apiRequestFile.callWriteApiUrl(apiPaths.devicesApi, readSubPart);
+	var readBase = apiRequestFile.writeUrl(apiPaths.devicesApi, readSubPart);
 	var readDevice = readBase + '/' + readIdPart;
 	return readDevice;
 }

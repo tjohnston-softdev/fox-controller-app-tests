@@ -36,7 +36,7 @@ function handleRetrieve()
 		
 		it("List Request Sent", function(done)
 		{
-			retrieveUrl = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+			retrieveUrl = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			retrieveReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(retrieveUrl, retrieveReturn, done);
 		});

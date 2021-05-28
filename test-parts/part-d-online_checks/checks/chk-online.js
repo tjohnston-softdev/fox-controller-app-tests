@@ -35,7 +35,7 @@ function coordinateOnlineCheck(onlineFlag)
 	
 	it("Status Check", function(done)
 	{
-		retrievedStatus = requestFile.getApplicationOnlineResult(reqReturn);
+		retrievedStatus = requestFile.getOnlineResult(reqReturn);
 		done();
 	});
 	

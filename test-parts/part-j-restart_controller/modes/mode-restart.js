@@ -34,7 +34,7 @@ function handleProcessRestart()
 	{
 		it("Restart Request Made", function(done)
 		{
-			processUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "restart/process");
+			processUrl = apiRequestScript.writeUrl(apiPaths.adminApi, "restart/process");
 			processReturn = httpRequests.defineOutput();
 			httpRequests.postSuccessful(processUrl, null, processReturn, done);
 		});
@@ -42,7 +42,7 @@ function handleProcessRestart()
 		
 		it("Results Read", function(done)
 		{
-			processRead = apiRequestScript.callReadApiResponseObject(processReturn);
+			processRead = apiRequestScript.readResponseObject(processReturn);
 			done();
 		});
 		

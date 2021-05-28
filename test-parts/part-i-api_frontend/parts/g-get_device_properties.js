@@ -80,7 +80,7 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Request Made", function(done)
 	{
-		deviceURL = apiRequestScript.callWriteApiUrl(apiPaths.nodesApi, deviceManufacturer);
+		deviceURL = apiRequestScript.writeUrl(apiPaths.nodesApi, deviceManufacturer);
 		deviceURL = deviceURL + "/" + deviceID;
 		deviceReturn = httpRequests.defineOutput();
 		
@@ -89,7 +89,7 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Results Read", function(done)
 	{
-		deviceRead = apiRequestScript.callReadApiResponseObject(deviceReturn);
+		deviceRead = apiRequestScript.readResponseObject(deviceReturn);
 		done();
 	});
 	

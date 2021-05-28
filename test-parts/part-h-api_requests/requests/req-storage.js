@@ -42,7 +42,7 @@ function handleFileList()
 		
 		it("Request Made", function(done)
 		{
-			fileListUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, "user-files/list");
+			fileListUrl = apiRequestScript.writeUrl(apiPaths.storageApi, "user-files/list");
 			fileReqReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(fileListUrl, fileReqReturn, done);
 		});
@@ -160,7 +160,7 @@ function handleFileDownload()
 		it("Download Request Made", function(done)
 		{
 			relPath = "user-files/download/" + testFile.name;
-			fileDownloadUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, relPath);
+			fileDownloadUrl = apiRequestScript.writeUrl(apiPaths.storageApi, relPath);
 			fileDownloadReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(fileDownloadUrl, fileDownloadReturn, done);
 		});
@@ -235,7 +235,7 @@ function handleGlobalStatus()
 		
 		it("Request Made", function(done)
 		{
-			statusUrl = apiRequestScript.callWriteApiUrl(apiPaths.storageApi, "global/status");
+			statusUrl = apiRequestScript.writeUrl(apiPaths.storageApi, "global/status");
 			statusReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(statusUrl, statusReturn, done);
 		});
@@ -243,7 +243,7 @@ function handleGlobalStatus()
 		
 		it("Results Read", function(done)
 		{
-			statusRead = apiRequestScript.callReadApiResponseObject(statusReturn);
+			statusRead = apiRequestScript.readResponseObject(statusReturn);
 			done();
 		});
 		

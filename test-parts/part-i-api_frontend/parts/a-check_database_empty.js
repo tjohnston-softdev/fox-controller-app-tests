@@ -31,7 +31,7 @@ function handleDatabaseRetrieve()
 		
 		it("Request Sent", function(done)
 		{
-			listUrl = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+			listUrl = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			listReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(listUrl, listReturn, done);
 		});

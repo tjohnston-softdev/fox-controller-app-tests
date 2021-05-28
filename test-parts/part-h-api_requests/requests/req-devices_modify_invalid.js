@@ -60,7 +60,7 @@ function handlePrepare()
 		
 		it("List Devices URL Written", function(done)
 		{
-			urlList = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+			urlList = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			
 			commonFunctionsFile.testPresent(urlList);
 			commonFunctionsFile.testString(urlList);
@@ -71,7 +71,7 @@ function handlePrepare()
 		
 		it("Create Device URL Written", function(done)
 		{
-			urlCreate = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+			urlCreate = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			
 			commonFunctionsFile.testPresent(urlCreate);
 			commonFunctionsFile.testString(urlCreate);
@@ -150,7 +150,7 @@ function handleTestAdd()
 		
 		it("Results Read", function(done)
 		{
-			addResultRead = apiRequestScript.callReadApiResponseObject(addResultReturn);
+			addResultRead = apiRequestScript.readResponseObject(addResultReturn);
 			done();
 		});
 		
@@ -209,7 +209,7 @@ function handleTestGet()
 		
 		it("Results Read", function(done)
 		{
-			getRead = apiRequestScript.callReadApiResponseObject(getReturn);
+			getRead = apiRequestScript.readResponseObject(getReturn);
 			done();
 		});
 		
@@ -263,7 +263,7 @@ function handleUnchangedModifyTest()
 		
 		it("Modification Passed", function(done)
 		{
-			ucUpdateRead = apiRequestScript.callReadApiResponseObject(updateReqReturn);
+			ucUpdateRead = apiRequestScript.readResponseObject(updateReqReturn);
 			
 			deviceCommon.testAddModifyResultProperties(ucUpdateRead);
 			deviceCommon.testAddModifyResultContents(ucUpdateRead);

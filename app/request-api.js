@@ -303,13 +303,13 @@ function getUrlValidationIndex(ouArg)
 module.exports =
 {
 	hostUrl: foxHost,
-	callWriteApiUrl: writeApiUrl,
-	callReadApiResponseArray: readApiResponseArray,
-	callReadApiResponseObject: readApiResponseObject,
-	callReadApiResponseError: readApiResponseError,
-	callValidateApiResponse: validateApiResponse,
-	getApplicationOnlineResult: requestApplicationOnlineResult,
-	showApiRequestRefusedError: apiRequestRefusedError,
+	writeUrl: writeApiUrl,
+	readResponseArray: readApiResponseArray,
+	readResponseObject: readApiResponseObject,
+	readResponseError: readApiResponseError,
+	validateResponse: validateApiResponse,
+	getOnlineResult: requestApplicationOnlineResult,
+	showRefusedError: apiRequestRefusedError,
 	generateIpAddress: generateRandomIpAddress,
 	getDeleteOptions: getDeleteOptionsObject
 };

@@ -54,7 +54,7 @@ function handleDatatabaseListCheck()
 		
 		it("List Request Sent", function(done)
 		{
-			listURL = apiRequestScript.callWriteApiUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
+			listURL = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			listReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(listURL, listReturn, done);
 		});

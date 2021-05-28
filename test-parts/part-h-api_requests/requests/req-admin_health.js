@@ -43,14 +43,14 @@ function getHealthObject()
 	{
 		it("Request Made", function(done)
 		{
-			healthUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "health");
+			healthUrl = apiRequestScript.writeUrl(apiPaths.adminApi, "health");
 			healthReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(healthUrl, healthReturn, done);
 		});
 		
 		it("Results Read", function(done)
 		{
-			healthObject = apiRequestScript.callReadApiResponseObject(healthReturn);
+			healthObject = apiRequestScript.readResponseObject(healthReturn);
 			done();
 		});
 		

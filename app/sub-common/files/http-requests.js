@@ -21,7 +21,7 @@ function requestGetSuccessful(endpointURL, outputObject, reqDone)
 	sendGet(endpointURL, function(requestErr, requestRes)
 	{
 		handleCallbackArguments(requestErr, requestRes);
-		apiRequestScript.callValidateApiResponse(requestRes);
+		apiRequestScript.validateResponse(requestRes);
 		
 		outputObject.body = requestRes.body;
 		outputObject.statusCode = requestRes.statusCode;
@@ -36,7 +36,7 @@ function requestPostSuccessful(endpointURL, postBody, outputObject, reqDone)
 	sendPost(endpointURL, postBody, function(requestErr, requestRes)
 	{
 		handleCallbackArguments(requestErr, requestRes);
-		apiRequestScript.callValidateApiResponse(requestRes);
+		apiRequestScript.validateResponse(requestRes);
 		
 		outputObject.body = requestRes.body;
 		outputObject.statusCode = requestRes.statusCode;
@@ -51,7 +51,7 @@ function requestPutSuccessful(endpointURL, putBody, outputObject, reqDone)
 	sendPut(endpointURL, putBody, function(requestErr, requestRes)
 	{
 		handleCallbackArguments(requestErr, requestRes);
-		apiRequestScript.callValidateApiResponse(requestRes);
+		apiRequestScript.validateResponse(requestRes);
 		
 		outputObject.body = requestRes.body;
 		outputObject.statusCode = requestRes.statusCode;
@@ -66,7 +66,7 @@ function requestDeleteSuccessful(endpointURL, deletePermStatus, outputObject, re
 	sendDelete(endpointURL, deletePermStatus, function(requestErr, requestRes)
 	{
 		handleCallbackArguments(requestErr, requestRes);
-		apiRequestScript.callValidateApiResponse(requestRes);
+		apiRequestScript.validateResponse(requestRes);
 		
 		outputObject.body = requestRes.body;
 		outputObject.statusCode = requestRes.statusCode;
@@ -149,7 +149,7 @@ function requestPing(outputObject, reqDone)
 
 function requestFactoryReset(outputObject, reqDone)
 {
-	var factoryURL = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "factory-reset");
+	var factoryURL = apiRequestScript.writeUrl(apiPaths.adminApi, "factory-reset");
 	
 	needle.post(factoryURL, null, {json: true}, function(requestErr, requestRes)
 	{
@@ -164,7 +164,7 @@ function requestFactoryReset(outputObject, reqDone)
 function checkFactoryResetResult(outputObject)
 {
 	handleCallbackArguments(outputObject.error, outputObject.reply);
-	apiRequestScript.callValidateApiResponse(outputObject.reply);
+	apiRequestScript.validateResponse(outputObject.reply);
 }
 
 
@@ -218,14 +218,14 @@ function handleCallbackArguments(argError, argResp)
 
 function handleErrorMessage(respObj, tgtMsg)
 {
-	var extractedMessage = apiRequestScript.callReadApiResponseError(respObj);
+	var extractedMessage = apiRequestScript.readResponseError(respObj);
 	expect(extractedMessage).to.equal(tgtMsg);
 }
 
 
 function handleInvalidStatus(respObj, sInput)
 {
-	var extractedObject = apiRequestScript.callReadApiResponseObject(respObj);
+	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
 	commonFunctionsFile.testPresent(extractedObject);
 	expect(extractedObject).to.be.an("object");
@@ -240,7 +240,7 @@ function handleInvalidStatus(respObj, sInput)
 
 function handleInvalidDelete(respObj)
 {
-	var extractedObject = apiRequestScript.callReadApiResponseObject(respObj);
+	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
 	commonFunctionsFile.testPresent(extractedObject);
 	expect(extractedObject).to.be.an("object");

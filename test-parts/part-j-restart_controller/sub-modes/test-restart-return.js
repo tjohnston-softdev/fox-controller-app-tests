@@ -18,7 +18,7 @@ function testProcessReturnObject(procObj)
 
 function testOfflineCheckResult(offlineReturn)
 {
-	var offlineRead = requestFile.getApplicationOnlineResult(offlineReturn);
+	var offlineRead = requestFile.getOnlineResult(offlineReturn);
 	expect(offlineRead).to.be.false;
 }
 

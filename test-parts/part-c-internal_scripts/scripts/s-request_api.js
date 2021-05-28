@@ -58,15 +58,15 @@ function checkHostUrlString()
 
 function checkWriteUrl()
 {	
-	describe("Request API Address (callWriteApiUrl)", function()
+	describe("Request API Address (writeUrl)", function()
 	{
 		var folderArg = "example-folder";
 		var fileArg = "example-file";
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callWriteApiUrl');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callWriteApiUrl', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'writeUrl');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'writeUrl', 'function');
 		});
 		
 		it("Call - Valid", function()
@@ -75,7 +75,7 @@ function checkWriteUrl()
 			var linkPath = folderArg + '/' + fileArg;
 			var inputURL = linkRoot + linkPath;
 			
-			var actualURL = requestFile.callWriteApiUrl(folderArg, fileArg);
+			var actualURL = requestFile.writeUrl(folderArg, fileArg);
 			expect(actualURL).to.equal(inputURL);
 		});
 		
@@ -111,20 +111,20 @@ function checkRequestResponseArray()
 	var posError = commonErrorStringsFile.writeUnexpectedTokenGeneral("u", 0);
 	var emptyBodyError = "Unexpected end of JSON input";
 	
-	describe("Read API Response Array (callReadApiResponseArray)", function()
+	describe("Read API Response Array (readResponseArray)", function()
 	{
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callReadApiResponseArray');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callReadApiResponseArray', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'readResponseArray');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'readResponseArray', 'function');
 		});
 		
 		it("Call - Valid", function()
 		{
 			var respString = '[{"value":"x","text":"y","name":"z"}]';
 			var inputResp = commonRequestFunctions.createReplyObject(200, respString);
-			var actualResp = requestFile.callReadApiResponseArray(inputResp);
+			var actualResp = requestFile.readResponseArray(inputResp);
 			
 			commonRequestFunctions.callValidateResponseArray(actualResp);
 		});
@@ -158,25 +158,25 @@ function checkRequestResponseObject()
 	var jsonString = '{"exampleProperty":"exampleValue"}';
 	var jsonObject = JSON.parse(jsonString);
 	
-	describe("Read API Response Object (callReadApiResponseObject)", function()
+	describe("Read API Response Object (readResponseObject)", function()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callReadApiResponseObject');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callReadApiResponseObject', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'readResponseObject');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'readResponseObject', 'function');
 		});
 		
 		it("Call - Valid String", function()
 		{
 			var inputResp = commonRequestFunctions.createReplyObject(200, jsonString);
-			var actualResp = requestFile.callReadApiResponseObject(inputResp);
+			var actualResp = requestFile.readResponseObject(inputResp);
 			commonRequestFunctions.callValidateResponseObject(actualResp);
 		});
 		
 		it("Call - Valid Object", function()
 		{
 			var inputResp = commonRequestFunctions.createReplyObject(200, jsonObject);
-			var actualResp = requestFile.callReadApiResponseObject(inputResp);
+			var actualResp = requestFile.readResponseObject(inputResp);
 			commonRequestFunctions.callValidateResponseObject(actualResp);
 		});
 		
@@ -208,14 +208,14 @@ function checkRequestResponseObject()
 
 function checkRequestResponseError()
 {
-	describe("Read API Response Error (callReadApiResponseError)", function()
+	describe("Read API Response Error (readResponseError)", function()
 	{
 		var incorrectErrorFormat = "Could not extract error message. HTTP reply body uses incorrect format";
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callReadApiResponseError');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callReadApiResponseError', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'readResponseError');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'readResponseError', 'function');
 		});
 		
 		it("Call - Valid", function()
@@ -223,7 +223,7 @@ function checkRequestResponseError()
 			var validErrorString = "Example Message";
 			var validReplyString = commonRequestFunctions.callWriteReplyErrorExample(validErrorString);
 			var inputReply = commonRequestFunctions.createReplyObject(500, validReplyString);
-			var actualError = requestFile.callReadApiResponseError(inputReply);
+			var actualError = requestFile.readResponseError(inputReply);
 			
 			commonFunctionsFile.testString(actualError);
 			expect(actualError).to.equal(validErrorString);
@@ -254,18 +254,18 @@ function checkRequestResponseError()
 
 function checkRequestResponseValidation()
 {
-	describe("Validate API Response (callValidateApiResponse)", function()
+	describe("Validate API Response (validateResponse)", function()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'callValidateApiResponse');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'callValidateApiResponse', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'validateResponse');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'validateResponse', 'function');
 		});
 		
 		it("Call - Valid", function()
 		{
 			var validResponseObject = commonRequestFunctions.createReplyObject(200, "Successful");
-			var validResult = requestFile.callValidateApiResponse(validResponseObject);
+			var validResult = requestFile.validateResponse(validResponseObject);
 			expect(validResult).to.be.true;
 		});
 		
@@ -286,37 +286,37 @@ function checkRequestResponseValidation()
 
 function checkOnlineResult()
 {
-	describe("Check Online Result (getApplicationOnlineResult)", function()
+	describe("Check Online Result (getOnlineResult)", function()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'getApplicationOnlineResult');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'getApplicationOnlineResult', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'getOnlineResult');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'getOnlineResult', 'function');
 		});
 		
 		it("Call - Online", function()
 		{
 			var inputReply = {"statusCode":200};
-			var onlineRes = requestFile.getApplicationOnlineResult(inputReply);
+			var onlineRes = requestFile.getOnlineResult(inputReply);
 			expect(onlineRes).to.be.true;
 		});
 		
 		it("Call - Offline", function()
 		{
-			var offlineRes = requestFile.getApplicationOnlineResult(null);
+			var offlineRes = requestFile.getOnlineResult(null);
 			expect(offlineRes).to.be.false;
 		});
 		
 		it("Call - Missing Status Code", function()
 		{
 			var emptyObj = {};
-			var statusRes = requestFile.getApplicationOnlineResult(emptyObj);
+			var statusRes = requestFile.getOnlineResult(emptyObj);
 			expect(statusRes).to.be.false;
 		});
 		
 		it("Call - Invalid Type", function()
 		{
-			var invalidTypeRes = requestFile.getApplicationOnlineResult(-1);
+			var invalidTypeRes = requestFile.getOnlineResult(-1);
 			expect(invalidTypeRes).to.be.false;
 		});
 		
@@ -326,12 +326,12 @@ function checkOnlineResult()
 
 function checkRefuseError()
 {
-	describe("Request Refused Error (showApiRequestRefusedError)", function()
+	describe("Request Refused Error (showRefusedError)", function()
 	{
 		it("Error Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'showApiRequestRefusedError');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'showApiRequestRefusedError', 'function');
+			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'showRefusedError');
+			commonFunctionsFile.testObjectPropertyContent(requestFile, 'showRefusedError', 'function');
 		});
 		
 		it("Error Flagged Successfully", function()
@@ -409,7 +409,7 @@ function runRequestUrlInvalid(folderArg, fileArg, eError)
 	
 	try
 	{
-		requestFile.callWriteApiUrl(folderArg, fileArg);
+		requestFile.writeUrl(folderArg, fileArg);
 		comp = true;
 	}
 	catch(e)
@@ -429,7 +429,7 @@ function runReadResponseInvalidArray(invalidArg, eError)
 	
 	try
 	{
-		requestFile.callReadApiResponseArray(invalidArg);
+		requestFile.readResponseArray(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -449,7 +449,7 @@ function runReadResponseInvalidObject(invalidArg, eError)
 	
 	try
 	{
-		requestFile.callReadApiResponseObject(invalidArg);
+		requestFile.readResponseObject(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -490,7 +490,7 @@ function runReadResponseInvalidError(invalidArg, eError)
 	
 	try
 	{
-		requestFile.callReadApiResponseError(invalidArg);
+		requestFile.readResponseError(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -512,7 +512,7 @@ function runValidateResponseInvalid(invalidArg, eError)
 	
 	try
 	{
-		requestFile.callValidateApiResponse(invalidArg);
+		requestFile.validateResponse(invalidArg);
 		comp = true;
 	}
 	catch(e)
@@ -535,7 +535,7 @@ function runRefuseError(refuseArg)
 	
 	try
 	{
-		requestFile.showApiRequestRefusedError(refuseArg);
+		requestFile.showRefusedError(refuseArg);
 		refComplete = true;
 	}
 	catch(e)

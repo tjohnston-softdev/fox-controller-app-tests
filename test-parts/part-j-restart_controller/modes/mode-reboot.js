@@ -50,14 +50,14 @@ function handleFoxRestart()
 		
 		it("Restart Request Made", function(done)
 		{
-			foxRestartUrl = apiRequestScript.callWriteApiUrl(apiPaths.adminApi, "restart/fox");
+			foxRestartUrl = apiRequestScript.writeUrl(apiPaths.adminApi, "restart/fox");
 			foxRestartReturn = httpRequests.defineOutput();
 			httpRequests.postSuccessful(foxRestartUrl, null, foxRestartReturn, done);
 		});
 		
 		it("Results Read", function(done)
 		{
-			foxRestartRead = apiRequestScript.callReadApiResponseObject(foxRestartReturn);
+			foxRestartRead = apiRequestScript.readResponseObject(foxRestartReturn);
 			done();
 		});
 		

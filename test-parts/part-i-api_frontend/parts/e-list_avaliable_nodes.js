@@ -55,7 +55,7 @@ function testCurrentManufacturerApi(mName)
 	
 	it("Request Made", function(done)
 	{
-		searchURL = apiRequestScript.callWriteApiUrl(apiPaths.nodesApi, mName);
+		searchURL = apiRequestScript.writeUrl(apiPaths.nodesApi, mName);
 		searchReturn = httpRequests.defineOutput();
 		httpRequests.getSuccessful(searchURL, searchReturn, done);
 	});
