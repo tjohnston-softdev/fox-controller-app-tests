@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonErrorsFile = require(commonPaths.commonErrors);
+const testCommon = require(commonPaths.testCommon);
 
 
 function testCommonErrors()
@@ -50,8 +51,7 @@ function testFunctionProperty(pName)
 function testStringProperty(pName)
 {
 	var pValue = commonErrorsFile[pName];
-	expect(pValue).to.be.a("string");
-	expect(pValue).to.not.be.empty;
+	testCommon.testString(pValue);
 }
 
 

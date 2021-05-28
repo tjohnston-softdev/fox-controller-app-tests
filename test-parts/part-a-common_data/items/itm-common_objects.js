@@ -2,6 +2,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonObjectsFile = require(commonPaths.commonObjects);
+const testCommon = require(commonPaths.testCommon);
 
 
 function testCommonObjects()
@@ -10,7 +11,7 @@ function testCommonObjects()
 	{
 		it("Unknown ID", function()
 		{
-			testString(commonObjectsFile.unknownID);
+			testCommon.testString(commonObjectsFile.unknownID);
 		});
 		
 		it("Device Objects", function()
@@ -48,15 +49,15 @@ function handleDeviceObject(devicePropName)
 	testObjectProperty(deviceObj, 'password', 'string');
 	testObjectProperty(deviceObj, 'isEnabled', 'boolean');
 	
-	testString(deviceObj.id);
-	testString(deviceObj.deviceType);
-	testString(deviceObj.maker);
-	testString(deviceObj.model);
-	testString(deviceObj.name);
-	testString(deviceObj.desc);
-	testString(deviceObj.ipAddress);
-	testString(deviceObj.username);
-	testString(deviceObj.password);
+	testCommon.testString(deviceObj.id);
+	testCommon.testString(deviceObj.deviceType);
+	testCommon.testString(deviceObj.maker);
+	testCommon.testString(deviceObj.model);
+	testCommon.testString(deviceObj.name);
+	testCommon.testString(deviceObj.desc);
+	testCommon.testString(deviceObj.ipAddress);
+	testCommon.testString(deviceObj.username);
+	testCommon.testString(deviceObj.password);
 }
 
 function handleRegisterNodeObject()
@@ -79,11 +80,11 @@ function handleRegisterNodeObject()
 	testObjectProperty(registerResult, 'y', 'number');
 	testObjectProperty(registerResult, 'wires', 'array');
 	
-	testString(registerResult.id);
-	testString(registerResult.type);
-	testString(registerResult.z);
-	testString(registerResult.deviceId);
-	testString(registerResult.ioSetId);
+	testCommon.testString(registerResult.id);
+	testCommon.testString(registerResult.type);
+	testCommon.testString(registerResult.z);
+	testCommon.testString(registerResult.deviceId);
+	testCommon.testString(registerResult.ioSetId);
 }
 
 
@@ -91,8 +92,7 @@ function handleRegisterNodeObject()
 
 function testObjectType(propObject)
 {
-	expect(propObject).to.not.be.undefined;
-	expect(propObject).to.not.be.null;
+	testCommon.testPresent(propObject);
 	expect(propObject).to.be.an("object");
 }
 
@@ -102,20 +102,10 @@ function testObjectFunction(funcName)
 	expect(functionValue).to.be.a("function");
 }
 
-
-function testString(strText)
-{
-	expect(strText).to.be.a("string");
-	expect(strText).to.not.be.empty;
-}
-
 function testObjectProperty(tObject, propName, desiredType)
-{
-	var propValue = tObject[propName];
-	
-	expect(propValue).to.not.be.undefined;
-	expect(propValue).to.not.be.null;
-	expect(propValue).to.be.a(desiredType);
+{	
+	testCommon.testObjectPropertyDefinition(tObject, propName);
+	testCommon.testObjectPropertyContent(tObject, propName, desiredType);
 }
 
 module.exports = testCommonObjects;

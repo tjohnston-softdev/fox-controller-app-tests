@@ -2,7 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const chai = require("chai");
 const expect = require("chai").expect;
-const foxPaths = require("../../../app/paths/files/fox-paths");
+const appPaths = require("../../../app/paths/files/app-paths");
+const foxPaths = require(appPaths.foxRelative);
+const testCommon = require(appPaths.testCommon);
 const propertyList = writeFoxPropertyNames();
 
 
@@ -12,8 +14,7 @@ function testCommonPaths()
 	{
 		it("Property Array Retrieved", function()
 		{
-			expect(propertyList).to.be.an("array");
-			expect(propertyList).to.not.be.empty;
+			testCommon.testArrayPopulated(propertyList);
 		});
 		
 		it("Property Names Valid", function()
