@@ -4,14 +4,14 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
-const rioCommon = require(commonPaths.rioCommonFile);
-const rioInvalid = require(commonPaths.rioCommonInvalidFile);
-const deviceCommon = require(commonPaths.deviceCommonFile);
-const httpRequests = require(commonPaths.httpRequestsFile);
+const rioCommon = require(commonPaths.rioCommon);
+const rioInvalid = require(commonPaths.rioInvalid);
+const deviceCommon = require(commonPaths.deviceCommon);
+const httpRequests = require(commonPaths.httpRequests);
 
 var urlList = null;
 var urlCreate = null;

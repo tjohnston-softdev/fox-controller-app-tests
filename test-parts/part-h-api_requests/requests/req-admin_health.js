@@ -5,9 +5,9 @@ const os = require('os');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
-const httpRequests = require(commonPaths.httpRequestsFile);
+const httpRequests = require(commonPaths.httpRequests);
 
 const commonApi = require("../sub-requests/common-api");
 const commonDatabase = require("../sub-requests/common-database");

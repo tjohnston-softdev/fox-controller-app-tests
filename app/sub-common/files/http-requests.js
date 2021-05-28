@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
 const apiPaths = require(commonPaths.requestApiPaths);
 

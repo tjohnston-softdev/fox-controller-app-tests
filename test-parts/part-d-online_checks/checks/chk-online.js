@@ -1,6 +1,6 @@
 const commonPaths = require("../../../app/paths/files/app-paths");
 const requestFile = require(commonPaths.requestApi);
-const httpRequests = require(commonPaths.httpRequestsFile);
+const httpRequests = require(commonPaths.httpRequests);
 
 function testOnline()
 {

@@ -4,15 +4,15 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 
-const modelFunctionsFile = require(commonPaths.getModelsFile);
-const modelIntegrityFile = require(commonPaths.checkModelIntegrityFile);
-const rioCommon = require(commonPaths.rioCommonFile);
-const deviceCommon = require(commonPaths.deviceCommonFile);
-const httpRequests = require(commonPaths.httpRequestsFile);
+const modelFunctionsFile = require(commonPaths.getModels);
+const modelIntegrityFile = require(commonPaths.checkModelIntegrity);
+const rioCommon = require(commonPaths.rioCommon);
+const deviceCommon = require(commonPaths.deviceCommon);
+const httpRequests = require(commonPaths.httpRequests);
 const apiCommonFile = require("../sub-requests/common-api");
 
 const deviceFolder = apiPaths.devicesApi;

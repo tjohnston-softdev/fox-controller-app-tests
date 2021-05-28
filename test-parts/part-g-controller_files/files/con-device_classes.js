@@ -4,13 +4,13 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const commonFile = require(commonPaths.rioCommonFile);
-const rioInvalid = require(commonPaths.rioCommonInvalidFile);
+const commonFile = require(commonPaths.rioCommon);
+const rioInvalid = require(commonPaths.rioInvalid);
 const deviceModelFile = loadFoxFile(foxPath.storedDeviceClassFile);
 const deviceConnectFile = loadFoxFile(foxPath.connectedDeviceClassFile);
 

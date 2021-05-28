@@ -4,11 +4,11 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
-const httpRequests = require(commonPaths.httpRequestsFile);
-const rioCommon = require(commonPaths.rioCommonFile);
-const modelFunctionsFile = require(commonPaths.getModelsFile);
+const httpRequests = require(commonPaths.httpRequests);
+const rioCommon = require(commonPaths.rioCommon);
+const modelFunctionsFile = require(commonPaths.getModels);
 const modelArray = modelFunctionsFile.retrieveAllSupportedModels();
 
 var retrievedDatabaseList = null;

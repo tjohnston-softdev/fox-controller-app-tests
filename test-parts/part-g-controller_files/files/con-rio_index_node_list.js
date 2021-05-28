@@ -5,10 +5,10 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const indexFile = loadFoxFile(foxPath.rioIndexFile);
-const rioSubCommonFile = require(commonPaths.rioCommonFile);
+const rioSubCommonFile = require(commonPaths.rioCommon);
 
 var nodeListSpy = null;
 

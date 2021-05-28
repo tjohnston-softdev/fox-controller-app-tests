@@ -4,10 +4,10 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 const apiRequestScript = require(commonPaths.requestApi);
-const httpRequests = require(commonPaths.httpRequestsFile);
+const httpRequests = require(commonPaths.httpRequests);
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
 const testCacheFile = require("../sub-parts/test-device-cache");

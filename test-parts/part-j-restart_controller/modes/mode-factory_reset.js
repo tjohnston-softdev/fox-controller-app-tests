@@ -4,9 +4,9 @@ const chaiThings = require('chai-things');
 const os = require('os');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
-const httpRequests = require(commonPaths.httpRequestsFile);
+const httpRequests = require(commonPaths.httpRequests);
 
 const testReturnFile = require("../sub-modes/test-restart-return");
 const offlineDelay = require("../sub-modes/offline-check-delay");

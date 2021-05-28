@@ -3,7 +3,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const ipStrings = require("../sub-modules/ip-strings");
 
 

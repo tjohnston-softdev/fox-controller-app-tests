@@ -4,12 +4,12 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
-const rioInvalid = require(commonPaths.rioCommonInvalidFile);
+const rioInvalid = require(commonPaths.rioInvalid);
 const rioCheckFile = require("../sub-files/rio-factory_return");
 const factoryFile = loadFoxFile(foxPath.rioFactoriesFile);
 

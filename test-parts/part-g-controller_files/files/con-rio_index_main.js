@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommonFull);
+const commonFunctionsFile = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const indexFile = loadFoxFile(foxPath.rioIndexFile);

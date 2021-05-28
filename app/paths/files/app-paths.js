@@ -13,14 +13,14 @@ function defineAppPaths()
 	defineRes["requestApi"] = appRoot + "request-api";
 	defineRes["requestApiPaths"] = appRoot + "request-api-paths";
 	defineRes["supportedDatabases"] = appRoot + "supported-databases";
-	defineRes["testCommonFull"] = appRoot + "test-common";
+	defineRes["testCommon"] = appRoot + "test-common";
 	
-	defineRes["getModelsFile"] = subCommonFolder + "get-models";
-	defineRes["checkModelIntegrityFile"] = subCommonFolder + "check-model-integrity";
-	defineRes["rioCommonFile"] = subCommonFolder + "remote-io-common";
-	defineRes["rioCommonInvalidFile"] = subCommonFolder + "remote-io-invalid_data";
-	defineRes["deviceCommonFile"] = subCommonFolder + "test-device-common";
-	defineRes["httpRequestsFile"] = subCommonFolder + "http-requests";
+	defineRes["getModels"] = subCommonFolder + "get-models";
+	defineRes["checkModelIntegrity"] = subCommonFolder + "check-model-integrity";
+	defineRes["rioCommon"] = subCommonFolder + "remote-io-common";
+	defineRes["rioInvalid"] = subCommonFolder + "remote-io-invalid_data";
+	defineRes["deviceCommon"] = subCommonFolder + "test-device-common";
+	defineRes["httpRequests"] = subCommonFolder + "http-requests";
 	
 	return defineRes;
 }
