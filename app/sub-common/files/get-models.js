@@ -23,7 +23,7 @@ function getAllSupportedModels()
 }
 
 
-function getManufacturerModels(sList)
+function getModelsByManufacturer(sList)
 {
 	var loopIndex = 0;
 	var currentElement = {};
@@ -45,6 +45,6 @@ function getManufacturerModels(sList)
 
 module.exports =
 {
-	retrieveAllSupportedModels: getAllSupportedModels,
-	retrieveManufacturerModels: getManufacturerModels
+	getAllModels: getAllSupportedModels,
+	getByManufacturer: getModelsByManufacturer
 };

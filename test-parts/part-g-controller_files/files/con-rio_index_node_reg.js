@@ -105,7 +105,7 @@ function handleBeforeList()
 		
 		it("Return Valid", function(done)
 		{
-			commonFile.callTestDeviceListValidReturnDynamic(origDeviceList);
+			commonFile.testDeviceListDynamic(origDeviceList);
 			done();
 		});
 		
@@ -202,7 +202,7 @@ function handleStaticGet()
 			
 			commonFunctionsFile.testPresent(nodeTestObject);
 			expect(nodeTestObject).to.be.an("object");
-			commonFile.callTestDeviceObjectStructure(nodeTestObject);
+			commonFile.testDeviceObject(nodeTestObject);
 			
 			done();
 		});
@@ -210,7 +210,7 @@ function handleStaticGet()
 		it("Retrieved Object Matches Original", function(done)
 		{
 			expect(nodeTestObject.id).to.equal(nodeTestID);
-			commonFile.callCompareGetDeviceToOriginal(nodeTestObject, commonJsonObjectsFile.nodeDevice);
+			commonFile.compareToOriginal(nodeTestObject, commonJsonObjectsFile.nodeDevice);
 			done();
 		});
 		
@@ -304,8 +304,8 @@ function handleGetIoProperties()
 			
 			it("Status and Control Arrays Valid", function()
 			{
-				commonFile.callTestPropertyArrayStructure(propertyRes.STATUS);
-				commonFile.callTestPropertyArrayStructure(propertyRes.CONTROL);
+				commonFile.testPropertyArray(propertyRes.STATUS);
+				commonFile.testPropertyArray(propertyRes.CONTROL);
 			});
 			
 			it("Matching Names", function()
@@ -355,7 +355,7 @@ function handleNodeConfig()
 		{
 			commonFunctionsFile.testPresent(nodeConfigObject);
 			expect(nodeConfigObject).to.be.an("object");
-			commonFile.callTestNodeConfigObjectStructure(nodeConfigObject);
+			commonFile.testNodeConfigObject(nodeConfigObject);
 			done();
 		});
 		
@@ -647,12 +647,12 @@ function handleAfterList()
 		
 		it("Return Valid", function()
 		{
-			commonFile.callTestDeviceListValidReturnDynamic(afterListArray);
+			commonFile.testDeviceListDynamic(afterListArray);
 		});
 		
 		it("Test Device Absent", function()
 		{
-			var listFlag = commonFile.callTestIdListed(afterListArray, nodeTestID);
+			var listFlag = commonFile.testIdListed(afterListArray, nodeTestID);
 			expect(listFlag).to.be.false;
 		});
 		

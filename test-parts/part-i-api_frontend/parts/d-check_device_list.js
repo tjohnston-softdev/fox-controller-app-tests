@@ -39,7 +39,7 @@ function handleCheckPrepare()
 		{
 			commonFunctionsFile.testArrayPopulated(listTest);
 			commonFunctionsFile.testAllElements(listTest, 'object');
-			rioCommon.callTestDeviceArrayStructure(listTest);
+			rioCommon.testDeviceArray(listTest);
 			
 			done();
 		});
@@ -78,7 +78,7 @@ function handleCheckDevicesLoop()
 			
 			it(currentDesc, function(done)
 			{
-				var cacheDeviceListed = rioCommon.callTestIdListed(dbDeviceList, currentElement.key);
+				var cacheDeviceListed = rioCommon.testIdListed(dbDeviceList, currentElement.key);
 				expect(cacheDeviceListed).to.be.true;
 				done();
 			});

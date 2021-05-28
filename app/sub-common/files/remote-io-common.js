@@ -103,7 +103,7 @@ function testPropertyArrayStructure(pArr)
 	commonFunctionsFile.testPropertyContents(pArr, 'text', 'string');
 }
 
-function testIdListed(deviceArr, targetDeviceID)
+function testDeviceIdListed(deviceArr, targetDeviceID)
 {
 	var listIndex = 0;
 	var currentListedDevice = null;
@@ -124,75 +124,75 @@ function testIdListed(deviceArr, targetDeviceID)
 	return targetFound;
 }
 
-function testLocalArray(locArr)
+function testLocalDeviceArrayPopulated(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
 	commonFunctionsFile.testArrayPopulated(locArr);
 }
 
-function testLocalArrayEmpty(locArr)
+function testLocalDeviceArrayEmpty(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
 	commonFunctionsFile.testArrayEmpty(locArr);
 }
 
-function testLocalArrayNeutral(locArr)
+function testLocalDeviceArrayNeutral(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
 	expect(locArr).to.be.an("array");
 }
 
 
-function testLocalArrayDynamic(localArr, itemsRequiredFlag)
+function testLocalDeviceArrayDynamic(localArr, itemsRequiredFlag)
 {
 	if (itemsRequiredFlag > 0)
 	{
-		testLocalArray(localArr);
+		testLocalDeviceArrayPopulated(localArr);
 	}
 	else if (itemsRequiredFlag < 0)
 	{
-		testLocalArrayEmpty(localArr);
+		testLocalDeviceArrayEmpty(localArr);
 	}
 	else
 	{
-		testLocalArrayNeutral(localArr);
+		testLocalDeviceArrayNeutral(localArr);
 	}
 }
 
 
 
-function testDeviceListValidReturnEmpty(dListReturn)
+function testDeviceListReturnEmpty(dListReturn)
 {
-	testLocalArrayEmpty(dListReturn);
+	testLocalDeviceArrayEmpty(dListReturn);
 	testDeviceListCommon(dListReturn);
 }
 
-function testDeviceListValidReturnPopulated(dListReturn)
+function testDeviceListReturnPopulated(dListReturn)
 {
-	testLocalArray(dListReturn);
+	testLocalDeviceArrayPopulated(dListReturn);
 	testDeviceListCommon(dListReturn);
 }
 
-function testDeviceListValidReturnNeutral(dListReturn)
+function testDeviceListReturnNeutral(dListReturn)
 {
-	testLocalArrayNeutral(dListReturn);
+	testLocalDeviceArrayNeutral(dListReturn);
 	testDeviceListCommon(dListReturn);
 }
 
 
-function testDeviceListValidReturnDynamic(dListRet, itemsRequiredFlag)
+function testDeviceListReturnDynamic(dListRet, itemsRequiredFlag)
 {
 	if (itemsRequiredFlag > 0)
 	{
-		testDeviceListValidReturnPopulated(dListRet);
+		testDeviceListReturnPopulated(dListRet);
 	}
 	else if (itemsRequiredFlag < 0)
 	{
-		testDeviceListValidReturnEmpty(dListRet);
+		testDeviceListReturnEmpty(dListRet);
 	}
 	else
 	{
-		testDeviceListValidReturnNeutral(dListRet);
+		testDeviceListReturnNeutral(dListRet);
 	}
 }
 
@@ -206,19 +206,19 @@ function testDeviceListCommon(dListRet)
 
 module.exports =
 {
-	callTestDeviceArrayStructure: testDeviceArrayStructure,
-	callTestDeviceObjectStructure: testDeviceObjectStructure,
-	callCompareGetDeviceToOriginal: compareGetDeviceToOriginal,
-	callTestDeviceDeletedStructure: testDeviceDeletedStructure,
-	callTestNodeConfigObjectStructure: testNodeConfigObjectStructure,
-	callTestPropertyArrayStructure: testPropertyArrayStructure,
-	callTestIdListed: testIdListed,
-	callTestLocalArray: testLocalArray,
-	callTestLocalArrayEmpty: testLocalArrayEmpty,
-	callTestLocalArrayNeutral: testLocalArrayNeutral,
-	callTestLocalArrayDynamic: testLocalArrayDynamic,
-	callTestDeviceListValidReturnEmpty: testDeviceListValidReturnEmpty,
-	callTestDeviceListValidReturnPopulated: testDeviceListValidReturnPopulated,
-	callTestDeviceListValidReturnNeutral: testDeviceListValidReturnNeutral,
-	callTestDeviceListValidReturnDynamic: testDeviceListValidReturnDynamic
+	testDeviceArray: testDeviceArrayStructure,
+	testDeviceObject: testDeviceObjectStructure,
+	compareToOriginal: compareGetDeviceToOriginal,
+	testDeviceDeleted: testDeviceDeletedStructure,
+	testNodeConfigObject: testNodeConfigObjectStructure,
+	testPropertyArray: testPropertyArrayStructure,
+	testIdListed: testDeviceIdListed,
+	testLocalArrayPopulated: testLocalDeviceArrayPopulated,
+	testLocalArrayEmpty: testLocalDeviceArrayEmpty,
+	testLocalArrayNeutral: testLocalDeviceArrayNeutral,
+	testLocalArrayDynamic: testLocalDeviceArrayDynamic,
+	testDeviceListEmpty: testDeviceListReturnEmpty,
+	testDeviceListPopulated: testDeviceListReturnPopulated,
+	testDeviceListNeutral: testDeviceListReturnNeutral,
+	testDeviceListDynamic: testDeviceListReturnDynamic
 };

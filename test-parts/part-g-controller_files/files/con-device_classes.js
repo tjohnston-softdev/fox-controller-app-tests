@@ -337,7 +337,7 @@ function verifyStoredDeviceReturn(sObject, rObject)
 {
 	commonFunctionsFile.testPresent(rObject);
 	expect(rObject).to.be.an("object");
-	commonFile.callTestDeviceDeletedStructure(rObject);
+	commonFile.testDeviceDeleted(rObject);
 	
 	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'id');
 	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'deviceType');

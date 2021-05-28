@@ -54,18 +54,18 @@ function handleUrlWrite()
 		
 		it("Read, Delete", function(done)
 		{
-			urlRudUnknown = deviceCommon.callGetRudUrl(crudUnknownID);
-			urlRudInvalid = deviceCommon.callGetRudUrl(crudInvalidID);
-			urlRudBlank = deviceCommon.callGetRudUrl(null);
+			urlRudUnknown = deviceCommon.getRudUrl(crudUnknownID);
+			urlRudInvalid = deviceCommon.getRudUrl(crudInvalidID);
+			urlRudBlank = deviceCommon.getRudUrl(null);
 			
 			done();
 		});
 		
 		it("Status", function(done)
 		{
-			urlStatusUnknown = deviceCommon.callGetStatusUrl(crudUnknownID);
-			urlStatusInvalid = deviceCommon.callGetStatusUrl(crudInvalidID);
-			urlStatusBlank = deviceCommon.callGetStatusUrl(null);
+			urlStatusUnknown = deviceCommon.getStatusUrl(crudUnknownID);
+			urlStatusInvalid = deviceCommon.getStatusUrl(crudInvalidID);
+			urlStatusBlank = deviceCommon.getStatusUrl(null);
 			
 			done();
 		});

@@ -118,7 +118,7 @@ function handleCurrentDeviceList()
 		
 		it("Valid Return", function(done)
 		{
-			rioCommon.callTestDeviceListValidReturnNeutral(currentDeviceList);
+			rioCommon.testDeviceListNeutral(currentDeviceList);
 			done();
 		});
 		
@@ -156,9 +156,9 @@ function handleTestAdd()
 		
 		it("Device Added", function(done)
 		{
-			deviceCommon.callTestFrontendAddSuccessful(addResultRead);
+			deviceCommon.testFrontendAdded(addResultRead);
 			addKey = addResultRead.id;
-			deviceCommon.callTestFrontendAddIdValid(addKey);
+			deviceCommon.testFrontendIdValid(addKey);
 			done();
 		});
 		
@@ -166,14 +166,14 @@ function handleTestAdd()
 		it("Test Object ID Stored", function(done)
 		{
 			testObjectID = addKey;
-			deviceCommon.callTestFrontendAddIdValid(testObjectID);
+			deviceCommon.testFrontendIdValid(testObjectID);
 			done();
 		});
 		
 		
 		it("Update URL Written", function(done)
 		{
-			testObjectLink = deviceCommon.callGetRudUrl(testObjectID);
+			testObjectLink = deviceCommon.getRudUrl(testObjectID);
 			
 			commonFunctionsFile.testPresent(testObjectLink);
 			commonFunctionsFile.testString(testObjectLink);
@@ -265,8 +265,8 @@ function handleUnchangedModifyTest()
 		{
 			ucUpdateRead = apiRequestScript.callReadApiResponseObject(updateReqReturn);
 			
-			deviceCommon.callTestAddModifyReturnProperties(ucUpdateRead);
-			deviceCommon.callTestAddModifyReturnContents(ucUpdateRead);
+			deviceCommon.testAddModifyResultProperties(ucUpdateRead);
+			deviceCommon.testAddModifyResultContents(ucUpdateRead);
 			expect(ucUpdateRead.id).to.equal(testObjectID);
 			
 			done();
@@ -433,7 +433,7 @@ function handleAfterDeviceList()
 		
 		it("Valid Return", function(done)
 		{
-			rioCommon.callTestDeviceListValidReturnNeutral(afterListRead);
+			rioCommon.testDeviceListNeutral(afterListRead);
 			done();
 		});
 		
@@ -491,9 +491,9 @@ function handleDispose()
 
 function checkModifyTestObjectGet(gResultObject, gTargetID, gOriginalObject)
 {
-	rioCommon.callTestDeviceObjectStructure(gResultObject);
+	rioCommon.testDeviceObject(gResultObject);
 	expect(gResultObject.id).to.equal(gTargetID);
-	rioCommon.callCompareGetDeviceToOriginal(gResultObject, gOriginalObject);
+	rioCommon.compareToOriginal(gResultObject, gOriginalObject);
 }
 
 

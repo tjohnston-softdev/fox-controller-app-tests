@@ -71,7 +71,7 @@ function handleNodeListFull()
 		
 		it("Array Structure Valid", function()
 		{
-			rioSubCommonFile.callTestPropertyArrayStructure(retrievedNodeList);
+			rioSubCommonFile.testPropertyArray(retrievedNodeList);
 		});
 		
 	});
@@ -162,7 +162,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	
 	commonFunctionsFile.testPresent(mDevices);
 	expect(mDevices).to.be.an("array");
-	rioSubCommonFile.callTestPropertyArrayStructure(mDevices);
+	rioSubCommonFile.testPropertyArray(mDevices);
 }
 
 module.exports = testRemoteIoIndexNodeList;

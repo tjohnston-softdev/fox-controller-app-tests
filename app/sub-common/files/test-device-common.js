@@ -17,13 +17,13 @@ function getReadUrl(readSubPart, readIdPart)
 
 
 
-function getRudUrl(crudID)
+function getDeviceRudUrl(crudID)
 {
 	var rudDeviceUrl = getReadUrl(apiPaths.rioApiSub, crudID);
 	return rudDeviceUrl;
 }
 
-function getStatusUrl(crudID)
+function getDeviceStatusUrl(crudID)
 {
 	var statusLocation = "status/" + apiPaths.rioApiSub;
 	var statusDeviceUrl = getReadUrl(statusLocation, crudID);
@@ -32,13 +32,13 @@ function getStatusUrl(crudID)
 
 
 
-function testAddModifyReturnProperties(returnedObject)
+function testAddModifyResultObjectProperties(returnedObject)
 {
 	commonFunctionsFile.testObjectPropertyDefinition(returnedObject, 'success');
 	commonFunctionsFile.testObjectPropertyDefinition(returnedObject, 'id');
 }
 
-function testAddModifyReturnContents(returnedObject)
+function testAddModifyResultObjectContents(returnedObject)
 {	
 	expect(returnedObject.success).to.be.true;
 	commonFunctionsFile.testString(returnedObject.id);
@@ -48,8 +48,8 @@ function testFrontendAddSuccessful(returnedObject)
 {
 	commonFunctionsFile.testPresent(returnedObject);
 	expect(returnedObject).to.be.an("object");
-	testAddModifyReturnProperties(returnedObject);
-	testAddModifyReturnContents(returnedObject);
+	testAddModifyResultObjectProperties(returnedObject);
+	testAddModifyResultObjectContents(returnedObject);
 }
 
 function testFrontendAddIdValid(returnedObjectID)
@@ -62,10 +62,10 @@ function testFrontendAddIdValid(returnedObjectID)
 
 module.exports =
 {
-	callGetRudUrl: getRudUrl,
-	callGetStatusUrl: getStatusUrl,
-	callTestAddModifyReturnProperties: testAddModifyReturnProperties,
-	callTestAddModifyReturnContents: testAddModifyReturnContents,
-	callTestFrontendAddSuccessful: testFrontendAddSuccessful,
-	callTestFrontendAddIdValid: testFrontendAddIdValid
+	getRudUrl: getDeviceRudUrl,
+	getStatusUrl: getDeviceStatusUrl,
+	testAddModifyResultProperties: testAddModifyResultObjectProperties,
+	testAddModifyResultContents: testAddModifyResultObjectContents,
+	testFrontendAdded: testFrontendAddSuccessful,
+	testFrontendIdValid: testFrontendAddIdValid
 };

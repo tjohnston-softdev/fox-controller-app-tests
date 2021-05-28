@@ -13,7 +13,7 @@ const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
 const testCacheFile = require("../sub-parts/test-device-cache");
 
-const modelReferenceArray = modelFunctionsFile.retrieveAllSupportedModels();
+const modelReferenceArray = modelFunctionsFile.getAllModels();
 var resultList = null;
 
 
@@ -49,7 +49,7 @@ function handleRetrieve()
 		
 		it("Valid Return", function(done)
 		{
-			rioCommon.callTestDeviceListValidReturnPopulated(resultList);
+			rioCommon.testDeviceListPopulated(resultList);
 			done();
 		});
 		

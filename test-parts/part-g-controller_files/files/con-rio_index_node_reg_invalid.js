@@ -87,7 +87,7 @@ function handleOriginalList()
 		
 		it("Return Valid", function(done)
 		{
-			commonFile.callTestDeviceListValidReturnDynamic(originalDeviceList);
+			commonFile.testDeviceListDynamic(originalDeviceList);
 			done();
 		});
 		
@@ -166,7 +166,7 @@ function handleTestConfig()
 		{
 			commonFunctionsFile.testPresent(registerConfigObject);
 			expect(registerConfigObject).to.be.an("object");
-			commonFile.callTestNodeConfigObjectStructure(registerConfigObject);
+			commonFile.testNodeConfigObject(registerConfigObject);
 		});
 		
 	});
@@ -501,7 +501,7 @@ function handleTestIntact()
 		
 		it("Return Valid", function(done)
 		{
-			commonFile.callTestDeviceListValidReturnDynamic(postList);
+			commonFile.testDeviceListDynamic(postList);
 			done();
 		});
 		

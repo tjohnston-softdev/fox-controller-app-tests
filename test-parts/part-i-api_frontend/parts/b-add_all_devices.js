@@ -8,7 +8,7 @@ const commonFunctionsFile = require(commonPaths.testCommon);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const modelFunctionsFile = require(commonPaths.getModels);
-const modelArray = modelFunctionsFile.retrieveAllSupportedModels();
+const modelArray = modelFunctionsFile.getAllModels();
 
 const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
@@ -109,8 +109,8 @@ function addCurrentSupportedModel(baseModel)
 	
 	it("Device Added to Database Successfully", function(done)
 	{
-		deviceCommon.callTestFrontendAddSuccessful(addRead);
-		deviceCommon.callTestFrontendAddIdValid(addRead.id);
+		deviceCommon.testFrontendAdded(addRead);
+		deviceCommon.testFrontendIdValid(addRead.id);
 		
 		commonFunctionsFile.testPresent(addRead.id);
 		commonFunctionsFile.testString(addRead.id);

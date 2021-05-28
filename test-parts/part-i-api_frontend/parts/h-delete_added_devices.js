@@ -53,7 +53,7 @@ function deleteCurrentDevice(currentID)
 	
 	it("Request Made", function(done)
 	{
-		deleteURL = deviceCommon.callGetRudUrl(currentID);
+		deleteURL = deviceCommon.getRudUrl(currentID);
 		deleteReturn = httpRequests.defineOutput();
 		httpRequests.deleteSuccessful(deleteURL, true, deleteReturn, done);
 	});

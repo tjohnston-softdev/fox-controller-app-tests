@@ -4,7 +4,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 
 
-function verifyDeviceListRefIntegrity(dList, sList)
+function verifyReferenceIntegrity(dList, sList)
 {
 	var deviceIndex = 0;
 	var currentDevice = null;
@@ -78,5 +78,5 @@ function writeCurrentDeviceDescription(vDevice)
 
 module.exports =
 {
-	checkIntegrity: verifyDeviceListRefIntegrity
+	checkIntegrity: verifyReferenceIntegrity
 };

@@ -18,7 +18,7 @@ const apiCommonFile = require("../sub-requests/common-api");
 const deviceFolder = apiPaths.devicesApi;
 const deviceRio = apiPaths.rioApiSub;
 
-const modelObjectArray = modelFunctionsFile.retrieveAllSupportedModels();
+const modelObjectArray = modelFunctionsFile.getAllModels();
 
 var rioList = null;
 var testID = null;
@@ -73,7 +73,7 @@ function handleDeviceDefaultValues()
 		
 		it("Manufacturer Model Lists Retrieved", function(done)
 		{
-			deviceArrayLists = modelFunctionsFile.retrieveManufacturerModels(modelObjectArray);
+			deviceArrayLists = modelFunctionsFile.getByManufacturer(modelObjectArray);
 			done();
 		});
 		
@@ -171,7 +171,7 @@ function handleBeforeListTest()
 		
 		it("Object Structures Valid", function(done)
 		{
-			rioCommon.callTestDeviceArrayStructure(rioList);
+			rioCommon.testDeviceArray(rioList);
 			done();
 		});
 		
@@ -218,13 +218,13 @@ function handleCreateDeviceTest()
 			
 			it("Correct Properties", function(done)
 			{
-				deviceCommon.callTestAddModifyReturnProperties(createRead);
+				deviceCommon.testAddModifyResultProperties(createRead);
 				done();
 			});
 			
 			it("Correct Contents", function(done)
 			{
-				deviceCommon.callTestAddModifyReturnContents(createRead);
+				deviceCommon.testAddModifyResultContents(createRead);
 				testID = createRead.id;
 				done();
 			});
@@ -268,13 +268,13 @@ function handleUpdateAddTest()
 		
 		it("Valid Return", function(done)
 		{
-			rioCommon.callTestDeviceListValidReturnPopulated(addUpdateRead);
+			rioCommon.testDeviceListPopulated(addUpdateRead);
 			done();
 		});
 		
 		it("Test Device Listed", function(done)
 		{
-			var listFlag = rioCommon.callTestIdListed(addUpdateRead, testID);
+			var listFlag = rioCommon.testIdListed(addUpdateRead, testID);
 			expect(listFlag).to.be.true;
 			done();
 		});
@@ -293,7 +293,7 @@ function handleReadDeviceTest()
 		
 		it("Request Made", function(done)
 		{
-			deviceUrl = deviceCommon.callGetRudUrl(testID);
+			deviceUrl = deviceCommon.getRudUrl(testID);
 			reqReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(deviceUrl, reqReturn, done);
 		});
@@ -314,7 +314,7 @@ function handleReadDeviceTest()
 		
 		it("Object Structure Valid", function(done)
 		{
-			rioCommon.callTestDeviceObjectStructure(deviceRead);
+			rioCommon.testDeviceObject(deviceRead);
 			done();
 		});
 		
@@ -326,7 +326,7 @@ function handleReadDeviceTest()
 		
 		it("Matching Contents", function(done)
 		{
-			rioCommon.callCompareGetDeviceToOriginal(deviceRead, commonJsonObjectsFile.crudDevice);
+			rioCommon.compareToOriginal(deviceRead, commonJsonObjectsFile.crudDevice);
 			done();
 		});
 		
@@ -346,7 +346,7 @@ function handleDeviceStatusTest()
 		
 		it("Request Made", function(done)
 		{
-			statusUrl = deviceCommon.callGetStatusUrl(testID);
+			statusUrl = deviceCommon.getStatusUrl(testID);
 			reqReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(statusUrl, reqReturn, done);
 		});
@@ -412,7 +412,7 @@ function handleUpdateDeviceTest()
 		
 		it("Request Made", function(done)
 		{
-			modifyUrl = deviceCommon.callGetRudUrl(testID);
+			modifyUrl = deviceCommon.getRudUrl(testID);
 			modifyReturn = httpRequests.defineOutput();
 			httpRequests.putSuccessful(modifyUrl, modifyObject, modifyReturn, done);			
 		});
@@ -432,13 +432,13 @@ function handleUpdateDeviceTest()
 		
 		it("Correct Properties", function(done)
 		{
-			deviceCommon.callTestAddModifyReturnProperties(modifyRead);
+			deviceCommon.testAddModifyResultProperties(modifyRead);
 			done();
 		});
 		
 		it("Correct Contents", function(done)
 		{
-			deviceCommon.callTestAddModifyReturnContents(modifyRead);
+			deviceCommon.testAddModifyResultContents(modifyRead);
 			done();
 		});
 		
@@ -471,7 +471,7 @@ function handleUpdateReviewTest()
 		
 		it("Request Made", function(done)
 		{
-			reviewUrl = deviceCommon.callGetRudUrl(testID);
+			reviewUrl = deviceCommon.getRudUrl(testID);
 			reviewReturn = httpRequests.defineOutput();
 			httpRequests.getSuccessful(reviewUrl, reviewReturn, done);
 		});
@@ -487,7 +487,7 @@ function handleUpdateReviewTest()
 			commonFunctionsFile.testPresent(reviewRead);
 			expect(reviewRead).to.be.an("object");
 			
-			rioCommon.callTestDeviceObjectStructure(reviewRead);
+			rioCommon.testDeviceObject(reviewRead);
 			expect(reviewRead.id).to.equal(testID);
 			
 			done();
@@ -495,7 +495,7 @@ function handleUpdateReviewTest()
 		
 		it("Modifications Successful", function(done)
 		{	
-			rioCommon.callCompareGetDeviceToOriginal(reviewRead, localModify);
+			rioCommon.compareToOriginal(reviewRead, localModify);
 			done();
 		});
 		
@@ -514,7 +514,7 @@ function handleDeleteFlagTest()
 		
 		it("Request Made", function(done)
 		{
-			flagUrl = deviceCommon.callGetRudUrl(testID);
+			flagUrl = deviceCommon.getRudUrl(testID);
 			flagReturn = httpRequests.defineOutput();
 			httpRequests.deleteSuccessful(flagUrl, false, flagReturn, done);
 		});
@@ -553,7 +553,7 @@ function handleDeleteObjectTest()
 	{
 		it("Request Made", function(done)
 		{
-			deleteUrl = deviceCommon.callGetRudUrl(testID);
+			deleteUrl = deviceCommon.getRudUrl(testID);
 			deleteReturn = httpRequests.defineOutput();
 			httpRequests.deleteSuccessful(deleteUrl, false, deleteReturn, done);
 		});
@@ -610,13 +610,13 @@ function handleUpdateDeleteTest()
 		
 		it("Valid Return", function(done)
 		{
-			rioCommon.callTestDeviceListValidReturnNeutral(deleteUpdateRead);
+			rioCommon.testDeviceListNeutral(deleteUpdateRead);
 			done();
 		});
 		
 		it("Test Device Absent", function(done)
 		{
-			var listFlag = rioCommon.callTestIdListed(deleteUpdateRead, testID);
+			var listFlag = rioCommon.testIdListed(deleteUpdateRead, testID);
 			expect(listFlag).to.be.false;
 			done();
 		});
