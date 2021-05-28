@@ -23,16 +23,16 @@ function testCommonErrors()
 		
 		it("Functions Valid", function()
 		{
-			testFunctionProperty('writeKeyNotFoundError');
-			testFunctionProperty('writeRemoteIoPropertyError');
+			testFunctionProperty('writeKeyNotFound');
+			testFunctionProperty('writeRemoteIoPropertyGeneral');
 			testFunctionProperty('writeRemoteIoPropertySupport');
 			testFunctionProperty('writeRemoteIoPropertyConstruct');
 			testFunctionProperty('writeConnectDeviceProperty');
 			testFunctionProperty('writeSetDeviceOutputWrong');
 			testFunctionProperty('writeRegisterPrefixIndex');
-			testFunctionProperty('writeUnexpectedTokenError');
-			testFunctionProperty('writeUnexpectedTokenErrorNull');
-			testFunctionProperty('writeUnexpectedTokenErrorType');
+			testFunctionProperty('writeUnexpectedTokenGeneral');
+			testFunctionProperty('writeUnexpectedTokenNull');
+			testFunctionProperty('writeUnexpectedTokenType');
 			testFunctionProperty('writeTest');
 		});
 		

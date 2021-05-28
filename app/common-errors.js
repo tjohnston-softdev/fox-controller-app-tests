@@ -9,9 +9,9 @@ const connectObjectError = "_storedDevice must be instance of StoredDevice";
 const negativeError = "Must be an object: -1";
 
 
-function writeKeyNotFoundErrorString(kText)
+function writeKeyNotFoundErrorString(keyTxt)
 {
-	var res = "Key not found in database [" + kText + "]";
+	var res = "Key not found in database [" + keyTxt + "]";
 	return res;
 }
 
@@ -141,15 +141,15 @@ module.exports =
 	missingModule: missingModuleError,
 	connectObject: connectObjectError,
 	negativeNumberObject: negativeError,
-	writeKeyNotFoundError: writeKeyNotFoundErrorString,
-	writeRemoteIoPropertyError: writeRemoteIoPropertyErrorString,
+	writeKeyNotFound: writeKeyNotFoundErrorString,
+	writeRemoteIoPropertyGeneral: writeRemoteIoPropertyErrorString,
 	writeRemoteIoPropertySupport: writeRemoteIoPropertySupportString,
 	writeRemoteIoPropertyConstruct: writeRemoteIoPropertyConstructString,
 	writeConnectDeviceProperty: writeConnectDevicePropertyErrorString,
 	writeSetDeviceOutputWrong: writeSetDeviceOutputWrongError,
 	writeRegisterPrefixIndex: writeRegisterPrefixIndexError,
-	writeUnexpectedTokenError: writeUnexpectedTokenErrorString,
-	writeUnexpectedTokenErrorNull: writeUnexpectedTokenErrorStringNull,
-	writeUnexpectedTokenErrorType: writeUnexpectedTokenErrorStringType,
+	writeUnexpectedTokenGeneral: writeUnexpectedTokenErrorString,
+	writeUnexpectedTokenNull: writeUnexpectedTokenErrorStringNull,
+	writeUnexpectedTokenType: writeUnexpectedTokenErrorStringType,
 	writeTest: writeTestString
 };

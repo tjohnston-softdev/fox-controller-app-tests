@@ -108,7 +108,7 @@ function checkWriteUrl()
 
 function checkRequestResponseArray()
 {
-	var posError = commonErrorStringsFile.writeUnexpectedTokenError("u", 0);
+	var posError = commonErrorStringsFile.writeUnexpectedTokenGeneral("u", 0);
 	var emptyBodyError = "Unexpected end of JSON input";
 	
 	describe("Read API Response Array (callReadApiResponseArray)", function()
@@ -154,7 +154,7 @@ function checkRequestResponseArray()
 
 function checkRequestResponseObject()
 {
-	var posError = commonErrorStringsFile.writeUnexpectedTokenError("u", 0);
+	var posError = commonErrorStringsFile.writeUnexpectedTokenGeneral("u", 0);
 	var jsonString = '{"exampleProperty":"exampleValue"}';
 	var jsonObject = JSON.parse(jsonString);
 	

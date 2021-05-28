@@ -81,9 +81,9 @@ function handlePrepare()
 		
 		it("Error Messages Retrieved", function(done)
 		{
-			nullMessage = commonErrorStringsFile.writeUnexpectedTokenErrorNull();
-			typeMessage = commonErrorStringsFile.writeUnexpectedTokenErrorType();
-			unknownIdMessage = commonErrorStringsFile.writeKeyNotFoundError(commonJsonObjectsFile.unknownID);
+			nullMessage = commonErrorStringsFile.writeUnexpectedTokenNull();
+			typeMessage = commonErrorStringsFile.writeUnexpectedTokenType();
+			unknownIdMessage = commonErrorStringsFile.writeKeyNotFound(commonJsonObjectsFile.unknownID);
 			deviceTypeObject = rioInvalid.getDeviceType(commonJsonObjectsFile.modifiedDevice);
 			manufacturerObject = rioInvalid.getManufacturer(commonJsonObjectsFile.modifiedDevice);
 			modelObject = rioInvalid.getModel(commonJsonObjectsFile.modifiedDevice);

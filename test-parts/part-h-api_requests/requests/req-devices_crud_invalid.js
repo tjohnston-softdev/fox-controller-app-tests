@@ -88,8 +88,8 @@ function handleCreateInvalid()
 				
 			it("Errors Defined", function(done)
 			{
-				objectNullError = commonErrorStringsFile.writeUnexpectedTokenErrorNull();
-				objectTypeError = commonErrorStringsFile.writeUnexpectedTokenErrorType();
+				objectNullError = commonErrorStringsFile.writeUnexpectedTokenNull();
+				objectTypeError = commonErrorStringsFile.writeUnexpectedTokenType();
 				done();
 			});
 			
@@ -261,19 +261,19 @@ function handleReadInvalid()
 		{
 			it("Unknown ID", function(done)
 			{
-				var unknownErrStr = commonErrorStringsFile.writeKeyNotFoundError(crudUnknownID);
+				var unknownErrStr = commonErrorStringsFile.writeKeyNotFound(crudUnknownID);
 				httpRequests.getInvalid(urlRudUnknown, unknownErrStr, done);
 			});
 			
 			it("Invalid ID", function(done)
 			{
-				var invalidErrStr = commonErrorStringsFile.writeKeyNotFoundError(crudInvalidID);
+				var invalidErrStr = commonErrorStringsFile.writeKeyNotFound(crudInvalidID);
 				httpRequests.getInvalid(urlRudInvalid, invalidErrStr, done);
 			});
 			
 			it("Blank ID", function(done)
 			{
-				var nullErrStr = commonErrorStringsFile.writeKeyNotFoundError(null);
+				var nullErrStr = commonErrorStringsFile.writeKeyNotFound(null);
 				httpRequests.getInvalid(urlRudBlank, nullErrStr, done);
 			});
 		});

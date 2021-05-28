@@ -11,9 +11,9 @@ const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 function getInvalidDeviceTypeObject(originalDefinition)
 {
-	var valueErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("deviceType", "Unknown");
-	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("deviceType", "-1");
-	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("deviceType", "undefined");
+	var valueErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("deviceType", "Unknown");
+	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("deviceType", "-1");
+	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("deviceType", "undefined");
 	
 	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
 	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
@@ -41,9 +41,9 @@ function getInvalidManufacturerObject(originalDefinition, propNull)
 		propContent = "null";
 	}
 	
-	var valueErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("maker", "Unknown");
-	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("maker", "-1");
-	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("maker", propContent);
+	var valueErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("maker", "Unknown");
+	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("maker", "-1");
+	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("maker", propContent);
 			
 	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
 	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
@@ -64,9 +64,9 @@ function getInvalidManufacturerObject(originalDefinition, propNull)
 
 function getInvalidModelObject(originalDefinition)
 {
-	var valueErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("model", "Unknown");
-	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("model", "-1");
-	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyError("model", "undefined");
+	var valueErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("model", "Unknown");
+	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("model", "-1");
+	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("model", "undefined");
 			
 	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
 	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
