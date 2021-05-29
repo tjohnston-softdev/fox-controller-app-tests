@@ -6,7 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 
 
-function validateResponseArray(resultObj)
+function validateResponseBodyArray(resultObj)
 {	
 	commonFunctionsFile.testPresent(resultObj);
 	commonFunctionsFile.testArrayPopulated(resultObj);
@@ -21,7 +21,7 @@ function validateResponseArray(resultObj)
 	commonFunctionsFile.testPropertyContents(resultObj, 'name', 'string');
 }
 
-function validateResponseObject(resultObj)
+function validateResponseBodyObject(resultObj)
 {
 	commonFunctionsFile.testPresent(resultObj);
 	expect(resultObj).to.be.an("object");
@@ -78,9 +78,9 @@ function createRequestReplyObject(rStatus, rBody)
 
 module.exports =
 {
-	callValidateResponseArray: validateResponseArray,
-	callValidateResponseObject: validateResponseObject,
-	callWriteReplyErrorExample: writeReplyErrorExample,
-	callValidateDeleteOptionsReturn: validateDeleteOptionsReturn,
+	validateBodyArray: validateResponseBodyArray,
+	validateBodyObject: validateResponseBodyObject,
+	writeErrorExample: writeReplyErrorExample,
+	validateDeleteOptions: validateDeleteOptionsReturn,
 	createReplyObject: createRequestReplyObject
 };

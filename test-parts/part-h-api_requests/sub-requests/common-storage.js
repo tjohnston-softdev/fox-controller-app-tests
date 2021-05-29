@@ -7,7 +7,7 @@ const commonFunctionsFile = require(commonPaths.testCommon);
 const localValidFile = require(commonPaths.localValid);
 
 
-function testDrivePropertyDefinitionsObject(driveObj)
+function testDrivePropertiesObject(driveObj)
 {
 	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'fs');
 	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'type');
@@ -35,7 +35,7 @@ function testDriveLetterObject(driveObj, devPlatform)
 	expect(letterValid).to.be.true;
 }
 
-function testMountObject(driveObj, devPlatform)
+function testDriveMountObject(driveObj, devPlatform)
 {
 	var mountValue = driveObj['mount'];
 	var mountValid = false;
@@ -91,7 +91,7 @@ function testDrivePercentageObject(percentObject)
 	commonFunctionsFile.testPercent(percentObject.use);
 }
 
-function testDrivePropertyDefinitionsArray(fsArray)
+function testDrivePropertiesArray(fsArray)
 {
 	var loopIndex = 0;
 	var currentObject = null;
@@ -99,7 +99,7 @@ function testDrivePropertyDefinitionsArray(fsArray)
 	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
 		currentObject = fsArray[loopIndex];
-		testDrivePropertyDefinitionsObject(currentObject);
+		testDrivePropertiesObject(currentObject);
 	}
 }
 
@@ -117,7 +117,7 @@ function testDriveLettersArray(fsArray, fsPlatform)
 	}
 }
 
-function testMountArray(fsArray, fsPlatform)
+function testDriveMountArray(fsArray, fsPlatform)
 {
 	var loopIndex = 0;
 	var currentObject = null;
@@ -125,7 +125,7 @@ function testMountArray(fsArray, fsPlatform)
 	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
 	{
 		currentObject = fsArray[loopIndex];
-		testMountObject(currentObject, fsPlatform);
+		testDriveMountObject(currentObject, fsPlatform);
 	}
 }
 
@@ -224,19 +224,19 @@ function testFolderCreationResult(errObj)
 
 module.exports =
 {
-	callTestDrivePropertyDefinitionsObject: testDrivePropertyDefinitionsObject,
-	callTestDriveLetterObject: testDriveLetterObject,
-	callTestMountObject: testMountObject,
-	callTestDriveTotalObject: testDriveTotalObject,
-	callTestDriveUsedObject: testDriveUsedObject,
-	callTestDrivePercentageObject: testDrivePercentageObject,
-	callTestDrivePropertyDefinitionsArray: testDrivePropertyDefinitionsArray,
-	callTestDriveLettersArray: testDriveLettersArray,
-	callTestMountArray: testMountArray,
-	callTestDriveTotalArray: testDriveTotalArray,
-	callTestDriveUsedArray: testDriveUsedArray,
-	callTestDrivePercentagesArray: testDrivePercentagesArray,
-	callTestFileFlags: testFileFlags,
+	testPropertiesObject: testDrivePropertiesObject,
+	testLetterObject: testDriveLetterObject,
+	testMountObject: testDriveMountObject,
+	testTotalObject: testDriveTotalObject,
+	testUsedObject: testDriveUsedObject,
+	testPercentageObject: testDrivePercentageObject,
+	testPropertiesArray: testDrivePropertiesArray,
+	testLettersArray: testDriveLettersArray,
+	testMountArray: testDriveMountArray,
+	testTotalArray: testDriveTotalArray,
+	testUsedArray: testDriveUsedArray,
+	testPercentagesArray: testDrivePercentagesArray,
+	testFlags: testFileFlags,
 	getUserStoragePaths: defineUserStoragePaths,
-	callTestFolderCreationResult: testFolderCreationResult
+	testFolderCreation: testFolderCreationResult
 };

@@ -107,7 +107,7 @@ function testArrayMacValue(objectArray, macProp, macEmptyAllowed)
 
 
 
-function testDhcpLeaseExpireValues(dhcpArray)
+function testArrayDhcpLeaseExpireValues(dhcpArray)
 {
 	var dhcpIndex = 0;
 	var dhcpObject = null;
@@ -143,7 +143,7 @@ function testDhcpMacShortValue(dhcpArray)
 	}
 }
 
-function testWriteTimestamp(writeObject, modifiedProperty, createdProperty)
+function testWriteTimestampValue(writeObject, modifiedProperty, createdProperty)
 {
 	var modifiedValue = writeObject[modifiedProperty];
 	var createdValue = writeObject[createdProperty];
@@ -153,7 +153,7 @@ function testWriteTimestamp(writeObject, modifiedProperty, createdProperty)
 	expect(modifiedValue).to.be.at.least(createdValue);
 }
 
-function testWriteTimestampArray(writeArray, arrayModifyProperty, arrayCreateProperty)
+function testWriteTimestampArrayValues(writeArray, arrayModifyProperty, arrayCreateProperty)
 {
 	var loopIndex = 0;
 	var currentObject = {};
@@ -161,7 +161,7 @@ function testWriteTimestampArray(writeArray, arrayModifyProperty, arrayCreatePro
 	for (loopIndex = 0; loopIndex < writeArray.length; loopIndex = loopIndex + 1)
 	{
 		currentObject = writeArray[loopIndex];
-		testWriteTimestamp(currentObject, arrayModifyProperty, arrayCreateProperty);
+		testWriteTimestampValue(currentObject, arrayModifyProperty, arrayCreateProperty);
 	}
 }
 
@@ -237,17 +237,17 @@ function testAlarmStateFlags(objectArray)
 
 module.exports =
 {
-	callTestArrayIpFourValue: testArrayIpFourValue,
-	callTestArrayIpSixValue: testArrayIpSixValue,
-	callTestArrayMacValue: testArrayMacValue,
-	callTestDhcpLeaseExpireValues: testDhcpLeaseExpireValues,
-	callTestDhcpMacLongValue: testDhcpMacLongValue,
-	callTestDhcpMacShortValue: testDhcpMacShortValue,
-	callTestWriteTimestamp: testWriteTimestamp,
-	callTestWriteTimestampArray: testWriteTimestampArray,
-	callTestFileNameArray: testFileNameArray,
-	callTestZeroLeastArray: testZeroLeastArray,
-	callTestPositiveNumberProperty: testPositiveNumberProperty,
-	callTestPositiveNumberPropertyArray: testPositiveNumberPropertyArray,
-	callTestAlarmStateFlags: testAlarmStateFlags
+	testArrayIpFour: testArrayIpFourValue,
+	testArrayIpSix: testArrayIpSixValue,
+	testArrayMac: testArrayMacValue,
+	testArrayDhcpLeaseExpire: testArrayDhcpLeaseExpireValues,
+	testDhcpMacLong: testDhcpMacLongValue,
+	testDhcpMacShort: testDhcpMacShortValue,
+	testWriteTimestamp: testWriteTimestampValue,
+	testWriteTimestampArray: testWriteTimestampArrayValues,
+	testFileNames: testFileNameArray,
+	testZeroLeastNumbers: testZeroLeastArray,
+	testPositiveNumber: testPositiveNumberProperty,
+	testPositiveNumberArray: testPositiveNumberPropertyArray,
+	testAlarmStates: testAlarmStateFlags
 };

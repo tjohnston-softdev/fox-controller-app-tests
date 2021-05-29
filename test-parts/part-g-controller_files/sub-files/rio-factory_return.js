@@ -22,5 +22,5 @@ function checkFactoryReturnValid(factReturnObject)
 
 module.exports =
 {
-	checkFactoryReturn: checkFactoryReturnValid
+	checkValid: checkFactoryReturnValid
 };

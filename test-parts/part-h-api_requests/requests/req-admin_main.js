@@ -69,11 +69,11 @@ function handleDhcpClients()
 			commonFunctionsFile.testPropertyContents(dhcpRead, 'host', 'string');
 			commonFunctionsFile.testPropertyContents(dhcpRead, 'shortMac', 'string');
 			
-			apiCommonFile.callTestDhcpLeaseExpireValues(dhcpRead);
-			apiCommonFile.callTestDhcpMacLongValue(dhcpRead, false);
-			apiCommonFile.callTestArrayIpFourValue(dhcpRead, 'ipAddress');
+			apiCommonFile.testArrayDhcpLeaseExpire(dhcpRead);
+			apiCommonFile.testDhcpMacLong(dhcpRead, false);
+			apiCommonFile.testArrayIpFour(dhcpRead, 'ipAddress');
 			commonFunctionsFile.testPropertyStringRequiredArray(dhcpRead, 'host');
-			apiCommonFile.callTestDhcpMacShortValue(dhcpRead);
+			apiCommonFile.testDhcpMacShort(dhcpRead);
 		});
 		
 		

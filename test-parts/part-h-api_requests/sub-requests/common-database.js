@@ -400,8 +400,8 @@ function showInvalidStructureError(vName)
 
 module.exports =
 {
-	callTestDatabaseNames: testDatabaseNames,
-	callTestDatabaseFolderFlags: testDatabaseFolderFlags,
-	callTestDatabaseSizesEmpty: testDatabaseSizesEmpty,
-	callTestDatabaseSizesPopulated: testDatabaseSizesPopulated
+	testNames: testDatabaseNames,
+	testFolderFlags: testDatabaseFolderFlags,
+	testSizesEmpty: testDatabaseSizesEmpty,
+	testSizesPopulated: testDatabaseSizesPopulated
 };

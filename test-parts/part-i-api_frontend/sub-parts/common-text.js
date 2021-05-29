@@ -1,25 +1,25 @@
 const d = " - ";
 
-function writeDeviceHeader(vManufacturer, vModel)
+function writeDeviceHeaderString(vManufacturer, vModel)
 {
 	var res = vManufacturer + d + vModel;
 	return res;
 }
 
-function writeDeviceCacheHeader(cacheObj)
+function writeDeviceCacheHeaderString(cacheObj)
 {
 	var res = [cacheObj.manufacturer, cacheObj.model, cacheObj.address, cacheObj.key].join(d);
 	return res;
 }
 
-function writeNodeCacheHeader(vText, vKey)
+function writeNodeCacheHeaderString(vText, vKey)
 {
 	var res = vText + d + vKey;
 	return res;
 }
 
 
-function writeDeviceDescription(vManufacturer, vModel)
+function writeDeviceDescriptionString(vManufacturer, vModel)
 {
 	var res = "";
 	
@@ -35,8 +35,8 @@ function writeDeviceDescription(vManufacturer, vModel)
 
 module.exports =
 {
-	callWriteDeviceHeader: writeDeviceHeader,
-	callWriteDeviceCacheHeader: writeDeviceCacheHeader,
-	callWriteNodeCacheHeader: writeNodeCacheHeader,
-	callWriteDeviceDescription: writeDeviceDescription
+	writeDeviceHeader: writeDeviceHeaderString,
+	writeDeviceCacheHeader: writeDeviceCacheHeaderString,
+	writeNodeCacheHeader: writeNodeCacheHeaderString,
+	writeDeviceDescription: writeDeviceDescriptionString
 };

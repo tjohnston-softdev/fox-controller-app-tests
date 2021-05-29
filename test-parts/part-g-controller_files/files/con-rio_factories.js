@@ -10,7 +10,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const rioInvalid = require(commonPaths.rioInvalid);
-const rioCheckFile = require("../sub-files/rio-factory_return");
+const rioFactoryReturn = require("../sub-files/rio-factory_return");
 const factoryFile = loadFoxFile(foxPath.rioFactoriesFile);
 
 const remoteIoTestDevice = commonJsonObjectsFile.testDevice;
@@ -56,7 +56,7 @@ function handleRemoteIoModuleFunction()
 			
 			commonFunctionsFile.testPresent(moduleRes);
 			expect(moduleRes).to.be.an("object");
-			rioCheckFile.checkFactoryReturn(moduleRes);
+			rioFactoryReturn.checkValid(moduleRes);
 		});
 		
 		

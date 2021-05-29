@@ -34,7 +34,7 @@ function deleteDevicesLoop()
 		for (deviceIndex = 0; deviceIndex < deviceCount; deviceIndex = deviceIndex + 1)
 		{
 			currentDevice = testCacheFile.getTestDevice(deviceIndex);
-			currentDesc = textCommon.callWriteDeviceCacheHeader(currentDevice);
+			currentDesc = textCommon.writeDeviceCacheHeader(currentDevice);
 			
 			describe(currentDesc, function()
 			{

@@ -76,7 +76,7 @@ function testNodeManufacturerArray(nmArray)
 }
 
 
-function testStatusControlStructure(structureObj)
+function testStatusControlArrayStructure(structureObj)
 {
 	commonFunctionsFile.testPropertyDefinitions(structureObj, 'value');
 	commonFunctionsFile.testPropertyDefinitions(structureObj, 'text');
@@ -85,7 +85,7 @@ function testStatusControlStructure(structureObj)
 	commonFunctionsFile.testPropertyContents(structureObj, 'text', 'string');
 }
 
-function testStatusControlSyntax(structureObj)
+function testStatusControlArraySyntax(structureObj)
 {
 	var rioIndex = 0;
 	var currentElement = null;
@@ -120,7 +120,7 @@ function testStatusControlSyntax(structureObj)
 }
 
 
-function testStatusControlIntegrity(structureObj)
+function testStatusControlArrayIntegrity(structureObj)
 {
 	var rioIndex = 0;
 	var currentElement = null;
@@ -205,13 +205,13 @@ function writeExpectedNodeName(enteredPrefix)
 
 module.exports =
 {
-	callTestNodeObjectArrayStructure: testNodeObjectArrayStructure,
-	callTestNodeObjectArrayProperties: testNodeObjectArrayProperties,
-	callTestNodeObjectArrayContents: testNodeObjectArrayContents,
-	callTestNodeStorageObject: testNodeStorageObject,
-	callTestNodeStoreCount: testNodeStoreCount,
-	callTestNodeManufacturerArray: testNodeManufacturerArray,
-	callTestStatusControlStructure: testStatusControlStructure,
-	callTestStatusControlSyntax: testStatusControlSyntax,
-	callTestStatusControlIntegrity: testStatusControlIntegrity
+	testArrayStructure: testNodeObjectArrayStructure,
+	testArrayProperties: testNodeObjectArrayProperties,
+	testArrayContents: testNodeObjectArrayContents,
+	testStorageObject: testNodeStorageObject,
+	testStoreCount: testNodeStoreCount,
+	testManufacturerArray: testNodeManufacturerArray,
+	testStatusControlStructure: testStatusControlArrayStructure,
+	testStatusControlSyntax: testStatusControlArraySyntax,
+	testStatusControlIntegrity: testStatusControlArrayIntegrity
 };

@@ -81,9 +81,9 @@ function testHealthEnvironmentDummy(envObject, devPlatform)
 
 module.exports =
 {
-	callTestHealthDeviceObject: testHealthDeviceObject,
-	callTestHealthTimezoneCodeValue: testHealthTimezoneCodeValue,
-	callTestHealthNumberMaximum: testHealthNumberMaximum,
-	callTestHealthEnvironmentValue: testHealthEnvironmentValue,
-	callTestHealthEnvironmentDummy: testHealthEnvironmentDummy
+	testDeviceObject: testHealthDeviceObject,
+	testTimezoneCode: testHealthTimezoneCodeValue,
+	testMaximumNumber: testHealthNumberMaximum,
+	testEnvValue: testHealthEnvironmentValue,
+	testEnvDummy: testHealthEnvironmentDummy
 };

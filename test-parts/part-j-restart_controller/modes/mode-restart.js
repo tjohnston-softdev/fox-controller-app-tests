@@ -48,7 +48,7 @@ function handleProcessRestart()
 		
 		it("Correct Return", function(done)
 		{
-			testReturnFile.callTestProcessReturnObject(processRead);
+			testReturnFile.testProcessReturn(processRead);
 			done();
 		});
 	});
@@ -96,7 +96,7 @@ function handleProcessOfflineCheck()
 		
 		it("Controller Offline", function(done)
 		{
-			testReturnFile.callTestOfflineCheckResult(pingReturn);
+			testReturnFile.testOfflineCheckResult(pingReturn);
 			done();
 		});
 	});

@@ -131,7 +131,7 @@ function handleFactoryResult()
 		
 		it("Correct Return", function(done)
 		{
-			testReturnFile.callTestProcessReturnObject(factoryResetRead);
+			testReturnFile.testProcessReturn(factoryResetRead);
 			done();
 		});
 		
@@ -161,7 +161,7 @@ function handleFactoryOfflineCheck()
 		
 		it("Controller Reset", function(done)
 		{
-			testReturnFile.callTestOfflineCheckResult(factoryOfflineReturn);
+			testReturnFile.testOfflineCheckResult(factoryOfflineReturn);
 			done();
 		});
 		

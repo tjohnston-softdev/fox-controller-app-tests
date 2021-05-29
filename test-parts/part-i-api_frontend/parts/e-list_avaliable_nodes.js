@@ -68,20 +68,20 @@ function testCurrentManufacturerApi(mName)
 	
 	it("Correct Array Structure", function(done)
 	{
-		nodeCommonFile.callTestNodeObjectArrayStructure(searchRead);
+		nodeCommonFile.testArrayStructure(searchRead);
 		done();
 	});
 	
 	
 	it("Correct Properties", function(done)
 	{
-		nodeCommonFile.callTestNodeObjectArrayProperties(searchRead);
+		nodeCommonFile.testArrayProperties(searchRead);
 		done();
 	});
 	
 	it("Correct Contents", function(done)
 	{
-		nodeCommonFile.callTestNodeObjectArrayContents(searchRead);
+		nodeCommonFile.testArrayContents(searchRead);
 		done();
 	});
 	

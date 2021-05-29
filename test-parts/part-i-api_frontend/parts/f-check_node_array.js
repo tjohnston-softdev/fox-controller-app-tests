@@ -37,7 +37,7 @@ function handleStructure()
 		it("Correct Array Structure", function(done)
 		{
 			expect(nodeCacheObject).to.be.an("object");
-			nodeCommonFile.callTestNodeStorageObject(nodeCacheObject);
+			nodeCommonFile.testStorageObject(nodeCacheObject);
 			done();
 		});
 		
@@ -63,7 +63,7 @@ function handleManufacturerProperties()
 		it("Manufacturer Property List Valid", function(done)
 		{
 			commonFunctionsFile.testAllElements(manufacturersArray, 'string');
-			nodeCommonFile.callTestNodeManufacturerArray(manufacturersArray);
+			nodeCommonFile.testManufacturerArray(manufacturersArray);
 			done();
 		});
 		
@@ -84,7 +84,7 @@ function handleDeviceCount()
 		
 		it("Nodes Counted", function(done)
 		{
-			retrievedCount = nodeCommonFile.callTestNodeStoreCount(nodeCacheObject);
+			retrievedCount = nodeCommonFile.testStoreCount(nodeCacheObject);
 			done();
 		});
 		

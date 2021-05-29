@@ -65,9 +65,9 @@ function handleList()
 			commonFunctionsFile.testPropertyContents(listRead, 'state', 'number');
 			commonFunctionsFile.testPropertyContents(listRead, 'name', 'string');
 			
-			apiCommonFile.callTestPositiveNumberPropertyArray(listRead, 'ts');
+			apiCommonFile.testPositiveNumberArray(listRead, 'ts');
 			commonFunctionsFile.testPropertyStringRequiredArray(listRead, 'nodeId');
-			apiCommonFile.callTestAlarmStateFlags(listRead);
+			apiCommonFile.testAlarmStates(listRead);
 			commonFunctionsFile.testPropertyStringRequiredArray(listRead, 'name');
 		});
 		

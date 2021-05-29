@@ -74,7 +74,7 @@ function handleCheckDevicesLoop()
 		for (loopIndex = 0; loopIndex < cacheCount; loopIndex = loopIndex + 1)
 		{
 			currentElement = testCacheFile.getTestDevice(loopIndex);
-			currentDesc = textCommon.callWriteDeviceCacheHeader(currentElement);
+			currentDesc = textCommon.writeDeviceCacheHeader(currentElement);
 			
 			it(currentDesc, function(done)
 			{

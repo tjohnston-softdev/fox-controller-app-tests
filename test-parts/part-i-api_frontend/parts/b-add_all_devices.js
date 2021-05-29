@@ -88,8 +88,8 @@ function addCurrentSupportedModel(baseModel)
 		
 		preparedModel.maker = baseModel.maker;
 		preparedModel.model = baseModel.modelType;
-		preparedModel.name = textCommon.callWriteDeviceHeader(baseModel.maker, baseModel.modelType);
-		preparedModel.desc = textCommon.callWriteDeviceDescription(baseModel.maker, baseModel.modelType)
+		preparedModel.name = textCommon.writeDeviceHeader(baseModel.maker, baseModel.modelType);
+		preparedModel.desc = textCommon.writeDeviceDescription(baseModel.maker, baseModel.modelType)
 		preparedModel.ipAddress = apiRequestScript.generateIpAddress();
 		
 		done();

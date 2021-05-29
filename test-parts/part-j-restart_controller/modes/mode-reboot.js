@@ -63,7 +63,7 @@ function handleFoxRestart()
 		
 		it("Correct Return", function(done)
 		{
-			testReturnFile.callTestProcessReturnObject(foxRestartRead);
+			testReturnFile.testProcessReturn(foxRestartRead);
 			done();
 		})
 	});
@@ -111,7 +111,7 @@ function handleFoxOfflineCheck()
 		
 		it("Controller Offline", function(done)
 		{
-			testReturnFile.callTestOfflineCheckResult(foxOfflineReturn);
+			testReturnFile.testOfflineCheckResult(foxOfflineReturn);
 			done();
 		});
 		

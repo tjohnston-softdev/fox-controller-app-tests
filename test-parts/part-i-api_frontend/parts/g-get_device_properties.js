@@ -60,7 +60,7 @@ function loopCurrentManufacturerStatus(manufacturerName, deviceArray)
 		currentObject = deviceArray[deviceIndex];
 		currentName = currentObject.name;
 		currentID = currentObject.value;
-		currentDesc = nodeTextFile.callWriteNodeCacheHeader(currentObject.text, currentID);
+		currentDesc = nodeTextFile.writeNodeCacheHeader(currentObject.text, currentID);
 		
 		describe(currentDesc, function()
 		{
@@ -139,12 +139,12 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 
 function validateStatusControlArray(scArray)
 {
-	nodeCommonFile.callTestStatusControlStructure(scArray);
+	nodeCommonFile.testStatusControlStructure(scArray);
 	commonFunctionsFile.testPropertyStringRequiredArray(scArray, 'value');
 	commonFunctionsFile.testPropertyStringRequiredArray(scArray, 'text');
 	
-	nodeCommonFile.callTestStatusControlSyntax(scArray);
-	nodeCommonFile.callTestStatusControlIntegrity(scArray);
+	nodeCommonFile.testStatusControlSyntax(scArray);
+	nodeCommonFile.testStatusControlIntegrity(scArray);
 	
 }
 

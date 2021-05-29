@@ -79,16 +79,16 @@ function handleFileList()
 			commonFunctionsFile.testPropertyContents(fileListRead, 'modified', 'number');
 			commonFunctionsFile.testPropertyContents(fileListRead, 'created', 'number');
 			
-			apiCommonFile.callTestFileNameArray(fileListRead, 'name');
-			apiCommonFile.callTestZeroLeastArray(fileListRead, 'size');
-			storageCommonFile.callTestFileFlags(fileListRead);
-			apiCommonFile.callTestPositiveNumberPropertyArray(fileListRead, 'modified');
-			apiCommonFile.callTestPositiveNumberPropertyArray(fileListRead, 'created');
+			apiCommonFile.testFileNames(fileListRead, 'name');
+			apiCommonFile.testZeroLeastNumbers(fileListRead, 'size');
+			storageCommonFile.testFlags(fileListRead);
+			apiCommonFile.testPositiveNumberArray(fileListRead, 'modified');
+			apiCommonFile.testPositiveNumberArray(fileListRead, 'created');
 		});
 		
 		it("Correct Timestamps", function()
 		{
-			apiCommonFile.callTestWriteTimestampArray(fileListRead, 'modified', 'created');
+			apiCommonFile.testWriteTimestampArray(fileListRead, 'modified', 'created');
 		});
 		
 	});
@@ -120,7 +120,7 @@ function handleUserStorageCreate()
 		it("Storage Folder Successful", function(done)
 		{
 			expect(folderComplete).to.be.true;
-			storageCommonFile.callTestFolderCreationResult(folderError);
+			storageCommonFile.testFolderCreation(folderError);
 			done();
 		});
 		
@@ -255,7 +255,7 @@ function handleGlobalStatus()
 		
 		it("Correct Properties", function()
 		{
-			storageCommonFile.callTestDrivePropertyDefinitionsObject(statusRead);
+			storageCommonFile.testPropertiesObject(statusRead);
 		});
 		
 		it("Correct Contents", function()
@@ -266,11 +266,11 @@ function handleGlobalStatus()
 			commonFunctionsFile.testObjectPropertyContent(statusRead, 'use', 'number');
 			commonFunctionsFile.testString(statusRead.mount);
 			
-			storageCommonFile.callTestDriveLetterObject(statusRead, currentPlatform);
-			storageCommonFile.callTestDriveTotalObject(statusRead, currentPlatform);
-			storageCommonFile.callTestDriveUsedObject(statusRead);
-			storageCommonFile.callTestDrivePercentageObject(statusRead);
-			storageCommonFile.callTestMountObject(statusRead, currentPlatform);
+			storageCommonFile.testLetterObject(statusRead, currentPlatform);
+			storageCommonFile.testTotalObject(statusRead, currentPlatform);
+			storageCommonFile.testUsedObject(statusRead);
+			storageCommonFile.testPercentageObject(statusRead);
+			storageCommonFile.testMountObject(statusRead, currentPlatform);
 		});
 		
 	});

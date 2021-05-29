@@ -16,7 +16,7 @@ function testProcessReturnObject(procObj)
 }
 
 
-function testOfflineCheckResult(offlineReturn)
+function testControllerOfflineCheckResult(offlineReturn)
 {
 	var offlineRead = requestFile.getOnlineResult(offlineReturn);
 	expect(offlineRead).to.be.false;
@@ -25,6 +25,6 @@ function testOfflineCheckResult(offlineReturn)
 
 module.exports =
 {
-	callTestProcessReturnObject: testProcessReturnObject,
-	callTestOfflineCheckResult: testOfflineCheckResult
+	testProcessReturn: testProcessReturnObject,
+	testOfflineCheckResult: testControllerOfflineCheckResult
 };

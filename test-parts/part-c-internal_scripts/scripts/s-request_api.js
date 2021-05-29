@@ -126,7 +126,7 @@ function checkRequestResponseArray()
 			var inputResp = commonRequestFunctions.createReplyObject(200, respString);
 			var actualResp = requestFile.readResponseArray(inputResp);
 			
-			commonRequestFunctions.callValidateResponseArray(actualResp);
+			commonRequestFunctions.validateBodyArray(actualResp);
 		});
 		
 		it("Call - Empty Body", function()
@@ -170,14 +170,14 @@ function checkRequestResponseObject()
 		{
 			var inputResp = commonRequestFunctions.createReplyObject(200, jsonString);
 			var actualResp = requestFile.readResponseObject(inputResp);
-			commonRequestFunctions.callValidateResponseObject(actualResp);
+			commonRequestFunctions.validateBodyObject(actualResp);
 		});
 		
 		it("Call - Valid Object", function()
 		{
 			var inputResp = commonRequestFunctions.createReplyObject(200, jsonObject);
 			var actualResp = requestFile.readResponseObject(inputResp);
-			commonRequestFunctions.callValidateResponseObject(actualResp);
+			commonRequestFunctions.validateBodyObject(actualResp);
 		});
 		
 		
@@ -221,7 +221,7 @@ function checkRequestResponseError()
 		it("Call - Valid", function()
 		{
 			var validErrorString = "Example Message";
-			var validReplyString = commonRequestFunctions.callWriteReplyErrorExample(validErrorString);
+			var validReplyString = commonRequestFunctions.writeErrorExample(validErrorString);
 			var inputReply = commonRequestFunctions.createReplyObject(500, validReplyString);
 			var actualError = requestFile.readResponseError(inputReply);
 			
@@ -272,7 +272,7 @@ function checkRequestResponseValidation()
 		it("Call - Invalid", function()
 		{
 			var errString = "Failure";
-			var errHTML = commonRequestFunctions.callWriteReplyErrorExample(errString);
+			var errHTML = commonRequestFunctions.writeErrorExample(errString);
 			var invalidResponseObject = commonRequestFunctions.createReplyObject(500, errHTML);
 			
 			runValidateResponseInvalid(invalidResponseObject, errString);
@@ -382,13 +382,13 @@ function checkDeleteOptionsObject()
 		it("Call - True", function()
 		{
 			trueRes = requestFile.getDeleteOptions(true);
-			commonRequestFunctions.callValidateDeleteOptionsReturn(trueRes, true);
+			commonRequestFunctions.validateDeleteOptions(trueRes, true);
 		});
 		
 		it("Call - False", function()
 		{
 			falseRes = requestFile.getDeleteOptions(false);
-			commonRequestFunctions.callValidateDeleteOptionsReturn(falseRes, false);
+			commonRequestFunctions.validateDeleteOptions(falseRes, false);
 		});
 		
 		it("Call - Invalid", function()
