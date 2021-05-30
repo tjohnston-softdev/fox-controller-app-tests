@@ -1,6 +1,6 @@
 # Information
 
-This folder includes a series of documentation files which provide information about the controller test script. This includes things like how the project is structured, what each folder is for, how to maintain or expand the script, and other things.
+This folder includes documentation files which provide information about the Controller test script. This includes things like how the project is structured, what each folder is for, and how to maintain the script.
 
 ---
 
