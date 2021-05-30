@@ -2,15 +2,13 @@
 
 When you run `npm test`, you will be prompted to enter a test mode. Each mode has a different keyword and a different tests will run depending on which keyword is entered. The reason modes are used because the different parts of the project are ordered in a cascading manner where one part depends on the previous. For example, once the external modules have been tested, they do not need to be tested again in other parts.  Not all of the files need to be tested every single time. You may choose to run the whole thing or just the parts that matter at the time.
 
-Another reason this was implemented is because certain parts can only be tested based on whether the Controller is on or offline. In order to test the APIs, the Controller must be running but because of concurrency and file locking issues, the Controller must be offline when testing the script files themselves. 
+Another reason this was implemented is because certain parts can only be tested based on whether the Controller is online or offline. In order to test the APIs, the Controller must be running but because of concurrency and file locking issues, the Controller must be offline when testing the script files themselves. 
 
 The user input is handled through the [prompt-sync](https://www.npmjs.com/package/prompt-sync) module. If you enter a keyword, the corresponding test will happen. If not, no tests will occur.
 
-The problem with the keywords is that the user has to remember them. This file is a reference to the different modes offered. The keywords are not case-sensitive.
+This file is a reference to the different modes offered. The keywords are not case-sensitive.
 
 ---
-
-The modes are:
 
 **common**  
 This mode only tests the common dependency files. (part A)

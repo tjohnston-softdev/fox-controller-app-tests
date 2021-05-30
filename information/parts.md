@@ -7,14 +7,10 @@ These different parts are located in the `test-parts` subfolder. Each part folde
 * A main file (eg. 'example_main.js')
 * A sub-folder containing individual scripts for that part.
 	* The main file requires and calls the script files inside the subfolder.
-	* The file is - in turn - required and called in [fox-test-main.js](../test/fox-test-main.js)
+	* The file is required and called in [fox-test-main.js](../test/fox-test-main.js)
 * Another sub-folder containing common files for that part.  (Optional)
 
-For more detail as to how this is arranged, look at one of these parts yourself.
-
 ---
-
-The parts are:
 
 **A - Common Data**  
 Used to test common dependency files which are required by the project as a whole. This includes error strings, example objects, and whether the FOX Controller files exist. The files being tested here are located in the 'app' folder.

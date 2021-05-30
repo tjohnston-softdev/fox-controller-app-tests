@@ -1,6 +1,6 @@
 # References
 
-This is a list of the references I used when writing the original version of the FOX Controller test script. At first, this was just a plain text file with URLs. For the public release in 2021, I decided to recompile the references in a markdown document which is much easier to read. Each entry links to the respective material, credits the author(s), and names the website if applicable.
+This is a list of the references I used when writing the original version of the FOX Controller test script. At first, this was just a plain text file with URLs. For the public release, I decided to recompile the references in a markdown document which is much easier to read. Each entry links to the respective material, credits the author(s), and names the website if applicable.
 
 This document was written on 28-29 April 2021 and shared publicly on 29 April 2021. All links in this document are active as of release or otherwise link to an archived version.
 
