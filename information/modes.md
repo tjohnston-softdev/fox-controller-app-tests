@@ -21,6 +21,9 @@ This mode tests important 3rd party modules and local scripts. (parts B-C)
 **online**  
 This mode tests whether the Controller is online. If it isn't, it will be flagged as an error. (part D)
 
+**offline**  
+This mode tests whether the Controller is offline. If it isn't, it will be flagged as an error. (part D)
+
 **cont**  
 This mode tests whether the Controller is offline before testing the script files. (parts D-G)
 
@@ -58,4 +61,5 @@ If no text is entered or an error occurs, a message will be displayed and nothin
 **Next:** [Folders](./folders.md)
 
 [Contents](./readme.md)
+
 
