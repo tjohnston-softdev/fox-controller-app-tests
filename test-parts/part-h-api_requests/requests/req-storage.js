@@ -1,5 +1,4 @@
 const fs = require('fs');
-const os = require('os');
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
@@ -13,7 +12,6 @@ const apiCommonFile = require("../sub-requests/common-api");
 const storageCommonFile = require("../sub-requests/common-storage");
 
 var testFile = storageCommonFile.getUserStoragePaths();
-var currentPlatform = os.platform();
 
 
 function testStorageAPIs()
@@ -266,11 +264,11 @@ function handleGlobalStatus()
 			commonFunctionsFile.testObjectPropertyContent(statusRead, 'use', 'number');
 			commonFunctionsFile.testString(statusRead.mount);
 			
-			storageCommonFile.testLetterObject(statusRead, currentPlatform);
-			storageCommonFile.testTotalObject(statusRead, currentPlatform);
+			storageCommonFile.testLetterObject(statusRead);
+			storageCommonFile.testTotalObject(statusRead);
 			storageCommonFile.testUsedObject(statusRead);
 			storageCommonFile.testPercentageObject(statusRead);
-			storageCommonFile.testMountObject(statusRead, currentPlatform);
+			storageCommonFile.testMountObject(statusRead);
 		});
 		
 	});

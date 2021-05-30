@@ -5,7 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const localValidFile = require(commonPaths.localValid);
-
+const sysPlatform = require(commonPaths.sysPlatform);
 
 
 function testHealthDeviceObject(healthObj)
@@ -48,13 +48,16 @@ function testHealthNumberMaximum(srcObject, propName, maxVal)
 	expect(givenValue).to.be.at.most(maxVal);
 }
 
-function testHealthEnvironmentValue(envObject, propName, devPlatform)
+function testHealthEnvironmentValue(envObject, propName)
 {
+	var dummyUsed = sysPlatform.getDummy();
+	var givenValue = null;
+	
 	commonFunctionsFile.testObjectPropertyDefinition(envObject, propName);
 	commonFunctionsFile.testObjectPropertyContent(envObject, propName, 'number');
-	var givenValue = envObject[propName];
+	givenValue = envObject[propName];
 	
-	if (devPlatform === 'win32' || devPlatform === 'mac' || devPlatform === 'darwin')
+	if (dummyUsed === true)
 	{
 		expect(givenValue).to.be.below(0);
 	}
@@ -64,9 +67,11 @@ function testHealthEnvironmentValue(envObject, propName, devPlatform)
 	}
 }
 
-function testHealthEnvironmentDummy(envObject, devPlatform)
+function testHealthEnvironmentDummy(envObject)
 {
-	if (devPlatform === 'win32' || devPlatform === 'mac' || devPlatform === 'darwin')
+	var dummyUsed = sysPlatform.getDummy();
+	
+	if (dummyUsed === true)
 	{
 		commonFunctionsFile.testObjectPropertyDefinition(envObject, 'isDummy');
 		expect(envObject.isDummy).to.be.true;

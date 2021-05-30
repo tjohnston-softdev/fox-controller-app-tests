@@ -1,20 +1,18 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const osModule = require('os');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
-
 const httpRequests = require(commonPaths.httpRequests);
+const sysPlatform = require(commonPaths.sysPlatform);
+
 const offlineDelay = require("../sub-modes/offline-check-delay");
 const testReturnFile = require("../sub-modes/test-restart-return");
 
-var currentPlatform = osModule.platform();
-
-
+var dummyPlatformUsed = sysPlatform.getDummy();
 
 function testFoxRestart()
 {
@@ -22,15 +20,14 @@ function testFoxRestart()
 	{
 		handleFoxRestart();
 		
-		if (currentPlatform === 'linux')
+		if (dummyPlatformUsed === true)
 		{
-			handleFoxOfflinePlaceholder();
+			handleFoxWait();
+			handleFoxOfflineCheck();
 		}
 		else
 		{
-			
-			handleFoxWait();
-			handleFoxOfflineCheck();
+			handleFoxOfflinePlaceholder();
 		}
 		
 	});

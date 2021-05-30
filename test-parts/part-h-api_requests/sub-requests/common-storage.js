@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const localValidFile = require(commonPaths.localValid);
+const sysPlatform = require(commonPaths.sysPlatform);
 
 
 function testDrivePropertiesObject(driveObj)
@@ -18,12 +19,13 @@ function testDrivePropertiesObject(driveObj)
 }
 
 
-function testDriveLetterObject(driveObj, devPlatform)
+function testDriveLetterObject(driveObj)
 {
+	var windowsUsed = sysPlatform.getWindows();
 	var letterValue = driveObj['fs'];
 	var letterValid = false;
 	
-	if (devPlatform === 'win32')
+	if (windowsUsed === true)
 	{
 		letterValid = localValidFile.validateDriveLetter(letterValue);
 	}
@@ -35,12 +37,13 @@ function testDriveLetterObject(driveObj, devPlatform)
 	expect(letterValid).to.be.true;
 }
 
-function testDriveMountObject(driveObj, devPlatform)
+function testDriveMountObject(driveObj)
 {
+	var windowsUsed = sysPlatform.getWindows();
 	var mountValue = driveObj['mount'];
 	var mountValid = false;
 	
-	if (devPlatform === 'win32')
+	if (windowsUsed === true)
 	{
 		mountValid = localValidFile.validateDriveLetter(mountValue);
 	}
@@ -57,12 +60,13 @@ function testDriveMountObject(driveObj, devPlatform)
 
 
 
-function testDriveTotalObject(driveObj, devPlatform)
+function testDriveTotalObject(driveObj)
 {
+	var windowsUsed = sysPlatform.getWindows();
 	var preparedSize = -1;
 	var targetType = "";
 	
-	if (devPlatform === 'win32')
+	if (windowsUsed === true)
 	{
 		targetType = 'string'
 		preparedSize = parseFloat(driveObj.size);

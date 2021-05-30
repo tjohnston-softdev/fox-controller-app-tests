@@ -1,7 +1,6 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const os = require('os');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
@@ -15,7 +14,6 @@ const commonHealth = require("../sub-requests/common-health");
 const commonStorage = require("../sub-requests/common-storage");
 
 var healthObject = null;
-var currentPlatform = os.platform();
 
 function testHealthApi()
 {
@@ -84,7 +82,7 @@ function handleIdentification()
 		
 		it("Device (device)", function()
 		{
-			commonHealth.testDeviceObject(healthObject, currentPlatform);
+			commonHealth.testDeviceObject(healthObject);
 		});
 		
 	});
@@ -260,7 +258,7 @@ function handleFileSystem()
 		
 		it("Drive Size (fsSize.size)", function()
 		{
-			commonStorage.testTotalArray(healthObject.fsSize, currentPlatform);
+			commonStorage.testTotalArray(healthObject.fsSize);
 		});
 		
 		it("Amount Used (fsSize.used)", function()
@@ -278,7 +276,7 @@ function handleFileSystem()
 		it("Mount (fsSize.mount)", function()
 		{
 			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'mount', 'string');
-			commonStorage.testMountArray(healthObject.fsSize, currentPlatform);
+			commonStorage.testMountArray(healthObject.fsSize);
 		});
 		
 	});
@@ -297,17 +295,17 @@ function handleEnvironment()
 		
 		it("Temperature (environment.temperature)", function()
 		{
-			commonHealth.testEnvValue(healthObject.environment, 'temperature', currentPlatform);
+			commonHealth.testEnvValue(healthObject.environment, 'temperature');
 		});
 		
 		it("Humidity (environment.humidity)", function()
 		{
-			commonHealth.testEnvValue(healthObject.environment, 'humidity', currentPlatform);
+			commonHealth.testEnvValue(healthObject.environment, 'humidity');
 		});
 		
 		it("Dummy Flag (environment.isDummy)", function()
 		{
-			commonHealth.testEnvDummy(healthObject.environment, currentPlatform);
+			commonHealth.testEnvDummy(healthObject.environment);
 		});
 		
 		
@@ -386,7 +384,7 @@ function handleDatabase()
 		{
 			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'size');
 			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'size', 'number');
-			commonDatabase.testSizesEmpty(healthObject.databaseSize, currentPlatform);
+			commonDatabase.testSizesEmpty(healthObject.databaseSize);
 		});
 		
 		it("Directory Flag (databaseSize.isDirectory)", function()
@@ -478,7 +476,7 @@ function handleLog()
 function testDriveLetter(fsObject)
 {
 	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
-	commonStorage.testLettersArray(fsObject, currentPlatform);
+	commonStorage.testLettersArray(fsObject);
 }
 
 

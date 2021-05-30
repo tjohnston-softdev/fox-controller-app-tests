@@ -4,6 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const sysPlatform = require(commonPaths.sysPlatform);
 
 const supportedDatabasesFile = require(commonPaths.supportedDatabases);
 const supportedDatabasesArray = supportedDatabasesFile.getSupportedDatabases();
@@ -98,10 +99,10 @@ function checkFileDatabaseEmpty(fileObj, fileDef, fileDbName)
 }
 
 
-function checkFolderDatabaseEmpty(folderObj, folderDef, folderDbName, platformUsed)
+function checkFolderDatabaseEmpty(folderObj, folderDef, folderDbName)
 {
 	var baseCleanSize = folderDef.dbDefinition.cleanSize;
-	var maximumCleanSize = getDatabaseFolderMargin(baseCleanSize, platformUsed);
+	var maximumCleanSize = getDatabaseFolderMargin(baseCleanSize);
 	var res = false;
 	
 	if (folderObj.size >= baseCleanSize && folderObj.size <= maximumCleanSize)
@@ -157,10 +158,10 @@ function checkFileDatabasePopulated(fileObj, fileDef, fileDbName)
 	return res;
 }
 
-function checkFolderDatabasePopulated(folderObj, folderDef, folderDbName, platformUsed)
+function checkFolderDatabasePopulated(folderObj, folderDef, folderDbName)
 {
 	var baseCleanSize = folderDef.dbDefinition.cleanSize;
-	var maximumCleanSize = getDatabaseFolderMargin(baseCleanSize, platformUsed);
+	var maximumCleanSize = getDatabaseFolderMargin(baseCleanSize);
 	var res = false;
 	
 	if (folderObj.size > maximumCleanSize)
@@ -188,13 +189,12 @@ function checkFolderDatabasePopulated(folderObj, folderDef, folderDbName, platfo
 
 
 
-
-
-function getDatabaseFolderMargin(baseNumber, pUsed)
+function getDatabaseFolderMargin(baseNumber)
 {
+	var windowsUsed = sysPlatform.getWindows();
 	var res = -1;
 	
-	if (pUsed === 'win32')
+	if (windowsUsed === true)
 	{
 		res = baseNumber;
 	}
@@ -265,7 +265,7 @@ function testDatabaseFolderFlags(dbArray)
 }
 
 
-function testDatabaseSizesEmpty(dbArray, dbPlatform)
+function testDatabaseSizesEmpty(dbArray)
 {
 	var loopIndex = 0;
 	var currentObject = {};
@@ -284,7 +284,7 @@ function testDatabaseSizesEmpty(dbArray, dbPlatform)
 		
 		if (currentFound === true && currentDefinition.dbDefinition.folder === true)
 		{
-			currentValid = checkFolderDatabaseEmpty(currentObject, currentDefinition, currentName, dbPlatform);
+			currentValid = checkFolderDatabaseEmpty(currentObject, currentDefinition, currentName);
 		}
 		else if (currentFound === true && currentDefinition.dbDefinition.folder === false)
 		{
@@ -306,7 +306,7 @@ function testDatabaseSizesEmpty(dbArray, dbPlatform)
 }
 
 
-function testDatabaseSizesPopulated(dbArray, dbPlatform)
+function testDatabaseSizesPopulated(dbArray)
 {
 	var loopIndex = 0;
 	var currentObject = {};
@@ -325,7 +325,7 @@ function testDatabaseSizesPopulated(dbArray, dbPlatform)
 		
 		if (currentFound === true && currentDefinition.dbDefinition.folder === true)
 		{
-			currentValid = checkFolderDatabasePopulated(currentObject, currentDefinition, currentName, dbPlatform);
+			currentValid = checkFolderDatabasePopulated(currentObject, currentDefinition, currentName);
 		}
 		else if (currentFound === true && currentDefinition.dbDefinition.folder === false)
 		{
@@ -349,8 +349,6 @@ function testDatabaseSizesPopulated(dbArray, dbPlatform)
 
 
 
-
-
 function showInvalidSizeError(vName)
 {
 	var flaggedMessage = "Invalid size for Database " + vName;
@@ -371,11 +369,11 @@ function showEmptyContentError(vName)
 }
 
 
-function showPopulatedFolderEmptyError(dn)
+function showPopulatedFolderEmptyError(vName)
 {
 	var flaggedMessage = "";
 	
-	flaggedMessage += dn;
+	flaggedMessage += vName;
 	flaggedMessage += " is most likely empty based on the ";
 	flaggedMessage += "Database's clean size, and folder error margin.";
 	
