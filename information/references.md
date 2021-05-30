@@ -31,7 +31,7 @@ This document was written on 28-29 April 2021 and shared publicly on 29 April 20
 \-Jani Hartikainen (Sitepoint)
 
 * [Testing Node.js Code with Mocha and Chai](https://stackabuse.com/testing-node-js-code-with-mocha-and-chai/)  
-\-[@ScottWRobinson](https://twitter.com/ScottWRobinson) (Stack Abuse)
+\-[@ScottWRobinson](https://github.com/scottwrobinson) (Stack Abuse)
 
 * [Node Mocha Tutorial](https://learn.co/lessons/node-mocha)  
 \-Flatiron School
