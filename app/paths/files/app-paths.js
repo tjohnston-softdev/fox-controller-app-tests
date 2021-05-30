@@ -21,6 +21,7 @@ function defineAppPaths()
 	defineRes["deviceCommon"] = subCommonFolder + "test-device-common";
 	defineRes["httpRequests"] = subCommonFolder + "http-requests";
 	defineRes["loadFox"] = subCommonFolder + "load-fox-file";
+	defineRes["sysPlatform"] = subCommonFolder + "sys-platform";
 	
 	return defineRes;
 }
