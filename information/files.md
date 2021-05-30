@@ -22,16 +22,13 @@ Stores the names of APIs used by the Controller. Tested in [s-request_api_paths.
 Stores 'definitions' of known Databases used by the Controller. Information includes the name, type, and its size when empty. Tested in [s-supported-databases.js](../test-parts/part-c-internal_scripts/scripts/s-supported-databases.js)
 
 **[app/test-common.js](../app/test-common.js)**  
-Stores shortcut functions for performing Chai assertion tests. Tested in [itm-common_functions.js](../test-parts/part-a-common_data/items/itm-common_functions.js)
+Stores shortcut functions for performing Chai assertion tests. Exempt from testing.
 
 **[app/paths/files/app-paths.js](../app/paths/files/app-paths.js)**  
-stores the paths to other files inside this project, including those in this subfolder. All of the files in this folder are tested in [itm-app_paths.js](../test-parts/part-a-common_data/items/itm-app_paths.js)
+Stores the paths to other files inside this project, including those in this subfolder. Exempt from testing.
 
 **[app/paths/files/fox-paths.js](../app/paths/files/fox-paths.js)**  
-This stores the paths to files in the Controller.
-
-**[app/paths/files/sub-common-paths.js](../app/paths/files/sub-common-paths.js)**  
-This stores the paths to the contents of `app/sub-common/files`
+This stores the paths to files in the Controller. Tested in [itm-app_paths.js](../test-parts/part-a-common_data/items/itm-app_paths.js)
 
 **[test/fox-test-main.js](../test/fox-test-main.js)**  
 The main part of the test script. This is run with the command `npm test`
