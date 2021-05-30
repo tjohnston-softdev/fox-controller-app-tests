@@ -185,7 +185,7 @@ function handleInvalidCall(invalidArg)
 		validationMessage = e.message;
 	}
 	
-	var res = [validationComplete, validationMessage];
+	var res = commonFunctionsFile.prepareInvalidResult(validationComplete, validationMessage);
 	return res;
 }
 

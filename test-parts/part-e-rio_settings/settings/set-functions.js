@@ -130,7 +130,7 @@ function parseIoPrefixInvalidCall(invalidArg, exceptMessage)
 		parseError = e.message;
 	}
 	
-	var parseRes = [parseComplete, parseError];
+	var parseRes = commonFunctionsFile.prepareInvalidResult(parseComplete, parseError);
 	commonFunctionsFile.testInvalidFunctionResult(parseRes, exceptMessage);
 }
 
@@ -151,7 +151,7 @@ function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 		parseError = e.message;
 	}
 	
-	var parseRes = [parseComplete, parseError];
+	var parseRes = commonFunctionsFile.prepareInvalidResult(parseComplete, parseError);
 	commonFunctionsFile.testInvalidFunctionResult(parseRes, exceptMessage);
 }
 

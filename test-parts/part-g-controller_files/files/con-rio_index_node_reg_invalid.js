@@ -408,7 +408,7 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 		regMessage = e.message;
 	}
 	
-	var regRes = [regComplete, regMessage];
+	var regRes = commonFunctionsFile.prepareInvalidResult(regComplete, regMessage);
 	commonFunctionsFile.testInvalidFunctionResult(regRes, expectedThrownError);
 }
 

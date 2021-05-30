@@ -250,21 +250,20 @@ function checkPropertyStringRequiredArray(aDef, pName)
 	}
 }
 
-function checkInvalidFunctionResult(rArray, expMsg)
-{
-	var successElement = null;
-	var messageElement = null;
-	
-	expect(rArray).to.be.an("array");
-	expect(rArray.length).to.be.at.least(2);
-	
-	successElement = rArray[0];
-	messageElement = rArray[1];
-	
-	expect(successElement).to.be.false;
-	expect(messageElement).to.equal(expMsg);
+function checkInvalidFunctionResult(rObject, expMsg)
+{	
+	expect(rObject.successful).to.be.false;
+	expect(rObject.errorText).to.equal(expMsg);
 }
 
+
+function prepareInvalidFunctionResult(executedSuccessfully, flaggedMessage)
+{
+	var prepRes = {};
+	prepRes["successful"] = executedSuccessfully;
+	prepRes["errorText"] = flaggedMessage;
+	return prepRes;
+}
 
 
 function cloneJsonObject(originalObject)
@@ -336,6 +335,7 @@ module.exports =
 	testPropertyStringRequiredObject: checkPropertyStringRequiredObject,
 	testPropertyStringRequiredArray: checkPropertyStringRequiredArray,
 	testInvalidFunctionResult: checkInvalidFunctionResult,
+	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject,
 	getObjectProperties: getJsonObjectProperties,
 	getObjectValues: getJsonObjectValues,
