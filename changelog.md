@@ -1,4 +1,6 @@
 # Changelog
 
-**./app/paths/files/fox-paths.js**
-* Switched to original Controller build.
+**./test-parts/part-h-api_requests/api-main.js**
+* Commented out all requirement calls except for:
+	* adminTests
+	* healthTests

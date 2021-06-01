@@ -12,11 +12,11 @@ function coordinateApiRequests()
 	{
 		adminTests();
 		healthTests();
-		alarmTests();
-		storageTests();
-		crudTests();
-		crudInvalidTests();
-		modifyInvalidTests();
+		//alarmTests();
+		//storageTests();
+		//crudTests();
+		//crudInvalidTests();
+		//modifyInvalidTests();
 	});
 }
 
