@@ -1,20 +1,16 @@
 # Changelog
 
 **Test Status**
-* Alarm API test results match between both controller builds.
+* Storage API test results match between both controller builds.
 
 ---
 
 **./test-parts/part-h-api_requests/api-main.js**
-* Uncommented 'alarmTests' call.
+* Uncommented 'storageTests' call.
 
 ---
 
-**./test-parts/part-h-api_requests/requests/req-admin_health.js**
-* Restored the 'testDriveLetter' function.
-
----
-
-**./test-parts/part-h-api_requests/sub-requests/common-health.js**
-* Moved the 'testDriveLetterString' function back to:
-	* ../requests/req-admin_health.js
+**./test-parts/part-h-api_requests/sub-requests/common-storage.js**
+* defineUserStoragePaths
+	* 'localFolder' is now set to the ORIGINAL build's user storage path.
+	* This is just a temporary fix.
