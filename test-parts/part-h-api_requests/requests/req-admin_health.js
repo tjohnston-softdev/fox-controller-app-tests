@@ -353,8 +353,7 @@ function handleNetwork()
 		
 		it("Internal Flag (networkInterfaces.internal)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'internal');
-			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'internal', 'boolean');
+			testNetworkInternal(healthObject.networkInterfaces);
 		});
 		
 	});
@@ -480,5 +479,24 @@ function testDriveLetter(fsObject)
 }
 
 
+function testNetworkInternal(netArray)
+{
+	var networkIndex = 0;
+	var currentInterface = {};
+	
+	for (networkIndex = 0; networkIndex < netArray.length; networkIndex = networkIndex + 1)
+	{
+		currentInterface = netArray[networkIndex];
+		
+		if (currentInterface.internal !== undefined)
+		{
+			expect(currentInterface.internal).to.be.a("boolean");
+		}
+		else
+		{
+			commonFunctionsFile.testPlaceholder();
+		}
+	}
+}
 
 module.exports = testHealthApi;

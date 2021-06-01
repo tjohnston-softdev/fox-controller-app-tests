@@ -62,22 +62,7 @@ function testDriveMountObject(driveObj)
 
 function testDriveTotalObject(driveObj)
 {
-	var windowsUsed = sysPlatform.getWindows();
-	var preparedSize = -1;
-	var targetType = "";
-	
-	if (windowsUsed === true)
-	{
-		targetType = 'string'
-		preparedSize = parseFloat(driveObj.size);
-	}
-	else
-	{
-		targetType = 'number'
-		preparedSize = driveObj.size;
-	}
-	
-	expect(driveObj.size).to.be.a(targetType);
+	var preparedSize = parseFloat(driveObj.size);
 	expect(preparedSize).to.be.above(0);
 }
 
