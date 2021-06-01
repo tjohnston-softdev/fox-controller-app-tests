@@ -174,8 +174,7 @@ function testFileFlags(fList)
 function defineUserStoragePaths()
 {
 	var localName = "test-file.txt";
-	//var localFolder = "../user-storage";
-	var localFolder = "../original/user-storage";
+	var localFolder = "../user-storage";
 	var localFullPath = localFolder + '/' + localName;
 	var localContents = "Test File Contents";
 	
