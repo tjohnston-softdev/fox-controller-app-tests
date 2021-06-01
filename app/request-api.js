@@ -280,26 +280,6 @@ function checkWriteArgument(argValue)
 
 
 
-function getUrlValidationIndex(ouArg)
-{
-	var urlTemplate = "";
-	var vIndex = -1;
-	
-	try
-	{
-		urlTemplate = foxHost + apiRoot;
-		vIndex = ouArg.indexOf(urlTemplate);
-	}
-	catch(e)
-	{
-		vIndex = -1;
-	}
-	
-	return vIndex;
-}
-
-
-
 module.exports =
 {
 	hostUrl: foxHost,
