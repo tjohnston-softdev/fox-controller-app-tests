@@ -84,11 +84,41 @@ function testHealthEnvironmentDummy(envObject)
 }
 
 
+function testDriveLetterString(fsObject)
+{
+	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
+	commonStorage.testLettersArray(fsObject);
+}
+
+
+function testNetworkInternalArray(netArray)
+{
+	var networkIndex = 0;
+	var currentInterface = {};
+	
+	for (networkIndex = 0; networkIndex < netArray.length; networkIndex = networkIndex + 1)
+	{
+		currentInterface = netArray[networkIndex];
+		
+		if (currentInterface.internal !== undefined)
+		{
+			expect(currentInterface.internal).to.be.a("boolean");
+		}
+		else
+		{
+			commonFunctionsFile.testPlaceholder();
+		}
+	}
+}
+
+
 module.exports =
 {
 	testDeviceObject: testHealthDeviceObject,
 	testTimezoneCode: testHealthTimezoneCodeValue,
 	testMaximumNumber: testHealthNumberMaximum,
 	testEnvValue: testHealthEnvironmentValue,
-	testEnvDummy: testHealthEnvironmentDummy
+	testEnvDummy: testHealthEnvironmentDummy,
+	testDriveLetter: testDriveLetterString,
+	testNetworkInternal: testNetworkInternalArray
 };

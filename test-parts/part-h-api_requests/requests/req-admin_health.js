@@ -248,7 +248,7 @@ function handleFileSystem()
 		
 		it("Drive Letter (fsSize.fs)", function()
 		{
-			testDriveLetter(healthObject.fsSize);
+			commonHealth.testDriveLetter(healthObject.fsSize);
 		});
 		
 		it("Drive Type (fsSize.type)", function()
@@ -353,7 +353,7 @@ function handleNetwork()
 		
 		it("Internal Flag (networkInterfaces.internal)", function()
 		{
-			testNetworkInternal(healthObject.networkInterfaces);
+			commonHealth.testNetworkInternal(healthObject.networkInterfaces);
 		});
 		
 	});
@@ -469,34 +469,6 @@ function handleLog()
 		});
 		
 	});
-}
-
-
-function testDriveLetter(fsObject)
-{
-	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
-	commonStorage.testLettersArray(fsObject);
-}
-
-
-function testNetworkInternal(netArray)
-{
-	var networkIndex = 0;
-	var currentInterface = {};
-	
-	for (networkIndex = 0; networkIndex < netArray.length; networkIndex = networkIndex + 1)
-	{
-		currentInterface = netArray[networkIndex];
-		
-		if (currentInterface.internal !== undefined)
-		{
-			expect(currentInterface.internal).to.be.a("boolean");
-		}
-		else
-		{
-			commonFunctionsFile.testPlaceholder();
-		}
-	}
 }
 
 module.exports = testHealthApi;
