@@ -1,4 +1,7 @@
 # Changelog
 
-**./app/paths/files/fox-paths.js**
-* Set 'useEmulator' back to True.
+**./information/references.md**
+* Changed markdown description.
+	* Before: "in a markdown"
+	* After: "into a markdown"
+* Removed "All links [...] archived version."
