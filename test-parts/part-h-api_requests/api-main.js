@@ -12,7 +12,7 @@ function coordinateApiRequests()
 	{
 		adminTests();
 		healthTests();
-		//alarmTests();
+		alarmTests();
 		//storageTests();
 		//crudTests();
 		//crudInvalidTests();

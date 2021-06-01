@@ -248,7 +248,7 @@ function handleFileSystem()
 		
 		it("Drive Letter (fsSize.fs)", function()
 		{
-			commonHealth.testDriveLetter(healthObject.fsSize);
+			testDriveLetter(healthObject.fsSize);
 		});
 		
 		it("Drive Type (fsSize.type)", function()
@@ -469,6 +469,14 @@ function handleLog()
 		});
 		
 	});
+}
+
+
+
+function testDriveLetter(fsObject)
+{
+	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
+	commonStorage.testLettersArray(fsObject);
 }
 
 module.exports = testHealthApi;

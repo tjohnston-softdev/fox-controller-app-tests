@@ -84,13 +84,6 @@ function testHealthEnvironmentDummy(envObject)
 }
 
 
-function testDriveLetterString(fsObject)
-{
-	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
-	commonStorage.testLettersArray(fsObject);
-}
-
-
 function testNetworkInternalArray(netArray)
 {
 	var networkIndex = 0;
@@ -119,6 +112,5 @@ module.exports =
 	testMaximumNumber: testHealthNumberMaximum,
 	testEnvValue: testHealthEnvironmentValue,
 	testEnvDummy: testHealthEnvironmentDummy,
-	testDriveLetter: testDriveLetterString,
 	testNetworkInternal: testNetworkInternalArray
 };
