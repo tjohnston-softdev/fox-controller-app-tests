@@ -10,10 +10,10 @@ function coordinateApiRequests()
 {
 	describe("H - API Requests", function()
 	{
-		//adminTests();
-		//healthTests();
-		//alarmTests();
-		//storageTests();
+		adminTests();
+		healthTests();
+		alarmTests();
+		storageTests();
 		crudTests();
 		crudInvalidTests();
 		modifyInvalidTests();
