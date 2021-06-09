@@ -6,7 +6,7 @@ Another reason this was implemented is because certain parts can only be tested 
 
 The user input is handled through the [prompt-sync](https://www.npmjs.com/package/prompt-sync) module. If you enter a keyword, the corresponding test will happen. If not, no tests will occur.
 
-This file is a reference to the different modes offered. The keywords are not case-sensitive.
+This file is a reference to the different modes offered. The keywords are not case-sensitive. If no text is entered or an error occurs, a message will be displayed and nothing else will happen.
 
 ---
 
@@ -49,15 +49,12 @@ This mode will test the Controller APIs from a front-end perspective. (parts D, 
 **debug**  
 This mode is reserved for testing whatever part(s) are being worked on at the time.
 
-\
-\
-If no text is entered or an error occurs, a message will be displayed and nothing else will happen.
-
 ---
 
 **Previous:** [Test Parts](./parts.md)  
 **Next:** [Folders](./folders.md)
 
 [Contents](./readme.md)
+
 
 

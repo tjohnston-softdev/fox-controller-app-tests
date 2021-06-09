@@ -1,8 +1,7 @@
+
 # Running
 
-Now that you have installed the FOX Controller test project successfully, this text file is going to explain how to actually run the script.
-
-First, navigate to where the `fox-controller-app` and `fox-controller-app-tests` folders are located. These two projects should be sitting in the same 'root' folder. Remembering where this root folder is located is helpful because it corresponds to where the Controller project is along with any dependencies or derived items.
+First, navigate to where the `fox-controller-app` and `fox-controller-app-tests` folders are located. These two projects should be sitting in the same 'root' folder. Remembering where this root folder is located is helpful because it corresponds to where the Controller project is along with any derived items.
 
 ---
 
