@@ -3,7 +3,7 @@ This is a Node JS application which is used to perform unit testing on a softwar
 
 ---
 
-## Inspiration
+## Background
 During April 2018, I made contact with Optim Controls and was introduced to their latest project - the FOX Controller In simple terms, a [Programmable Logic Controller](https://en.wikipedia.org/wiki/Programmable_logic_controller) is a device used by the engineering industries to remotely control various machinery such as assembly lines and robotics. 
 
 At first, I was asked to research various technical requirements and determine whether they can be implemented in Node JS. Unfortunately, much of my research was a non-starter so eventually, I was asked to shift my focus to writing unit tests for prototype builds of the Controller software.
@@ -12,9 +12,6 @@ At first, I thought it was weird writing software to test software and I'll admi
 
 I do not know the exact date I started working on this project but it was during late-July 2018. My last contribution was on 21st December, which was the date I officially resigned from Optim.
 
----
-
-## Getting Started
 Refer to the [Information](./information/readme.md) folder for instructions on how to use this program.
 
 ---
