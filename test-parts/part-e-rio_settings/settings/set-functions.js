@@ -52,11 +52,11 @@ function checkGetSignalTypeFunction()
 	});
 }
 
+
 function checkParsePrefixFunction()
 {
 	describe("Function - Parse Prefix (parseIoPrefix)", function()
 	{
-		
 		it("Call - Valid Prefix", function()
 		{
 			var validRes = settingsFile.parseIoPrefix(prefixIndexObject.validInput);
@@ -84,7 +84,6 @@ function checkParsePrefixFunction()
 
 function checkParseIndexFunction()
 {
-	
 	describe("Function - Parse Index (parseIoIndex)", function()
 	{
 		it("Call - Valid Prefix", function()

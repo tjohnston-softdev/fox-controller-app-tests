@@ -1,6 +1,7 @@
 # Changelog
 
-**./test-parts/part-c-internal_scripts/sub-scripts/common-request.js**
-* Removed from 'validateResponseBodyObject'
-	* commonFunctionsFile.testObjectPropertyContent
-	* commonFunctionsFile.testString
+**./test-parts/part-e-rio_settings/settings/set-functions.js**
+* Removed blank line at the start of functions:
+	* checkParsePrefixFunction
+	* checkParseIndexFunction
+* Added extra space at the end of 'checkGetSignalTypeFunction'
