@@ -27,8 +27,6 @@ function validateResponseBodyObject(resultObj)
 	expect(resultObj).to.be.an("object");
 			
 	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'exampleProperty');
-	commonFunctionsFile.testObjectPropertyContent(resultObj, 'exampleProperty', 'string');
-	commonFunctionsFile.testString(resultObj.exampleProperty);
 	expect(resultObj.exampleProperty).to.equal("exampleValue");
 }
 
