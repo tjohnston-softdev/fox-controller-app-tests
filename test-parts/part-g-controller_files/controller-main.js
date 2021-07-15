@@ -15,16 +15,16 @@ function coordinateController()
 		var rioIndexRegisterInvalidTests = require("./files/con-rio_index_node_reg_invalid");
 		var serviceTests = require("./files/con-service_main");
 		
-		deviceSettingsTests();
-		classTests();
-		factoryTests();
-		rioIndexMainTests();
-		rioIndexNodeListTests();
+		//deviceSettingsTests();
+		//classTests();
+		//factoryTests();
+		//rioIndexMainTests();
+		//rioIndexNodeListTests();
 		rioIndexRegisterTests();
 		rioIndexRegisterInvalidTests();
-		serviceTests();
-		settingsMainTests();
-		redTests();
+		//serviceTests();
+		//settingsMainTests();
+		//redTests();
 	});
 }
 

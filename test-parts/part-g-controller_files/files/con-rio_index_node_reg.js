@@ -524,15 +524,15 @@ function handleSetDeviceOutput()
 			
 			it("Invalid ID Type", function(done)
 			{
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, -1, correctPrefix, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, -1, correctPrefix, correctIndex, correctBinary);
 				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, null, correctPrefix, correctIndex, correctBinary);
 				done();
 			});
 			
 			it("Invalid Prefix", function(done)
 			{
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, "XYZ", correctIndex, correctBinary);
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, -1, correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, "XYZ", correctIndex, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, -1, correctIndex, correctBinary);
 				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, null, correctIndex, correctBinary);
 				done();
 			});
@@ -540,8 +540,8 @@ function handleSetDeviceOutput()
 			it("Invalid Index", function(done)
 			{	
 				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, NaN, correctBinary);
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, "3", correctBinary);
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, null, correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, "3", correctBinary);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, null, correctBinary);
 				done();
 			});
 			
@@ -553,8 +553,8 @@ function handleSetDeviceOutput()
 			
 			it("Invalid Binary Signal", function(done)
 			{
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, "UNKNOWN");
-				//coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, -1);
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, "UNKNOWN");
+				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, -1);
 				coordinateSetDeviceOutputInvalidCall(setInvalidSpy, nodeTestID, correctPrefix, correctIndex, null);
 				done();
 			});

@@ -127,7 +127,7 @@ describe("FOX Controller Test Script", function()
 	else if (chosenMode === 'debug')
 	{
 		clear();
-		internalPart();
+		controllerPart();
 	}
 	else if (chosenMode === '')
 	{
