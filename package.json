@@ -9,13 +9,8 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/optimcontrols/fox-controller-app-tests.git"
-  },
   "author": "Tyrone Johnston",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/optimcontrols/fox-controller-app-tests#readme",
+  "license": "MIT",
   "dependencies": {
     "chai": "^4.3.4",
     "chai-things": "^0.2.0",

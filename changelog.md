@@ -1,8 +1,6 @@
 # Changelog
 
 **./package.json**
-* Updated packages to their latest versions:
-	* mocha
-	* needle
-	* prompt-sync
-	* sinon
+* Corrected 'license' property.
+* Removed original repository information.
+* Removed homepage URL.
