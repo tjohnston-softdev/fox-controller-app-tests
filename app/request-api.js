@@ -26,14 +26,14 @@ function writeApiUrl(vFolder, vPage)
 }
 
 
-function readApiResponseArray(responseObject)
+function readApiResponseArray(respObj)
 {
 	var rText = null;
 	var objectResult = null;
 	
 	try
 	{
-		rText = responseObject.body;
+		rText = respObj.body;
 		objectResult = JSON.parse(rText);
 	}
 	catch(e)
@@ -45,22 +45,22 @@ function readApiResponseArray(responseObject)
 	return objectResult;
 }
 
-function readApiResponseObject(responseObject)
+function readApiResponseObject(respObj)
 {
 	var bodyType = null;
 	var objectResult = null;
 	
 	try
 	{
-		bodyType = typeof responseObject.body;
+		bodyType = typeof respObj.body;
 		
-		if (responseObject.body !== undefined && responseObject.body !== null && bodyType === "object")
+		if (respObj.body !== undefined && respObj.body !== null && bodyType === "object")
 		{
-			objectResult = responseObject.body;
+			objectResult = respObj.body;
 		}
 		else
 		{
-			objectResult = JSON.parse(responseObject.body);
+			objectResult = JSON.parse(respObj.body);
 		}
 	}
 	catch(e)
@@ -79,8 +79,6 @@ function readApiResponseError(eObject)
 	var rText = validateExtractedErrorText(errorBodyExtract);
 	return rText;
 }
-
-
 
 
 function validateApiResponse(respObj)
@@ -106,11 +104,11 @@ function validateApiResponse(respObj)
 
 
 
-function requestApplicationOnlineResult(aReply)
+function requestApplicationOnlineResult(respObj)
 {
 	var onlineResult = false;
 	
-	if (aReply != null && aReply.statusCode === 200)
+	if (respObj != null && respObj.statusCode === 200)
 	{
 		onlineResult = true;
 	}
@@ -239,32 +237,27 @@ function validateExtractedErrorText(vObject)
 function getRandomIpNumber()
 {
 	var randomBase = Math.random() * 255;
-	var randomResult = Math.round(randomBase);
-	
-	if (randomResult < 1)
-	{
-		randomResult = 1;
-	}
-	
+	var randomResult = Math.ceil(randomBase);
 	return randomResult;
 }
 
 
 function checkWriteArgument(argValue)
 {
+	var argSet = (argValue !== undefined && argValue !== null);
 	var argType = typeof argValue;
 	var argValid = false;
 	
-	if (argValue !== undefined && argValue !== null && argType === "string" && argValue.length > 0)
+	if (argSet === true && argType === "string" && argValue.length > 0)
 	{
 		argValid = true;
 	}
-	else if (argValue !== undefined && argValue !== null && argType === "string")
+	else if (argSet === true && argType === "string")
 	{
 		argValid = false;
 		throw new Error("URL Write argument strings cannot be empty");
 	}
-	else if (argValue !== undefined && argValue !== null)
+	else if (argSet === true)
 	{
 		argValid = false;
 		throw new Error("URL Write arguments must be strings");
