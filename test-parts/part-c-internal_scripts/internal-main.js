@@ -1,4 +1,6 @@
-const localValidTests = require("./scripts/s-local_valid");
+//const localValidTests = require("./scripts/s-local_valid");
+const localGeneralTests = require("./scripts/s-local_valid-general");
+const localSpecificTests = require("./scripts/s-local_valid-specific");
 const defineApiTests = require("./scripts/s-define_api");
 const requestApiTests = require("./scripts/s-request_api");
 const requestPathTests = require("./scripts/s-request_api_paths");
@@ -9,11 +11,13 @@ function coordinateInternal()
 {
 	describe("C - Internal Scripts", function()
 	{
-		localValidTests();
-		defineApiTests();
+		//localValidTests();
+		localGeneralTests();
+		localSpecificTests();
+		//defineApiTests();
 		requestApiTests();
-		requestPathTests();
-		dbDefinitionTests();
+		//requestPathTests();
+		//dbDefinitionTests();
 	});
 }
 
