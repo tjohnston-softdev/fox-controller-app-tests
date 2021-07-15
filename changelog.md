@@ -1,7 +1,5 @@
 # Changelog
 
-**./test-parts/part-e-rio_settings/settings/set-functions.js**
-* Removed blank line at the start of functions:
-	* checkParsePrefixFunction
-	* checkParseIndexFunction
-* Added extra space at the end of 'checkGetSignalTypeFunction'
+**./test-parts/part-f-controller_models/models/m-model_definitions.js**
+* checkModelsLoop
+	* Merged 'currentQuote' variable into 'currentDesc'

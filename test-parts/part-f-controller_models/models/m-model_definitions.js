@@ -83,14 +83,12 @@ function checkModelsLoop(modelArr)
 {
 	var modelIndex = 0;
 	var currentModel = null;
-	var currentQuote = "";
 	var currentDesc = "";
 	
 	for (modelIndex = 0; modelIndex < modelArr.length; modelIndex = modelIndex + 1)
 	{
 		currentModel = modelArr[modelIndex];
-		currentQuote = "'" + currentModel.modelType + "'";
-		currentDesc = "Model - " + currentQuote;
+		currentDesc = "Model - '" + currentModel.modelType + "'";
 		
 		describe(currentDesc, function()
 		{
