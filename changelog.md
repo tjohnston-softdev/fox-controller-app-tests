@@ -1,42 +1,53 @@
 # Changelog
 
-**./test-parts/part-c-internal_scripts/scripts/s-local_valid.js**
-* Moved functions to 's-local_valid-general.js'
-	* handleExampleFunction
-	* callExampleValid
-	* callExampleInvalid
-* Moved functions to s-local_valid-specific.js'
-	* handleTimezoneOffsetFunction
-	* handleDriveLetterFunction
-	* handleDrivePathFunction
-	* handleFilenameFunction
-	* handleRioPrefixFunction
-	* handleRioTextFunction
-* Added "Obsolete" suffix to main description.
-* Wrote 'handlePlaceholder' test function.
-* Removed 'commonPaths.localValid' requirement.
+**./test-parts/part-c-internal_scripts/scripts/s-request_api.js**
+* Moved functions to 's-request_api-urls.js'
+	* checkHostUrlString
+	* checkWriteUrl
+* Moved functions to 's-request_api-response.js'
+	* checkRequestResponseArray
+	* checkRequestResponseObject
+	* checkRequestResponseError
+	* checkRequestResponseValidation
+	* checkOnlineResult
+	* checkRefuseError
+* Moved functions to 's-request_api-other.js'
+	* checkRandomIp
+	* checkDeleteOptionsObject
+* Removed requirements:
+	* validator
+	* commonPaths.commonErrors
+	* commonPaths.requestApi
+	* ../sub-scripts/common-request
+	* ../sub-scripts/request-invalid
+* Removed global variables:
+	* readNullError
+	* emptyReplyObject
+	* validUrl
+* Added 'handlePlaceholder' function. Copied from 's-local_valid.js'
 
 ---
 
-**./test-parts/part-c-internal_scripts/scripts/s-local_valid-general.js**
-* New file - Contains unit tests for example validation.
-	* All of these validation functions follow the same basic pattern.
-	* This handles common argument and error testing.
+**./test-parts/part-c-internal_scripts/scripts/s-request_api-urls.js**
+* New file - Unit testing for functions related to writing URLs
 
 ---
 
-**./test-parts/part-c-internal_scripts/scripts/s-local_valid-specific.js**
-* New file - Contains unit tests for specific validation functions.
-	* eg. Timezone offset string.
+**./test-parts/part-c-internal_scripts/scripts/s-request_api-responses.js**
+* New file - Unit testing for functions related to API responses.
 
 ---
 
-**./test-parts/part-c-internal_scripts/internal-main.js**
-* Commented out 'localValidTests'
-* Added new requirements:
-	* ./scripts/s-local_valid-general
-	* ./scripts/s-local_valid-specific
-* Commented out calls:
-	* defineApiTests
-	* requestPathTests
-	* dbDefinitionTests
+**./test-parts/part-c-internal_scripts/scripts/s-request_api-other.js**
+* New file - Unit testing for misc request functions.
+	* Random IP address generation.
+	* Create DELETE request options object.
+
+---
+
+**./test-parts/part-c-internal_scripts/scripts/internal-main.js**
+* Commented out 'requestApiTests'
+* Added requirements:
+	* ./scripts/s-request_api-urls
+	* ./scripts/s-request_api-responses
+	* ./scripts/s-request_api-other
