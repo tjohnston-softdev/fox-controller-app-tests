@@ -1,6 +1,5 @@
 const pathTests = require("./items/itm-app_paths");
 const objectTests = require("./items/itm-common_objects");
-const errorTests = require("./items/itm-common_errors");
 
 function coordinateCommon()
 {
@@ -8,7 +7,6 @@ function coordinateCommon()
 	{
 		pathTests();
 		objectTests();
-		errorTests();
 	});
 }
 

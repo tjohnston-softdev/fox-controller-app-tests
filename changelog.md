@@ -1,13 +1,12 @@
 # Changelog
 
-**./app/request-api.js**
-* Renamed 'responseObject' parameter to 'respObj' in functions:
-	* readApiResponseArray
-	* readApiResponseObject
-* requestApplicationOnlineResult
-	* Renamed 'aReply' parameter to 'respObj'
-* getRandomIpNumber
-	* When generating a random number, the decimal is rounded up.
-	* This saves having to cap the number at 1
-* Declared 'argSet' variable in 'checkWriteArgument'
-	* Merges the `undefined` and `null` checks.
+**./app/common-errors.js**
+* This file is now exempt from testing.
+
+---
+
+**./test-parts/part-a-common_data/**
+* items/itm-common_errors.js
+	* This file is now empty.
+* common-main.js
+	* Removed requirement: './items/itm-common_errors'
