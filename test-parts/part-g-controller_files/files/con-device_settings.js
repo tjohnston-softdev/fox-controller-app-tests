@@ -237,31 +237,31 @@ function checkValidateBinSignalFunction()
 		it("Call - On", function()
 		{
 			var onRes = settingsFile.isValidBinarySignal(ioSetFile.binSignal.ON);
-			checkSignalValidationResult(onRes, true);
+			handleSignalResult(onRes, true);
 		});
 		
 		it("Call - Off", function()
 		{
 			var offRes = settingsFile.isValidBinarySignal(ioSetFile.binSignal.OFF);
-			checkSignalValidationResult(offRes, true);
+			handleSignalResult(offRes, true);
 		});
 		
 		it("Call - Invalid String", function()
 		{
 			var valRes = settingsFile.isValidBinarySignal("Unknown");
-			checkSignalValidationResult(valRes, false);
+			handleSignalResult(valRes, false);
 		});
 		
 		it("Call - Invalid Type", function()
 		{
 			var typeRes = settingsFile.isValidBinarySignal(-1);
-			checkSignalValidationResult(typeRes, false);
+			handleSignalResult(typeRes, false);
 		});
 		
 		it("Call - Null", function()
 		{
 			var nullRes = settingsFile.isValidBinarySignal(null);
-			checkSignalValidationResult(nullRes, false);
+			handleSignalResult(nullRes, false);
 		});
 		
 	});
@@ -364,7 +364,7 @@ function checkModelTypeListProperty()
 	});
 }
 
-function checkSignalValidationResult(actualOut, expectedOut)
+function handleSignalResult(actualOut, expectedOut)
 {
 	if (expectedOut === true)
 	{

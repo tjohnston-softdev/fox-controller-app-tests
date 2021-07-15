@@ -132,9 +132,6 @@ function handleNodeListDispose()
 }
 
 
-
-
-
 function verifyNodeListCalled(nArg)
 {
 	expect(nodeListSpy.called).to.be.true;
@@ -143,7 +140,6 @@ function verifyNodeListCalled(nArg)
 	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args);
 	commonFunctionsFile.testArrayPopulated(nodeListSpy.lastCall.args);
 	
-	expect(nodeListSpy.lastCall.args[0]).to.not.be.undefined;
 	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);
 	
 	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args[1]);

@@ -59,35 +59,30 @@ function handlePathProperties()
 		it("User Storage Folder (userStoragePath)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'userStoragePath');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'userStoragePath', 'string');
 			commonFunctionsFile.testString(controllerSettingsFile.userStoragePath);
 		});
 		
 		it("Database Folder (dbsPath)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'dbsPath');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'dbsPath', 'string');
 			commonFunctionsFile.testString(controllerSettingsFile.dbsPath);
 		});
 		
 		it("Log Folder (logsPath)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'logsPath');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'logsPath', 'string');
 			commonFunctionsFile.testString(controllerSettingsFile.logsPath);
 		});
 		
 		it("Log File (logFile)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'logFile');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'logFile', 'string');
 			commonFunctionsFile.testString(controllerSettingsFile.logFile);
 		});
 		
 		it("Node RED Folder (flowsPath)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'flowsPath');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'flowsPath', 'string');
 			commonFunctionsFile.testString(controllerSettingsFile.flowsPath);
 		});
 		
