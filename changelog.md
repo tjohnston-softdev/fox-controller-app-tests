@@ -1,5 +1,8 @@
 # Changelog
 
-**./readme.md**
-* Renamed the 'Inspiration' section to 'Background'
-* Merged the 'Getting Started' section into 'Background'
+**./package.json**
+* Updated packages to their latest versions:
+	* mocha
+	* needle
+	* prompt-sync
+	* sinon
