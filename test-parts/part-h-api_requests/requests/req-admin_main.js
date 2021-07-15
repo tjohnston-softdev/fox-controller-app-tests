@@ -110,7 +110,6 @@ function handleDefaultObject()
 			expect(defaultRead).to.be.an("object");
 			
 			commonFunctionsFile.testObjectPropertyDefinition(defaultRead, 'message');
-			commonFunctionsFile.testObjectPropertyContent(defaultRead, 'message', 'string');
 			expect(defaultRead.message).to.equal("adminApi");
 		});
 		

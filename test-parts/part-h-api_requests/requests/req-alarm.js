@@ -115,13 +115,7 @@ function handleAvailable()
 		});
 		
 		it("Correct Contents", function()
-		{
-			commonFunctionsFile.testPropertyContents(retrievedData, 'id', 'string');
-			commonFunctionsFile.testPropertyContents(retrievedData, 'name', 'string');
-			commonFunctionsFile.testPropertyContents(retrievedData, 'okText', 'string');
-			commonFunctionsFile.testPropertyContents(retrievedData, 'alarmText', 'string');
-			commonFunctionsFile.testPropertyContents(retrievedData, 'alarmColor', 'string');
-			
+		{			
 			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'id');
 			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'name');
 			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'okText');
