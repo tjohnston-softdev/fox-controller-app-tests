@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 
 
 function testDeviceArrayStructure(deviceArr)
@@ -50,16 +51,16 @@ function testDeviceObjectStructure(deviceObj)
 
 function compareGetDeviceToOriginal(retObj, origObj)
 {
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'deviceType');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'maker');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'model');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'name');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'desc');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'ipAddress');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'username');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'password');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'isEnabled');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(retObj, origObj, 'macAddress');
+	objectFunctions.testSameValues(retObj, origObj, 'deviceType');
+	objectFunctions.testSameValues(retObj, origObj, 'maker');
+	objectFunctions.testSameValues(retObj, origObj, 'model');
+	objectFunctions.testSameValues(retObj, origObj, 'name');
+	objectFunctions.testSameValues(retObj, origObj, 'desc');
+	objectFunctions.testSameValues(retObj, origObj, 'ipAddress');
+	objectFunctions.testSameValues(retObj, origObj, 'username');
+	objectFunctions.testSameValues(retObj, origObj, 'password');
+	objectFunctions.testSameValues(retObj, origObj, 'isEnabled');
+	objectFunctions.testSameValues(retObj, origObj, 'macAddress');
 }
 
 function testDeviceDeletedStructure(deviceDelObj)

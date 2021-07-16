@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const ipStrings = require("../sub-modules/ip-strings");
 const needleData = require("../sub-modules/needle-data");
 
@@ -181,7 +182,7 @@ function checkModifyOutcome(replyObject, correctStatus, correctMethod)
 function compareDataObjects(inputObject, replyObject, correctID)
 {
 	var outputObject = replyObject.body;
-	commonFunctionsFile.testBothObjectsSameProperties(outputObject, inputObject);
+	objectFunctions.testSameProps(outputObject, inputObject);
 	
 	expect(outputObject.id).to.equal(correctID);
 	expect(outputObject.title).to.equal(inputObject.title);

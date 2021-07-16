@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -339,17 +340,17 @@ function verifyStoredDeviceReturn(sObject, rObject)
 	expect(rObject).to.be.an("object");
 	commonFile.testDeviceDeleted(rObject);
 	
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'id');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'deviceType');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'maker');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'model');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'name');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'desc');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'ipAddress');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'username');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'password');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'isEnabled');
-	commonFunctionsFile.testBothObjectsHaveSamePropertyValue(sObject, rObject, 'macAddress');
+	objectFunctions.testSameValues(sObject, rObject, 'id');
+	objectFunctions.testSameValues(sObject, rObject, 'deviceType');
+	objectFunctions.testSameValues(sObject, rObject, 'maker');
+	objectFunctions.testSameValues(sObject, rObject, 'model');
+	objectFunctions.testSameValues(sObject, rObject, 'name');
+	objectFunctions.testSameValues(sObject, rObject, 'desc');
+	objectFunctions.testSameValues(sObject, rObject, 'ipAddress');
+	objectFunctions.testSameValues(sObject, rObject, 'username');
+	objectFunctions.testSameValues(sObject, rObject, 'password');
+	objectFunctions.testSameValues(sObject, rObject, 'isEnabled');
+	objectFunctions.testSameValues(sObject, rObject, 'macAddress');
 }
 
 

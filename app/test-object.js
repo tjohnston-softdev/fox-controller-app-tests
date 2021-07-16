@@ -42,9 +42,41 @@ function checkMatchKVInsensitive(objDef)
 }
 
 
+function checkSameProps(oSrc, oTgt)
+{
+	var srcProps = getJsonObjectProperties(oSrc);
+	var tgtProps = getJsonObjectProperties(oTgt);
+	
+	var tgtInd = 0;
+	var tgtVal = null;
+	
+	for (tgtInd = 0; tgtInd < tgtProps.length; tgtInd = tgtInd + 1)
+	{
+		tgtVal = tgtProps[tgtInd];
+		expect(srcProps).to.include(tgtVal);
+	}
+}
+
+function checkSameValues(oSrc, oTgt, oProp)
+{
+	var srcVal = null;
+	var tgtVal = null;
+	
+	expect(oSrc).to.have.property(oProp);
+	expect(oTgt).to.have.property(oProp);
+	
+	srcVal = oSrc[oProp];
+	tgtVal = oTgt[oProp];
+	
+	expect(srcVal).to.equal(tgtVal);
+}
+
+
 module.exports =
 {
 	testAllPropsType: checkAllPropsType,
 	testMatchKV: checkMatchKV,
-	testMatchKVInsensitive: checkMatchKVInsensitive
+	testMatchKVInsensitive: checkMatchKVInsensitive,
+	testSameProps: checkSameProps,
+	testSameValues: checkSameValues
 };

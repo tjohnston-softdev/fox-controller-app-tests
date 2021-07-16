@@ -32,34 +32,7 @@ function checkString(strDef)
 	expect(strDef.length).to.be.at.least(1);
 }
 
-function checkBothObjectsSameProperties(oSrc, oTgt)
-{
-	var srcProps = getJsonObjectProperties(oSrc);
-	var tgtProps = getJsonObjectProperties(oTgt);
-	
-	var tgtInd = 0;
-	var tgtVal = null;
-	
-	for (tgtInd = 0; tgtInd < tgtProps.length; tgtInd = tgtInd + 1)
-	{
-		tgtVal = tgtProps[tgtInd];
-		expect(srcProps).to.include(tgtVal);
-	}
-}
 
-function checkBothObjectsHaveSamePropertyValue(oSrc, oTgt, oProp)
-{
-	var srcVal = null;
-	var tgtVal = null;
-	
-	expect(oSrc).to.have.property(oProp);
-	expect(oTgt).to.have.property(oProp);
-	
-	srcVal = oSrc[oProp];
-	tgtVal = oTgt[oProp];
-	
-	expect(srcVal).to.equal(tgtVal);
-}
 
 function checkObjectPropertyDefinition(oDef, pName)
 {
@@ -225,8 +198,8 @@ module.exports =
 	//testObjectAllPropertiesType: checkObjectAllPropertiesType,
 	//testObjectMatchKV: checkObjectMatchKV,
 	//testObjectMatchKVInsensitive: checkObjectMatchKVInsensitive,
-	testBothObjectsSameProperties: checkBothObjectsSameProperties,
-	testBothObjectsHaveSamePropertyValue: checkBothObjectsHaveSamePropertyValue,
+	//testBothObjectsSameProperties: checkBothObjectsSameProperties,
+	//testBothObjectsHaveSamePropertyValue: checkBothObjectsHaveSamePropertyValue,
 	testObjectPropertyDefinition: checkObjectPropertyDefinition,
 	testObjectPropertyContent: checkObjectPropertyContent,
 	testObjectPropertyAbsent: checkObjectPropertyAbsent,

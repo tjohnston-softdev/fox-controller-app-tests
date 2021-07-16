@@ -59,7 +59,7 @@ function checkNamesProperty()
 		
 		it("Uses Same Prefixes", function()
 		{
-			commonFunctionsFile.testBothObjectsSameProperties(settingsFile.ioPrefixes, settingsFile.ioNames);
+			objectFunctions.testSameProps(settingsFile.ioPrefixes, settingsFile.ioNames);
 		});
 	});	
 }
