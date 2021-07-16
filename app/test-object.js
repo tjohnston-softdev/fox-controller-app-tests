@@ -1,3 +1,8 @@
+const chai = require("chai");
+const expect = require("chai").expect;
+const chaiThings = require('chai-things');
+chai.use(chaiThings);
+
 function checkAllPropsType(objDef, allType)
 {
 	var currentVal = null;
