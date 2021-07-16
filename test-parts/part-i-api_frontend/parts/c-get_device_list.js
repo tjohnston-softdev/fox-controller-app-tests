@@ -13,7 +13,7 @@ const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
 const testCacheFile = require("../sub-parts/test-device-cache");
 
-const modelReferenceArray = modelFunctionsFile.getAllModels();
+var modelReferenceArray = null;
 var resultList = null;
 
 
@@ -55,6 +55,7 @@ function handleRetrieve()
 		
 		it("Supported Models Retrieved", function(done)
 		{
+			modelReferenceArray = testCacheFile.getSupportedModels();
 			commonFunctionsFile.testPresent(modelReferenceArray);
 			commonFunctionsFile.testArrayPopulated(modelReferenceArray);
 			commonFunctionsFile.testAllElements(modelReferenceArray, 'object');
@@ -76,7 +77,7 @@ function handleRetrieve()
 
 function handleStore()
 {
-	describe("Store Device List Into Cache", function()
+	describe("Cache Device List", function()
 	{
 		it("Cache Written", function(done)
 		{
@@ -84,8 +85,9 @@ function handleStore()
 			done();
 		});
 		
-		it("Local Copy Disposed", function(done)
+		it("Local Variables Disposed", function(done)
 		{
+			modelReferenceArray = null;
 			resultList = null;
 			done();
 		});

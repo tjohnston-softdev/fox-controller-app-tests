@@ -8,26 +8,27 @@ const commonFunctionsFile = require(commonPaths.testCommon);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const modelFunctionsFile = require(commonPaths.getModels);
-const modelArray = modelFunctionsFile.getAllModels();
 
 const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
 const testCacheFile = require("../sub-parts/test-device-cache");
 const textCommon = require("../sub-parts/common-text");
 
-const deviceCreateUrl = getDeviceCreateUrl();
+var deviceCreateUrl = getDeviceCreateUrl();
+var modelArray = modelFunctionsFile.getAllModels();
 
 
 function testNodeAddApis()
 {
 	describe("Add All Supported Devices", function()
 	{
-		addPrepare();
-		addModelsLoop();
+		handlePrepare();
+		handleModelsLoop();
+		handleModelStorage();
 	});
 }
 
-function addPrepare()
+function handlePrepare()
 {
 	describe("Add Preperation", function()
 	{
@@ -52,7 +53,7 @@ function addPrepare()
 }
 
 
-function addModelsLoop()
+function handleModelsLoop()
 {
 	var modelIndex = 0;
 	var currentModel = {};
@@ -71,6 +72,26 @@ function addModelsLoop()
 				addCurrentSupportedModel(currentModel);
 			});
 		}
+	});
+}
+
+
+function handleModelStorage()
+{
+	describe("Cache Supported Models", function()
+	{
+		it("Cache Written", function(done)
+		{
+			testCacheFile.storeSupportedModels(modelArray);
+			done();
+		});
+		
+		it("Local Variables Disposed", function(done)
+		{
+			deviceCreateUrl = null;
+			modelArray = null;
+			done();
+		});
 	});
 }
 

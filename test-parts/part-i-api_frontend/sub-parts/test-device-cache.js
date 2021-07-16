@@ -1,6 +1,18 @@
+var modelsCache = [];
 var addedDeviceCache = [];
 var listCache = [];
 var nodeCache = {};
+
+
+function setModels(newValue)
+{
+	modelsCache = newValue;
+}
+
+function getModels()
+{
+	return modelsCache;
+}
 
 
 function addDevice(vManufacturer, vModel, vAddr, vKey)
@@ -111,6 +123,7 @@ function clearCache()
 	
 	try
 	{
+		modelsCache = [];
 		addedDeviceCache = [];
 		listCache = [];
 		nodeCache = {};
@@ -128,6 +141,8 @@ function clearCache()
 
 module.exports =
 {
+	storeSupportedModels: setModels,
+	getSupportedModels: getModels,
 	storeTestDevice: addDevice,
 	getTestDevice: getDevice,
 	countTestDevices: countDevices,
