@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
-
+const arrayFunctions = require(commonPaths.testArray);
 
 
 function verifyRemoteIoList(listError, listCalled, callObject)
@@ -13,7 +13,7 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 		
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArrayPopulated(callObject.args);
+	arrayFunctions.testPopulated(callObject.args);
 	commonFunctionsFile.testPresent(callObject.args[0]);
 	expect(callObject.args[0]).to.be.a("function");
 	
@@ -31,7 +31,7 @@ function verifyDevice(deviceArg, deviceCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArrayPopulated(callObject.args);
+	arrayFunctions.testPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.equal(deviceArg);
 	
@@ -49,7 +49,7 @@ function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArrayPopulated(callObject.args);
+	arrayFunctions.testPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.equal(aMode);
 	expect(callObject.args[1]).to.equal(aObject);
@@ -66,7 +66,7 @@ function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aTog
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArrayPopulated(callObject.args);
+	arrayFunctions.testPopulated(callObject.args);
 	expect(callObject.args).to.deep.equal([aID, aPrefix, aIndex, aToggle]);
 	
 	expect(callObject.returnValue).to.be.undefined;
@@ -78,7 +78,7 @@ function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 	commonFunctionsFile.testPresent(callObject);
 	
 	commonFunctionsFile.testPresent(callObject.args);
-	commonFunctionsFile.testArrayPopulated(callObject.args);
+	arrayFunctions.testPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.equal(deleteArg);
 	expect(callObject.args[1]).to.equal(flagArg);

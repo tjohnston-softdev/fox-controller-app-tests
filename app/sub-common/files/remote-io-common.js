@@ -4,6 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 
 
 function testDeviceArrayStructure(deviceArr)
@@ -127,13 +128,13 @@ function testDeviceIdListed(deviceArr, targetDeviceID)
 function testLocalDeviceArrayPopulated(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
-	commonFunctionsFile.testArrayPopulated(locArr);
+	arrayFunctions.testPopulated(locArr);
 }
 
 function testLocalDeviceArrayEmpty(locArr)
 {
 	commonFunctionsFile.testPresent(locArr);
-	commonFunctionsFile.testArrayEmpty(locArr);
+	arrayFunctions.testEmpty(locArr);
 }
 
 function testLocalDeviceArrayNeutral(locArr)
@@ -199,7 +200,7 @@ function testDeviceListReturnDynamic(dListRet, itemsRequiredFlag)
 
 function testDeviceListCommon(dListRet)
 {
-	commonFunctionsFile.testAllElements(dListRet, 'object');
+	arrayFunctions.testAllType(dListRet, 'object');
 	testDeviceArrayStructure(dListRet);
 }
 

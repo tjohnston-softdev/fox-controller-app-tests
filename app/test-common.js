@@ -25,56 +25,11 @@ function checkPercent(percVal)
 	expect(percVal).to.be.within(0, 100);
 }
 
-function checkArrayPopulated(arrDef)
-{
-	expect(arrDef).to.be.an('array');
-	expect(arrDef).to.not.be.empty;
-}
-
-function checkArrayEmpty(arrDef)
-{
-	expect(arrDef).to.be.an('array');
-	expect(arrDef).to.be.empty;
-}
-
-
-function checkArrayDynamic(arrDef, lengthFlag)
-{
-	if (lengthFlag > 0)
-	{
-		expect(arrDef).to.be.an('array').that.is.not.empty;
-	}
-	else if (lengthFlag < 0)
-	{
-		expect(arrDef).to.be.an('array').that.is.empty;
-	}
-	else
-	{
-		expect(arrDef).to.be.an('array');
-	}
-}
-
-
 
 function checkString(strDef)
 {
 	expect(strDef).to.be.a('string');
 	expect(strDef.length).to.be.at.least(1);
-}
-
-
-function checkAllElements(arrDef, eType)
-{
-	var objectInd = 0;
-	var currentObject = null;
-	
-	for (objectInd = 0; objectInd < arrDef.length; objectInd = objectInd + 1)
-	{
-		currentObject = arrDef[objectInd];
-		expect(currentObject).to.be.an(eType);
-		objectInd = objectInd + 1;
-	}
-	
 }
 
 
@@ -306,11 +261,11 @@ module.exports =
 	testPresent: checkPresent,
 	testBinary: checkBinary,
 	testPercent: checkPercent,
-	testArrayPopulated: checkArrayPopulated,
-	testArrayEmpty: checkArrayEmpty,
-	testArrayDynamic: checkArrayDynamic,
+	//testArrayPopulated: checkArrayPopulated,
+	//testArrayEmpty: checkArrayEmpty,
+	//testArrayDynamic: checkArrayDynamic,
 	testString: checkString,
-	testAllElements: checkAllElements,
+	//testAllElements: checkAllElements,
 	testObjectAllPropertiesType: checkObjectAllPropertiesType,
 	testObjectMatchKV: checkObjectMatchKV,
 	testObjectMatchKVInsensitive: checkObjectMatchKVInsensitive,

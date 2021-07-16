@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 const modelFunctionsFile = require(commonPaths.getModels);
@@ -35,8 +36,8 @@ function handlePrepare()
 		it("Supported Models Retrieved", function(done)
 		{
 			commonFunctionsFile.testPresent(modelArray);
-			commonFunctionsFile.testArrayPopulated(modelArray);
-			commonFunctionsFile.testAllElements(modelArray, 'object');
+			arrayFunctions.testPopulated(modelArray);
+			arrayFunctions.testAllType(modelArray, 'object');
 			
 			done();
 		});

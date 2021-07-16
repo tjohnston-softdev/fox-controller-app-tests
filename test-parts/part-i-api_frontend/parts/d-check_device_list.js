@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const rioCommon = require(commonPaths.rioCommon);
 
 const testCacheFile = require("../sub-parts/test-device-cache");
@@ -36,8 +37,8 @@ function handleCheckPrepare()
 		
 		it("Device List Valid", function(done)
 		{
-			commonFunctionsFile.testArrayPopulated(listTest);
-			commonFunctionsFile.testAllElements(listTest, 'object');
+			arrayFunctions.testPopulated(listTest);
+			arrayFunctions.testAllType(listTest, 'object');
 			rioCommon.testDeviceArray(listTest);
 			
 			done();

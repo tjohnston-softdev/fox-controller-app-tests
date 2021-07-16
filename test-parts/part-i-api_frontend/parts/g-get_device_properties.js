@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 
@@ -118,14 +119,14 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Correct Status Array", function(done)
 	{
-		commonFunctionsFile.testArrayPopulated(deviceRead.STATUS);
+		arrayFunctions.testPopulated(deviceRead.STATUS);
 		validateStatusControlArray(deviceRead.STATUS);
 		done();
 	});
 	
 	it("Correct Control Array", function(done)
 	{
-		commonFunctionsFile.testArrayPopulated(deviceRead.CONTROL);
+		arrayFunctions.testPopulated(deviceRead.CONTROL);
 		validateStatusControlArray(deviceRead.CONTROL);
 		done();
 	});

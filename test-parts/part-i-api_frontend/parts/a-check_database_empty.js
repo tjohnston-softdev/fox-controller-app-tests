@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const rioCommon = require(commonPaths.rioCommon);
@@ -56,14 +57,14 @@ function handleDatabaseCheck()
 		
 		it("Valid Array Structure", function(done)
 		{
-			commonFunctionsFile.testAllElements(retrievedDatabaseList, 'object');
+			arrayFunctions.testAllType(retrievedDatabaseList, 'object');
 			rioCommon.testDeviceArray(retrievedDatabaseList);
 			done();
 		});
 		
 		it("Device List Empty", function(done)
 		{
-			commonFunctionsFile.testArrayEmpty(retrievedDatabaseList);
+			arrayFunctions.testEmpty(retrievedDatabaseList);
 			done();
 		});
 		

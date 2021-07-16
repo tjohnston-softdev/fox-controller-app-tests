@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 
 const ioSetFile = loadFoxFile(foxPath.rioSettingsFile);
@@ -76,13 +77,13 @@ function checkSupportedModelDefinitions()
 		it("Manufacturers", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'manufacturers');
-			commonFunctionsFile.testArrayPopulated(supportedListObject.manufacturers);
+			arrayFunctions.testPopulated(supportedListObject.manufacturers);
 		});
 		
 		it("Models", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'models');
-			commonFunctionsFile.testArrayPopulated(supportedListObject.models);
+			arrayFunctions.testPopulated(supportedListObject.models);
 		});
 		
 	});
@@ -126,12 +127,12 @@ function checkDeviceTypeArrayProperty()
 		
 		it("Populated Array", function()
 		{
-			commonFunctionsFile.testArrayPopulated(settingsFile.deviceTypes);
+			arrayFunctions.testPopulated(settingsFile.deviceTypes);
 		});
 		
 		it("All Elements Strings", function()
 		{
-			commonFunctionsFile.testAllElements(settingsFile.deviceTypes, 'string');
+			arrayFunctions.testAllType(settingsFile.deviceTypes, 'string');
 		});
 	});
 }
@@ -320,12 +321,12 @@ function checkManufacturerListProperty()
 		
 		it("Array", function()
 		{
-			commonFunctionsFile.testArrayPopulated(settingsFile.listRioMakers);
+			arrayFunctions.testPopulated(settingsFile.listRioMakers);
 		});
 		
 		it("All Elements Strings", function()
 		{
-			commonFunctionsFile.testAllElements(settingsFile.listRioMakers, 'string');
+			arrayFunctions.testAllType(settingsFile.listRioMakers, 'string');
 		});
 		
 		it("Matching Contents", function()
@@ -348,12 +349,12 @@ function checkModelTypeListProperty()
 		
 		it("Array", function()
 		{
-			commonFunctionsFile.testArrayPopulated(settingsFile.listRioModelTypes);
+			arrayFunctions.testPopulated(settingsFile.listRioModelTypes);
 		});
 		
 		it("All Elements Strings", function()
 		{
-			commonFunctionsFile.testAllElements(settingsFile.listRioModelTypes, 'string');
+			arrayFunctions.testAllType(settingsFile.listRioModelTypes, 'string');
 		});
 		
 		it("Matching Contents", function()

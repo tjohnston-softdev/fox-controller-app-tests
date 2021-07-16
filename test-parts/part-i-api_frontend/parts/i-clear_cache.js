@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const testCacheFile = require("../sub-parts/test-device-cache");
@@ -64,7 +65,7 @@ function handleDatatabaseListCheck()
 		
 		it("Device List Empty", function(done)
 		{
-			commonFunctionsFile.testArrayEmpty(listRead);
+			arrayFunctions.testEmpty(listRead);
 			done();
 		});
 		

@@ -4,6 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
@@ -54,14 +55,14 @@ function handleManufacturerProperties()
 			manufacturersArray = commonFunctionsFile.getObjectProperties(nodeCacheObject);
 			
 			commonFunctionsFile.testPresent(manufacturersArray);
-			commonFunctionsFile.testArrayPopulated(manufacturersArray);
+			arrayFunctions.testPopulated(manufacturersArray);
 			
 			done();
 		});
 		
 		it("Manufacturer Property List Valid", function(done)
 		{
-			commonFunctionsFile.testAllElements(manufacturersArray, 'string');
+			arrayFunctions.testAllType(manufacturersArray, 'string');
 			nodeCommonFile.testManufacturerArray(manufacturersArray);
 			done();
 		});

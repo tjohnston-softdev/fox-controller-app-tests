@@ -6,6 +6,7 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 const indexFile = loadFoxFile(foxPath.rioIndexFile);
 const rioSubCommonFile = require(commonPaths.rioCommon);
@@ -138,7 +139,7 @@ function verifyNodeListCalled(nArg)
 	commonFunctionsFile.testPresent(nodeListSpy.lastCall);
 	
 	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args);
-	commonFunctionsFile.testArrayPopulated(nodeListSpy.lastCall.args);
+	arrayFunctions.testPopulated(nodeListSpy.lastCall.args);
 	
 	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);
 	

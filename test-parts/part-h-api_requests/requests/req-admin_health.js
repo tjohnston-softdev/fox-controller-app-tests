@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 
@@ -159,8 +160,8 @@ function handleSpeed()
 		it("Array (cpuCurrentSpeed.cores)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject.cpuCurrentSpeed, 'cores');
-			commonFunctionsFile.testArrayPopulated(healthObject.cpuCurrentSpeed.cores);
-			commonFunctionsFile.testAllElements(healthObject.cpuCurrentSpeed.cores, 'number');
+			arrayFunctions.testPopulated(healthObject.cpuCurrentSpeed.cores);
+			arrayFunctions.testAllType(healthObject.cpuCurrentSpeed.cores, 'number');
 			expect(healthObject.cpuCurrentSpeed.cores).to.all.be.above(0);
 		});
 		
@@ -236,8 +237,8 @@ function handleFileSystem()
 		it("File System Array (fsSize)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'fsSize');
-			commonFunctionsFile.testArrayPopulated(healthObject.fsSize);
-			commonFunctionsFile.testAllElements(healthObject.fsSize, 'object');
+			arrayFunctions.testPopulated(healthObject.fsSize);
+			arrayFunctions.testAllType(healthObject.fsSize, 'object');
 		});
 		
 		it("File System Properties (fsSize)", function()
@@ -320,8 +321,8 @@ function handleNetwork()
 		it("Network Interface Array (networkInterfaces)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'networkInterfaces');
-			commonFunctionsFile.testArrayPopulated(healthObject.networkInterfaces);
-			commonFunctionsFile.testAllElements(healthObject.networkInterfaces, 'object');
+			arrayFunctions.testPopulated(healthObject.networkInterfaces);
+			arrayFunctions.testAllType(healthObject.networkInterfaces, 'object');
 		});
 		
 		it("Interface Name (networkInterfaces.iface)", function()
@@ -367,8 +368,8 @@ function handleDatabase()
 		it("Database Array (databaseSize)", function()
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'databaseSize');
-			commonFunctionsFile.testArrayPopulated(healthObject.databaseSize);
-			commonFunctionsFile.testAllElements(healthObject.databaseSize, 'object');
+			arrayFunctions.testPopulated(healthObject.databaseSize);
+			arrayFunctions.testAllType(healthObject.databaseSize, 'object');
 			expect(healthObject.databaseSize.length).to.equal(2);
 		});
 		
@@ -425,8 +426,8 @@ function handleLog()
 		it("Log Array (logSize)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'logSize');
-			commonFunctionsFile.testArrayPopulated(healthObject.logSize);
-			commonFunctionsFile.testAllElements(healthObject.logSize, 'object');
+			arrayFunctions.testPopulated(healthObject.logSize);
+			arrayFunctions.testAllType(healthObject.logSize, 'object');
 			expect(healthObject.logSize.length).to.equal(1);
 			
 			logObject = healthObject.logSize[0];

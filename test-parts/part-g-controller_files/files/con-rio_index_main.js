@@ -6,6 +6,7 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const indexFile = loadFoxFile(foxPath.rioIndexFile);
@@ -117,7 +118,7 @@ function handleInitializationCompleteFunction()
 			commonFunctionsFile.testPresent(compSpy.firstCall);
 			
 			commonFunctionsFile.testPresent(compSpy.firstCall.args);
-			commonFunctionsFile.testArrayPopulated(compSpy.firstCall.args);
+			arrayFunctions.testPopulated(compSpy.firstCall.args);
 			
 			commonFunctionsFile.testPresent(compSpy.firstCall.args[0]);
 			expect(compSpy.firstCall.args[0]).to.be.a("function");

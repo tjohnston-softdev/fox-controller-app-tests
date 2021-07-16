@@ -4,6 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const localValidFile = require(commonPaths.localValid);
 const nodeNames = require(commonPaths.nodeNames);
 
@@ -12,7 +13,7 @@ function testNodeObjectArrayStructure(nodeObjArray)
 {
 	commonFunctionsFile.testPresent(nodeObjArray);
 	expect(nodeObjArray).to.be.an("array");
-	commonFunctionsFile.testAllElements(nodeObjArray, 'object');
+	arrayFunctions.testAllType(nodeObjArray, 'object');
 }
 
 

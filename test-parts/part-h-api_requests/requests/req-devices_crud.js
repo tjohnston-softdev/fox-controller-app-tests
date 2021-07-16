@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 
@@ -52,7 +53,7 @@ function handleSupportedModels()
 		it("Retrieved Successfully", function(done)
 		{
 			commonFunctionsFile.testPresent(modelObjectArray);
-			commonFunctionsFile.testArrayPopulated(modelObjectArray);
+			arrayFunctions.testPopulated(modelObjectArray);
 			done();
 		});
 		
@@ -105,7 +106,7 @@ function handleDeviceDefaultValues()
 			var correctTypes = ["Remote IO", "Motor Drive"];
 			
 			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'deviceTypes');
-			commonFunctionsFile.testArrayPopulated(defaultsRead.deviceTypes);
+			arrayFunctions.testPopulated(defaultsRead.deviceTypes);
 			expect(defaultsRead.deviceTypes).to.deep.equal(correctTypes);
 			
 			done();
@@ -115,7 +116,7 @@ function handleDeviceDefaultValues()
 		it("Manufacturers (rioMakers)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'rioMakers');
-			commonFunctionsFile.testArrayPopulated(defaultsRead.rioMakers);
+			arrayFunctions.testPopulated(defaultsRead.rioMakers);
 			expect(defaultsRead.rioMakers).to.deep.equal(deviceArrayLists.manufacturers);
 			
 			done();
@@ -124,7 +125,7 @@ function handleDeviceDefaultValues()
 		it("Models (rioModelTypes)", function(done)
 		{
 			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'rioModelTypes');
-			commonFunctionsFile.testArrayPopulated(defaultsRead.rioModelTypes);
+			arrayFunctions.testPopulated(defaultsRead.rioModelTypes);
 			expect(defaultsRead.rioModelTypes).to.deep.equal(deviceArrayLists.models);
 			
 			done();
@@ -159,13 +160,13 @@ function handleBeforeListTest()
 		
 		it("Device Array Returned", function(done)
 		{
-			commonFunctionsFile.testArrayDynamic(rioList, -1);
+			arrayFunctions.testDynamic(rioList, -1);
 			done();
 		});
 		
 		it("All Elements Objects", function(done)
 		{
-			commonFunctionsFile.testAllElements(rioList, 'object');
+			arrayFunctions.testAllType(rioList, 'object');
 			done();
 		});
 		

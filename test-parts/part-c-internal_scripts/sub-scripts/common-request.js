@@ -4,13 +4,14 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 
 
 function validateResponseBodyArray(resultObj)
 {	
 	commonFunctionsFile.testPresent(resultObj);
-	commonFunctionsFile.testArrayPopulated(resultObj);
-	commonFunctionsFile.testAllElements(resultObj, 'object');
+	commonFunctionsFile.testPopulated(resultObj);
+	commonFunctionsFile.testAllType(resultObj, 'object');
 	
 	commonFunctionsFile.testPropertyDefinitions(resultObj, 'value');
 	commonFunctionsFile.testPropertyDefinitions(resultObj, 'text');

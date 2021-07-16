@@ -6,6 +6,7 @@ const sinon = require('sinon');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -298,8 +299,8 @@ function handleGetIoProperties()
 				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'CONTROL');
 				
 				commonFunctionsFile.testString(propertyRes.name);
-				commonFunctionsFile.testArrayPopulated(propertyRes.STATUS);
-				commonFunctionsFile.testArrayPopulated(propertyRes.CONTROL);
+				arrayFunctions.testPopulated(propertyRes.STATUS);
+				arrayFunctions.testPopulated(propertyRes.CONTROL);
 			});
 			
 			it("Status and Control Arrays Valid", function()

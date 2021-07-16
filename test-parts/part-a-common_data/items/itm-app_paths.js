@@ -5,6 +5,7 @@ const expect = require("chai").expect;
 const appPaths = require("../../../app/paths/files/app-paths");
 const foxPaths = require(appPaths.foxRelative);
 const testCommon = require(appPaths.testCommon);
+const testArray = require(commonPaths.testArray);
 const propertyList = writeFoxPropertyNames();
 
 
@@ -14,7 +15,7 @@ function testCommonPaths()
 	{
 		it("Property Array Retrieved", function()
 		{
-			testCommon.testArrayPopulated(propertyList);
+			testArray.testPopulated(propertyList);
 		});
 		
 		it("Property Names Valid", function()

@@ -4,6 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const databaseFile = require(commonPaths.supportedDatabases);
 
 
@@ -56,8 +57,8 @@ function checkDefinitionObject()
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctionsFile.testArrayPopulated(definitionArray);
-			commonFunctionsFile.testAllElements(definitionArray, 'object');
+			arrayFunctions.testPopulated(definitionArray);
+			arrayFunctions.testAllType(definitionArray, 'object');
 		});
 		
 		it("Correct Properties", function()

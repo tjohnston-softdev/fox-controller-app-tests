@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 const ioFile = loadFoxFile(foxPath.rioSettingsFile);
 
@@ -63,12 +64,12 @@ function checkManufacturerArrayRead(modelArr)
 		it("Successfully Read", function()
 		{
 			commonFunctionsFile.testPresent(modelArr);
-			commonFunctionsFile.testArrayPopulated(modelArr);
+			arrayFunctions.testPopulated(modelArr);
 		});
 		
 		it("Correct Structure", function()
 		{
-			commonFunctionsFile.testAllElements(modelArr, 'object');
+			arrayFunctions.testAllType(modelArr, 'object');
 		});
 		
 		it("Model Types Defined", function()
@@ -130,12 +131,12 @@ function checkIoConfigArrayProperty(modelObj)
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testArrayPopulated(modelObj.ioConfigs);
+			arrayFunctions.testPopulated(modelObj.ioConfigs);
 		});
 		
 		it("All Elements Objects", function()
 		{
-			commonFunctionsFile.testAllElements(modelObj.ioConfigs, 'object');
+			arrayFunctions.testAllType(modelObj.ioConfigs, 'object');
 		});
 		
 		it("Object Structures Valid", function()
