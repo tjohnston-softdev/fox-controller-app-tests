@@ -1,27 +1,22 @@
 # Changelog
 
-**./test-parts/part-i-api_frontend/parts/**
-* a-check_database_empty.js
-	* Removed 'commonPaths.getModels' requirement.
-	* Removed 'modelArray' global.
-* d-check_device_list.js
-	* Removed 'commonPaths.deviceCommon' requirement.
-* e-list_avaliable_nodes.js
-	* Removed whitespace at the start of 'listDevicesLoop'
-* f-check_node_array.js
-	* Removed 'commonPaths.requestApiPaths' requirement.
-* g-get_device_properties.js
-	* Removed string check on 'deviceRead.name' in 'testCurrentDeviceStatus'
-* h-delete_added_devices.js
-	* Removed 'commonPaths.requestApiPaths' requirement.
-	* Removed 'commonPaths.requestApi' requirement
-* i-clear_cache.js
-	* Removed whitespace in "Cache Cleared Successfully" test.
+**./app/sub-common/files/node-names.js**
+* New file
+	* Contains functions to help write the expected node name in front-end API testing.
+	* See below for split details.
 
 ---
 
-**./test-parts/part-i-api_frontend/sub-parts/**
-* common-nodes.js
-	* Removed 'commonPaths.foxRelative' requirement.
-* common-text.js
-	* Renamed 'd' global to 'dash'
+**./app/paths/files/app-paths.js**
+* Added property for: '../../sub-common/files/node-names.js'
+
+---
+
+**./test-parts/part-i-api_frontend/sub-parts/common-nodes.js**
+* Added requirement for 'commonPaths.nodeNames'
+* writeExpectedNodeName
+	* Moved 'firstCharacter' IF structure to 'nodeNames' as 'parseDataTypeChar'
+	* Moved 'secondCharacter' IF structure to 'nodeNames' as 'parseDataModeChar'
+	* Moved 'enteredPrefix.length' IF condition to 'nodeNames' as 'parseIndexNumberChars'
+	* Removed 'firstWord', 'secondWord', and 'thirdWord' variables.
+	* Rewrote 'fullText' using 'nodeNames'
