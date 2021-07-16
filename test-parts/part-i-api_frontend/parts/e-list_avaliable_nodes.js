@@ -31,7 +31,6 @@ function listDevicesLoop()
 	
 	describe("Supported Manufacturers", function()
 	{
-		
 		for (manufacturerIndex = 0; manufacturerIndex < apiDefinitionObject.length; manufacturerIndex = manufacturerIndex + 1)
 		{
 			currentName = apiDefinitionObject[manufacturerIndex];

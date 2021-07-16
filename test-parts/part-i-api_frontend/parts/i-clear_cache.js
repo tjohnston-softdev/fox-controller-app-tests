@@ -35,11 +35,8 @@ function handleClearCache()
 		{
 			commonFunctionsFile.testPresent(clearResult);
 			expect(clearResult).to.be.true;
-			
 			done();
 		});
-		
-		
 	});
 }
 

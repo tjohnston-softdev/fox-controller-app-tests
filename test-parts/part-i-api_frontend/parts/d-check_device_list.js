@@ -7,7 +7,6 @@ const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const rioCommon = require(commonPaths.rioCommon);
 
-const deviceCommon = require(commonPaths.deviceCommon);
 const testCacheFile = require("../sub-parts/test-device-cache");
 const textCommon = require("../sub-parts/common-text");
 

@@ -1,20 +1,20 @@
-const d = " - ";
+const dash = " - ";
 
 function writeDeviceHeaderString(vManufacturer, vModel)
 {
-	var res = vManufacturer + d + vModel;
+	var res = vManufacturer + dash + vModel;
 	return res;
 }
 
 function writeDeviceCacheHeaderString(cacheObj)
 {
-	var res = [cacheObj.manufacturer, cacheObj.model, cacheObj.address, cacheObj.key].join(d);
+	var res = [cacheObj.manufacturer, cacheObj.model, cacheObj.address, cacheObj.key].join(dash);
 	return res;
 }
 
 function writeNodeCacheHeaderString(vText, vKey)
 {
-	var res = vText + d + vKey;
+	var res = vText + dash + vKey;
 	return res;
 }
 

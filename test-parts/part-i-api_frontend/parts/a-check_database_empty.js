@@ -8,8 +8,6 @@ const commonFunctionsFile = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const rioCommon = require(commonPaths.rioCommon);
-const modelFunctionsFile = require(commonPaths.getModels);
-const modelArray = modelFunctionsFile.getAllModels();
 
 var retrievedDatabaseList = null;
 

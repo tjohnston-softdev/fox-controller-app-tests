@@ -112,9 +112,7 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Correct Node Name", function(done)
 	{
-		commonFunctionsFile.testObjectPropertyContent(deviceRead, 'name', 'string');
 		expect(deviceRead.name).to.equal(deviceName);
-		
 		done();
 	});
 	
