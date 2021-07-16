@@ -5,7 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const localValidFile = require(commonPaths.localValid);
-
+const nodeNames = require(commonPaths.nodeNames);
 
 
 function testNodeObjectArrayStructure(nodeObjArray)
@@ -160,44 +160,13 @@ function writeExpectedNodeName(enteredPrefix)
 {
 	var firstCharacter = enteredPrefix.charAt(0);
 	var secondCharacter = enteredPrefix.charAt(1);
-	
-	var firstWord = "";
-	var secondWord = "";
-	var thirdWord = "";
-	
 	var fullText = "";
 	
+	fullText += nodeNames.parseDataType(firstCharacter);
+	fullText += nodeNames.parseDataMode(secondCharacter);
+	fullText += nodeNames.parseIndexNumber(enteredPrefix);
 	
-	if (firstCharacter === "a")
-	{
-		firstWord = "analogue ";
-	}
-	else if (firstCharacter === "d")
-	{
-		firstWord = "digital ";
-	}
-	else if (firstCharacter === "r")
-	{
-		firstWord = "relay ";
-	}
-	
-	if (secondCharacter === "i")
-	{
-		secondWord = "input ";
-	}
-	else if (secondCharacter === "o")
-	{
-		secondWord = "output ";
-	}
-	
-	if (enteredPrefix.length > 3)
-	{
-		thirdWord = enteredPrefix.substring(3);
-	}
-	
-	fullText = firstWord + secondWord + thirdWord;
 	fullText = fullText.trim();
-	
 	return fullText;
 }
 

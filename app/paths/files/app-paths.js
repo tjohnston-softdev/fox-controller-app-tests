@@ -22,6 +22,7 @@ function defineAppPaths()
 	defineRes["httpRequests"] = subCommonFolder + "http-requests";
 	defineRes["loadFox"] = subCommonFolder + "load-fox-file";
 	defineRes["sysPlatform"] = subCommonFolder + "sys-platform";
+	defineRes["nodeNames"] = subCommonFolder + "node-names";
 	
 	return defineRes;
 }
