@@ -4,6 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 
 function testLocalValidSpecific()
@@ -32,8 +33,8 @@ function handleTimezoneOffsetFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateTimezoneOffset');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateTimezoneOffset', 'function');
+			objectFunctions.testPropExists(localValidFile, 'validateTimezoneOffset');
+			objectFunctions.testPropType(localValidFile, 'validateTimezoneOffset', 'function');
 		});
 		
 		it("Call - Early Valid", function()
@@ -82,8 +83,8 @@ function handleDriveLetterFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateDriveLetter');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateDriveLetter', 'function');
+			objectFunctions.testPropExists(localValidFile, 'validateDriveLetter');
+			objectFunctions.testPropType(localValidFile, 'validateDriveLetter', 'function');
 		});
 		
 		it("Call - Valid Format", function()
@@ -114,8 +115,8 @@ function handleDrivePathFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateDrivePath');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateDrivePath', 'function');
+			objectFunctions.testPropExists(localValidFile, 'validateDrivePath');
+			objectFunctions.testPropType(localValidFile, 'validateDrivePath', 'function');
 		});
 		
 		it("Call - Valid Format", function()
@@ -148,8 +149,8 @@ function handleFilenameFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateFilename');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateFilename', 'function');
+			objectFunctions.testPropExists(localValidFile, 'validateFilename');
+			objectFunctions.testPropType(localValidFile, 'validateFilename', 'function');
 		});
 		
 		it("Call - Valid Format", function()
@@ -186,8 +187,8 @@ function handleRioPrefixFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateRioPrefix');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateRioPrefix', 'function');
+			objectFunctions.testPropExists(localValidFile, 'validateRioPrefix');
+			objectFunctions.testPropType(localValidFile, 'validateRioPrefix', 'function');
 		});
 		
 		it("Call - Valid Format", function()
@@ -228,8 +229,8 @@ function handleRioTextFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(localValidFile, 'validateRioText');
-			commonFunctionsFile.testObjectPropertyContent(localValidFile, 'validateRioText', 'function');
+			objectFunctions.testPropExists(localValidFile, 'validateRioText');
+			objectFunctions.testPropType(localValidFile, 'validateRioText', 'function');
 		});
 		
 		it("Call - Valid Format", function()

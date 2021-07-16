@@ -6,6 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 
@@ -104,9 +105,9 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Correct Properties", function(done)
 	{
-		commonFunctionsFile.testObjectPropertyDefinition(deviceRead, 'name');
-		commonFunctionsFile.testObjectPropertyDefinition(deviceRead, 'STATUS');
-		commonFunctionsFile.testObjectPropertyDefinition(deviceRead, 'CONTROL');
+		objectFunctions.testPropExists(deviceRead, 'name');
+		objectFunctions.testPropExists(deviceRead, 'STATUS');
+		objectFunctions.testPropExists(deviceRead, 'CONTROL');
 		
 		done();
 	});

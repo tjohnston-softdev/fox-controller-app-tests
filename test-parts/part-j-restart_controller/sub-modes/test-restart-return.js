@@ -3,6 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
 
 
@@ -11,7 +12,7 @@ function testProcessReturnObject(procObj)
 	commonFunctionsFile.testPresent(procObj);
 	expect(procObj).to.be.an("object");
 	
-	commonFunctionsFile.testObjectPropertyDefinition(procObj, 'success');
+	objectFunctions.testPropExists(procObj, 'success');
 	expect(procObj.success).to.be.true;
 }
 

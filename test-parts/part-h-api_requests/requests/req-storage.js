@@ -261,8 +261,8 @@ function handleGlobalStatus()
 		{
 			commonFunctionsFile.testString(statusRead.fs);
 			commonFunctionsFile.testString(statusRead.type);
-			commonFunctionsFile.testObjectPropertyContent(statusRead, 'used', 'number');
-			commonFunctionsFile.testObjectPropertyContent(statusRead, 'use', 'number');
+			objectFunctions.testPropType(statusRead, 'used', 'number');
+			objectFunctions.testPropType(statusRead, 'use', 'number');
 			commonFunctionsFile.testString(statusRead.mount);
 			
 			storageCommonFile.testLetterObject(statusRead);

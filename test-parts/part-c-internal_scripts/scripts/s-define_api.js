@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const defineFile = require(commonPaths.defineApi);
 
 function testDefine()
@@ -12,7 +13,7 @@ function testDefine()
 	{
 		it("Array Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(defineFile, 'definitions');
+			objectFunctions.testPropExists(defineFile, 'definitions');
 			arrayFunctions.testPopulated(defineFile.definitions);
 		});
 		

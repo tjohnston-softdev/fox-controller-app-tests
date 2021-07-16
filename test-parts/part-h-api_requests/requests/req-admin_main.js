@@ -6,6 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const apiCommonFile = require("../sub-requests/common-api");
@@ -110,7 +111,7 @@ function handleDefaultObject()
 			commonFunctionsFile.testPresent(defaultRead);
 			expect(defaultRead).to.be.an("object");
 			
-			commonFunctionsFile.testObjectPropertyDefinition(defaultRead, 'message');
+			objectFunctions.testPropExists(defaultRead, 'message');
 			expect(defaultRead.message).to.equal("adminApi");
 		});
 		
@@ -146,8 +147,8 @@ function handleLog()
 			commonFunctionsFile.testPresent(logRead);
 			expect(logRead).to.be.an("object");
 		
-			commonFunctionsFile.testObjectPropertyDefinition(logRead, 'success');
-			commonFunctionsFile.testObjectPropertyDefinition(logRead, 'logs');
+			objectFunctions.testPropExists(logRead, 'success');
+			objectFunctions.testPropExists(logRead, 'logs');
 		});
 	
 		it("Valid Contents", function()

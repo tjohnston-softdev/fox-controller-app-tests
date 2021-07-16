@@ -77,11 +77,31 @@ function checkSameValues(oSrc, oTgt, oProp)
 }
 
 
+function checkPropExists(oDef, pName)
+{
+	expect(oDef).to.have.property(pName);
+}
+
+function checkPropType(oDef, pName, pType)
+{
+	expect(oDef[pName]).to.be.a(pType).and.is.not.null.and.is.not.undefined;
+}
+
+
+function checkPropAbsent(oDef, pName)
+{
+	expect(oDef).to.not.have.property(pName);
+}
+
+
 module.exports =
 {
 	testAllPropsType: checkAllPropsType,
 	testMatchKV: checkMatchKV,
 	testMatchKVInsensitive: checkMatchKVInsensitive,
 	testSameProps: checkSameProps,
-	testSameValues: checkSameValues
+	testSameValues: checkSameValues,
+	testPropExists: checkPropExists,
+	testPropType: checkPropType,
+	testPropAbsent: checkPropAbsent
 };

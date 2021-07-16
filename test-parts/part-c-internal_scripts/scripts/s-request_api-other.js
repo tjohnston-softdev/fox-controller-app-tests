@@ -4,6 +4,7 @@ const validator = require("validator");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
 const commonRequestFunctions = require("../sub-scripts/common-request");
 const requestInvalid = require("../sub-scripts/request-invalid");
@@ -24,8 +25,8 @@ function checkRandomIp()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'generateIpAddress');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'generateIpAddress', 'function');
+			objectFunctions.testPropExists(requestFile, 'generateIpAddress');
+			objectFunctions.testPropType(requestFile, 'generateIpAddress', 'function');
 		});
 		
 		it("Generation Successful", function()
@@ -50,8 +51,8 @@ function checkDeleteOptionsObject()
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'getDeleteOptions');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'getDeleteOptions', 'function');
+			objectFunctions.testPropExists(requestFile, 'getDeleteOptions');
+			objectFunctions.testPropType(requestFile, 'getDeleteOptions', 'function');
 		});
 		
 		it("Call - True", function()

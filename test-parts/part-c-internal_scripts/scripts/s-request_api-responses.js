@@ -3,6 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const requestFile = require(commonPaths.requestApi);
 const commonRequestFunctions = require("../sub-scripts/common-request");
@@ -36,8 +37,8 @@ function checkRequestResponseArray()
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'readResponseArray');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'readResponseArray', 'function');
+			objectFunctions.testPropExists(requestFile, 'readResponseArray');
+			objectFunctions.testPropType(requestFile, 'readResponseArray', 'function');
 		});
 		
 		it("Call - Valid", function()
@@ -82,8 +83,8 @@ function checkRequestResponseObject()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'readResponseObject');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'readResponseObject', 'function');
+			objectFunctions.testPropExists(requestFile, 'readResponseObject');
+			objectFunctions.testPropType(requestFile, 'readResponseObject', 'function');
 		});
 		
 		it("Call - Valid String", function()
@@ -134,8 +135,8 @@ function checkRequestResponseError()
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'readResponseError');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'readResponseError', 'function');
+			objectFunctions.testPropExists(requestFile, 'readResponseError');
+			objectFunctions.testPropType(requestFile, 'readResponseError', 'function');
 		});
 		
 		it("Call - Valid", function()
@@ -178,8 +179,8 @@ function checkRequestResponseValidation()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'validateResponse');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'validateResponse', 'function');
+			objectFunctions.testPropExists(requestFile, 'validateResponse');
+			objectFunctions.testPropType(requestFile, 'validateResponse', 'function');
 		});
 		
 		it("Call - Valid", function()
@@ -210,8 +211,8 @@ function checkOnlineResult()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'getOnlineResult');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'getOnlineResult', 'function');
+			objectFunctions.testPropExists(requestFile, 'getOnlineResult');
+			objectFunctions.testPropType(requestFile, 'getOnlineResult', 'function');
 		});
 		
 		it("Call - Online", function()
@@ -250,8 +251,8 @@ function checkRefuseError()
 	{
 		it("Error Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'showRefusedError');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'showRefusedError', 'function');
+			objectFunctions.testPropExists(requestFile, 'showRefusedError');
+			objectFunctions.testPropType(requestFile, 'showRefusedError', 'function');
 		});
 		
 		it("Error Flagged Successfully", function()

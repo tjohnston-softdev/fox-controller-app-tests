@@ -3,6 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const ipStrings = require("../sub-modules/ip-strings");
 const validator = require("validator");
 
@@ -28,14 +29,14 @@ function verifyFunctionsExist()
 	{
 		it("IP Address (isIP)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(validator, 'isIP');
-			commonFunctionsFile.testObjectPropertyContent(validator, 'isIP', 'function');
+			objectFunctions.testPropExists(validator, 'isIP');
+			objectFunctions.testPropType(validator, 'isIP', 'function');
 		});
 		
 		it("MAC Address (isMACAddress)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(validator, 'isMACAddress');
-			commonFunctionsFile.testObjectPropertyContent(validator, 'isMACAddress', 'function');
+			objectFunctions.testPropExists(validator, 'isMACAddress');
+			objectFunctions.testPropType(validator, 'isMACAddress', 'function');
 		});
 		
 	});

@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const controllerSettingsFile = loadFoxFile(foxPath.settingsFile);
 
@@ -38,14 +39,14 @@ function handleFlagProperties()
 	{
 		it("Production (isProd)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'isProd');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'isProd', 'boolean');
+			objectFunctions.testPropExists(controllerSettingsFile, 'isProd');
+			objectFunctions.testPropType(controllerSettingsFile, 'isProd', 'boolean');
 		});
 		
 		it("Development (isDev)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'isDev');
-			commonFunctionsFile.testObjectPropertyContent(controllerSettingsFile, 'isDev', 'boolean');
+			objectFunctions.testPropExists(controllerSettingsFile, 'isDev');
+			objectFunctions.testPropType(controllerSettingsFile, 'isDev', 'boolean');
 		});
 		
 	});
@@ -58,31 +59,31 @@ function handlePathProperties()
 	{
 		it("User Storage Folder (userStoragePath)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'userStoragePath');
+			objectFunctions.testPropExists(controllerSettingsFile, 'userStoragePath');
 			commonFunctionsFile.testString(controllerSettingsFile.userStoragePath);
 		});
 		
 		it("Database Folder (dbsPath)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'dbsPath');
+			objectFunctions.testPropExists(controllerSettingsFile, 'dbsPath');
 			commonFunctionsFile.testString(controllerSettingsFile.dbsPath);
 		});
 		
 		it("Log Folder (logsPath)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'logsPath');
+			objectFunctions.testPropExists(controllerSettingsFile, 'logsPath');
 			commonFunctionsFile.testString(controllerSettingsFile.logsPath);
 		});
 		
 		it("Log File (logFile)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'logFile');
+			objectFunctions.testPropExists(controllerSettingsFile, 'logFile');
 			commonFunctionsFile.testString(controllerSettingsFile.logFile);
 		});
 		
 		it("Node RED Folder (flowsPath)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(controllerSettingsFile, 'flowsPath');
+			objectFunctions.testPropExists(controllerSettingsFile, 'flowsPath');
 			commonFunctionsFile.testString(controllerSettingsFile.flowsPath);
 		});
 		

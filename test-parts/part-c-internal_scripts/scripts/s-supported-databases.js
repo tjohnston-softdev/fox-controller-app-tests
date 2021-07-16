@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const databaseFile = require(commonPaths.supportedDatabases);
 
 
@@ -24,12 +25,12 @@ function checkMarginNumber()
 	{
 		it("Property Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(databaseFile, 'folderErrorMargin');
+			objectFunctions.testPropExists(databaseFile, 'folderErrorMargin');
 		});
 		
 		it("Valid Number", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(databaseFile, 'folderErrorMargin', 'number');
+			objectFunctions.testPropType(databaseFile, 'folderErrorMargin', 'number');
 			expect(databaseFile.folderErrorMargin).to.be.at.least(0);
 		});
 		
@@ -45,8 +46,8 @@ function checkDefinitionObject()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(databaseFile, 'getSupportedDatabases');
-			commonFunctionsFile.testObjectPropertyContent(databaseFile, 'getSupportedDatabases', 'function');
+			objectFunctions.testPropExists(databaseFile, 'getSupportedDatabases');
+			objectFunctions.testPropType(databaseFile, 'getSupportedDatabases', 'function');
 		});
 		
 		it("Function Works", function()

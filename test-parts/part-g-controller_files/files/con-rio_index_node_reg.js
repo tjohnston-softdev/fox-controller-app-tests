@@ -7,6 +7,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -294,9 +295,9 @@ function handleGetIoProperties()
 			
 			it("Object Structure Valid", function()
 			{
-				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'name');
-				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'STATUS');
-				commonFunctionsFile.testObjectPropertyDefinition(propertyRes, 'CONTROL');
+				objectFunctions.testPropExists(propertyRes, 'name');
+				objectFunctions.testPropExists(propertyRes, 'STATUS');
+				objectFunctions.testPropExists(propertyRes, 'CONTROL');
 				
 				commonFunctionsFile.testString(propertyRes.name);
 				arrayFunctions.testPopulated(propertyRes.STATUS);

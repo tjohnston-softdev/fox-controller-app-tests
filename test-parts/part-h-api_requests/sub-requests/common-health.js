@@ -4,20 +4,21 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 const sysPlatform = require(commonPaths.sysPlatform);
 
 
 function testHealthDeviceObject(healthObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(healthObj, 'device');
-	commonFunctionsFile.testObjectPropertyContent(healthObj, 'device', 'object');
+	objectFunctions.testPropExists(healthObj, 'device');
+	objectFunctions.testPropType(healthObj, 'device', 'object');
 	
-	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'WARNING');
-	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'name');
-	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'serialNumber');
-	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'hardware');
-	commonFunctionsFile.testObjectPropertyDefinition(healthObj.device, 'wifiPass');
+	objectFunctions.testPropExists(healthObj.device, 'WARNING');
+	objectFunctions.testPropExists(healthObj.device, 'name');
+	objectFunctions.testPropExists(healthObj.device, 'serialNumber');
+	objectFunctions.testPropExists(healthObj.device, 'hardware');
+	objectFunctions.testPropExists(healthObj.device, 'wifiPass');
 	
 	commonFunctionsFile.testString(healthObj.device.WARNING);
 	commonFunctionsFile.testString(healthObj.device.name);
@@ -40,8 +41,8 @@ function testHealthNumberMaximum(srcObject, propName, maxVal)
 {
 	var givenValue = -1;
 	
-	commonFunctionsFile.testObjectPropertyDefinition(srcObject, propName);
-	commonFunctionsFile.testObjectPropertyContent(srcObject, propName, 'number');
+	objectFunctions.testPropExists(srcObject, propName);
+	objectFunctions.testPropType(srcObject, propName, 'number');
 	givenValue = srcObject[propName];
 	
 	expect(givenValue).to.be.at.least(0);
@@ -53,8 +54,8 @@ function testHealthEnvironmentValue(envObject, propName)
 	var dummyUsed = sysPlatform.getDummy();
 	var givenValue = null;
 	
-	commonFunctionsFile.testObjectPropertyDefinition(envObject, propName);
-	commonFunctionsFile.testObjectPropertyContent(envObject, propName, 'number');
+	objectFunctions.testPropExists(envObject, propName);
+	objectFunctions.testPropType(envObject, propName, 'number');
 	givenValue = envObject[propName];
 	
 	if (dummyUsed === true)
@@ -73,7 +74,7 @@ function testHealthEnvironmentDummy(envObject)
 	
 	if (dummyUsed === true)
 	{
-		commonFunctionsFile.testObjectPropertyDefinition(envObject, 'isDummy');
+		objectFunctions.testPropExists(envObject, 'isDummy');
 		expect(envObject.isDummy).to.be.true;
 	}
 	else

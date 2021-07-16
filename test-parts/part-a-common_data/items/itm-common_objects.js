@@ -3,6 +3,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonObjectsFile = require(commonPaths.commonObjects);
 const testCommon = require(commonPaths.testCommon);
+const testObject = require(commonPaths.testObject);
 
 
 function testCommonObjects()
@@ -104,8 +105,8 @@ function testObjectFunction(funcName)
 
 function testObjectProperty(tObject, propName, desiredType)
 {	
-	testCommon.testObjectPropertyDefinition(tObject, propName);
-	testCommon.testObjectPropertyContent(tObject, propName, desiredType);
+	testObject.testPropExists(tObject, propName);
+	testObject.testPropType(tObject, propName, desiredType);
 }
 
 module.exports = testCommonObjects;

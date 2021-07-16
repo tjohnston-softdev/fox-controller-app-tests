@@ -6,6 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 
@@ -71,13 +72,13 @@ function handleIdentification()
 	{
 		it("Version (version)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'version');
+			objectFunctions.testPropExists(healthObject, 'version');
 			commonFunctionsFile.testString(healthObject.version);
 		});
 		
 		it("Serial Number (serialNumber)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'serialNumber');
+			objectFunctions.testPropExists(healthObject, 'serialNumber');
 			commonFunctionsFile.testString(healthObject.serialNumber);
 		});
 		
@@ -96,8 +97,8 @@ function handleTime()
 	{
 		it("Time Object (time)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'time');
-			commonFunctionsFile.testObjectPropertyContent(healthObject, 'time', 'object');
+			objectFunctions.testPropExists(healthObject, 'time');
+			objectFunctions.testPropType(healthObject, 'time', 'object');
 		});
 		
 		it("Current Time (time.current)", function()
@@ -112,14 +113,14 @@ function handleTime()
 		
 		it("Timezone Offset Code (time.timezone)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.time, 'timezone');
+			objectFunctions.testPropExists(healthObject.time, 'timezone');
 			commonFunctionsFile.testString(healthObject.time.timezone);
 			commonHealth.testTimezoneCode(healthObject.time.timezone);
 		});
 		
 		it("Timezone Name (time.timezoneName)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.time, 'timezoneName');
+			objectFunctions.testPropExists(healthObject.time, 'timezoneName');
 			commonFunctionsFile.testString(healthObject.time.timezoneName);
 		});
 		
@@ -138,8 +139,8 @@ function handleSpeed()
 	{
 		it("Current Speed Object (cpuCurrentSpeed)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'cpuCurrentSpeed');
-			commonFunctionsFile.testObjectPropertyContent(healthObject, 'cpuCurrentSpeed', 'object');
+			objectFunctions.testPropExists(healthObject, 'cpuCurrentSpeed');
+			objectFunctions.testPropType(healthObject, 'cpuCurrentSpeed', 'object');
 		});
 		
 		it("Minimum (cpuCurrentSpeed.min)", function()
@@ -159,7 +160,7 @@ function handleSpeed()
 		
 		it("Array (cpuCurrentSpeed.cores)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.cpuCurrentSpeed, 'cores');
+			objectFunctions.testPropExists(healthObject.cpuCurrentSpeed, 'cores');
 			arrayFunctions.testPopulated(healthObject.cpuCurrentSpeed.cores);
 			arrayFunctions.testAllType(healthObject.cpuCurrentSpeed.cores, 'number');
 			expect(healthObject.cpuCurrentSpeed.cores).to.all.be.above(0);
@@ -175,8 +176,8 @@ function handleRam()
 	{
 		it("Memory Object (mem)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'mem');
-			commonFunctionsFile.testObjectPropertyContent(healthObject, 'mem', 'object');
+			objectFunctions.testPropExists(healthObject, 'mem');
+			objectFunctions.testPropType(healthObject, 'mem', 'object');
 		});
 		
 		it("Total Amount (mem.total)", function()
@@ -206,8 +207,8 @@ function handleRam()
 		
 		it("Buffer Cache (mem.buffcache)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject.mem, 'buffcache');
-			commonFunctionsFile.testObjectPropertyContent(healthObject.mem, 'buffcache', 'number');
+			objectFunctions.testPropExists(healthObject.mem, 'buffcache');
+			objectFunctions.testPropType(healthObject.mem, 'buffcache', 'number');
 			expect(healthObject.mem.buffcache).to.be.at.most(healthObject.mem.total);
 		});
 		
@@ -236,7 +237,7 @@ function handleFileSystem()
 		
 		it("File System Array (fsSize)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'fsSize');
+			objectFunctions.testPropExists(healthObject, 'fsSize');
 			arrayFunctions.testPopulated(healthObject.fsSize);
 			arrayFunctions.testAllType(healthObject.fsSize, 'object');
 		});
@@ -290,8 +291,8 @@ function handleEnvironment()
 	{
 		it("Environment Object (environment)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'environment');
-			commonFunctionsFile.testObjectPropertyContent(healthObject, 'environment', 'object');
+			objectFunctions.testPropExists(healthObject, 'environment');
+			objectFunctions.testPropType(healthObject, 'environment', 'object');
 		});
 		
 		it("Temperature (environment.temperature)", function()
@@ -320,7 +321,7 @@ function handleNetwork()
 	{
 		it("Network Interface Array (networkInterfaces)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'networkInterfaces');
+			objectFunctions.testPropExists(healthObject, 'networkInterfaces');
 			arrayFunctions.testPopulated(healthObject.networkInterfaces);
 			arrayFunctions.testAllType(healthObject.networkInterfaces, 'object');
 		});
@@ -367,7 +368,7 @@ function handleDatabase()
 		
 		it("Database Array (databaseSize)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'databaseSize');
+			objectFunctions.testPropExists(healthObject, 'databaseSize');
 			arrayFunctions.testPopulated(healthObject.databaseSize);
 			arrayFunctions.testAllType(healthObject.databaseSize, 'object');
 			expect(healthObject.databaseSize.length).to.equal(2);
@@ -425,7 +426,7 @@ function handleLog()
 		
 		it("Log Array (logSize)", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(healthObject, 'logSize');
+			objectFunctions.testPropExists(healthObject, 'logSize');
 			arrayFunctions.testPopulated(healthObject.logSize);
 			arrayFunctions.testAllType(healthObject.logSize, 'object');
 			expect(healthObject.logSize.length).to.equal(1);
@@ -436,20 +437,20 @@ function handleLog()
 	
 		it("Log Name (logSize.name)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(logObject, 'name');
+			objectFunctions.testPropExists(logObject, 'name');
 			expect(logObject.name).to.equal("fox-controller.log");
 		});
 	
 		it("Log Size (logSize.size)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(logObject, 'size');
-			commonFunctionsFile.testObjectPropertyContent(logObject, 'size', 'number');
+			objectFunctions.testPropExists(logObject, 'size');
+			objectFunctions.testPropType(logObject, 'size', 'number');
 			expect(logObject.size).to.be.at.least(0);
 		});
 	
 		it("Directory Flag (logSize.isDirectory)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(logObject, 'isDirectory');
+			objectFunctions.testPropExists(logObject, 'isDirectory');
 			expect(logObject.isDirectory).to.be.false;
 		});
 	

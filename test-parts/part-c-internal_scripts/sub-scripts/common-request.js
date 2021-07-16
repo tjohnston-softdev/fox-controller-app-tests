@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 
 
 function validateResponseBodyArray(resultObj)
@@ -27,7 +28,7 @@ function validateResponseBodyObject(resultObj)
 	commonFunctionsFile.testPresent(resultObj);
 	expect(resultObj).to.be.an("object");
 			
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'exampleProperty');
+	objectFunctions.testPropExists(resultObj, 'exampleProperty');
 	expect(resultObj.exampleProperty).to.equal("exampleValue");
 }
 
@@ -46,17 +47,17 @@ function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 	commonFunctionsFile.testPresent(resultObj);
 	expect(resultObj).to.be.an("object");
 	
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'json');
+	objectFunctions.testPropExists(resultObj, 'json');
 	expect(resultObj.json).to.be.true;
 	
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj, 'headers');
-	commonFunctionsFile.testObjectPropertyContent(resultObj, 'headers', 'object');
+	objectFunctions.testPropExists(resultObj, 'headers');
+	objectFunctions.testPropType(resultObj, 'headers', 'object');
 	
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'content_type');
-	commonFunctionsFile.testObjectPropertyDefinition(resultObj.headers, 'delete-permanently');
+	objectFunctions.testPropExists(resultObj.headers, 'content_type');
+	objectFunctions.testPropExists(resultObj.headers, 'delete-permanently');
 	
-	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'content_type', 'string');
-	commonFunctionsFile.testObjectPropertyContent(resultObj.headers, 'delete-permanently', 'boolean');
+	objectFunctions.testPropType(resultObj.headers, 'content_type', 'string');
+	objectFunctions.testPropType(resultObj.headers, 'delete-permanently', 'boolean');
 	
 	commonFunctionsFile.testString(resultObj.headers['content_type']);
 	expect(resultObj.headers['delete-permanently']).to.equal(desiredPermFlag);

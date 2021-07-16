@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const settingsFile = loadFoxFile(foxPath.rioSettingsFile);
 
@@ -36,33 +37,33 @@ function checkExports()
 	{
 		it("IO Properties", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'ioPrefixes');
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'ioNames');
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'ioTypes');
+			objectFunctions.testPropExists(settingsFile, 'ioPrefixes');
+			objectFunctions.testPropExists(settingsFile, 'ioNames');
+			objectFunctions.testPropExists(settingsFile, 'ioTypes');
 		});
 		
 		it("Signal Properties", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'signalType');
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'binSignal');
+			objectFunctions.testPropExists(settingsFile, 'signalType');
+			objectFunctions.testPropExists(settingsFile, 'binSignal');
 		});
 		
 		it("Signal Type Function (getSignalType)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'getSignalType');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'getSignalType', 'function');
+			objectFunctions.testPropExists(settingsFile, 'getSignalType');
+			objectFunctions.testPropType(settingsFile, 'getSignalType', 'function');
 		});
 		
 		it("Parse Prefix Function (parseIoPrefix)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'parseIoPrefix');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'parseIoPrefix', 'function');
+			objectFunctions.testPropExists(settingsFile, 'parseIoPrefix');
+			objectFunctions.testPropType(settingsFile, 'parseIoPrefix', 'function');
 		});
 		
 		it("Parse Index Function (parseIoIndex)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'parseIoIndex');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'parseIoIndex', 'function');
+			objectFunctions.testPropExists(settingsFile, 'parseIoIndex');
+			objectFunctions.testPropType(settingsFile, 'parseIoIndex', 'function');
 		});
 		
 	});

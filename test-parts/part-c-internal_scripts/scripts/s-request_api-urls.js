@@ -3,6 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
 const requestInvalid = require("../sub-scripts/request-invalid");
 
@@ -23,7 +24,7 @@ function checkHostUrlString()
 	{
 		it("Property Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'hostUrl');
+			objectFunctions.testPropExists(requestFile, 'hostUrl');
 		});
 		
 		it("Valid String", function()
@@ -52,8 +53,8 @@ function checkWriteUrl()
 		
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(requestFile, 'writeUrl');
-			commonFunctionsFile.testObjectPropertyContent(requestFile, 'writeUrl', 'function');
+			objectFunctions.testPropExists(requestFile, 'writeUrl');
+			objectFunctions.testPropType(requestFile, 'writeUrl', 'function');
 		});
 		
 		it("Call - Valid", function()

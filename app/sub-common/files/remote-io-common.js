@@ -22,31 +22,31 @@ function testDeviceArrayStructure(deviceArr)
 
 function testDeviceObjectStructure(deviceObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'id');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'maker');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'deviceType');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'model');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'name');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'desc');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'ipAddress');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'username');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'password');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'isEnabled');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, '__modified');
-	commonFunctionsFile.testObjectPropertyDefinition(deviceObj, 'macAddress');
+	objectFunctions.testPropExists(deviceObj, 'id');
+	objectFunctions.testPropExists(deviceObj, 'maker');
+	objectFunctions.testPropExists(deviceObj, 'deviceType');
+	objectFunctions.testPropExists(deviceObj, 'model');
+	objectFunctions.testPropExists(deviceObj, 'name');
+	objectFunctions.testPropExists(deviceObj, 'desc');
+	objectFunctions.testPropExists(deviceObj, 'ipAddress');
+	objectFunctions.testPropExists(deviceObj, 'username');
+	objectFunctions.testPropExists(deviceObj, 'password');
+	objectFunctions.testPropExists(deviceObj, 'isEnabled');
+	objectFunctions.testPropExists(deviceObj, '__modified');
+	objectFunctions.testPropExists(deviceObj, 'macAddress');
 	
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'id', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'maker', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'deviceType', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'model', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'name', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'desc', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'ipAddress', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'username', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'password', 'string');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'isEnabled', 'boolean');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, '__modified', 'number');
-	commonFunctionsFile.testObjectPropertyContent(deviceObj, 'macAddress', 'string');
+	objectFunctions.testPropType(deviceObj, 'id', 'string');
+	objectFunctions.testPropType(deviceObj, 'maker', 'string');
+	objectFunctions.testPropType(deviceObj, 'deviceType', 'string');
+	objectFunctions.testPropType(deviceObj, 'model', 'string');
+	objectFunctions.testPropType(deviceObj, 'name', 'string');
+	objectFunctions.testPropType(deviceObj, 'desc', 'string');
+	objectFunctions.testPropType(deviceObj, 'ipAddress', 'string');
+	objectFunctions.testPropType(deviceObj, 'username', 'string');
+	objectFunctions.testPropType(deviceObj, 'password', 'string');
+	objectFunctions.testPropType(deviceObj, 'isEnabled', 'boolean');
+	objectFunctions.testPropType(deviceObj, '__modified', 'number');
+	objectFunctions.testPropType(deviceObj, 'macAddress', 'string');
 }
 
 function compareGetDeviceToOriginal(retObj, origObj)
@@ -67,22 +67,22 @@ function testDeviceDeletedStructure(deviceDelObj)
 {
 	testDeviceObjectStructure(deviceDelObj);
 	
-	commonFunctionsFile.testObjectPropertyDefinition(deviceDelObj, 'isDeleted');
-	commonFunctionsFile.testObjectPropertyContent(deviceDelObj, 'isDeleted', 'boolean');
+	objectFunctions.testPropExists(deviceDelObj, 'isDeleted');
+	objectFunctions.testPropType(deviceDelObj, 'isDeleted', 'boolean');
 }
 
 
 function testNodeConfigObjectStructure(configObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'id');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'type');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'z');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'name');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'deviceId');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'ioSetId');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'x');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'y');
-	commonFunctionsFile.testObjectPropertyDefinition(configObj, 'wires');
+	objectFunctions.testPropExists(configObj, 'id');
+	objectFunctions.testPropExists(configObj, 'type');
+	objectFunctions.testPropExists(configObj, 'z');
+	objectFunctions.testPropExists(configObj, 'name');
+	objectFunctions.testPropExists(configObj, 'deviceId');
+	objectFunctions.testPropExists(configObj, 'ioSetId');
+	objectFunctions.testPropExists(configObj, 'x');
+	objectFunctions.testPropExists(configObj, 'y');
+	objectFunctions.testPropExists(configObj, 'wires');
 	
 	commonFunctionsFile.testString(configObj.id);
 	commonFunctionsFile.testString(configObj.type);

@@ -2,21 +2,22 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 
 
 function checkFactoryReturnValid(factReturnObject)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(factReturnObject, 'disableRio');
-	commonFunctionsFile.testObjectPropertyDefinition(factReturnObject, 'getRioDeviceProperties');
-	commonFunctionsFile.testObjectPropertyDefinition(factReturnObject, 'registerNodeCallback');
-	commonFunctionsFile.testObjectPropertyDefinition(factReturnObject, 'setOutputFromNode');
-	commonFunctionsFile.testObjectPropertyDefinition(factReturnObject, 'getCommsErrors');
+	objectFunctions.testPropExists(factReturnObject, 'disableRio');
+	objectFunctions.testPropExists(factReturnObject, 'getRioDeviceProperties');
+	objectFunctions.testPropExists(factReturnObject, 'registerNodeCallback');
+	objectFunctions.testPropExists(factReturnObject, 'setOutputFromNode');
+	objectFunctions.testPropExists(factReturnObject, 'getCommsErrors');
 			
-	commonFunctionsFile.testObjectPropertyContent(factReturnObject, 'disableRio', 'function');
-	commonFunctionsFile.testObjectPropertyContent(factReturnObject, 'getRioDeviceProperties', 'function');
-	commonFunctionsFile.testObjectPropertyContent(factReturnObject, 'registerNodeCallback', 'function');
-	commonFunctionsFile.testObjectPropertyContent(factReturnObject, 'setOutputFromNode', 'function');
-	commonFunctionsFile.testObjectPropertyContent(factReturnObject, 'getCommsErrors', 'function');
+	objectFunctions.testPropType(factReturnObject, 'disableRio', 'function');
+	objectFunctions.testPropType(factReturnObject, 'getRioDeviceProperties', 'function');
+	objectFunctions.testPropType(factReturnObject, 'registerNodeCallback', 'function');
+	objectFunctions.testPropType(factReturnObject, 'setOutputFromNode', 'function');
+	objectFunctions.testPropType(factReturnObject, 'getCommsErrors', 'function');
 }
 
 

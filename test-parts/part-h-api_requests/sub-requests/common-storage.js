@@ -4,18 +4,19 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 const sysPlatform = require(commonPaths.sysPlatform);
 
 
 function testDrivePropertiesObject(driveObj)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'fs');
-	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'type');
-	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'size');
-	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'used');
-	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'use');
-	commonFunctionsFile.testObjectPropertyDefinition(driveObj, 'mount');
+	objectFunctions.testPropExists(driveObj, 'fs');
+	objectFunctions.testPropExists(driveObj, 'type');
+	objectFunctions.testPropExists(driveObj, 'size');
+	objectFunctions.testPropExists(driveObj, 'used');
+	objectFunctions.testPropExists(driveObj, 'use');
+	objectFunctions.testPropExists(driveObj, 'mount');
 }
 
 

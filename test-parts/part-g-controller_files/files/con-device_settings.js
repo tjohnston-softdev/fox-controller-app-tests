@@ -77,13 +77,13 @@ function checkSupportedModelDefinitions()
 		
 		it("Manufacturers", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'manufacturers');
+			objectFunctions.testPropExists(supportedListObject, 'manufacturers');
 			arrayFunctions.testPopulated(supportedListObject.manufacturers);
 		});
 		
 		it("Models", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(supportedListObject, 'models');
+			objectFunctions.testPropExists(supportedListObject, 'models');
 			arrayFunctions.testPopulated(supportedListObject.models);
 		});
 		
@@ -97,12 +97,12 @@ function checkDeviceTypeObjectProperty()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'deviceType');
+			objectFunctions.testPropExists(settingsFile, 'deviceType');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'deviceType', 'object');
+			objectFunctions.testPropType(settingsFile, 'deviceType', 'object');
 		});
 		
 		it("All Properties Strings", function()
@@ -122,7 +122,7 @@ function checkDeviceTypeArrayProperty()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'deviceTypes');
+			objectFunctions.testPropExists(settingsFile, 'deviceTypes');
 			commonFunctionsFile.testPresent(settingsFile.deviceTypes);
 		});
 		
@@ -145,12 +145,12 @@ function checkCommunicationTypeProperty()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'communicationType');
+			objectFunctions.testPropExists(settingsFile, 'communicationType');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'communicationType', 'object');
+			objectFunctions.testPropType(settingsFile, 'communicationType', 'object');
 		});
 		
 		it("All Properties Strings", function()
@@ -167,8 +167,8 @@ function checkBinSignalFunction()
 		
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'convertToBinSignal');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'convertToBinSignal', 'function');
+			objectFunctions.testPropExists(settingsFile, 'convertToBinSignal');
+			objectFunctions.testPropType(settingsFile, 'convertToBinSignal', 'function');
 		});
 		
 		
@@ -201,8 +201,8 @@ function checkScaleDecimalValueFunction()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'scaleDecimalValue');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'scaleDecimalValue', 'function');
+			objectFunctions.testPropExists(settingsFile, 'scaleDecimalValue');
+			objectFunctions.testPropType(settingsFile, 'scaleDecimalValue', 'function');
 		});
 		
 		it("Call - Valid", function()
@@ -232,8 +232,8 @@ function checkValidateBinSignalFunction()
 	{
 		it("Function exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'isValidBinarySignal');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'isValidBinarySignal', 'function');
+			objectFunctions.testPropExists(settingsFile, 'isValidBinarySignal');
+			objectFunctions.testPropType(settingsFile, 'isValidBinarySignal', 'function');
 		});
 		
 		it("Call - On", function()
@@ -280,8 +280,8 @@ function checkGetModelFunction()
 		
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'getModel');
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'getModel', 'function');
+			objectFunctions.testPropExists(settingsFile, 'getModel');
+			objectFunctions.testPropType(settingsFile, 'getModel', 'function');
 		});
 		
 		it("Call - Supported", function()
@@ -291,12 +291,12 @@ function checkGetModelFunction()
 			commonFunctionsFile.testPresent(supportedRes);
 			expect(supportedRes).to.be.an("object");
 			
-			commonFunctionsFile.testObjectPropertyDefinition(supportedRes, 'modelType');
-			commonFunctionsFile.testObjectPropertyContent(supportedRes, 'modelType', 'string');
+			objectFunctions.testPropExists(supportedRes, 'modelType');
+			objectFunctions.testPropType(supportedRes, 'modelType', 'string');
 			expect(supportedRes.modelType).to.equal(testModelName);
 			
-			commonFunctionsFile.testObjectPropertyDefinition(supportedRes, 'maker');
-			commonFunctionsFile.testObjectPropertyContent(supportedRes, 'maker', 'string');
+			objectFunctions.testPropExists(supportedRes, 'maker');
+			objectFunctions.testPropType(supportedRes, 'maker', 'string');
 			expect(supportedRes.maker).to.equal(testModelManufacturer);
 		});
 		
@@ -316,7 +316,7 @@ function checkManufacturerListProperty()
 		
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'listRioMakers');
+			objectFunctions.testPropExists(settingsFile, 'listRioMakers');
 			commonFunctionsFile.testPresent(settingsFile.listRioMakers);
 		});
 		
@@ -344,7 +344,7 @@ function checkModelTypeListProperty()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(settingsFile, 'listRioModelTypes');
+			objectFunctions.testPropExists(settingsFile, 'listRioModelTypes');
 			commonFunctionsFile.testPresent(settingsFile.listRioModelTypes);
 		});
 		

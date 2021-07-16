@@ -33,24 +33,6 @@ function checkString(strDef)
 }
 
 
-
-function checkObjectPropertyDefinition(oDef, pName)
-{
-	expect(oDef).to.have.property(pName);
-}
-
-function checkObjectPropertyContent(oDef, pName, pType)
-{
-	expect(oDef[pName]).to.be.a(pType).and.is.not.null.and.is.not.undefined;
-}
-
-
-function checkObjectPropertyAbsent(oDef, pName)
-{
-	expect(oDef).to.not.have.property(pName);
-}
-
-
 function checkObjectSearchValue(oDef, tgtVal)
 {
 	var valueArray = getJsonObjectValues(oDef);
@@ -200,9 +182,10 @@ module.exports =
 	//testObjectMatchKVInsensitive: checkObjectMatchKVInsensitive,
 	//testBothObjectsSameProperties: checkBothObjectsSameProperties,
 	//testBothObjectsHaveSamePropertyValue: checkBothObjectsHaveSamePropertyValue,
-	testObjectPropertyDefinition: checkObjectPropertyDefinition,
-	testObjectPropertyContent: checkObjectPropertyContent,
-	testObjectPropertyAbsent: checkObjectPropertyAbsent,
+	
+	//testObjectPropertyDefinition: checkObjectPropertyDefinition,
+	//testObjectPropertyContent: checkObjectPropertyContent,
+	//testObjectPropertyAbsent: checkObjectPropertyAbsent,
 	testObjectSearchValue: checkObjectSearchValue,
 	testPropertySearchValues: checkPropertySearchValues,
 	testPropertyDefinitions: checkPropertyDefinitions,

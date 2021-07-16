@@ -178,8 +178,8 @@ function handleDeviceClasses()
 			commonFunctionsFile.testPresent(connectRes);
 			expect(connectRes).to.be.an("object");
 			
-			commonFunctionsFile.testObjectPropertyDefinition(connectRes, 'storedDevice');
-			commonFunctionsFile.testObjectPropertyContent(connectRes, 'storedDevice', 'object');
+			objectFunctions.testPropExists(connectRes, 'storedDevice');
+			objectFunctions.testPropType(connectRes, 'storedDevice', 'object');
 			expect(connectRes.storedDevice).to.equal(storeDeviceValid);
 			
 			done();

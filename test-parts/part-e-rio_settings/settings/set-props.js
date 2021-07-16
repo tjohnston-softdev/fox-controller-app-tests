@@ -28,7 +28,7 @@ function checkPrefixesProperty()
 	{
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'ioPrefixes', 'object');
+			objectFunctions.testPropType(settingsFile, 'ioPrefixes', 'object');
 		});
 		
 		it("All Strings", function()
@@ -49,7 +49,7 @@ function checkNamesProperty()
 	{
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'ioNames', 'object');
+			objectFunctions.testPropType(settingsFile, 'ioNames', 'object');
 		});
 		
 		it("All Strings", function()
@@ -70,7 +70,7 @@ function checkIoTypesProperty()
 	{
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'ioTypes', 'object');
+			objectFunctions.testPropType(settingsFile, 'ioTypes', 'object');
 		});
 		
 		it("All Strings", function()
@@ -92,7 +92,7 @@ function checkSignalTypeProperty()
 	{
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'signalType', 'object');
+			objectFunctions.testPropType(settingsFile, 'signalType', 'object');
 		});
 		
 		it("All Numbers", function()
@@ -109,7 +109,7 @@ function checkBinarySignalProperty()
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(settingsFile, 'binSignal', 'object');
+			objectFunctions.testPropType(settingsFile, 'binSignal', 'object');
 		});
 		
 		it("All Strings", function()

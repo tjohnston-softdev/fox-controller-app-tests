@@ -6,6 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
 
@@ -105,7 +106,7 @@ function handleDeviceDefaultValues()
 		{
 			var correctTypes = ["Remote IO", "Motor Drive"];
 			
-			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'deviceTypes');
+			objectFunctions.testPropExists(defaultsRead, 'deviceTypes');
 			arrayFunctions.testPopulated(defaultsRead.deviceTypes);
 			expect(defaultsRead.deviceTypes).to.deep.equal(correctTypes);
 			
@@ -115,7 +116,7 @@ function handleDeviceDefaultValues()
 		
 		it("Manufacturers (rioMakers)", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'rioMakers');
+			objectFunctions.testPropExists(defaultsRead, 'rioMakers');
 			arrayFunctions.testPopulated(defaultsRead.rioMakers);
 			expect(defaultsRead.rioMakers).to.deep.equal(deviceArrayLists.manufacturers);
 			
@@ -124,7 +125,7 @@ function handleDeviceDefaultValues()
 		
 		it("Models (rioModelTypes)", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(defaultsRead, 'rioModelTypes');
+			objectFunctions.testPropExists(defaultsRead, 'rioModelTypes');
 			arrayFunctions.testPopulated(defaultsRead.rioModelTypes);
 			expect(defaultsRead.rioModelTypes).to.deep.equal(deviceArrayLists.models);
 			
@@ -368,8 +369,8 @@ function handleDeviceStatusTest()
 		
 		it("Object Structure Valid", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(statusRead, 'id');
-			commonFunctionsFile.testObjectPropertyDefinition(statusRead, 'isRunning');
+			objectFunctions.testPropExists(statusRead, 'id');
+			objectFunctions.testPropExists(statusRead, 'isRunning');
 			
 			commonFunctionsFile.testString(statusRead.id);
 			expect(statusRead.isRunning).to.be.a("boolean");
@@ -379,7 +380,7 @@ function handleDeviceStatusTest()
 		
 		it("No Communication Errors", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyAbsent(statusRead, 'commsError');
+			objectFunctions.testPropAbsent(statusRead, 'commsError');
 			done();
 		});
 		
@@ -535,7 +536,7 @@ function handleDeleteFlagTest()
 		
 		it("Delete Flag Successful", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(flagRead, 'success');
+			objectFunctions.testPropExists(flagRead, 'success');
 			expect(flagRead.success).to.be.true;
 			done();
 		});
@@ -575,7 +576,7 @@ function handleDeleteObjectTest()
 		
 		it("Delete Object Successful", function(done)
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(deleteRead, 'success');
+			objectFunctions.testPropExists(deleteRead, 'success');
 			expect(deleteRead.success).to.be.true;
 			done();
 		});

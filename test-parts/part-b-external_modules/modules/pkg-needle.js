@@ -28,8 +28,8 @@ function verifyGetRequest()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(needle, "get");
-			commonFunctionsFile.testObjectPropertyContent(needle, "get", "function");
+			objectFunctions.testPropExists(needle, "get");
+			objectFunctions.testPropType(needle, "get", "function");
 		});
 		
 		it("Request Successful", function(done)
@@ -53,8 +53,8 @@ function verifyPostRequest()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(needle, "post");
-			commonFunctionsFile.testObjectPropertyContent(needle, "post", "function");
+			objectFunctions.testPropExists(needle, "post");
+			objectFunctions.testPropType(needle, "post", "function");
 		});
 		
 		it("Request Successful", function(done)
@@ -79,8 +79,8 @@ function verifyPutRequest()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(needle, "put");
-			commonFunctionsFile.testObjectPropertyContent(needle, "put", "function");
+			objectFunctions.testPropExists(needle, "put");
+			objectFunctions.testPropType(needle, "put", "function");
 		});
 		
 		it("Request Successful", function(done)
@@ -105,8 +105,8 @@ function verifyDeleteRequest()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(needle, "delete");
-			commonFunctionsFile.testObjectPropertyContent(needle, "delete", "function");
+			objectFunctions.testPropExists(needle, "delete");
+			objectFunctions.testPropType(needle, "delete", "function");
 		});
 		
 		it("Request Successful", function(done)
@@ -152,7 +152,7 @@ function checkRequestReturn(replyObject)
 	validateCommonProperty(replyObject, "statusCode", "number");
 	validateCommonProperty(replyObject, "bytes", "number");
 	validateCommonProperty(replyObject, "req", "object");
-	commonFunctionsFile.testObjectPropertyDefinition(replyObject, "body");
+	objectFunctions.testPropExists(replyObject, "body");
 	expect(replyObject.bytes).to.be.above(0);
 }
 
@@ -194,8 +194,8 @@ function compareDataObjects(inputObject, replyObject, correctID)
 
 function validateCommonProperty(sourceObj, gProp, gType)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(sourceObj, gProp);
-	commonFunctionsFile.testObjectPropertyContent(sourceObj, gProp, gType);
+	objectFunctions.testPropExists(sourceObj, gProp);
+	objectFunctions.testPropType(sourceObj, gProp, gType);
 }
 
 

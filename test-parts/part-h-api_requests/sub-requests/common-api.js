@@ -5,6 +5,7 @@ const validator = require("validator");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 
 
@@ -200,8 +201,8 @@ function testPositiveNumberProperty(parentObject, propName)
 {
 	var givenValue = -1;
 	
-	commonFunctionsFile.testObjectPropertyDefinition(parentObject, propName);
-	commonFunctionsFile.testObjectPropertyContent(parentObject, propName, 'number');
+	objectFunctions.testPropExists(parentObject, propName);
+	objectFunctions.testPropType(parentObject, propName, 'number');
 	givenValue = parentObject[propName];
 	expect(givenValue).to.be.above(0);
 }

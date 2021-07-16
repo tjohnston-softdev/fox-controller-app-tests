@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const apiRequestFile = require(commonPaths.requestApi);
 
 
@@ -34,8 +35,8 @@ function getDeviceStatusUrl(crudID)
 
 function testAddModifyResultObjectProperties(returnedObject)
 {
-	commonFunctionsFile.testObjectPropertyDefinition(returnedObject, 'success');
-	commonFunctionsFile.testObjectPropertyDefinition(returnedObject, 'id');
+	objectFunctions.testPropExists(returnedObject, 'success');
+	objectFunctions.testPropExists(returnedObject, 'id');
 }
 
 function testAddModifyResultObjectContents(returnedObject)

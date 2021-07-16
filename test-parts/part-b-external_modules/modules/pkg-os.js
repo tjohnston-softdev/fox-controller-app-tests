@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const osStrings = require("../sub-modules/os-strings");
 
 function testOsDependency()
@@ -24,8 +25,8 @@ function verifyPlatformFunction()
 	{
 		it("Function Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(osModule, 'platform');
-			commonFunctionsFile.testObjectPropertyContent(osModule, 'platform', 'function');
+			objectFunctions.testPropExists(osModule, 'platform');
+			objectFunctions.testPropType(osModule, 'platform', 'function');
 		});
 		
 		it("Function Works", function()

@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const serviceFile = loadFoxFile(foxPath.serviceMainFile);
 
@@ -39,12 +40,12 @@ function handleControllerObject()
 	{
 		it("Property Exists", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile, 'controller');
+			objectFunctions.testPropExists(serviceFile, 'controller');
 		});
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testObjectPropertyContent(serviceFile, 'controller', 'object');
+			objectFunctions.testPropType(serviceFile, 'controller', 'object');
 		});
 		
 	});
@@ -57,32 +58,32 @@ function handleGeneralFunctions()
 	{
 		it("Get Health (controller.getHealth)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'getHealth');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'getHealth', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'getHealth');
+			objectFunctions.testPropType(serviceFile.controller, 'getHealth', 'function');
 		});
 		
 		it("Get Environment (controller.getEnvironment)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'getEnvironment');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'getEnvironment', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'getEnvironment');
+			objectFunctions.testPropType(serviceFile.controller, 'getEnvironment', 'function');
 		});
 		
 		it("Get Disk Space (controller.getDiskSpace)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'getDiskSpace');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'getDiskSpace', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'getDiskSpace');
+			objectFunctions.testPropType(serviceFile.controller, 'getDiskSpace', 'function');
 		});
 		
 		it("Get Database Size (controller.getDatabaseSize)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'getDatabaseSize');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'getDatabaseSize', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'getDatabaseSize');
+			objectFunctions.testPropType(serviceFile.controller, 'getDatabaseSize', 'function');
 		});
 		
 		it("Get Log Size (controller.getLogSize)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'getLogSize');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'getLogSize', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'getLogSize');
+			objectFunctions.testPropType(serviceFile.controller, 'getLogSize', 'function');
 		});
 		
 	});
@@ -94,14 +95,14 @@ function handleRedFunctions()
 	{
 		it("Stop (controller.stopFlows)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'stopFlows');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'stopFlows', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'stopFlows');
+			objectFunctions.testPropType(serviceFile.controller, 'stopFlows', 'function');
 		});
 		
 		it("Start (controller.startFlows)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'startFlows');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'startFlows', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'startFlows');
+			objectFunctions.testPropType(serviceFile.controller, 'startFlows', 'function');
 		});
 	});
 }
@@ -112,20 +113,20 @@ function handleProcessFunctions()
 	{
 		it("Restart (controller.restartProcess)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'restartProcess');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'restartProcess', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'restartProcess');
+			objectFunctions.testPropType(serviceFile.controller, 'restartProcess', 'function');
 		});
 		
 		it("Reboot (controller.rebootController)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'rebootController');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'rebootController', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'rebootController');
+			objectFunctions.testPropType(serviceFile.controller, 'rebootController', 'function');
 		});
 		
 		it("Factory Settings (controller.factoryReset)", function()
 		{
-			commonFunctionsFile.testObjectPropertyDefinition(serviceFile.controller, 'factoryReset');
-			commonFunctionsFile.testObjectPropertyContent(serviceFile.controller, 'factoryReset', 'function');
+			objectFunctions.testPropExists(serviceFile.controller, 'factoryReset');
+			objectFunctions.testPropType(serviceFile.controller, 'factoryReset', 'function');
 		});
 	});
 }
