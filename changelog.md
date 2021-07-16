@@ -1,40 +1,17 @@
 # Changelog
 
-### ./test-parts/part-h-api_requests/requests/req-devices_modify_invalid.js
-
-**handleUnknownDeviceTypeModifyTest**
-* Renamed 'invalidEntry' variable to 'modBodyObject'
-* Declared 'invalidValue' variable.
-	* Local for 'deviceTypeObject.valueCase.jsonObject.deviceType'
-* Declared 'targetErrorMsg' variable.
-	* Local for 'deviceTypeObject.valueCase.errorMessage'
-* 'modBodyObject.deviceType' is assigned with 'invalidValue'
+**./app/output-msg.js**
+* New file - Contains callback message echo debug function.
+* Split from 'test-common.js'
 
 ---
 
-**handleUnknownManufacturerModifyTest**
-* Renamed 'invalidEntry' variable to 'modBodyObject'
-* Declared 'invalidValue' variable.
-	* Local for 'manufacturerObject.valueCase.jsonObject.maker'
-* Declared 'targetErrorMsg' variable.
-	* Local for 'manufacturerObject.valueCase.errorMessage'
-* 'modBodyObject.maker' is assigned with 'invalidValue'
+**./app/test-common.js**
+* Split 'outputCallbackMessage' into it's own file: 'output-msg.js'
+	* It is not currently used in any tests.
+	* Kept in a separate file for future reference.
 
 ---
 
-**handleUnknownModelModifyTest**
-* Renamed 'invalidEntry' variable to 'modBodyObject'
-* Declared 'invalidValue' variable.
-	* Local for 'modelObject.valueCase.jsonObject.model'
-* Declared 'targetErrorMsg' variable.
-	* Local for 'modelObject.valueCase.errorMessage'
-* 'modBodyObject.model' is assigned with 'invalidValue'
-
----
-
-**handleBadIpAddressModifyTest**
-* Declared 'invalidValue' variable.
-	* Local for 'ipAddressObject.formatCase.jsonObject.ipAddress'
-* Declared 'targetErrorMsg' variable.
-	* Local for 'ipAddressObject.formatCase.errorMessage'
-* 'ipObject.ipAddress' is assigned with 'invalidValue'
+**./app/paths/files/app-paths.js**
+* Added property for: '../../output-msg.js'

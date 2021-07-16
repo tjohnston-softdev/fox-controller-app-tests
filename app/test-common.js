@@ -299,14 +299,6 @@ function getJsonObjectValues(intendedObject)
 	return res;
 }
 
-function outputCallbackMessage(cHeader, errorArg, objectArg)
-{
-	console.log("");
-	console.log(cHeader);
-	console.log("Error: " + errorArg);
-	console.log("Object: " + objectArg);
-}
-
 
 module.exports =
 {
@@ -338,6 +330,5 @@ module.exports =
 	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject,
 	getObjectProperties: getJsonObjectProperties,
-	getObjectValues: getJsonObjectValues,
-	displayCallbackMessage: outputCallbackMessage
+	getObjectValues: getJsonObjectValues
 };

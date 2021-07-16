@@ -13,6 +13,7 @@ function defineAppPaths()
 	defineRes["requestApiPaths"] = appRoot + "request-api-paths";
 	defineRes["supportedDatabases"] = appRoot + "supported-databases";
 	defineRes["testCommon"] = appRoot + "test-common";
+	defineRes["outputMsg"] = appRoot + "output-msg";
 	
 	defineRes["getModels"] = subCommonFolder + "get-models";
 	defineRes["checkModelIntegrity"] = subCommonFolder + "check-model-integrity";
