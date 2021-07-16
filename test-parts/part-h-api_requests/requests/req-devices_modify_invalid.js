@@ -303,18 +303,22 @@ function handleUnknownDeviceTypeModifyTest()
 {
 	describe("Unknown Device Type (deviceType)", function()
 	{
-		var invalidEntry = null;
+		var invalidValue = null;
+		var targetErrorMsg = "";
+		var modBodyObject = null;
 		
 		it("Modification Defined", function(done)
 		{
-			invalidEntry = cloneAddedDevice();
-			invalidEntry.deviceType = deviceTypeObject.valueCase.jsonObject.deviceType;
+			invalidValue = deviceTypeObject.valueCase.jsonObject.deviceType;
+			targetErrorMsg = deviceTypeObject.valueCase.errorMessage;
+			modBodyObject = cloneAddedDevice();
+			modBodyObject.deviceType = invalidValue;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, invalidEntry, deviceTypeObject.valueCase.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, modBodyObject, targetErrorMsg, done);
 		});
 	});
 }
@@ -323,18 +327,22 @@ function handleUnknownManufacturerModifyTest()
 {
 	describe("Unknown Manufacturer (maker)", function()
 	{
-		var invalidEntry = null;
+		var invalidValue = null;
+		var targetErrorMsg = "";
+		var modBodyObject = null;
 		
 		it("Modification Defined", function(done)
 		{
-			invalidEntry = cloneAddedDevice();
-			invalidEntry.maker = manufacturerObject.valueCase.jsonObject.maker;
+			invalidValue = manufacturerObject.valueCase.jsonObject.maker;
+			targetErrorMsg = manufacturerObject.valueCase.errorMessage;
+			modBodyObject = cloneAddedDevice();
+			modBodyObject.maker = invalidValue;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, invalidEntry, manufacturerObject.valueCase.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, modBodyObject, targetErrorMsg, done);
 		});
 		
 	});
@@ -345,18 +353,22 @@ function handleUnknownModelModifyTest()
 {
 	describe("Unknown Model (model)", function()
 	{
-		var invalidEntry = null;
+		var invalidValue = null;
+		var targetErrorMsg = "";
+		var modBodyObject = null;
 		
 		it("Modification Defined", function(done)
 		{
-			invalidEntry = cloneAddedDevice();
-			invalidEntry.model = modelObject.valueCase.jsonObject.model;
+			invalidValue = modelObject.valueCase.jsonObject.model;
+			targetErrorMsg = modelObject.valueCase.errorMessage;
+			modBodyObject = cloneAddedDevice();
+			modBodyObject.model = invalidValue;
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, invalidEntry, modelObject.valueCase.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, modBodyObject, targetErrorMsg, done);
 		});
 		
 	});
@@ -367,20 +379,24 @@ function handleBadIpAddressModifyTest()
 {
 	describe("Invalid IP Address (ipAddress)", function()
 	{
+		var invalidValue = null;
+		var targetErrorMsg = "";
 		var ipObject = null;
 		var ipUpdateError = null;
 		var ipUpdateReturn = null;
 		
 		it("Modification Defined", function(done)
 		{
+			invalidValue = ipAddressObject.formatCase.jsonObject.ipAddress;
+			targetErrorMsg = ipAddressObject.formatCase.errorMessage;
 			ipObject = cloneAddedDevice();
-			ipObject.ipAddress = ipAddressObject.formatCase.jsonObject.ipAddress;
+			ipObject.ipAddress = invalidValue
 			done();
 		});
 		
 		it("Error Flagged", function(done)
 		{
-			httpRequests.putInvalid(testObjectLink, ipObject, ipAddressObject.formatCase.errorMessage, done);
+			httpRequests.putInvalid(testObjectLink, ipObject, targetErrorMsg, done);
 		});
 		
 	});

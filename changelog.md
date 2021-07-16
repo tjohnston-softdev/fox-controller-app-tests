@@ -1,22 +1,40 @@
 # Changelog
 
-**./app/sub-common/files/node-names.js**
-* New file
-	* Contains functions to help write the expected node name in front-end API testing.
-	* See below for split details.
+### ./test-parts/part-h-api_requests/requests/req-devices_modify_invalid.js
+
+**handleUnknownDeviceTypeModifyTest**
+* Renamed 'invalidEntry' variable to 'modBodyObject'
+* Declared 'invalidValue' variable.
+	* Local for 'deviceTypeObject.valueCase.jsonObject.deviceType'
+* Declared 'targetErrorMsg' variable.
+	* Local for 'deviceTypeObject.valueCase.errorMessage'
+* 'modBodyObject.deviceType' is assigned with 'invalidValue'
 
 ---
 
-**./app/paths/files/app-paths.js**
-* Added property for: '../../sub-common/files/node-names.js'
+**handleUnknownManufacturerModifyTest**
+* Renamed 'invalidEntry' variable to 'modBodyObject'
+* Declared 'invalidValue' variable.
+	* Local for 'manufacturerObject.valueCase.jsonObject.maker'
+* Declared 'targetErrorMsg' variable.
+	* Local for 'manufacturerObject.valueCase.errorMessage'
+* 'modBodyObject.maker' is assigned with 'invalidValue'
 
 ---
 
-**./test-parts/part-i-api_frontend/sub-parts/common-nodes.js**
-* Added requirement for 'commonPaths.nodeNames'
-* writeExpectedNodeName
-	* Moved 'firstCharacter' IF structure to 'nodeNames' as 'parseDataTypeChar'
-	* Moved 'secondCharacter' IF structure to 'nodeNames' as 'parseDataModeChar'
-	* Moved 'enteredPrefix.length' IF condition to 'nodeNames' as 'parseIndexNumberChars'
-	* Removed 'firstWord', 'secondWord', and 'thirdWord' variables.
-	* Rewrote 'fullText' using 'nodeNames'
+**handleUnknownModelModifyTest**
+* Renamed 'invalidEntry' variable to 'modBodyObject'
+* Declared 'invalidValue' variable.
+	* Local for 'modelObject.valueCase.jsonObject.model'
+* Declared 'targetErrorMsg' variable.
+	* Local for 'modelObject.valueCase.errorMessage'
+* 'modBodyObject.model' is assigned with 'invalidValue'
+
+---
+
+**handleBadIpAddressModifyTest**
+* Declared 'invalidValue' variable.
+	* Local for 'ipAddressObject.formatCase.jsonObject.ipAddress'
+* Declared 'targetErrorMsg' variable.
+	* Local for 'ipAddressObject.formatCase.errorMessage'
+* 'ipObject.ipAddress' is assigned with 'invalidValue'
