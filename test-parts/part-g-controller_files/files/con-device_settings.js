@@ -6,6 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 
 const ioSetFile = loadFoxFile(foxPath.rioSettingsFile);
@@ -106,7 +107,7 @@ function checkDeviceTypeObjectProperty()
 		
 		it("All Properties Strings", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.deviceType, 'string');
+			objectFunctions.testAllPropsType(settingsFile.deviceType, 'string');
 		});
 		
 	});
@@ -154,7 +155,7 @@ function checkCommunicationTypeProperty()
 		
 		it("All Properties Strings", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.communicationType, 'string');
+			objectFunctions.testAllPropsType(settingsFile.communicationType, 'string');
 		});
 	});
 }

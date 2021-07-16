@@ -4,6 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
+const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const settingsFile = loadFoxFile(foxPath.rioSettingsFile);
 
@@ -32,12 +33,12 @@ function checkPrefixesProperty()
 		
 		it("All Strings", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.ioPrefixes, 'string');
+			objectFunctions.testAllPropsType(settingsFile.ioPrefixes, 'string');
 		});
 		
 		it("All Key-Value Pairs Match", function()
 		{
-			commonFunctionsFile.testObjectMatchKV(settingsFile.ioPrefixes);
+			objectFunctions.testMatchKV(settingsFile.ioPrefixes);
 		});
 	});	
 }
@@ -53,7 +54,7 @@ function checkNamesProperty()
 		
 		it("All Strings", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.ioNames, 'string');
+			objectFunctions.testAllPropsType(settingsFile.ioNames, 'string');
 		});
 		
 		it("Uses Same Prefixes", function()
@@ -74,12 +75,12 @@ function checkIoTypesProperty()
 		
 		it("All Strings", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.ioTypes, 'string');
+			objectFunctions.testAllPropsType(settingsFile.ioTypes, 'string');
 		});
 		
 		it("All Key-Value Pairs Match", function()
 		{
-			commonFunctionsFile.testObjectMatchKVInsensitive(settingsFile.ioTypes);
+			objectFunctions.testMatchKVInsensitive(settingsFile.ioTypes);
 		});
 		
 	});
@@ -96,7 +97,7 @@ function checkSignalTypeProperty()
 		
 		it("All Numbers", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.signalType, 'number');
+			objectFunctions.testAllPropsType(settingsFile.signalType, 'number');
 		});
 	});
 }
@@ -113,12 +114,12 @@ function checkBinarySignalProperty()
 		
 		it("All Strings", function()
 		{
-			commonFunctionsFile.testObjectAllPropertiesType(settingsFile.binSignal, 'string');
+			objectFunctions.testAllPropsType(settingsFile.binSignal, 'string');
 		});
 		
 		it("All Key-Value Pairs Match", function()
 		{
-			commonFunctionsFile.testObjectMatchKV(settingsFile.binSignal);
+			objectFunctions.testMatchKV(settingsFile.binSignal);
 		});
 	});
 }

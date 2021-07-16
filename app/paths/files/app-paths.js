@@ -14,6 +14,7 @@ function defineAppPaths()
 	defineRes["supportedDatabases"] = appRoot + "supported-databases";
 	defineRes["testCommon"] = appRoot + "test-common";
 	defineRes["testArray"] = appRoot + "test-array";
+	defineRes["testObject"] = appRoot + "test-object";
 	defineRes["outputMsg"] = appRoot + "output-msg";
 	
 	defineRes["getModels"] = subCommonFolder + "get-models";
