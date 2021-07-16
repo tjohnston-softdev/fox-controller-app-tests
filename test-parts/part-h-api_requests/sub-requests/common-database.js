@@ -348,50 +348,49 @@ function testDatabaseSizesPopulated(dbArray)
 }
 
 
-
 function showInvalidSizeError(vName)
 {
-	var flaggedMessage = "Invalid size for Database " + vName;
-	throw new Error(flaggedMessage);
+	var flagMsg = "Invalid size for Database " + vName;
+	throw new Error(flagMsg);
 }
+
 
 function showCurrentSizeCheckError(vName)
 {
-	var flaggedMessage = "Could not check current size of Database " + vName;
-	throw new Error(flaggedMessage);
+	var flagMsg = "Could not check current size of Database " + vName;
+	throw new Error(flagMsg);
 }
 
 
 function showEmptyContentError(vName)
 {
-	var flaggedMessage = vName + " has content. This Database must be cleaned.";
-	throw new Error(flaggedMessage);
+	var flagMsg = vName + " has content. This Database must be cleaned.";
+	throw new Error(flagMsg);
 }
 
 
 function showPopulatedFolderEmptyError(vName)
 {
-	var flaggedMessage = "";
+	var flagMsg = "";
 	
-	flaggedMessage += vName;
-	flaggedMessage += " is most likely empty based on the ";
-	flaggedMessage += "Database's clean size, and folder error margin.";
+	flagMsg += vName;
+	flagMsg += " is most likely empty based on the ";
+	flagMsg += "Database's clean size, and folder error margin.";
 	
-	throw new Error(flaggedMessage);
+	throw new Error(flagMsg);
 }
-
 
 
 function showUnknownDatabaseError(vName)
 {
-	var flaggedMessage = vName + " is not a known Controller Database.";
-	throw new Error(flaggedMessage);
+	var flagMsg = vName + " is not a known Controller Database.";
+	throw new Error(flagMsg);
 }
 
 function showInvalidStructureError(vName)
 {
-	var flaggedMessage = vName + " has an invalid definition structure.";
-	throw new Error(flaggedMessage);
+	var flagMsg = vName + " has an invalid definition structure.";
+	throw new Error(flagMsg);
 }
 
 
