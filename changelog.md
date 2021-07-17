@@ -1,5 +1,7 @@
 # Changelog
 
-**./information/files.md**
-* Removed "Exempt from testing"
-    * If an entry does not link to a test script, it is exempt.
+**./information/**
+* Added extra whitespace between entries for:
+	* folders.md
+	* modes.md
+	* parts.md

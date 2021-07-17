@@ -13,39 +13,51 @@ This file is a reference to the different modes offered. The keywords are not ca
 **common**  
 This mode only tests the common dependency files. (part A)
 
+\
 **local**  
 This mode tests important 3rd party modules and local scripts. (parts B-C)
 
+\
 **online**  
 This mode tests whether the Controller is online. If it isn't, it will be flagged as an error. (part D)
 
+\
 **offline**  
 This mode tests whether the Controller is offline. If it isn't, it will be flagged as an error. (part D)
 
+\
 **cont**  
 This mode tests whether the Controller is offline before testing the script files. (parts D-G)
 
+\
 **request**  
 This mode tests whether the Controller is online before testing the APIs. (parts D, H)
 
+\
 **r-process**  
 This mode is used to test the 'Restart Process' API. This should only quit the Controller software and not shut down or delete anything. (part J)
 
+\
 **r-fox**  
 This mode is used to test the 'Reboot Controller' API. This should reboot the Controller device. (part J)
 
+\
 **r-factory**  
 This mode is used to test the 'Factory Reset' API. This will delete any user data and reboot the Controller device. (part J)
 
+\
 **all-cont**  
 This mode will test the whole project with the Controller files. (parts A-G)
 
+\
 **all-api**  
 This mode will test the whole project with the device APIs. (parts A-D, H)
 
+\
 **front**  
 This mode will test the Controller APIs from a front-end perspective. (parts D, I)
 
+\
 **debug**  
 This mode is reserved for testing whatever part(s) are being worked on at the time.
 
