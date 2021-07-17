@@ -1,7 +1,7 @@
 # Files
 
 **[app/common-errors.js](../app/common-errors.js)**  
-Used to store error strings and functions that write error strings. The reason some of these errors are stored in this file is so that they can be used by multiple parts of the test script. Exempt from testing.
+Used to store error strings and functions that write error strings. The reason some of these errors are stored in this file is so that they can be used by multiple parts of the test script.
 
 \
 **[app/common-objects.js](../app/common-objects.js)**  
@@ -36,23 +36,23 @@ Stores 'definitions' of known Databases used by the Controller. Information incl
 
 \
 **[app/test-common.js](../app/test-common.js)**  
-Stores shortcut functions for performing Chai assertion tests related to common data types. Exempt from testing.
+Stores shortcut functions for performing Chai assertion tests related to common data types.
 
 \
 **[app/test-array.js](../app/test-array.js)**  
-Stores shortcut functions for performing Chai assertion tests related to array objects. Exempt from testing.
+Stores shortcut functions for performing Chai assertion tests related to array objects.
 
 \
 **[app/test-object.js](../app/test-object.js)**  
-Stores shortcut functions for performing Chai assertion tests related to JSON objects. Exempt from testing.
+Stores shortcut functions for performing Chai assertion tests related to JSON objects.
 
 \
 **[app/test-reference.js](../app/test-reference.js)**  
-Stores shortcut function for checking referential integrity between JSON object arrays. Exempt from testing.
+Stores shortcut function for checking referential integrity between JSON object arrays.
 
 \
 **[app/paths/files/app-paths.js](../app/paths/files/app-paths.js)**  
-Stores the paths to other files inside this project, including those in this subfolder. Exempt from testing.
+Stores the paths to other files inside this project, including those in this subfolder.
 
 \
 **[app/paths/files/fox-paths.js](../app/paths/files/fox-paths.js)**  
