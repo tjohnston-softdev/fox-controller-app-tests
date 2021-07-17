@@ -11,8 +11,8 @@ const objectFunctions = require(commonPaths.testObject);
 function validateResponseBodyArray(resultObj)
 {	
 	commonFunctionsFile.testPresent(resultObj);
-	commonFunctionsFile.testPopulated(resultObj);
-	commonFunctionsFile.testAllType(resultObj, 'object');
+	arrayFunctions.testPopulated(resultObj);
+	arrayFunctions.testAllType(resultObj, 'object');
 	
 	arrayFunctions.testAllPropExists(resultObj, 'value');
 	arrayFunctions.testAllPropExists(resultObj, 'text');

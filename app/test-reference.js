@@ -12,7 +12,7 @@ function checkPropSearchValues(aDef, pName, srcObject)
 	{
 		currentObject = aDef[oInd];
 		currentVal = currentObject[pName];
-		checkObjectSearchValue(srcObject, currentVal);
+		readCurrentObject(srcObject, currentVal);
 		oInd = oInd + 1;
 	}
 }
@@ -20,7 +20,7 @@ function checkPropSearchValues(aDef, pName, srcObject)
 
 function readCurrentObject(oDef, tgtVal)
 {
-	var valueArray = getJsonObjectValues(oDef);
+	var valueArray = getObjectValues(oDef);
 	var valueIndex = valueArray.indexOf(tgtVal);
 	
 	expect(valueIndex).to.be.at.least(0);
