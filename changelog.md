@@ -1,29 +1,16 @@
 # Changelog
 
-**./app/test-reference.js**
-* New file - Tests referential integrity for object arrays.
-* Split from 'test-common.js'
-* Only 'checkPropSearchValues' can be called publicly.
-
----
-
 **./app/test-common.js**
-* Moved functions to 'test-reference.js'
-	* 'checkObjectSearchValue' as 'readCurrentObject'
-	* 'checkPropertySearchValues' as 'checkPropSearchValues'
-	* 'getJsonObjectValues' as 'getObjectValues'
-* Commented out exports:
-	* testObjectSearchValue
-	* testPropertySearchValues
-	* getObjectValues
+* Moved 'getJsonObjectProperties' to 'test-object.js' as 'getObjectProperties'
+* Commented out 'getObjectProperties' export.
 
 ---
 
-**./app/paths/files/app-paths.js**
-* Added property for '../../test-reference.js'
+**./app/test-object.js**
+* 'getObjectProperties' is called publicly as 'getProps'
 
 ---
 
-**./test-parts/part-f-controller_models/models/m-model_definitions.js**
-* Required 'commonPaths.testRef'
-* Replaced 'commonFunctionsFile.testPropertySearchValues' with 'referenceFunctions.testPropSearchValues'
+**./test-parts/part-i-api_frontend/parts/f-check_node_array.js**
+* Added requirement for 'commonPaths.testObject'
+* Replaced 'commonFunctionsFile.getObjectProperties' with 'objectFunctions.getProps'

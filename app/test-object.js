@@ -94,6 +94,19 @@ function checkPropAbsent(oDef, pName)
 }
 
 
+function getObjectProperties(intendedObject)
+{
+	var res = [];
+	
+	for (prop in intendedObject)
+	{
+		res.push(prop);
+	}
+	
+	return res;
+}
+
+
 module.exports =
 {
 	testAllPropsType: checkAllPropsType,
@@ -103,5 +116,6 @@ module.exports =
 	testSameValues: checkSameValues,
 	testPropExists: checkPropExists,
 	testPropType: checkPropType,
-	testPropAbsent: checkPropAbsent
+	testPropAbsent: checkPropAbsent,
+	getProps: getObjectProperties
 };

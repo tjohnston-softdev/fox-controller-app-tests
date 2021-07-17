@@ -56,18 +56,6 @@ function cloneJsonObject(originalObject)
 	return newObject;
 }
 
-function getJsonObjectProperties(intendedObject)
-{
-	var res = [];
-	
-	for (prop in intendedObject)
-	{
-		res.push(prop);
-	}
-	
-	return res;
-}
-
 
 module.exports =
 {
@@ -88,18 +76,15 @@ module.exports =
 	//testObjectPropertyDefinition: checkObjectPropertyDefinition,
 	//testObjectPropertyContent: checkObjectPropertyContent,
 	//testObjectPropertyAbsent: checkObjectPropertyAbsent,
-	
 	//testObjectSearchValue: checkObjectSearchValue,
 	//testPropertySearchValues: checkPropertySearchValues,
-	
 	//testPropertyDefinitions: checkPropertyDefinitions,
 	//testPropertyContents: checkPropertyContents,
 	//testPropertyAbsentDefinitions: checkPropertyAbsentDefinitions,
-	
 	//testPropertyStringRequiredArray: checkPropertyStringRequiredArray,
 	testInvalidFunctionResult: checkInvalidFunctionResult,
 	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject,
-	getObjectProperties: getJsonObjectProperties,
+	//getObjectProperties: getJsonObjectProperties,
 	//getObjectValues: getJsonObjectValues
 };

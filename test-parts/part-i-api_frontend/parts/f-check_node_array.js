@@ -5,6 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
+const objectFunctions = require(commonPaths.testObject);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 
 const nodeCommonFile = require("../sub-parts/common-nodes");
@@ -52,7 +53,7 @@ function handleManufacturerProperties()
 		
 		it("Manufacturer Property List Retrieved From Cache", function(done)
 		{
-			manufacturersArray = commonFunctionsFile.getObjectProperties(nodeCacheObject);
+			manufacturersArray = objectFunctions.getProps(nodeCacheObject);
 			
 			commonFunctionsFile.testPresent(manufacturersArray);
 			arrayFunctions.testPopulated(manufacturersArray);
