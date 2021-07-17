@@ -5,7 +5,7 @@ const expect = require("chai").expect;
 const appPaths = require("../../../app/paths/files/app-paths");
 const foxPaths = require(appPaths.foxRelative);
 const testCommon = require(appPaths.testCommon);
-const testArray = require(commonPaths.testArray);
+const testArray = require(appPaths.testArray);
 const propertyList = writeFoxPropertyNames();
 
 
