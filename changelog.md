@@ -1,7 +1,4 @@
 # Changelog
 
-**./information/**
-* Added extra whitespace between entries for:
-	* folders.md
-	* modes.md
-	* parts.md
+**./test/fox-test-main.js**
+* 'debug' test mode now calls Part A, as a placeholder.
