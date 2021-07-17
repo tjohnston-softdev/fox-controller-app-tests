@@ -33,30 +33,6 @@ function checkString(strDef)
 }
 
 
-function checkObjectSearchValue(oDef, tgtVal)
-{
-	var valueArray = getJsonObjectValues(oDef);
-	var valueIndex = valueArray.indexOf(tgtVal);
-	
-	expect(valueIndex).to.be.at.least(0);
-	expect(valueIndex).to.be.below(valueArray.length);
-}
-
-function checkPropertySearchValues(aDef, pName, srcObject)
-{
-	var oInd = 0;
-	var currentObject = null;
-	var currentVal = null;
-	
-	while (oInd >= 0 && oInd < aDef.length && aDef !== null)
-	{
-		currentObject = aDef[oInd];
-		currentVal = currentObject[pName];
-		checkObjectSearchValue(srcObject, currentVal);
-		oInd = oInd + 1;
-	}
-}
-
 function checkInvalidFunctionResult(rObject, expMsg)
 {	
 	expect(rObject.successful).to.be.false;
@@ -92,20 +68,6 @@ function getJsonObjectProperties(intendedObject)
 	return res;
 }
 
-function getJsonObjectValues(intendedObject)
-{
-	var retValue = null;
-	var res = [];
-	
-	for (prop in intendedObject)
-	{
-		retValue = intendedObject[prop];
-		res.push(retValue);
-	}
-	
-	return res;
-}
-
 
 module.exports =
 {
@@ -126,8 +88,10 @@ module.exports =
 	//testObjectPropertyDefinition: checkObjectPropertyDefinition,
 	//testObjectPropertyContent: checkObjectPropertyContent,
 	//testObjectPropertyAbsent: checkObjectPropertyAbsent,
-	testObjectSearchValue: checkObjectSearchValue,
-	testPropertySearchValues: checkPropertySearchValues,
+	
+	//testObjectSearchValue: checkObjectSearchValue,
+	//testPropertySearchValues: checkPropertySearchValues,
+	
 	//testPropertyDefinitions: checkPropertyDefinitions,
 	//testPropertyContents: checkPropertyContents,
 	//testPropertyAbsentDefinitions: checkPropertyAbsentDefinitions,
@@ -137,5 +101,5 @@ module.exports =
 	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject,
 	getObjectProperties: getJsonObjectProperties,
-	getObjectValues: getJsonObjectValues
+	//getObjectValues: getJsonObjectValues
 };

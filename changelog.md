@@ -1,15 +1,29 @@
 # Changelog
 
-**./app/test-common.js**
-* Moved 'checkPropertyStringRequiredArray' function to 'test-array.js' as 'checkAllStringRequired'
-* Commented out 'testPropertyStringRequiredArray' export.
+**./app/test-reference.js**
+* New file - Tests referential integrity for object arrays.
+* Split from 'test-common.js'
+* Only 'checkPropSearchValues' can be called publicly.
 
 ---
 
-**Affected Files**
-* ./test-parts/
-	* part-h-api_requests/requests/
-		* req-admin_main.js
-		* req-alarm.js
-	* part-i-api_frontend/parts/
-		* g-get_device_properties.js
+**./app/test-common.js**
+* Moved functions to 'test-reference.js'
+	* 'checkObjectSearchValue' as 'readCurrentObject'
+	* 'checkPropertySearchValues' as 'checkPropSearchValues'
+	* 'getJsonObjectValues' as 'getObjectValues'
+* Commented out exports:
+	* testObjectSearchValue
+	* testPropertySearchValues
+	* getObjectValues
+
+---
+
+**./app/paths/files/app-paths.js**
+* Added property for '../../test-reference.js'
+
+---
+
+**./test-parts/part-f-controller_models/models/m-model_definitions.js**
+* Required 'commonPaths.testRef'
+* Replaced 'commonFunctionsFile.testPropertySearchValues' with 'referenceFunctions.testPropSearchValues'

@@ -6,6 +6,7 @@ const foxPath = require(commonPaths.foxRelative);
 const commonFunctionsFile = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
+const referenceFunctions = require(commonPaths.testRef);
 const loadFoxFile = require(commonPaths.loadFox);
 const ioFile = loadFoxFile(foxPath.rioSettingsFile);
 
@@ -153,12 +154,12 @@ function checkIoConfigArrayProperty(modelObj)
 		
 		it("IO Type Referental Integrity", function()
 		{
-			commonFunctionsFile.testPropertySearchValues(modelObj.ioConfigs, 'ioType', ioFile.ioTypes);
+			referenceFunctions.testPropSearchValues(modelObj.ioConfigs, 'ioType', ioFile.ioTypes);
 		});
 		
 		it("IO Prefix Referental Integrity", function()
 		{
-			commonFunctionsFile.testPropertySearchValues(modelObj.ioConfigs, 'ioPrefix', ioFile.ioPrefixes);
+			referenceFunctions.testPropSearchValues(modelObj.ioConfigs, 'ioPrefix', ioFile.ioPrefixes);
 		});
 	});
 }
