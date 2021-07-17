@@ -23,8 +23,6 @@ function checkMatchKV(objDef)
 	for (currentKey in objDef)
 	{
 		currentVal = objDef[currentKey];
-		expect(currentVal).to.not.be.undefined;
-		expect(currentVal).to.not.be.null;
 		expect(currentVal).to.equal(currentKey);
 	}
 }
@@ -38,9 +36,6 @@ function checkMatchKVInsensitive(objDef)
 	{
 		currentKey = currentProp.toLowerCase();
 		currentVal = objDef[currentProp].toLowerCase();
-		
-		expect(currentVal).to.not.be.undefined;
-		expect(currentVal).to.not.be.null;
 		expect(currentVal).to.equal(currentKey);
 	}
 	
@@ -49,8 +44,8 @@ function checkMatchKVInsensitive(objDef)
 
 function checkSameProps(oSrc, oTgt)
 {
-	var srcProps = getJsonObjectProperties(oSrc);
-	var tgtProps = getJsonObjectProperties(oTgt);
+	var srcProps = getObjectProperties(oSrc);
+	var tgtProps = getObjectProperties(oTgt);
 	
 	var tgtInd = 0;
 	var tgtVal = null;

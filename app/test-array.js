@@ -93,8 +93,6 @@ function checkAllStringRequired(aDef, pName)
 		currentObject = aDef[oInd];
 		currentVal = currentObject[pName];
 		
-		expect(currentVal).to.not.be.undefined;
-		expect(currentVal).to.not.be.null;
 		expect(currentVal).to.be.a('string');
 		expect(currentVal.length).to.be.at.least(1);
 		

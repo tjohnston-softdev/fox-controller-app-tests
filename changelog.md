@@ -1,16 +1,17 @@
 # Changelog
 
 **./app/test-common.js**
-* Moved 'getJsonObjectProperties' to 'test-object.js' as 'getObjectProperties'
-* Commented out 'getObjectProperties' export.
+* Removed commented out exports.
 
 ---
 
 **./app/test-object.js**
-* 'getObjectProperties' is called publicly as 'getProps'
+* Removed `undefined` and `null` checks from:
+	* checkMatchKV
+	* checkMatchKVInsensitive
+* Replaced calls to 'getJsonObjectProperties' with 'getObjectProperties'
 
 ---
 
-**./test-parts/part-i-api_frontend/parts/f-check_node_array.js**
-* Added requirement for 'commonPaths.testObject'
-* Replaced 'commonFunctionsFile.getObjectProperties' with 'objectFunctions.getProps'
+**./app/test-array.js**
+* Removed `undefined` and `null` checks from 'checkAllStringRequired'
