@@ -149,7 +149,7 @@ function callRemoteIoModuleInvalid(rioInvalidObject)
 	}
 	
 	remoteRes = commonFunctionsFile.prepareInvalidResult(remoteComplete, remoteError);
-	commonFunctionsFile.testInvalidFunctionResult(remoteRes, rioInvalidObject.errorMessage);
+	commonFunctionsFile.testInvalidResult(remoteRes, rioInvalidObject.errorMessage);
 }
 
 

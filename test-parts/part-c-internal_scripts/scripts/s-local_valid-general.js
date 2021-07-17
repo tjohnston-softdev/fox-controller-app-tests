@@ -107,7 +107,7 @@ function callExampleInvalid(eString, eSyntax, eEmpty, eErrorText)
 	}
 	
 	var callRes = commonFunctionsFile.prepareInvalidResult(callComplete, thrownError);
-	commonFunctionsFile.testInvalidFunctionResult(callRes, eErrorText);
+	commonFunctionsFile.testInvalidResult(callRes, eErrorText);
 }
 
 

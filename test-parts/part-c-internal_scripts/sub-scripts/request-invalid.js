@@ -20,7 +20,7 @@ function runRequestUrlInvalid(folderArg, fileArg, eError)
 	}
 	
 	var invalidUrlRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidFunctionResult(invalidUrlRes, eError);
+	commonFunctionsFile.testInvalidResult(invalidUrlRes, eError);
 }
 
 function runReadResponseInvalidArray(invalidArg, eError)
@@ -40,7 +40,7 @@ function runReadResponseInvalidArray(invalidArg, eError)
 	}
 	
 	var invalidArrayRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidFunctionResult(invalidArrayRes, eError);
+	commonFunctionsFile.testInvalidResult(invalidArrayRes, eError);
 }
 
 function runReadResponseInvalidObject(invalidArg, eError)
@@ -60,7 +60,7 @@ function runReadResponseInvalidObject(invalidArg, eError)
 	}
 	
 	var invalidObjectRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidFunctionResult(invalidObjectRes, eError);
+	commonFunctionsFile.testInvalidResult(invalidObjectRes, eError);
 }
 
 function runReadResponseInvalidString(invalidArg, eError)
@@ -80,7 +80,7 @@ function runReadResponseInvalidString(invalidArg, eError)
 	}
 	
 	var invalidStringRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidFunctionResult(invalidStringRes, eError);
+	commonFunctionsFile.testInvalidResult(invalidStringRes, eError);
 }
 
 
@@ -101,7 +101,7 @@ function runReadResponseInvalidError(invalidArg, eError)
 	}
 	
 	var invalidRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidFunctionResult(invalidRes, eError);
+	commonFunctionsFile.testInvalidResult(invalidRes, eError);
 }
 
 
@@ -123,7 +123,7 @@ function runValidateResponseInvalid(invalidArg, eError)
 	}
 	
 	var invalidRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidFunctionResult(invalidRes, eError);
+	commonFunctionsFile.testInvalidResult(invalidRes, eError);
 }
 
 
@@ -146,7 +146,7 @@ function runRefuseError(refuseArg)
 	}
 	
 	var reResult = commonFunctionsFile.prepareInvalidResult(refComplete, refMsg);
-	commonFunctionsFile.testInvalidFunctionResult(reResult, supposedText);
+	commonFunctionsFile.testInvalidResult(reResult, supposedText);
 }
 
 
@@ -167,7 +167,7 @@ function runOptionError(deleteArg, eError)
 	}
 	
 	var oResult = commonFunctionsFile.prepareInvalidResult(oComplete, oMessage);
-	commonFunctionsFile.testInvalidFunctionResult(oResult, eError);	
+	commonFunctionsFile.testInvalidResult(oResult, eError);	
 }
 
 

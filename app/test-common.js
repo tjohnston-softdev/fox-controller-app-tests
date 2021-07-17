@@ -64,7 +64,7 @@ module.exports =
 	testBinary: checkBinary,
 	testPercent: checkPercent,
 	testString: checkString,
-	testInvalidFunctionResult: checkInvalidFunctionResult,
+	testInvalidResult: checkInvalidFunctionResult,
 	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject
 };

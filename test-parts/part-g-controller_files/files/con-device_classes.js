@@ -259,7 +259,7 @@ function callStoredDeviceUnsupported(callObject)
 	}
 	
 	var callResult = commonFunctionsFile.prepareInvalidResult(storedDeviceComplete, storedDeviceError);
-	commonFunctionsFile.testInvalidFunctionResult(callResult, callObject.errorMessage);
+	commonFunctionsFile.testInvalidResult(callResult, callObject.errorMessage);
 }
 
 
@@ -281,7 +281,7 @@ function callConnectedDeviceUnsupported(a, expectedError)
 	}
 	
 	var callResult = commonFunctionsFile.prepareInvalidResult(connectionComplete, connectionError);
-	commonFunctionsFile.testInvalidFunctionResult(callResult, expectedError);
+	commonFunctionsFile.testInvalidResult(callResult, expectedError);
 }
 
 
@@ -330,7 +330,7 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 	
 	
 	var tcRes = commonFunctionsFile.prepareInvalidResult(structureChanged, thrownError);
-	commonFunctionsFile.testInvalidFunctionResult(tcRes, propError);
+	commonFunctionsFile.testInvalidResult(tcRes, propError);
 }
 
 

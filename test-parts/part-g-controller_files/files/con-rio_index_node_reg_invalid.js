@@ -409,7 +409,7 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 	}
 	
 	var regRes = commonFunctionsFile.prepareInvalidResult(regComplete, regMessage);
-	commonFunctionsFile.testInvalidFunctionResult(regRes, expectedThrownError);
+	commonFunctionsFile.testInvalidResult(regRes, expectedThrownError);
 }
 
 function getCallbackErrorMessage(eObject)

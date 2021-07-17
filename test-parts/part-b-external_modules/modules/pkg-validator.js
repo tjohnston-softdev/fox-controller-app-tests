@@ -157,13 +157,13 @@ function verifyExceptions()
 		it("Invalid Type", function()
 		{
 			var invalidTypeRes = handleInvalidCall(-1);
-			commonFunctionsFile.testInvalidFunctionResult(invalidTypeRes, "Expected a string but received a number");
+			commonFunctionsFile.testInvalidResult(invalidTypeRes, "Expected a string but received a number");
 		});
 		
 		it("Null", function()
 		{
 			var nullRes = handleInvalidCall(null);
-			commonFunctionsFile.testInvalidFunctionResult(nullRes, "Expected a string but received a null");
+			commonFunctionsFile.testInvalidResult(nullRes, "Expected a string but received a null");
 		});
 	});
 }
