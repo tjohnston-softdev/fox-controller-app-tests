@@ -57,26 +57,6 @@ function checkPropertySearchValues(aDef, pName, srcObject)
 	}
 }
 
-function checkPropertyStringRequiredArray(aDef, pName)
-{
-	var oInd = 0;
-	var currentObject = null;
-	var currentVal = null;
-	
-	for (oInd = 0; oInd < aDef.length; oInd = oInd + 1)
-	{
-		currentObject = aDef[oInd];
-		currentVal = currentObject[pName];
-		
-		expect(currentVal).to.not.be.undefined;
-		expect(currentVal).to.not.be.null;
-		expect(currentVal).to.be.a('string');
-		expect(currentVal.length).to.be.at.least(1);
-		
-		oInd = oInd + 1;
-	}
-}
-
 function checkInvalidFunctionResult(rObject, expMsg)
 {	
 	expect(rObject.successful).to.be.false;
@@ -151,7 +131,8 @@ module.exports =
 	//testPropertyDefinitions: checkPropertyDefinitions,
 	//testPropertyContents: checkPropertyContents,
 	//testPropertyAbsentDefinitions: checkPropertyAbsentDefinitions,
-	testPropertyStringRequiredArray: checkPropertyStringRequiredArray,
+	
+	//testPropertyStringRequiredArray: checkPropertyStringRequiredArray,
 	testInvalidFunctionResult: checkInvalidFunctionResult,
 	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject,

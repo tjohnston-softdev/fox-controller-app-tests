@@ -67,9 +67,9 @@ function handleList()
 			arrayFunctions.testAllPropType(listRead, 'name', 'string');
 			
 			apiCommonFile.testPositiveNumberArray(listRead, 'ts');
-			commonFunctionsFile.testPropertyStringRequiredArray(listRead, 'nodeId');
+			arrayFunctions.testAllStringRequired(listRead, 'nodeId');
 			apiCommonFile.testAlarmStates(listRead);
-			commonFunctionsFile.testPropertyStringRequiredArray(listRead, 'name');
+			arrayFunctions.testAllStringRequired(listRead, 'name');
 		});
 		
 	});
@@ -117,11 +117,11 @@ function handleAvailable()
 		
 		it("Correct Contents", function()
 		{			
-			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'id');
-			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'name');
-			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'okText');
-			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'alarmText');
-			commonFunctionsFile.testPropertyStringRequiredArray(retrievedData, 'alarmColor');
+			arrayFunctions.testAllStringRequired(retrievedData, 'id');
+			arrayFunctions.testAllStringRequired(retrievedData, 'name');
+			arrayFunctions.testAllStringRequired(retrievedData, 'okText');
+			arrayFunctions.testAllStringRequired(retrievedData, 'alarmText');
+			arrayFunctions.testAllStringRequired(retrievedData, 'alarmColor');
 		});
 		
 	});

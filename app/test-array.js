@@ -82,6 +82,27 @@ function checkAllPropAbsent(aDef, pName)
 }
 
 
+function checkAllStringRequired(aDef, pName)
+{
+	var oInd = 0;
+	var currentObject = null;
+	var currentVal = null;
+	
+	for (oInd = 0; oInd < aDef.length; oInd = oInd + 1)
+	{
+		currentObject = aDef[oInd];
+		currentVal = currentObject[pName];
+		
+		expect(currentVal).to.not.be.undefined;
+		expect(currentVal).to.not.be.null;
+		expect(currentVal).to.be.a('string');
+		expect(currentVal.length).to.be.at.least(1);
+		
+		oInd = oInd + 1;
+	}
+}
+
+
 module.exports =
 {
 	testPopulated: checkPopulated,
@@ -90,5 +111,6 @@ module.exports =
 	testAllType: checkAllType,
 	testAllPropExists: checkAllPropExists,
 	testAllPropType: checkAllPropType,
-	testAllPropAbsent: checkAllPropAbsent
+	testAllPropAbsent: checkAllPropAbsent,
+	testAllStringRequired: checkAllStringRequired
 };

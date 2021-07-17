@@ -74,7 +74,7 @@ function handleDhcpClients()
 			apiCommonFile.testArrayDhcpLeaseExpire(dhcpRead);
 			apiCommonFile.testDhcpMacLong(dhcpRead, false);
 			apiCommonFile.testArrayIpFour(dhcpRead, 'ipAddress');
-			commonFunctionsFile.testPropertyStringRequiredArray(dhcpRead, 'host');
+			arrayFunctions.testAllStringRequired(dhcpRead, 'host');
 			apiCommonFile.testDhcpMacShort(dhcpRead);
 		});
 		

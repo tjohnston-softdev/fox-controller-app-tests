@@ -140,8 +140,8 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 function validateStatusControlArray(scArray)
 {
 	nodeCommonFile.testStatusControlStructure(scArray);
-	commonFunctionsFile.testPropertyStringRequiredArray(scArray, 'value');
-	commonFunctionsFile.testPropertyStringRequiredArray(scArray, 'text');
+	arrayFunctions.testAllStringRequired(scArray, 'value');
+	arrayFunctions.testAllStringRequired(scArray, 'text');
 	
 	nodeCommonFile.testStatusControlSyntax(scArray);
 	nodeCommonFile.testStatusControlIntegrity(scArray);
