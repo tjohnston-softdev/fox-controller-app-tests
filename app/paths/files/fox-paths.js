@@ -1,7 +1,6 @@
 function defineFoxPaths()
 {
-	var useEmulator = true;
-	var foxRoot = getFoxRoot(useEmulator);
+	var foxRoot = "../../../../fox-controller-app/";
 	var defineRes = {};
 	
 	defineRes["serviceMainFile"] = foxRoot + "service.main.js";
@@ -19,24 +18,5 @@ function defineFoxPaths()
 	
 	return defineRes;
 }
-
-
-function getFoxRoot(foxEmu)
-{
-	var pathRes = "";
-	
-	if (foxEmu === true)
-	{
-		pathRes = "../../../../fox-controller-app/";
-	}
-	else
-	{
-		pathRes = "../../../../original/fox-controller-app/";
-	}
-	
-	return pathRes;
-}
-
-
 
 module.exports = defineFoxPaths();
