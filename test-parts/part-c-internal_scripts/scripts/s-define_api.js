@@ -2,7 +2,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const defineFile = require(commonPaths.defineApi);
@@ -34,7 +34,7 @@ function manufacturerArrayLoop()
 	for (loopIndex = 0; loopIndex < defineFile.definitions.length; loopIndex = loopIndex + 1)
 	{
 		currentElement = defineFile.definitions[loopIndex];
-		commonFunctionsFile.testString(currentElement);
+		commonFunctions.testString(currentElement);
 	}
 }
 

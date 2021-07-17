@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
@@ -40,8 +40,8 @@ function checkFiles()
 	{
 		it("Loaded", function()
 		{
-			commonFunctionsFile.testPresent(deviceModelFile);
-			commonFunctionsFile.testPresent(deviceConnectFile);
+			commonFunctions.testPresent(deviceModelFile);
+			commonFunctions.testPresent(deviceConnectFile);
 		});
 	});
 }
@@ -53,13 +53,13 @@ function handleDeviceConstructors()
 	{
 		it(storeDeviceDesc, function()
 		{
-			commonFunctionsFile.testPresent(deviceModelFile.StoredDevice);
+			commonFunctions.testPresent(deviceModelFile.StoredDevice);
 			expect(deviceModelFile.StoredDevice).to.be.a("function");
 		});
 		
 		it(connectDesc, function()
 		{
-			commonFunctionsFile.testPresent(deviceConnectFile.ConnectedDevice);
+			commonFunctions.testPresent(deviceConnectFile.ConnectedDevice);
 			expect(deviceConnectFile.ConnectedDevice).to.be.a("function");
 		});
 		
@@ -79,7 +79,7 @@ function handleDeviceClasses()
 		{
 			storeDeviceValid = new deviceModelFile.StoredDevice(testDeviceValidModel);
 			
-			commonFunctionsFile.testPresent(storeDeviceValid);
+			commonFunctions.testPresent(storeDeviceValid);
 			expect(storeDeviceValid).to.be.an("object");
 			verifyStoredDeviceReturn(testDeviceValidModel, storeDeviceValid);
 			
@@ -175,7 +175,7 @@ function handleDeviceClasses()
 		{
 			var connectRes = new deviceConnectFile.ConnectedDevice(storeDeviceValid);
 			
-			commonFunctionsFile.testPresent(connectRes);
+			commonFunctions.testPresent(connectRes);
 			expect(connectRes).to.be.an("object");
 			
 			objectFunctions.testPropExists(connectRes, 'storedDevice');
@@ -258,8 +258,8 @@ function callStoredDeviceUnsupported(callObject)
 		storedDeviceError = e.message;
 	}
 	
-	var callResult = commonFunctionsFile.prepareInvalidResult(storedDeviceComplete, storedDeviceError);
-	commonFunctionsFile.testInvalidResult(callResult, callObject.errorMessage);
+	var callResult = commonFunctions.prepareInvalidResult(storedDeviceComplete, storedDeviceError);
+	commonFunctions.testInvalidResult(callResult, callObject.errorMessage);
 }
 
 
@@ -280,8 +280,8 @@ function callConnectedDeviceUnsupported(a, expectedError)
 		connectionError = e.message;
 	}
 	
-	var callResult = commonFunctionsFile.prepareInvalidResult(connectionComplete, connectionError);
-	commonFunctionsFile.testInvalidResult(callResult, expectedError);
+	var callResult = commonFunctions.prepareInvalidResult(connectionComplete, connectionError);
+	commonFunctions.testInvalidResult(callResult, expectedError);
 }
 
 
@@ -329,14 +329,14 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 	}
 	
 	
-	var tcRes = commonFunctionsFile.prepareInvalidResult(structureChanged, thrownError);
-	commonFunctionsFile.testInvalidResult(tcRes, propError);
+	var tcRes = commonFunctions.prepareInvalidResult(structureChanged, thrownError);
+	commonFunctions.testInvalidResult(tcRes, propError);
 }
 
 
 function verifyStoredDeviceReturn(sObject, rObject)
 {
-	commonFunctionsFile.testPresent(rObject);
+	commonFunctions.testPresent(rObject);
 	expect(rObject).to.be.an("object");
 	commonFile.testDeviceDeleted(rObject);
 	

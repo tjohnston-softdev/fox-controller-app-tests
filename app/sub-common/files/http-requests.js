@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const apiPaths = require(commonPaths.requestApiPaths);
@@ -212,7 +212,7 @@ function sendDelete(httpURL, permHeader, httpCallback)
 function handleCallbackArguments(argError, argResp)
 {
 	expect(argError).to.be.null;
-	commonFunctionsFile.testPresent(argResp);
+	commonFunctions.testPresent(argResp);
 	expect(argResp).to.be.an("object");
 }
 
@@ -228,7 +228,7 @@ function handleInvalidStatus(respObj, sInput)
 {
 	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
-	commonFunctionsFile.testPresent(extractedObject);
+	commonFunctions.testPresent(extractedObject);
 	expect(extractedObject).to.be.an("object");
 	
 	objectFunctions.testPropExists(extractedObject, 'id');
@@ -243,7 +243,7 @@ function handleInvalidDelete(respObj)
 {
 	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
-	commonFunctionsFile.testPresent(extractedObject);
+	commonFunctions.testPresent(extractedObject);
 	expect(extractedObject).to.be.an("object");
 	objectFunctions.testPropExists(extractedObject, 'success');
 	expect(extractedObject.success).to.be.true;

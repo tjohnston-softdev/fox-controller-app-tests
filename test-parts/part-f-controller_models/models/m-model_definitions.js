@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const referenceFunctions = require(commonPaths.testRef);
@@ -33,14 +33,14 @@ function checkFiles()
 	{
 		it("Remote IO Settings Loaded", function()
 		{
-			commonFunctionsFile.testPresent(ioFile);
+			commonFunctions.testPresent(ioFile);
 		});
 		
 		it("Model Definitions Loaded", function()
 		{
-			commonFunctionsFile.testPresent(advantechModels);
-			commonFunctionsFile.testPresent(moxaModels);
-			commonFunctionsFile.testPresent(sonoffModels);
+			commonFunctions.testPresent(advantechModels);
+			commonFunctions.testPresent(moxaModels);
+			commonFunctions.testPresent(sonoffModels);
 		});
 		
 	});
@@ -65,7 +65,7 @@ function checkManufacturerArrayRead(modelArr)
 	{
 		it("Successfully Read", function()
 		{
-			commonFunctionsFile.testPresent(modelArr);
+			commonFunctions.testPresent(modelArr);
 			arrayFunctions.testPopulated(modelArr);
 		});
 		
@@ -117,7 +117,7 @@ function checkCommunicationTypeProperty(modelObj)
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testString(modelObj.commsType);
+			commonFunctions.testString(modelObj.commsType);
 		});
 	});
 }
@@ -207,7 +207,7 @@ function checkInfoUrlProperty(modelObj)
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testString(modelObj.infoUrl);
+			commonFunctions.testString(modelObj.infoUrl);
 		});
 	});
 }
@@ -223,7 +223,7 @@ function checkManufacturerProperty(modelObj)
 		
 		it("Valid Type", function()
 		{
-			commonFunctionsFile.testString(modelObj.maker);
+			commonFunctions.testString(modelObj.maker);
 		});
 	});
 }

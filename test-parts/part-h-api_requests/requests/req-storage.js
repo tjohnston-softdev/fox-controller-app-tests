@@ -5,7 +5,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
@@ -57,7 +57,7 @@ function handleFileList()
 		
 		it("Correct Array Structure", function()
 		{
-			commonFunctionsFile.testPresent(fileListRead);
+			commonFunctions.testPresent(fileListRead);
 			arrayFunctions.testEmpty(fileListRead);
 			arrayFunctions.testAllType(fileListRead, 'object');
 		});
@@ -249,7 +249,7 @@ function handleGlobalStatus()
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctionsFile.testPresent(statusRead);
+			commonFunctions.testPresent(statusRead);
 			expect(statusRead).to.be.an("object");
 		});
 		
@@ -260,11 +260,11 @@ function handleGlobalStatus()
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testString(statusRead.fs);
-			commonFunctionsFile.testString(statusRead.type);
+			commonFunctions.testString(statusRead.fs);
+			commonFunctions.testString(statusRead.type);
 			objectFunctions.testPropType(statusRead, 'used', 'number');
 			objectFunctions.testPropType(statusRead, 'use', 'number');
-			commonFunctionsFile.testString(statusRead.mount);
+			commonFunctions.testString(statusRead.mount);
 			
 			storageCommonFile.testLetterObject(statusRead);
 			storageCommonFile.testTotalObject(statusRead);

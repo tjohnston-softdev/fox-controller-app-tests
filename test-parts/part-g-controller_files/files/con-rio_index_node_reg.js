@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
@@ -58,8 +58,8 @@ function handleNodePrepare()
 		
 		it("Files Loaded", function()
 		{
-			commonFunctionsFile.testPresent(rioFile);
-			commonFunctionsFile.testPresent(rioSetFile);
+			commonFunctions.testPresent(rioFile);
+			commonFunctions.testPresent(rioSetFile);
 		});
 		
 		it("Function Arguments Assigned", function(done)
@@ -151,8 +151,8 @@ function handleStaticAdd()
 			expect(staticAddSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
 			
-			commonFunctionsFile.testPresent(staticID);
-			commonFunctionsFile.testString(staticID);
+			commonFunctions.testPresent(staticID);
+			commonFunctions.testString(staticID);
 					
 			nodeTestID = staticID;
 			done();
@@ -202,7 +202,7 @@ function handleStaticGet()
 			expect(staticGetSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
 			
-			commonFunctionsFile.testPresent(nodeTestObject);
+			commonFunctions.testPresent(nodeTestObject);
 			expect(nodeTestObject).to.be.an("object");
 			commonFile.testDeviceObject(nodeTestObject);
 			
@@ -289,7 +289,7 @@ function handleGetIoProperties()
 			
 			it("Property Object Returned", function()
 			{
-				commonFunctionsFile.testPresent(propertyRes);
+				commonFunctions.testPresent(propertyRes);
 				expect(propertyRes).to.be.an("object");
 			});
 			
@@ -299,7 +299,7 @@ function handleGetIoProperties()
 				objectFunctions.testPropExists(propertyRes, 'STATUS');
 				objectFunctions.testPropExists(propertyRes, 'CONTROL');
 				
-				commonFunctionsFile.testString(propertyRes.name);
+				commonFunctions.testString(propertyRes.name);
 				arrayFunctions.testPopulated(propertyRes.STATUS);
 				arrayFunctions.testPopulated(propertyRes.CONTROL);
 			});
@@ -355,7 +355,7 @@ function handleNodeConfig()
 		
 		it("Correct Return Structure", function(done)
 		{
-			commonFunctionsFile.testPresent(nodeConfigObject);
+			commonFunctions.testPresent(nodeConfigObject);
 			expect(nodeConfigObject).to.be.an("object");
 			commonFile.testNodeConfigObject(nodeConfigObject);
 			done();
@@ -407,7 +407,7 @@ function handleRegisterNode()
 			
 			it("Callback Function Returned", function(done)
 			{
-				commonFunctionsFile.testPresent(registerSpy.firstCall.returnValue);
+				commonFunctions.testPresent(registerSpy.firstCall.returnValue);
 				expect(registerSpy.firstCall.returnValue).to.be.a("function");
 				registerReturn = registerSpy.firstCall.returnValue;
 				done();
@@ -427,7 +427,7 @@ function handleRegisterNode()
 			
 			it("Callback Function Remembered", function(done)
 			{
-				commonFunctionsFile.testPresent(registerReturn);
+				commonFunctions.testPresent(registerReturn);
 				expect(registerReturn).to.be.a("function");
 				done();
 			});
@@ -447,9 +447,9 @@ function handleRegisterNode()
 			it("Unregister Function Successful", function(done)
 			{
 				expect(unregisterNodeSpy.calledOnce).to.be.true;
-				commonFunctionsFile.testPresent(unregisterNodeSpy.firstCall);
+				commonFunctions.testPresent(unregisterNodeSpy.firstCall);
 				
-				commonFunctionsFile.testPresent(unregisterNodeSpy.firstCall.args);
+				commonFunctions.testPresent(unregisterNodeSpy.firstCall.args);
 				expect(unregisterNodeSpy.firstCall.args).to.be.an("array");
 				expect(unregisterNodeSpy.firstCall.args).to.deep.equal([]);
 				
@@ -739,8 +739,8 @@ function coordinateGetIoPropertiesInvalidCall(invalidArg)
 		ioError = e.message;
 	}
 	
-	var ioRes = commonFunctionsFile.prepareInvalidResult(ioComplete, ioError);
-	commonFunctionsFile.testInvalidResult(ioRes, commonErrorStringsFile.rioPropertiesUndefined);
+	var ioRes = commonFunctions.prepareInvalidResult(ioComplete, ioError);
+	commonFunctions.testInvalidResult(ioRes, commonErrorStringsFile.rioPropertiesUndefined);
 }
 
 

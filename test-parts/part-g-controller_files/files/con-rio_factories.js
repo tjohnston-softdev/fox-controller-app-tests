@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -33,7 +33,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctionsFile.testPresent(factoryFile);
+			commonFunctions.testPresent(factoryFile);
 		});
 	});
 }
@@ -45,7 +45,7 @@ function handleRemoteIoModuleFunction()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testPresent(factoryFile.RemoteIoModule);
+			commonFunctions.testPresent(factoryFile.RemoteIoModule);
 			expect(factoryFile.RemoteIoModule).to.be.a("function");
 		});
 		
@@ -54,7 +54,7 @@ function handleRemoteIoModuleFunction()
 		{
 			var moduleRes = factoryFile.RemoteIoModule(remoteIoTestDevice);
 			
-			commonFunctionsFile.testPresent(moduleRes);
+			commonFunctions.testPresent(moduleRes);
 			expect(moduleRes).to.be.an("object");
 			rioFactoryReturn.checkValid(moduleRes);
 		});
@@ -148,8 +148,8 @@ function callRemoteIoModuleInvalid(rioInvalidObject)
 		remoteError = e.message;
 	}
 	
-	remoteRes = commonFunctionsFile.prepareInvalidResult(remoteComplete, remoteError);
-	commonFunctionsFile.testInvalidResult(remoteRes, rioInvalidObject.errorMessage);
+	remoteRes = commonFunctions.prepareInvalidResult(remoteComplete, remoteError);
+	commonFunctions.testInvalidResult(remoteRes, rioInvalidObject.errorMessage);
 }
 
 

@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
@@ -50,7 +50,7 @@ function handleDatabaseCheck()
 	{
 		it("Device List Exists", function(done)
 		{
-			commonFunctionsFile.testPresent(retrievedDatabaseList);
+			commonFunctions.testPresent(retrievedDatabaseList);
 			expect(retrievedDatabaseList).to.be.an("array");
 			done();
 		});

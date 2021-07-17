@@ -1,7 +1,7 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 
 

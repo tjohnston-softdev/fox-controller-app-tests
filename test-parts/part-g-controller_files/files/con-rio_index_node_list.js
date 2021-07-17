@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 const indexFile = loadFoxFile(foxPath.rioIndexFile);
@@ -66,7 +66,7 @@ function handleNodeListFull()
 		
 		it("Node Array Returned", function()
 		{
-			commonFunctionsFile.testPresent(retrievedNodeList);
+			commonFunctions.testPresent(retrievedNodeList);
 			expect(retrievedNodeList).to.be.an("array");
 		});
 		
@@ -136,17 +136,17 @@ function handleNodeListDispose()
 function verifyNodeListCalled(nArg)
 {
 	expect(nodeListSpy.called).to.be.true;
-	commonFunctionsFile.testPresent(nodeListSpy.lastCall);
+	commonFunctions.testPresent(nodeListSpy.lastCall);
 	
-	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args);
+	commonFunctions.testPresent(nodeListSpy.lastCall.args);
 	arrayFunctions.testPopulated(nodeListSpy.lastCall.args);
 	
 	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);
 	
-	commonFunctionsFile.testPresent(nodeListSpy.lastCall.args[1]);
+	commonFunctions.testPresent(nodeListSpy.lastCall.args[1]);
 	expect(nodeListSpy.lastCall.args[1]).to.be.a("function");
 	
-	commonFunctionsFile.testPresent(nodeListSpy.lastCall.callback);
+	commonFunctions.testPresent(nodeListSpy.lastCall.callback);
 	expect(nodeListSpy.lastCall.callback).to.be.a("function");
 }
 
@@ -157,7 +157,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	expect(nodeListSpy.lastCall.exception).to.be.undefined;
 	expect(mError).to.be.null;
 	
-	commonFunctionsFile.testPresent(mDevices);
+	commonFunctions.testPresent(mDevices);
 	expect(mDevices).to.be.an("array");
 	rioSubCommonFile.testPropertyArray(mDevices);
 }

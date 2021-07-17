@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
@@ -31,7 +31,7 @@ function handleStructure()
 		it("Node Array Retrieved From Cache", function(done)
 		{
 			nodeCacheObject = callNodeCache();
-			commonFunctionsFile.testPresent(nodeCacheObject);
+			commonFunctions.testPresent(nodeCacheObject);
 			done();
 		});
 		
@@ -55,7 +55,7 @@ function handleManufacturerProperties()
 		{
 			manufacturersArray = objectFunctions.getProps(nodeCacheObject);
 			
-			commonFunctionsFile.testPresent(manufacturersArray);
+			commonFunctions.testPresent(manufacturersArray);
 			arrayFunctions.testPopulated(manufacturersArray);
 			
 			done();

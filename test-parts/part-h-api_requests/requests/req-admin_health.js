@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
@@ -56,7 +56,7 @@ function getHealthObject()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(healthObject);
+			commonFunctions.testPresent(healthObject);
 			expect(healthObject).to.be.an("object");
 			done();
 		});
@@ -73,13 +73,13 @@ function handleIdentification()
 		it("Version (version)", function()
 		{
 			objectFunctions.testPropExists(healthObject, 'version');
-			commonFunctionsFile.testString(healthObject.version);
+			commonFunctions.testString(healthObject.version);
 		});
 		
 		it("Serial Number (serialNumber)", function()
 		{
 			objectFunctions.testPropExists(healthObject, 'serialNumber');
-			commonFunctionsFile.testString(healthObject.serialNumber);
+			commonFunctions.testString(healthObject.serialNumber);
 		});
 		
 		it("Device (device)", function()
@@ -114,14 +114,14 @@ function handleTime()
 		it("Timezone Offset Code (time.timezone)", function()
 		{
 			objectFunctions.testPropExists(healthObject.time, 'timezone');
-			commonFunctionsFile.testString(healthObject.time.timezone);
+			commonFunctions.testString(healthObject.time.timezone);
 			commonHealth.testTimezoneCode(healthObject.time.timezone);
 		});
 		
 		it("Timezone Name (time.timezoneName)", function()
 		{
 			objectFunctions.testPropExists(healthObject.time, 'timezoneName');
-			commonFunctionsFile.testString(healthObject.time.timezoneName);
+			commonFunctions.testString(healthObject.time.timezoneName);
 		});
 		
 		it("Process Time (time.process)", function()

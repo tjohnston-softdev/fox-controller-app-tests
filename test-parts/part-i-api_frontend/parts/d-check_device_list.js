@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const rioCommon = require(commonPaths.rioCommon);
 
@@ -31,7 +31,7 @@ function handleCheckPrepare()
 		it("Device List Retrieved From Cache", function(done)
 		{
 			listTest = retrieveListFromCache();
-			commonFunctionsFile.testPresent(listTest);
+			commonFunctions.testPresent(listTest);
 			done();
 		});
 		
@@ -48,7 +48,7 @@ function handleCheckPrepare()
 		{
 			var addCount = retrieveCountFromCache();
 			
-			commonFunctionsFile.testPresent(addCount);
+			commonFunctions.testPresent(addCount);
 			expect(addCount).to.be.a("number");
 			expect(addCount).to.be.above(0);
 			

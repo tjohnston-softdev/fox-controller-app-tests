@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
@@ -46,7 +46,7 @@ function handleList()
 		
 		it("Correct Array Structure", function()
 		{
-			commonFunctionsFile.testPresent(listRead);
+			commonFunctions.testPresent(listRead);
 			arrayFunctions.testEmpty(listRead);
 			arrayFunctions.testAllType(listRead, 'object');
 		});
@@ -101,7 +101,7 @@ function handleAvailable()
 		
 		it("Correct Array Structure", function()
 		{
-			commonFunctionsFile.testPresent(retrievedData);
+			commonFunctions.testPresent(retrievedData);
 			arrayFunctions.testEmpty(retrievedData);
 			arrayFunctions.testAllType(retrievedData, 'object');
 		});

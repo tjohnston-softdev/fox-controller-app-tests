@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -30,7 +30,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctionsFile.testPresent(indexFile);
+			commonFunctions.testPresent(indexFile);
 		});
 	});
 }
@@ -77,7 +77,7 @@ function handleInitializationFunction()
 		it("Initialization Event Successful", function(done)
 		{
 			expect(initSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(initSpy.firstCall);
+			commonFunctions.testPresent(initSpy.firstCall);
 			expect(initSpy.firstCall.args).to.deep.equal([]);
 			expect(initSpy.firstCall.returnValue).to.be.undefined;
 			expect(initSpy.firstCall.exception).to.be.undefined;
@@ -115,15 +115,15 @@ function handleInitializationCompleteFunction()
 		it("Event Successful", function(done)
 		{
 			expect(compSpy.calledOnce).to.be.true;
-			commonFunctionsFile.testPresent(compSpy.firstCall);
+			commonFunctions.testPresent(compSpy.firstCall);
 			
-			commonFunctionsFile.testPresent(compSpy.firstCall.args);
+			commonFunctions.testPresent(compSpy.firstCall.args);
 			arrayFunctions.testPopulated(compSpy.firstCall.args);
 			
-			commonFunctionsFile.testPresent(compSpy.firstCall.args[0]);
+			commonFunctions.testPresent(compSpy.firstCall.args[0]);
 			expect(compSpy.firstCall.args[0]).to.be.a("function");
 			
-			commonFunctionsFile.testPresent(compSpy.firstCall.callback);
+			commonFunctions.testPresent(compSpy.firstCall.callback);
 			expect(compSpy.firstCall.callback).to.be.a("function");
 			
 			expect(compSpy.firstCall.exception).to.be.undefined;
@@ -157,7 +157,7 @@ function checkFunctionDefinitionLoop(nameArray)
 		currentName = nameArray[loopIndex];
 		currentFunction = indexFile[currentName];
 		
-		commonFunctionsFile.testPresent(currentFunction);
+		commonFunctions.testPresent(currentFunction);
 		expect(currentFunction).to.be.a("function");
 	}
 }

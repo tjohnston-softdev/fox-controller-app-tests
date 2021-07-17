@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
@@ -46,19 +46,19 @@ function checkFiles()
 	{
 		it("Remote IO Settings Loaded", function()
 		{
-			commonFunctionsFile.testPresent(ioSetFile);
+			commonFunctions.testPresent(ioSetFile);
 		});
 		
 		it("Model Definitions Loaded", function()
 		{
-			commonFunctionsFile.testPresent(advantechModels);
-			commonFunctionsFile.testPresent(moxaModels);
-			commonFunctionsFile.testPresent(sonoffModels);
+			commonFunctions.testPresent(advantechModels);
+			commonFunctions.testPresent(moxaModels);
+			commonFunctions.testPresent(sonoffModels);
 		});
 		
 		it("Device Settings Loaded", function()
 		{
-			commonFunctionsFile.testPresent(settingsFile);
+			commonFunctions.testPresent(settingsFile);
 		});
 		
 	});
@@ -71,7 +71,7 @@ function checkSupportedModelDefinitions()
 	{
 		it("Valid Object Type", function()
 		{
-			commonFunctionsFile.testPresent(supportedListObject);
+			commonFunctions.testPresent(supportedListObject);
 			expect(supportedListObject).to.be.an("object");
 		});
 		
@@ -123,7 +123,7 @@ function checkDeviceTypeArrayProperty()
 		it("Exists", function()
 		{
 			objectFunctions.testPropExists(settingsFile, 'deviceTypes');
-			commonFunctionsFile.testPresent(settingsFile.deviceTypes);
+			commonFunctions.testPresent(settingsFile.deviceTypes);
 		});
 		
 		it("Populated Array", function()
@@ -288,7 +288,7 @@ function checkGetModelFunction()
 		{
 			var supportedRes = settingsFile.getModel(testModelName);
 			
-			commonFunctionsFile.testPresent(supportedRes);
+			commonFunctions.testPresent(supportedRes);
 			expect(supportedRes).to.be.an("object");
 			
 			objectFunctions.testPropExists(supportedRes, 'modelType');
@@ -317,7 +317,7 @@ function checkManufacturerListProperty()
 		it("Exists", function()
 		{
 			objectFunctions.testPropExists(settingsFile, 'listRioMakers');
-			commonFunctionsFile.testPresent(settingsFile.listRioMakers);
+			commonFunctions.testPresent(settingsFile.listRioMakers);
 		});
 		
 		it("Array", function()
@@ -345,7 +345,7 @@ function checkModelTypeListProperty()
 		it("Exists", function()
 		{
 			objectFunctions.testPropExists(settingsFile, 'listRioModelTypes');
-			commonFunctionsFile.testPresent(settingsFile.listRioModelTypes);
+			commonFunctions.testPresent(settingsFile.listRioModelTypes);
 		});
 		
 		it("Array", function()

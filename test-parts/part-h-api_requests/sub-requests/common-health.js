@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 const sysPlatform = require(commonPaths.sysPlatform);
@@ -20,11 +20,11 @@ function testHealthDeviceObject(healthObj)
 	objectFunctions.testPropExists(healthObj.device, 'hardware');
 	objectFunctions.testPropExists(healthObj.device, 'wifiPass');
 	
-	commonFunctionsFile.testString(healthObj.device.WARNING);
-	commonFunctionsFile.testString(healthObj.device.name);
-	commonFunctionsFile.testString(healthObj.device.serialNumber);
-	commonFunctionsFile.testString(healthObj.device.hardware);
-	commonFunctionsFile.testString(healthObj.device.wifiPass);
+	commonFunctions.testString(healthObj.device.WARNING);
+	commonFunctions.testString(healthObj.device.name);
+	commonFunctions.testString(healthObj.device.serialNumber);
+	commonFunctions.testString(healthObj.device.hardware);
+	commonFunctions.testString(healthObj.device.wifiPass);
 	
 	expect(healthObj.device.WARNING).to.equal("DO NOT MODIFY THIS FILE!");
 	
@@ -79,7 +79,7 @@ function testHealthEnvironmentDummy(envObject)
 	}
 	else
 	{
-		commonFunctionsFile.testPlaceholder();
+		commonFunctions.testPlaceholder();
 	}
 	
 }
@@ -100,7 +100,7 @@ function testNetworkInternalArray(netArray)
 		}
 		else
 		{
-			commonFunctionsFile.testPlaceholder();
+			commonFunctions.testPlaceholder();
 		}
 	}
 }

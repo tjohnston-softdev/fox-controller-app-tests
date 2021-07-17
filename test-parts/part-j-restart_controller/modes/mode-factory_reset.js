@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const sysPlatform = require(commonPaths.sysPlatform);
@@ -175,7 +175,7 @@ function handleFactoryPlaceholder()
 	{
 		it("True", function(done)
 		{
-			commonFunctionsFile.testPlaceholder();
+			commonFunctions.testPlaceholder();
 			done();
 		});
 	});

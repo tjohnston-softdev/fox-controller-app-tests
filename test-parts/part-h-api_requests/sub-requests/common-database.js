@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const sysPlatform = require(commonPaths.sysPlatform);
 
 const supportedDatabasesFile = require(commonPaths.supportedDatabases);

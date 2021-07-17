@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
@@ -15,9 +15,9 @@ function getInvalidDeviceTypeObject(originalDefinition)
 	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("deviceType", "-1");
 	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("deviceType", "undefined");
 	
-	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var valueInput = commonFunctions.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	valueInput.deviceType = "Unknown";
 	typeInput.deviceType = -1;
@@ -45,9 +45,9 @@ function getInvalidManufacturerObject(originalDefinition, propNull)
 	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("maker", "-1");
 	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("maker", propContent);
 			
-	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var valueInput = commonFunctions.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	valueInput.maker = "Unknown";
 	typeInput.maker = -1;
@@ -68,9 +68,9 @@ function getInvalidModelObject(originalDefinition)
 	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("model", "-1");
 	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyGeneral("model", "undefined");
 			
-	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var valueInput = commonFunctions.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	valueInput.model = "Unknown";
 	typeInput.model = -1;
@@ -87,10 +87,10 @@ function getInvalidModelObject(originalDefinition)
 
 function getInvalidIPAddressObject(originalDefinition)
 {			
-	var formatInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var valueInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var formatInput = commonFunctions.cloneObject(originalDefinition);
+	var valueInput = commonFunctions.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	formatInput.ipAddress = "192.168.321.456";
 	valueInput.ipAddress = "Unknown";
@@ -112,8 +112,8 @@ function getInvalidMacAddressObject(originalDefinition)
 	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyConstruct("macAddress", "string", "-1");
 	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyConstruct("macAddress", "string", "undefined");
 	
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 	
 	typeInput.macAddress = -1;
 	delete propInput.macAddress;
@@ -128,8 +128,8 @@ function getInvalidMacAddressObject(originalDefinition)
 
 function getInvalidIDStringObject(originalDefinition, typeErrMsg, propErrMsg)
 {			
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	typeInput.id = -1;
 	delete propInput.id;
@@ -147,8 +147,8 @@ function getInvalidNameStringObject(originalDefinition)
 	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyConstruct("name", "string", "-1");
 	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyConstruct("name", "string", "undefined");
 			
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	typeInput.name = -1;
 	delete propInput.name;
@@ -166,8 +166,8 @@ function getInvalidEnabledFlagObject(originalDefinition)
 	var typeErrMsg = commonErrorStringsFile.writeRemoteIoPropertyConstruct("isEnabled", "boolean", "-1");
 	var propErrMsg = commonErrorStringsFile.writeRemoteIoPropertyConstruct("isEnabled", "boolean", "undefined");
 			
-	var typeInput = commonFunctionsFile.cloneObject(originalDefinition);
-	var propInput = commonFunctionsFile.cloneObject(originalDefinition);
+	var typeInput = commonFunctions.cloneObject(originalDefinition);
+	var propInput = commonFunctions.cloneObject(originalDefinition);
 			
 	typeInput.isEnabled = -1;
 	delete propInput.isEnabled;

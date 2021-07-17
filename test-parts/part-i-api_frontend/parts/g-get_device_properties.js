@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
@@ -97,7 +97,7 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Object Returned", function(done)
 	{
-		commonFunctionsFile.testPresent(deviceRead);
+		commonFunctions.testPresent(deviceRead);
 		expect(deviceRead).to.be.an("object");
 		
 		done();

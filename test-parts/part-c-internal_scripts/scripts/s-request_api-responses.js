@@ -2,7 +2,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const requestFile = require(commonPaths.requestApi);
@@ -146,7 +146,7 @@ function checkRequestResponseError()
 			var inputReply = commonRequestFunctions.createReplyObject(500, validReplyString);
 			var actualError = requestFile.readResponseError(inputReply);
 			
-			commonFunctionsFile.testString(actualError);
+			commonFunctions.testString(actualError);
 			expect(actualError).to.equal(validErrorString);
 		});
 		

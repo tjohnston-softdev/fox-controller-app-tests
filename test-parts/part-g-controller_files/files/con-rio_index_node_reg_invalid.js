@@ -5,7 +5,7 @@ const sinon = require('sinon');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -111,7 +111,7 @@ function handleTestDevice()
 		it("Add Function Called", function(done)
 		{
 			addSpy = sinon.spy(rioFile, 'addRemoteIoDevice');
-			addObject = commonFunctionsFile.cloneObject(commonJsonObjectsFile.crudDevice);
+			addObject = commonFunctions.cloneObject(commonJsonObjectsFile.crudDevice);
 			
 			rioFile.addRemoteIoDevice(addObject, function(addRioErr, addedID)
 			{
@@ -128,8 +128,8 @@ function handleTestDevice()
 			expect(addSpy.lastCall.exception).to.be.undefined;
 			expect(addError).to.be.null;
 			
-			commonFunctionsFile.testPresent(addID);
-			commonFunctionsFile.testString(addID);
+			commonFunctions.testPresent(addID);
+			commonFunctions.testString(addID);
 					
 			testID = addID;
 			done();
@@ -137,8 +137,8 @@ function handleTestDevice()
 		
 		it("Test ID Retained", function(done)
 		{
-			commonFunctionsFile.testPresent(testID);
-			commonFunctionsFile.testString(testID);
+			commonFunctions.testPresent(testID);
+			commonFunctions.testString(testID);
 			expect(testID).to.equal(addID);
 			done();
 		});
@@ -164,7 +164,7 @@ function handleTestConfig()
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctionsFile.testPresent(registerConfigObject);
+			commonFunctions.testPresent(registerConfigObject);
 			expect(registerConfigObject).to.be.an("object");
 			commonFile.testNodeConfigObject(registerConfigObject);
 		});
@@ -408,8 +408,8 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 		regMessage = e.message;
 	}
 	
-	var regRes = commonFunctionsFile.prepareInvalidResult(regComplete, regMessage);
-	commonFunctionsFile.testInvalidResult(regRes, expectedThrownError);
+	var regRes = commonFunctions.prepareInvalidResult(regComplete, regMessage);
+	commonFunctions.testInvalidResult(regRes, expectedThrownError);
 }
 
 function getCallbackErrorMessage(eObject)

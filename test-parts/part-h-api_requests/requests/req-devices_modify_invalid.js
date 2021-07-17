@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
@@ -62,8 +62,8 @@ function handlePrepare()
 		{
 			urlList = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			
-			commonFunctionsFile.testPresent(urlList);
-			commonFunctionsFile.testString(urlList);
+			commonFunctions.testPresent(urlList);
+			commonFunctions.testString(urlList);
 			
 			done();
 		});
@@ -73,8 +73,8 @@ function handlePrepare()
 		{
 			urlCreate = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			
-			commonFunctionsFile.testPresent(urlCreate);
-			commonFunctionsFile.testString(urlCreate);
+			commonFunctions.testPresent(urlCreate);
+			commonFunctions.testString(urlCreate);
 			
 			done();
 		});
@@ -175,8 +175,8 @@ function handleTestAdd()
 		{
 			testObjectLink = deviceCommon.getRudUrl(testObjectID);
 			
-			commonFunctionsFile.testPresent(testObjectLink);
-			commonFunctionsFile.testString(testObjectLink);
+			commonFunctions.testPresent(testObjectLink);
+			commonFunctions.testString(testObjectLink);
 			
 			done();
 		});
@@ -515,13 +515,13 @@ function checkModifyTestObjectGet(gResultObject, gTargetID, gOriginalObject)
 
 function cloneBaseDefinition()
 {
-	var res = commonFunctionsFile.cloneObject(commonJsonObjectsFile.modifiedDevice);
+	var res = commonFunctions.cloneObject(commonJsonObjectsFile.modifiedDevice);
 	return res;
 }
 
 function cloneAddedDevice()
 {
-	var res = commonFunctionsFile.cloneObject(testObjectDefinition);
+	var res = commonFunctions.cloneObject(testObjectDefinition);
 	return res;
 }
 

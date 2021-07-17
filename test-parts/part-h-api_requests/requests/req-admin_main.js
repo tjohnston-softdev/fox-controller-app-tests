@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
@@ -49,7 +49,7 @@ function handleDhcpClients()
 		
 		it("Correct Array Structure", function()
 		{
-			commonFunctionsFile.testPresent(dhcpRead);
+			commonFunctions.testPresent(dhcpRead);
 			arrayFunctions.testPopulated(dhcpRead);
 			arrayFunctions.testAllType(dhcpRead, 'object');
 		});
@@ -108,7 +108,7 @@ function handleDefaultObject()
 		
 		it("Correct Object Returned", function()
 		{
-			commonFunctionsFile.testPresent(defaultRead);
+			commonFunctions.testPresent(defaultRead);
 			expect(defaultRead).to.be.an("object");
 			
 			objectFunctions.testPropExists(defaultRead, 'message');
@@ -144,7 +144,7 @@ function handleLog()
 	
 		it("Valid Return Structure", function()
 		{
-			commonFunctionsFile.testPresent(logRead);
+			commonFunctions.testPresent(logRead);
 			expect(logRead).to.be.an("object");
 		
 			objectFunctions.testPropExists(logRead, 'success');
@@ -154,7 +154,7 @@ function handleLog()
 		it("Valid Contents", function()
 		{
 			expect(logRead.success).to.be.true;
-			commonFunctionsFile.testString(logRead.logs);
+			commonFunctions.testString(logRead.logs);
 		});
 		
 	});

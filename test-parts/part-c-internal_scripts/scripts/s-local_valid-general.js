@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 
@@ -106,8 +106,8 @@ function callExampleInvalid(eString, eSyntax, eEmpty, eErrorText)
 		thrownError = e.message;
 	}
 	
-	var callRes = commonFunctionsFile.prepareInvalidResult(callComplete, thrownError);
-	commonFunctionsFile.testInvalidResult(callRes, eErrorText);
+	var callRes = commonFunctions.prepareInvalidResult(callComplete, thrownError);
+	commonFunctions.testInvalidResult(callRes, eErrorText);
 }
 
 

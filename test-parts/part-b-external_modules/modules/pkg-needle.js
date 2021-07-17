@@ -3,7 +3,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const ipStrings = require("../sub-modules/ip-strings");
 const needleData = require("../sub-modules/needle-data");
@@ -146,7 +146,7 @@ function verifyTimeoutRequest()
 
 function checkRequestReturn(replyObject)
 {
-	commonFunctionsFile.testPresent(replyObject);
+	commonFunctions.testPresent(replyObject);
 	expect(replyObject).to.be.an("object");
 	
 	validateCommonProperty(replyObject, "statusCode", "number");
@@ -159,7 +159,7 @@ function checkRequestReturn(replyObject)
 
 function checkReadOutcome(replyObject)
 {
-	commonFunctionsFile.testString(replyObject.body);
+	commonFunctions.testString(replyObject.body);
 	expect(replyObject.statusCode).to.equal(200);
 	expect(replyObject.req).to.have.deep.property("method", "GET");
 }
@@ -169,7 +169,7 @@ function checkModifyOutcome(replyObject, correctStatus, correctMethod)
 {
 	var outputObject = replyObject.body;
 	
-	commonFunctionsFile.testPresent(outputObject);
+	commonFunctions.testPresent(outputObject);
 	expect(outputObject).to.be.an("object");
 	expect(replyObject.statusCode).to.equal(correctStatus);
 	

@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const apiRequestScript = require(commonPaths.requestApi);
@@ -35,7 +35,7 @@ function handlePrepare()
 	{
 		it("Supported Models Retrieved", function(done)
 		{
-			commonFunctionsFile.testPresent(modelArray);
+			commonFunctions.testPresent(modelArray);
 			arrayFunctions.testPopulated(modelArray);
 			arrayFunctions.testAllType(modelArray, 'object');
 			
@@ -44,8 +44,8 @@ function handlePrepare()
 		
 		it("Create Device URL Written", function(done)
 		{
-			commonFunctionsFile.testPresent(deviceCreateUrl);
-			commonFunctionsFile.testString(deviceCreateUrl);
+			commonFunctions.testPresent(deviceCreateUrl);
+			commonFunctions.testString(deviceCreateUrl);
 			done();
 		});
 		
@@ -106,7 +106,7 @@ function addCurrentSupportedModel(baseModel)
 	
 	it("Model Object Defined", function(done)
 	{
-		preparedModel = commonFunctionsFile.cloneObject(commonJsonObjectsFile.testDevice);
+		preparedModel = commonFunctions.cloneObject(commonJsonObjectsFile.testDevice);
 		
 		preparedModel.maker = baseModel.maker;
 		preparedModel.model = baseModel.modelType;
@@ -134,8 +134,8 @@ function addCurrentSupportedModel(baseModel)
 		deviceCommon.testFrontendAdded(addRead);
 		deviceCommon.testFrontendIdValid(addRead.id);
 		
-		commonFunctionsFile.testPresent(addRead.id);
-		commonFunctionsFile.testString(addRead.id);
+		commonFunctions.testPresent(addRead.id);
+		commonFunctions.testString(addRead.id);
 		
 		newObjectID = addRead.id;
 		done();

@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const controllerRedSettingsFile = loadFoxFile(foxPath.redSettingsFile);
 
@@ -22,7 +22,7 @@ function checkSettingsFile()
 	{
 		it("Exists", function()
 		{
-			commonFunctionsFile.testPresent(controllerRedSettingsFile);
+			commonFunctions.testPresent(controllerRedSettingsFile);
 			expect(controllerRedSettingsFile).to.be.an("object");
 		});
 	});

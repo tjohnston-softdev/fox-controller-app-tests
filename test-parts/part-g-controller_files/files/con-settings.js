@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const controllerSettingsFile = loadFoxFile(foxPath.settingsFile);
@@ -27,7 +27,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctionsFile.testPresent(controllerSettingsFile);
+			commonFunctions.testPresent(controllerSettingsFile);
 		});
 	});
 }
@@ -60,31 +60,31 @@ function handlePathProperties()
 		it("User Storage Folder (userStoragePath)", function()
 		{
 			objectFunctions.testPropExists(controllerSettingsFile, 'userStoragePath');
-			commonFunctionsFile.testString(controllerSettingsFile.userStoragePath);
+			commonFunctions.testString(controllerSettingsFile.userStoragePath);
 		});
 		
 		it("Database Folder (dbsPath)", function()
 		{
 			objectFunctions.testPropExists(controllerSettingsFile, 'dbsPath');
-			commonFunctionsFile.testString(controllerSettingsFile.dbsPath);
+			commonFunctions.testString(controllerSettingsFile.dbsPath);
 		});
 		
 		it("Log Folder (logsPath)", function()
 		{
 			objectFunctions.testPropExists(controllerSettingsFile, 'logsPath');
-			commonFunctionsFile.testString(controllerSettingsFile.logsPath);
+			commonFunctions.testString(controllerSettingsFile.logsPath);
 		});
 		
 		it("Log File (logFile)", function()
 		{
 			objectFunctions.testPropExists(controllerSettingsFile, 'logFile');
-			commonFunctionsFile.testString(controllerSettingsFile.logFile);
+			commonFunctions.testString(controllerSettingsFile.logFile);
 		});
 		
 		it("Node RED Folder (flowsPath)", function()
 		{
 			objectFunctions.testPropExists(controllerSettingsFile, 'flowsPath');
-			commonFunctionsFile.testString(controllerSettingsFile.flowsPath);
+			commonFunctions.testString(controllerSettingsFile.flowsPath);
 		});
 		
 	});

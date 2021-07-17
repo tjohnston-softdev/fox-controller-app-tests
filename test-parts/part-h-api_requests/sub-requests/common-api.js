@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 const validator = require("validator");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 
@@ -229,7 +229,7 @@ function testAlarmStateFlags(objectArray)
 	for (loopIndex = 0; loopIndex < objectArray.length; loopIndex = loopIndex + 1)
 	{
 		currentAlarmObject = objectArray[loopIndex];
-		commonFunctionsFile.testBinary(currentAlarmObject.state);
+		commonFunctions.testBinary(currentAlarmObject.state);
 	}
 }
 

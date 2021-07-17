@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const sysPlatform = require(commonPaths.sysPlatform);
@@ -124,7 +124,7 @@ function handleFoxOfflinePlaceholder()
 	{
 		it("True", function(done)
 		{
-			commonFunctionsFile.testPlaceholder();
+			commonFunctions.testPlaceholder();
 			done();
 		});
 	});

@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestFile = require(commonPaths.requestApi);
 
@@ -42,12 +42,12 @@ function testAddModifyResultObjectProperties(returnedObject)
 function testAddModifyResultObjectContents(returnedObject)
 {	
 	expect(returnedObject.success).to.be.true;
-	commonFunctionsFile.testString(returnedObject.id);
+	commonFunctions.testString(returnedObject.id);
 }
 
 function testFrontendAddSuccessful(returnedObject)
 {
-	commonFunctionsFile.testPresent(returnedObject);
+	commonFunctions.testPresent(returnedObject);
 	expect(returnedObject).to.be.an("object");
 	testAddModifyResultObjectProperties(returnedObject);
 	testAddModifyResultObjectContents(returnedObject);
@@ -55,8 +55,8 @@ function testFrontendAddSuccessful(returnedObject)
 
 function testFrontendAddIdValid(returnedObjectID)
 {
-	commonFunctionsFile.testPresent(returnedObjectID);
-	commonFunctionsFile.testString(returnedObjectID);
+	commonFunctions.testPresent(returnedObjectID);
+	commonFunctions.testString(returnedObjectID);
 }
 
 

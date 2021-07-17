@@ -1,5 +1,5 @@
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const requestFile = require(commonPaths.requestApi);
 
 
@@ -19,8 +19,8 @@ function runRequestUrlInvalid(folderArg, fileArg, eError)
 		msg = e.message;
 	}
 	
-	var invalidUrlRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidResult(invalidUrlRes, eError);
+	var invalidUrlRes = commonFunctions.prepareInvalidResult(comp, msg);
+	commonFunctions.testInvalidResult(invalidUrlRes, eError);
 }
 
 function runReadResponseInvalidArray(invalidArg, eError)
@@ -39,8 +39,8 @@ function runReadResponseInvalidArray(invalidArg, eError)
 		msg = e.message;
 	}
 	
-	var invalidArrayRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidResult(invalidArrayRes, eError);
+	var invalidArrayRes = commonFunctions.prepareInvalidResult(comp, msg);
+	commonFunctions.testInvalidResult(invalidArrayRes, eError);
 }
 
 function runReadResponseInvalidObject(invalidArg, eError)
@@ -59,8 +59,8 @@ function runReadResponseInvalidObject(invalidArg, eError)
 		msg = e.message;
 	}
 	
-	var invalidObjectRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidResult(invalidObjectRes, eError);
+	var invalidObjectRes = commonFunctions.prepareInvalidResult(comp, msg);
+	commonFunctions.testInvalidResult(invalidObjectRes, eError);
 }
 
 function runReadResponseInvalidString(invalidArg, eError)
@@ -79,8 +79,8 @@ function runReadResponseInvalidString(invalidArg, eError)
 		msg = e.message;
 	}
 	
-	var invalidStringRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidResult(invalidStringRes, eError);
+	var invalidStringRes = commonFunctions.prepareInvalidResult(comp, msg);
+	commonFunctions.testInvalidResult(invalidStringRes, eError);
 }
 
 
@@ -100,8 +100,8 @@ function runReadResponseInvalidError(invalidArg, eError)
 		msg = e.message;
 	}
 	
-	var invalidRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidResult(invalidRes, eError);
+	var invalidRes = commonFunctions.prepareInvalidResult(comp, msg);
+	commonFunctions.testInvalidResult(invalidRes, eError);
 }
 
 
@@ -122,8 +122,8 @@ function runValidateResponseInvalid(invalidArg, eError)
 		msg = e.message;
 	}
 	
-	var invalidRes = commonFunctionsFile.prepareInvalidResult(comp, msg);
-	commonFunctionsFile.testInvalidResult(invalidRes, eError);
+	var invalidRes = commonFunctions.prepareInvalidResult(comp, msg);
+	commonFunctions.testInvalidResult(invalidRes, eError);
 }
 
 
@@ -145,8 +145,8 @@ function runRefuseError(refuseArg)
 		refMsg = e.message;
 	}
 	
-	var reResult = commonFunctionsFile.prepareInvalidResult(refComplete, refMsg);
-	commonFunctionsFile.testInvalidResult(reResult, supposedText);
+	var reResult = commonFunctions.prepareInvalidResult(refComplete, refMsg);
+	commonFunctions.testInvalidResult(reResult, supposedText);
 }
 
 
@@ -166,8 +166,8 @@ function runOptionError(deleteArg, eError)
 		oMessage = e.message;
 	}
 	
-	var oResult = commonFunctionsFile.prepareInvalidResult(oComplete, oMessage);
-	commonFunctionsFile.testInvalidResult(oResult, eError);	
+	var oResult = commonFunctions.prepareInvalidResult(oComplete, oMessage);
+	commonFunctions.testInvalidResult(oResult, eError);	
 }
 
 

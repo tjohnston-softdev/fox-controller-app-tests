@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const localValidFile = require(commonPaths.localValid);
 const nodeNames = require(commonPaths.nodeNames);
@@ -11,7 +11,7 @@ const nodeNames = require(commonPaths.nodeNames);
 
 function testNodeObjectArrayStructure(nodeObjArray)
 {
-	commonFunctionsFile.testPresent(nodeObjArray);
+	commonFunctions.testPresent(nodeObjArray);
 	expect(nodeObjArray).to.be.an("array");
 	arrayFunctions.testAllType(nodeObjArray, 'object');
 }
@@ -71,7 +71,7 @@ function testNodeManufacturerArray(nmArray)
 	for (stringIndex = 0; stringIndex < nmArray.length; stringIndex = stringIndex + 1)
 	{
 		currentElement = nmArray[stringIndex];
-		commonFunctionsFile.testString(currentElement);
+		commonFunctions.testString(currentElement);
 	}
 }
 

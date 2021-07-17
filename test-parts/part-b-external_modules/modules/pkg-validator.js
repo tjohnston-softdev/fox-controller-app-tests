@@ -2,7 +2,7 @@ const chai = require("chai");
 const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const ipStrings = require("../sub-modules/ip-strings");
 const validator = require("validator");
@@ -157,13 +157,13 @@ function verifyExceptions()
 		it("Invalid Type", function()
 		{
 			var invalidTypeRes = handleInvalidCall(-1);
-			commonFunctionsFile.testInvalidResult(invalidTypeRes, "Expected a string but received a number");
+			commonFunctions.testInvalidResult(invalidTypeRes, "Expected a string but received a number");
 		});
 		
 		it("Null", function()
 		{
 			var nullRes = handleInvalidCall(null);
-			commonFunctionsFile.testInvalidResult(nullRes, "Expected a string but received a null");
+			commonFunctions.testInvalidResult(nullRes, "Expected a string but received a null");
 		});
 	});
 }
@@ -186,7 +186,7 @@ function handleInvalidCall(invalidArg)
 		validationMessage = e.message;
 	}
 	
-	var res = commonFunctionsFile.prepareInvalidResult(validationComplete, validationMessage);
+	var res = commonFunctions.prepareInvalidResult(validationComplete, validationMessage);
 	return res;
 }
 

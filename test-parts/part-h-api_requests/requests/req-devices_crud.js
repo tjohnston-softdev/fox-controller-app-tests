@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
@@ -53,7 +53,7 @@ function handleSupportedModels()
 	{
 		it("Retrieved Successfully", function(done)
 		{
-			commonFunctionsFile.testPresent(modelObjectArray);
+			commonFunctions.testPresent(modelObjectArray);
 			arrayFunctions.testPopulated(modelObjectArray);
 			done();
 		});
@@ -97,7 +97,7 @@ function handleDeviceDefaultValues()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(defaultsRead);
+			commonFunctions.testPresent(defaultsRead);
 			expect(defaultsRead).to.be.an("object");
 			done();
 		});
@@ -213,7 +213,7 @@ function handleCreateDeviceTest()
 			
 			it("Object Returned", function(done)
 			{
-				commonFunctionsFile.testPresent(createRead);
+				commonFunctions.testPresent(createRead);
 				expect(createRead).to.be.an("object");
 				done();
 			});
@@ -233,8 +233,8 @@ function handleCreateDeviceTest()
 			
 			it("Test ID Retained", function(done)
 			{
-				commonFunctionsFile.testPresent(testID);
-				commonFunctionsFile.testString(testID);
+				commonFunctions.testPresent(testID);
+				commonFunctions.testString(testID);
 				done();
 			});
 			
@@ -309,7 +309,7 @@ function handleReadDeviceTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(deviceRead);
+			commonFunctions.testPresent(deviceRead);
 			expect(deviceRead).to.be.an("object");
 			done();
 		});
@@ -362,7 +362,7 @@ function handleDeviceStatusTest()
 		
 		it("Status Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(statusRead);
+			commonFunctions.testPresent(statusRead);
 			expect(statusRead).to.be.an("object");
 			done();
 		});
@@ -372,7 +372,7 @@ function handleDeviceStatusTest()
 			objectFunctions.testPropExists(statusRead, 'id');
 			objectFunctions.testPropExists(statusRead, 'isRunning');
 			
-			commonFunctionsFile.testString(statusRead.id);
+			commonFunctions.testString(statusRead.id);
 			expect(statusRead.isRunning).to.be.a("boolean");
 			
 			done();
@@ -406,7 +406,7 @@ function handleUpdateDeviceTest()
 		
 		it("Modification Defined", function(done)
 		{
-			modifyObject = commonFunctionsFile.cloneObject(commonJsonObjectsFile.modifiedDevice);
+			modifyObject = commonFunctions.cloneObject(commonJsonObjectsFile.modifiedDevice);
 			modifyObject.id = testID;
 			done();
 		});
@@ -427,7 +427,7 @@ function handleUpdateDeviceTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(modifyRead);
+			commonFunctions.testPresent(modifyRead);
 			expect(modifyRead).to.be.an("object");
 			done();
 		});
@@ -486,7 +486,7 @@ function handleUpdateReviewTest()
 		
 		it("Return Valid", function(done)
 		{
-			commonFunctionsFile.testPresent(reviewRead);
+			commonFunctions.testPresent(reviewRead);
 			expect(reviewRead).to.be.an("object");
 			
 			rioCommon.testDeviceObject(reviewRead);
@@ -529,7 +529,7 @@ function handleDeleteFlagTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(flagRead);
+			commonFunctions.testPresent(flagRead);
 			expect(flagRead).to.be.an("object");
 			done();
 		});
@@ -568,7 +568,7 @@ function handleDeleteObjectTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctionsFile.testPresent(deleteRead);
+			commonFunctions.testPresent(deleteRead);
 			expect(deleteRead).to.be.an("object");
 			done();
 		});

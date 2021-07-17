@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 const sysPlatform = require(commonPaths.sysPlatform);
@@ -78,7 +78,7 @@ function testDriveUsedObject(driveObj)
 
 function testDrivePercentageObject(percentObject)
 {
-	commonFunctionsFile.testPercent(percentObject.use);
+	commonFunctions.testPercent(percentObject.use);
 }
 
 function testDrivePropertiesArray(fsArray)

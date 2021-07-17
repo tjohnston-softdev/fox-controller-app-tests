@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
 const prefixIndexObject = require("../sub-settings/io-set-object");
 const settingsFile = loadFoxFile(foxPath.rioSettingsFile);
@@ -129,8 +129,8 @@ function parseIoPrefixInvalidCall(invalidArg, exceptMessage)
 		parseError = e.message;
 	}
 	
-	var parseRes = commonFunctionsFile.prepareInvalidResult(parseComplete, parseError);
-	commonFunctionsFile.testInvalidResult(parseRes, exceptMessage);
+	var parseRes = commonFunctions.prepareInvalidResult(parseComplete, parseError);
+	commonFunctions.testInvalidResult(parseRes, exceptMessage);
 }
 
 
@@ -150,8 +150,8 @@ function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 		parseError = e.message;
 	}
 	
-	var parseRes = commonFunctionsFile.prepareInvalidResult(parseComplete, parseError);
-	commonFunctionsFile.testInvalidResult(parseRes, exceptMessage);
+	var parseRes = commonFunctions.prepareInvalidResult(parseComplete, parseError);
+	commonFunctions.testInvalidResult(parseRes, exceptMessage);
 }
 
 

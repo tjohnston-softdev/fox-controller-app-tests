@@ -3,14 +3,14 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 
 
 function validateResponseBodyArray(resultObj)
 {	
-	commonFunctionsFile.testPresent(resultObj);
+	commonFunctions.testPresent(resultObj);
 	arrayFunctions.testPopulated(resultObj);
 	arrayFunctions.testAllType(resultObj, 'object');
 	
@@ -25,7 +25,7 @@ function validateResponseBodyArray(resultObj)
 
 function validateResponseBodyObject(resultObj)
 {
-	commonFunctionsFile.testPresent(resultObj);
+	commonFunctions.testPresent(resultObj);
 	expect(resultObj).to.be.an("object");
 			
 	objectFunctions.testPropExists(resultObj, 'exampleProperty');
@@ -44,7 +44,7 @@ function writeReplyErrorExample(rMessage)
 
 function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 {
-	commonFunctionsFile.testPresent(resultObj);
+	commonFunctions.testPresent(resultObj);
 	expect(resultObj).to.be.an("object");
 	
 	objectFunctions.testPropExists(resultObj, 'json');
@@ -59,7 +59,7 @@ function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 	objectFunctions.testPropType(resultObj.headers, 'content_type', 'string');
 	objectFunctions.testPropType(resultObj.headers, 'delete-permanently', 'boolean');
 	
-	commonFunctionsFile.testString(resultObj.headers['content_type']);
+	commonFunctions.testString(resultObj.headers['content_type']);
 	expect(resultObj.headers['delete-permanently']).to.equal(desiredPermFlag);
 }
 

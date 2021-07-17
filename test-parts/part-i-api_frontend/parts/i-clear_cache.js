@@ -4,7 +4,7 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
@@ -34,7 +34,7 @@ function handleClearCache()
 		
 		it("Cache Cleared Successfully", function(done)
 		{
-			commonFunctionsFile.testPresent(clearResult);
+			commonFunctions.testPresent(clearResult);
 			expect(clearResult).to.be.true;
 			done();
 		});

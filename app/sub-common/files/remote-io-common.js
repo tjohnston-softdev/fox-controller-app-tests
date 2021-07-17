@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 
@@ -84,12 +84,12 @@ function testNodeConfigObjectStructure(configObj)
 	objectFunctions.testPropExists(configObj, 'y');
 	objectFunctions.testPropExists(configObj, 'wires');
 	
-	commonFunctionsFile.testString(configObj.id);
-	commonFunctionsFile.testString(configObj.type);
-	commonFunctionsFile.testString(configObj.z);
+	commonFunctions.testString(configObj.id);
+	commonFunctions.testString(configObj.type);
+	commonFunctions.testString(configObj.z);
 	expect(configObj.name).to.be.a("string");
-	commonFunctionsFile.testString(configObj.deviceId);
-	commonFunctionsFile.testString(configObj.ioSetId);
+	commonFunctions.testString(configObj.deviceId);
+	commonFunctions.testString(configObj.ioSetId);
 	expect(configObj.x).to.be.a('number');
 	expect(configObj.y).to.be.a('number');
 	expect(configObj.wires).to.be.an("array");
@@ -128,19 +128,19 @@ function testDeviceIdListed(deviceArr, targetDeviceID)
 
 function testLocalDeviceArrayPopulated(locArr)
 {
-	commonFunctionsFile.testPresent(locArr);
+	commonFunctions.testPresent(locArr);
 	arrayFunctions.testPopulated(locArr);
 }
 
 function testLocalDeviceArrayEmpty(locArr)
 {
-	commonFunctionsFile.testPresent(locArr);
+	commonFunctions.testPresent(locArr);
 	arrayFunctions.testEmpty(locArr);
 }
 
 function testLocalDeviceArrayNeutral(locArr)
 {
-	commonFunctionsFile.testPresent(locArr);
+	commonFunctions.testPresent(locArr);
 	expect(locArr).to.be.an("array");
 }
 

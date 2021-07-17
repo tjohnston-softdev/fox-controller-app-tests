@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctionsFile = require(commonPaths.testCommon);
+const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const databaseFile = require(commonPaths.supportedDatabases);
@@ -53,7 +53,7 @@ function checkDefinitionObject()
 		it("Function Works", function()
 		{
 			definitionArray = databaseFile.getSupportedDatabases();
-			commonFunctionsFile.testPresent(definitionArray);
+			commonFunctions.testPresent(definitionArray);
 		});
 		
 		it("Correct Return Structure", function()
@@ -93,7 +93,7 @@ function testDefinitionNames(dArray)
 	for (loopIndex = 0; loopIndex < dArray.length; loopIndex = loopIndex + 1)
 	{
 		currentObject = dArray[loopIndex];
-		commonFunctionsFile.testString(currentObject.dbName);
+		commonFunctions.testString(currentObject.dbName);
 	}
 }
 
