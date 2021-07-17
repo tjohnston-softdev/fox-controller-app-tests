@@ -63,20 +63,20 @@ function handleFileList()
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(fileListRead, 'name');
-			commonFunctionsFile.testPropertyDefinitions(fileListRead, 'size');
-			commonFunctionsFile.testPropertyDefinitions(fileListRead, 'isDirectory');
-			commonFunctionsFile.testPropertyDefinitions(fileListRead, 'modified');
-			commonFunctionsFile.testPropertyDefinitions(fileListRead, 'created');
+			arrayFunctions.testAllPropExists(fileListRead, 'name');
+			arrayFunctions.testAllPropExists(fileListRead, 'size');
+			arrayFunctions.testAllPropExists(fileListRead, 'isDirectory');
+			arrayFunctions.testAllPropExists(fileListRead, 'modified');
+			arrayFunctions.testAllPropExists(fileListRead, 'created');
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testPropertyContents(fileListRead, 'name', 'string');
-			commonFunctionsFile.testPropertyContents(fileListRead, 'size', 'number');
-			commonFunctionsFile.testPropertyContents(fileListRead, 'isDirectory', 'boolean');
-			commonFunctionsFile.testPropertyContents(fileListRead, 'modified', 'number');
-			commonFunctionsFile.testPropertyContents(fileListRead, 'created', 'number');
+			arrayFunctions.testAllPropType(fileListRead, 'name', 'string');
+			arrayFunctions.testAllPropType(fileListRead, 'size', 'number');
+			arrayFunctions.testAllPropType(fileListRead, 'isDirectory', 'boolean');
+			arrayFunctions.testAllPropType(fileListRead, 'modified', 'number');
+			arrayFunctions.testAllPropType(fileListRead, 'created', 'number');
 			
 			apiCommonFile.testFileNames(fileListRead, 'name');
 			apiCommonFile.testZeroLeastNumbers(fileListRead, 'size');

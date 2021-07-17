@@ -75,8 +75,8 @@ function checkManufacturerArrayRead(modelArr)
 		
 		it("Model Types Defined", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(modelArr, 'modelType');
-			commonFunctionsFile.testPropertyContents(modelArr, 'modelType', 'string');
+			arrayFunctions.testAllPropExists(modelArr, 'modelType');
+			arrayFunctions.testAllPropType(modelArr, 'modelType', 'string');
 		});
 	});
 }
@@ -142,13 +142,13 @@ function checkIoConfigArrayProperty(modelObj)
 		
 		it("Object Structures Valid", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(modelObj.ioConfigs, 'ioType');
-			commonFunctionsFile.testPropertyDefinitions(modelObj.ioConfigs, 'ioPrefix');
-			commonFunctionsFile.testPropertyDefinitions(modelObj.ioConfigs, 'length');
+			arrayFunctions.testAllPropExists(modelObj.ioConfigs, 'ioType');
+			arrayFunctions.testAllPropExists(modelObj.ioConfigs, 'ioPrefix');
+			arrayFunctions.testAllPropExists(modelObj.ioConfigs, 'length');
 			
-			commonFunctionsFile.testPropertyContents(modelObj.ioConfigs, 'ioType', 'string');
-			commonFunctionsFile.testPropertyContents(modelObj.ioConfigs, 'ioPrefix', 'string');
-			commonFunctionsFile.testPropertyContents(modelObj.ioConfigs, 'length', 'number');
+			arrayFunctions.testAllPropType(modelObj.ioConfigs, 'ioType', 'string');
+			arrayFunctions.testAllPropType(modelObj.ioConfigs, 'ioPrefix', 'string');
+			arrayFunctions.testAllPropType(modelObj.ioConfigs, 'length', 'number');
 		});
 		
 		it("IO Type Referental Integrity", function()

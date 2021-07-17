@@ -64,16 +64,16 @@ function checkDefinitionObject()
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(definitionArray, 'dbName');
-			commonFunctionsFile.testPropertyDefinitions(definitionArray, 'folder');
-			commonFunctionsFile.testPropertyDefinitions(definitionArray, 'cleanSize');
+			arrayFunctions.testAllPropExists(definitionArray, 'dbName');
+			arrayFunctions.testAllPropExists(definitionArray, 'folder');
+			arrayFunctions.testAllPropExists(definitionArray, 'cleanSize');
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testPropertyContents(definitionArray, 'dbName', 'string');
-			commonFunctionsFile.testPropertyContents(definitionArray, 'folder', 'boolean');
-			commonFunctionsFile.testPropertyContents(definitionArray, 'cleanSize', 'number');
+			arrayFunctions.testAllPropType(definitionArray, 'dbName', 'string');
+			arrayFunctions.testAllPropType(definitionArray, 'folder', 'boolean');
+			arrayFunctions.testAllPropType(definitionArray, 'cleanSize', 'number');
 			
 			testDefinitionNames(definitionArray);
 			testDefinitionSizes(definitionArray);

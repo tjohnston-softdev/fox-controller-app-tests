@@ -19,16 +19,16 @@ function testNodeObjectArrayStructure(nodeObjArray)
 
 function testNodeObjectArrayProperties(nodeObjArray)
 {
-	commonFunctionsFile.testPropertyDefinitions(nodeObjArray, 'value');
-	commonFunctionsFile.testPropertyDefinitions(nodeObjArray, 'text');
-	commonFunctionsFile.testPropertyDefinitions(nodeObjArray, 'name');
+	arrayFunctions.testAllPropExists(nodeObjArray, 'value');
+	arrayFunctions.testAllPropExists(nodeObjArray, 'text');
+	arrayFunctions.testAllPropExists(nodeObjArray, 'name');
 }
 
 function testNodeObjectArrayContents(nodeObjArray)
 {
-	commonFunctionsFile.testPropertyContents(nodeObjArray, 'value', 'string');
-	commonFunctionsFile.testPropertyContents(nodeObjArray, 'text', 'string');
-	commonFunctionsFile.testPropertyContents(nodeObjArray, 'name', 'string');
+	arrayFunctions.testAllPropType(nodeObjArray, 'value', 'string');
+	arrayFunctions.testAllPropType(nodeObjArray, 'text', 'string');
+	arrayFunctions.testAllPropType(nodeObjArray, 'name', 'string');
 }
 
 
@@ -78,11 +78,11 @@ function testNodeManufacturerArray(nmArray)
 
 function testStatusControlArrayStructure(structureObj)
 {
-	commonFunctionsFile.testPropertyDefinitions(structureObj, 'value');
-	commonFunctionsFile.testPropertyDefinitions(structureObj, 'text');
+	arrayFunctions.testAllPropExists(structureObj, 'value');
+	arrayFunctions.testAllPropExists(structureObj, 'text');
 	
-	commonFunctionsFile.testPropertyContents(structureObj, 'value', 'string');
-	commonFunctionsFile.testPropertyContents(structureObj, 'text', 'string');
+	arrayFunctions.testAllPropType(structureObj, 'value', 'string');
+	arrayFunctions.testAllPropType(structureObj, 'text', 'string');
 }
 
 function testStatusControlArraySyntax(structureObj)

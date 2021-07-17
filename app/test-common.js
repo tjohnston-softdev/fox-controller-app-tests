@@ -58,40 +58,6 @@ function checkPropertySearchValues(aDef, pName, srcObject)
 }
 
 
-function checkPropertyDefinitions(aDef, pName)
-{
-	expect(aDef).to.all.have.property(pName);
-}
-
-function checkPropertyContents(aDef, pName, pType)
-{
-	var oInd = 0;
-	var currentObject = null;
-	var currentVal = null;
-	
-	while (oInd >= 0 && oInd < aDef.length && aDef != null)
-	{
-		currentObject = aDef[oInd];
-		currentVal = currentObject[pName];
-		expect(currentVal).to.be.a(pType).and.is.not.null.and.is.not.undefined;
-		oInd = oInd + 1;
-	}
-}
-
-function checkPropertyAbsentDefinitions(aDef, pName)
-{
-	var arrayElementInd = 0;
-	var currentElementObject = null;
-	
-	while (arrayElementInd >= 0 && arrayElementInd < aDef.length && aDef !== null)
-	{
-		currentElementObject = aDef[arrayElementInd];
-		expect(currentElementObject).to.not.have.property(pName);
-		arrayElementInd = arrayElementInd + 1;
-	}
-}
-
-
 function checkPropertyStringRequiredObject(oDef, pRequired)
 {
 	var currentVal = oDef[pRequired];
@@ -182,15 +148,14 @@ module.exports =
 	//testObjectMatchKVInsensitive: checkObjectMatchKVInsensitive,
 	//testBothObjectsSameProperties: checkBothObjectsSameProperties,
 	//testBothObjectsHaveSamePropertyValue: checkBothObjectsHaveSamePropertyValue,
-	
 	//testObjectPropertyDefinition: checkObjectPropertyDefinition,
 	//testObjectPropertyContent: checkObjectPropertyContent,
 	//testObjectPropertyAbsent: checkObjectPropertyAbsent,
 	testObjectSearchValue: checkObjectSearchValue,
 	testPropertySearchValues: checkPropertySearchValues,
-	testPropertyDefinitions: checkPropertyDefinitions,
-	testPropertyContents: checkPropertyContents,
-	testPropertyAbsentDefinitions: checkPropertyAbsentDefinitions,
+	//testPropertyDefinitions: checkPropertyDefinitions,
+	//testPropertyContents: checkPropertyContents,
+	//testPropertyAbsentDefinitions: checkPropertyAbsentDefinitions,
 	testPropertyStringRequiredObject: checkPropertyStringRequiredObject,
 	testPropertyStringRequiredArray: checkPropertyStringRequiredArray,
 	testInvalidFunctionResult: checkInvalidFunctionResult,

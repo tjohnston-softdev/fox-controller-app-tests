@@ -14,13 +14,13 @@ function validateResponseBodyArray(resultObj)
 	commonFunctionsFile.testPopulated(resultObj);
 	commonFunctionsFile.testAllType(resultObj, 'object');
 	
-	commonFunctionsFile.testPropertyDefinitions(resultObj, 'value');
-	commonFunctionsFile.testPropertyDefinitions(resultObj, 'text');
-	commonFunctionsFile.testPropertyDefinitions(resultObj, 'name');
+	arrayFunctions.testAllPropExists(resultObj, 'value');
+	arrayFunctions.testAllPropExists(resultObj, 'text');
+	arrayFunctions.testAllPropExists(resultObj, 'name');
 			
-	commonFunctionsFile.testPropertyContents(resultObj, 'value', 'string');
-	commonFunctionsFile.testPropertyContents(resultObj, 'text', 'string');
-	commonFunctionsFile.testPropertyContents(resultObj, 'name', 'string');
+	arrayFunctions.testAllPropType(resultObj, 'value', 'string');
+	arrayFunctions.testAllPropType(resultObj, 'text', 'string');
+	arrayFunctions.testAllPropType(resultObj, 'name', 'string');
 }
 
 function validateResponseBodyObject(resultObj)

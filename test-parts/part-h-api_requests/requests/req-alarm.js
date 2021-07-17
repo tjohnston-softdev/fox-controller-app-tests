@@ -53,18 +53,18 @@ function handleList()
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(listRead, 'ts');
-			commonFunctionsFile.testPropertyDefinitions(listRead, 'nodeId');
-			commonFunctionsFile.testPropertyDefinitions(listRead, 'state');
-			commonFunctionsFile.testPropertyDefinitions(listRead, 'name');
+			arrayFunctions.testAllPropExists(listRead, 'ts');
+			arrayFunctions.testAllPropExists(listRead, 'nodeId');
+			arrayFunctions.testAllPropExists(listRead, 'state');
+			arrayFunctions.testAllPropExists(listRead, 'name');
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testPropertyContents(listRead, 'ts', 'number');
-			commonFunctionsFile.testPropertyContents(listRead, 'nodeId', 'string');
-			commonFunctionsFile.testPropertyContents(listRead, 'state', 'number');
-			commonFunctionsFile.testPropertyContents(listRead, 'name', 'string');
+			arrayFunctions.testAllPropType(listRead, 'ts', 'number');
+			arrayFunctions.testAllPropType(listRead, 'nodeId', 'string');
+			arrayFunctions.testAllPropType(listRead, 'state', 'number');
+			arrayFunctions.testAllPropType(listRead, 'name', 'string');
 			
 			apiCommonFile.testPositiveNumberArray(listRead, 'ts');
 			commonFunctionsFile.testPropertyStringRequiredArray(listRead, 'nodeId');
@@ -108,11 +108,11 @@ function handleAvailable()
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'id');
-			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'name');
-			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'okText');
-			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'alarmText');
-			commonFunctionsFile.testPropertyDefinitions(retrievedData, 'alarmColor');
+			arrayFunctions.testAllPropExists(retrievedData, 'id');
+			arrayFunctions.testAllPropExists(retrievedData, 'name');
+			arrayFunctions.testAllPropExists(retrievedData, 'okText');
+			arrayFunctions.testAllPropExists(retrievedData, 'alarmText');
+			arrayFunctions.testAllPropExists(retrievedData, 'alarmColor');
 		});
 		
 		it("Correct Contents", function()

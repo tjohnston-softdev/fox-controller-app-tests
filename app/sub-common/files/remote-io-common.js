@@ -98,11 +98,11 @@ function testNodeConfigObjectStructure(configObj)
 
 function testPropertyArrayStructure(pArr)
 {	
-	commonFunctionsFile.testPropertyDefinitions(pArr, 'value');
-	commonFunctionsFile.testPropertyDefinitions(pArr, 'text');
+	arrayFunctions.testAllPropExists(pArr, 'value');
+	arrayFunctions.testAllPropExists(pArr, 'text');
 	
-	commonFunctionsFile.testPropertyContents(pArr, 'value', 'string');
-	commonFunctionsFile.testPropertyContents(pArr, 'text', 'string');
+	arrayFunctions.testAllPropType(pArr, 'value', 'string');
+	arrayFunctions.testAllPropType(pArr, 'text', 'string');
 }
 
 function testDeviceIdListed(deviceArr, targetDeviceID)

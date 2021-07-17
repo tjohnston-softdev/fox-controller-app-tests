@@ -255,7 +255,7 @@ function handleFileSystem()
 		
 		it("Drive Type (fsSize.type)", function()
 		{
-			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'type', 'string');
+			arrayFunctions.testAllPropType(healthObject.fsSize, 'type', 'string');
 		});
 		
 		it("Drive Size (fsSize.size)", function()
@@ -265,19 +265,19 @@ function handleFileSystem()
 		
 		it("Amount Used (fsSize.used)", function()
 		{
-			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'used', 'number');
+			arrayFunctions.testAllPropType(healthObject.fsSize, 'used', 'number');
 			commonStorage.testUsedArray(healthObject.fsSize);
 		});
 		
 		it("Used Percentage (fsSize.use)", function()
 		{
-			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'use', 'number');
+			arrayFunctions.testAllPropType(healthObject.fsSize, 'use', 'number');
 			commonStorage.testPercentagesArray(healthObject.fsSize);
 		});
 		
 		it("Mount (fsSize.mount)", function()
 		{
-			commonFunctionsFile.testPropertyContents(healthObject.fsSize, 'mount', 'string');
+			arrayFunctions.testAllPropType(healthObject.fsSize, 'mount', 'string');
 			commonStorage.testMountArray(healthObject.fsSize);
 		});
 		
@@ -328,28 +328,28 @@ function handleNetwork()
 		
 		it("Interface Name (networkInterfaces.iface)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'iface');
-			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'iface', 'string');
+			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'iface');
+			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'iface', 'string');
 		});
 		
 		it("IP Address v4 (networkInterfaces.ip4)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'ip4');
-			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'ip4', 'string');
+			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'ip4');
+			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'ip4', 'string');
 			commonApi.testArrayIpFour(healthObject.networkInterfaces, 'ip4', true);
 		});
 		
 		it("IP Address v6 (networkInterfaces.ip6)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'ip6');
-			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'ip6', 'string');
+			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'ip6');
+			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'ip6', 'string');
 			commonApi.testArrayIpSix(healthObject.networkInterfaces, 'ip6', true);
 		});
 		
 		it("MAC Address (networkInterfaces.mac)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.networkInterfaces, 'mac');
-			commonFunctionsFile.testPropertyContents(healthObject.networkInterfaces, 'mac', 'string');
+			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'mac');
+			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'mac', 'string');
 			commonApi.testArrayMac(healthObject.networkInterfaces, 'mac', true);
 		});
 		
@@ -376,36 +376,36 @@ function handleDatabase()
 		
 		it("Database Name (databaseSize.name)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'name');
-			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'name', 'string');
+			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'name');
+			arrayFunctions.testAllPropType(healthObject.databaseSize, 'name', 'string');
 			commonDatabase.testNames(healthObject.databaseSize);
 		});
 		
 		it("Database Size (databaseSize.size)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'size');
-			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'size', 'number');
+			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'size');
+			arrayFunctions.testAllPropType(healthObject.databaseSize, 'size', 'number');
 			commonDatabase.testSizesEmpty(healthObject.databaseSize);
 		});
 		
 		it("Directory Flag (databaseSize.isDirectory)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'isDirectory');
-			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'isDirectory', 'boolean');
+			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'isDirectory');
+			arrayFunctions.testAllPropType(healthObject.databaseSize, 'isDirectory', 'boolean');
 			commonDatabase.testFolderFlags(healthObject.databaseSize);
 		});
 		
 		it("Modified (databaseSize.modified)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'modified');
-			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'modified', 'number');
+			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'modified');
+			arrayFunctions.testAllPropType(healthObject.databaseSize, 'modified', 'number');
 			commonApi.testPositiveNumberArray(healthObject.databaseSize, 'modified');
 		});
 		
 		it("Created (databaseSize.created)", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(healthObject.databaseSize, 'created');
-			commonFunctionsFile.testPropertyContents(healthObject.databaseSize, 'created', 'number');
+			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'created');
+			arrayFunctions.testAllPropType(healthObject.databaseSize, 'created', 'number');
 			commonApi.testPositiveNumberArray(healthObject.databaseSize, 'created');
 		});
 		
@@ -477,7 +477,7 @@ function handleLog()
 
 function testDriveLetter(fsObject)
 {
-	commonFunctionsFile.testPropertyContents(fsObject, 'fs', 'string');
+	arrayFunctions.testAllPropType(fsObject, 'fs', 'string');
 	commonStorage.testLettersArray(fsObject);
 }
 

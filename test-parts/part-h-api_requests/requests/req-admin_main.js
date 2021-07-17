@@ -56,20 +56,20 @@ function handleDhcpClients()
 		
 		it("Correct Properties", function()
 		{
-			commonFunctionsFile.testPropertyDefinitions(dhcpRead, 'leaseExpiry');
-			commonFunctionsFile.testPropertyDefinitions(dhcpRead, 'mac');
-			commonFunctionsFile.testPropertyDefinitions(dhcpRead, 'ipAddress');
-			commonFunctionsFile.testPropertyDefinitions(dhcpRead, 'host');
-			commonFunctionsFile.testPropertyDefinitions(dhcpRead, 'shortMac');
+			arrayFunctions.testAllPropExists(dhcpRead, 'leaseExpiry');
+			arrayFunctions.testAllPropExists(dhcpRead, 'mac');
+			arrayFunctions.testAllPropExists(dhcpRead, 'ipAddress');
+			arrayFunctions.testAllPropExists(dhcpRead, 'host');
+			arrayFunctions.testAllPropExists(dhcpRead, 'shortMac');
 		});
 		
 		it("Correct Contents", function()
 		{
-			commonFunctionsFile.testPropertyContents(dhcpRead, 'leaseExpiry', 'number');
-			commonFunctionsFile.testPropertyContents(dhcpRead, 'mac', 'string');
-			commonFunctionsFile.testPropertyContents(dhcpRead, 'ipAddress', 'string');
-			commonFunctionsFile.testPropertyContents(dhcpRead, 'host', 'string');
-			commonFunctionsFile.testPropertyContents(dhcpRead, 'shortMac', 'string');
+			arrayFunctions.testAllPropType(dhcpRead, 'leaseExpiry', 'number');
+			arrayFunctions.testAllPropType(dhcpRead, 'mac', 'string');
+			arrayFunctions.testAllPropType(dhcpRead, 'ipAddress', 'string');
+			arrayFunctions.testAllPropType(dhcpRead, 'host', 'string');
+			arrayFunctions.testAllPropType(dhcpRead, 'shortMac', 'string');
 			
 			apiCommonFile.testArrayDhcpLeaseExpire(dhcpRead);
 			apiCommonFile.testDhcpMacLong(dhcpRead, false);

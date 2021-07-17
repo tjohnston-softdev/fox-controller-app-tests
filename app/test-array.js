@@ -1,5 +1,7 @@
 const chai = require("chai");
 const expect = require("chai").expect;
+const chaiThings = require('chai-things');
+chai.use(chaiThings);
 
 function checkPopulated(arrDef)
 {
@@ -41,8 +43,42 @@ function checkAllType(arrDef, eType)
 		currentObject = arrDef[objectInd];
 		expect(currentObject).to.be.an(eType);
 		objectInd = objectInd + 1;
-	}
+	}	
+}
+
+
+function checkAllPropExists(aDef, pName)
+{
+	expect(aDef).to.all.have.property(pName);
+}
+
+
+function checkAllPropType(aDef, pName, pType)
+{
+	var oInd = 0;
+	var currentObject = null;
+	var currentVal = null;
 	
+	while (oInd >= 0 && oInd < aDef.length && aDef != null)
+	{
+		currentObject = aDef[oInd];
+		currentVal = currentObject[pName];
+		expect(currentVal).to.be.a(pType).and.is.not.null.and.is.not.undefined;
+		oInd = oInd + 1;
+	}
+}
+
+function checkAllPropAbsent(aDef, pName)
+{
+	var arrayElementInd = 0;
+	var currentElementObject = null;
+	
+	while (arrayElementInd >= 0 && arrayElementInd < aDef.length && aDef !== null)
+	{
+		currentElementObject = aDef[arrayElementInd];
+		expect(currentElementObject).to.not.have.property(pName);
+		arrayElementInd = arrayElementInd + 1;
+	}
 }
 
 
@@ -51,5 +87,8 @@ module.exports =
 	testPopulated: checkPopulated,
 	testEmpty: checkEmpty,
 	testDynamic: checkDynamic,
-	testAllType: checkAllType
+	testAllType: checkAllType,
+	testAllPropExists: checkAllPropExists,
+	testAllPropType: checkAllPropType,
+	testAllPropAbsent: checkAllPropAbsent
 };
