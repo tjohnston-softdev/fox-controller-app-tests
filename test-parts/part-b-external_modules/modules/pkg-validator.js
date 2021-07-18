@@ -13,9 +13,9 @@ function testValidatorDependency()
 	describe("Validator", function()
 	{
 		verifyFunctionsExist();
-		verifyIpAddressVerFour();
-		verifyIpAddressVerSix();
-		verifyMacAddressFunction();
+		verifyIpAddressFour();
+		verifyIpAddressSix();
+		verifyMacAddress();
 		verifyExceptions();
 	});
 	
@@ -44,7 +44,7 @@ function verifyFunctionsExist()
 }
 
 
-function verifyIpAddressVerFour()
+function verifyIpAddressFour()
 {
 	var validResult = false;
 	var emptyResult = false;
@@ -77,7 +77,7 @@ function verifyIpAddressVerFour()
 
 
 
-function verifyIpAddressVerSix()
+function verifyIpAddressSix()
 {
 	var validString = "1234:5678:9ABC:DEF:0000:0000:0000:0001";
 	var loopbackString = "::1";
@@ -119,7 +119,7 @@ function verifyIpAddressVerSix()
 }
 
 
-function verifyMacAddressFunction()
+function verifyMacAddress()
 {
 	var macValid = "00-14-22-01-23-45";
 	var macInvalid = "Invalid MAC";
