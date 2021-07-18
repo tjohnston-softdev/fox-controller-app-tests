@@ -6,9 +6,9 @@ function coordinateExternal()
 {
 	describe("B - External Modules", function()
 	{
-		//operatingSystemTests();
+		operatingSystemTests();
 		validatorTests();
-		//needleTests();
+		needleTests();
 	});
 }
 
