@@ -13,13 +13,13 @@ function testRequestOther()
 {
 	describe("API Request - Other", function()
 	{
-		checkRandomIp();
+		checkRandomIpAddress();
 		checkDeleteOptionsObject();
 	});
 }
 
 
-function checkRandomIp()
+function checkRandomIpAddress()
 {
 	describe("Generate Random IP (generateIpAddress)", function()
 	{
