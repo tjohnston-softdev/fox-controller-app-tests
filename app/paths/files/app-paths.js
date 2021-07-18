@@ -2,6 +2,7 @@ function defineAppPaths()
 {
 	var appRoot = "../../../app/";
 	var subCommonFolder = appRoot + "sub-common/files/";
+	var validatorFolder = appRoot + "validator/";
 	var defineRes = {};
 	
 	defineRes["foxRelative"] = appRoot + "paths/files/fox-paths";
@@ -27,6 +28,9 @@ function defineAppPaths()
 	defineRes["loadFox"] = subCommonFolder + "load-fox-file";
 	defineRes["sysPlatform"] = subCommonFolder + "sys-platform";
 	defineRes["nodeNames"] = subCommonFolder + "node-names";
+	
+	defineRes["validatorIP"] = validatorFolder + "isIP";
+	defineRes["validatorMAC"] = validatorFolder + "isMACAddress";
 	
 	return defineRes;
 }

@@ -5,7 +5,8 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const ipStrings = require("../sub-modules/ip-strings");
-const validator = require("validator");
+const isIP = require(commonPaths.validatorIP);
+const isMACAddress = require(commonPaths.validatorMAC);
 
 function testValidatorDependency()
 {
@@ -29,14 +30,14 @@ function verifyFunctionsExist()
 	{
 		it("IP Address (isIP)", function()
 		{
-			objectFunctions.testPropExists(validator, 'isIP');
-			objectFunctions.testPropType(validator, 'isIP', 'function');
+			commonFunctions.testPresent(isIP);
+			expect(isIP).to.be.a("function");
 		});
 		
 		it("MAC Address (isMACAddress)", function()
 		{
-			objectFunctions.testPropExists(validator, 'isMACAddress');
-			objectFunctions.testPropType(validator, 'isMACAddress', 'function');
+			commonFunctions.testPresent(isMACAddress);
+			expect(isMACAddress).to.be.a("function");
 		});
 		
 	});
@@ -54,20 +55,20 @@ function verifyIpAddressVerFour()
 		
 		it("Valid Format", function()
 		{
-			validResult = validator.isIP(ipStrings.testString, 4);
+			validResult = isIP(ipStrings.testString, 4);
 			expect(validResult).to.be.true;
 		});
 		
 		it("Empty", function()
 		{
-			emptyResult = validator.isIP("", 4);
+			emptyResult = isIP("", 4);
 			expect(emptyResult).to.be.false;
 		});
 		
 		
 		it("Invalid Format", function()
 		{
-			invalidResult = validator.isIP(ipStrings.invalidString, 4);
+			invalidResult = isIP(ipStrings.invalidString, 4);
 			expect(invalidResult).to.be.false;
 		});
 		
@@ -91,26 +92,26 @@ function verifyIpAddressVerSix()
 	{	
 		it("Valid Format", function()
 		{
-			validResult = validator.isIP(validString, 6);
+			validResult = isIP(validString, 6);
 			expect(validResult).to.be.true;
 		});
 		
 		it("Loopback", function()
 		{
-			loopbackResult = validator.isIP(loopbackString, 6);
+			loopbackResult = isIP(loopbackString, 6);
 			expect(loopbackResult).to.be.true;
 		});
 		
 		it("Empty", function()
 		{
-			emptyResult = validator.isIP("", 6);
+			emptyResult = isIP("", 6);
 			expect(emptyResult).to.be.false;
 		});
 		
 		
 		it("Invalid Format", function()
 		{
-			invalidResult = validator.isIP(invalidString, 6);
+			invalidResult = isIP(invalidString, 6);
 			expect(invalidResult).to.be.false;
 		});
 		
@@ -127,20 +128,20 @@ function verifyMacAddressFunction()
 	{
 		it("Valid Format", function()
 		{
-			var validResult = validator.isMACAddress(macValid);
+			var validResult = isMACAddress(macValid);
 			expect(validResult).to.be.true;
 		});
 		
 		it("Empty", function()
 		{
-			var emptyResult = validator.isMACAddress("");
+			var emptyResult = isMACAddress("");
 			expect(emptyResult).to.be.false;
 		});
 		
 		
 		it("Invalid Format", function()
 		{
-			var invalidResult = validator.isMACAddress(macInvalid);
+			var invalidResult = isMACAddress(macInvalid);
 			expect(invalidResult).to.be.false;
 		});
 		
@@ -177,7 +178,7 @@ function handleInvalidCall(invalidArg)
 	
 	try
 	{
-		validator.isIP(invalidArg);
+		isIP(invalidArg);
 		validationComplete = true;
 	}
 	catch(e)

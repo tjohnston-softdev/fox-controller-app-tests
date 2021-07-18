@@ -1,6 +1,5 @@
 const chai = require("chai");
 const expect = require("chai").expect;
-const validator = require("validator");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
@@ -8,6 +7,7 @@ const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
 const commonRequestFunctions = require("../sub-scripts/common-request");
 const requestInvalid = require("../sub-scripts/request-invalid");
+const isIP = require(commonPaths.validatorIP);
 
 function testRequestOther()
 {
@@ -34,7 +34,7 @@ function checkRandomIp()
 			var randIP = requestFile.generateIpAddress();
 			var ipValid = false;
 			commonFunctions.testString(randIP);
-			ipValid = validator.isIP(randIP, 4);
+			ipValid = isIP(randIP, 4);
 			expect(ipValid).to.be.true;
 		});
 		

@@ -1,12 +1,14 @@
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
-const validator = require("validator");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
+
+const isIP = require(commonPaths.validatorIP);
+const isMACAddress = require(commonPaths.validatorMAC);
 
 
 function testArrayIpFourValue(objectArray, ipProp, ipEmptyAllowed)
@@ -24,7 +26,7 @@ function testArrayIpFourValue(objectArray, ipProp, ipEmptyAllowed)
 		
 		if (currentIP.length > 0)
 		{
-			currentValid = validator.isIP(currentIP, 4);
+			currentValid = isIP(currentIP, 4);
 		}
 		else if (ipEmptyAllowed === true)
 		{
@@ -58,7 +60,7 @@ function testArrayIpSixValue(objectArray, ipProp, ipEmptyAllowed)
 		}
 		else if (currentIP.length > 0)
 		{
-			currentValid = validator.isIP(currentIP, 6);
+			currentValid = isIP(currentIP, 6);
 		}
 		else if (ipEmptyAllowed === true)
 		{
@@ -89,7 +91,7 @@ function testArrayMacValue(objectArray, macProp, macEmptyAllowed)
 		
 		if (currentMac.length > 0)
 		{
-			currentValid = validator.isMACAddress(currentMac);
+			currentValid = isMACAddress(currentMac);
 		}
 		else if (currentMac === "" && macEmptyAllowed === true)
 		{
