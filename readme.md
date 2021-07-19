@@ -21,7 +21,7 @@ As of April 2021, I have decided to clean up my work with Optim. I spent a coupl
 
 On the 26th of April, I publicly released both the emulator and the original test program. Coincidently enough, this was exactly three years since I first made contact with Optim Controls.
 
-I will be cleaning and revising the test script in the coming months. Once I feel that is ready, I will release an updated version.
+A revised version of the test script was released on 19 July 2021.
 
 ---
 
