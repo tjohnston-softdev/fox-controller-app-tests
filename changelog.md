@@ -1,4 +1,4 @@
 # Changelog
 
-**./test-parts/part-b-external_modules/external-main.js**
-* Uncommented calls
+**./test/fox-test-main.js**
+* 'debug' mode now runs "Part A - Common Data"
