@@ -1,5 +1,6 @@
 # FOX Controller Unit Testing
-This is a Node JS application which is used to perform unit testing on a software prototype I helped develop as an employee of [Optim Controls](https://www.optimcontrols.com.au/home) during late-2018. It has the ability to test both the individual script files and the online API endpoints.
+
+This is a Node JS application which is used to perform unit testing on a software prototype I helped develop as an employee of [ControlX Engineering](https://www.controlxengineering.com.au/) during late-2018, when the company was known as 'Optim Controls'. It has the ability to test both the individual script files and the online API endpoints.
 
 ---
 
@@ -28,4 +29,3 @@ A revised version of the test script was released on 19 July 2021.
 ## Disclaimer
 
 The FOX Controller test script is licensed under MIT. This means that anyone may use or modify this project as they see fit as long as the copyright notice is intact and that appropriate credit is given.
-
