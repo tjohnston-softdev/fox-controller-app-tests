@@ -1,7 +1,11 @@
 # Changelog
 
 **./readme.md**
-* Added blank line after the main heading.
-* Changed 'Optim Controls' to 'ControlX Engineering'
-	* Updated link to website.
-	* Clarified that 'Optim Controls' was the name of the company at the time.
+* Rewrote opening paragraph for better clarity.
+* Moved PLC Wikipedia link from 'Background' to opening paragraph.
+	* Replaced with italics.
+* Added "the" and "of" to "last contribution [...] December" sentence.
+* Added blank lines below headings:
+	* Background
+	* Further Development
+* Added 're-branded release' announcement to 'Further Development'
