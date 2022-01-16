@@ -1,5 +1,5 @@
+const mocha = require("mocha");
 const clear = require("clear");
-const readline = require("readline");
 
 const commonPart = require("../test-parts/part-a-common_data/common-main");
 const externalPart = require("../test-parts/part-b-external_modules/external-main");
@@ -12,20 +12,11 @@ const deviceApiPart = require("../test-parts/part-h-api_requests/api-main");
 const frontendPart = require("../test-parts/part-i-api_frontend/front-main");
 const processPart = require("../test-parts/part-j-restart_controller/restart-main");
 
-var readConsole = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout
-});
+const chosenMode = process.env["npm_config_mode"]
 
 clear();
 
-readConsole.question("Enter test mode: ", function(inputLine)
-{
-	console.log(typeof inputLine);
-	readConsole.close();
-});
 
-/*
 describe("FOX Controller Test Script", function()
 {
 	var userInputType = typeof chosenMode;
@@ -101,18 +92,15 @@ describe("FOX Controller Test Script", function()
 	{
 		commonPart();
 	}
-	else if (chosenMode === '')
+	else if (userInputType === 'string' && chosenMode.length > 0)
 	{
-		console.log("No text entered");
-	}
-	else if (userInputType === 'string')
-	{
+		console.log("");
 		console.log("Unknown test mode");
 	}
 	else
 	{
 		console.log("");
+		console.log("No unit test mode entered.");
 	}
 	
 });
-*/
