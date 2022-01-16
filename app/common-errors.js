@@ -18,27 +18,13 @@ function writeKeyNotFoundErrorString(keyTxt)
 
 function writeRemoteIoPropertyErrorString(pName, rVal)
 {
-	var res = "";
-	
-	res += ".";
-	res += pName;
-	res += " = ";
-	res += rVal;
-	res += " is not supported!";
-	
+	var res = [".", pName, " = ", String(rVal), " is not supported!"].join("");
 	return res;
 }
 
 function writeRemoteIoPropertySupportString(pName, rVal)
 {
-	var res = "";
-	
-	res += "Property .";
-	res += pName;
-	res += " = ";
-	res += rVal;
-	res += " is not supported!";
-	
+	var res = ["Property .", pName, " = ", String(rVal), " is not supported!"].join("");
 	return res;
 }
 
@@ -46,13 +32,9 @@ function writeRemoteIoPropertyConstructString(pName, eType, rVal)
 {
 	var res = "";
 	
-	res += "Invalid type! ";
-	res += pName;
-	res += " must be '";
-	res += eType;
-	res += "' when got value ";
-	res += rVal;
-	res += " in StoredDevice during construction";
+	res += ["Invalid type! ", pName].join("");
+	res += [" must be '", eType, "' when got value ", String(rVal), " in "].join("");
+	res += "StoredDevice during construction";
 	
 	return res;
 }
@@ -61,13 +43,9 @@ function writeConnectDevicePropertyErrorString(pName, eType, rVal)
 {	
 	var res = "";
 	
-	res += "Invalid type! ";
-	res += pName;
-	res += " must be '";
-	res += eType;
-	res += "' when got value ";
-	res += rVal;
-	res += " in StoredDevice during setting";
+	res += ["Invalid type! ", pName].join("");
+	res += [" must be '", eType, "' when got value ", String(rVal), " in "].join("");
+	res += "StoredDevice during setting";
 	
 	return res;
 }
@@ -77,10 +55,8 @@ function writeSetDeviceOutputWrongError(pName, rVal)
 {
 	var res = "";
 	
-	res += "Wrong ";
-	res += pName;
-	res += " = ";
-	res += rVal;
+	res += ["Wrong ", pName, " = "].join("");
+	res += String(rVal);
 	
 	return res;
 }
@@ -94,18 +70,13 @@ function writeRegisterPrefixIndexError(badValue)
 function writeUnexpectedTokenErrorString(tokenValue, tokenPosition)
 {
 	var setToken = 0;
-	var res = "";
 	
 	if (tokenPosition >= 0)
 	{
 		setToken = tokenPosition;
 	}
 	
-	res += "Unexpected token ";
-	res += tokenValue;
-	res += " in JSON at position ";
-	res += tokenPosition;
-	
+	var res = ["Unexpected token ", String(tokenValue), " in JSON at position ", tokenPosition].join("");
 	return res;
 }
 
@@ -120,7 +91,6 @@ function writeUnexpectedTokenErrorStringType()
 	var typeRes = writeUnexpectedTokenErrorString("-", 0);
 	return typeRes;
 }
-
 
 
 function writeTestString()
