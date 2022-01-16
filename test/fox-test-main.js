@@ -26,29 +26,6 @@ readConsole.question("Enter test mode: ", function(inputLine)
 });
 
 /*
-var chosenMode = getTestModeInput();
-
-function getTestModeInput()
-{
-	var inputLine = null;
-	var textLower = null;
-	
-	try
-	{
-		inputLine = promptMode("Enter test mode: ");
-		textLower = inputLine.toLowerCase();
-	}
-	catch(e)
-	{
-		inputLine = null;
-		textLower = null;
-		console.log("Test mode input not successful.");
-	}
-	
-	return textLower;
-}
-
-
 describe("FOX Controller Test Script", function()
 {
 	var userInputType = typeof chosenMode;
