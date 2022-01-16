@@ -11,13 +11,8 @@ function writeApiUrl(vFolder, vPage)
 	var apiUrlResult = "";
 	
 	if (folderValid === true && pageValid === true)
-	{	
-		apiUrlResult += foxHost;
-		apiUrlResult += apiRoot;
-		apiUrlResult += vFolder;
-		apiUrlResult += "/";
-		apiUrlResult += vPage;
-		
+	{
+		apiUrlResult = [foxHost, apiRoot, vFolder, "/", vPage].join("");
 		apiUrlResult = apiUrlResult.toLowerCase();
 	}
 	
