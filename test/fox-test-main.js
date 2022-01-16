@@ -1,5 +1,5 @@
 const clear = require("clear");
-const promptMode = require('prompt-sync')();
+const readline = require("readline");
 const chai = require("chai");
 const expect = require("chai").expect;
 const chaiThings = require('chai-things');
@@ -18,7 +18,20 @@ const processPart = require("../test-parts/part-j-restart_controller/restart-mai
 
 chai.use(chaiThings);
 
+var readConsole = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 clear();
+
+readConsole.question("Enter test mode: ", function(inputLine)
+{
+	console.log(typeof inputLine);
+	readConsole.close();
+});
+
+/*
 var chosenMode = getTestModeInput();
 
 function getTestModeInput()
@@ -131,3 +144,4 @@ describe("FOX Controller Test Script", function()
 	}
 	
 });
+*/
