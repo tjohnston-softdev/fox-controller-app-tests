@@ -1,9 +1,5 @@
 const clear = require("clear");
 const readline = require("readline");
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-const sinon = require('sinon');
 
 const commonPart = require("../test-parts/part-a-common_data/common-main");
 const externalPart = require("../test-parts/part-b-external_modules/external-main");
@@ -16,11 +12,9 @@ const deviceApiPart = require("../test-parts/part-h-api_requests/api-main");
 const frontendPart = require("../test-parts/part-i-api_frontend/front-main");
 const processPart = require("../test-parts/part-j-restart_controller/restart-main");
 
-chai.use(chaiThings);
-
 var readConsole = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+	input: process.stdin,
+	output: process.stdout
 });
 
 clear();
