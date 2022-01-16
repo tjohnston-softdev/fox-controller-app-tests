@@ -94,15 +94,22 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (userInputType === 'string' && chosenMode.length > 0)
 	{
-		//
 		console.log("");
 		console.log("Unknown test mode");
 	}
 	else
 	{
-		//
-		console.log("");
-		console.log("No unit test mode entered.");
+		displayMissingCodeError();
 	}
 	
 });
+
+
+function displayMissingCodeError()
+{
+	var cmdLine = "Valid command: `npm run tests --mode=example`";
+	
+	console.log("");
+	console.log("Unit testing mode is missing.");
+	console.log(cmdLine);
+}

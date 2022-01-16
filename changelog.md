@@ -1,4 +1,5 @@
 # Changelog
 
 **./tests/fox-test-main.js**
-* Added blank line before input error messages.
+* Wrote more detailed error message for missing mode argument.
+* Mode argument error is in its own function 'displayMissingCodeError'
