@@ -1,3 +1,3 @@
 # Changelog
 
-'ControlX Engineering' rebrand complete. (11 August 2021)
+Opened '2022' branch.
