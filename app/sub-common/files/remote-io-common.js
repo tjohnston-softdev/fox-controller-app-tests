@@ -133,7 +133,6 @@ function testLocalDeviceArrayPopulated(locArr)
 
 function testLocalDeviceArrayEmpty(locArr)
 {
-	expect(locArr).to.exist;
 	arrayFunctions.testEmpty(locArr);
 }
 

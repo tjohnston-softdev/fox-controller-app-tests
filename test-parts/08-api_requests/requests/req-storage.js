@@ -57,7 +57,6 @@ function handleFileList()
 		
 		it("Correct Array Structure", function()
 		{
-			expect(fileListRead).to.exist;
 			arrayFunctions.testEmpty(fileListRead);
 			arrayFunctions.testAllType(fileListRead, 'object');
 		});

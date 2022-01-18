@@ -46,7 +46,6 @@ function handleList()
 		
 		it("Correct Array Structure", function()
 		{
-			expect(listRead).to.exist;
 			arrayFunctions.testEmpty(listRead);
 			arrayFunctions.testAllType(listRead, 'object');
 		});
@@ -101,7 +100,6 @@ function handleAvailable()
 		
 		it("Correct Array Structure", function()
 		{
-			expect(retrievedData).to.exist;
 			arrayFunctions.testEmpty(retrievedData);
 			arrayFunctions.testAllType(retrievedData, 'object');
 		});
