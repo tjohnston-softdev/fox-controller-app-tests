@@ -5,7 +5,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
-const requestInvalid = require("../sub-scripts/request-invalid");
+const requestInvalid = require("../sub/request-invalid");
 
 
 function testRequestURLs()

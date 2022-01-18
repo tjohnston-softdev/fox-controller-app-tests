@@ -15,7 +15,7 @@ const modelIntegrityFile = require(commonPaths.checkModelIntegrity);
 const rioCommon = require(commonPaths.rioCommon);
 const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
-const apiCommonFile = require("../sub-requests/common-api");
+const apiCommonFile = require("../sub/common-api");
 
 const deviceFolder = apiPaths.devicesApi;
 const deviceRio = apiPaths.rioApiSub;

@@ -10,9 +10,9 @@ const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 
-const nodeCommonFile = require("../sub-parts/common-nodes");
-const nodeTextFile = require("../sub-parts/common-text");
-const testCacheFile = require("../sub-parts/test-device-cache");
+const nodeCommonFile = require("../sub/common-nodes");
+const nodeTextFile = require("../sub/common-text");
+const testCacheFile = require("../sub/test-device-cache");
 
 
 

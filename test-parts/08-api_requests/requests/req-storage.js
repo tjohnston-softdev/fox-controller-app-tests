@@ -10,8 +10,8 @@ const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
-const apiCommonFile = require("../sub-requests/common-api");
-const storageCommonFile = require("../sub-requests/common-storage");
+const apiCommonFile = require("../sub/common-api");
+const storageCommonFile = require("../sub/common-storage");
 
 var testFile = storageCommonFile.getUserStoragePaths();
 

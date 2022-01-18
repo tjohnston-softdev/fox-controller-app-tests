@@ -5,8 +5,8 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
-const ipStrings = require("../sub-modules/ip-strings");
-const needleData = require("../sub-modules/needle-data");
+const ipStrings = require("../sub/ip-strings");
+const needleData = require("../sub/needle-data");
 
 
 function testNeedle()

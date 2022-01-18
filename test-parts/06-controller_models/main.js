@@ -1,4 +1,4 @@
-const definitionTests = require("./models/m-model_definitions");
+const definitionTests = require("./models/m-definitions");
 
 function coordinateModels()
 {	

@@ -8,8 +8,8 @@ const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 const sysPlatform = require(commonPaths.sysPlatform);
 
-const testReturnFile = require("../sub-modes/test-restart-return");
-const offlineDelay = require("../sub-modes/offline-check-delay");
+const testReturnFile = require("../sub/test-restart-return");
+const offlineDelay = require("../sub/offline-check-delay");
 
 var factoryOutput = {};
 var dummyPlatformUsed = sysPlatform.getDummy();

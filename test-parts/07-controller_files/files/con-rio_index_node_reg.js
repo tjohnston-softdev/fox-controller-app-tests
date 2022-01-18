@@ -15,8 +15,8 @@ const commonJsonObjectsFile = require(commonPaths.commonObjects);
 const rioFile = loadFoxFile(foxPath.rioIndexFile);
 const rioSetFile = loadFoxFile(foxPath.rioSettingsFile);
 const commonFile = require(commonPaths.rioCommon);
-const spyFile = require("../sub-files/rio-spy_functions");
-const registerArguments = require("../sub-files/rio-node_args");
+const spyFile = require("../sub/rio-spy_functions");
+const registerArguments = require("../sub/rio-node_args");
 
 var correctPrefix = null;
 var correctIndex = null;

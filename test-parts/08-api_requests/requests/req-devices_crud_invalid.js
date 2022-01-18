@@ -11,7 +11,7 @@ const apiRequestScript = require(commonPaths.requestApi);
 const rioInvalid = require(commonPaths.rioInvalid);
 const httpRequests = require(commonPaths.httpRequests);
 
-const apiCommonFile = require("../sub-requests/common-api");
+const apiCommonFile = require("../sub/common-api");
 const deviceCommon = require(commonPaths.deviceCommon);
 const deviceFolder = apiPaths.devicesApi;
 const deviceRio = apiPaths.rioApiSub;

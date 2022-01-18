@@ -1,7 +1,6 @@
 const mocha = require("mocha");
 const clear = require("clear");
 
-/*
 const commonPart = require("../test-parts/01-common_data/main");
 const externalPart = require("../test-parts/02-external_modules/main");
 const internalPart = require("../test-parts/03-internal_scripts/main");
@@ -12,16 +11,14 @@ const controllerPart = require("../test-parts/07-controller_files/main");
 const deviceApiPart = require("../test-parts/08-api_requests/main");
 const frontendPart = require("../test-parts/09-api_frontend/main");
 const processPart = require("../test-parts/10-restart_controller/main");
-*/
 
 const chosenMode = process.env["npm_config_mode"]
-
-clear();
 
 
 describe("FOX Controller Test Script", function()
 {
 	var userInputType = typeof chosenMode;
+	clear();
 	
 	if (chosenMode === 'common')
 	{

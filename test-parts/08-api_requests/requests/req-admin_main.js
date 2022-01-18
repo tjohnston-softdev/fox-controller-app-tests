@@ -9,7 +9,7 @@ const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
-const apiCommonFile = require("../sub-requests/common-api");
+const apiCommonFile = require("../sub/common-api");
 
 
 

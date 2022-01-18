@@ -8,8 +8,8 @@ const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const rioCommon = require(commonPaths.rioCommon);
 
-const testCacheFile = require("../sub-parts/test-device-cache");
-const textCommon = require("../sub-parts/common-text");
+const testCacheFile = require("../sub/test-device-cache");
+const textCommon = require("../sub/common-text");
 
 
 function testNodeCheckListApi()

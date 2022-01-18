@@ -8,7 +8,7 @@ const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
-const testCacheFile = require("../sub-parts/test-device-cache");
+const testCacheFile = require("../sub/test-device-cache");
 
 
 function testNodeClearCacheApi()

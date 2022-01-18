@@ -12,7 +12,7 @@ const modelIntegrityFile = require(commonPaths.checkModelIntegrity);
 const rioCommon = require(commonPaths.rioCommon);
 const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
-const testCacheFile = require("../sub-parts/test-device-cache");
+const testCacheFile = require("../sub/test-device-cache");
 
 var modelReferenceArray = null;
 var resultList = null;

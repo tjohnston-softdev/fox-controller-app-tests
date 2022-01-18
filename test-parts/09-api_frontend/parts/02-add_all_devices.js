@@ -12,8 +12,8 @@ const modelFunctionsFile = require(commonPaths.getModels);
 
 const deviceCommon = require(commonPaths.deviceCommon);
 const httpRequests = require(commonPaths.httpRequests);
-const testCacheFile = require("../sub-parts/test-device-cache");
-const textCommon = require("../sub-parts/common-text");
+const testCacheFile = require("../sub/test-device-cache");
+const textCommon = require("../sub/common-text");
 
 var deviceCreateUrl = getDeviceCreateUrl();
 var modelArray = modelFunctionsFile.getAllModels();

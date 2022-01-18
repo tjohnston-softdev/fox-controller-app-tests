@@ -4,7 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
-const ipStrings = require("../sub-modules/ip-strings");
+const ipStrings = require("../sub/ip-strings");
 const isIP = require(commonPaths.validatorIP);
 const isMACAddress = require(commonPaths.validatorMAC);
 

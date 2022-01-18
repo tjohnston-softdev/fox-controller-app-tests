@@ -7,8 +7,8 @@ const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctions = require(commonPaths.testCommon);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
-const offlineDelay = require("../sub-modes/offline-check-delay");
-const testReturnFile = require("../sub-modes/test-restart-return");
+const offlineDelay = require("../sub/offline-check-delay");
+const testReturnFile = require("../sub/test-restart-return");
 
 
 function testProcessRestart()

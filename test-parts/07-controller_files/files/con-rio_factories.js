@@ -10,7 +10,7 @@ const commonErrorStringsFile = require(commonPaths.commonErrors);
 const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 const rioInvalid = require(commonPaths.rioInvalid);
-const rioFactoryReturn = require("../sub-files/rio-factory_return");
+const rioFactoryReturn = require("../sub/rio-factory_return");
 const factoryFile = loadFoxFile(foxPath.rioFactoriesFile);
 
 const remoteIoTestDevice = commonJsonObjectsFile.testDevice;

@@ -1,12 +1,12 @@
-const checkDatabaseEmpty = require("./parts/a-check_database_empty");
-const addAllDevices = require("./parts/b-add_all_devices");
-const getDeviceList = require("./parts/c-get_device_list");
-const checkDeviceList = require("./parts/d-check_device_list");
-const listNodes = require("./parts/e-list_avaliable_nodes");
-const checkNodes = require("./parts/f-check_node_array");
-const getDevProps = require("./parts/g-get_device_properties");
-const deleteAddedDevices = require("./parts/h-delete_added_devices");
-const clearCache = require("./parts/i-clear_cache");
+const checkDatabaseEmpty = require("./parts/01-check_database_empty");
+const addAllDevices = require("./parts/02-add_all_devices");
+const getDeviceList = require("./parts/03-get_device_list");
+const checkDeviceList = require("./parts/04-check_device_list");
+const listNodes = require("./parts/05-list_nodes");
+const checkNodes = require("./parts/06-check_node_array");
+const getDevProps = require("./parts/07-get_device_properties");
+const deleteAddedDevices = require("./parts/08-delete_added_devices");
+const clearCache = require("./parts/09-clear_cache");
 
 
 function coordinateFrontendTesting()

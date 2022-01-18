@@ -5,7 +5,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctions = require(commonPaths.testCommon);
 const loadFoxFile = require(commonPaths.loadFox);
-const prefixIndexObject = require("../sub-settings/io-set-object");
+const prefixIndexObject = require("../sub/io-set-object");
 const settingsFile = loadFoxFile(foxPath.rioSettingsFile);
 
 

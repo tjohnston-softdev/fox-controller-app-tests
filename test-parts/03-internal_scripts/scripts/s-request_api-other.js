@@ -5,8 +5,8 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
-const commonRequestFunctions = require("../sub-scripts/common-request");
-const requestInvalid = require("../sub-scripts/request-invalid");
+const commonRequestFunctions = require("../sub/common-request");
+const requestInvalid = require("../sub/request-invalid");
 const isIP = require(commonPaths.validatorIP);
 
 function testRequestOther()

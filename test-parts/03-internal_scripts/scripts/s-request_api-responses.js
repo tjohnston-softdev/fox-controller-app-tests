@@ -6,8 +6,8 @@ const commonFunctions = require(commonPaths.testCommon);
 const objectFunctions = require(commonPaths.testObject);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const requestFile = require(commonPaths.requestApi);
-const commonRequestFunctions = require("../sub-scripts/common-request");
-const requestInvalid = require("../sub-scripts/request-invalid");
+const commonRequestFunctions = require("../sub/common-request");
+const requestInvalid = require("../sub/request-invalid");
 
 const readNullError = "Cannot read property 'body' of null";
 const emptyReplyObject = commonRequestFunctions.createReplyObject(200, "");

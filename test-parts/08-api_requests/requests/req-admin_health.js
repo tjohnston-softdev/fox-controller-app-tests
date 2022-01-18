@@ -10,10 +10,10 @@ const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 
-const commonApi = require("../sub-requests/common-api");
-const commonDatabase = require("../sub-requests/common-database");
-const commonHealth = require("../sub-requests/common-health");
-const commonStorage = require("../sub-requests/common-storage");
+const commonApi = require("../sub/common-api");
+const commonDatabase = require("../sub/common-database");
+const commonHealth = require("../sub/common-health");
+const commonStorage = require("../sub/common-storage");
 
 var healthObject = null;
 

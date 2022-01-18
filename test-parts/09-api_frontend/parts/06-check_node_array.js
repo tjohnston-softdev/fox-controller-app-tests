@@ -8,8 +8,8 @@ const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
 const apiDefinitionObject = require(commonPaths.defineApi).definitions;
 
-const nodeCommonFile = require("../sub-parts/common-nodes");
-const testCacheFile = require("../sub-parts/test-device-cache");
+const nodeCommonFile = require("../sub/common-nodes");
+const testCacheFile = require("../sub/test-device-cache");
 var nodeCacheObject = null;
 
 
