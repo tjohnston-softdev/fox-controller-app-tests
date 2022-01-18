@@ -16,13 +16,15 @@ function checkObject(objVal)
 
 function checkBinary(numVal)
 {
+	expect(numVal).to.exist;
 	expect(numVal).to.be.oneOf([0, 1]);
 }
 
 
 function checkPercent(percVal)
 {
-	expect(percVal).to.be.within(0, 100);
+	expect(percVal).to.exist;
+	expect(percVal).to.be.a("number").within(0, 100);
 }
 
 
