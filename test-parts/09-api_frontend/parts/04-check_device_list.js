@@ -31,13 +31,12 @@ function handleCheckPrepare()
 		it("Device List Retrieved From Cache", function(done)
 		{
 			listTest = retrieveListFromCache();
-			expect(listTest).to.exist;
+			arrayFunctions.testPopulated(listTest);
 			done();
 		});
 		
 		it("Device List Valid", function(done)
 		{
-			arrayFunctions.testPopulated(listTest);
 			arrayFunctions.testAllType(listTest, 'object');
 			rioCommon.testDeviceArray(listTest);
 			

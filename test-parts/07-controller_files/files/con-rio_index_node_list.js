@@ -138,7 +138,6 @@ function verifyNodeListCalled(nArg)
 	expect(nodeListSpy.called).to.be.true;
 	expect(nodeListSpy.lastCall).to.exist;
 	
-	expect(nodeListSpy.lastCall.args).to.exist;
 	arrayFunctions.testPopulated(nodeListSpy.lastCall.args);
 	
 	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);

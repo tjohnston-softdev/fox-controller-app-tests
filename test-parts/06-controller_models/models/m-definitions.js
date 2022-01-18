@@ -65,7 +65,6 @@ function checkManufacturerArrayRead(modelArr)
 	{
 		it("Successfully Read", function()
 		{
-			expect(modelArr).to.exist;
 			arrayFunctions.testPopulated(modelArr);
 		});
 		

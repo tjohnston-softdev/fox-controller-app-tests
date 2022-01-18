@@ -54,10 +54,7 @@ function handleManufacturerProperties()
 		it("Manufacturer Property List Retrieved From Cache", function(done)
 		{
 			manufacturersArray = objectFunctions.getProps(nodeCacheObject);
-			
-			expect(manufacturersArray).to.exist;
 			arrayFunctions.testPopulated(manufacturersArray);
-			
 			done();
 		});
 		

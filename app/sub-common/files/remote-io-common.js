@@ -128,7 +128,6 @@ function testDeviceIdListed(deviceArr, targetDeviceID)
 
 function testLocalDeviceArrayPopulated(locArr)
 {
-	expect(locArr).to.exist;
 	arrayFunctions.testPopulated(locArr);
 }
 

@@ -9,8 +9,7 @@ const objectFunctions = require(commonPaths.testObject);
 
 
 function validateResponseBodyArray(resultObj)
-{	
-	expect(resultObj).to.exist;
+{
 	arrayFunctions.testPopulated(resultObj);
 	arrayFunctions.testAllType(resultObj, 'object');
 	

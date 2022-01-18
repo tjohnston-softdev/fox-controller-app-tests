@@ -35,7 +35,6 @@ function handlePrepare()
 	{
 		it("Supported Models Retrieved", function(done)
 		{
-			expect(modelArray).to.exist;
 			arrayFunctions.testPopulated(modelArray);
 			arrayFunctions.testAllType(modelArray, 'object');
 			

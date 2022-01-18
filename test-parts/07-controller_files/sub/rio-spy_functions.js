@@ -11,8 +11,7 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 {
 	expect(listCalled).to.be.true;
 	expect(callObject).to.exist;
-		
-	expect(callObject.args).to.exist;
+	
 	arrayFunctions.testPopulated(callObject.args);
 	expect(callObject.args[0]).to.exist;
 	expect(callObject.args[0]).to.be.a("function");
@@ -30,7 +29,6 @@ function verifyDevice(deviceArg, deviceCalled, callObject)
 	expect(deviceCalled).to.be.true;
 	expect(callObject).to.exist;
 	
-	expect(callObject.args).to.exist;
 	arrayFunctions.testPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.equal(deviceArg);
@@ -48,7 +46,6 @@ function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 	expect(regCalled).to.be.true;
 	expect(callObject).to.exist;
 	
-	expect(callObject.args).to.exist;
 	arrayFunctions.testPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.equal(aMode);
@@ -65,7 +62,6 @@ function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aTog
 	expect(setCalled).to.be.true;
 	expect(callObject).to.exist;
 	
-	expect(callObject.args).to.exist;
 	arrayFunctions.testPopulated(callObject.args);
 	expect(callObject.args).to.deep.equal([aID, aPrefix, aIndex, aToggle]);
 	
@@ -77,7 +73,6 @@ function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 	expect(deleteCalled).to.be.true;
 	expect(callObject).to.exist;
 	
-	expect(callObject.args).to.exist;
 	arrayFunctions.testPopulated(callObject.args);
 	
 	expect(callObject.args[0]).to.equal(deleteArg);

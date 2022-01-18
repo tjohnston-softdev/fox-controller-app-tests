@@ -53,7 +53,6 @@ function handleSupportedModels()
 	{
 		it("Retrieved Successfully", function(done)
 		{
-			expect(modelObjectArray).to.exist;
 			arrayFunctions.testPopulated(modelObjectArray);
 			done();
 		});

@@ -49,7 +49,6 @@ function handleDhcpClients()
 		
 		it("Correct Array Structure", function()
 		{
-			expect(dhcpRead).to.exist;
 			arrayFunctions.testPopulated(dhcpRead);
 			arrayFunctions.testAllType(dhcpRead, 'object');
 		});

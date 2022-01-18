@@ -117,7 +117,6 @@ function handleInitializationCompleteFunction()
 			expect(compSpy.calledOnce).to.be.true;
 			expect(compSpy.firstCall).to.exist;
 			
-			expect(compSpy.firstCall.args).to.exist;
 			arrayFunctions.testPopulated(compSpy.firstCall.args);
 			
 			expect(compSpy.firstCall.args[0]).to.exist;
