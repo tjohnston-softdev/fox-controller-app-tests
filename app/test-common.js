@@ -46,8 +46,10 @@ function checkInvalidFunctionResult(rObject, expMsg)
 function prepareInvalidFunctionResult(executedSuccessfully, flaggedMessage)
 {
 	var prepRes = {};
+	
 	prepRes["successful"] = executedSuccessfully;
 	prepRes["errorText"] = flaggedMessage;
+	
 	return prepRes;
 }
 

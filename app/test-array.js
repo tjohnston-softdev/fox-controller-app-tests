@@ -5,15 +5,16 @@ chai.use(chaiThings);
 
 function checkPopulated(arrDef)
 {
-	expect(arrDef).to.be.an('array');
-	expect(arrDef).to.not.be.empty;
+	expect(arrDef).to.exist;
+	expect(arrDef).to.be.an('array').that.is.not.empty;
 }
 
 function checkEmpty(arrDef)
 {
-	expect(arrDef).to.be.an('array');
-	expect(arrDef).to.be.empty;
+	expect(arrDef).to.exist;
+	expect(arrDef).to.be.an('array').that.is.empty;
 }
+
 
 
 function checkDynamic(arrDef, lengthFlag)
