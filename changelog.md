@@ -1,3 +1,4 @@
 # Changelog
 
-Deleted empty files.
+**./test-parts/part-a-common_data/sub-items**
+* Deleted folder.
