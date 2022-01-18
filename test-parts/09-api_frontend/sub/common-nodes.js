@@ -11,8 +11,7 @@ const nodeNames = require(commonPaths.nodeNames);
 
 function testNodeObjectArrayStructure(nodeObjArray)
 {
-	expect(nodeObjArray).to.exist;
-	expect(nodeObjArray).to.be.an("array");
+	arrayFunctions.testNeutral(nodeObjArray);
 	arrayFunctions.testAllType(nodeObjArray, 'object');
 }
 

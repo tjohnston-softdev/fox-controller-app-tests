@@ -443,10 +443,7 @@ function handleRegisterNode()
 			{
 				expect(unregisterNodeSpy.calledOnce).to.be.true;
 				expect(unregisterNodeSpy.firstCall).to.exist;
-				
-				expect(unregisterNodeSpy.firstCall.args).to.exist;
-				expect(unregisterNodeSpy.firstCall.args).to.be.an("array");
-				expect(unregisterNodeSpy.firstCall.args).to.deep.equal([]);
+				arrayFunctions.testEmpty(unregisterNodeSpy.firstCall.args);
 				
 				expect(unregisterNodeSpy.firstCall.callback).to.be.undefined;
 				expect(unregisterNodeSpy.firstCall.returnValue).to.be.undefined;

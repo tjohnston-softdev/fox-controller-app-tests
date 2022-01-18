@@ -16,9 +16,18 @@ function checkEmpty(arrDef)
 }
 
 
+function checkNeutral(arrDef)
+{
+	expect(arrDef).to.exist;
+	expect(arrDef).to.be.an('array');
+}
+
+
 
 function checkDynamic(arrDef, lengthFlag)
 {
+	expect(arrDef).to.exist;
+	
 	if (lengthFlag > 0)
 	{
 		expect(arrDef).to.be.an('array').that.is.not.empty;
@@ -106,6 +115,7 @@ module.exports =
 {
 	testPopulated: checkPopulated,
 	testEmpty: checkEmpty,
+	testNeutral: checkNeutral,
 	testDynamic: checkDynamic,
 	testAllType: checkAllType,
 	testAllPropExists: checkAllPropExists,

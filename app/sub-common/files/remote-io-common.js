@@ -138,8 +138,7 @@ function testLocalDeviceArrayEmpty(locArr)
 
 function testLocalDeviceArrayNeutral(locArr)
 {
-	expect(locArr).to.exist;
-	expect(locArr).to.be.an("array");
+	arrayFunctions.testNeutral(locArr);
 }
 
 

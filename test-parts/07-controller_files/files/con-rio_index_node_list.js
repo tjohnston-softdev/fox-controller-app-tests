@@ -66,8 +66,7 @@ function handleNodeListFull()
 		
 		it("Node Array Returned", function()
 		{
-			expect(retrievedNodeList).to.exist;
-			expect(retrievedNodeList).to.be.an("array");
+			arrayFunctions.testNeutral(retrievedNodeList);
 		});
 		
 		it("Array Structure Valid", function()
@@ -156,8 +155,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	expect(nodeListSpy.lastCall.exception).to.be.undefined;
 	expect(mError).to.be.null;
 	
-	expect(mDevices).to.exist;
-	expect(mDevices).to.be.an("array");
+	arrayFunctions.testNeutral(mDevices);
 	rioSubCommonFile.testPropertyArray(mDevices);
 }
 
