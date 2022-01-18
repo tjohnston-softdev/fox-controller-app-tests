@@ -44,7 +44,6 @@ function handlePrepare()
 		
 		it("Create Device URL Written", function(done)
 		{
-			expect(deviceCreateUrl).to.exist;
 			commonFunctions.testString(deviceCreateUrl);
 			done();
 		});
@@ -133,8 +132,6 @@ function addCurrentSupportedModel(baseModel)
 	{
 		deviceCommon.testFrontendAdded(addRead);
 		deviceCommon.testFrontendIdValid(addRead.id);
-		
-		expect(addRead.id).to.exist;
 		commonFunctions.testString(addRead.id);
 		
 		newObjectID = addRead.id;

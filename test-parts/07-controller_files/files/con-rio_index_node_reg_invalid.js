@@ -127,8 +127,6 @@ function handleTestDevice()
 			
 			expect(addSpy.lastCall.exception).to.be.undefined;
 			expect(addError).to.be.null;
-			
-			expect(addID).to.exist;
 			commonFunctions.testString(addID);
 					
 			testID = addID;
@@ -137,7 +135,6 @@ function handleTestDevice()
 		
 		it("Test ID Retained", function(done)
 		{
-			expect(testID).to.exist;
 			commonFunctions.testString(testID);
 			expect(testID).to.equal(addID);
 			done();

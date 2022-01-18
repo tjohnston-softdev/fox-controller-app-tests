@@ -231,7 +231,6 @@ function handleCreateDeviceTest()
 			
 			it("Test ID Retained", function(done)
 			{
-				expect(testID).to.exist;
 				commonFunctions.testString(testID);
 				done();
 			});

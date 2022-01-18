@@ -150,8 +150,6 @@ function handleStaticAdd()
 			
 			expect(staticAddSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
-			
-			expect(staticID).to.exist;
 			commonFunctions.testString(staticID);
 					
 			nodeTestID = staticID;

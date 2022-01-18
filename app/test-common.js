@@ -30,6 +30,7 @@ function checkPercent(percVal)
 
 function checkString(strDef)
 {
+	expect(strDef).to.exist;
 	expect(strDef).to.be.a('string');
 	expect(strDef.length).to.be.at.least(1);
 }

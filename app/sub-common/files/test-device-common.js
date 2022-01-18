@@ -54,7 +54,6 @@ function testFrontendAddSuccessful(returnedObject)
 
 function testFrontendAddIdValid(returnedObjectID)
 {
-	expect(returnedObjectID).to.exist;
 	commonFunctions.testString(returnedObjectID);
 }
 
