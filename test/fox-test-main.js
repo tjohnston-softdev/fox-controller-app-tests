@@ -1,16 +1,18 @@
 const mocha = require("mocha");
 const clear = require("clear");
 
-const commonPart = require("../test-parts/part-a-common_data/common-main");
-const externalPart = require("../test-parts/part-b-external_modules/external-main");
-const internalPart = require("../test-parts/part-c-internal_scripts/internal-main");
-const onlinePart = require("../test-parts/part-d-online_checks/online-main");
-const settingsPart = require("../test-parts/part-e-rio_settings/rio-settings-main");
-const modelsPart = require("../test-parts/part-f-controller_models/models-main");
-const controllerPart = require("../test-parts/part-g-controller_files/controller-main");
-const deviceApiPart = require("../test-parts/part-h-api_requests/api-main");
-const frontendPart = require("../test-parts/part-i-api_frontend/front-main");
-const processPart = require("../test-parts/part-j-restart_controller/restart-main");
+/*
+const commonPart = require("../test-parts/01-common_data/main");
+const externalPart = require("../test-parts/02-external_modules/main");
+const internalPart = require("../test-parts/03-internal_scripts/main");
+const onlinePart = require("../test-parts/04-online_checks/main");
+const settingsPart = require("../test-parts/05-rio_settings/main");
+const modelsPart = require("../test-parts/06-controller_models/main");
+const controllerPart = require("../test-parts/07-controller_files/main");
+const deviceApiPart = require("../test-parts/08-api_requests/main");
+const frontendPart = require("../test-parts/09-api_frontend/main");
+const processPart = require("../test-parts/10-restart_controller/main");
+*/
 
 const chosenMode = process.env["npm_config_mode"]
 
