@@ -97,9 +97,7 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 	
 	it("Object Returned", function(done)
 	{
-		commonFunctions.testPresent(deviceRead);
-		expect(deviceRead).to.be.an("object");
-		
+		commonFunctions.testObject(deviceRead);
 		done();
 	});
 	

@@ -50,7 +50,7 @@ function handleDatabaseCheck()
 	{
 		it("Device List Exists", function(done)
 		{
-			commonFunctions.testPresent(retrievedDatabaseList);
+			expect(retrievedDatabaseList).to.exist;
 			expect(retrievedDatabaseList).to.be.an("array");
 			done();
 		});

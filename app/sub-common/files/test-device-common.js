@@ -47,15 +47,14 @@ function testAddModifyResultObjectContents(returnedObject)
 
 function testFrontendAddSuccessful(returnedObject)
 {
-	commonFunctions.testPresent(returnedObject);
-	expect(returnedObject).to.be.an("object");
+	commonFunctions.testObject(returnedObject);
 	testAddModifyResultObjectProperties(returnedObject);
 	testAddModifyResultObjectContents(returnedObject);
 }
 
 function testFrontendAddIdValid(returnedObjectID)
 {
-	commonFunctions.testPresent(returnedObjectID);
+	expect(returnedObjectID).to.exist;
 	commonFunctions.testString(returnedObjectID);
 }
 

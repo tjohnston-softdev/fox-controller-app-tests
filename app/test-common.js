@@ -8,10 +8,10 @@ function checkPlaceholder()
 	expect(true).to.be.true;
 }
 
-function checkPresent(preVal)
+function checkObject(objVal)
 {
-	expect(preVal).to.not.be.undefined;
-	expect(preVal).to.not.be.null;
+	expect(objVal).to.exist;
+	expect(objVal).to.be.an("object");
 }
 
 function checkBinary(numVal)
@@ -60,7 +60,7 @@ function cloneJsonObject(originalObject)
 module.exports =
 {
 	testPlaceholder: checkPlaceholder,
-	testPresent: checkPresent,
+	testObject: checkObject,
 	testBinary: checkBinary,
 	testPercent: checkPercent,
 	testString: checkString,

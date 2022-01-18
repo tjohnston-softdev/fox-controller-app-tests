@@ -128,19 +128,19 @@ function testDeviceIdListed(deviceArr, targetDeviceID)
 
 function testLocalDeviceArrayPopulated(locArr)
 {
-	commonFunctions.testPresent(locArr);
+	expect(locArr).to.exist;
 	arrayFunctions.testPopulated(locArr);
 }
 
 function testLocalDeviceArrayEmpty(locArr)
 {
-	commonFunctions.testPresent(locArr);
+	expect(locArr).to.exist;
 	arrayFunctions.testEmpty(locArr);
 }
 
 function testLocalDeviceArrayNeutral(locArr)
 {
-	commonFunctions.testPresent(locArr);
+	expect(locArr).to.exist;
 	expect(locArr).to.be.an("array");
 }
 

@@ -30,7 +30,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctions.testPresent(indexFile);
+			expect(indexFile).to.exist;
 		});
 	});
 }
@@ -77,7 +77,7 @@ function handleInitializationFunction()
 		it("Initialization Event Successful", function(done)
 		{
 			expect(initSpy.calledOnce).to.be.true;
-			commonFunctions.testPresent(initSpy.firstCall);
+			expect(initSpy.firstCall).to.exist;
 			expect(initSpy.firstCall.args).to.deep.equal([]);
 			expect(initSpy.firstCall.returnValue).to.be.undefined;
 			expect(initSpy.firstCall.exception).to.be.undefined;
@@ -115,15 +115,15 @@ function handleInitializationCompleteFunction()
 		it("Event Successful", function(done)
 		{
 			expect(compSpy.calledOnce).to.be.true;
-			commonFunctions.testPresent(compSpy.firstCall);
+			expect(compSpy.firstCall).to.exist;
 			
-			commonFunctions.testPresent(compSpy.firstCall.args);
+			expect(compSpy.firstCall.args).to.exist;
 			arrayFunctions.testPopulated(compSpy.firstCall.args);
 			
-			commonFunctions.testPresent(compSpy.firstCall.args[0]);
+			expect(compSpy.firstCall.args[0]).to.exist;
 			expect(compSpy.firstCall.args[0]).to.be.a("function");
 			
-			commonFunctions.testPresent(compSpy.firstCall.callback);
+			expect(compSpy.firstCall.callback).to.exist;
 			expect(compSpy.firstCall.callback).to.be.a("function");
 			
 			expect(compSpy.firstCall.exception).to.be.undefined;
@@ -157,7 +157,7 @@ function checkFunctionDefinitionLoop(nameArray)
 		currentName = nameArray[loopIndex];
 		currentFunction = indexFile[currentName];
 		
-		commonFunctions.testPresent(currentFunction);
+		expect(currentFunction).to.exist;
 		expect(currentFunction).to.be.a("function");
 	}
 }

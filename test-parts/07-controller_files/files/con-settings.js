@@ -27,7 +27,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctions.testPresent(controllerSettingsFile);
+			expect(controllerSettingsFile).to.exist;
 		});
 	});
 }

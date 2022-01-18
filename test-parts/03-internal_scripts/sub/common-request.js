@@ -10,7 +10,7 @@ const objectFunctions = require(commonPaths.testObject);
 
 function validateResponseBodyArray(resultObj)
 {	
-	commonFunctions.testPresent(resultObj);
+	expect(resultObj).to.exist;
 	arrayFunctions.testPopulated(resultObj);
 	arrayFunctions.testAllType(resultObj, 'object');
 	
@@ -25,9 +25,7 @@ function validateResponseBodyArray(resultObj)
 
 function validateResponseBodyObject(resultObj)
 {
-	commonFunctions.testPresent(resultObj);
-	expect(resultObj).to.be.an("object");
-			
+	commonFunctions.testObject(resultObj);
 	objectFunctions.testPropExists(resultObj, 'exampleProperty');
 	expect(resultObj.exampleProperty).to.equal("exampleValue");
 }
@@ -44,8 +42,7 @@ function writeReplyErrorExample(rMessage)
 
 function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 {
-	commonFunctions.testPresent(resultObj);
-	expect(resultObj).to.be.an("object");
+	commonFunctions.testObject(resultObj);
 	
 	objectFunctions.testPropExists(resultObj, 'json');
 	expect(resultObj.json).to.be.true;

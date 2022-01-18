@@ -37,7 +37,7 @@ function handleDeviceObject(devicePropName)
 {
 	var deviceObj = commonObjectsFile[devicePropName];
 	
-	testObjectType(deviceObj);
+	testCommon.testObject(deviceObj);
 	
 	testObjectProperty(deviceObj, 'id', 'string');
 	testObjectProperty(deviceObj, 'deviceType', 'string');
@@ -69,7 +69,7 @@ function handleRegisterNodeObject()
 	testObjectFunction('getRegisterNode');
 	registerResult = commonObjectsFile.getRegisterNode("Example Device", "Example Node", "RO-0");
 	
-	testObjectType(registerResult);
+	testCommon.testObject(registerResult);
 	
 	testObjectProperty(registerResult, 'id', 'string');
 	testObjectProperty(registerResult, 'type', 'string');
@@ -86,15 +86,6 @@ function handleRegisterNodeObject()
 	testCommon.testString(registerResult.z);
 	testCommon.testString(registerResult.deviceId);
 	testCommon.testString(registerResult.ioSetId);
-}
-
-
-
-
-function testObjectType(propObject)
-{
-	testCommon.testPresent(propObject);
-	expect(propObject).to.be.an("object");
 }
 
 function testObjectFunction(funcName)

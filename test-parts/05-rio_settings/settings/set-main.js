@@ -25,7 +25,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctions.testPresent(settingsFile);
+			expect(settingsFile).to.exist;
 		});
 	});
 }

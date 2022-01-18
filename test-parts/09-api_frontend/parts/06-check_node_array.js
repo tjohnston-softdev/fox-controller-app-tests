@@ -31,7 +31,7 @@ function handleStructure()
 		it("Node Array Retrieved From Cache", function(done)
 		{
 			nodeCacheObject = callNodeCache();
-			commonFunctions.testPresent(nodeCacheObject);
+			expect(nodeCacheObject).to.exist;
 			done();
 		});
 		
@@ -55,7 +55,7 @@ function handleManufacturerProperties()
 		{
 			manufacturersArray = objectFunctions.getProps(nodeCacheObject);
 			
-			commonFunctions.testPresent(manufacturersArray);
+			expect(manufacturersArray).to.exist;
 			arrayFunctions.testPopulated(manufacturersArray);
 			
 			done();

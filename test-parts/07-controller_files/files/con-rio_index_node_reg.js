@@ -58,8 +58,8 @@ function handleNodePrepare()
 		
 		it("Files Loaded", function()
 		{
-			commonFunctions.testPresent(rioFile);
-			commonFunctions.testPresent(rioSetFile);
+			expect(rioFile).to.exist;
+			expect(rioSetFile).to.exist;
 		});
 		
 		it("Function Arguments Assigned", function(done)
@@ -151,7 +151,7 @@ function handleStaticAdd()
 			expect(staticAddSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
 			
-			commonFunctions.testPresent(staticID);
+			expect(staticID).to.exist;
 			commonFunctions.testString(staticID);
 					
 			nodeTestID = staticID;
@@ -202,8 +202,7 @@ function handleStaticGet()
 			expect(staticGetSpy.firstCall.exception).to.be.undefined;
 			expect(staticErr).to.be.null;
 			
-			commonFunctions.testPresent(nodeTestObject);
-			expect(nodeTestObject).to.be.an("object");
+			commonFunctions.testObject(nodeTestObject);
 			commonFile.testDeviceObject(nodeTestObject);
 			
 			done();
@@ -289,8 +288,7 @@ function handleGetIoProperties()
 			
 			it("Property Object Returned", function()
 			{
-				commonFunctions.testPresent(propertyRes);
-				expect(propertyRes).to.be.an("object");
+				commonFunctions.testObject(propertyRes);
 			});
 			
 			it("Object Structure Valid", function()
@@ -355,8 +353,7 @@ function handleNodeConfig()
 		
 		it("Correct Return Structure", function(done)
 		{
-			commonFunctions.testPresent(nodeConfigObject);
-			expect(nodeConfigObject).to.be.an("object");
+			commonFunctions.testObject(nodeConfigObject);
 			commonFile.testNodeConfigObject(nodeConfigObject);
 			done();
 		});
@@ -407,7 +404,7 @@ function handleRegisterNode()
 			
 			it("Callback Function Returned", function(done)
 			{
-				commonFunctions.testPresent(registerSpy.firstCall.returnValue);
+				expect(registerSpy.firstCall.returnValue).to.exist;
 				expect(registerSpy.firstCall.returnValue).to.be.a("function");
 				registerReturn = registerSpy.firstCall.returnValue;
 				done();
@@ -427,7 +424,7 @@ function handleRegisterNode()
 			
 			it("Callback Function Remembered", function(done)
 			{
-				commonFunctions.testPresent(registerReturn);
+				expect(registerReturn).to.exist;
 				expect(registerReturn).to.be.a("function");
 				done();
 			});
@@ -447,9 +444,9 @@ function handleRegisterNode()
 			it("Unregister Function Successful", function(done)
 			{
 				expect(unregisterNodeSpy.calledOnce).to.be.true;
-				commonFunctions.testPresent(unregisterNodeSpy.firstCall);
+				expect(unregisterNodeSpy.firstCall).to.exist;
 				
-				commonFunctions.testPresent(unregisterNodeSpy.firstCall.args);
+				expect(unregisterNodeSpy.firstCall.args).to.exist;
 				expect(unregisterNodeSpy.firstCall.args).to.be.an("array");
 				expect(unregisterNodeSpy.firstCall.args).to.deep.equal([]);
 				

@@ -53,7 +53,7 @@ function checkDefinitionObject()
 		it("Function Works", function()
 		{
 			definitionArray = databaseFile.getSupportedDatabases();
-			commonFunctions.testPresent(definitionArray);
+			expect(definitionArray).to.exist;
 		});
 		
 		it("Correct Return Structure", function()

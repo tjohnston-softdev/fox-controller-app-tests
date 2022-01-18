@@ -35,7 +35,7 @@ function handlePrepare()
 	{
 		it("Supported Models Retrieved", function(done)
 		{
-			commonFunctions.testPresent(modelArray);
+			expect(modelArray).to.exist;
 			arrayFunctions.testPopulated(modelArray);
 			arrayFunctions.testAllType(modelArray, 'object');
 			
@@ -44,7 +44,7 @@ function handlePrepare()
 		
 		it("Create Device URL Written", function(done)
 		{
-			commonFunctions.testPresent(deviceCreateUrl);
+			expect(deviceCreateUrl).to.exist;
 			commonFunctions.testString(deviceCreateUrl);
 			done();
 		});
@@ -134,7 +134,7 @@ function addCurrentSupportedModel(baseModel)
 		deviceCommon.testFrontendAdded(addRead);
 		deviceCommon.testFrontendIdValid(addRead.id);
 		
-		commonFunctions.testPresent(addRead.id);
+		expect(addRead.id).to.exist;
 		commonFunctions.testString(addRead.id);
 		
 		newObjectID = addRead.id;

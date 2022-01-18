@@ -146,8 +146,7 @@ function verifyTimeoutRequest()
 
 function checkRequestReturn(replyObject)
 {
-	commonFunctions.testPresent(replyObject);
-	expect(replyObject).to.be.an("object");
+	commonFunctions.testObject(outputObject);
 	
 	validateCommonProperty(replyObject, "statusCode", "number");
 	validateCommonProperty(replyObject, "bytes", "number");
@@ -169,8 +168,7 @@ function checkModifyOutcome(replyObject, correctStatus, correctMethod)
 {
 	var outputObject = replyObject.body;
 	
-	commonFunctions.testPresent(outputObject);
-	expect(outputObject).to.be.an("object");
+	commonFunctions.testObject(outputObject);
 	expect(replyObject.statusCode).to.equal(correctStatus);
 	
 	validateCommonProperty(replyObject, "parser", "string");

@@ -57,7 +57,7 @@ function handleFileList()
 		
 		it("Correct Array Structure", function()
 		{
-			commonFunctions.testPresent(fileListRead);
+			expect(fileListRead).to.exist;
 			arrayFunctions.testEmpty(fileListRead);
 			arrayFunctions.testAllType(fileListRead, 'object');
 		});
@@ -249,8 +249,7 @@ function handleGlobalStatus()
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctions.testPresent(statusRead);
-			expect(statusRead).to.be.an("object");
+			commonFunctions.testObject(statusRead);
 		});
 		
 		it("Correct Properties", function()

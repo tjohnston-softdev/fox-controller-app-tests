@@ -9,9 +9,7 @@ const requestFile = require(commonPaths.requestApi);
 
 function testProcessReturnObject(procObj)
 {
-	commonFunctions.testPresent(procObj);
-	expect(procObj).to.be.an("object");
-	
+	commonFunctions.testObject(procObj);
 	objectFunctions.testPropExists(procObj, 'success');
 	expect(procObj.success).to.be.true;
 }

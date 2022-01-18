@@ -40,8 +40,8 @@ function checkFiles()
 	{
 		it("Loaded", function()
 		{
-			commonFunctions.testPresent(deviceModelFile);
-			commonFunctions.testPresent(deviceConnectFile);
+			expect(deviceModelFile).to.exist;
+			expect(deviceConnectFile).to.exist;
 		});
 	});
 }
@@ -53,13 +53,13 @@ function handleDeviceConstructors()
 	{
 		it(storeDeviceDesc, function()
 		{
-			commonFunctions.testPresent(deviceModelFile.StoredDevice);
+			expect(deviceModelFile.StoredDevice).to.exist;
 			expect(deviceModelFile.StoredDevice).to.be.a("function");
 		});
 		
 		it(connectDesc, function()
 		{
-			commonFunctions.testPresent(deviceConnectFile.ConnectedDevice);
+			expect(deviceConnectFile.ConnectedDevice).to.exist;
 			expect(deviceConnectFile.ConnectedDevice).to.be.a("function");
 		});
 		
@@ -79,8 +79,7 @@ function handleDeviceClasses()
 		{
 			storeDeviceValid = new deviceModelFile.StoredDevice(testDeviceValidModel);
 			
-			commonFunctions.testPresent(storeDeviceValid);
-			expect(storeDeviceValid).to.be.an("object");
+			commonFunctions.testObject(storeDeviceValid);
 			verifyStoredDeviceReturn(testDeviceValidModel, storeDeviceValid);
 			
 			done();
@@ -175,9 +174,7 @@ function handleDeviceClasses()
 		{
 			var connectRes = new deviceConnectFile.ConnectedDevice(storeDeviceValid);
 			
-			commonFunctions.testPresent(connectRes);
-			expect(connectRes).to.be.an("object");
-			
+			commonFunctions.testObject(connectRes);
 			objectFunctions.testPropExists(connectRes, 'storedDevice');
 			objectFunctions.testPropType(connectRes, 'storedDevice', 'object');
 			expect(connectRes.storedDevice).to.equal(storeDeviceValid);
@@ -336,8 +333,7 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 
 function verifyStoredDeviceReturn(sObject, rObject)
 {
-	commonFunctions.testPresent(rObject);
-	expect(rObject).to.be.an("object");
+	commonFunctions.testObject(rObject);
 	commonFile.testDeviceDeleted(rObject);
 	
 	objectFunctions.testSameValues(sObject, rObject, 'id');

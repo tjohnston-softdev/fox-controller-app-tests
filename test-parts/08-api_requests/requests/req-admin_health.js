@@ -56,8 +56,7 @@ function getHealthObject()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctions.testPresent(healthObject);
-			expect(healthObject).to.be.an("object");
+			commonFunctions.testObject(healthObject);
 			done();
 		});
 		

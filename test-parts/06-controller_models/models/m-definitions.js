@@ -33,14 +33,14 @@ function checkFiles()
 	{
 		it("Remote IO Settings Loaded", function()
 		{
-			commonFunctions.testPresent(ioFile);
+			expect(ioFile).to.exist;
 		});
 		
 		it("Model Definitions Loaded", function()
 		{
-			commonFunctions.testPresent(advantechModels);
-			commonFunctions.testPresent(moxaModels);
-			commonFunctions.testPresent(sonoffModels);
+			expect(advantechModels).to.exist;
+			expect(moxaModels).to.exist;
+			expect(sonoffModels).to.exist;
 		});
 		
 	});
@@ -65,7 +65,7 @@ function checkManufacturerArrayRead(modelArr)
 	{
 		it("Successfully Read", function()
 		{
-			commonFunctions.testPresent(modelArr);
+			expect(modelArr).to.exist;
 			arrayFunctions.testPopulated(modelArr);
 		});
 		

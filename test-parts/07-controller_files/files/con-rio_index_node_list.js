@@ -66,7 +66,7 @@ function handleNodeListFull()
 		
 		it("Node Array Returned", function()
 		{
-			commonFunctions.testPresent(retrievedNodeList);
+			expect(retrievedNodeList).to.exist;
 			expect(retrievedNodeList).to.be.an("array");
 		});
 		
@@ -136,17 +136,17 @@ function handleNodeListDispose()
 function verifyNodeListCalled(nArg)
 {
 	expect(nodeListSpy.called).to.be.true;
-	commonFunctions.testPresent(nodeListSpy.lastCall);
+	expect(nodeListSpy.lastCall).to.exist;
 	
-	commonFunctions.testPresent(nodeListSpy.lastCall.args);
+	expect(nodeListSpy.lastCall.args).to.exist;
 	arrayFunctions.testPopulated(nodeListSpy.lastCall.args);
 	
 	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);
 	
-	commonFunctions.testPresent(nodeListSpy.lastCall.args[1]);
+	expect(nodeListSpy.lastCall.args[1]).to.exist;
 	expect(nodeListSpy.lastCall.args[1]).to.be.a("function");
 	
-	commonFunctions.testPresent(nodeListSpy.lastCall.callback);
+	expect(nodeListSpy.lastCall.callback).to.exist;
 	expect(nodeListSpy.lastCall.callback).to.be.a("function");
 }
 
@@ -157,7 +157,7 @@ function verifyNodeListManufacturer(mName, mError, mDevices)
 	expect(nodeListSpy.lastCall.exception).to.be.undefined;
 	expect(mError).to.be.null;
 	
-	commonFunctions.testPresent(mDevices);
+	expect(mDevices).to.exist;
 	expect(mDevices).to.be.an("array");
 	rioSubCommonFile.testPropertyArray(mDevices);
 }

@@ -33,7 +33,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctions.testPresent(factoryFile);
+			expect(factoryFile).to.exist;
 		});
 	});
 }
@@ -45,7 +45,7 @@ function handleRemoteIoModuleFunction()
 	{
 		it("Exists", function()
 		{
-			commonFunctions.testPresent(factoryFile.RemoteIoModule);
+			expect(factoryFile.RemoteIoModule).to.exist;
 			expect(factoryFile.RemoteIoModule).to.be.a("function");
 		});
 		
@@ -53,9 +53,7 @@ function handleRemoteIoModuleFunction()
 		it("Call - Valid", function()
 		{
 			var moduleRes = factoryFile.RemoteIoModule(remoteIoTestDevice);
-			
-			commonFunctions.testPresent(moduleRes);
-			expect(moduleRes).to.be.an("object");
+			commonFunctions.testObject(moduleRes);
 			rioFactoryReturn.checkValid(moduleRes);
 		});
 		

@@ -53,7 +53,7 @@ function handleSupportedModels()
 	{
 		it("Retrieved Successfully", function(done)
 		{
-			commonFunctions.testPresent(modelObjectArray);
+			expect(modelObjectArray).to.exist;
 			arrayFunctions.testPopulated(modelObjectArray);
 			done();
 		});
@@ -97,8 +97,7 @@ function handleDeviceDefaultValues()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctions.testPresent(defaultsRead);
-			expect(defaultsRead).to.be.an("object");
+			commonFunctions.testObject(defaultsRead);
 			done();
 		});
 		
@@ -213,8 +212,7 @@ function handleCreateDeviceTest()
 			
 			it("Object Returned", function(done)
 			{
-				commonFunctions.testPresent(createRead);
-				expect(createRead).to.be.an("object");
+				commonFunctions.testObject(createRead);
 				done();
 			});
 			
@@ -233,7 +231,7 @@ function handleCreateDeviceTest()
 			
 			it("Test ID Retained", function(done)
 			{
-				commonFunctions.testPresent(testID);
+				expect(testID).to.exist;
 				commonFunctions.testString(testID);
 				done();
 			});
@@ -309,8 +307,7 @@ function handleReadDeviceTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctions.testPresent(deviceRead);
-			expect(deviceRead).to.be.an("object");
+			commonFunctions.testObject(deviceRead);
 			done();
 		});
 		
@@ -362,8 +359,7 @@ function handleDeviceStatusTest()
 		
 		it("Status Object Returned", function(done)
 		{
-			commonFunctions.testPresent(statusRead);
-			expect(statusRead).to.be.an("object");
+			commonFunctions.testObject(statusRead);
 			done();
 		});
 		
@@ -427,8 +423,7 @@ function handleUpdateDeviceTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctions.testPresent(modifyRead);
-			expect(modifyRead).to.be.an("object");
+			commonFunctions.testObject(modifyRead);
 			done();
 		});
 		
@@ -486,9 +481,7 @@ function handleUpdateReviewTest()
 		
 		it("Return Valid", function(done)
 		{
-			commonFunctions.testPresent(reviewRead);
-			expect(reviewRead).to.be.an("object");
-			
+			commonFunctions.testObject(reviewRead);
 			rioCommon.testDeviceObject(reviewRead);
 			expect(reviewRead.id).to.equal(testID);
 			
@@ -529,8 +522,7 @@ function handleDeleteFlagTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctions.testPresent(flagRead);
-			expect(flagRead).to.be.an("object");
+			commonFunctions.testObject(flagRead);
 			done();
 		});
 		
@@ -568,8 +560,7 @@ function handleDeleteObjectTest()
 		
 		it("Object Returned", function(done)
 		{
-			commonFunctions.testPresent(deleteRead);
-			expect(deleteRead).to.be.an("object");
+			commonFunctions.testObject(deleteRead);
 			done();
 		});
 		

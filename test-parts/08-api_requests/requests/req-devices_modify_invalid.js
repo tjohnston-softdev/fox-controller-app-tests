@@ -62,7 +62,7 @@ function handlePrepare()
 		{
 			urlList = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			
-			commonFunctions.testPresent(urlList);
+			expect(urlList).to.exist;
 			commonFunctions.testString(urlList);
 			
 			done();
@@ -73,7 +73,7 @@ function handlePrepare()
 		{
 			urlCreate = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 			
-			commonFunctions.testPresent(urlCreate);
+			expect(urlCreate).to.exist;
 			commonFunctions.testString(urlCreate);
 			
 			done();
@@ -175,7 +175,7 @@ function handleTestAdd()
 		{
 			testObjectLink = deviceCommon.getRudUrl(testObjectID);
 			
-			commonFunctions.testPresent(testObjectLink);
+			expect(testObjectLink).to.exist;
 			commonFunctions.testString(testObjectLink);
 			
 			done();

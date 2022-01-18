@@ -46,19 +46,19 @@ function checkFiles()
 	{
 		it("Remote IO Settings Loaded", function()
 		{
-			commonFunctions.testPresent(ioSetFile);
+			expect(ioSetFile).to.exist;
 		});
 		
 		it("Model Definitions Loaded", function()
 		{
-			commonFunctions.testPresent(advantechModels);
-			commonFunctions.testPresent(moxaModels);
-			commonFunctions.testPresent(sonoffModels);
+			expect(advantechModels).to.exist;
+			expect(moxaModels).to.exist;
+			expect(sonoffModels).to.exist;
 		});
 		
 		it("Device Settings Loaded", function()
 		{
-			commonFunctions.testPresent(settingsFile);
+			expect(settingsFile).to.exist;
 		});
 		
 	});
@@ -71,8 +71,7 @@ function checkSupportedModelDefinitions()
 	{
 		it("Valid Object Type", function()
 		{
-			commonFunctions.testPresent(supportedListObject);
-			expect(supportedListObject).to.be.an("object");
+			commonFunctions.testObject(supportedListObject);
 		});
 		
 		it("Manufacturers", function()
@@ -123,7 +122,7 @@ function checkDeviceTypeArrayProperty()
 		it("Exists", function()
 		{
 			objectFunctions.testPropExists(settingsFile, 'deviceTypes');
-			commonFunctions.testPresent(settingsFile.deviceTypes);
+			expect(settingsFile.deviceTypes).to.exist;
 		});
 		
 		it("Populated Array", function()
@@ -288,8 +287,7 @@ function checkGetModelFunction()
 		{
 			var supportedRes = settingsFile.getModel(testModelName);
 			
-			commonFunctions.testPresent(supportedRes);
-			expect(supportedRes).to.be.an("object");
+			commonFunctions.testObject(supportedRes);
 			
 			objectFunctions.testPropExists(supportedRes, 'modelType');
 			objectFunctions.testPropType(supportedRes, 'modelType', 'string');
@@ -317,7 +315,7 @@ function checkManufacturerListProperty()
 		it("Exists", function()
 		{
 			objectFunctions.testPropExists(settingsFile, 'listRioMakers');
-			commonFunctions.testPresent(settingsFile.listRioMakers);
+			expect(settingsFile.listRioMakers).to.exist;
 		});
 		
 		it("Array", function()
@@ -345,7 +343,7 @@ function checkModelTypeListProperty()
 		it("Exists", function()
 		{
 			objectFunctions.testPropExists(settingsFile, 'listRioModelTypes');
-			commonFunctions.testPresent(settingsFile.listRioModelTypes);
+			expect(settingsFile.listRioModelTypes).to.exist;
 		});
 		
 		it("Array", function()

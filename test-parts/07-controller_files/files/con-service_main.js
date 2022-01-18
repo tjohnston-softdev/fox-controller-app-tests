@@ -28,7 +28,7 @@ function checkFile()
 	{
 		it("Loaded", function()
 		{
-			commonFunctions.testPresent(serviceFile);
+			expect(serviceFile).to.exist;
 		});
 	});
 }

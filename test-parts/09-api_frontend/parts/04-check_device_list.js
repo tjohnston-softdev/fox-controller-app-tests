@@ -31,7 +31,7 @@ function handleCheckPrepare()
 		it("Device List Retrieved From Cache", function(done)
 		{
 			listTest = retrieveListFromCache();
-			commonFunctions.testPresent(listTest);
+			expect(listTest).to.exist;
 			done();
 		});
 		
@@ -48,7 +48,7 @@ function handleCheckPrepare()
 		{
 			var addCount = retrieveCountFromCache();
 			
-			commonFunctions.testPresent(addCount);
+			expect(addCount).to.exist;
 			expect(addCount).to.be.a("number");
 			expect(addCount).to.be.above(0);
 			

@@ -212,8 +212,7 @@ function sendDelete(httpURL, permHeader, httpCallback)
 function handleCallbackArguments(argError, argResp)
 {
 	expect(argError).to.be.null;
-	commonFunctions.testPresent(argResp);
-	expect(argResp).to.be.an("object");
+	commonFunctions.testObject(argResp);
 }
 
 
@@ -228,9 +227,7 @@ function handleInvalidStatus(respObj, sInput)
 {
 	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
-	commonFunctions.testPresent(extractedObject);
-	expect(extractedObject).to.be.an("object");
-	
+	commonFunctions.testObject(extractedObject);
 	objectFunctions.testPropExists(extractedObject, 'id');
 	objectFunctions.testPropExists(extractedObject, 'isRunning');
 	
@@ -243,8 +240,7 @@ function handleInvalidDelete(respObj)
 {
 	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
-	commonFunctions.testPresent(extractedObject);
-	expect(extractedObject).to.be.an("object");
+	commonFunctions.testObject(extractedObject);
 	objectFunctions.testPropExists(extractedObject, 'success');
 	expect(extractedObject.success).to.be.true;
 }

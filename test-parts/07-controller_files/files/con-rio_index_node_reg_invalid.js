@@ -128,7 +128,7 @@ function handleTestDevice()
 			expect(addSpy.lastCall.exception).to.be.undefined;
 			expect(addError).to.be.null;
 			
-			commonFunctions.testPresent(addID);
+			expect(addID).to.exist;
 			commonFunctions.testString(addID);
 					
 			testID = addID;
@@ -137,7 +137,7 @@ function handleTestDevice()
 		
 		it("Test ID Retained", function(done)
 		{
-			commonFunctions.testPresent(testID);
+			expect(testID).to.exist;
 			commonFunctions.testString(testID);
 			expect(testID).to.equal(addID);
 			done();
@@ -164,8 +164,7 @@ function handleTestConfig()
 		
 		it("Correct Return Structure", function()
 		{
-			commonFunctions.testPresent(registerConfigObject);
-			expect(registerConfigObject).to.be.an("object");
+			commonFunctions.testObject(registerConfigObject);
 			commonFile.testNodeConfigObject(registerConfigObject);
 		});
 		

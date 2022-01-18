@@ -57,7 +57,7 @@ function handleRetrieve()
 		it("Supported Models Retrieved", function(done)
 		{
 			modelReferenceArray = testCacheFile.getSupportedModels();
-			commonFunctions.testPresent(modelReferenceArray);
+			expect(modelReferenceArray).to.exist;
 			arrayFunctions.testPopulated(modelReferenceArray);
 			arrayFunctions.testAllType(modelReferenceArray, 'object');
 			

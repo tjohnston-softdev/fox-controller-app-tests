@@ -49,7 +49,7 @@ function handleDhcpClients()
 		
 		it("Correct Array Structure", function()
 		{
-			commonFunctions.testPresent(dhcpRead);
+			expect(dhcpRead).to.exist;
 			arrayFunctions.testPopulated(dhcpRead);
 			arrayFunctions.testAllType(dhcpRead, 'object');
 		});
@@ -108,9 +108,7 @@ function handleDefaultObject()
 		
 		it("Correct Object Returned", function()
 		{
-			commonFunctions.testPresent(defaultRead);
-			expect(defaultRead).to.be.an("object");
-			
+			commonFunctions.testObject(defaultRead);
 			objectFunctions.testPropExists(defaultRead, 'message');
 			expect(defaultRead.message).to.equal("adminApi");
 		});
@@ -144,9 +142,7 @@ function handleLog()
 	
 		it("Valid Return Structure", function()
 		{
-			commonFunctions.testPresent(logRead);
-			expect(logRead).to.be.an("object");
-		
+			commonFunctions.testObject(logRead);
 			objectFunctions.testPropExists(logRead, 'success');
 			objectFunctions.testPropExists(logRead, 'logs');
 		});
