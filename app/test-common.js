@@ -27,6 +27,12 @@ function checkBinary(numVal)
 	expect(numVal).to.be.oneOf([0, 1]);
 }
 
+function checkBoolean(boolVal)
+{
+	expect(boolVal).to.exist;
+	expect(boolVal).to.be.a("boolean");
+}
+
 
 function checkPercent(percVal)
 {
@@ -75,6 +81,7 @@ module.exports =
 	testFunction: checkFunction,
 	testObject: checkObject,
 	testBinary: checkBinary,
+	testBoolean: checkBoolean,
 	testPercent: checkPercent,
 	testString: checkString,
 	testInvalidResult: checkInvalidFunctionResult,
