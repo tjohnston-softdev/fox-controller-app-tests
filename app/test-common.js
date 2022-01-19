@@ -33,6 +33,12 @@ function checkBoolean(boolVal)
 	expect(boolVal).to.be.a("boolean");
 }
 
+function checkNumber(numVal)
+{
+	expect(numVal).to.exist;
+	expect(numVal).to.be.a("number");
+}
+
 
 function checkPercent(percVal)
 {
@@ -82,6 +88,7 @@ module.exports =
 	testObject: checkObject,
 	testBinary: checkBinary,
 	testBoolean: checkBoolean,
+	testNumber: checkNumber,
 	testPercent: checkPercent,
 	testString: checkString,
 	testInvalidResult: checkInvalidFunctionResult,
