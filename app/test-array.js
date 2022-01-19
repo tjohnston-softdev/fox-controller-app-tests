@@ -51,8 +51,9 @@ function checkAllType(arrDef, eType)
 	for (objectInd = 0; objectInd < arrDef.length; objectInd = objectInd + 1)
 	{
 		currentObject = arrDef[objectInd];
+		
+		expect(currentObject).to.exist;
 		expect(currentObject).to.be.an(eType);
-		objectInd = objectInd + 1;
 	}	
 }
 
@@ -73,7 +74,9 @@ function checkAllPropType(aDef, pName, pType)
 	{
 		currentObject = aDef[oInd];
 		currentVal = currentObject[pName];
-		expect(currentVal).to.be.a(pType).and.is.not.null.and.is.not.undefined;
+		expect(currentVal).to.exist;
+		expect(currentVal).to.be.a(pType);
+		
 		oInd = oInd + 1;
 	}
 }
@@ -103,10 +106,9 @@ function checkAllStringRequired(aDef, pName)
 		currentObject = aDef[oInd];
 		currentVal = currentObject[pName];
 		
+		expect(currentVal).to.exist;
 		expect(currentVal).to.be.a('string');
 		expect(currentVal.length).to.be.at.least(1);
-		
-		oInd = oInd + 1;
 	}
 }
 

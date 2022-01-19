@@ -22,9 +22,7 @@ function readCurrentObject(oDef, tgtVal)
 {
 	var valueArray = getObjectValues(oDef);
 	var valueIndex = valueArray.indexOf(tgtVal);
-	
-	expect(valueIndex).to.be.at.least(0);
-	expect(valueIndex).to.be.below(valueArray.length);
+	expect(valueIndex).to.be.within(0, valueArray.length - 1);
 }
 
 

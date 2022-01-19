@@ -10,8 +10,7 @@ function checkAllPropsType(objDef, allType)
 	for (currentProp in objDef)
 	{
 		currentVal = objDef[currentProp];
-		expect(currentVal).to.not.be.undefined;
-		expect(currentVal).to.not.be.null;
+		expect(currentVal).to.exist;
 		expect(currentVal).to.be.an(allType);
 	}
 }
@@ -79,7 +78,9 @@ function checkPropExists(oDef, pName)
 
 function checkPropType(oDef, pName, pType)
 {
-	expect(oDef[pName]).to.be.a(pType).and.is.not.null.and.is.not.undefined;
+	var pValue = oDef[pName];
+	expect(pValue).to.exist;
+	expect(pValue).to.be.a(pType);
 }
 
 
