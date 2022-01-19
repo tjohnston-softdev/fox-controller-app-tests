@@ -66,7 +66,7 @@ function handleRegisterNodeObject()
 	var getRegisterName = 'nodeConfigObject';
 	var registerResult = null;
 	
-	testObjectFunction('getRegisterNode');
+	testCommon.testFunction(commonObjectsFile.getRegisterNode);
 	registerResult = commonObjectsFile.getRegisterNode("Example Device", "Example Node", "RO-0");
 	
 	testCommon.testObject(registerResult);
@@ -86,12 +86,6 @@ function handleRegisterNodeObject()
 	testCommon.testString(registerResult.z);
 	testCommon.testString(registerResult.deviceId);
 	testCommon.testString(registerResult.ioSetId);
-}
-
-function testObjectFunction(funcName)
-{
-	var functionValue = commonObjectsFile[funcName];
-	expect(functionValue).to.be.a("function");
 }
 
 function testObjectProperty(tObject, propName, desiredType)

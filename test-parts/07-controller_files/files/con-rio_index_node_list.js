@@ -134,18 +134,19 @@ function handleNodeListDispose()
 
 function verifyNodeListCalled(nArg)
 {
+	var firstArg = null;
+	var secondArg = null;
+	
 	expect(nodeListSpy.called).to.be.true;
 	expect(nodeListSpy.lastCall).to.exist;
 	
 	arrayFunctions.testPopulated(nodeListSpy.lastCall.args);
+	firstArg = nodeListSpy.lastCall.args[0];
+	secondArg = nodeListSpy.lastCall.args[1];
 	
-	expect(nodeListSpy.lastCall.args[0]).to.equal(nArg);
-	
-	expect(nodeListSpy.lastCall.args[1]).to.exist;
-	expect(nodeListSpy.lastCall.args[1]).to.be.a("function");
-	
-	expect(nodeListSpy.lastCall.callback).to.exist;
-	expect(nodeListSpy.lastCall.callback).to.be.a("function");
+	expect(firstArg).to.equal(nArg);
+	commonFunctions.testFunction(secondArg);
+	commonFunctions.testFunction(nodeListSpy.lastCall.callback);
 }
 
 

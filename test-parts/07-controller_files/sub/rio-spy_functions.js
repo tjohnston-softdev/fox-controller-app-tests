@@ -9,15 +9,16 @@ const arrayFunctions = require(commonPaths.testArray);
 
 function verifyRemoteIoList(listError, listCalled, callObject)
 {
+	var firstArg = null;
+	
 	expect(listCalled).to.be.true;
 	expect(callObject).to.exist;
 	
 	arrayFunctions.testPopulated(callObject.args);
-	expect(callObject.args[0]).to.exist;
-	expect(callObject.args[0]).to.be.a("function");
+	firstArg = callObject.args[0];
+	commonFunctions.testFunction(firstArg);
 	
-	expect(callObject.callback).to.exist;
-	expect(callObject.callback).to.be.a("function");
+	commonFunctions.testFunction(callObject.callback);
 					
 	expect(callObject.exception).to.be.undefined;
 	expect(listError).to.be.null;
@@ -26,33 +27,41 @@ function verifyRemoteIoList(listError, listCalled, callObject)
 
 function verifyDevice(deviceArg, deviceCalled, callObject)
 {
+	var firstArg = null;
+	var secondArg = null;
+	
 	expect(deviceCalled).to.be.true;
 	expect(callObject).to.exist;
 	
 	arrayFunctions.testPopulated(callObject.args);
+	firstArg = callObject.args[0];
+	secondArg = callObject.args[1];
 	
-	expect(callObject.args[0]).to.equal(deviceArg);
+	expect(firstArg).to.equal(deviceArg);
+	commonFunctions.testFunction(secondArg);
 	
-	expect(callObject.args[1]).to.exist;
-	expect(callObject.args[1]).to.be.a("function");
-	
-	expect(callObject.callback).to.exist;
-	expect(callObject.callback).to.be.a("function");
+	commonFunctions.testFunction(callObject.callback);
 }
 
 
 function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 {
+	var firstArg = null;
+	var secondArg = null;
+	var thirdArg = null;
+	
 	expect(regCalled).to.be.true;
 	expect(callObject).to.exist;
 	
 	arrayFunctions.testPopulated(callObject.args);
 	
-	expect(callObject.args[0]).to.equal(aMode);
-	expect(callObject.args[1]).to.equal(aObject);
+	firstArg = callObject.args[0];
+	secondArg = callObject.args[1];
+	thirdArg = callObject.args[2];
 	
-	expect(callObject.args[2]).to.exist;
-	expect(callObject.args[2]).to.be.a("function");
+	expect(firstArg).to.equal(aMode);
+	expect(secondArg).to.equal(aObject);
+	commonFunctions.testFunction(thirdArg);
 }
 
 
@@ -70,19 +79,24 @@ function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aTog
 
 function verifyDeleteDevice(deleteArg, flagArg, deleteCalled, callObject)
 {
+	var firstArg = null;
+	var secondArg = null;
+	var thirdArg = null;
+	
 	expect(deleteCalled).to.be.true;
 	expect(callObject).to.exist;
 	
 	arrayFunctions.testPopulated(callObject.args);
 	
-	expect(callObject.args[0]).to.equal(deleteArg);
-	expect(callObject.args[1]).to.equal(flagArg);
+	firstArg = callObject.args[0];
+	secondArg = callObject.args[1];
+	thirdArg = callObject.args[2];
 	
-	expect(callObject.args[2]).to.exist;
-	expect(callObject.args[2]).to.be.a("function");
+	expect(firstArg).to.equal(deleteArg);
+	expect(secondArg).to.equal(flagArg);
+	commonFunctions.testFunction(thirdArg);
 	
-	expect(callObject.callback).to.exist;
-	expect(callObject.callback).to.be.a("function");
+	commonFunctions.testFunction(callObject.callback);
 }
 
 module.exports =

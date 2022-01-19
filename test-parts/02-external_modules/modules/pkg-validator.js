@@ -30,14 +30,12 @@ function verifyFunctionsExist()
 	{
 		it("IP Address (isIP)", function()
 		{
-			expect(isIP).to.exist;
-			expect(isIP).to.be.a("function");
+			commonFunctions.testFunction(isIP);
 		});
 		
 		it("MAC Address (isMACAddress)", function()
 		{
-			expect(isMACAddress).to.exist;
-			expect(isMACAddress).to.be.a("function");
+			commonFunctions.testFunction(isMACAddress);
 		});
 		
 	});

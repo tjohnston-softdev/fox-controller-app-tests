@@ -45,8 +45,7 @@ function handleRemoteIoModuleFunction()
 	{
 		it("Exists", function()
 		{
-			expect(factoryFile.RemoteIoModule).to.exist;
-			expect(factoryFile.RemoteIoModule).to.be.a("function");
+			commonFunctions.testFunction(factoryFile.RemoteIoModule);
 		});
 		
 		

@@ -402,8 +402,7 @@ function handleRegisterNode()
 			
 			it("Callback Function Returned", function(done)
 			{
-				expect(registerSpy.firstCall.returnValue).to.exist;
-				expect(registerSpy.firstCall.returnValue).to.be.a("function");
+				commonFunctions.testFunction(registerSpy.firstCall.returnValue);
 				registerReturn = registerSpy.firstCall.returnValue;
 				done();
 			});
@@ -422,8 +421,7 @@ function handleRegisterNode()
 			
 			it("Callback Function Remembered", function(done)
 			{
-				expect(registerReturn).to.exist;
-				expect(registerReturn).to.be.a("function");
+				commonFunctions.testFunction(registerReturn);
 				done();
 			});
 			

@@ -53,14 +53,12 @@ function handleDeviceConstructors()
 	{
 		it(storeDeviceDesc, function()
 		{
-			expect(deviceModelFile.StoredDevice).to.exist;
-			expect(deviceModelFile.StoredDevice).to.be.a("function");
+			commonFunctions.testFunction(deviceModelFile.StoredDevice);
 		});
 		
 		it(connectDesc, function()
 		{
-			expect(deviceConnectFile.ConnectedDevice).to.exist;
-			expect(deviceConnectFile.ConnectedDevice).to.be.a("function");
+			commonFunctions.testFunction(deviceConnectFile.ConnectedDevice);
 		});
 		
 	});

@@ -8,6 +8,13 @@ function checkPlaceholder()
 	expect(true).to.be.true;
 }
 
+
+function checkFunction(funVal)
+{
+	expect(funVal).to.exist;
+	expect(funVal).to.be.a("function");
+}
+
 function checkObject(objVal)
 {
 	expect(objVal).to.exist;
@@ -65,6 +72,7 @@ function cloneJsonObject(originalObject)
 module.exports =
 {
 	testPlaceholder: checkPlaceholder,
+	testFunction: checkFunction,
 	testObject: checkObject,
 	testBinary: checkBinary,
 	testPercent: checkPercent,

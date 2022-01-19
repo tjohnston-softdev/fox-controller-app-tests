@@ -114,16 +114,16 @@ function handleInitializationCompleteFunction()
 		
 		it("Event Successful", function(done)
 		{
+			var firstArg = null;
+			
 			expect(compSpy.calledOnce).to.be.true;
 			expect(compSpy.firstCall).to.exist;
 			
 			arrayFunctions.testPopulated(compSpy.firstCall.args);
+			firstArg = compSpy.firstCall.args[0];
+			commonFunctions.testFunction(firstArg);
 			
-			expect(compSpy.firstCall.args[0]).to.exist;
-			expect(compSpy.firstCall.args[0]).to.be.a("function");
-			
-			expect(compSpy.firstCall.callback).to.exist;
-			expect(compSpy.firstCall.callback).to.be.a("function");
+			commonFunctions.testFunction(compSpy.firstCall.callback);
 			
 			expect(compSpy.firstCall.exception).to.be.undefined;
 			expect(triggerFlag).to.be.true;
@@ -155,9 +155,7 @@ function checkFunctionDefinitionLoop(nameArray)
 	{
 		currentName = nameArray[loopIndex];
 		currentFunction = indexFile[currentName];
-		
-		expect(currentFunction).to.exist;
-		expect(currentFunction).to.be.a("function");
+		commonFunctions.testFunction(currentFunction);
 	}
 }
 
