@@ -28,8 +28,7 @@ function verifyGetRequest()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(needle, "get");
-			objectFunctions.testPropType(needle, "get", "function");
+			commonFunctions.testFunction(needle.get);
 		});
 		
 		it("Request Successful", function(done)
@@ -53,8 +52,7 @@ function verifyPostRequest()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(needle, "post");
-			objectFunctions.testPropType(needle, "post", "function");
+			commonFunctions.testFunction(needle.post);
 		});
 		
 		it("Request Successful", function(done)
@@ -79,8 +77,7 @@ function verifyPutRequest()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(needle, "put");
-			objectFunctions.testPropType(needle, "put", "function");
+			commonFunctions.testFunction(needle.put);
 		});
 		
 		it("Request Successful", function(done)
@@ -105,8 +102,8 @@ function verifyDeleteRequest()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(needle, "delete");
-			objectFunctions.testPropType(needle, "delete", "function");
+			var delFunc = needle["delete"];
+			commonFunctions.testFunction(delFunc);
 		});
 		
 		it("Request Successful", function(done)
@@ -147,11 +144,10 @@ function verifyTimeoutRequest()
 function checkRequestReturn(replyObject)
 {
 	commonFunctions.testObject(outputObject);
-	
-	validateCommonProperty(replyObject, "statusCode", "number");
-	validateCommonProperty(replyObject, "bytes", "number");
-	validateCommonProperty(replyObject, "req", "object");
-	objectFunctions.testPropExists(replyObject, "body");
+	commonFunctions.testNumber(replyObject.statusCode);
+	commonFunctions.testNumber(replyObject.bytes);
+	commonFunctions.testObject(replyObject.req);
+	expect(replyObject.body).to.exist;
 	expect(replyObject.bytes).to.be.above(0);
 }
 
@@ -167,11 +163,9 @@ function checkReadOutcome(replyObject)
 function checkModifyOutcome(replyObject, correctStatus, correctMethod)
 {
 	var outputObject = replyObject.body;
-	
 	commonFunctions.testObject(outputObject);
-	expect(replyObject.statusCode).to.equal(correctStatus);
 	
-	validateCommonProperty(replyObject, "parser", "string");
+	expect(replyObject.statusCode).to.equal(correctStatus);
 	expect(replyObject.parser).to.equal("json");
 	expect(replyObject.req).to.have.deep.property("method", correctMethod);
 }
@@ -186,14 +180,6 @@ function compareDataObjects(inputObject, replyObject, correctID)
 	expect(outputObject.title).to.equal(inputObject.title);
 	expect(outputObject.body).to.equal(inputObject.body);
 	expect(outputObject.userId).to.equal('1');
-}
-
-
-
-function validateCommonProperty(sourceObj, gProp, gType)
-{
-	objectFunctions.testPropExists(sourceObj, gProp);
-	objectFunctions.testPropType(sourceObj, gProp, gType);
 }
 
 

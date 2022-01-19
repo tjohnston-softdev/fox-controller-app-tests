@@ -19,7 +19,6 @@ function testValidatorDependency()
 		verifyExceptions();
 	});
 	
-	
 }
 
 
@@ -50,7 +49,6 @@ function verifyIpAddressFour()
 	
 	describe("IP Address - Version 4", function()
 	{
-		
 		it("Valid Format", function()
 		{
 			validResult = isIP(ipStrings.testString, 4);
@@ -142,7 +140,6 @@ function verifyMacAddress()
 			var invalidResult = isMACAddress(macInvalid);
 			expect(invalidResult).to.be.false;
 		});
-		
 		
 	});
 }
