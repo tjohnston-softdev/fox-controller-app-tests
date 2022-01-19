@@ -61,7 +61,6 @@ function checkPropertyListArray()
 		elementIndex = elementIndex + 1;
 	}
 	
-	expect(allElementsValid).to.be.true;
 }
 
 
@@ -96,7 +95,6 @@ function checkPaths()
 		pathIndex = pathIndex + 1;
 	}
 	
-	expect(allFilesExist).to.be.true;
 }
 
 
@@ -130,12 +128,8 @@ function handleFileExists(pName, relativePath)
 	var flaggedMessage = "";
 	
 	if (handleRes !== true)
-	{
-		flaggedMessage += "'foxPaths.";
-		flaggedMessage += pName;
-		flaggedMessage += "' path does not exist.\n";
-		flaggedMessage += absolutePath;
-		
+	{	
+		flaggedMessage = ["'foxPaths.", pName, "' path does not exist.\r\n\t", absolutePath].join("");
 		throw new Error(flaggedMessage);
 	}
 	
