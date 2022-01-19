@@ -2,9 +2,8 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonObjectsFile = require(commonPaths.commonObjects);
-const testCommon = require(commonPaths.testCommon);
-const testObject = require(commonPaths.testObject);
-const testArray = require(commonPaths.testArray);
+const commonFunctions = require(commonPaths.testCommon);
+const arrayFunctions = require(commonPaths.testArray);
 
 
 function testCommonObjects()
@@ -13,7 +12,7 @@ function testCommonObjects()
 	{
 		it("Unknown ID", function()
 		{
-			testCommon.testString(commonObjectsFile.unknownID);
+			commonFunctions.testString(commonObjectsFile.unknownID);
 		});
 		
 		it("Device Objects", function()
@@ -38,18 +37,18 @@ function handleDeviceObject(devicePropName)
 {
 	var deviceObj = commonObjectsFile[devicePropName];
 	
-	testCommon.testObject(deviceObj);
+	commonFunctions.testObject(deviceObj);
 	
-	testCommon.testString(deviceObj.id);
-	testCommon.testString(deviceObj.deviceType);
-	testCommon.testString(deviceObj.maker);
-	testCommon.testString(deviceObj.model);
-	testCommon.testString(deviceObj.name);
-	testCommon.testString(deviceObj.desc);
-	testCommon.testString(deviceObj.ipAddress);
-	testCommon.testString(deviceObj.username);
-	testCommon.testString(deviceObj.password);
-	testCommon.testBoolean(deviceObj.isEnabled);
+	commonFunctions.testString(deviceObj.id);
+	commonFunctions.testString(deviceObj.deviceType);
+	commonFunctions.testString(deviceObj.maker);
+	commonFunctions.testString(deviceObj.model);
+	commonFunctions.testString(deviceObj.name);
+	commonFunctions.testString(deviceObj.desc);
+	commonFunctions.testString(deviceObj.ipAddress);
+	commonFunctions.testString(deviceObj.username);
+	commonFunctions.testString(deviceObj.password);
+	commonFunctions.testBoolean(deviceObj.isEnabled);
 }
 
 function handleRegisterNodeObject()
@@ -57,19 +56,19 @@ function handleRegisterNodeObject()
 	var getRegisterName = 'nodeConfigObject';
 	var registerResult = null;
 	
-	testCommon.testFunction(commonObjectsFile.getRegisterNode);
+	commonFunctions.testFunction(commonObjectsFile.getRegisterNode);
 	registerResult = commonObjectsFile.getRegisterNode("Example Device", "Example Node", "RO-0");
 	
-	testCommon.testObject(registerResult);
+	commonFunctions.testObject(registerResult);
 	
-	testCommon.testString(registerResult.id);
-	testCommon.testString(registerResult.type);
-	testCommon.testString(registerResult.z);
-	testCommon.testString(registerResult.deviceId);
-	testCommon.testString(registerResult.ioSetId);
-	// X
-	// Y
-	testArray.testNeutral(wires.array);
+	commonFunctions.testString(registerResult.id);
+	commonFunctions.testString(registerResult.type);
+	commonFunctions.testString(registerResult.z);
+	commonFunctions.testString(registerResult.deviceId);
+	commonFunctions.testString(registerResult.ioSetId);
+	commonFunctions.testNumber(registerResult.x);
+	commonFunctions.testNumber(registerResult.y);
+	arrayFunctions.testNeutral(registerResult.wires);
 }
 
 module.exports = testCommonObjects;
