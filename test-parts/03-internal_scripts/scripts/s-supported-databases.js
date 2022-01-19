@@ -5,9 +5,9 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
-const objectFunctions = require(commonPaths.testObject);
 const databaseFile = require(commonPaths.supportedDatabases);
 
+chai.use(chaiThings);
 
 function testSupportedDatabases()
 {
@@ -25,12 +25,12 @@ function checkMarginNumber()
 	{
 		it("Property Exists", function()
 		{
-			objectFunctions.testPropExists(databaseFile, 'folderErrorMargin');
+			expect(databaseFile.folderErrorMargin).to.exist;
 		});
 		
 		it("Valid Number", function()
 		{
-			objectFunctions.testPropType(databaseFile, 'folderErrorMargin', 'number');
+			commonFunctions.testNumber(databaseFile.folderErrorMargin);
 			expect(databaseFile.folderErrorMargin).to.be.at.least(0);
 		});
 		
@@ -46,14 +46,12 @@ function checkDefinitionObject()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(databaseFile, 'getSupportedDatabases');
-			objectFunctions.testPropType(databaseFile, 'getSupportedDatabases', 'function');
+			commonFunctions.testFunction(databaseFile.getSupportedDatabases);
 		});
 		
 		it("Function Works", function()
 		{
 			definitionArray = databaseFile.getSupportedDatabases();
-			expect(definitionArray).to.exist;
 		});
 		
 		it("Correct Return Structure", function()
@@ -64,19 +62,12 @@ function checkDefinitionObject()
 		
 		it("Correct Properties", function()
 		{
-			arrayFunctions.testAllPropExists(definitionArray, 'dbName');
-			arrayFunctions.testAllPropExists(definitionArray, 'folder');
-			arrayFunctions.testAllPropExists(definitionArray, 'cleanSize');
+			expect(definitionArray).to.all.have.keys("dbName", "folder", "cleanSize");
 		});
 		
 		it("Correct Contents", function()
 		{
-			arrayFunctions.testAllPropType(definitionArray, 'dbName', 'string');
-			arrayFunctions.testAllPropType(definitionArray, 'folder', 'boolean');
-			arrayFunctions.testAllPropType(definitionArray, 'cleanSize', 'number');
-			
-			testDefinitionNames(definitionArray);
-			testDefinitionSizes(definitionArray);
+			testDefinitionContents(definitionArray);
 		});
 		
 	});
@@ -84,27 +75,18 @@ function checkDefinitionObject()
 
 
 
-
-function testDefinitionNames(dArray)
+function testDefinitionContents(defArray)
 {
 	var loopIndex = 0;
 	var currentObject = null;
 	
-	for (loopIndex = 0; loopIndex < dArray.length; loopIndex = loopIndex + 1)
+	for (loopIndex = 0; loopIndex < defArray.length; loopIndex = loopIndex + 1)
 	{
-		currentObject = dArray[loopIndex];
+		currentObject = defArray[loopIndex];
+		
 		commonFunctions.testString(currentObject.dbName);
-	}
-}
-
-function testDefinitionSizes(dArray)
-{
-	var loopIndex = 0;
-	var currentObject = null;
-	
-	for (loopIndex = 0; loopIndex < dArray.length; loopIndex = loopIndex + 1)
-	{
-		currentObject = dArray[loopIndex];
+		commonFunctions.testBoolean(currentObject.folder);
+		commonFunctions.testNumber(currentObject.cleanSize);
 		expect(currentObject.cleanSize).to.be.at.least(0);
 	}
 }

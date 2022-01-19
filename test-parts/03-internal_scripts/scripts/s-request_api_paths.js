@@ -2,7 +2,6 @@ const chai = require("chai");
 const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const requestPathFile = require(commonPaths.requestApiPaths);
 
 
@@ -34,9 +33,8 @@ function handleIndividualPath(propertyName, descriptionName)
 {
 	it(descriptionName, function()
 	{
-		objectFunctions.testPropExists(requestPathFile, propertyName);
-		objectFunctions.testPropType(requestPathFile, propertyName, 'string');
-		commonFunctions.testString(requestPathFile[propertyName]);
+		var propVal = requestPathFile[propertyName];
+		commonFunctions.testString(propVal);
 	});
 }
 

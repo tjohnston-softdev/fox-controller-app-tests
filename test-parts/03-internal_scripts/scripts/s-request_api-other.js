@@ -3,7 +3,6 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const requestFile = require(commonPaths.requestApi);
 const commonRequestFunctions = require("../sub/common-request");
 const requestInvalid = require("../sub/request-invalid");
@@ -25,8 +24,7 @@ function checkRandomIpAddress()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'generateIpAddress');
-			objectFunctions.testPropType(requestFile, 'generateIpAddress', 'function');
+			commonFunctions.testFunction(requestFile.generateIpAddress);
 		});
 		
 		it("Generation Successful", function()
@@ -51,8 +49,7 @@ function checkDeleteOptionsObject()
 		
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'getDeleteOptions');
-			objectFunctions.testPropType(requestFile, 'getDeleteOptions', 'function');
+			commonFunctions.testFunction(requestFile.getDeleteOptions);
 		});
 		
 		it("Call - True", function()
@@ -71,8 +68,6 @@ function checkDeleteOptionsObject()
 		{
 			requestInvalid.runOptions(null, "Invalid permanant flag. Must be True or False");
 		});
-		
-		
 		
 	});
 }

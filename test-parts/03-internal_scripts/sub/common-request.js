@@ -11,21 +11,12 @@ const objectFunctions = require(commonPaths.testObject);
 function validateResponseBodyArray(resultObj)
 {
 	arrayFunctions.testPopulated(resultObj);
-	arrayFunctions.testAllType(resultObj, 'object');
-	
-	arrayFunctions.testAllPropExists(resultObj, 'value');
-	arrayFunctions.testAllPropExists(resultObj, 'text');
-	arrayFunctions.testAllPropExists(resultObj, 'name');
-			
-	arrayFunctions.testAllPropType(resultObj, 'value', 'string');
-	arrayFunctions.testAllPropType(resultObj, 'text', 'string');
-	arrayFunctions.testAllPropType(resultObj, 'name', 'string');
+	loopResponseContents(resultObj);
 }
 
 function validateResponseBodyObject(resultObj)
 {
 	commonFunctions.testObject(resultObj);
-	objectFunctions.testPropExists(resultObj, 'exampleProperty');
 	expect(resultObj.exampleProperty).to.equal("exampleValue");
 }
 
@@ -41,22 +32,17 @@ function writeReplyErrorExample(rMessage)
 
 function validateDeleteOptionsReturn(resultObj, desiredPermFlag)
 {
+	var contType = null;
+	var delPerm = null;
+	
 	commonFunctions.testObject(resultObj);
-	
-	objectFunctions.testPropExists(resultObj, 'json');
 	expect(resultObj.json).to.be.true;
+	commonFunctions.testObject(resultObj.headers);
 	
-	objectFunctions.testPropExists(resultObj, 'headers');
-	objectFunctions.testPropType(resultObj, 'headers', 'object');
-	
-	objectFunctions.testPropExists(resultObj.headers, 'content_type');
-	objectFunctions.testPropExists(resultObj.headers, 'delete-permanently');
-	
-	objectFunctions.testPropType(resultObj.headers, 'content_type', 'string');
-	objectFunctions.testPropType(resultObj.headers, 'delete-permanently', 'boolean');
-	
-	commonFunctions.testString(resultObj.headers['content_type']);
-	expect(resultObj.headers['delete-permanently']).to.equal(desiredPermFlag);
+	contType = resultObj.headers['content_type'];
+	delPerm = resultObj.headers['delete-permanently'];
+	commonFunctions.testString(contType);
+	expect(delPerm).to.equal(desiredPermFlag);
 }
 
 
@@ -68,6 +54,27 @@ function createRequestReplyObject(rStatus, rBody)
 	replyRes["body"] = rBody;
 	
 	return replyRes;
+}
+
+
+function loopResponseContents(resArr)
+{
+	var loopIndex = 0;
+	var currentObject = null;
+	var currentText = "";
+	
+	for (loopIndex = 0; loopIndex < resArr.length; loopIndex = loopIndex + 1)
+	{
+		currentObject = resArr[loopIndex];
+		currentText = null;
+		
+		commonFunctions.testObject(currentObject);
+		currentText = currentObject["text"];
+		
+		commonFunctions.testString(currentObject.value);
+		commonFunctions.testString(currentText);
+		commonFunctions.testString(currentObject.name);
+	}
 }
 
 

@@ -4,7 +4,6 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 
 
@@ -30,8 +29,7 @@ function handleExampleFunction()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(localValidFile, 'validateExampleTest');
-			objectFunctions.testPropType(localValidFile, 'validateExampleTest', 'function');
+			commonFunctions.testFunction(localValidFile.validateExampleTest);
 		});
 		
 		it("Call - Valid String", function()

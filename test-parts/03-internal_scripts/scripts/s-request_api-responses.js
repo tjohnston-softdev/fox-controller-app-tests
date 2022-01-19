@@ -3,7 +3,6 @@ const expect = require("chai").expect;
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
 const requestFile = require(commonPaths.requestApi);
 const commonRequestFunctions = require("../sub/common-request");
@@ -34,11 +33,9 @@ function checkRequestResponseArray()
 	
 	describe("Read API Response Array (readResponseArray)", function()
 	{
-		
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'readResponseArray');
-			objectFunctions.testPropType(requestFile, 'readResponseArray', 'function');
+			commonFunctions.testFunction(requestFile.readResponseArray);
 		});
 		
 		it("Call - Valid", function()
@@ -57,7 +54,8 @@ function checkRequestResponseArray()
 		
 		it("Call - Missing Body", function()
 		{
-			requestInvalid.runResponseArray({}, posError);
+			var emptyObj = {};
+			requestInvalid.runResponseArray(emptyObj, posError);
 		});
 		
 		it("Call - Null", function()
@@ -83,8 +81,7 @@ function checkRequestResponseObject()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'readResponseObject');
-			objectFunctions.testPropType(requestFile, 'readResponseObject', 'function');
+			commonFunctions.testFunction(requestFile.readResponseObject);
 		});
 		
 		it("Call - Valid String", function()
@@ -135,8 +132,7 @@ function checkRequestResponseError()
 		
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'readResponseError');
-			objectFunctions.testPropType(requestFile, 'readResponseError', 'function');
+			commonFunctions.testFunction(requestFile.readResponseError);
 		});
 		
 		it("Call - Valid", function()
@@ -146,7 +142,6 @@ function checkRequestResponseError()
 			var inputReply = commonRequestFunctions.createReplyObject(500, validReplyString);
 			var actualError = requestFile.readResponseError(inputReply);
 			
-			commonFunctions.testString(actualError);
 			expect(actualError).to.equal(validErrorString);
 		});
 		
@@ -179,8 +174,7 @@ function checkRequestResponseValidation()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'validateResponse');
-			objectFunctions.testPropType(requestFile, 'validateResponse', 'function');
+			commonFunctions.testFunction(requestFile.validateResponse);
 		});
 		
 		it("Call - Valid", function()
@@ -211,8 +205,7 @@ function checkOnlineResult()
 	{
 		it("Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'getOnlineResult');
-			objectFunctions.testPropType(requestFile, 'getOnlineResult', 'function');
+			commonFunctions.testFunction(requestFile.getOnlineResult);
 		});
 		
 		it("Call - Online", function()
@@ -251,8 +244,7 @@ function checkRefuseError()
 	{
 		it("Error Function Exists", function()
 		{
-			objectFunctions.testPropExists(requestFile, 'showRefusedError');
-			objectFunctions.testPropType(requestFile, 'showRefusedError', 'function');
+			commonFunctions.testFunction(requestFile.showRefusedError);
 		});
 		
 		it("Error Flagged Successfully", function()
@@ -262,7 +254,5 @@ function checkRefuseError()
 		
 	});
 }
-
-
 
 module.exports = testRequestResponses;
