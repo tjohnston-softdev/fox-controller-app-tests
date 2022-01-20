@@ -11,23 +11,13 @@ const sysPlatform = require(commonPaths.sysPlatform);
 
 function testHealthDeviceObject(healthObj)
 {
-	objectFunctions.testPropExists(healthObj, 'device');
-	objectFunctions.testPropType(healthObj, 'device', 'object');
+	commonFunctions.testObject(healthObj.device);
 	
-	objectFunctions.testPropExists(healthObj.device, 'WARNING');
-	objectFunctions.testPropExists(healthObj.device, 'name');
-	objectFunctions.testPropExists(healthObj.device, 'serialNumber');
-	objectFunctions.testPropExists(healthObj.device, 'hardware');
-	objectFunctions.testPropExists(healthObj.device, 'wifiPass');
-	
-	commonFunctions.testString(healthObj.device.WARNING);
+	expect(healthObj.device.WARNING).to.equal("DO NOT MODIFY THIS FILE!");
 	commonFunctions.testString(healthObj.device.name);
 	commonFunctions.testString(healthObj.device.serialNumber);
 	commonFunctions.testString(healthObj.device.hardware);
 	commonFunctions.testString(healthObj.device.wifiPass);
-	
-	expect(healthObj.device.WARNING).to.equal("DO NOT MODIFY THIS FILE!");
-	
 }
 
 
@@ -45,8 +35,7 @@ function testHealthNumberMaximum(srcObject, propName, maxVal)
 	objectFunctions.testPropType(srcObject, propName, 'number');
 	givenValue = srcObject[propName];
 	
-	expect(givenValue).to.be.at.least(0);
-	expect(givenValue).to.be.at.most(maxVal);
+	expect(givenValue).to.be.within(0, maxVal);
 }
 
 function testHealthEnvironmentValue(envObject, propName)
@@ -54,9 +43,8 @@ function testHealthEnvironmentValue(envObject, propName)
 	var dummyUsed = sysPlatform.getDummy();
 	var givenValue = null;
 	
-	objectFunctions.testPropExists(envObject, propName);
-	objectFunctions.testPropType(envObject, propName, 'number');
 	givenValue = envObject[propName];
+	commonFunctions.testNumber(givenValue);
 	
 	if (dummyUsed === true)
 	{
@@ -74,7 +62,6 @@ function testHealthEnvironmentDummy(envObject)
 	
 	if (dummyUsed === true)
 	{
-		objectFunctions.testPropExists(envObject, 'isDummy');
 		expect(envObject.isDummy).to.be.true;
 	}
 	else
