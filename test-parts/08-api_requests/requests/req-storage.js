@@ -245,17 +245,16 @@ function handleGlobalStatus()
 		
 		it("Correct Properties", function()
 		{
-			//storageCommonFile.testPropertiesObject(statusRead);
-		});
-		
-		it("Correct Contents", function()
-		{
 			commonFunctions.testString(statusRead.fs);
 			commonFunctions.testString(statusRead.type);
 			commonFunctions.testNumber(statusRead.used);
 			commonFunctions.testNumber(statusRead.use);
 			commonFunctions.testString(statusRead.mount);
-			
+		});
+		
+		
+		it("Correct Contents", function()
+		{
 			storageCommonFile.testLetterObject(statusRead);
 			storageCommonFile.testTotalObject(statusRead);
 			storageCommonFile.testUsedObject(statusRead);
