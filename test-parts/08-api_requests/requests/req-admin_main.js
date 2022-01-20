@@ -55,21 +55,15 @@ function handleDhcpClients()
 		
 		it("Correct Properties", function()
 		{
-			arrayFunctions.testAllPropExists(dhcpRead, 'leaseExpiry');
-			arrayFunctions.testAllPropExists(dhcpRead, 'mac');
-			arrayFunctions.testAllPropExists(dhcpRead, 'ipAddress');
-			arrayFunctions.testAllPropExists(dhcpRead, 'host');
-			arrayFunctions.testAllPropExists(dhcpRead, 'shortMac');
-		});
-		
-		it("Correct Contents", function()
-		{
 			arrayFunctions.testAllPropType(dhcpRead, 'leaseExpiry', 'number');
 			arrayFunctions.testAllPropType(dhcpRead, 'mac', 'string');
 			arrayFunctions.testAllPropType(dhcpRead, 'ipAddress', 'string');
 			arrayFunctions.testAllPropType(dhcpRead, 'host', 'string');
 			arrayFunctions.testAllPropType(dhcpRead, 'shortMac', 'string');
-			
+		});
+		
+		it("Correct Contents", function()
+		{
 			apiCommonFile.testArrayDhcpLeaseExpire(dhcpRead);
 			apiCommonFile.testDhcpMacLong(dhcpRead, false);
 			apiCommonFile.testArrayIpFour(dhcpRead, 'ipAddress');
@@ -108,7 +102,6 @@ function handleDefaultObject()
 		it("Correct Object Returned", function()
 		{
 			commonFunctions.testObject(defaultRead);
-			objectFunctions.testPropExists(defaultRead, 'message');
 			expect(defaultRead.message).to.equal("adminApi");
 		});
 		
@@ -139,11 +132,9 @@ function handleLog()
 		});
 		
 	
-		it("Valid Return Structure", function()
+		it("Valid Object", function()
 		{
 			commonFunctions.testObject(logRead);
-			objectFunctions.testPropExists(logRead, 'success');
-			objectFunctions.testPropExists(logRead, 'logs');
 		});
 	
 		it("Valid Contents", function()

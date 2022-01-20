@@ -71,13 +71,11 @@ function handleIdentification()
 	{
 		it("Version (version)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'version');
 			commonFunctions.testString(healthObject.version);
 		});
 		
 		it("Serial Number (serialNumber)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'serialNumber');
 			commonFunctions.testString(healthObject.serialNumber);
 		});
 		
@@ -96,8 +94,7 @@ function handleTime()
 	{
 		it("Time Object (time)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'time');
-			objectFunctions.testPropType(healthObject, 'time', 'object');
+			commonFunctions.testObject(healthObject.time);
 		});
 		
 		it("Current Time (time.current)", function()
@@ -112,14 +109,12 @@ function handleTime()
 		
 		it("Timezone Offset Code (time.timezone)", function()
 		{
-			objectFunctions.testPropExists(healthObject.time, 'timezone');
 			commonFunctions.testString(healthObject.time.timezone);
 			commonHealth.testTimezoneCode(healthObject.time.timezone);
 		});
 		
 		it("Timezone Name (time.timezoneName)", function()
 		{
-			objectFunctions.testPropExists(healthObject.time, 'timezoneName');
 			commonFunctions.testString(healthObject.time.timezoneName);
 		});
 		
@@ -138,8 +133,7 @@ function handleSpeed()
 	{
 		it("Current Speed Object (cpuCurrentSpeed)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'cpuCurrentSpeed');
-			objectFunctions.testPropType(healthObject, 'cpuCurrentSpeed', 'object');
+			commonFunctions.testObject(healthObject.cpuCurrentSpeed);
 		});
 		
 		it("Minimum (cpuCurrentSpeed.min)", function()
@@ -159,7 +153,6 @@ function handleSpeed()
 		
 		it("Array (cpuCurrentSpeed.cores)", function()
 		{
-			objectFunctions.testPropExists(healthObject.cpuCurrentSpeed, 'cores');
 			arrayFunctions.testPopulated(healthObject.cpuCurrentSpeed.cores);
 			arrayFunctions.testAllType(healthObject.cpuCurrentSpeed.cores, 'number');
 			expect(healthObject.cpuCurrentSpeed.cores).to.all.be.above(0);
@@ -175,8 +168,7 @@ function handleRam()
 	{
 		it("Memory Object (mem)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'mem');
-			objectFunctions.testPropType(healthObject, 'mem', 'object');
+			commonFunctions.testObject(healthObject.mem);
 		});
 		
 		it("Total Amount (mem.total)", function()
@@ -205,9 +197,8 @@ function handleRam()
 		});
 		
 		it("Buffer Cache (mem.buffcache)", function()
-		{
-			objectFunctions.testPropExists(healthObject.mem, 'buffcache');
-			objectFunctions.testPropType(healthObject.mem, 'buffcache', 'number');
+		{	
+			commonFunctions.testNumber(healthObject.mem.buffcache);
 			expect(healthObject.mem.buffcache).to.be.at.most(healthObject.mem.total);
 		});
 		
@@ -233,10 +224,8 @@ function handleFileSystem()
 {
 	describe("File System", function()
 	{
-		
 		it("File System Array (fsSize)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'fsSize');
 			arrayFunctions.testPopulated(healthObject.fsSize);
 			arrayFunctions.testAllType(healthObject.fsSize, 'object');
 		});
@@ -290,8 +279,7 @@ function handleEnvironment()
 	{
 		it("Environment Object (environment)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'environment');
-			objectFunctions.testPropType(healthObject, 'environment', 'object');
+			commonFunctions.testObject(healthObject.environment);
 		});
 		
 		it("Temperature (environment.temperature)", function()
@@ -320,34 +308,29 @@ function handleNetwork()
 	{
 		it("Network Interface Array (networkInterfaces)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'networkInterfaces');
 			arrayFunctions.testPopulated(healthObject.networkInterfaces);
 			arrayFunctions.testAllType(healthObject.networkInterfaces, 'object');
 		});
 		
 		it("Interface Name (networkInterfaces.iface)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'iface');
 			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'iface', 'string');
 		});
 		
 		it("IP Address v4 (networkInterfaces.ip4)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'ip4');
 			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'ip4', 'string');
 			commonApi.testArrayIpFour(healthObject.networkInterfaces, 'ip4', true);
 		});
 		
 		it("IP Address v6 (networkInterfaces.ip6)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'ip6');
 			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'ip6', 'string');
 			commonApi.testArrayIpSix(healthObject.networkInterfaces, 'ip6', true);
 		});
 		
 		it("MAC Address (networkInterfaces.mac)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.networkInterfaces, 'mac');
 			arrayFunctions.testAllPropType(healthObject.networkInterfaces, 'mac', 'string');
 			commonApi.testArrayMac(healthObject.networkInterfaces, 'mac', true);
 		});
@@ -364,10 +347,8 @@ function handleDatabase()
 {
 	describe("Database", function()
 	{
-		
 		it("Database Array (databaseSize)", function()
 		{
-			objectFunctions.testPropExists(healthObject, 'databaseSize');
 			arrayFunctions.testPopulated(healthObject.databaseSize);
 			arrayFunctions.testAllType(healthObject.databaseSize, 'object');
 			expect(healthObject.databaseSize.length).to.equal(2);
@@ -375,35 +356,30 @@ function handleDatabase()
 		
 		it("Database Name (databaseSize.name)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'name');
 			arrayFunctions.testAllPropType(healthObject.databaseSize, 'name', 'string');
 			commonDatabase.testNames(healthObject.databaseSize);
 		});
 		
 		it("Database Size (databaseSize.size)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'size');
 			arrayFunctions.testAllPropType(healthObject.databaseSize, 'size', 'number');
 			commonDatabase.testSizesEmpty(healthObject.databaseSize);
 		});
 		
 		it("Directory Flag (databaseSize.isDirectory)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'isDirectory');
 			arrayFunctions.testAllPropType(healthObject.databaseSize, 'isDirectory', 'boolean');
 			commonDatabase.testFolderFlags(healthObject.databaseSize);
 		});
 		
 		it("Modified (databaseSize.modified)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'modified');
 			arrayFunctions.testAllPropType(healthObject.databaseSize, 'modified', 'number');
 			commonApi.testPositiveNumberArray(healthObject.databaseSize, 'modified');
 		});
 		
 		it("Created (databaseSize.created)", function()
 		{
-			arrayFunctions.testAllPropExists(healthObject.databaseSize, 'created');
 			arrayFunctions.testAllPropType(healthObject.databaseSize, 'created', 'number');
 			commonApi.testPositiveNumberArray(healthObject.databaseSize, 'created');
 		});
@@ -413,9 +389,9 @@ function handleDatabase()
 			commonApi.testWriteTimestampArray(healthObject.databaseSize, 'modified', 'created');
 		});
 		
-		
 	});
 }
+
 
 function handleLog()
 {
@@ -425,7 +401,6 @@ function handleLog()
 		
 		it("Log Array (logSize)", function(done)
 		{
-			objectFunctions.testPropExists(healthObject, 'logSize');
 			arrayFunctions.testPopulated(healthObject.logSize);
 			arrayFunctions.testAllType(healthObject.logSize, 'object');
 			expect(healthObject.logSize.length).to.equal(1);
@@ -436,20 +411,17 @@ function handleLog()
 	
 		it("Log Name (logSize.name)", function()
 		{
-			objectFunctions.testPropExists(logObject, 'name');
 			expect(logObject.name).to.equal("fox-controller.log");
 		});
 	
 		it("Log Size (logSize.size)", function()
 		{
-			objectFunctions.testPropExists(logObject, 'size');
-			objectFunctions.testPropType(logObject, 'size', 'number');
+			commonFunctions.testNumber(logObject.size);
 			expect(logObject.size).to.be.at.least(0);
 		});
 	
 		it("Directory Flag (logSize.isDirectory)", function()
 		{
-			objectFunctions.testPropExists(logObject, 'isDirectory');
 			expect(logObject.isDirectory).to.be.false;
 		});
 	
@@ -471,7 +443,6 @@ function handleLog()
 		
 	});
 }
-
 
 
 function testDriveLetter(fsObject)
