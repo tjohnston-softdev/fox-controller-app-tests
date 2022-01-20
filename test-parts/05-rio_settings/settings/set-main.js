@@ -4,7 +4,6 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const settingsFile = loadFoxFile(foxPath.rioSettingsFile);
 
@@ -37,33 +36,30 @@ function checkExports()
 	{
 		it("IO Properties", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'ioPrefixes');
-			objectFunctions.testPropExists(settingsFile, 'ioNames');
-			objectFunctions.testPropExists(settingsFile, 'ioTypes');
+			expect(settingsFile.ioPrefixes).to.exist;
+			expect(settingsFile.ioNames).to.exist;
+			expect(settingsFile.ioTypes).to.exist;
 		});
 		
 		it("Signal Properties", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'signalType');
-			objectFunctions.testPropExists(settingsFile, 'binSignal');
+			expect(settingsFile.signalType).to.exist;
+			expect(settingsFile.binSignal).to.exist;
 		});
 		
 		it("Signal Type Function (getSignalType)", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'getSignalType');
-			objectFunctions.testPropType(settingsFile, 'getSignalType', 'function');
+			commonFunctions.testFunction(settingsFile.getSignalType);
 		});
 		
 		it("Parse Prefix Function (parseIoPrefix)", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'parseIoPrefix');
-			objectFunctions.testPropType(settingsFile, 'parseIoPrefix', 'function');
+			commonFunctions.testFunction(settingsFile.parseIoPrefix);
 		});
 		
 		it("Parse Index Function (parseIoIndex)", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'parseIoIndex');
-			objectFunctions.testPropType(settingsFile, 'parseIoIndex', 'function');
+			commonFunctions.testFunction(settingsFile.parseIoIndex);
 		});
 		
 	});
