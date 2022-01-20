@@ -103,30 +103,20 @@ function handleDeviceDefaultValues()
 		it("Supported Device Types (deviceTypes)", function(done)
 		{
 			var correctTypes = ["Remote IO", "Motor Drive"];
-			
-			objectFunctions.testPropExists(defaultsRead, 'deviceTypes');
-			arrayFunctions.testPopulated(defaultsRead.deviceTypes);
 			expect(defaultsRead.deviceTypes).to.deep.equal(correctTypes);
-			
 			done();
 		});
 		
 		
 		it("Manufacturers (rioMakers)", function(done)
 		{
-			objectFunctions.testPropExists(defaultsRead, 'rioMakers');
-			arrayFunctions.testPopulated(defaultsRead.rioMakers);
-			expect(defaultsRead.rioMakers).to.deep.equal(deviceArrayLists.manufacturers);
-			
+			expect(defaultsRead.rioMakers).to.deep.equal(deviceArrayLists.manufacturers);	
 			done();
 		});
 		
 		it("Models (rioModelTypes)", function(done)
 		{
-			objectFunctions.testPropExists(defaultsRead, 'rioModelTypes');
-			arrayFunctions.testPopulated(defaultsRead.rioModelTypes);
-			expect(defaultsRead.rioModelTypes).to.deep.equal(deviceArrayLists.models);
-			
+			expect(defaultsRead.rioModelTypes).to.deep.equal(deviceArrayLists.models);	
 			done();
 		});
 		
@@ -363,12 +353,8 @@ function handleDeviceStatusTest()
 		
 		it("Object Structure Valid", function(done)
 		{
-			objectFunctions.testPropExists(statusRead, 'id');
-			objectFunctions.testPropExists(statusRead, 'isRunning');
-			
 			commonFunctions.testString(statusRead.id);
 			expect(statusRead.isRunning).to.be.a("boolean");
-			
 			done();
 		});
 		
@@ -450,8 +436,6 @@ function handleUpdateDeviceTest()
 			done();
 		});
 		
-		
-		
 	});
 }
 
@@ -526,7 +510,6 @@ function handleDeleteFlagTest()
 		
 		it("Delete Flag Successful", function(done)
 		{
-			objectFunctions.testPropExists(flagRead, 'success');
 			expect(flagRead.success).to.be.true;
 			done();
 		});
@@ -565,7 +548,6 @@ function handleDeleteObjectTest()
 		
 		it("Delete Object Successful", function(done)
 		{
-			objectFunctions.testPropExists(deleteRead, 'success');
 			expect(deleteRead.success).to.be.true;
 			done();
 		});
@@ -643,7 +625,6 @@ function handleVariableDispose()
 			localModify = null;
 			done();
 		});
-		
 		
 	});
 }
