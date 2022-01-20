@@ -47,8 +47,7 @@ function handleCheckPrepare()
 		{
 			var addCount = retrieveCountFromCache();
 			
-			expect(addCount).to.exist;
-			expect(addCount).to.be.a("number");
+			commonFunctions.testNumber(addCount);
 			expect(addCount).to.be.above(0);
 			
 			done();
@@ -97,7 +96,7 @@ function retrieveListFromCache()
 	{
 		res = testCacheFile.retrieveList();
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		res = null;
 	}
@@ -114,7 +113,7 @@ function retrieveCountFromCache()
 	{
 		res = testCacheFile.countTestDevices();
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		res = null;
 	}

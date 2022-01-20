@@ -31,13 +31,12 @@ function handleStructure()
 		it("Node Array Retrieved From Cache", function(done)
 		{
 			nodeCacheObject = callNodeCache();
-			expect(nodeCacheObject).to.exist;
+			commonFunctions.testObject(nodeCacheObject);
 			done();
 		});
 		
-		it("Correct Array Structure", function(done)
+		it("Correct Structure", function(done)
 		{
-			expect(nodeCacheObject).to.be.an("object");
 			nodeCommonFile.testStorageObject(nodeCacheObject);
 			done();
 		});
@@ -117,7 +116,7 @@ function callNodeCache()
 	{
 		res = testCacheFile.retrieveNodeArrayStructure();
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		res = null;
 	}

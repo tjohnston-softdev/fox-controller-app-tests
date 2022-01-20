@@ -130,7 +130,7 @@ function clearCache()
 		
 		res = true;
 	}
-	catch(e)
+	catch(clearErr)
 	{
 		res = false;
 	}

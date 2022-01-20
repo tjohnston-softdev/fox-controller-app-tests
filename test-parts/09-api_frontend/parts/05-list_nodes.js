@@ -72,12 +72,6 @@ function testCurrentManufacturerApi(mName)
 	});
 	
 	
-	it("Correct Properties", function(done)
-	{
-		nodeCommonFile.testArrayProperties(searchRead);
-		done();
-	});
-	
 	it("Correct Contents", function(done)
 	{
 		nodeCommonFile.testArrayContents(searchRead);

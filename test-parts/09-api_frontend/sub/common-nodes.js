@@ -15,14 +15,6 @@ function testNodeObjectArrayStructure(nodeObjArray)
 	arrayFunctions.testAllType(nodeObjArray, 'object');
 }
 
-
-function testNodeObjectArrayProperties(nodeObjArray)
-{
-	arrayFunctions.testAllPropExists(nodeObjArray, 'value');
-	arrayFunctions.testAllPropExists(nodeObjArray, 'text');
-	arrayFunctions.testAllPropExists(nodeObjArray, 'name');
-}
-
 function testNodeObjectArrayContents(nodeObjArray)
 {
 	arrayFunctions.testAllPropType(nodeObjArray, 'value', 'string');
@@ -77,9 +69,6 @@ function testNodeManufacturerArray(nmArray)
 
 function testStatusControlArrayStructure(structureObj)
 {
-	arrayFunctions.testAllPropExists(structureObj, 'value');
-	arrayFunctions.testAllPropExists(structureObj, 'text');
-	
 	arrayFunctions.testAllPropType(structureObj, 'value', 'string');
 	arrayFunctions.testAllPropType(structureObj, 'text', 'string');
 }

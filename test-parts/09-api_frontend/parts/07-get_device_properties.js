@@ -101,15 +101,6 @@ function testCurrentDeviceStatus(deviceManufacturer, deviceName, deviceID)
 		done();
 	});
 	
-	it("Correct Properties", function(done)
-	{
-		objectFunctions.testPropExists(deviceRead, 'name');
-		objectFunctions.testPropExists(deviceRead, 'STATUS');
-		objectFunctions.testPropExists(deviceRead, 'CONTROL');
-		
-		done();
-	});
-	
 	it("Correct Node Name", function(done)
 	{
 		expect(deviceRead.name).to.equal(deviceName);
@@ -154,7 +145,7 @@ function callNodeManufacturerPropertyList()
 	{
 		listRes = testCacheFile.readNodePropertyList();
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		listRes = null;
 	}

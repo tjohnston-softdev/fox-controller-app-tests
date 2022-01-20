@@ -21,14 +21,7 @@ function writeNodeCacheHeaderString(vText, vKey)
 
 function writeDeviceDescriptionString(vManufacturer, vModel)
 {
-	var res = "";
-	
-	res += "Supported ";
-	res += vModel
-	res += "device manufactured by ";
-	res += vManufacturer;
-	res += " ";
-	
+	var res = ["Supported ", vModel, "device manufactured by ", vManufacturer, " "].join("");
 	return res;	
 }
 
