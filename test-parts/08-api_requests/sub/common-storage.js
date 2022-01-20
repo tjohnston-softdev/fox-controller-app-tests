@@ -9,17 +9,6 @@ const localValidFile = require(commonPaths.localValid);
 const sysPlatform = require(commonPaths.sysPlatform);
 
 
-function testDrivePropertiesObject(driveObj)
-{
-	objectFunctions.testPropExists(driveObj, 'fs');
-	objectFunctions.testPropExists(driveObj, 'type');
-	objectFunctions.testPropExists(driveObj, 'size');
-	objectFunctions.testPropExists(driveObj, 'used');
-	objectFunctions.testPropExists(driveObj, 'use');
-	objectFunctions.testPropExists(driveObj, 'mount');
-}
-
-
 function testDriveLetterObject(driveObj)
 {
 	var windowsUsed = sysPlatform.getWindows();
@@ -71,9 +60,7 @@ function testDriveUsedObject(driveObj)
 {
 	var totalValue = parseFloat(driveObj.size);
 	var usedValue = driveObj.used;
-		
-	expect(usedValue).to.be.at.least(0);
-	expect(usedValue).to.be.at.most(totalValue);
+	expect(usedValue).to.be.within(0, totalValue);
 }
 
 function testDrivePercentageObject(percentObject)
@@ -215,7 +202,6 @@ function testFolderCreationResult(errObj)
 
 module.exports =
 {
-	testPropertiesObject: testDrivePropertiesObject,
 	testLetterObject: testDriveLetterObject,
 	testMountObject: testDriveMountObject,
 	testTotalObject: testDriveTotalObject,

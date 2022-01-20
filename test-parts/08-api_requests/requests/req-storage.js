@@ -39,7 +39,6 @@ function handleFileList()
 	
 	describe("User File List (user-files/list)", function()
 	{
-		
 		it("Request Made", function(done)
 		{
 			fileListUrl = apiRequestScript.writeUrl(apiPaths.storageApi, "user-files/list");
@@ -63,21 +62,15 @@ function handleFileList()
 		
 		it("Correct Properties", function()
 		{
-			arrayFunctions.testAllPropExists(fileListRead, 'name');
-			arrayFunctions.testAllPropExists(fileListRead, 'size');
-			arrayFunctions.testAllPropExists(fileListRead, 'isDirectory');
-			arrayFunctions.testAllPropExists(fileListRead, 'modified');
-			arrayFunctions.testAllPropExists(fileListRead, 'created');
-		});
-		
-		it("Correct Contents", function()
-		{
 			arrayFunctions.testAllPropType(fileListRead, 'name', 'string');
 			arrayFunctions.testAllPropType(fileListRead, 'size', 'number');
 			arrayFunctions.testAllPropType(fileListRead, 'isDirectory', 'boolean');
 			arrayFunctions.testAllPropType(fileListRead, 'modified', 'number');
 			arrayFunctions.testAllPropType(fileListRead, 'created', 'number');
-			
+		});
+		
+		it("Correct Contents", function()
+		{
 			apiCommonFile.testFileNames(fileListRead, 'name');
 			apiCommonFile.testZeroLeastNumbers(fileListRead, 'size');
 			storageCommonFile.testFlags(fileListRead);
@@ -105,7 +98,6 @@ function handleUserStorageCreate()
 	
 	describe("Create User Storage", function()
 	{
-		
 		it("Storage Folder Called", function(done)
 		{
 			fs.mkdir(testFile.folder, function(foError)
@@ -246,22 +238,22 @@ function handleGlobalStatus()
 			done();
 		});
 		
-		it("Correct Return Structure", function()
+		it("Object Returned", function()
 		{
 			commonFunctions.testObject(statusRead);
 		});
 		
 		it("Correct Properties", function()
 		{
-			storageCommonFile.testPropertiesObject(statusRead);
+			//storageCommonFile.testPropertiesObject(statusRead);
 		});
 		
 		it("Correct Contents", function()
 		{
 			commonFunctions.testString(statusRead.fs);
 			commonFunctions.testString(statusRead.type);
-			objectFunctions.testPropType(statusRead, 'used', 'number');
-			objectFunctions.testPropType(statusRead, 'use', 'number');
+			commonFunctions.testNumber(statusRead.used);
+			commonFunctions.testNumber(statusRead.use);
 			commonFunctions.testString(statusRead.mount);
 			
 			storageCommonFile.testLetterObject(statusRead);
