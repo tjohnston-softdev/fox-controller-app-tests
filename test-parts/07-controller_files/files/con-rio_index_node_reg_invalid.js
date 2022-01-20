@@ -22,6 +22,7 @@ var originalDeviceList = null;
 var testID = null;
 var registerConfigObject = null;
 
+
 function testRemoteIoIndexRegisterInvalid()
 {
 	describe("Remote IO Index Register Invalid", function()
@@ -55,7 +56,6 @@ function handleNodeInvalidPrepare()
 		{
 			listSpy = sinon.spy(rioFile, 'listRemoteIoDevices');
 			registerSpy = sinon.spy(rioFile, 'registerNode');
-			
 			done();
 		});
 		
@@ -74,7 +74,6 @@ function handleOriginalList()
 			{
 				originalDeviceList = listDevices;
 				origErr = listError;
-				
 				done();
 			});
 		});
@@ -91,9 +90,7 @@ function handleOriginalList()
 			done();
 		});
 		
-		
 	});
-	
 	
 }
 
@@ -135,7 +132,6 @@ function handleTestDevice()
 		
 		it("Test ID Retained", function(done)
 		{
-			commonFunctions.testString(testID);
 			expect(testID).to.equal(addID);
 			done();
 		});
@@ -398,10 +394,10 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 			regComplete = true;
 		});
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		regComplete = false;
-		regMessage = e.message;
+		regMessage = catchErr.message;
 	}
 	
 	var regRes = commonFunctions.prepareInvalidResult(regComplete, regMessage);
@@ -512,9 +508,6 @@ function handleTestIntact()
 
 
 
-
-
-
 function handleNodeInvalidDispose()
 {
 	describe("Disposal", function()
@@ -543,5 +536,6 @@ function handleNodeInvalidDispose()
 		});
 	});
 }
+
 
 module.exports = testRemoteIoIndexRegisterInvalid;

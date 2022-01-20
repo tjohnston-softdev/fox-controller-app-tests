@@ -139,10 +139,10 @@ function callRemoteIoModuleInvalid(rioInvalidObject)
 		factoryFile.RemoteIoModule(rioInvalidObject.jsonObject);
 		remoteComplete = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		remoteComplete = false;
-		remoteError = e.message;
+		remoteError = catchErr.message;
 	}
 	
 	remoteRes = commonFunctions.prepareInvalidResult(remoteComplete, remoteError);

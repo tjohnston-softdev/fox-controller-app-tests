@@ -54,8 +54,7 @@ function testRemoteIoIndexNodeReg()
 function handleNodePrepare()
 {
 	describe("Preperation", function()
-	{
-		
+	{	
 		it("Files Loaded", function()
 		{
 			expect(rioFile).to.exist;
@@ -81,7 +80,6 @@ function handleBeforeList()
 	
 	describe("List All Devices (listRemoteIoDevices, remote-io.index)", function()
 	{
-		
 		it("Spy Assigned", function(done)
 		{
 			beforeListSpy = sinon.spy(rioFile, 'listRemoteIoDevices');
@@ -268,8 +266,6 @@ function handleCheckNodeExist()
 }
 
 
-
-
 function handleGetIoProperties()
 {
 	describe("Function - Get IO Properties (getIoProperties, remote-io.index)", function()
@@ -291,10 +287,6 @@ function handleGetIoProperties()
 			
 			it("Object Structure Valid", function()
 			{
-				objectFunctions.testPropExists(propertyRes, 'name');
-				objectFunctions.testPropExists(propertyRes, 'STATUS');
-				objectFunctions.testPropExists(propertyRes, 'CONTROL');
-				
 				commonFunctions.testString(propertyRes.name);
 				arrayFunctions.testPopulated(propertyRes.STATUS);
 				arrayFunctions.testPopulated(propertyRes.CONTROL);
@@ -312,6 +304,7 @@ function handleGetIoProperties()
 			});
 			
 		});
+		
 		
 		describe("Invalid Calls", function()
 		{
@@ -337,8 +330,6 @@ function handleGetIoProperties()
 }
 
 
-
-
 function handleNodeConfig()
 {
 	describe("Function - Get Node Config Object (getRegisterNode, common-objects)", function()
@@ -355,8 +346,6 @@ function handleNodeConfig()
 			commonFile.testNodeConfigObject(nodeConfigObject);
 			done();
 		});
-		
-		
 		
 	});
 }
@@ -723,10 +712,10 @@ function coordinateGetIoPropertiesInvalidCall(invalidArg)
 		rioFile.getIoProperties(invalidArg);
 		ioComplete = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		ioComplete = false;
-		ioError = e.message;
+		ioError = catchErr.message;
 	}
 	
 	var ioRes = commonFunctions.prepareInvalidResult(ioComplete, ioError);

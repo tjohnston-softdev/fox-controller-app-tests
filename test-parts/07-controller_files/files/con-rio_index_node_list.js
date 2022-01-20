@@ -85,7 +85,6 @@ function handleNodeListManufacturers()
 	
 	describe("Manufacturer Node Lists (listRiosForNode)", function()
 	{
-		
 		it("Advantech", function(done)
 		{
 			indexFile.listRiosForNode(advantechName, (advErr, advDevices) =>
@@ -115,8 +114,6 @@ function handleNodeListManufacturers()
 		
 	});
 }
-
-
 
 
 function handleNodeListDispose()

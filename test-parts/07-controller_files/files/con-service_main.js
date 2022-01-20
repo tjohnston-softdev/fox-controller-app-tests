@@ -4,7 +4,6 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const loadFoxFile = require(commonPaths.loadFox);
 const serviceFile = loadFoxFile(foxPath.serviceMainFile);
 
@@ -38,14 +37,9 @@ function handleControllerObject()
 {
 	describe("Controller Object Property (controller)", function()
 	{
-		it("Property Exists", function()
+		it("Valid Object", function()
 		{
-			objectFunctions.testPropExists(serviceFile, 'controller');
-		});
-		
-		it("Valid Type", function()
-		{
-			objectFunctions.testPropType(serviceFile, 'controller', 'object');
+			commonFunctions.testObject(serviceFile.controller);
 		});
 		
 	});
@@ -58,32 +52,27 @@ function handleGeneralFunctions()
 	{
 		it("Get Health (controller.getHealth)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'getHealth');
-			objectFunctions.testPropType(serviceFile.controller, 'getHealth', 'function');
+			commonFunctions.testFunction(serviceFile.controller.getHealth);
 		});
 		
 		it("Get Environment (controller.getEnvironment)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'getEnvironment');
-			objectFunctions.testPropType(serviceFile.controller, 'getEnvironment', 'function');
+			commonFunctions.testFunction(serviceFile.controller.getEnvironment);
 		});
 		
 		it("Get Disk Space (controller.getDiskSpace)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'getDiskSpace');
-			objectFunctions.testPropType(serviceFile.controller, 'getDiskSpace', 'function');
+			commonFunctions.testFunction(serviceFile.controller.getDiskSpace);
 		});
 		
 		it("Get Database Size (controller.getDatabaseSize)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'getDatabaseSize');
-			objectFunctions.testPropType(serviceFile.controller, 'getDatabaseSize', 'function');
+			commonFunctions.testFunction(serviceFile.controller.getDatabaseSize);
 		});
 		
 		it("Get Log Size (controller.getLogSize)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'getLogSize');
-			objectFunctions.testPropType(serviceFile.controller, 'getLogSize', 'function');
+			commonFunctions.testFunction(serviceFile.controller.getLogSize);
 		});
 		
 	});
@@ -95,14 +84,12 @@ function handleRedFunctions()
 	{
 		it("Stop (controller.stopFlows)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'stopFlows');
-			objectFunctions.testPropType(serviceFile.controller, 'stopFlows', 'function');
+			commonFunctions.testFunction(serviceFile.controller.stopFlows);
 		});
 		
 		it("Start (controller.startFlows)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'startFlows');
-			objectFunctions.testPropType(serviceFile.controller, 'startFlows', 'function');
+			commonFunctions.testFunction(serviceFile.controller.startFlows);
 		});
 	});
 }
@@ -113,20 +100,17 @@ function handleProcessFunctions()
 	{
 		it("Restart (controller.restartProcess)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'restartProcess');
-			objectFunctions.testPropType(serviceFile.controller, 'restartProcess', 'function');
+			commonFunctions.testFunction(serviceFile.controller.restartProcess);
 		});
 		
 		it("Reboot (controller.rebootController)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'rebootController');
-			objectFunctions.testPropType(serviceFile.controller, 'rebootController', 'function');
+			commonFunctions.testFunction(serviceFile.controller.rebootController);
 		});
 		
 		it("Factory Settings (controller.factoryReset)", function()
 		{
-			objectFunctions.testPropExists(serviceFile.controller, 'factoryReset');
-			objectFunctions.testPropType(serviceFile.controller, 'factoryReset', 'function');
+			commonFunctions.testFunction(serviceFile.controller.factoryReset);
 		});
 	});
 }

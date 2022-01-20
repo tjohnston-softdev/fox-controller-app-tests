@@ -76,13 +76,11 @@ function checkSupportedModelDefinitions()
 		
 		it("Manufacturers", function()
 		{
-			objectFunctions.testPropExists(supportedListObject, 'manufacturers');
 			arrayFunctions.testPopulated(supportedListObject.manufacturers);
 		});
 		
 		it("Models", function()
 		{
-			objectFunctions.testPropExists(supportedListObject, 'models');
 			arrayFunctions.testPopulated(supportedListObject.models);
 		});
 		
@@ -94,11 +92,6 @@ function checkDeviceTypeObjectProperty()
 {
 	describe("Property - Device Type Object (deviceType)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(settingsFile, 'deviceType');
-		});
-		
 		it("Valid Type", function()
 		{
 			objectFunctions.testPropType(settingsFile, 'deviceType', 'object');
@@ -119,12 +112,6 @@ function checkDeviceTypeArrayProperty()
 {
 	describe("Property - Device Type Array (deviceTypes)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(settingsFile, 'deviceTypes');
-			expect(settingsFile.deviceTypes).to.exist;
-		});
-		
 		it("Populated Array", function()
 		{
 			arrayFunctions.testPopulated(settingsFile.deviceTypes);
@@ -142,14 +129,9 @@ function checkCommunicationTypeProperty()
 {
 	describe("Property - Communication Type (communicationType)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(settingsFile, 'communicationType');
-		});
-		
 		it("Valid Type", function()
 		{
-			objectFunctions.testPropType(settingsFile, 'communicationType', 'object');
+			commonFunctions.testObject(settingsFile.communicationType);
 		});
 		
 		it("All Properties Strings", function()
@@ -163,13 +145,10 @@ function checkBinSignalFunction()
 {
 	describe("Function - Convert to Binary Signal (convertToBinSignal)", function()
 	{
-		
 		it("Exists", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'convertToBinSignal');
-			objectFunctions.testPropType(settingsFile, 'convertToBinSignal', 'function');
+			commonFunctions.testFunction(settingsFile.convertToBinSignal);
 		});
-		
 		
 		it("Call - On", function()
 		{
@@ -200,8 +179,7 @@ function checkScaleDecimalValueFunction()
 	{
 		it("Exists", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'scaleDecimalValue');
-			objectFunctions.testPropType(settingsFile, 'scaleDecimalValue', 'function');
+			commonFunctions.testFunction(settingsFile.scaleDecimalValue);
 		});
 		
 		it("Call - Valid", function()
@@ -231,8 +209,7 @@ function checkValidateBinSignalFunction()
 	{
 		it("Function exists", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'isValidBinarySignal');
-			objectFunctions.testPropType(settingsFile, 'isValidBinarySignal', 'function');
+			commonFunctions.testFunction(settingsFile.isValidBinarySignal);
 		});
 		
 		it("Call - On", function()
@@ -276,11 +253,9 @@ function checkGetModelFunction()
 	
 	describe("Function - Get Model (getModel)", function()
 	{
-		
 		it("Exists", function()
 		{
-			objectFunctions.testPropExists(settingsFile, 'getModel');
-			objectFunctions.testPropType(settingsFile, 'getModel', 'function');
+			commonFunctions.testFunction(settingsFile.getModel);
 		});
 		
 		it("Call - Supported", function()
@@ -288,13 +263,7 @@ function checkGetModelFunction()
 			var supportedRes = settingsFile.getModel(testModelName);
 			
 			commonFunctions.testObject(supportedRes);
-			
-			objectFunctions.testPropExists(supportedRes, 'modelType');
-			objectFunctions.testPropType(supportedRes, 'modelType', 'string');
 			expect(supportedRes.modelType).to.equal(testModelName);
-			
-			objectFunctions.testPropExists(supportedRes, 'maker');
-			objectFunctions.testPropType(supportedRes, 'maker', 'string');
 			expect(supportedRes.maker).to.equal(testModelManufacturer);
 		});
 		
@@ -310,15 +279,8 @@ function checkGetModelFunction()
 function checkManufacturerListProperty()
 {
 	describe("Property - Manufacturer List (listRioMakers)", function()
-	{
-		
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(settingsFile, 'listRioMakers');
-			expect(settingsFile.listRioMakers).to.exist;
-		});
-		
-		it("Array", function()
+	{	
+		it("Valid Array", function()
 		{
 			arrayFunctions.testPopulated(settingsFile.listRioMakers);
 		});
@@ -339,14 +301,8 @@ function checkManufacturerListProperty()
 function checkModelTypeListProperty()
 {
 	describe("Property - Model Type List (listRioModelTypes)", function()
-	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(settingsFile, 'listRioModelTypes');
-			expect(settingsFile.listRioModelTypes).to.exist;
-		});
-		
-		it("Array", function()
+	{	
+		it("Valid Array", function()
 		{
 			arrayFunctions.testPopulated(settingsFile.listRioModelTypes);
 		});
@@ -390,7 +346,9 @@ function getSupportedLists()
 		derivedManufacturers = allModelsArray.map(currentObj => { return currentObj.maker});
 		derivedModels = allModelsArray.map(currentObj => { return currentObj.modelType});
 		
-		resultObject = {"manufacturers": derivedManufacturers, "models": derivedModels};
+		resultObject = {};
+		resultObject["manufacturers"] = derivedManufacturers;
+		resultObject["models"] = derivedModels;
 	}
 	catch(e)
 	{

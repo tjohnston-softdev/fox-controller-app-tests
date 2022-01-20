@@ -78,7 +78,7 @@ function handleInitializationFunction()
 		{
 			expect(initSpy.calledOnce).to.be.true;
 			expect(initSpy.firstCall).to.exist;
-			expect(initSpy.firstCall.args).to.deep.equal([]);
+			arrayFunctions.testEmpty(initSpy.firstCall.args);
 			expect(initSpy.firstCall.returnValue).to.be.undefined;
 			expect(initSpy.firstCall.exception).to.be.undefined;
 			
@@ -138,10 +138,8 @@ function handleInitializationCompleteFunction()
 			done();
 		});
 		
-		
 	});
 }
-
 
 
 

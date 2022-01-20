@@ -65,8 +65,6 @@ function handleDeviceConstructors()
 }
 
 
-
-
 function handleDeviceClasses()
 {
 	var storeDeviceValid = null;
@@ -173,8 +171,7 @@ function handleDeviceClasses()
 			var connectRes = new deviceConnectFile.ConnectedDevice(storeDeviceValid);
 			
 			commonFunctions.testObject(connectRes);
-			objectFunctions.testPropExists(connectRes, 'storedDevice');
-			objectFunctions.testPropType(connectRes, 'storedDevice', 'object');
+			commonFunctions.testObject(connectRes.storedDevice);
 			expect(connectRes.storedDevice).to.equal(storeDeviceValid);
 			
 			done();
@@ -247,10 +244,10 @@ function callStoredDeviceUnsupported(callObject)
 		storedDeviceObject = new deviceModelFile.StoredDevice(callObject.jsonObject);
 		storedDeviceComplete = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		storedDeviceComplete = false;
-		storedDeviceError = e.message;
+		storedDeviceError = catchErr.message;
 	}
 	
 	var callResult = commonFunctions.prepareInvalidResult(storedDeviceComplete, storedDeviceError);
@@ -269,10 +266,10 @@ function callConnectedDeviceUnsupported(a, expectedError)
 		connectObject = new deviceConnectFile.ConnectedDevice(a);
 		connectionComplete = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		connectionComplete = false;
-		connectionError = e.message;
+		connectionError = catchErr.message;
 	}
 	
 	var callResult = commonFunctions.prepareInvalidResult(connectionComplete, connectionError);
@@ -310,21 +307,21 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 {
 	var invalidObject = cloneInvalidModel();
 	var structureChanged = false;
-	var thrownError = "";
+	var structureError = "";
 	
 	try
 	{
 		invalidObject[propName] = propValue;
 		structureChanged = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		structureChanged = false;
-		thrownError = e.message;
+		structureError = catchErr.message;
 	}
 	
 	
-	var tcRes = commonFunctions.prepareInvalidResult(structureChanged, thrownError);
+	var tcRes = commonFunctions.prepareInvalidResult(structureChanged, structureError);
 	commonFunctions.testInvalidResult(tcRes, propError);
 }
 

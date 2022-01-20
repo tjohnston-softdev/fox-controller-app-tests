@@ -68,12 +68,13 @@ function verifyRegisterNode(regCalled, callObject, aMode, aObject)
 
 function verifySetDeviceOutput(setCalled, callObject, aID, aPrefix, aIndex, aToggle)
 {
+	var targetArguments = [aID, aPrefix, aIndex, aToggle];
+	
 	expect(setCalled).to.be.true;
 	expect(callObject).to.exist;
 	
 	arrayFunctions.testPopulated(callObject.args);
-	expect(callObject.args).to.deep.equal([aID, aPrefix, aIndex, aToggle]);
-	
+	expect(callObject.args).to.deep.equal(targetArguments);
 	expect(callObject.returnValue).to.be.undefined;
 }
 
