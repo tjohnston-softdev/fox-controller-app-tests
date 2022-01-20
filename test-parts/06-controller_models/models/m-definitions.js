@@ -75,7 +75,6 @@ function checkManufacturerArrayRead(modelArr)
 		
 		it("Model Types Defined", function()
 		{
-			arrayFunctions.testAllPropExists(modelArr, 'modelType');
 			arrayFunctions.testAllPropType(modelArr, 'modelType', 'string');
 		});
 	});
@@ -90,7 +89,7 @@ function checkModelsLoop(modelArr)
 	for (modelIndex = 0; modelIndex < modelArr.length; modelIndex = modelIndex + 1)
 	{
 		currentModel = modelArr[modelIndex];
-		currentDesc = "Model - '" + currentModel.modelType + "'";
+		currentDesc = ["Model - '", currentModel.modelType, "'"].join("");
 		
 		describe(currentDesc, function()
 		{
@@ -109,11 +108,6 @@ function checkCommunicationTypeProperty(modelObj)
 {
 	describe("Property - Communication Type (commsType)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(modelObj, 'commsType');
-		});
-		
 		it("Valid Type", function()
 		{
 			commonFunctions.testString(modelObj.commsType);
@@ -125,11 +119,6 @@ function checkIoConfigArrayProperty(modelObj)
 {
 	describe("Property - IO Config Array (ioConfigs)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(modelObj, 'ioConfigs');
-		});
-		
 		it("Valid Type", function()
 		{
 			arrayFunctions.testPopulated(modelObj.ioConfigs);
@@ -142,10 +131,6 @@ function checkIoConfigArrayProperty(modelObj)
 		
 		it("Object Structures Valid", function()
 		{
-			arrayFunctions.testAllPropExists(modelObj.ioConfigs, 'ioType');
-			arrayFunctions.testAllPropExists(modelObj.ioConfigs, 'ioPrefix');
-			arrayFunctions.testAllPropExists(modelObj.ioConfigs, 'length');
-			
 			arrayFunctions.testAllPropType(modelObj.ioConfigs, 'ioType', 'string');
 			arrayFunctions.testAllPropType(modelObj.ioConfigs, 'ioPrefix', 'string');
 			arrayFunctions.testAllPropType(modelObj.ioConfigs, 'length', 'number');
@@ -167,11 +152,6 @@ function checkTotalPollProperty(modelObj)
 {
 	describe("Property - Total Polls (totalPolls)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(modelObj, 'totalPolls');
-		});
-		
 		it("Valid Type", function()
 		{
 			objectFunctions.testPropType(modelObj, 'totalPolls', 'number');
@@ -183,11 +163,6 @@ function checkPollIntervalProperty(modelObj)
 {
 	describe("Property - Polling Interval (pollingInterval)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(modelObj, 'pollingInterval');
-		});
-		
 		it("Valid Type", function()
 		{
 			objectFunctions.testPropType(modelObj, 'pollingInterval', 'number');
@@ -199,11 +174,6 @@ function checkInfoUrlProperty(modelObj)
 {
 	describe("Property - Information URL (infoUrl)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(modelObj, 'infoUrl');
-		});
-		
 		it("Valid Type", function()
 		{
 			commonFunctions.testString(modelObj.infoUrl);
@@ -215,11 +185,6 @@ function checkManufacturerProperty(modelObj)
 {
 	describe("Property - Manufacturer (maker)", function()
 	{
-		it("Exists", function()
-		{
-			objectFunctions.testPropExists(modelObj, 'maker');
-		});
-		
 		it("Valid Type", function()
 		{
 			commonFunctions.testString(modelObj.maker);
@@ -233,18 +198,14 @@ function checkFunctionProperties(modelObj)
 	{
 		it("Device Data Function Exists (readAndWriteDeviceData)", function()
 		{
-			objectFunctions.testPropExists(modelObj, 'readAndWriteDeviceData');
-			objectFunctions.testPropType(modelObj, 'readAndWriteDeviceData', 'function');
+			commonFunctions.testFunction(modelObj.readAndWriteDeviceData);
 		});
 		
 		it("Information Parse Function Exists (parseDeviceInfo)", function()
 		{
-			objectFunctions.testPropExists(modelObj, 'parseDeviceInfo');
-			objectFunctions.testPropType(modelObj, 'parseDeviceInfo', 'function');
+			commonFunctions.testFunction(modelObj.parseDeviceInfo);
 		});
 	});
 }
-
-
 
 module.exports = testModelDefinitionFiles;
