@@ -29,7 +29,6 @@ function handleList()
 	
 	describe("Alarm History List (list/all?limit=10)", function()
 	{
-		
 		it("Request Made", function(done)
 		{
 			listUrl = apiRequestScript.writeUrl(apiPaths.alarmApi, "list/all?limit=10");
@@ -52,19 +51,14 @@ function handleList()
 		
 		it("Correct Properties", function()
 		{
-			arrayFunctions.testAllPropExists(listRead, 'ts');
-			arrayFunctions.testAllPropExists(listRead, 'nodeId');
-			arrayFunctions.testAllPropExists(listRead, 'state');
-			arrayFunctions.testAllPropExists(listRead, 'name');
-		});
-		
-		it("Correct Contents", function()
-		{
 			arrayFunctions.testAllPropType(listRead, 'ts', 'number');
 			arrayFunctions.testAllPropType(listRead, 'nodeId', 'string');
 			arrayFunctions.testAllPropType(listRead, 'state', 'number');
 			arrayFunctions.testAllPropType(listRead, 'name', 'string');
-			
+		});
+		
+		it("Correct Contents", function()
+		{
 			apiCommonFile.testPositiveNumberArray(listRead, 'ts');
 			arrayFunctions.testAllStringRequired(listRead, 'nodeId');
 			apiCommonFile.testAlarmStates(listRead);
@@ -82,8 +76,7 @@ function handleAvailable()
 	var retrievedData = null;
 	
 	describe("Available (available)", function()
-	{
-		
+	{	
 		it("Request Made", function(done)
 		{
 			availabilityUrl = apiRequestScript.writeUrl(apiPaths.alarmApi, "available");
@@ -106,15 +99,6 @@ function handleAvailable()
 		
 		it("Correct Properties", function()
 		{
-			arrayFunctions.testAllPropExists(retrievedData, 'id');
-			arrayFunctions.testAllPropExists(retrievedData, 'name');
-			arrayFunctions.testAllPropExists(retrievedData, 'okText');
-			arrayFunctions.testAllPropExists(retrievedData, 'alarmText');
-			arrayFunctions.testAllPropExists(retrievedData, 'alarmColor');
-		});
-		
-		it("Correct Contents", function()
-		{			
 			arrayFunctions.testAllStringRequired(retrievedData, 'id');
 			arrayFunctions.testAllStringRequired(retrievedData, 'name');
 			arrayFunctions.testAllStringRequired(retrievedData, 'okText');
