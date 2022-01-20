@@ -24,6 +24,11 @@ function checkGetSignalTypeFunction()
 {
 	describe("Function - Get Signal Type (getSignalType)", function()
 	{
+		it("Exists", function()
+		{
+			commonFunctions.testFunction(settingsFile.getSignalType);
+		});
+		
 		it("Call - Valid IO Type", function()
 		{
 			var validStringRes = settingsFile.getSignalType("DI");
@@ -57,6 +62,11 @@ function checkParsePrefixFunction()
 {
 	describe("Function - Parse Prefix (parseIoPrefix)", function()
 	{
+		it("Exists", function()
+		{
+			commonFunctions.testFunction(settingsFile.parseIoPrefix);
+		});
+		
 		it("Call - Valid Prefix", function()
 		{
 			var validRes = settingsFile.parseIoPrefix(prefixIndexObject.validInput);
@@ -86,6 +96,11 @@ function checkParseIndexFunction()
 {
 	describe("Function - Parse Index (parseIoIndex)", function()
 	{
+		it("Exists", function()
+		{
+			commonFunctions.testFunction(settingsFile.parseIoIndex);
+		});
+		
 		it("Call - Valid Prefix", function()
 		{
 			var validRes = settingsFile.parseIoIndex(prefixIndexObject.validInput);
@@ -123,10 +138,10 @@ function parseIoPrefixInvalidCall(invalidArg, exceptMessage)
 		settingsFile.parseIoPrefix(invalidArg);
 		parseComplete = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		parseComplete = false;
-		parseError = e.message;
+		parseError = catchErr.message;
 	}
 	
 	var parseRes = commonFunctions.prepareInvalidResult(parseComplete, parseError);
@@ -144,10 +159,10 @@ function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 		settingsFile.parseIoIndex(invalidArg);
 		parseComplete = true;
 	}
-	catch(e)
+	catch(catchErr)
 	{
 		parseComplete = false;
-		parseError = e.message;
+		parseError = catchErr.message;
 	}
 	
 	var parseRes = commonFunctions.prepareInvalidResult(parseComplete, parseError);

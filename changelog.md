@@ -1,16 +1,20 @@
 # Changelog
 
 **./test-parts/05-rio_settings/settings/set-main.js**
-* Replaced 'objectFunctions.testPropExists' with `exist` checks in these tests:
-	* "IO Properties"
-	* "Signal Properties"
-* Re-wrote the following tests to use 'commonFunctions.testFunction'
-	* "Signal Type Function"
-	* "Parse Prefix Function"
-	* "Parse Index Function"
-* Removed 'commonPaths.testObject' requirement.
+* Removed:
+	* 'checkExports' function.
+	* 'commonPaths.testCommon' requirement.
+* Outcome:
+	* This file now only tests whether RIO Settings was successfully loaded.
+	* 'Property Exist' testing is now handled by the other files.
 
 ---
 
-**./test-parts/05-rio_settings/settings/set-props.js**
-* Modified "Valid Type" tests to use 'commonFunctions.testObject'
+**./test-parts/05-rio_settings/settings/set-functions.js**
+* Added "Exists" test to functions:
+	* checkGetSignalTypeFunction
+	* checkParsePrefixFunction
+	* checkParseIndexFunction
+* Renamed error parameter from 'e' to 'catchErr' in functions:
+	* parseIoPrefixInvalidCall
+	* parseIoIndexInvalidCall
