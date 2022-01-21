@@ -230,11 +230,6 @@ function handleFileSystem()
 			arrayFunctions.testAllType(healthObject.fsSize, 'object');
 		});
 		
-		it("File System Properties (fsSize)", function()
-		{
-			commonStorage.testPropertiesArray(healthObject.fsSize);
-		});
-		
 		
 		it("Drive Letter (fsSize.fs)", function()
 		{

@@ -32,7 +32,6 @@ function testNodeStorageObject(storageObject)
 		currentProperty = storageObject[nodeManufacturer];
 		
 		testNodeObjectArrayStructure(currentProperty);
-		testNodeObjectArrayProperties(currentProperty);
 		testNodeObjectArrayContents(currentProperty);
 	}
 }

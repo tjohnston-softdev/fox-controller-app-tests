@@ -68,18 +68,6 @@ function testDrivePercentageObject(percentObject)
 	commonFunctions.testPercent(percentObject.use);
 }
 
-function testDrivePropertiesArray(fsArray)
-{
-	var loopIndex = 0;
-	var currentObject = null;
-	
-	for (loopIndex = 0; loopIndex < fsArray.length; loopIndex = loopIndex + 1)
-	{
-		currentObject = fsArray[loopIndex];
-		testDrivePropertiesObject(currentObject);
-	}
-}
-
 
 
 function testDriveLettersArray(fsArray, fsPlatform)
@@ -207,7 +195,6 @@ module.exports =
 	testTotalObject: testDriveTotalObject,
 	testUsedObject: testDriveUsedObject,
 	testPercentageObject: testDrivePercentageObject,
-	testPropertiesArray: testDrivePropertiesArray,
 	testLettersArray: testDriveLettersArray,
 	testMountArray: testDriveMountArray,
 	testTotalArray: testDriveTotalArray,
