@@ -1,14 +1,9 @@
 # Changelog
 
-**./app/sub-common/files/test-device-common.js**
-* Removed 'testAddModifyResultProperties' export.
+**./test/fox-test-main.js**
+* 'debug' mode now tests external modules.
 
 ---
 
-**./test-parts/09-api_frontend/sub/common-nodes.js**
-* Removed 'testArrayProperties' export.
-
----
-
-**./test-parts/05-rio_settings/settings/set-main.js**
-* Removed stray 'checkExports' call.
+**./test-parts/02-external_modules/modules/pkg-needle.js - checkRequestReturn**
+* Replaced 'outputObject' reference with 'replyObject'

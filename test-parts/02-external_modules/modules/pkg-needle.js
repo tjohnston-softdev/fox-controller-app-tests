@@ -143,7 +143,7 @@ function verifyTimeoutRequest()
 
 function checkRequestReturn(replyObject)
 {
-	commonFunctions.testObject(outputObject);
+	commonFunctions.testObject(replyObject);
 	commonFunctions.testNumber(replyObject.statusCode);
 	commonFunctions.testNumber(replyObject.bytes);
 	commonFunctions.testObject(replyObject.req);
