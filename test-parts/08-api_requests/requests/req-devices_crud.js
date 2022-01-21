@@ -178,8 +178,7 @@ function handleBeforeListTest()
 function handleCreateDeviceTest()
 {
 	describe("Create Remote IO Device (devices/remote-io)", function()
-	{
-		
+	{	
 		describe("Valid Device Object", function()
 		{
 			var createUrl = null;
@@ -202,12 +201,6 @@ function handleCreateDeviceTest()
 			it("Object Returned", function(done)
 			{
 				commonFunctions.testObject(createRead);
-				done();
-			});
-			
-			it("Correct Properties", function(done)
-			{
-				deviceCommon.testAddModifyResultProperties(createRead);
 				done();
 			});
 			
@@ -408,12 +401,6 @@ function handleUpdateDeviceTest()
 		it("Object Returned", function(done)
 		{
 			commonFunctions.testObject(modifyRead);
-			done();
-		});
-		
-		it("Correct Properties", function(done)
-		{
-			deviceCommon.testAddModifyResultProperties(modifyRead);
 			done();
 		});
 		

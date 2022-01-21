@@ -14,7 +14,7 @@ function getAllSupportedModels()
 	{
 		resArray = advantechDefs.concat(moxaDefs, sonoffDefs);
 	}
-	catch(e)
+	catch(arrayErr)
 	{
 		resArray = null;
 	}
@@ -23,23 +23,23 @@ function getAllSupportedModels()
 }
 
 
-function getModelsByManufacturer(sList)
+function getModelsByManufacturer(srcList)
 {
 	var loopIndex = 0;
 	var currentElement = {};
-	var res = {};
+	var loopRes = {};
 	
-	res["manufacturers"] = [];
-	res["models"] = [];
+	loopRes["manufacturers"] = [];
+	loopRes["models"] = [];
 	
-	for (loopIndex = 0; loopIndex < sList.length; loopIndex = loopIndex + 1)
+	for (loopIndex = 0; loopIndex < srcList.length; loopIndex = loopIndex + 1)
 	{
-		currentElement = sList[loopIndex];
-		res.manufacturers.push(currentElement.maker);
-		res.models.push(currentElement.modelType);
+		currentElement = srcList[loopIndex];
+		loopRes.manufacturers.push(currentElement.maker);
+		loopRes.models.push(currentElement.modelType);
 	}
 	
-	return res;
+	return loopRes;
 }
 
 

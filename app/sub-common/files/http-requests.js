@@ -5,7 +5,6 @@ const needle = require("needle");
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const apiRequestScript = require(commonPaths.requestApi);
 const apiPaths = require(commonPaths.requestApiPaths);
 
@@ -228,9 +227,6 @@ function handleInvalidStatus(respObj, sInput)
 	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
 	commonFunctions.testObject(extractedObject);
-	objectFunctions.testPropExists(extractedObject, 'id');
-	objectFunctions.testPropExists(extractedObject, 'isRunning');
-	
 	expect(extractedObject.id).to.equal(sInput);
 	expect(extractedObject.isRunning).to.be.false;
 }
@@ -241,7 +237,6 @@ function handleInvalidDelete(respObj)
 	var extractedObject = apiRequestScript.readResponseObject(respObj);
 	
 	commonFunctions.testObject(extractedObject);
-	objectFunctions.testPropExists(extractedObject, 'success');
 	expect(extractedObject.success).to.be.true;
 }
 

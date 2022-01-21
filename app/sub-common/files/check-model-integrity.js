@@ -1,41 +1,31 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const commonPaths = require("../../../app/paths/files/app-paths");
-const commonFunctions = require(commonPaths.testCommon);
-
-
-function verifyReferenceIntegrity(dList, sList)
+function verifyReferenceIntegrity(devList, srcList)
 {
 	var deviceIndex = 0;
 	var currentDevice = null;
 	var currentDesc = "";
 	var currentMatch = false;
-	var canContinue = true;
 	
-	while (deviceIndex >= 0 && deviceIndex < dList.length && canContinue === true)
+	for (deviceIndex = 0; deviceIndex < devList.length; deviceIndex = deviceIndex + 1)
 	{
-		currentDevice = dList[deviceIndex];
+		currentDevice = devList[deviceIndex];
 		currentDesc = writeCurrentDeviceDescription(currentDevice);
-		currentMatch = matchCurrentDevice(currentDevice, sList);
+		currentMatch = matchCurrentDevice(currentDevice, srcList);
 		
 		if (currentMatch !== true)
 		{
-			canContinue = false;
 			throw new Error(currentDesc);
 		}
 		
-		deviceIndex = deviceIndex + 1;
 	}
 	
-	expect(canContinue).to.be.true;
 }
 
 
 
-function matchCurrentDevice(cDevice, sModels)
+function matchCurrentDevice(curDevice, srcModels)
 {
-	var deviceManufacturer = cDevice.maker.toLowerCase();
-	var deviceModel = cDevice.model.toLowerCase();
+	var deviceManufacturer = curDevice.maker.toLowerCase();
+	var deviceModel = curDevice.model.toLowerCase();
 	
 	var supportIndex = 0;
 	var currentSupportEntry = null;
@@ -43,9 +33,9 @@ function matchCurrentDevice(cDevice, sModels)
 	var currentModel = "";
 	var matchFound = false;
 	
-	while (supportIndex >= 0 && supportIndex < sModels.length && matchFound !== true)
+	while (supportIndex >= 0 && supportIndex < srcModels.length && matchFound !== true)
 	{
-		currentSupportEntry = sModels[supportIndex];
+		currentSupportEntry = srcModels[supportIndex];
 		currentManufacturer = currentSupportEntry.maker.toLowerCase();
 		currentModel = currentSupportEntry.modelType.toLowerCase();
 		

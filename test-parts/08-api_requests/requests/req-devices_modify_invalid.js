@@ -255,8 +255,6 @@ function handleUnchangedModifyTest()
 		it("Modification Passed", function(done)
 		{
 			ucUpdateRead = apiRequestScript.readResponseObject(updateReqReturn);
-			
-			deviceCommon.testAddModifyResultProperties(ucUpdateRead);
 			deviceCommon.testAddModifyResultContents(ucUpdateRead);
 			expect(ucUpdateRead.id).to.equal(testObjectID);
 			

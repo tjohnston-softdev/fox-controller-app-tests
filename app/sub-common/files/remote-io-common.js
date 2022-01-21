@@ -21,32 +21,22 @@ function testDeviceArrayStructure(deviceArr)
 }
 
 function testDeviceObjectStructure(deviceObj)
-{
-	objectFunctions.testPropExists(deviceObj, 'id');
-	objectFunctions.testPropExists(deviceObj, 'maker');
-	objectFunctions.testPropExists(deviceObj, 'deviceType');
-	objectFunctions.testPropExists(deviceObj, 'model');
-	objectFunctions.testPropExists(deviceObj, 'name');
-	objectFunctions.testPropExists(deviceObj, 'desc');
-	objectFunctions.testPropExists(deviceObj, 'ipAddress');
-	objectFunctions.testPropExists(deviceObj, 'username');
-	objectFunctions.testPropExists(deviceObj, 'password');
-	objectFunctions.testPropExists(deviceObj, 'isEnabled');
-	objectFunctions.testPropExists(deviceObj, '__modified');
-	objectFunctions.testPropExists(deviceObj, 'macAddress');
+{	
+	var passVal = deviceObj["password"];
+	var modVal = deviceObj["__modified"];
 	
-	objectFunctions.testPropType(deviceObj, 'id', 'string');
-	objectFunctions.testPropType(deviceObj, 'maker', 'string');
-	objectFunctions.testPropType(deviceObj, 'deviceType', 'string');
-	objectFunctions.testPropType(deviceObj, 'model', 'string');
-	objectFunctions.testPropType(deviceObj, 'name', 'string');
-	objectFunctions.testPropType(deviceObj, 'desc', 'string');
-	objectFunctions.testPropType(deviceObj, 'ipAddress', 'string');
-	objectFunctions.testPropType(deviceObj, 'username', 'string');
-	objectFunctions.testPropType(deviceObj, 'password', 'string');
-	objectFunctions.testPropType(deviceObj, 'isEnabled', 'boolean');
-	objectFunctions.testPropType(deviceObj, '__modified', 'number');
-	objectFunctions.testPropType(deviceObj, 'macAddress', 'string');
+	commonFunctions.testString(deviceObj.id);
+	commonFunctions.testString(deviceObj.maker);
+	commonFunctions.testString(deviceObj.deviceType);
+	commonFunctions.testString(deviceObj.model);
+	commonFunctions.testString(deviceObj.name);
+	commonFunctions.testString(deviceObj.desc);
+	commonFunctions.testString(deviceObj.ipAddress);
+	commonFunctions.testString(deviceObj.username);
+	commonFunctions.testString(passVal);
+	commonFunctions.testBoolean(deviceObj.isEnabled);
+	commonFunctions.testNumber(modVal);
+	commonFunctions.testString(deviceObj.macAddress);
 }
 
 function compareGetDeviceToOriginal(retObj, origObj)
@@ -66,41 +56,26 @@ function compareGetDeviceToOriginal(retObj, origObj)
 function testDeviceDeletedStructure(deviceDelObj)
 {
 	testDeviceObjectStructure(deviceDelObj);
-	
-	objectFunctions.testPropExists(deviceDelObj, 'isDeleted');
-	objectFunctions.testPropType(deviceDelObj, 'isDeleted', 'boolean');
+	commonFunctions.testBoolean(deviceDelObj.isDeleted);
 }
 
 
 function testNodeConfigObjectStructure(configObj)
-{
-	objectFunctions.testPropExists(configObj, 'id');
-	objectFunctions.testPropExists(configObj, 'type');
-	objectFunctions.testPropExists(configObj, 'z');
-	objectFunctions.testPropExists(configObj, 'name');
-	objectFunctions.testPropExists(configObj, 'deviceId');
-	objectFunctions.testPropExists(configObj, 'ioSetId');
-	objectFunctions.testPropExists(configObj, 'x');
-	objectFunctions.testPropExists(configObj, 'y');
-	objectFunctions.testPropExists(configObj, 'wires');
-	
+{	
 	commonFunctions.testString(configObj.id);
 	commonFunctions.testString(configObj.type);
 	commonFunctions.testString(configObj.z);
-	expect(configObj.name).to.be.a("string");
+	commonFunctions.testString(configObj.name);
 	commonFunctions.testString(configObj.deviceId);
 	commonFunctions.testString(configObj.ioSetId);
-	expect(configObj.x).to.be.a('number');
-	expect(configObj.y).to.be.a('number');
-	expect(configObj.wires).to.be.an("array");
+	commonFunctions.testNumber(configObj.x);
+	commonFunctions.testNumber(configObj.y);
+	commonFunctions.testNeutral(configObj.wires);
 }
 
 
 function testPropertyArrayStructure(pArr)
-{	
-	arrayFunctions.testAllPropExists(pArr, 'value');
-	arrayFunctions.testAllPropExists(pArr, 'text');
-	
+{
 	arrayFunctions.testAllPropType(pArr, 'value', 'string');
 	arrayFunctions.testAllPropType(pArr, 'text', 'string');
 }
@@ -160,46 +135,46 @@ function testLocalDeviceArrayDynamic(localArr, itemsRequiredFlag)
 
 
 
-function testDeviceListReturnEmpty(dListReturn)
+function testDeviceListReturnEmpty(devListReturn)
 {
-	testLocalDeviceArrayEmpty(dListReturn);
-	testDeviceListCommon(dListReturn);
+	testLocalDeviceArrayEmpty(devListReturn);
+	testDeviceListCommon(devListReturn);
 }
 
-function testDeviceListReturnPopulated(dListReturn)
+function testDeviceListReturnPopulated(devListReturn)
 {
-	testLocalDeviceArrayPopulated(dListReturn);
-	testDeviceListCommon(dListReturn);
+	testLocalDeviceArrayPopulated(devListReturn);
+	testDeviceListCommon(devListReturn);
 }
 
-function testDeviceListReturnNeutral(dListReturn)
+function testDeviceListReturnNeutral(devListReturn)
 {
-	testLocalDeviceArrayNeutral(dListReturn);
-	testDeviceListCommon(dListReturn);
+	testLocalDeviceArrayNeutral(devListReturn);
+	testDeviceListCommon(devListReturn);
 }
 
 
-function testDeviceListReturnDynamic(dListRet, itemsRequiredFlag)
+function testDeviceListReturnDynamic(devListRet, itemsRequiredFlag)
 {
 	if (itemsRequiredFlag > 0)
 	{
-		testDeviceListReturnPopulated(dListRet);
+		testDeviceListReturnPopulated(devListRet);
 	}
 	else if (itemsRequiredFlag < 0)
 	{
-		testDeviceListReturnEmpty(dListRet);
+		testDeviceListReturnEmpty(devListRet);
 	}
 	else
 	{
-		testDeviceListReturnNeutral(dListRet);
+		testDeviceListReturnNeutral(devListRet);
 	}
 }
 
 
-function testDeviceListCommon(dListRet)
+function testDeviceListCommon(devListRet)
 {
-	arrayFunctions.testAllType(dListRet, 'object');
-	testDeviceArrayStructure(dListRet);
+	arrayFunctions.testAllType(devListRet, 'object');
+	testDeviceArrayStructure(devListRet);
 }
 
 

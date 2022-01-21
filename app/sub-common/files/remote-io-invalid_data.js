@@ -1,12 +1,6 @@
-const chai = require("chai");
-const expect = require("chai").expect;
-const chaiThings = require('chai-things');
-
 const commonPaths = require("../../../app/paths/files/app-paths");
-const foxPath = require(commonPaths.foxRelative);
 const commonFunctions = require(commonPaths.testCommon);
 const commonErrorStringsFile = require(commonPaths.commonErrors);
-const commonJsonObjectsFile = require(commonPaths.commonObjects);
 
 
 function getInvalidDeviceTypeObject(originalDefinition)

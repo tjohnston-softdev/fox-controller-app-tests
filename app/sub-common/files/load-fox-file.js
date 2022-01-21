@@ -6,7 +6,7 @@ function loadFileSafely(tgtFilePath)
 	{
 		loadRes = require(tgtFilePath);
 	}
-	catch(e)
+	catch(loadErr)
 	{
 		loadRes = null;
 	}
