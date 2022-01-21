@@ -36,7 +36,7 @@ function testDeviceObjectStructure(deviceObj)
 	commonFunctions.testString(passVal);
 	commonFunctions.testBoolean(deviceObj.isEnabled);
 	commonFunctions.testNumber(modVal);
-	commonFunctions.testString(deviceObj.macAddress);
+	commonFunctions.testStringOptional(deviceObj.macAddress);
 }
 
 function compareGetDeviceToOriginal(retObj, origObj)
@@ -65,12 +65,12 @@ function testNodeConfigObjectStructure(configObj)
 	commonFunctions.testString(configObj.id);
 	commonFunctions.testString(configObj.type);
 	commonFunctions.testString(configObj.z);
-	commonFunctions.testString(configObj.name);
+	commonFunctions.testStringOptional(configObj.name);
 	commonFunctions.testString(configObj.deviceId);
 	commonFunctions.testString(configObj.ioSetId);
 	commonFunctions.testNumber(configObj.x);
 	commonFunctions.testNumber(configObj.y);
-	commonFunctions.testNeutral(configObj.wires);
+	arrayFunctions.testNeutral(configObj.wires);
 }
 
 
