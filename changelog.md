@@ -1,9 +1,6 @@
 # Changelog
 
-**./test/fox-test-main.js**
-* 'debug' mode now tests external modules.
-
----
-
-**./test-parts/02-external_modules/modules/pkg-needle.js - checkRequestReturn**
-* Replaced 'outputObject' reference with 'replyObject'
+**./app/test-common.js**
+* Wrote new function 'checkStringOptional'
+	* Just like 'checkStringOptional', except it does not check length.
+	* Empty strings are allowed.

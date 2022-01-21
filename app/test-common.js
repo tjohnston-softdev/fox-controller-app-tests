@@ -55,6 +55,13 @@ function checkString(strDef)
 }
 
 
+function checkStringOptional(strDef)
+{
+	expect(strDef).to.exist;
+	expect(strDef).to.be.a('string');
+}
+
+
 function checkInvalidFunctionResult(rObject, expMsg)
 {	
 	expect(rObject.successful).to.be.false;
@@ -91,6 +98,7 @@ module.exports =
 	testNumber: checkNumber,
 	testPercent: checkPercent,
 	testString: checkString,
+	testStringOptional: checkStringOptional,
 	testInvalidResult: checkInvalidFunctionResult,
 	prepareInvalidResult: prepareInvalidFunctionResult,
 	cloneObject: cloneJsonObject
