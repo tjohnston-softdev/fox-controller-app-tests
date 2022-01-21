@@ -4,7 +4,6 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 const sysPlatform = require(commonPaths.sysPlatform);
 
@@ -29,12 +28,8 @@ function testHealthTimezoneCodeValue(tzCode)
 
 function testHealthNumberMaximum(srcObject, propName, maxVal)
 {
-	var givenValue = -1;
-	
-	objectFunctions.testPropExists(srcObject, propName);
-	objectFunctions.testPropType(srcObject, propName, 'number');
-	givenValue = srcObject[propName];
-	
+	var givenValue = srcObject[propName];
+	commonFunctions.testNumber(givenValue);
 	expect(givenValue).to.be.within(0, maxVal);
 }
 

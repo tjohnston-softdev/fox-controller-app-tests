@@ -4,7 +4,6 @@ const chaiThings = require('chai-things');
 
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
-const objectFunctions = require(commonPaths.testObject);
 const localValidFile = require(commonPaths.localValid);
 
 const isIP = require(commonPaths.validatorIP);
@@ -201,11 +200,8 @@ function testZeroLeastArray(objectArray, numberProp)
 
 function testPositiveNumberProperty(parentObject, propName)
 {
-	var givenValue = -1;
-	
-	objectFunctions.testPropExists(parentObject, propName);
-	objectFunctions.testPropType(parentObject, propName, 'number');
-	givenValue = parentObject[propName];
+	var givenValue = parentObject[propName];
+	commonFunctions.testNumber(givenValue);
 	expect(givenValue).to.be.above(0);
 }
 
