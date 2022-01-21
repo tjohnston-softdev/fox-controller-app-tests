@@ -5,7 +5,6 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const foxPath = require(commonPaths.foxRelative);
 const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
-const objectFunctions = require(commonPaths.testObject);
 const referenceFunctions = require(commonPaths.testRef);
 const loadFoxFile = require(commonPaths.loadFox);
 const ioFile = loadFoxFile(foxPath.rioSettingsFile);
@@ -154,7 +153,7 @@ function checkTotalPollProperty(modelObj)
 	{
 		it("Valid Type", function()
 		{
-			objectFunctions.testPropType(modelObj, 'totalPolls', 'number');
+			commonFunctions.testNumber(modelObj.totalPolls);
 		});
 	});
 }
@@ -165,7 +164,7 @@ function checkPollIntervalProperty(modelObj)
 	{
 		it("Valid Type", function()
 		{
-			objectFunctions.testPropType(modelObj, 'pollingInterval', 'number');
+			commonFunctions.testNumber(modelObj.pollingInterval);
 		});
 	});
 }

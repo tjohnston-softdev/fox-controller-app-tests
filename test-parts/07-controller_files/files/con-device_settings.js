@@ -94,7 +94,7 @@ function checkDeviceTypeObjectProperty()
 	{
 		it("Valid Type", function()
 		{
-			objectFunctions.testPropType(settingsFile, 'deviceType', 'object');
+			commonFunctions.testObject(settingsFile.deviceType);
 		});
 		
 		it("All Properties Strings", function()
