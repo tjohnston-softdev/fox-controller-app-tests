@@ -163,7 +163,6 @@ function writeExpectedNodeName(enteredPrefix)
 module.exports =
 {
 	testArrayStructure: testNodeObjectArrayStructure,
-	testArrayProperties: testNodeObjectArrayProperties,
 	testArrayContents: testNodeObjectArrayContents,
 	testStorageObject: testNodeStorageObject,
 	testStoreCount: testNodeStoreCount,

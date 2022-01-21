@@ -53,7 +53,6 @@ module.exports =
 {
 	getRudUrl: getDeviceRudUrl,
 	getStatusUrl: getDeviceStatusUrl,
-	testAddModifyResultProperties: testAddModifyResultObjectProperties,
 	testAddModifyResultContents: testAddModifyResultObjectContents,
 	testFrontendAdded: testFrontendAddSuccessful,
 	testFrontendIdValid: testFrontendAddIdValid

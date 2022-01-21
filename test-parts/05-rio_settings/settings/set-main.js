@@ -12,7 +12,6 @@ function testRemoteIoSettings()
 	describe("Main", function()
 	{
 		checkFile();
-		checkExports();
 	});
 }
 
