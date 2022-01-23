@@ -22,8 +22,7 @@ function handleExampleFunction()
 	var exampleValid = "Hello";
 	var exampleInvalid = "Invalid";
 	
-	var nullError = "Cannot read property 'length' of null";
-	var syntaxError = "subjectSyntax.test is not a function";
+	var syntaxError = "regObj.test is not a function";
 	
 	describe("Example (validateExampleTest)", function()
 	{
@@ -34,30 +33,28 @@ function handleExampleFunction()
 		
 		it("Call - Valid String", function()
 		{
-			callExampleValid(exampleValid, exampleSyntax, false, true);
+			callExampleValid(exampleValid, exampleSyntax, false);
 		});
 		
 		it("Call - Valid Empty", function()
 		{
-			callExampleValid("", exampleSyntax, true, true);
+			callExampleValid("", exampleSyntax, true);
 		});
 		
 		
 		it("Call - Invalid String", function()
 		{
-			callExampleValid(exampleInvalid, exampleSyntax, false, false);
+			callExampleInvalid(exampleInvalid, exampleSyntax, false, "Invalid Example string.");
 		});
 		
 		it("Call - Invalid Empty", function()
 		{
-			callExampleValid("", exampleSyntax, false, false);
+			callExampleInvalid("", exampleSyntax, false, "Example string cannot be empty.");
 		});
 		
 		it("Call - Null", function()
 		{
-			callExampleInvalid(null, exampleSyntax, false, nullError);
-			callExampleInvalid(exampleValid, null, false, "Cannot read property 'test' of null");
-			callExampleInvalid(null, null, null, nullError);
+			callExampleInvalid(null, exampleSyntax, false, "Input must be a valid string.");
 		});
 		
 		it("Call - Empty Syntax", function()
@@ -74,18 +71,10 @@ function handleExampleFunction()
 }
 
 
-function callExampleValid(eString, eSyntax, eEmpty, eTarget)
+function callExampleValid(eString, eSyntax, eEmpty)
 {
 	var exampleRes = localValidFile.validateExampleTest(eString, eSyntax, eEmpty);
-	
-	if (eTarget === true)
-	{
-		expect(exampleRes).to.be.true;
-	}
-	else
-	{
-		expect(exampleRes).to.be.false;
-	}
+	expect(exampleRes).to.be.true;
 }
 
 function callExampleInvalid(eString, eSyntax, eEmpty, eErrorText)
@@ -98,10 +87,10 @@ function callExampleInvalid(eString, eSyntax, eEmpty, eErrorText)
 		localValidFile.validateExampleTest(eString, eSyntax, eEmpty);
 		callComplete = true;
 	}
-	catch(e)
+	catch(errorObject)
 	{
 		callComplete = false;
-		thrownError = e.message;
+		thrownError = errorObject.message;
 	}
 	
 	var callRes = commonFunctions.prepareInvalidResult(callComplete, thrownError);

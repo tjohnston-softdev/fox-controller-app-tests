@@ -7,32 +7,32 @@ const rioPrefixSyntax = /^(A|D|R)(I|O)-([0-9]+)$/i;
 
 function validateExample(testString, testSyntax, allowEmpty)
 {
-	var res = checkRegEx(testString, testSyntax, allowEmpty);
+	var res = checkRegEx(testString, testSyntax, allowEmpty, "Example");
 	return res;
 }
 
 function validateTimezoneOffsetString(offsetString, allowEmpty)
 {
-	var res = checkRegEx(offsetString, timeOffsetSyntax, allowEmpty);
+	var res = checkRegEx(offsetString, timeOffsetSyntax, allowEmpty, "Timezone Offset");
 	return res;
 }
 
 function validateDriveLetterString(dString, allowEmpty)
 {
-	var res = checkRegEx(dString, driveLetterSyntax, allowEmpty);
+	var res = checkRegEx(dString, driveLetterSyntax, allowEmpty, "Drive Letter");
 	return res;
 }
 
 function validateDrivePathString(dString, allowEmpty)
 {
-	var res = checkRegEx(dString, drivePathSyntax, allowEmpty);
+	var res = checkRegEx(dString, drivePathSyntax, allowEmpty, "Drive Path");
 	return res;
 }
 
 
 function validateFilenameString(fnString, allowEmpty)
 {
-	var res = checkRegEx(fnString, filenameSyntax, allowEmpty);
+	var res = checkRegEx(fnString, filenameSyntax, allowEmpty, "File Name");
 	return res;
 }
 
@@ -40,13 +40,13 @@ function validateFilenameString(fnString, allowEmpty)
 
 function validateRioPrefixString(prefixString, allowEmpty)
 {
-	var res = checkRegEx(prefixString, rioPrefixSyntax, allowEmpty);
+	var res = checkRegEx(prefixString, rioPrefixSyntax, allowEmpty, "Remote IO Prefix");
 	return res;
 }
 
 function validateRequirementPathString(reqPathString, allowEmpty)
 {
-	var res = checkRegEx(reqPathString, requirementPathSyntax, allowEmpty);
+	var res = checkRegEx(reqPathString, requirementPathSyntax, allowEmpty, "Requirement Path");
 	return res;
 }
 
@@ -54,22 +54,28 @@ function validateRequirementPathString(reqPathString, allowEmpty)
 
 function validateRioTextString(txtString, allowEmpty)
 {
+	var correctType = (typeof txtString === "string");
 	var txtLower = txtString.toLowerCase();
 	var wordArray = txtLower.split(" ");
-	var validCheck = checkRioSplitArray(wordArray);
 	var res = false;
 	
-	if (validCheck === true)
+	if (correctType === true && txtString.length > 0)
+	{
+		txtLower = txtString.toLowerCase();
+		wordArray = txtLower.split(" ");
+		res = checkRioSplitArray(wordArray);
+	}
+	else if (correctType === true && allowEmpty === true)
 	{
 		res = true;
 	}
-	else if (txtString === "" && allowEmpty === true)
+	else if (correctType === true)
 	{
-		res = true;
+		throwEmptyError("Remote IO Text");
 	}
 	else
 	{
-		res = false;
+		throwTypeError();
 	}
 	
 	return res;
@@ -109,6 +115,10 @@ function checkRioSplitArray(splitArr)
 	{
 		checkRes = true;
 	}
+	else
+	{
+		throw new Error("Invalid Remote IO Text string.");
+	}
 	
 	return checkRes;
 }
@@ -117,25 +127,59 @@ function checkRioSplitArray(splitArr)
 
 
 
-function checkRegEx(subjectString, subjectSyntax, allowEmptyString)
+function checkRegEx(subjectString, subjectSyntax, allowEmptyString, stringDesc)
 {
+	var correctType = (typeof subjectString === "string");
 	var validationMet = false;
 	
-	if (subjectString.length > 0)
+	if (correctType === true && subjectString.length > 0)
 	{
-		validationMet = subjectSyntax.test(subjectString);
+		validationMet = testSyntax(subjectString, subjectSyntax, stringDesc);
 	}
-	else if (subjectString === "" && allowEmptyString === true)
+	else if (correctType === true && allowEmptyString === true)
 	{
 		validationMet = true;
 	}
+	else if (correctType === true)
+	{
+		throwEmptyError(stringDesc);
+	}
 	else
 	{
-		validationMet = false;
+		throwTypeError();
 	}
 	
 	return validationMet;
 }
+
+
+function testSyntax(subStr, regObj, sDesc)
+{
+	var stringPassed = regObj.test(subStr);
+	var flaggedText = "";
+	
+	if (stringPassed !== true)
+	{
+		flaggedText = "Invalid " + sDesc + " string.";
+		throw new Error(flaggedText);
+	}
+	
+	return stringPassed;
+}
+
+
+function throwEmptyError(sDesc)
+{
+	var flaggedText = sDesc + " string cannot be empty.";
+	throw new Error(flaggedText);
+}
+
+
+function throwTypeError()
+{
+	throw new Error("Input must be a valid string.");
+}
+
 
 
 module.exports =

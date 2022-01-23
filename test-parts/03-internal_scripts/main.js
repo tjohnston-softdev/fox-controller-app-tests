@@ -14,12 +14,14 @@ function coordinateInternal()
 	{
 		localGeneralTests();
 		localSpecificTests();
+		/*
 		defineApiTests();
 		requestApiUrlTests();
 		requestApiResponseTests();
 		requestApiOtherTests();
 		requestPathTests();
 		dbDefinitionTests();
+		*/
 	});
 }
 

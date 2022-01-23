@@ -28,6 +28,8 @@ function handleTimezoneOffsetFunction()
 	var timeLateInvalid = "GMT+5678";
 	var timeWrongPrefix = "UTC+1234";
 	
+	var invalidErrTxt = "Invalid Timezone Offset string.";
+	
 	describe("Timezone Offset Code (validateTimezoneOffset)", function()
 	{
 		it("Function Exists", function()
@@ -49,20 +51,17 @@ function handleTimezoneOffsetFunction()
 		
 		it("Call - Early Invalid", function()
 		{
-			var earlyInvalidRes = localValidFile.validateTimezoneOffset(timeEarlyInvalid, false);
-			expect(earlyInvalidRes).to.be.false;
+			callInvalid(localValidFile.validateTimezoneOffset, timeEarlyInvalid, invalidErrTxt);
 		});
 		
 		it("Call - Late Invalid", function()
 		{
-			var lateInvalidRes = localValidFile.validateTimezoneOffset(timeLateInvalid, false);
-			expect(lateInvalidRes).to.be.false;
+			callInvalid(localValidFile.validateTimezoneOffset, timeLateInvalid, invalidErrTxt);
 		});
 		
 		it("Call - Invalid Prefix", function()
 		{
-			var invalidPrefixRes = localValidFile.validateTimezoneOffset(timeWrongPrefix, false);
-			expect(invalidPrefixRes).to.be.false;
+			callInvalid(localValidFile.validateTimezoneOffset, timeWrongPrefix, invalidErrTxt);
 		});
 		
 	});
@@ -92,8 +91,7 @@ function handleDriveLetterFunction()
 		
 		it("Call - Invalid Format", function()
 		{
-			driveInvalidRes = localValidFile.validateDriveLetter(driveInvalidString, false);
-			expect(driveInvalidRes).to.be.false;
+			callInvalid(localValidFile.validateDriveLetter, driveInvalidString, "Invalid Drive Letter string.");
 		});
 	
 	});
@@ -123,8 +121,7 @@ function handleDrivePathFunction()
 		
 		it("Call - Invalid Format", function()
 		{
-			invalidPathRes = localValidFile.validateDrivePath(invalidPathString, false);
-			expect(invalidPathRes).to.be.false;
+			callInvalid(localValidFile.validateDrivePath, invalidPathString, "Invalid Drive Path string.");
 		});
 		
 	});
@@ -156,8 +153,7 @@ function handleFilenameFunction()
 		
 		it("Call - Invalid Format", function()
 		{
-			invalidFileRes = localValidFile.validateFilename(invalidFileString, false);
-			expect(invalidFileRes).to.be.false;
+			callInvalid(localValidFile.validateFilename, invalidFileString, "Invalid File Name string.");
 		});
 		
 	});
@@ -176,6 +172,8 @@ function handleRioPrefixFunction()
 	var invalidPrefixRes = false;
 	var negativePrefixRes = false;
 	
+	var invalidErrTxt = "Invalid Remote IO Prefix string.";
+	
 	describe("Remote IO Prefix (validateRioPrefix)", function()
 	{
 		it("Function Exists", function()
@@ -191,14 +189,12 @@ function handleRioPrefixFunction()
 		
 		it("Call - Invalid Format", function()
 		{
-			invalidPrefixRes = localValidFile.validateRioPrefix(invalidPrefixString, false);
-			expect(invalidPrefixRes).to.be.false;
+			callInvalid(localValidFile.validateRioPrefix, invalidPrefixString, invalidErrTxt);
 		});
 		
 		it("Call - Negative Index", function()
 		{
-			negativePrefixRes = localValidFile.validateRioPrefix(negativePrefixString, false);
-			expect(negativePrefixRes).to.be.false;
+			callInvalid(localValidFile.validateRioPrefix, negativePrefixString, invalidErrTxt);
 		});
 		
 	});
@@ -217,6 +213,8 @@ function handleRioTextFunction()
 	var invalidRes = false;
 	var negativeRes = false;
 	
+	var invalidErrTxt = "Invalid Remote IO Text string.";
+	
 	describe("Remote IO Text (validateRioText)", function()
 	{
 		it("Function Exists", function()
@@ -232,17 +230,36 @@ function handleRioTextFunction()
 		
 		it("Call - Invalid Format", function()
 		{
-			invalidRes = localValidFile.validateRioText(invalidString, false);
-			expect(invalidRes).to.be.false;
+			callInvalid(localValidFile.validateRioText, invalidString, invalidErrTxt);
 		});
 		
 		it("Call - Negative Number", function()
 		{
-			negativeRes = localValidFile.validateRioText(negativeString, false);
-			expect(negativeRes).to.be.false;
+			callInvalid(localValidFile.validateRioText, negativeString, invalidErrTxt);
 		});
 	});
 	
+}
+
+
+function callInvalid(localFunction, stringArgument, eErrorText)
+{
+	var callComplete = false;
+	var thrownError = "";
+	
+	try
+	{
+		localFunction(stringArgument, false);
+		callComplete = true;
+	}
+	catch(errorObject)
+	{
+		callComplete = false;
+		thrownError = errorObject.message;
+	}
+	
+	var callRes = commonFunctions.prepareInvalidResult(callComplete, thrownError);
+	commonFunctions.testInvalidResult(callRes, eErrorText);
 }
 
 
