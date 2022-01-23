@@ -145,7 +145,7 @@ function callNodeManufacturerPropertyList()
 	{
 		listRes = testCacheFile.readNodePropertyList();
 	}
-	catch(catchErr)
+	catch(callErr)
 	{
 		listRes = null;
 	}

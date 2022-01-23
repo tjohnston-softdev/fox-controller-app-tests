@@ -394,10 +394,10 @@ function coordinateRegisterNodeInvalidThrow(tMode, tObject, expectedThrownError)
 			regComplete = true;
 		});
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		regComplete = false;
-		regMessage = catchErr.message;
+		regMessage = errorObj.message;
 	}
 	
 	var regRes = commonFunctions.prepareInvalidResult(regComplete, regMessage);

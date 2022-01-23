@@ -96,7 +96,7 @@ function retrieveListFromCache()
 	{
 		res = testCacheFile.retrieveList();
 	}
-	catch(catchErr)
+	catch(retErr)
 	{
 		res = null;
 	}
@@ -113,7 +113,7 @@ function retrieveCountFromCache()
 	{
 		res = testCacheFile.countTestDevices();
 	}
-	catch(catchErr)
+	catch(retErr)
 	{
 		res = null;
 	}

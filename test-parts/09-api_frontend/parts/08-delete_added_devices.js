@@ -72,7 +72,7 @@ function getAddedDeviceCountFromCache()
 	{
 		addRes = testCacheFile.countTestDevices();
 	}
-	catch(catchErr)
+	catch(getCountErr)
 	{
 		addRes = null;
 	}

@@ -138,10 +138,10 @@ function parseIoPrefixInvalidCall(invalidArg, exceptMessage)
 		settingsFile.parseIoPrefix(invalidArg);
 		parseComplete = true;
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		parseComplete = false;
-		parseError = catchErr.message;
+		parseError = errorObj.message;
 	}
 	
 	var parseRes = commonFunctions.prepareInvalidResult(parseComplete, parseError);
@@ -159,10 +159,10 @@ function parseIoIndexInvalidCall(invalidArg, exceptMessage)
 		settingsFile.parseIoIndex(invalidArg);
 		parseComplete = true;
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		parseComplete = false;
-		parseError = catchErr.message;
+		parseError = errorObj.message;
 	}
 	
 	var parseRes = commonFunctions.prepareInvalidResult(parseComplete, parseError);

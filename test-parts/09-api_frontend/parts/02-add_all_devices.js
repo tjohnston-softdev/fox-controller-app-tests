@@ -154,7 +154,7 @@ function getDeviceCreateUrl()
 	{
 		res = apiRequestScript.writeUrl(apiPaths.devicesApi, apiPaths.rioApiSub);
 	}
-	catch(e)
+	catch(createErr)
 	{
 		res = null;
 	}

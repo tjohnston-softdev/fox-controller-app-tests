@@ -176,10 +176,10 @@ function handleInvalidCall(invalidArg)
 		isIP(invalidArg);
 		validationComplete = true;
 	}
-	catch(e)
+	catch(errorObject)
 	{
 		validationComplete = false;
-		validationMessage = e.message;
+		validationMessage = errorObject.message;
 	}
 	
 	var res = commonFunctions.prepareInvalidResult(validationComplete, validationMessage);

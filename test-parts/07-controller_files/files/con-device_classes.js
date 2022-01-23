@@ -244,10 +244,10 @@ function callStoredDeviceUnsupported(callObject)
 		storedDeviceObject = new deviceModelFile.StoredDevice(callObject.jsonObject);
 		storedDeviceComplete = true;
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		storedDeviceComplete = false;
-		storedDeviceError = catchErr.message;
+		storedDeviceError = errorObj.message;
 	}
 	
 	var callResult = commonFunctions.prepareInvalidResult(storedDeviceComplete, storedDeviceError);
@@ -266,10 +266,10 @@ function callConnectedDeviceUnsupported(a, expectedError)
 		connectObject = new deviceConnectFile.ConnectedDevice(a);
 		connectionComplete = true;
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		connectionComplete = false;
-		connectionError = catchErr.message;
+		connectionError = errorObj.message;
 	}
 	
 	var callResult = commonFunctions.prepareInvalidResult(connectionComplete, connectionError);
@@ -314,10 +314,10 @@ function callConnectedDeviceStructureError(propName, propValue, propError)
 		invalidObject[propName] = propValue;
 		structureChanged = true;
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		structureChanged = false;
-		structureError = catchErr.message;
+		structureError = errorObj.message;
 	}
 	
 	

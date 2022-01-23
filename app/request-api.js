@@ -31,10 +31,10 @@ function readApiResponseArray(respObj)
 		rText = respObj.body;
 		objectResult = JSON.parse(rText);
 	}
-	catch(e)
+	catch(arrayErr)
 	{
 		objectResult = null;
-		throw new Error(e.message);
+		throw new Error(arrayErr.message);
 	}
 	
 	return objectResult;
@@ -58,10 +58,10 @@ function readApiResponseObject(respObj)
 			objectResult = JSON.parse(respObj.body);
 		}
 	}
-	catch(e)
+	catch(objectErr)
 	{
 		objectResult = null;
-		throw new Error(e.message);
+		throw new Error(objectErr.message);
 	}
 	
 	return objectResult;
@@ -189,7 +189,7 @@ function extractErrorText(eBodyText)
 		
 		res.errorFree = true;
 	}
-	catch(e)
+	catch(extractErr)
 	{
 		res.extractedText = "";
 		res.valid = false;

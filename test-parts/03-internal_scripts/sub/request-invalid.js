@@ -13,10 +13,10 @@ function runRequestUrlInvalid(folderArg, fileArg, eError)
 		requestFile.writeUrl(folderArg, fileArg);
 		comp = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		comp = false;
-		msg = e.message;
+		msg = errorObj.message;
 	}
 	
 	var invalidUrlRes = commonFunctions.prepareInvalidResult(comp, msg);
@@ -33,10 +33,10 @@ function runReadResponseInvalidArray(invalidArg, eError)
 		requestFile.readResponseArray(invalidArg);
 		comp = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		comp = false;
-		msg = e.message;
+		msg = errorObj.message;
 	}
 	
 	var invalidArrayRes = commonFunctions.prepareInvalidResult(comp, msg);
@@ -53,10 +53,10 @@ function runReadResponseInvalidObject(invalidArg, eError)
 		requestFile.readResponseObject(invalidArg);
 		comp = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		comp = false;
-		msg = e.message;
+		msg = errorObj.message;
 	}
 	
 	var invalidObjectRes = commonFunctions.prepareInvalidResult(comp, msg);
@@ -73,10 +73,10 @@ function runReadResponseInvalidString(invalidArg, eError)
 		requestFile.callReadApiResponseString(invalidArg);
 		comp = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		comp = false;
-		msg = e.message;
+		msg = errorObj.message;
 	}
 	
 	var invalidStringRes = commonFunctions.prepareInvalidResult(comp, msg);
@@ -94,10 +94,10 @@ function runReadResponseInvalidError(invalidArg, eError)
 		requestFile.readResponseError(invalidArg);
 		comp = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		comp = false;
-		msg = e.message;
+		msg = errorObj.message;
 	}
 	
 	var invalidRes = commonFunctions.prepareInvalidResult(comp, msg);
@@ -116,10 +116,10 @@ function runValidateResponseInvalid(invalidArg, eError)
 		requestFile.validateResponse(invalidArg);
 		comp = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		comp = false;
-		msg = e.message;
+		msg = errorObj.message;
 	}
 	
 	var invalidRes = commonFunctions.prepareInvalidResult(comp, msg);
@@ -139,10 +139,10 @@ function runRefuseError(refuseArg)
 		requestFile.showRefusedError(refuseArg);
 		refComplete = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		refComplete = false;
-		refMsg = e.message;
+		refMsg = errorObj.message;
 	}
 	
 	var reResult = commonFunctions.prepareInvalidResult(refComplete, refMsg);
@@ -160,10 +160,10 @@ function runOptionError(deleteArg, eError)
 		requestFile.getDeleteOptions(deleteArg);
 		oComplete = true;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		oComplete = false;
-		oMessage = e.message;
+		oMessage = errorObj.message;
 	}
 	
 	var oResult = commonFunctions.prepareInvalidResult(oComplete, oMessage);

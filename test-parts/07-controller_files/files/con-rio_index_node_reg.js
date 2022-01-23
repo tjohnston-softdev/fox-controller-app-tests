@@ -712,10 +712,10 @@ function coordinateGetIoPropertiesInvalidCall(invalidArg)
 		rioFile.getIoProperties(invalidArg);
 		ioComplete = true;
 	}
-	catch(catchErr)
+	catch(errorObj)
 	{
 		ioComplete = false;
-		ioError = catchErr.message;
+		ioError = errorObj.message;
 	}
 	
 	var ioRes = commonFunctions.prepareInvalidResult(ioComplete, ioError);

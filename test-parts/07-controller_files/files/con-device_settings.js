@@ -350,7 +350,7 @@ function getSupportedLists()
 		resultObject["manufacturers"] = derivedManufacturers;
 		resultObject["models"] = derivedModels;
 	}
-	catch(e)
+	catch(errorObj)
 	{
 		resultObject = null;
 	}

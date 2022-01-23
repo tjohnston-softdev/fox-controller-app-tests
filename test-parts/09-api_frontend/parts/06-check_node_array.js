@@ -116,7 +116,7 @@ function callNodeCache()
 	{
 		res = testCacheFile.retrieveNodeArrayStructure();
 	}
-	catch(catchErr)
+	catch(callErr)
 	{
 		res = null;
 	}
