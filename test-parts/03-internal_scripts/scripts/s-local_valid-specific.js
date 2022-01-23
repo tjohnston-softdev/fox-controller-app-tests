@@ -73,9 +73,6 @@ function handleDriveLetterFunction()
 	var driveValidString = "C:";
 	var driveInvalidString = "3:";
 	
-	var driveValidRes = false;
-	var driveInvalidRes = false;
-	
 	describe("Drive Letter (validateDriveLetter)", function()
 	{
 		it("Function Exists", function()
@@ -85,7 +82,7 @@ function handleDriveLetterFunction()
 		
 		it("Call - Valid Format", function()
 		{
-			driveValidRes = localValidFile.validateDriveLetter(driveValidString, false);
+			var driveValidRes = localValidFile.validateDriveLetter(driveValidString, false);
 			expect(driveValidRes).to.be.true;
 		});
 		
@@ -103,9 +100,6 @@ function handleDrivePathFunction()
 	var validPathString = "/dev/root";
 	var invalidPathString = "C:";
 	
-	var validPathRes = false;
-	var invalidPathRes = false;
-	
 	describe("Drive Path (validateDrivePath)", function()
 	{
 		it("Function Exists", function()
@@ -115,7 +109,7 @@ function handleDrivePathFunction()
 		
 		it("Call - Valid Format", function()
 		{
-			validPathRes = localValidFile.validateDrivePath(validPathString, false);
+			var validPathRes = localValidFile.validateDrivePath(validPathString, false);
 			expect(validPathRes).to.be.true;
 		});
 		
@@ -135,9 +129,6 @@ function handleFilenameFunction()
 	var validFileString = "example.txt";
 	var invalidFileString = "fi/le.txt";
 	
-	var validFileRes = false;
-	var invalidFileRes = false;
-	
 	describe("File Name (validateFilename)", function()
 	{
 		it("Function Exists", function()
@@ -147,7 +138,7 @@ function handleFilenameFunction()
 		
 		it("Call - Valid Format", function()
 		{
-			validFileRes = localValidFile.validateFilename(validFileString, false);
+			var validFileRes = localValidFile.validateFilename(validFileString, false);
 			expect(validFileRes).to.be.true;
 		});
 		
@@ -168,10 +159,6 @@ function handleRioPrefixFunction()
 	var invalidPrefixString = "OA-5";
 	var negativePrefixString = "DI--1";
 	
-	var validPrefixRes = false;
-	var invalidPrefixRes = false;
-	var negativePrefixRes = false;
-	
 	var invalidErrTxt = "Invalid Remote IO Prefix string.";
 	
 	describe("Remote IO Prefix (validateRioPrefix)", function()
@@ -183,7 +170,7 @@ function handleRioPrefixFunction()
 		
 		it("Call - Valid Format", function()
 		{
-			validPrefixRes = localValidFile.validateRioPrefix(validPrefixString, false);
+			var validPrefixRes = localValidFile.validateRioPrefix(validPrefixString, false);
 			expect(validPrefixRes).to.be.true;
 		});
 		
@@ -209,10 +196,6 @@ function handleRioTextFunction()
 	var invalidString = "Output Analogue 5";
 	var negativeString = "Digital Input -1";
 	
-	var validRes = false;
-	var invalidRes = false;
-	var negativeRes = false;
-	
 	var invalidErrTxt = "Invalid Remote IO Text string.";
 	
 	describe("Remote IO Text (validateRioText)", function()
@@ -224,7 +207,7 @@ function handleRioTextFunction()
 		
 		it("Call - Valid Format", function()
 		{
-			validRes = localValidFile.validateRioText(validString, false);
+			var validRes = localValidFile.validateRioText(validString, false);
 			expect(validRes).to.be.true;
 		});
 		
