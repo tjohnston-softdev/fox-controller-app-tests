@@ -64,8 +64,8 @@ function checkStringOptional(strDef)
 
 function checkInvalidFunctionResult(rObject, expMsg)
 {	
-	expect(rObject.successful).to.be.false;
-	expect(rObject.errorText).to.equal(expMsg);
+	expect(rObject.successful, "No error was thrown.").to.be.false;
+	expect(rObject.errorText).to.equal(expMsg, "Wrong error thrown.");
 }
 
 
