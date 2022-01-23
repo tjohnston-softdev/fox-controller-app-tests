@@ -5,7 +5,7 @@ const chaiThings = require('chai-things');
 const commonPaths = require("../../../app/paths/files/app-paths");
 const apiPaths = require(commonPaths.requestApiPaths);
 const commonFunctions = require(commonPaths.testCommon);
-const apiDefinitionObject = require(commonPaths.defineApi).definitions;
+const apiDefinitionObject = require(commonPaths.defineApi);
 const apiRequestScript = require(commonPaths.requestApi);
 const httpRequests = require(commonPaths.httpRequests);
 

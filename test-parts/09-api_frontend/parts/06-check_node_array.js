@@ -6,7 +6,7 @@ const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
 const objectFunctions = require(commonPaths.testObject);
-const apiDefinitionObject = require(commonPaths.defineApi).definitions;
+const apiDefinitionObject = require(commonPaths.defineApi);
 
 const nodeCommonFile = require("../sub/common-nodes");
 const testCacheFile = require("../sub/test-device-cache");

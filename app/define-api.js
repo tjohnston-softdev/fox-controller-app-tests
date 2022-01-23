@@ -1,6 +1,1 @@
-const apiDefinitions = ["Advantech", "Moxa", "Sonoff"];
-
-module.exports =
-{
-	definitions: apiDefinitions
-};
+module.exports = ["Advantech", "Moxa", "Sonoff"];

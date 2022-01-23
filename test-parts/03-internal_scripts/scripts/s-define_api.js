@@ -4,7 +4,7 @@ const expect = require("chai").expect;
 const commonPaths = require("../../../app/paths/files/app-paths");
 const commonFunctions = require(commonPaths.testCommon);
 const arrayFunctions = require(commonPaths.testArray);
-const defineFile = require(commonPaths.defineApi);
+const definitions = require(commonPaths.defineApi);
 
 function testDefine()
 {
@@ -12,7 +12,7 @@ function testDefine()
 	{
 		it("Array Exists", function()
 		{
-			arrayFunctions.testPopulated(defineFile.definitions);
+			arrayFunctions.testPopulated(definitions);
 		});
 		
 		it("Valid Contents", function()
@@ -29,9 +29,9 @@ function manufacturerArrayLoop()
 	var loopIndex = 0;
 	var currentElement = null;
 	
-	for (loopIndex = 0; loopIndex < defineFile.definitions.length; loopIndex = loopIndex + 1)
+	for (loopIndex = 0; loopIndex < definitions.length; loopIndex = loopIndex + 1)
 	{
-		currentElement = defineFile.definitions[loopIndex];
+		currentElement = definitions[loopIndex];
 		commonFunctions.testString(currentElement);
 	}
 }
