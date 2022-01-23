@@ -24,7 +24,7 @@ function testDriveLetterObject(driveObj)
 		letterValid = localValidFile.validateDrivePath(letterValue);
 	}
 	
-	expect(letterValid).to.be.true;
+	return letterValid;
 }
 
 function testDriveMountObject(driveObj)
@@ -46,6 +46,7 @@ function testDriveMountObject(driveObj)
 		mountValid = false;
 	}
 	
+	return mountValid;
 }
 
 

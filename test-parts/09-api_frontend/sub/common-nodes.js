@@ -77,33 +77,12 @@ function testStatusControlArraySyntax(structureObj)
 	var rioIndex = 0;
 	var currentElement = null;
 	
-	var currentPrefixValid = false;
-	var currentNameValid = false;
-	var currentElementValid = false;
-	
-	var canContinue = true;
-	
-	while (rioIndex >= 0 && rioIndex < structureObj.length && canContinue === true)
+	for (rioIndex = 0; rioIndex < structureObj.length; rioIndex = rioIndex + 1)
 	{
 		currentElement = structureObj[rioIndex];
-		currentPrefixValid = localValidFile.validateRioPrefix(currentElement.value);
-		currentNameValid = localValidFile.validateRioText(currentElement.text);
-		currentElementValid = false;
-		
-		if (currentPrefixValid === true && currentNameValid === true)
-		{
-			currentElementValid = true;
-		}
-		
-		if (currentElementValid !== true)
-		{
-			canContinue = false;
-		}
-		
-		rioIndex = rioIndex + 1;
+		localValidFile.validateRioPrefix(currentElement.value);
+		localValidFile.validateRioText(currentElement.text);
 	}
-	
-	expect(canContinue).to.be.true;
 }
 
 

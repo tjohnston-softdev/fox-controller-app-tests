@@ -178,8 +178,6 @@ function testFileNameArray(objectArray, nameProp)
 		currentObject = objectArray[loopIndex];
 		currentName = currentObject[nameProp];
 		currentValid = localValidFile.validateFilename(currentName);
-		
-		expect(currentValid).to.be.true;
 	}
 }
 

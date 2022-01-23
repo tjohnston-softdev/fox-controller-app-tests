@@ -23,7 +23,7 @@ function testHealthDeviceObject(healthObj)
 function testHealthTimezoneCodeValue(tzCode)
 {
 	var tzValid = localValidFile.validateTimezoneOffset(tzCode, false);
-	expect(tzValid).to.be.true;
+	return tzValid;
 }
 
 function testHealthNumberMaximum(srcObject, propName, maxVal)
