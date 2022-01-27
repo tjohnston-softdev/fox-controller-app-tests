@@ -1,3 +1,5 @@
 # Changelog
 
-Snapshot 2022-01-23 15:31
+**./package.json**
+* Updated mocha to 9.2.0
+* This should fix a security vulnerability related to recent mocha versions.
