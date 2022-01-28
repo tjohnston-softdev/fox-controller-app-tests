@@ -89,7 +89,7 @@ describe("FOX Controller Test Script", function()
 	}
 	else if (chosenMode === 'debug')
 	{
-		internalPart();
+		commonPart();
 	}
 	else if (userInputType === 'string' && chosenMode.length > 0)
 	{
