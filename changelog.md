@@ -1,5 +1,3 @@
 # Changelog
 
-**./information/files.md**
-* Corrected links to repository files.
-* `npm test` ---> `npm run tests`
+Documentation repository links work (2022-01-28 11:45)
