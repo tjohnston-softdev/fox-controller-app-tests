@@ -28,6 +28,8 @@ A revised version of the test script was released on 19 July 2021.
 
 I have since found out that Optim had rebranded itself as 'ControlX Engineering', I have no indication as to when this took place but my best guess would be early-mid 2021. A re-branded version of the test script was released on 11 August 2021.
 
+A 2022 version of the test script was released on 28 January.
+
 ---
 
 ## Disclaimer

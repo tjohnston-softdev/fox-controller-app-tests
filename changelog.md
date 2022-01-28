@@ -1,4 +1,4 @@
 # Changelog
 
-**./package.json**
-* Removed version number.
+**./readme.md**
+* Release date for 2022 update.
