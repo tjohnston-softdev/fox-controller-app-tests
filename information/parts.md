@@ -5,9 +5,9 @@ The test project is divided into ten different parts. This division was necessar
 These different parts are located in the `test-parts` subfolder. Each part folder is named using the format `00-example_name`. Each part has:
 
 * A main file (main.js)
-* A sub-folder containing individual scripts for that part.
 	* The main file requires and calls the script files inside the subfolder.
 	* The file is required and called in [fox-test-main.js](../test/fox-test-main.js)
+* A sub-folder containing individual scripts for that part.
 * Another sub-folder containing common files for that part.  (Optional)
 
 ---
