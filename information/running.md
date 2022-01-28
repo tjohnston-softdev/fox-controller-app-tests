@@ -1,11 +1,10 @@
-
 # Running
 
 First, navigate to where the `fox-controller-app` and `fox-controller-app-tests` folders are located. These two projects should be sitting in the same 'root' folder. Remembering where this root folder is located is helpful because it corresponds to where the Controller project is along with any derived items.
 
 ---
 
-At the moment, the test script assumes you are using a blank installation. Because of this, it is a good idea to delete the folders created by the Controller before doing any major testing.
+The test script assumes you are using a blank installation. Therefore, it is a good idea to delete the folders created by the Controller before doing any major testing.
 
 These folders will be sitting alongside 'fox-controller-app' and 'fox-controller-app-tests' in your project root folder. The folders you should delete are:
 
@@ -20,23 +19,27 @@ This step may or may not be optional depending on what testing you want to perfo
 
 Now that the Controller is cleaned, you should now decide whether to run the Controller program. This depends on what [parts](./parts.md) you want to test.
 
-* For parts A-D, this does not matter.
-* For parts E-G, the Controller must be offline.
-* For parts H-J, the Controller must be online.
+* For parts 01-04, this does not matter.
+* For parts 05-07, the Controller must be offline.
+* For parts 08-10, the Controller must be online.
 
 If you need to run the Controller, do so before continuing by navigating to the 'fox-controller-app' folder and running the command `SET DEBUG=fox-controller-app:* & npm start`
 
 ---
 
-To run the test script, navigate to the `fox-controller-app-tests` folder and run `npm test`. What this particular command does is that it executes the script file located in the 'test' folder in a way that calls upon the 'Mocha' testing framework for Node JS.
+To run the test script, navigate to the `fox-controller-app-tests` folder and run the command:
 
-If you have not already installed the third-party packages, an error will most likely be flagged when running `npm test`. If this happens, don't worry because mistakes happen. All you have to do is run `npm install` and the packages will be downloaded.
+ `npm run tests --mode=example`
+
+The above command executes the script file located in the 'test' folder in a way that calls upon the 'Mocha' testing framework for Node JS.
+
+If you have not already installed the third-party packages, an error will be flagged. If this happens,  all you have to do is run `npm install` and the packages will be downloaded.
 
 ---
 
-When running `npm test`, you will be prompted to enter a [testing mode](./modes.md). This could be one of several defined keywords, with each keyword executing different parts of the project. For example, the keyword "common" runs tests for dependency scripts required by the whole project.
+The `--mode=example` argument for `npm run tests` refers to the [testing mode](./modes.md). This could be one of several defined keywords, with each keyword executing different parts of the project. For example, the keyword "common" runs tests for dependency scripts required by the whole project.
 
-Keywords are case-insensitive. If an invalid keyword is entered, a message will be displayed and nothing serious will happen. Just run `npm test` again and use something different.
+Keywords are case-insensitive. If an invalid keyword is entered, nothing will happen. Just run the script again and use something different.
 
 ---
 
