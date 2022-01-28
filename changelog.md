@@ -1,3 +1,3 @@
 # Changelog
 
-2022 update complete.
+Opened '2022-docs' branch.
