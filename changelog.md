@@ -1,3 +1,3 @@
 # Changelog
 
-Opened '2022-docs' branch.
+Begin 2022 documentation.
