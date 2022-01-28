@@ -1,4 +1,3 @@
 # Changelog
 
-**./tests/fox-test-main.js**
-* Reset 'debug' mode.
+2022 documentation updates complete.
